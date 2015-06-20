@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6B1B357CEE0068B084 /* SlidersViewController.swift */; };
+		42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6D1B357ECA0068B084 /* OptionsViewController.swift */; };
+		42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */; };
+		42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D251B356C5B0067FEAA /* FirstViewController.swift */; };
+		42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D281B3576110067FEAA /* MaleFemaleViewController.swift */; };
+		42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D291B3576110067FEAA /* RateAppViewController.swift */; };
+		42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2A1B3576110067FEAA /* ReportViewController.swift */; };
+		42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2B1B3576110067FEAA /* SignUpViewController.swift */; };
+		42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D331B357A440067FEAA /* ButtonsViewController.swift */; };
+		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
+		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
+		42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */; };
+		42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */; };
+		42589DD91B3447EA007CA8C1 /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC51B3447EA007CA8C1 /* WorkInProgressViewController.swift */; };
+		42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */; };
+		42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */; };
+		42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */; };
+		42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */; };
+		42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */; };
+		429910E01B348022001F9195 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
+		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
+		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
+		42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		429910DA1B347FD8001F9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42D5DE651A38167400D5C368;
+			remoteInfo = SwiftyFORM;
+		};
+		429910DC1B347FD8001F9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 42D5DE6F1A38167400D5C368;
+			remoteInfo = SwiftyFORMTests;
+		};
+		429910DE1B348018001F9195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 42D5DE641A38167400D5C368;
+			remoteInfo = SwiftyFORM;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42CEC0451A3C5C0A0048E072 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		42096E6B1B357CEE0068B084 /* SlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersViewController.swift; sourceTree = "<group>"; };
+		42096E6D1B357ECA0068B084 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		42108D251B356C5B0067FEAA /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		42108D281B3576110067FEAA /* MaleFemaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaleFemaleViewController.swift; sourceTree = "<group>"; };
+		42108D291B3576110067FEAA /* RateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
+		42108D2A1B3576110067FEAA /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		42108D2B1B3576110067FEAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		42108D331B357A440067FEAA /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
+		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
+		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
+		42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerValueViewController.swift; sourceTree = "<group>"; };
+		42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		42589DC51B3447EA007CA8C1 /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
+		42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldKeyboardTypesViewController.swift; sourceTree = "<group>"; };
+		42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReturnKeyViewController.swift; sourceTree = "<group>"; };
+		42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTabThroughFormViewController.swift; sourceTree = "<group>"; };
+		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
+		42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewValidationViewController.swift; sourceTree = "<group>"; };
+		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
+		42CEBF951A3BA2B50048E072 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42CEBF991A3BA2B50048E072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		42CEBFA11A3BA2B50048E072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		42CEBFA41A3BA2B50048E072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		42CEBF921A3BA2B50048E072 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				429910E01B348022001F9195 /* SwiftyFORM.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42108D271B3576110067FEAA /* Usecases */ = {
+			isa = PBXGroup;
+			children = (
+				42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */,
+				42108D281B3576110067FEAA /* MaleFemaleViewController.swift */,
+				42108D291B3576110067FEAA /* RateAppViewController.swift */,
+				42108D2A1B3576110067FEAA /* ReportViewController.swift */,
+				42108D2B1B3576110067FEAA /* SignUpViewController.swift */,
+			);
+			path = Usecases;
+			sourceTree = "<group>";
+		};
+		42589DAE1B3447E1007CA8C1 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */,
+				42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */,
+				42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
+		42589DC21B3447EA007CA8C1 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
+				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
+				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
+				42589DC51B3447EA007CA8C1 /* WorkInProgressViewController.swift */,
+				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		42589DC61B3447EA007CA8C1 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */,
+				42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */,
+				42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */,
+				42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */,
+			);
+			path = TextField;
+			sourceTree = "<group>";
+		};
+		42589DCC1B3447EA007CA8C1 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
+		429910D61B347FD7001F9195 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				429910DB1B347FD8001F9195 /* SwiftyFORM.framework */,
+				429910DD1B347FD8001F9195 /* SwiftyFORMTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42CEBF8C1A3BA2B50048E072 = {
+			isa = PBXGroup;
+			children = (
+				429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */,
+				42CEBF971A3BA2B50048E072 /* Example */,
+				42CEBF961A3BA2B50048E072 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		42CEBF961A3BA2B50048E072 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42CEBF951A3BA2B50048E072 /* Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42CEBF971A3BA2B50048E072 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */,
+				42589DAE1B3447E1007CA8C1 /* DatePicker */,
+				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
+				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
+				42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */,
+				42589DC21B3447EA007CA8C1 /* Other */,
+				42CEBF981A3BA2B50048E072 /* Supporting Files */,
+				42589DC61B3447EA007CA8C1 /* TextField */,
+				42589DCC1B3447EA007CA8C1 /* TextView */,
+				42108D271B3576110067FEAA /* Usecases */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		42CEBF981A3BA2B50048E072 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				42CEBF991A3BA2B50048E072 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42CEBF941A3BA2B50048E072 /* Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42CEBFB41A3BA2B50048E072 /* Build configuration list for PBXNativeTarget "Example" */;
+			buildPhases = (
+				42CEBF911A3BA2B50048E072 /* Sources */,
+				42CEBF921A3BA2B50048E072 /* Frameworks */,
+				42CEBF931A3BA2B50048E072 /* Resources */,
+				42CEC0451A3C5C0A0048E072 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				429910DF1B348018001F9195 /* PBXTargetDependency */,
+			);
+			name = Example;
+			productName = demo_swift_ios8;
+			productReference = 42CEBF951A3BA2B50048E072 /* Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		42CEBF8D1A3BA2B50048E072 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Simon Strandgaard";
+				TargetAttributes = {
+					42CEBF941A3BA2B50048E072 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 42CEBF901A3BA2B50048E072 /* Build configuration list for PBXProject "Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 42CEBF8C1A3BA2B50048E072;
+			productRefGroup = 42CEBF961A3BA2B50048E072 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 429910D61B347FD7001F9195 /* Products */;
+					ProjectRef = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				42CEBF941A3BA2B50048E072 /* Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		429910DB1B347FD8001F9195 /* SwiftyFORM.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyFORM.framework;
+			remoteRef = 429910DA1B347FD8001F9195 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		429910DD1B347FD8001F9195 /* SwiftyFORMTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftyFORMTests.xctest;
+			remoteRef = 429910DC1B347FD8001F9195 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		42CEBF931A3BA2B50048E072 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */,
+				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		42CEBF911A3BA2B50048E072 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
+				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
+				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
+				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
+				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
+				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
+				42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */,
+				42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */,
+				42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */,
+				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
+				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
+				42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */,
+				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
+				42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */,
+				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
+				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
+				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
+				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
+				42589DD91B3447EA007CA8C1 /* WorkInProgressViewController.swift in Sources */,
+				42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		429910DF1B348018001F9195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyFORM;
+			targetProxy = 429910DE1B348018001F9195 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42CEBFA41A3BA2B50048E072 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		42CEBFB21A3BA2B50048E072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		42CEBFB31A3BA2B50048E072 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		42CEBFB51A3BA2B50048E072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Example;
+			};
+			name = Debug;
+		};
+		42CEBFB61A3BA2B50048E072 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = Example;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		42CEBF901A3BA2B50048E072 /* Build configuration list for PBXProject "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42CEBFB21A3BA2B50048E072 /* Debug */,
+				42CEBFB31A3BA2B50048E072 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42CEBFB41A3BA2B50048E072 /* Build configuration list for PBXNativeTarget "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42CEBFB51A3BA2B50048E072 /* Debug */,
+				42CEBFB61A3BA2B50048E072 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 42CEBF8D1A3BA2B50048E072 /* Project object */;
+}
