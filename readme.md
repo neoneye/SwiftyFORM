@@ -21,6 +21,8 @@ SwiftyFORM is a form framework for iOS written in Swift.
 
 ### Change password form
 
+![Change password form](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/change_password_form.gif "Change password form")
+
 ```swift
 import SwiftyFORM
 
