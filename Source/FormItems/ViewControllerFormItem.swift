@@ -41,7 +41,7 @@ public class ViewControllerFormItem: FormItem {
 	
 	public func viewController(aClass: UIViewController.Type) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
-			return aClass()
+			return aClass.init()
 		}
 		return self
 	}
