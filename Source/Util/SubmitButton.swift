@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyFORM
 
 extension FormViewController {
 	public func form_installSubmitButton() {
