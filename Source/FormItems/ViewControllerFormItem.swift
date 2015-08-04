@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class ViewControllerFormItemPopContext {
+public class ViewControllerFormItemPopContext {
 	public let parentViewController: UIViewController
 	public let childViewController: UIViewController
 	public let cell: ViewControllerFormItemCell

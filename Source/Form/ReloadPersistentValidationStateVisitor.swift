@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc class ReloadPersistentValidationStateVisitor: FormItemVisitor {
+class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	
 	class func validateAndUpdateUI(items: [FormItem]) {
 		let visitor = ReloadPersistentValidationStateVisitor()

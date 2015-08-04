@@ -10,12 +10,12 @@ import UIKit
 
 
 
-@objc protocol WillPopCommandProtocol {
+protocol WillPopCommandProtocol {
 	func execute(context: ViewControllerFormItemPopContext)
 }
 
 
-@objc class WillPopCustomViewController: WillPopCommandProtocol {
+class WillPopCustomViewController: WillPopCommandProtocol {
 	let object: AnyObject
 	init(object: AnyObject) {
 		self.object = object
@@ -29,7 +29,7 @@ import UIKit
 	}
 }
 
-@objc class WillPopOptionViewController: WillPopCommandProtocol {
+class WillPopOptionViewController: WillPopCommandProtocol {
 	let object: ViewControllerFormItem
 	init(object: ViewControllerFormItem) {
 		self.object = object
@@ -48,7 +48,7 @@ struct PopulateTableViewModel {
 
 
 
-@objc class PopulateTableView: FormItemVisitor {
+class PopulateTableView: FormItemVisitor {
 	let model: PopulateTableViewModel
 	
 	var cells = [UITableViewCell]()

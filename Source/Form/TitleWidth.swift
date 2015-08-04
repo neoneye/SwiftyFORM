@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class ObtainTitleWidth: FormItemVisitor {
+class ObtainTitleWidth: FormItemVisitor {
 	var width: CGFloat = 0
 	
 	func visitMeta(object: MetaFormItem) {}
@@ -34,7 +34,7 @@ import UIKit
 	func visitSectionFooterView(object: SectionFooterViewFormItem) {}
 }
 
-@objc class AssignTitleWidth: FormItemVisitor {
+class AssignTitleWidth: FormItemVisitor {
 	private var width: CGFloat = 0
 	
 	init(width: CGFloat) {

@@ -9,7 +9,7 @@
 import UIKit
 
 
-@objc public protocol FormItemVisitor {
+public protocol FormItemVisitor {
 	func visitMeta(object: MetaFormItem)
 	func visitStaticText(object: StaticTextFormItem)
 	func visitTextField(object: TextFieldFormItem)

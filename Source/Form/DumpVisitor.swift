@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class DumpVisitor: FormItemVisitor {
+public class DumpVisitor: FormItemVisitor {
 	public init() {
 	}
 	
