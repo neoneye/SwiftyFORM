@@ -13,7 +13,7 @@ SwiftyFORM is a form framework for iOS written in Swift.
 
 ## Setup
 
-- Xcode7.0 beta 3 (7A152u)
+- Xcode7.0 beta 4 (7A165t)
 - iOS 9
 
 
