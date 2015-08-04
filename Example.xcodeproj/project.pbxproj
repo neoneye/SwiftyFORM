@@ -26,13 +26,21 @@
 		42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */; };
 		42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */; };
 		42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */; };
-		429910E01B348022001F9195 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
+		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
+		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
 		42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		425A32691B71571A006A433E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 42D5DE641A38167400D5C368;
+			remoteInfo = SwiftyFORM;
+		};
 		429910DA1B347FD8001F9195 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */;
@@ -63,6 +71,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				429910E01B348022001F9195 /* SwiftyFORM.framework in Frameworks */,
+				425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +238,7 @@
 			);
 			dependencies = (
 				429910DF1B348018001F9195 /* PBXTargetDependency */,
+				425A326A1B71571A006A433E /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = demo_swift_ios8;
@@ -334,6 +344,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		425A326A1B71571A006A433E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyFORM;
+			targetProxy = 425A32691B71571A006A433E /* PBXContainerItemProxy */;
+		};
 		429910DF1B348018001F9195 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyFORM;
