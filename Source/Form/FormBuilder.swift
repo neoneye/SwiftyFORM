@@ -53,7 +53,7 @@ public class FormBuilder: NSObject {
 	}
 	
 	public var items: [FormItem] {
-		get { return innerItems }
+		return innerItems
 	}
 	
 	public func dump(prettyPrinted: Bool = true) -> NSData {
