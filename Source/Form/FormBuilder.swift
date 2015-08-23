@@ -33,6 +33,10 @@ public class FormBuilder: NSObject {
 	
 	public var toolbarMode: ToolbarMode = .None
 	
+	public func removeAll() {
+		innerItems.removeAll()
+	}
+	
 	public func append(item: FormItem) -> FormItem {
 		innerItems.append(item)
 		return item
