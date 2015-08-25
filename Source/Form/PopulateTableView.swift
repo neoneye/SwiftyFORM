@@ -307,8 +307,28 @@ class PopulateTableView: FormItemVisitor {
 	func visitStepper(object: StepperFormItem) {
 		var model = StepperCellModel()
 		model.title = object.title
+		model.value = object.value
+
+		weak var weakObject = object
+		model.valueDidChange = { (value: Int) in
+			DLog("value \(value)")
+			weakObject?.innerValue = value
+			return
+		}
+
 		let cell = StepperCell(model: model)
 		cells.append(cell)
+
+		DLog("will assign value \(object.value)")
+		cell.setValueWithoutSync(object.value, animated: true)
+		DLog("did assign value \(object.value)")
+
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Int, animated: Bool) in
+			DLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+			return
+		}
 	}
 
 	func visitSlider(object: SliderFormItem) {
