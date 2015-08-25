@@ -10,6 +10,11 @@ import UIKit
 
 public struct StepperCellModel {
 	var title: String = ""
+	var value: Int = 0
+
+	var valueDidChange: Int -> Void = { (value: Int) in
+		DLog("value \(value)")
+	}
 }
 
 public class StepperCell: UITableViewCell {
@@ -64,12 +69,28 @@ public class StepperCell: UITableViewCell {
 	
 	public func valueChanged() {
 		DLog("value did change")
-		
+
 		let value: Double = stepperView.value
-		let valueInt: Int = Int(round(value))
-		
-		self.valueLabel.text = "\(valueInt)"
+		let intValue: Int = Int(round(value))
+
+		updateValue(intValue)
+
+		model.valueDidChange(intValue)
 		setNeedsLayout()
+	}
+
+	public func updateValue(value: Int) {
+		let value: Double = stepperView.value
+		let intValue: Int = Int(round(value))
+
+		self.valueLabel.text = "\(intValue)"
+	}
+
+	public func setValueWithoutSync(value: Int, animated: Bool) {
+		DLog("set value \(value)")
+
+		stepperView.value = Double(value)
+		updateValue(value)
 	}
 }
 
