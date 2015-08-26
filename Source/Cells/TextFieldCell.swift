@@ -184,9 +184,9 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		var errorLabelFrame = CGRectZero
 		var cellHeight: CGFloat = 0
 		let veryTallCell = CGRectMake(0, 0, cellWidth, CGFloat.max)
-		let area = veryTallCell.rectByInsetting(dx: 16, dy: 0)
+		let area = veryTallCell.insetBy(dx: 16, dy: 0)
 		
-		let (topRect, _) = area.rectsByDividing(44, fromEdge: .MinYEdge)
+		let (topRect, _) = area.divide(44, fromEdge: .MinYEdge)
 		if true {
 			let size = titleLabel.sizeThatFits(area.size)
 			var titleLabelWidth = size.width
@@ -201,9 +201,9 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 				}
 			}
 
-			var (slice, remainder) = topRect.rectsByDividing(titleLabelWidth, fromEdge: .MinXEdge)
+			var (slice, remainder) = topRect.divide(titleLabelWidth, fromEdge: .MinXEdge)
 			titleLabelFrame = slice
-			(_, remainder) = remainder.rectsByDividing(10, fromEdge: .MinXEdge)
+			(_, remainder) = remainder.divide(10, fromEdge: .MinXEdge)
 			remainder.size.width += 4
 			textFieldFrame = remainder
 
@@ -215,7 +215,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			if size.height > 0.1 {
 				var r = topRect
 				r.origin.y = topRect.maxY - 6
-				let (slice, _) = r.rectsByDividing(size.height, fromEdge: .MinYEdge)
+				let (slice, _) = r.divide(size.height, fromEdge: .MinYEdge)
 				errorLabelFrame = slice
 				cellHeight = ceil(errorLabelFrame.maxY + 10)
 			}

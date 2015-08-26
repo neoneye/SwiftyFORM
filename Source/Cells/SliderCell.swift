@@ -40,7 +40,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		super.layoutSubviews()
 		
 		slider.sizeToFit()
-		slider.frame = bounds.rectByInsetting(dx: 16, dy: 0)
+		slider.frame = bounds.insetBy(dx: 16, dy: 0)
 	}
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
