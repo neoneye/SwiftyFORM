@@ -12,6 +12,7 @@ class ObtainTitleWidth: FormItemVisitor {
 	var width: CGFloat = 0
 	
 	func visitMeta(object: MetaFormItem) {}
+	func visitCustom(object: CustomFormItem) {}
 	func visitStaticText(object: StaticTextFormItem) {}
 	
 	func visitTextField(object: TextFieldFormItem) {
@@ -42,6 +43,7 @@ class AssignTitleWidth: FormItemVisitor {
 	}
 	
 	func visitMeta(object: MetaFormItem) {}
+	func visitCustom(object: CustomFormItem) {}
 	func visitStaticText(object: StaticTextFormItem) {}
 	
 	func visitTextField(object: TextFieldFormItem) {

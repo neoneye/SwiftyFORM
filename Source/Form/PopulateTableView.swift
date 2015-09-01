@@ -79,6 +79,21 @@ class PopulateTableView: FormItemVisitor {
 		// this item is not visual
 	}
 
+	func visitCustom(object: CustomFormItem) {
+		do {
+			let cell = try object.createCell()
+			cells.append(cell)
+		} catch {
+			print("ERROR: Could not create cell for custom form item: \(error)")
+
+			var model = StaticTextCellModel()
+			model.title = "CustomFormItem"
+			model.value = "Exception"
+			let cell = StaticTextCell(model: model)
+			cells.append(cell)
+		}
+	}
+	
 	func visitStaticText(object: StaticTextFormItem) {
 		var model = StaticTextCellModel()
 		model.title = object.title

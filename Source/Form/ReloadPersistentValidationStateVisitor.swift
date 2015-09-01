@@ -18,6 +18,7 @@ class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	}
 	
 	func visitMeta(object: MetaFormItem) {}
+	func visitCustom(object: CustomFormItem) {}
 	func visitStaticText(object: StaticTextFormItem) {}
 	
 	func visitTextField(object: TextFieldFormItem) {
