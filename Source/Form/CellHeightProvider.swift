@@ -8,6 +8,6 @@
 
 import UIKit
 
-@objc protocol CellHeightProvider {
+@objc public protocol CellHeightProvider {
 	func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat
 }
