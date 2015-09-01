@@ -74,6 +74,7 @@
 		428683671B346D0C0028DB2F /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683621B346D0C0028DB2F /* ValidatorTests.swift */; };
 		42D0050E1B96241100986B3B /* CustomFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0050D1B96241100986B3B /* CustomFormItem.swift */; settings = {ASSET_TAGS = (); }; };
 		42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005171B96348200986B3B /* NSBundle+LoadView.swift */; settings = {ASSET_TAGS = (); }; };
 		42D5DE701A38167400D5C368 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D5DE651A38167400D5C368 /* SwiftyFORM.framework */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		428683621B346D0C0028DB2F /* ValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		42D0050D1B96241100986B3B /* CustomFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFormItem.swift; sourceTree = "<group>"; };
 		42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WillDisplayCellDelegate.swift; sourceTree = "<group>"; };
+		42D005171B96348200986B3B /* NSBundle+LoadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+LoadView.swift"; sourceTree = "<group>"; };
 		42D5DE651A38167400D5C368 /* SwiftyFORM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyFORM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5DE6F1A38167400D5C368 /* SwiftyFORMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyFORMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -262,6 +264,7 @@
 				4286830C1B346CFE0028DB2F /* FormBuilder.swift */,
 				4286830F1B346CFE0028DB2F /* FormTableView.swift */,
 				4286830D1B346CFE0028DB2F /* FormViewController.swift */,
+				42D005171B96348200986B3B /* NSBundle+LoadView.swift */,
 				4286830B1B346CFE0028DB2F /* OptionViewController.swift */,
 				428683131B346CFE0028DB2F /* PopulateTableView.swift */,
 				428683141B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift */,
@@ -458,6 +461,7 @@
 				4286833A1B346CFE0028DB2F /* Command.swift in Sources */,
 				428683311B346CFE0028DB2F /* OptionCell.swift in Sources */,
 				4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */,
+				42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */,
 				42108D1F1B34E9F60067FEAA /* StepperFormItem.swift in Sources */,
 				428683401B346CFE0028DB2F /* FormViewController.swift in Sources */,
 				42108D1B1B34E9F60067FEAA /* OptionPickerFormItem.swift in Sources */,
