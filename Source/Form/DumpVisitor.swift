@@ -62,6 +62,13 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 
+	public func visitCustom(object: CustomFormItem) {
+		dict["class"] = "CustomFormItem"
+		dict["elementIdentifier"] = object.elementIdentifier
+		dict["styleIdentifier"] = object.styleIdentifier
+		dict["styleClass"] = object.styleClass
+	}
+	
 	public func visitStaticText(object: StaticTextFormItem) {
 		dict["class"] = "StaticTextFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier

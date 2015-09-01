@@ -49,4 +49,14 @@ public class SliderFormItem: FormItem {
 		innerValue = value
 		syncCellWithValue(value: value, animated: animated)
 	}
+
+	typealias SliderDidChangeBlock = (value: Float) -> Void
+	var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
+		DLog("not overridden")
+	}
+	
+	public func sliderDidChange(value: Float) {
+		innerValue = value
+		sliderDidChangeBlock(value: value)
+	}
 }

@@ -34,6 +34,16 @@ public class SwitchFormItem: FormItem {
 		}
 	}
 	
+	typealias SwitchDidChangeBlock = (value: Bool) -> Void
+	var switchDidChangeBlock: SwitchDidChangeBlock = { (value: Bool) in
+		DLog("not overridden")
+	}
+	
+	public func switchDidChange(value: Bool) {
+		innerValue = value
+		switchDidChangeBlock(value: value)
+	}
+	
 	public func setValue(value: Bool, animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value: value, animated: animated)

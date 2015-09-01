@@ -47,6 +47,16 @@ public class TextFieldFormItem: FormItem {
 		}
 	}
 	
+	typealias TextDidChangeBlock = (value: String) -> Void
+	var textDidChangeBlock: TextDidChangeBlock = { (value: String) in
+		DLog("not overridden")
+	}
+	
+	public func textDidChange(value: String) {
+		innerValue = value
+		textDidChangeBlock(value: value)
+	}
+
 	func assignValueAndSync(value: String) {
 		innerValue = value
 		syncCellWithValue(value: value)

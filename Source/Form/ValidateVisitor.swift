@@ -12,6 +12,7 @@ class ValidateVisitor: NSObject, FormItemVisitor {
 	var result = ValidateResult.Valid
 	
 	func visitMeta(object: MetaFormItem) {}
+	func visitCustom(object: CustomFormItem) {}
 	func visitStaticText(object: StaticTextFormItem) {}
 	
 	func visitTextField(object: TextFieldFormItem) {
