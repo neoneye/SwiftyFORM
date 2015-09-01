@@ -114,6 +114,12 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 		return 44
 	}
 	
+	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		if let cell = cells[indexPath.row] as? WillDisplayCellDelegate {
+			cell.form_willDisplay(tableView, forRowAtIndexPath: indexPath)
+		}
+	}
+	
 }
 
 
@@ -169,6 +175,10 @@ public class TableViewSectionArray : NSObject, UITableViewDataSource, UITableVie
 	
 	public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		return sections[indexPath.section].tableView?(tableView, heightForRowAtIndexPath: indexPath) ?? 0
+	}
+	
+	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		sections[indexPath.section].tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
 	}
 	
 	

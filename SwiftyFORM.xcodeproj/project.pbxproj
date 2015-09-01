@@ -73,6 +73,7 @@
 		428683661B346D0C0028DB2F /* ValidateResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683611B346D0C0028DB2F /* ValidateResultTests.swift */; };
 		428683671B346D0C0028DB2F /* ValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683621B346D0C0028DB2F /* ValidatorTests.swift */; };
 		42D0050E1B96241100986B3B /* CustomFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0050D1B96241100986B3B /* CustomFormItem.swift */; settings = {ASSET_TAGS = (); }; };
+		42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		42D5DE701A38167400D5C368 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D5DE651A38167400D5C368 /* SwiftyFORM.framework */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +156,7 @@
 		428683611B346D0C0028DB2F /* ValidateResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateResultTests.swift; sourceTree = "<group>"; };
 		428683621B346D0C0028DB2F /* ValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatorTests.swift; sourceTree = "<group>"; };
 		42D0050D1B96241100986B3B /* CustomFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFormItem.swift; sourceTree = "<group>"; };
+		42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WillDisplayCellDelegate.swift; sourceTree = "<group>"; };
 		42D5DE651A38167400D5C368 /* SwiftyFORM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyFORM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5DE6F1A38167400D5C368 /* SwiftyFORMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyFORMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -270,6 +272,7 @@
 				428683161B346CFE0028DB2F /* ValidateResult.swift */,
 				428683171B346CFE0028DB2F /* ValidateVisitor.swift */,
 				428683111B346CFE0028DB2F /* Validator.swift */,
+				42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				428683381B346CFE0028DB2F /* TextViewCell.swift in Sources */,
 				4286833E1B346CFE0028DB2F /* OptionViewController.swift in Sources */,
 				42108D191B34E9F60067FEAA /* FormItem.swift in Sources */,
+				42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */,
 				42108D211B34E9F60067FEAA /* TextFieldFormItem.swift in Sources */,
 				428683341B346CFE0028DB2F /* StaticTextCell.swift in Sources */,
 				428683531B346CFE0028DB2F /* DebugViewController.swift in Sources */,
