@@ -28,6 +28,7 @@
 		42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */; };
 		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
 		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
 		42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */; };
@@ -99,6 +100,7 @@
 		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
 		42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewValidationViewController.swift; sourceTree = "<group>"; };
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
+		42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
 		42CEBF951A3BA2B50048E072 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CEBF991A3BA2B50048E072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,9 +147,10 @@
 			children = (
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
 				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
-				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
-				42589DC51B3447EA007CA8C1 /* WorkInProgressViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
+				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
+				42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */,
+				42589DC51B3447EA007CA8C1 /* WorkInProgressViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
+				42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */,
 				42589DD91B3447EA007CA8C1 /* WorkInProgressViewController.swift in Sources */,
 				42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */,
 			);

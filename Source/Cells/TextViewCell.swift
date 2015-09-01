@@ -157,35 +157,35 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		let errorLabelFrame = CGRectZero
 		var maxY: CGFloat = 0
 		let veryTallCell = CGRectMake(0, 0, cellWidth, CGFloat.max)
-		var (slice, remainder) = veryTallCell.rectsByDividing(10, fromEdge: .MinYEdge)
+		var (slice, remainder) = veryTallCell.divide(10, fromEdge: .MinYEdge)
 		
 		if true {
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
 			availableSize.width -= dx * 2
 			let size = titleLabel.sizeThatFits(availableSize)
-			(slice, remainder) = remainder.rectsByDividing(size.height, fromEdge: .MinYEdge)
-			titleLabelFrame = slice.rectByInsetting(dx: dx, dy: 0)
+			(slice, remainder) = remainder.divide(size.height, fromEdge: .MinYEdge)
+			titleLabelFrame = slice.insetBy(dx: dx, dy: 0)
 		}
 		
 		let bottomRemainder = remainder
 		
 		if true {
-			(slice, remainder) = bottomRemainder.rectsByDividing(5.5, fromEdge: .MinYEdge)
+			(slice, remainder) = bottomRemainder.divide(5.5, fromEdge: .MinYEdge)
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
 			availableSize.width -= dx * 2
 			let size = placeholderLabel.sizeThatFits(availableSize)
-			(slice, remainder) = remainder.rectsByDividing(size.height, fromEdge: .MinYEdge)
-			placeholderLabelFrame = slice.rectByInsetting(dx: dx, dy: 0)
+			(slice, remainder) = remainder.divide(size.height, fromEdge: .MinYEdge)
+			placeholderLabelFrame = slice.insetBy(dx: dx, dy: 0)
 		}
-		(slice, remainder) = remainder.rectsByDividing(10, fromEdge: .MinYEdge)
+		(slice, remainder) = remainder.divide(10, fromEdge: .MinYEdge)
 		maxY = slice.maxY
 		
 		if true {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
-			(slice, remainder) = bottomRemainder.rectsByDividing(size.height, fromEdge: .MinYEdge)
+			(slice, remainder) = bottomRemainder.divide(size.height, fromEdge: .MinYEdge)
 			textViewFrame = slice
 		}
 		maxY = max(textViewFrame.maxY, maxY)
