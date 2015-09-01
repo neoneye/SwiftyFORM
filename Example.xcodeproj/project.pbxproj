@@ -32,6 +32,8 @@
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
 		42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */; };
+		42D005151B9631F400986B3B /* SimpleCustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005131B9631F400986B3B /* SimpleCustomTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		42D005161B9631F400986B3B /* SimpleCustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D005141B9631F400986B3B /* SimpleCustomTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,8 @@
 		42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CEBFA11A3BA2B50048E072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		42CEBFA41A3BA2B50048E072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		42D005131B9631F400986B3B /* SimpleCustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCustomTableViewCell.swift; sourceTree = "<group>"; };
+		42D005141B9631F400986B3B /* SimpleCustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimpleCustomTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */,
+				42D005111B96319900986B3B /* Custom */,
 				42589DAE1B3447E1007CA8C1 /* DatePicker */,
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
@@ -223,6 +228,15 @@
 				42CEBF991A3BA2B50048E072 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42D005111B96319900986B3B /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				42D005131B9631F400986B3B /* SimpleCustomTableViewCell.swift */,
+				42D005141B9631F400986B3B /* SimpleCustomTableViewCell.xib */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D005161B9631F400986B3B /* SimpleCustomTableViewCell.xib in Resources */,
 				42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */,
 				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
 			);
@@ -329,6 +344,7 @@
 				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
 				42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */,
 				42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */,
+				42D005151B9631F400986B3B /* SimpleCustomTableViewCell.swift in Sources */,
 				42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */,
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
