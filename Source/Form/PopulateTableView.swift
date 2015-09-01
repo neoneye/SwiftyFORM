@@ -102,7 +102,7 @@ class PopulateTableView: FormItemVisitor {
 		weak var weakObject = object
 		model.valueDidChange = { (value: String) in
 			DLog("value \(value)")
-			weakObject?.innerValue = value
+			weakObject?.textDidChange(value)
 			return
 		}
 		let cell = TextFieldFormItemCell(model: model)
@@ -285,7 +285,7 @@ class PopulateTableView: FormItemVisitor {
 		weak var weakObject = object
 		model.valueDidChange = { (value: Bool) in
 			DLog("value did change \(value)")
-			weakObject?.innerValue = value
+			weakObject?.switchDidChange(value)
 			return
 		}
 
@@ -341,7 +341,7 @@ class PopulateTableView: FormItemVisitor {
 		weak var weakObject = object
 		model.valueDidChange = { (value: Float) in
 			DLog("value did change \(value)")
-			weakObject?.innerValue = value
+			weakObject?.sliderDidChange(value)
 			return
 		}
 
