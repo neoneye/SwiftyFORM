@@ -1,11 +1,4 @@
-//
-//  ButtonsViewController.swift
-//  Example
-//
-//  Created by Simon Strandgaard on 20-06-15.
-//  Copyright © 2015 Simon Strandgaard. All rights reserved.
-//
-
+// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 

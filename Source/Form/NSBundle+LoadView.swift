@@ -1,11 +1,4 @@
-//
-//  NSBundle+LoadView.swift
-//  Helium
-//
-//  Created by Simon Strandgaard on 28-08-15.
-//  Copyright © 2015 Simon Strandgaard. All rights reserved.
-//
-
+// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
 import Foundation
 
 extension NSBundle {

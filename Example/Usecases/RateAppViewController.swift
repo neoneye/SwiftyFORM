@@ -1,11 +1,4 @@
-//
-//  RateAppViewController.swift
-//  SwiftyFORM
-//
-//  Created by Simon Strandgaard on 22-01-15.
-//  Copyright (c) 2015 Simon Strandgaard. All rights reserved.
-//
-
+// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 

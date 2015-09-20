@@ -1,4 +1,4 @@
-//  Copyright (c) 2014 Simon Strandgaard. All rights reserved.
+// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import Foundation
 
 // http://stackoverflow.com/questions/24114288/macros-in-swift
