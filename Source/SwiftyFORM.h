@@ -1,11 +1,4 @@
-//
-//  SwiftyFORM.h
-//  SwiftyFORM
-//
-//  Created by Simon Strandgaard on 10/12/14.
-//  Copyright (c) 2014 Simon Strandgaard. All rights reserved.
-//
-
+// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 #import <UIKit/UIKit.h>
 
 FOUNDATION_EXPORT double SwiftyFORMVersionNumber;

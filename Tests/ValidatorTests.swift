@@ -1,11 +1,4 @@
-//
-//  ValidatorTests.swift
-//  SwiftyFORM
-//
-//  Created by Simon Strandgaard on 18/12/14.
-//  Copyright (c) 2014 Simon Strandgaard. All rights reserved.
-//
-
+// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import UIKit
 import XCTest
 @testable import SwiftyFORM
