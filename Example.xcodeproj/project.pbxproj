@@ -16,6 +16,9 @@
 		42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2A1B3576110067FEAA /* ReportViewController.swift */; };
 		42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2B1B3576110067FEAA /* SignUpViewController.swift */; };
 		42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D331B357A440067FEAA /* ButtonsViewController.swift */; };
+		423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17031BAF3A9B00A9859F /* AliensViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; settings = {ASSET_TAGS = (); }; };
+		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
 		42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */; };
@@ -92,6 +95,9 @@
 		42108D2A1B3576110067FEAA /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		42108D2B1B3576110067FEAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		42108D331B357A440067FEAA /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
+		423D17031BAF3A9B00A9859F /* AliensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliensViewController.swift; sourceTree = "<group>"; };
+		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
+		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
 		42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerValueViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 		42108D271B3576110067FEAA /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
+				423D17021BAF3A9B00A9859F /* Area51 */,
 				42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */,
 				42108D281B3576110067FEAA /* MaleFemaleViewController.swift */,
 				42108D291B3576110067FEAA /* RateAppViewController.swift */,
@@ -136,6 +143,16 @@
 				42108D2B1B3576110067FEAA /* SignUpViewController.swift */,
 			);
 			path = Usecases;
+			sourceTree = "<group>";
+		};
+		423D17021BAF3A9B00A9859F /* Area51 */ = {
+			isa = PBXGroup;
+			children = (
+				423D17031BAF3A9B00A9859F /* AliensViewController.swift */,
+				423D17041BAF3A9B00A9859F /* Area51.storyboard */,
+				423D17051BAF3A9B00A9859F /* GhostsViewController.swift */,
+			);
+			path = Area51;
 			sourceTree = "<group>";
 		};
 		42589DAE1B3447E1007CA8C1 /* DatePicker */ = {
@@ -329,6 +346,7 @@
 				42D005161B9631F400986B3B /* LoadingCell.xib in Resources */,
 				42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */,
 				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
+				423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */,
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
@@ -357,6 +376,7 @@
 				42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
+				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
 				42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */,
