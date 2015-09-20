@@ -18,7 +18,8 @@ public class FormViewController: UIViewController {
 	}
 	
 	required public init(coder aDecoder: NSCoder) {
-	    fatalError("init(coder:) has not been implemented")
+		DLog("super init")
+		super.init(nibName: nil, bundle: nil)
 	}
 
 	override public func loadView() {
@@ -36,7 +37,7 @@ public class FormViewController: UIViewController {
 	}
 
 	public func populate(builder: FormBuilder) {
-		print("subclass must implement populate()")
+		DLog("subclass must implement populate()")
 	}
 
 	override public func viewWillAppear(animated: Bool) {

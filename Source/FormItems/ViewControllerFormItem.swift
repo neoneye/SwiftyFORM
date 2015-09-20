@@ -46,6 +46,14 @@ public class ViewControllerFormItem: FormItem {
 		return self
 	}
 	
+	public func storyboard(name: String, bundle storyboardBundleOrNil: NSBundle?) -> Self {
+		createViewController = { (dismissCommand: CommandProtocol) in
+			let storyboard: UIStoryboard = UIStoryboard(name: name, bundle: storyboardBundleOrNil)
+			return storyboard.instantiateInitialViewController()
+		}
+		return self
+	}
+	
 	// the view controller must invoke the dismiss block when it's being dismissed
 	public typealias CreateViewController = CommandProtocol -> UIViewController?
 	public var createViewController: CreateViewController?
