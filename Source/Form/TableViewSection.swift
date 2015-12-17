@@ -113,6 +113,11 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 		}
 	}
 	
+	public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+		if let cell = cells[indexPath.row] as? AccessoryButtonDelegate {
+			cell.form_accessoryButtonTapped(indexPath, tableView: tableView)
+		}
+	}
 }
 
 
@@ -174,7 +179,10 @@ public class TableViewSectionArray : NSObject, UITableViewDataSource, UITableVie
 		sections[indexPath.section].tableView?(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
 	}
 	
-	
+	public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+		sections[indexPath.section].tableView?(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+	}
+
 	// MARK: UIScrollViewDelegate
 	
 	/// hide keyboard when the user starts scrolling
