@@ -201,6 +201,7 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.placeholder = object.placeholder
 		model.optionField = object
+		model.selectedOptionRow = object.selected
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: OptionRowModel?) in
@@ -211,8 +212,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = OptionViewControllerCell(
 			parentViewController: self.model.viewController,
-			model: model,
-			selectedOptionRow: object.selected
+			model: model
 		)
 		cells.append(cell)
 		

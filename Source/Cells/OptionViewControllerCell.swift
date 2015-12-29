@@ -5,6 +5,7 @@ public struct OptionViewControllerCellModel {
 	var title: String = ""
 	var placeholder: String = ""
 	var optionField: OptionPickerFormItem? = nil
+	var selectedOptionRow: OptionRowModel? = nil
 
 	var valueDidChange: OptionRowModel? -> Void = { (value: OptionRowModel?) in
 		DLog("value \(value)")
@@ -16,10 +17,10 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	private var selectedOptionRow: OptionRowModel? = nil
 	private weak var parentViewController: UIViewController?
 	
-	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel, selectedOptionRow: OptionRowModel?) {
+	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel) {
 		self.parentViewController = parentViewController
 		self.model = model
-		self.selectedOptionRow = selectedOptionRow
+		self.selectedOptionRow = model.selectedOptionRow
 		super.init(style: .Value1, reuseIdentifier: nil)
 		accessoryType = .DisclosureIndicator
 		textLabel?.text = model.title
