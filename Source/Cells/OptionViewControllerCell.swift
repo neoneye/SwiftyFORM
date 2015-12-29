@@ -12,23 +12,25 @@ public struct OptionViewControllerCellModel {
 }
 
 public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
-	public let model: OptionViewControllerCellModel
-	public var selectedOptionRow: OptionRowModel? = nil
-	weak var parentViewController: UIViewController?
+	private let model: OptionViewControllerCellModel
+	private var selectedOptionRow: OptionRowModel? = nil
+	private weak var parentViewController: UIViewController?
 	
-	public init(model: OptionViewControllerCellModel) {
+	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel, selectedOptionRow: OptionRowModel?) {
+		self.parentViewController = parentViewController
 		self.model = model
+		self.selectedOptionRow = selectedOptionRow
 		super.init(style: .Value1, reuseIdentifier: nil)
 		accessoryType = .DisclosureIndicator
 		textLabel?.text = model.title
-		detailTextLabel?.text = model.placeholder
+		updateValue()
 	}
 	
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func humanReadableValue() -> String? {
+	private func humanReadableValue() -> String? {
 		if let option = selectedOptionRow {
 			return option.title
 		} else {
@@ -36,22 +38,30 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 	
-	public func updateValue() {
+	private func updateValue() {
 		let s = humanReadableValue()
 		DLog("update value \(s)")
-		detailTextLabel?.text = humanReadableValue()
+		detailTextLabel?.text = s
 	}
 	
-	public func setValueWithoutSync(value: OptionRowModel?) {
-		DLog("set value \(value)")
-		selectedOptionRow = value
+	public func setSelectedOptionRowWithoutPropagation(option: OptionRowModel?) {
+		DLog("set selected option: \(option?.title) \(option?.identifier)")
+		
+		selectedOptionRow = option
 		updateValue()
 	}
 	
-	public func setValueAndSync(value: OptionRowModel?) {
-		selectedOptionRow = value
-		model.valueDidChange(selectedOptionRow)
+	private func viaOptionList_userPickedOption(option: OptionRowModel) {
+		DLog("user picked option: \(option.title) \(option.identifier)")
+		
+		if selectedOptionRow === option {
+			DLog("no change")
+			return
+		}
+		
+		selectedOptionRow = option
 		updateValue()
+		model.valueDidChange(option)
 	}
 
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
@@ -74,8 +84,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		tableView.form_firstResponder()?.resignFirstResponder()
 
 		let childViewController = OptionListViewController(optionField: optionField) { [weak self] (selected: OptionRowModel) in
-			DLog("user selected option: \(selected.title)")
-			self?.setValueAndSync(selected)
+			self?.viaOptionList_userPickedOption(selected)
 			nc.popViewControllerAnimated(true)
 		}
 		nc.pushViewController(childViewController, animated: true)
