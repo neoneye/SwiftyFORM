@@ -56,31 +56,30 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
 		DLog("will invoke")
-		// hide keyboard when the user taps this kind of row
-		tableView.form_firstResponder()?.resignFirstResponder()
 		
-		weak var weakCell = self
-		let dismissCommand = CommandBlock { (childViewController: UIViewController, returnObject: AnyObject?) in
-			if let cell = weakCell {
-				if let pickedOption = returnObject as? OptionRowModel {
-					DLog("pick ok")
-					cell.setValueAndSync(pickedOption)
-				} else {
-					DLog("pick none")
-					cell.setValueAndSync(nil)
-				}
-			}
-			childViewController.navigationController?.popViewControllerAnimated(true)
+		guard let vc: UIViewController = parentViewController else {
+			DLog("Expected a parent view controller")
+			return
+		}
+		guard let nc: UINavigationController = vc.navigationController else {
+			DLog("Expected parent view controller to have a navigation controller")
+			return
+		}
+		guard let optionField = model.optionField else {
+			DLog("Expected model to have an optionField")
 			return
 		}
 		
-		if let vc = parentViewController {
-			if let optionField = model.optionField {
-				let childViewController = OptionListViewController(dismissCommand: dismissCommand, optionField: optionField)
-				vc.navigationController?.pushViewController(childViewController, animated: true)
-			}
-		}
+		// hide keyboard when the user taps this kind of row
+		tableView.form_firstResponder()?.resignFirstResponder()
 
+		let childViewController = OptionListViewController(optionField: optionField) { [weak self] (selected: OptionRowModel) in
+			DLog("user selected option: \(selected.title)")
+			self?.setValueAndSync(selected)
+			nc.popViewControllerAnimated(true)
+		}
+		nc.pushViewController(childViewController, animated: true)
+		
 		DLog("did invoke")
 	}
 }
