@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import UIKit
 
-class OptionViewController: FormViewController, SelectOptionDelegate {
+class OptionListViewController: FormViewController, SelectOptionDelegate {
 	let dismissCommand: CommandProtocol
 	let optionField: OptionPickerFormItem
 	

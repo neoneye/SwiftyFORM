@@ -76,7 +76,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		
 		if let vc = parentViewController {
 			if let optionField = model.optionField {
-				let childViewController = OptionViewController(dismissCommand: dismissCommand, optionField: optionField)
+				let childViewController = OptionListViewController(dismissCommand: dismissCommand, optionField: optionField)
 				vc.navigationController?.pushViewController(childViewController, animated: true)
 			}
 		}
