@@ -207,7 +207,7 @@ class PopulateTableView: FormItemVisitor {
 		model.valueDidChange = { (value: OptionRowModel?) in
 			DLog("propagate from cell to model. value \(value)")
 			weakObject?.innerSelected = value
-			return
+			weakObject?.valueDidChange(selected: value)
 		}
 		
 		let cell = OptionViewControllerCell(

@@ -20,6 +20,9 @@ class OptionsViewController: FormViewController {
 		instance.title("Adopt Bitcoin?").placeholder("required")
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
+		instance.valueDidChange = { (selected: OptionRowModel?) in
+			print("adopt bitcoin: \(selected)")
+		}
 		return instance
 		}()
 	
@@ -28,6 +31,9 @@ class OptionsViewController: FormViewController {
 		instance.title("Explore Space?").placeholder("required")
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
+		instance.valueDidChange = { (selected: OptionRowModel?) in
+			print("explore space: \(selected)")
+		}
 		return instance
 		}()
 	
@@ -36,6 +42,9 @@ class OptionsViewController: FormViewController {
 		instance.title("World Peace?").placeholder("required")
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
+		instance.valueDidChange = { (selected: OptionRowModel?) in
+			print("world peace: \(selected)")
+		}
 		return instance
 		}()
 	
@@ -44,6 +53,9 @@ class OptionsViewController: FormViewController {
 		instance.title("Stop Global Warming?").placeholder("required")
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
+		instance.valueDidChange = { (selected: OptionRowModel?) in
+			print("stop global warming: \(selected)")
+		}
 		return instance
 		}()
 
