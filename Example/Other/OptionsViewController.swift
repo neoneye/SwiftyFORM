@@ -51,8 +51,12 @@ class OptionsViewController: FormViewController {
 	lazy var stopGlobalWarming: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Stop Global Warming?").placeholder("required")
-		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
-		instance.selectOptionWithTitle("Neutral")
+		instance.append("Strongly disagree", identifier: "strongly_disagree")
+		instance.append("Disagree", identifier: "disagree")
+		instance.append("Neutral", identifier: "neutral")
+		instance.append("Agree", identifier: "agree")
+		instance.append("Strongly agree", identifier: "strongly_agree")
+		instance.selectOptionWithIdentifier("neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
 			print("stop global warming: \(selected)")
 		}
