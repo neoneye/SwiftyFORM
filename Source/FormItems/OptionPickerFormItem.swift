@@ -1,13 +1,17 @@
 // MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class OptionRowModel {
+public class OptionRowModel: CustomStringConvertible {
 	public let title: String
 	public let identifier: String
 	
 	public init(_ title: String, _ identifier: String) {
 		self.title = title
 		self.identifier = identifier
+	}
+	
+	public var description: String {
+		return "\(title)-\(identifier)"
 	}
 }
 
@@ -38,13 +42,22 @@ public class OptionPickerFormItem: FormItem {
 		for option in options {
 			if option.title == title {
 				self.setSelectedOptionRow(option)
-				DLog("initial selected option: \(option.title)")
+				DLog("initial selected option: \(option)")
 			}
 		}
 	}
 	
-	typealias SyncBlock = (selected: OptionRowModel?) -> Void
-	var syncCellWithValue: SyncBlock = { (selected: OptionRowModel?) in
+	public func selectOptionWithIdentifier(identifier: String) {
+		for option in options {
+			if option.identifier == identifier {
+				self.setSelectedOptionRow(option)
+				DLog("initial selected option: \(option)")
+			}
+		}
+	}
+
+	public typealias SyncBlock = (selected: OptionRowModel?) -> Void
+	public var syncCellWithValue: SyncBlock = { (selected: OptionRowModel?) in
 		DLog("sync is not overridden")
 	}
 	
@@ -62,6 +75,11 @@ public class OptionPickerFormItem: FormItem {
 		DLog("option: \(selected?.title)")
 		innerSelected = selected
 		syncCellWithValue(selected: selected)
+	}
+	
+	public typealias ValueDidChange = (selected: OptionRowModel?) -> Void
+	public var valueDidChange: ValueDidChange = { (selected: OptionRowModel?) in
+		DLog("value did change not overridden")
 	}
 }
 

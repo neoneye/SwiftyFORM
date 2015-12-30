@@ -1,13 +1,14 @@
 // MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import UIKit
 
-class OptionViewController: FormViewController, SelectOptionDelegate {
-	let dismissCommand: CommandProtocol
+class OptionListViewController: FormViewController, SelectOptionDelegate {
+	typealias SelectOptionHandler = OptionRowModel -> Void
 	let optionField: OptionPickerFormItem
+	let selectOptionHandler: SelectOptionHandler
 	
-	init(dismissCommand: CommandProtocol, optionField: OptionPickerFormItem) {
-		self.dismissCommand = dismissCommand
+	init(optionField: OptionPickerFormItem, selectOptionHandler: SelectOptionHandler) {
 		self.optionField = optionField
+		self.selectOptionHandler = selectOptionHandler
 		super.init()
 	}
 
@@ -28,8 +29,12 @@ class OptionViewController: FormViewController, SelectOptionDelegate {
 	}
 	
 	func form_willSelectOption(option: OptionRowFormItem) {
+		guard let selected = option.context as? OptionRowModel else {
+			fatalError("Expected OptionRowModel when selecting option \(option.title)")
+		}
+		
 		DLog("select option \(option.title)")
-		dismissCommand.execute(self, returnObject: option.context)
+		selectOptionHandler(selected)
 	}
 
 }
