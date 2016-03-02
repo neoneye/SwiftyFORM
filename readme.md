@@ -5,7 +5,8 @@ SwiftyFORM is a form framework for iOS written in Swift.
 
 ## Features
 
-- [x] There are 12 form items that can be used in a form
+- [x] 12 built in form items that can be used in a form
+- [x] You can create your own custom form items
 - [x] Align textfields across multiple rows
 - [x] Form validation rule engine
 - [x] Shows with red text where there are problems with validation
@@ -13,7 +14,7 @@ SwiftyFORM is a form framework for iOS written in Swift.
 
 ## Setup
 
-- Xcode7.0 (7A218)
+- Xcode7.2 (7C68)
 - iOS 9
 
 

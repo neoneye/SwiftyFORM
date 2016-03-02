@@ -201,26 +201,25 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.placeholder = object.placeholder
 		model.optionField = object
+		model.selectedOptionRow = object.selected
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: OptionRowModel?) in
-			DLog("value \(value)")
+			DLog("propagate from cell to model. value \(value)")
 			weakObject?.innerSelected = value
-			return
+			weakObject?.valueDidChange(selected: value)
 		}
 		
-		let cell = OptionViewControllerCell(model: model)
-		cell.parentViewController = self.model.viewController
-		cell.setValueWithoutSync(object.selected)
+		let cell = OptionViewControllerCell(
+			parentViewController: self.model.viewController,
+			model: model
+		)
 		cells.append(cell)
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (selected: OptionRowModel?) in
-			DLog("sync option: \(selected?.title)")
-			if let cell = weakCell {
-				DLog("setting")
-				cell.setValueWithoutSync(selected)
-			}
+			DLog("propagate from model to cell. option: \(selected?.title)")
+			weakCell?.setSelectedOptionRowWithoutPropagation(selected)
 		}
 	}
 	

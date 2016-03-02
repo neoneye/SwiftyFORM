@@ -12,7 +12,7 @@ public class FormViewController: UIViewController {
 	
 	required public init(coder aDecoder: NSCoder) {
 		DLog("super init")
-		super.init(nibName: nil, bundle: nil)
+		super.init(coder: aDecoder)!
 	}
 
 	override public func loadView() {
