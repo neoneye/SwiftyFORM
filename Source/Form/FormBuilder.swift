@@ -75,9 +75,9 @@ public class FormBuilder: NSObject {
 				$0.accept(v)
 				return v.width
 			}
-			//DLog("widthArray: \(widthArray)")
+			//SwiftyFormLog("widthArray: \(widthArray)")
 			let width = widthArray.maxElement()!
-			//DLog("max width: \(width)")
+			//SwiftyFormLog("max width: \(width)")
 			
 			for item in alignLeftItem.items {
 				let v = AssignTitleWidth(width: width)
@@ -103,13 +103,13 @@ public class FormBuilder: NSObject {
 			item.accept(v)
 			switch v.result {
 			case .Valid:
-				// DLog("valid")
+				// SwiftyFormLog("valid")
 				continue
 			case .HardInvalid(let message):
-				//DLog("invalid message \(message)")
+				//SwiftyFormLog("invalid message \(message)")
 				return .Invalid(item: item, message: message)
 			case .SoftInvalid(let message):
-				//DLog("invalid message \(message)")
+				//SwiftyFormLog("invalid message \(message)")
 				return .Invalid(item: item, message: message)
 			}
 		}

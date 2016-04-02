@@ -14,7 +14,7 @@ public class StepperFormItem: FormItem {
 
 	typealias SyncBlock = (value: Int, animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int, animated: Bool) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 
 	internal var innerValue: Int = 0

@@ -50,7 +50,7 @@ public struct TextFieldFormItemCellModel {
 	var model: TextFieldFormItem! = nil
 
 	var valueDidChange: String -> Void = { (value: String) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -80,7 +80,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		textField.configure()
 		textField.delegate = self
 		
-		textField.addTarget(self, action: "valueDidChange:", forControlEvents: UIControlEvents.EditingChanged)
+		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
 		
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(textField)
@@ -140,17 +140,17 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	}
 	
 	public func gotoPrevious() {
-		DLog("make previous cell first responder")
+		SwiftyFormLog("make previous cell first responder")
 		form_makePreviousCellFirstResponder()
 	}
 	
 	public func gotoNext() {
-		DLog("make next cell first responder")
+		SwiftyFormLog("make next cell first responder")
 		form_makeNextCellFirstResponder()
 	}
 
 	public func dismissKeyboard() {
-		DLog("dismiss keyboard")
+		SwiftyFormLog("dismiss keyboard")
 		resignFirstResponder()
 	}
 	
@@ -159,7 +159,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	}
 	
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-		let gr = UITapGestureRecognizer(target: self, action: "handleTap:")
+		let gr = UITapGestureRecognizer(target: self, action: #selector(TextFieldFormItemCell.handleTap(_:)))
 		return gr
 		}()
 	
@@ -204,7 +204,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		}
 		if true {
 			let size = errorLabel.sizeThatFits(area.size)
-//			DLog("error label size \(size)")
+//			SwiftyFormLog("error label size \(size)")
 			if size.height > 0.1 {
 				var r = topRect
 				r.origin.y = topRect.maxY - 6
@@ -219,7 +219,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		//DLog("layoutSubviews")
+		//SwiftyFormLog("layoutSubviews")
 		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
 		titleLabel.frame = sizes.titleLabelFrame
 		textField.frame = sizes.textFieldFrame
@@ -227,22 +227,22 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	}
 	
 	public func valueDidChange(sender: AnyObject?) {
-		//DLog("did change")
+		//SwiftyFormLog("did change")
 		model.valueDidChange(textField.text ?? "")
 		
 		let result: ValidateResult = model.model.liveValidateValueText()
 		switch result {
 		case .Valid:
-			DLog("valid")
+			SwiftyFormLog("valid")
 		case .HardInvalid:
-			DLog("hard invalid")
+			SwiftyFormLog("hard invalid")
 		case .SoftInvalid:
-			DLog("soft invalid")
+			SwiftyFormLog("soft invalid")
 		}
 	}
 
 	public func setValueWithoutSync(value: String) {
-		DLog("set value \(value)")
+		SwiftyFormLog("set value \(value)")
 		textField.text = value
 		validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
 	}
@@ -281,7 +281,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	
 	public func installTimer() {
 		invalidateTimer()
-		let timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "timerUpdate", userInfo: nil, repeats: false)
+		let timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(TextFieldFormItemCell.timerUpdate), userInfo: nil, repeats: false)
 		hideErrorMessageAfterFewSecondsTimer = timer
 	}
 	
@@ -296,17 +296,17 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			if lastResult == result {
 				switch result {
 				case .Valid:
-					//DLog("same valid")
+					//SwiftyFormLog("same valid")
 					return true
 				case .HardInvalid:
-					//DLog("same hard invalid")
+					//SwiftyFormLog("same hard invalid")
 					invalidateTimer()
 					if shouldInstallTimer {
 						installTimer()
 					}
 					return false
 				case .SoftInvalid:
-					//DLog("same soft invalid")
+					//SwiftyFormLog("same soft invalid")
 					invalidateTimer()
 					if shouldInstallTimer {
 						installTimer()
@@ -319,7 +319,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		
 		switch result {
 		case .Valid:
-			//DLog("different valid")
+			//SwiftyFormLog("different valid")
 			if let tv = tableView {
 				tv.beginUpdates()
 				errorLabel.text = nil
@@ -330,7 +330,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			}
 			return true
 		case let .HardInvalid(message):
-			//DLog("different hard invalid")
+			//SwiftyFormLog("different hard invalid")
 			if let tv = tableView {
 				tv.beginUpdates()
 				errorLabel.text = message
@@ -344,7 +344,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			}
 			return false
 		case let .SoftInvalid(message):
-			//DLog("different soft invalid")
+			//SwiftyFormLog("different soft invalid")
 			if let tv = tableView {
 				tv.beginUpdates()
 				errorLabel.text = message
@@ -369,7 +369,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	
 	public func timerUpdate() {
 		invalidateTimer()
-		//DLog("timer update")
+		//SwiftyFormLog("timer update")
 
 		let s = textField.text ?? ""
 		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: false)
@@ -377,7 +377,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 
 	public func reloadPersistentValidationState() {
 		invalidateTimer()
-		//DLog("reload persistent message")
+		//SwiftyFormLog("reload persistent message")
 
 		let s = textField.text ?? ""
 		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
@@ -386,7 +386,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
-		//DLog("compute height of row: \(value)")
+		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
 	

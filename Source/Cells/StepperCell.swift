@@ -6,7 +6,7 @@ public struct StepperCellModel {
 	var value: Int = 0
 
 	var valueDidChange: Int -> Void = { (value: Int) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -28,7 +28,7 @@ public class StepperCell: UITableViewCell {
 		containerView.addSubview(valueLabel)
 		accessoryView = containerView
 
-		stepperView.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		stepperView.addTarget(self, action: #selector(StepperCell.valueChanged), forControlEvents: .ValueChanged)
 
 		valueLabel.text = "0"
 	}
@@ -61,7 +61,7 @@ public class StepperCell: UITableViewCell {
 	}
 	
 	public func valueChanged() {
-		DLog("value did change")
+		SwiftyFormLog("value did change")
 
 		let value: Double = stepperView.value
 		let intValue: Int = Int(round(value))
@@ -80,7 +80,7 @@ public class StepperCell: UITableViewCell {
 	}
 
 	public func setValueWithoutSync(value: Int, animated: Bool) {
-		DLog("set value \(value)")
+		SwiftyFormLog("set value \(value)")
 
 		stepperView.value = Double(value)
 		updateValue(value)

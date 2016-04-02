@@ -8,7 +8,7 @@ public struct SliderCellModel {
 	var maximumValue: Float = 1.0
 
 	var valueDidChange: Float -> Void = { (value: Float) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -27,7 +27,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		slider.minimumValue = model.minimumValue
 		slider.maximumValue = model.maximumValue
 		slider.value = model.value
-		slider.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		slider.addTarget(self, action: #selector(SliderCell.valueChanged), forControlEvents: .ValueChanged)
 		
 		clipsToBounds = true
 	}
@@ -48,12 +48,12 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 	}
 	
 	public func valueChanged() {
-		DLog("value did change")
+		SwiftyFormLog("value did change")
 		model.valueDidChange(slider.value)
 	}
 	
 	public func setValueWithoutSync(value: Float, animated: Bool) {
-		DLog("set value \(value), animated \(animated)")
+		SwiftyFormLog("set value \(value), animated \(animated)")
 		slider.setValue(value, animated: animated)
 	}
 }

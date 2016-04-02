@@ -24,12 +24,12 @@ public class OptionCell: UITableViewCell, SelectRowDelegate {
 	}
 
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		DLog("will invoke")
+		SwiftyFormLog("will invoke")
 		accessoryType = .Checkmark
 		
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
 		innerDidSelectOption()
-		DLog("did invoke")
+		SwiftyFormLog("did invoke")
 	}
 }

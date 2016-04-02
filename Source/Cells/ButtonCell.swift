@@ -5,7 +5,7 @@ public struct ButtonCellModel {
 	var title: String = ""
 	
 	var action: Void -> Void = {
-		DLog("action")
+		SwiftyFormLog("action")
 	}
 
 }

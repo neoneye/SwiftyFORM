@@ -21,7 +21,7 @@ public class SliderFormItem: FormItem {
 	
 	typealias SyncBlock = (value: Float, animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Float, animated: Bool) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: Float = 0.0
@@ -45,7 +45,7 @@ public class SliderFormItem: FormItem {
 
 	typealias SliderDidChangeBlock = (value: Float) -> Void
 	var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
-		DLog("not overridden")
+		SwiftyFormLog("not overridden")
 	}
 	
 	public func sliderDidChange(value: Float) {

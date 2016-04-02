@@ -17,7 +17,7 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 	}
 	
 	override func populate(builder: FormBuilder) {
-		DLog("preselect option \(optionField.selected?.title)")
+		SwiftyFormLog("preselect option \(optionField.selected?.title)")
 		builder.navigationTitle = optionField.title
 		for optionRow: OptionRowModel in optionField.options {
 			let option = OptionRowFormItem()
@@ -33,7 +33,7 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 			fatalError("Expected OptionRowModel when selecting option \(option.title)")
 		}
 		
-		DLog("select option \(option.title)")
+		SwiftyFormLog("select option \(option.title)")
 		selectOptionHandler(selected)
 	}
 

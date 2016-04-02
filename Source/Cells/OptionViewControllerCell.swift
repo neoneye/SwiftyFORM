@@ -8,7 +8,7 @@ public struct OptionViewControllerCellModel {
 	var selectedOptionRow: OptionRowModel? = nil
 
 	var valueDidChange: OptionRowModel? -> Void = { (value: OptionRowModel?) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -41,22 +41,22 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	
 	private func updateValue() {
 		let s = humanReadableValue()
-		DLog("update value \(s)")
+		SwiftyFormLog("update value \(s)")
 		detailTextLabel?.text = s
 	}
 	
 	public func setSelectedOptionRowWithoutPropagation(option: OptionRowModel?) {
-		DLog("set selected option: \(option?.title) \(option?.identifier)")
+		SwiftyFormLog("set selected option: \(option?.title) \(option?.identifier)")
 		
 		selectedOptionRow = option
 		updateValue()
 	}
 	
 	private func viaOptionList_userPickedOption(option: OptionRowModel) {
-		DLog("user picked option: \(option.title) \(option.identifier)")
+		SwiftyFormLog("user picked option: \(option.title) \(option.identifier)")
 		
 		if selectedOptionRow === option {
-			DLog("no change")
+			SwiftyFormLog("no change")
 			return
 		}
 		
@@ -66,18 +66,18 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	}
 
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		DLog("will invoke")
+		SwiftyFormLog("will invoke")
 		
 		guard let vc: UIViewController = parentViewController else {
-			DLog("Expected a parent view controller")
+			SwiftyFormLog("Expected a parent view controller")
 			return
 		}
 		guard let nc: UINavigationController = vc.navigationController else {
-			DLog("Expected parent view controller to have a navigation controller")
+			SwiftyFormLog("Expected parent view controller to have a navigation controller")
 			return
 		}
 		guard let optionField = model.optionField else {
-			DLog("Expected model to have an optionField")
+			SwiftyFormLog("Expected model to have an optionField")
 			return
 		}
 		
@@ -90,6 +90,6 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		}
 		nc.pushViewController(childViewController, animated: true)
 		
-		DLog("did invoke")
+		SwiftyFormLog("did invoke")
 	}
 }

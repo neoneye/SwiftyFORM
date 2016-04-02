@@ -3,13 +3,13 @@ import UIKit
 
 extension FormViewController {
 	public func form_installSubmitButton() {
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Plain, target: self, action: "form_submitAction:")
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .Plain, target: self, action: #selector(FormViewController.form_submitAction(_:)))
 	}
 
 	public func form_submitAction(sender: AnyObject?) {
 		formBuilder.validateAndUpdateUI()
 		let result = formBuilder.validate()
-		DLog("result \(result)")
+		SwiftyFormLog("result \(result)")
 		form_showSubmitResult(result)
 	}
 	
