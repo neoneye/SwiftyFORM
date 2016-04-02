@@ -57,7 +57,7 @@ public class DebugViewController: UIViewController {
 		let webview = UIWebView()
 		self.view = webview
 		
-		let item = UIBarButtonItem(title: "Dismiss", style: .Plain, target: self, action: "dismissAction:")
+		let item = UIBarButtonItem(title: "Dismiss", style: .Plain, target: self, action: #selector(DebugViewController.dismissAction(_:)))
 		self.navigationItem.leftBarButtonItem = item
 
 		switch whatToShow {

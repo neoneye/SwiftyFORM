@@ -68,7 +68,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	}
 	
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-		let gr = UITapGestureRecognizer(target: self, action: "handleTap:")
+		let gr = UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
 		return gr
 		}()
 	

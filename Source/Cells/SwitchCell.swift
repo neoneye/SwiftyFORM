@@ -20,7 +20,7 @@ public class SwitchCell: UITableViewCell {
 		selectionStyle = .None
 		textLabel?.text = model.title
 		
-		switchView.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		switchView.addTarget(self, action: #selector(SwitchCell.valueChanged), forControlEvents: .ValueChanged)
 		accessoryView = switchView
 	}
 	

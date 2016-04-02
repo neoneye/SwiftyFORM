@@ -27,7 +27,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		slider.minimumValue = model.minimumValue
 		slider.maximumValue = model.maximumValue
 		slider.value = model.value
-		slider.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		slider.addTarget(self, action: #selector(SliderCell.valueChanged), forControlEvents: .ValueChanged)
 		
 		clipsToBounds = true
 	}

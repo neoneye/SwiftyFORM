@@ -21,22 +21,22 @@ public class SimpleToolbar: UIToolbar {
 		let image = UIImage(named: "SwiftFORMArrowLeft", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
 		if let image = image {
 			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: "previousButtonAction:")
+			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: "<<", style: .Plain, target: self, action: "previousButtonAction:")
+		return UIBarButtonItem(title: "<<", style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}()
 	
 	public lazy var nextButton: UIBarButtonItem = {
 		let image = UIImage(named: "SwiftFORMArrowRight", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
 		if let image = image {
 			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: "nextButtonAction:")
+			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: ">>", style: .Plain, target: self, action: "nextButtonAction:")
+		return UIBarButtonItem(title: ">>", style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}()
 	
 	public lazy var closeButton: UIBarButtonItem = {
-		let item = UIBarButtonItem(title: "OK", style: .Plain, target: self, action: "closeButtonAction:")
+		let item = UIBarButtonItem(title: "OK", style: .Plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
 		return item
 		}()
 	

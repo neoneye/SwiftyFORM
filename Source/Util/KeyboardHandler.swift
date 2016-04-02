@@ -38,8 +38,8 @@ public class KeyboardHandler: NSObject {
 		
 		// Listen for changes to keyboard visibility so that we can adjust the text view accordingly.
 		let notificationCenter = NSNotificationCenter.defaultCenter()
-		notificationCenter.addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-		notificationCenter.addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 	}
 	
 	func removeObservers() {

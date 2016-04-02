@@ -22,7 +22,7 @@ public extension NSIndexPath {
 		}
 		var currentSection = section
 		while true {
-			currentSection--
+			currentSection -= 1
 			if currentSection < 0 || currentSection >= sectionCount {
 				return nil
 			}
@@ -56,7 +56,7 @@ public extension NSIndexPath {
 			if currentRow > rowCount {
 				return nil
 			}
-			currentSection++
+			currentSection += 1
 			currentRow = 0
 		}
 	}
@@ -76,9 +76,9 @@ extension UITableView {
 	func form_indexPathForCell(cell: UITableViewCell) -> NSIndexPath? {
 		guard let dataSource = self.dataSource else { return nil }
 		let sectionCount: Int = dataSource.numberOfSectionsInTableView?(self) ?? 0
-		for var section: Int = 0; section < sectionCount; section++ {
+		for section: Int in 0 ..< sectionCount {
 			let rowCount: Int = dataSource.tableView(self, numberOfRowsInSection: section)
-			for var row: Int = 0; row < rowCount; row++ {
+			for row: Int in 0 ..< rowCount {
 				let indexPath = NSIndexPath(forRow: row, inSection: section)
 				let dataSourceCell = dataSource.tableView(self, cellForRowAtIndexPath: indexPath)
 				if dataSourceCell === cell {

@@ -32,7 +32,7 @@ public class DumpVisitor: FormItemVisitor {
 			dict.update(dumpVisitor.dict)
 			
 			result.append(dict)
-			rowNumber++
+			rowNumber += 1
 		}
 		
 		do {

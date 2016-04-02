@@ -66,7 +66,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		instance.datePickerMode = self.model.datePickerMode
 		instance.minimumDate = self.model.minimumDate
 		instance.maximumDate = self.model.maximumDate
-		instance.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		instance.addTarget(self, action: #selector(DatePickerCell.valueChanged), forControlEvents: .ValueChanged)
 		instance.locale = self.resolveLocale()
 		return instance
 		}()

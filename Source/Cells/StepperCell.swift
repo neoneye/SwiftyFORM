@@ -28,7 +28,7 @@ public class StepperCell: UITableViewCell {
 		containerView.addSubview(valueLabel)
 		accessoryView = containerView
 
-		stepperView.addTarget(self, action: "valueChanged", forControlEvents: .ValueChanged)
+		stepperView.addTarget(self, action: #selector(StepperCell.valueChanged), forControlEvents: .ValueChanged)
 
 		valueLabel.text = "0"
 	}
