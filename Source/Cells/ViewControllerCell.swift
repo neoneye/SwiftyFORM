@@ -29,11 +29,11 @@ public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		DLog("will invoke")
+		SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 
 		innerDidSelectRow(self, model)
-		DLog("did invoke")
+		SwiftyFormLog("did invoke")
 	}
 }

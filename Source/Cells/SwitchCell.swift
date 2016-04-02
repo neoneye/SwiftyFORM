@@ -5,7 +5,7 @@ public struct SwitchCellModel {
 	var title: String = ""
 
 	var valueDidChange: Bool -> Void = { (value: Bool) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -29,12 +29,12 @@ public class SwitchCell: UITableViewCell {
 	}
 	
 	public func valueChanged() {
-		DLog("value did change")
+		SwiftyFormLog("value did change")
 		model.valueDidChange(switchView.on)
 	}
 
 	public func setValueWithoutSync(value: Bool, animated: Bool) {
-		DLog("set value \(value), animated \(animated)")
+		SwiftyFormLog("set value \(value), animated \(animated)")
 		switchView.setOn(value, animated: animated)
 	}
 	

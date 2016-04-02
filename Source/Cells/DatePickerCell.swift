@@ -10,7 +10,7 @@ public struct DatePickerCellModel {
 	var maximumDate: NSDate? = nil // default is nil
 	
 	var valueDidChange: NSDate -> Void = { (date: NSDate) in
-		DLog("date \(date)")
+		SwiftyFormLog("date \(date)")
 	}
 }
 
@@ -52,7 +52,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	
 	public func assignTintColors() {
 		let color = self.tintColor
-		DLog("assigning tint color: \(color)")
+		SwiftyFormLog("assigning tint color: \(color)")
 		textLabel?.textColor = color
 		detailTextLabel?.textColor = color
 	}
@@ -100,17 +100,17 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	}
 	
 	public func gotoPrevious() {
-		DLog("make previous cell first responder")
+		SwiftyFormLog("make previous cell first responder")
 		form_makePreviousCellFirstResponder()
 	}
 	
 	public func gotoNext() {
-		DLog("make next cell first responder")
+		SwiftyFormLog("make next cell first responder")
 		form_makeNextCellFirstResponder()
 	}
 	
 	public func dismissKeyboard() {
-		DLog("dismiss keyboard")
+		SwiftyFormLog("dismiss keyboard")
 		resignFirstResponder()
 	}
 	
@@ -171,7 +171,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		}
 		if true {
 			let date = datePicker.date
-			//DLog("date: \(date)")
+			//SwiftyFormLog("date: \(date)")
 			let dateFormatter = NSDateFormatter()
 			dateFormatter.locale = self.resolveLocale()
 			dateFormatter.dateStyle = obtainDateStyle(model.datePickerMode)
@@ -185,7 +185,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	}
 	
 	public func setDateWithoutSync(date: NSDate?, animated: Bool) {
-		DLog("set date \(date), animated \(animated)")
+		SwiftyFormLog("set date \(date), animated \(animated)")
 		datePicker.setDate(date ?? NSDate(), animated: animated)
 		updateValue()
 	}
@@ -201,12 +201,12 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 			return
 		}
 		
-		//DLog("will invoke")
+		//SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 		self.becomeFirstResponder()
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		//DLog("did invoke")
+		//SwiftyFormLog("did invoke")
 	}
 	
 	// MARK: UIResponder

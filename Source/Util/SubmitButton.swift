@@ -9,7 +9,7 @@ extension FormViewController {
 	public func form_submitAction(sender: AnyObject?) {
 		formBuilder.validateAndUpdateUI()
 		let result = formBuilder.validate()
-		DLog("result \(result)")
+		SwiftyFormLog("result \(result)")
 		form_showSubmitResult(result)
 	}
 	

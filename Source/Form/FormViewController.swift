@@ -6,17 +6,17 @@ public class FormViewController: UIViewController {
 	public var keyboardHandler: KeyboardHandler?
 	
 	public init() {
-		DLog("super init")
+		SwiftyFormLog("super init")
 		super.init(nibName: nil, bundle: nil)
 	}
 	
 	required public init(coder aDecoder: NSCoder) {
-		DLog("super init")
+		SwiftyFormLog("super init")
 		super.init(nibName: nil, bundle: nil)
 	}
 
 	override public func loadView() {
-		DLog("super loadview")
+		SwiftyFormLog("super loadview")
 		self.view = self.tableView
 		
 		keyboardHandler = KeyboardHandler(tableView: self.tableView)
@@ -30,7 +30,7 @@ public class FormViewController: UIViewController {
 	}
 
 	public func populate(builder: FormBuilder) {
-		DLog("subclass must implement populate()")
+		SwiftyFormLog("subclass must implement populate()")
 	}
 
 	override public func viewWillAppear(animated: Bool) {

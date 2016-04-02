@@ -3,11 +3,11 @@ import Foundation
 
 // http://stackoverflow.com/questions/24114288/macros-in-swift
 #if DEBUG
-	func DLog(message: String, function: String = #function, file: String = #file, line: Int = #line) {
+	func SwiftyFormLog(message: String, function: String = #function, file: String = #file, line: Int = #line) {
 		print("[\(file):\(line)] \(function) - \(message)")
 	}
 #else
-	func DLog(message: String, function: String = #function, file: String = #file, line: Int = #line) {
+	func SwiftyFormLog(message: String, function: String = #function, file: String = #file, line: Int = #line) {
 		// do nothing
 	}
 #endif

@@ -15,7 +15,7 @@ public struct TextViewCellModel {
 	var toolbarMode: ToolbarMode = .Simple
 
 	var valueDidChange: String -> Void = { (value: String) in
-		DLog("value \(value)")
+		SwiftyFormLog("value \(value)")
 	}
 }
 
@@ -100,17 +100,17 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	}
 	
 	public func gotoPrevious() {
-		DLog("make previous cell first responder")
+		SwiftyFormLog("make previous cell first responder")
 		form_makePreviousCellFirstResponder()
 	}
 	
 	public func gotoNext() {
-		DLog("make next cell first responder")
+		SwiftyFormLog("make next cell first responder")
 		form_makeNextCellFirstResponder()
 	}
 	
 	public func dismissKeyboard() {
-		DLog("dismiss keyboard")
+		SwiftyFormLog("dismiss keyboard")
 		resignFirstResponder()
 	}
 	
@@ -137,7 +137,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	}
 	
 	public func setValueWithoutSync(value: String) {
-		DLog("set value \(value)")
+		SwiftyFormLog("set value \(value)")
 		textView.text = value
 		updateValue()
 	}
@@ -205,7 +205,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
-		//DLog("compute height of row: \(value)")
+		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
 	

@@ -107,7 +107,7 @@ class PopulateTableView: FormItemVisitor {
 		model.model = object
 		weak var weakObject = object
 		model.valueDidChange = { (value: String) in
-			DLog("value \(value)")
+			SwiftyFormLog("value \(value)")
 			weakObject?.textDidChange(value)
 			return
 		}
@@ -117,7 +117,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
-			DLog("sync value \(value)")
+			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value)
 			return
 		}
@@ -150,7 +150,7 @@ class PopulateTableView: FormItemVisitor {
 		model.placeholder = object.placeholder
 		weak var weakObject = object
 		model.valueDidChange = { (value: String) in
-			DLog("value \(value)")
+			SwiftyFormLog("value \(value)")
 			weakObject?.innerValue = value
 			return
 		}
@@ -160,7 +160,7 @@ class PopulateTableView: FormItemVisitor {
 
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
-			DLog("sync value \(value)")
+			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value)
 			return
 		}
@@ -172,7 +172,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakViewController = self.model.viewController
 		let cell = ViewControllerFormItemCell(model: model) { (cell: ViewControllerFormItemCell, modelObject: ViewControllerFormItemCellModel) in
-			DLog("push")
+			SwiftyFormLog("push")
 			if let vc = weakViewController {
 				let dismissCommand = PopulateTableView.prepareDismissCommand(willPopViewController, parentViewController: vc, cell: cell)
 				if let childViewController = object.createViewController?(dismissCommand) {
@@ -186,7 +186,7 @@ class PopulateTableView: FormItemVisitor {
 	class func prepareDismissCommand(willPopCommand: WillPopCommandProtocol, parentViewController: UIViewController, cell: ViewControllerFormItemCell) -> CommandProtocol {
 		weak var weakViewController = parentViewController
 		let command = CommandBlock { (childViewController: UIViewController, returnObject: AnyObject?) in
-			DLog("pop: \(returnObject)")
+			SwiftyFormLog("pop: \(returnObject)")
 			if let vc = weakViewController {
 				let context = ViewControllerFormItemPopContext(parentViewController: vc, childViewController: childViewController, cell: cell, returnedObject: returnObject)
 				willPopCommand.execute(context)
@@ -205,7 +205,7 @@ class PopulateTableView: FormItemVisitor {
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: OptionRowModel?) in
-			DLog("propagate from cell to model. value \(value)")
+			SwiftyFormLog("propagate from cell to model. value \(value)")
 			weakObject?.innerSelected = value
 			weakObject?.valueDidChange(selected: value)
 		}
@@ -218,7 +218,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (selected: OptionRowModel?) in
-			DLog("propagate from model to cell. option: \(selected?.title)")
+			SwiftyFormLog("propagate from model to cell. option: \(selected?.title)")
 			weakCell?.setSelectedOptionRowWithoutPropagation(selected)
 		}
 	}
@@ -242,21 +242,21 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakObject = object
 		model.valueDidChange = { (date: NSDate) in
-			DLog("value did change \(date)")
+			SwiftyFormLog("value did change \(date)")
 			weakObject?.innerValue = date
 			return
 		}
 		
 		let cell = DatePickerCell(model: model)
 		
-		DLog("will assign date \(object.value)")
+		SwiftyFormLog("will assign date \(object.value)")
 		cell.setDateWithoutSync(object.value, animated: false)
-		DLog("did assign date \(object.value)")
+		SwiftyFormLog("did assign date \(object.value)")
 		cells.append(cell)
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
-			DLog("sync date \(date)")
+			SwiftyFormLog("sync date \(date)")
 			weakCell?.setDateWithoutSync(date, animated: animated)
 			return
 		}
@@ -273,7 +273,7 @@ class PopulateTableView: FormItemVisitor {
 	func visitOptionRow(object: OptionRowFormItem) {
 		weak var weakViewController = self.model.viewController
 		let cell = OptionCell(model: object) {
-			DLog("did select option")
+			SwiftyFormLog("did select option")
 			if let vc = weakViewController {
 				if let x = vc as? SelectOptionDelegate {
 					x.form_willSelectOption(object)
@@ -289,7 +289,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakObject = object
 		model.valueDidChange = { (value: Bool) in
-			DLog("value did change \(value)")
+			SwiftyFormLog("value did change \(value)")
 			weakObject?.switchDidChange(value)
 			return
 		}
@@ -297,13 +297,13 @@ class PopulateTableView: FormItemVisitor {
 		let cell = SwitchCell(model: model)
 		cells.append(cell)
 
-		DLog("will assign value \(object.value)")
+		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: false)
-		DLog("did assign value \(object.value)")
+		SwiftyFormLog("did assign value \(object.value)")
 
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Bool, animated: Bool) in
-			DLog("sync value \(value)")
+			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value, animated: animated)
 			return
 		}
@@ -316,7 +316,7 @@ class PopulateTableView: FormItemVisitor {
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: Int) in
-			DLog("value \(value)")
+			SwiftyFormLog("value \(value)")
 			weakObject?.innerValue = value
 			return
 		}
@@ -324,13 +324,13 @@ class PopulateTableView: FormItemVisitor {
 		let cell = StepperCell(model: model)
 		cells.append(cell)
 
-		DLog("will assign value \(object.value)")
+		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: true)
-		DLog("did assign value \(object.value)")
+		SwiftyFormLog("did assign value \(object.value)")
 
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Int, animated: Bool) in
-			DLog("sync value \(value)")
+			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value, animated: animated)
 			return
 		}
@@ -345,7 +345,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakObject = object
 		model.valueDidChange = { (value: Float) in
-			DLog("value did change \(value)")
+			SwiftyFormLog("value did change \(value)")
 			weakObject?.sliderDidChange(value)
 			return
 		}
@@ -355,7 +355,7 @@ class PopulateTableView: FormItemVisitor {
 
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
-			DLog("sync value \(value)")
+			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value, animated: animated)
 			return
 		}

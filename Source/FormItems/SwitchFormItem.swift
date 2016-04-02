@@ -14,7 +14,7 @@ public class SwitchFormItem: FormItem {
 	
 	typealias SyncBlock = (value: Bool, animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Bool, animated: Bool) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: Bool = false
@@ -29,7 +29,7 @@ public class SwitchFormItem: FormItem {
 	
 	typealias SwitchDidChangeBlock = (value: Bool) -> Void
 	var switchDidChangeBlock: SwitchDidChangeBlock = { (value: Bool) in
-		DLog("not overridden")
+		SwiftyFormLog("not overridden")
 	}
 	
 	public func switchDidChange(value: Bool) {

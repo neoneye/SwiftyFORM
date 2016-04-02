@@ -28,7 +28,7 @@ public class DatePickerFormItem: FormItem {
 	
 	typealias SyncBlock = (date: NSDate?, animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (date: NSDate?, animated: Bool) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: NSDate? = nil

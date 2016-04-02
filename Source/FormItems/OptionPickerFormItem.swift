@@ -42,7 +42,7 @@ public class OptionPickerFormItem: FormItem {
 		for option in options {
 			if option.title == title {
 				self.setSelectedOptionRow(option)
-				DLog("initial selected option: \(option)")
+				SwiftyFormLog("initial selected option: \(option)")
 			}
 		}
 	}
@@ -51,14 +51,14 @@ public class OptionPickerFormItem: FormItem {
 		for option in options {
 			if option.identifier == identifier {
 				self.setSelectedOptionRow(option)
-				DLog("initial selected option: \(option)")
+				SwiftyFormLog("initial selected option: \(option)")
 			}
 		}
 	}
 
 	public typealias SyncBlock = (selected: OptionRowModel?) -> Void
 	public var syncCellWithValue: SyncBlock = { (selected: OptionRowModel?) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerSelected: OptionRowModel? = nil
@@ -72,14 +72,14 @@ public class OptionPickerFormItem: FormItem {
 	}
 	
 	public func setSelectedOptionRow(selected: OptionRowModel?) {
-		DLog("option: \(selected?.title)")
+		SwiftyFormLog("option: \(selected?.title)")
 		innerSelected = selected
 		syncCellWithValue(selected: selected)
 	}
 	
 	public typealias ValueDidChange = (selected: OptionRowModel?) -> Void
 	public var valueDidChange: ValueDidChange = { (selected: OptionRowModel?) in
-		DLog("value did change not overridden")
+		SwiftyFormLog("value did change not overridden")
 	}
 }
 

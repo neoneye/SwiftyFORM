@@ -20,7 +20,7 @@ public class TextViewFormItem: FormItem {
 	
 	typealias SyncBlock = (value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in
-		DLog("sync is not overridden")
+		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: String = ""
