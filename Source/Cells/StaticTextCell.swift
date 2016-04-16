@@ -7,7 +7,7 @@ public struct StaticTextCellModel {
 }
 
 public class StaticTextCell: UITableViewCell {
-	public let model: StaticTextCellModel
+	public var model: StaticTextCellModel
 
 	public init(model: StaticTextCellModel) {
 		self.model = model
