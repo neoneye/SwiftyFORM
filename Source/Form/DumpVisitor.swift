@@ -105,6 +105,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
 		dict["placeholder"] = object.placeholder
+		dict["value"] = object.selected?.title
 	}
 	
 	func convertOptionalDateToJSON(date: NSDate?) -> AnyObject {
