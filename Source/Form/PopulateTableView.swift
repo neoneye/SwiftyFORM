@@ -91,6 +91,18 @@ class PopulateTableView: FormItemVisitor {
 		model.value = object.value
 		let cell = StaticTextCell(model: model)
 		cells.append(cell)
+
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: String) in
+			SwiftyFormLog("sync value \(value)")
+			if let c = weakCell {
+				var m = StaticTextCellModel()
+				m.title = c.model.title
+				m.value = value
+				c.model = m
+				c.loadWithModel(m)
+			}
+		}
 	}
 	
 	func visitTextField(object: TextFieldFormItem) {

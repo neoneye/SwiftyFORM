@@ -43,8 +43,8 @@ public class SliderFormItem: FormItem {
 		syncCellWithValue(value: value, animated: animated)
 	}
 
-	typealias SliderDidChangeBlock = (value: Float) -> Void
-	var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
+	public typealias SliderDidChangeBlock = (value: Float) -> Void
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
 		SwiftyFormLog("not overridden")
 	}
 	
