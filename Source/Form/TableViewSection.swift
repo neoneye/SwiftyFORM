@@ -104,7 +104,7 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 		if let cell = cells[indexPath.row] as? CellHeightProvider {
 			return cell.form_cellHeight(indexPath, tableView: tableView)
 		}
-		return 44
+		return UITableViewAutomaticDimension
 	}
 	
 	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
