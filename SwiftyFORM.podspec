@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary = 'SwiftyFORM is a form framework for iOS written in Swift'
   s.homepage = 'https://github.com/neoneye/SwiftyFORM'
   s.authors = { 'Simon Strandgaard' => 'simon@iroots.dk' }
-  s.source = { :git => 'https://github.com/neoneye/SwiftyFORM.git', :tag => s.version }
-  s.source_files = 'Source/Cells/*.swift, Source/Form/*.swift, Source/FormItems/*.swift, Source/SpecificationPattern/*.swift, Source/Util/*.swift'
+  s.source = { :git => 'https://github.com/neoneye/SwiftyFORM.git' }
+  s.source_files = 'Source/*/*.swift'
   s.ios.deployment_target = '8.0'
 end
