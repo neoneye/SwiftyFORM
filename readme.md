@@ -1,3 +1,6 @@
+[![License](https://img.shields.io/badge/license-MIT-gray.svg)](http://cocoadocs.org/docsets/SwiftForms)
+[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoadocs.org/docsets/SwiftForms)
+
 # SwiftyFORM
 
 SwiftyFORM is a form framework for iOS written in Swift.
@@ -17,6 +20,32 @@ SwiftyFORM is a form framework for iOS written in Swift.
 - Xcode7.3.1 (7D1014)
 - iOS 9
 
+## Installation
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
+
+CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate SwiftForms into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'SwiftyFORM'
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
 
 ## Usage
 
