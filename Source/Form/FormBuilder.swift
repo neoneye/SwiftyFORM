@@ -57,7 +57,7 @@ public class FormBuilder: NSObject {
 		return DumpVisitor.dump(prettyPrinted, items: innerItems)
 	}
 	
-	func result(viewController: UIViewController) -> TableViewSectionArray {
+	public func result(viewController: UIViewController) -> TableViewSectionArray {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)

@@ -25,8 +25,8 @@ public class TextFieldFormItem: FormItem {
 	}
 	
 	
-	typealias SyncBlock = (value: String) -> Void
-	var syncCellWithValue: SyncBlock = { (string: String) in
+	public typealias SyncBlock = (value: String) -> Void
+	public var syncCellWithValue: SyncBlock = { (string: String) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
@@ -40,8 +40,8 @@ public class TextFieldFormItem: FormItem {
 		}
 	}
 	
-	typealias TextDidChangeBlock = (value: String) -> Void
-	var textDidChangeBlock: TextDidChangeBlock = { (value: String) in
+	public typealias TextDidChangeBlock = (value: String) -> Void
+	public var textDidChangeBlock: TextDidChangeBlock = { (value: String) in
 		SwiftyFormLog("not overridden")
 	}
 	
@@ -50,19 +50,19 @@ public class TextFieldFormItem: FormItem {
 		textDidChangeBlock(value: value)
 	}
 
-	func assignValueAndSync(value: String) {
+	public func assignValueAndSync(value: String) {
 		innerValue = value
 		syncCellWithValue(value: value)
 	}
 	
-	var reloadPersistentValidationState: Void -> Void = {}
+	public var reloadPersistentValidationState: Void -> Void = {}
 	
 	
-	var obtainTitleWidth: Void -> CGFloat = {
+	public var obtainTitleWidth: Void -> CGFloat = {
 		return 0
 	}
 	
-	var assignTitleWidth: CGFloat -> Void = { (width: CGFloat) in
+	public var assignTitleWidth: CGFloat -> Void = { (width: CGFloat) in
 		// do nothing
 	}
 	
@@ -84,7 +84,7 @@ public class TextFieldFormItem: FormItem {
 		return self
 	}
 	
-	let validatorBuilder = ValidatorBuilder()
+	public let validatorBuilder = ValidatorBuilder()
 	
 	public func validate(specification: Specification, message: String) -> Self {
 		validatorBuilder.hardValidate(specification, message: message)

@@ -2,7 +2,7 @@
 import UIKit
 
 extension UIView {
-	func form_firstResponder() -> UIView? {
+	public func form_firstResponder() -> UIView? {
 		if self.isFirstResponder() {
 			return self
 		}
