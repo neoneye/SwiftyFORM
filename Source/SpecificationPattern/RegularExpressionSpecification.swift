@@ -3,12 +3,12 @@ import Foundation
 public class RegularExpressionSpecification: CompositeSpecification {
 	public let regularExpression: NSRegularExpression
 	
-	init(regularExpression: NSRegularExpression) {
+	public init(regularExpression: NSRegularExpression) {
 		self.regularExpression = regularExpression
 		super.init()
 	}
 	
-	convenience init(pattern: String) {
+	public convenience init(pattern: String) {
 		let regularExpression = try! NSRegularExpression(pattern: pattern, options: [])
 		self.init(regularExpression: regularExpression)
 	}
