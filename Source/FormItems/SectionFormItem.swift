@@ -8,6 +8,11 @@ public class SectionFormItem: FormItem {
 }
 
 public class SectionHeaderTitleFormItem: FormItem {
+	public init(title: String? = nil) {
+		self.title = title
+		super.init()
+	}
+	
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visitSectionHeaderTitle(self)
 	}
@@ -29,6 +34,11 @@ public class SectionHeaderViewFormItem: FormItem {
 }
 
 public class SectionFooterTitleFormItem: FormItem {
+	public init(title: String? = nil) {
+		self.title = title
+		super.init()
+	}
+	
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visitSectionFooterTitle(self)
 	}

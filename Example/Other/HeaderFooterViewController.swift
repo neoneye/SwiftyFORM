@@ -27,7 +27,7 @@ class HeaderFooterViewController: FormViewController {
 		builder += StaticTextFormItem().title("Empty Row")
 		builder += StaticTextFormItem().title("Empty Row")
 		builder += StaticTextFormItem().title("Empty Row")
-		builder += SectionFooterTitleFormItem().title("Line 1: Standard Footer Title\nLine 2: Standard Footer Title\nLine 3: Standard Footer Title")
+		builder += SectionFooterTitleFormItem(title: "Line 1: Standard Footer Title\nLine 2: Standard Footer Title\nLine 3: Standard Footer Title")
 	}
 	
 	func configureHeaderView0() {

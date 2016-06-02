@@ -9,7 +9,7 @@ class CustomViewController: FormViewController {
 		builder.toolbarMode = .Simple
 		builder.demo_showInfo("Demonstration of\ncustom cells using\nCustomFormItem")
 
-		builder += SectionHeaderTitleFormItem().title("World news")
+		builder += SectionHeaderTitleFormItem(title: "World news")
 		let loaderItem0 = CustomFormItem()
 		loaderItem0.createCell = {
 			return try LoadingCell.createCell()
