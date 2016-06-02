@@ -8,6 +8,12 @@ public class SectionFormItem: FormItem {
 }
 
 public class SectionHeaderTitleFormItem: FormItem {
+    
+    init(title: String) {
+        super.init()
+        self.title = title;
+    }
+    
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visitSectionHeaderTitle(self)
 	}
