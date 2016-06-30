@@ -71,8 +71,11 @@ class PopulateTableView: FormItemVisitor {
 	}
 
 	func visitCustom(object: CustomFormItem) {
+		let context = CustomFormItem.Context(
+			viewController: model.viewController
+		)
 		do {
-			let cell = try object.createCell()
+			let cell = try object.createCell(context)
 			cells.append(cell)
 		} catch {
 			print("ERROR: Could not create cell for custom form item: \(error)")
