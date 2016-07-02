@@ -440,6 +440,28 @@ class PopulateTableView: FormItemVisitor {
 		}
 		closeSection(footerBlock)
 	}
+	
+	func visitSegmentedControl(object: SegmentedControlFormItem) {
+		var model = SegmentedControlCellModel()
+		model.title = object.title
+		model.items = object.items
+		model.value = object.selected
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Int) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.valueDidChange(value)
+			return
+		}
+		
+		let cell = SegmentedControlCell(model: model)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Int) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value)
+			return
+		}
+	}
 }
-
-
