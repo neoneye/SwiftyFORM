@@ -32,4 +32,5 @@ class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	func visitSectionHeaderView(object: SectionHeaderViewFormItem) {}
 	func visitSectionFooterTitle(object: SectionFooterTitleFormItem) {}
 	func visitSectionFooterView(object: SectionFooterViewFormItem) {}
+	func visitSegmentedControl(object: SegmentedControlFormItem) {}
 }

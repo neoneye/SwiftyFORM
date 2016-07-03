@@ -2,12 +2,16 @@
 import Foundation
 
 public class CustomFormItem: FormItem {
+	public struct Context {
+		public let viewController: UIViewController
+	}
+	
 	public enum CustomFormItemError: ErrorType {
 		case CouldNotCreate
 	}
 
-	public typealias CreateCell = Void throws -> UITableViewCell
-	public var createCell: CreateCell = { throw CustomFormItemError.CouldNotCreate }
+	public typealias CreateCell = Context throws -> UITableViewCell
+	public var createCell: CreateCell = { _ in throw CustomFormItemError.CouldNotCreate }
 	
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visitCustom(self)

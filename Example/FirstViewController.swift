@@ -30,6 +30,7 @@ public class FirstViewController: FormViewController {
 		builder += SectionHeaderTitleFormItem().title("Other")
 		builder += ViewControllerFormItem().title("Buttons").viewController(ButtonsViewController.self)
 		builder += ViewControllerFormItem().title("Sliders").viewController(SlidersViewController.self)
+		builder += ViewControllerFormItem().title("Segmented Controls").viewController(SegmentedControlsViewController.self)
 		builder += ViewControllerFormItem().title("Options").viewController(OptionsViewController.self)
 		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
