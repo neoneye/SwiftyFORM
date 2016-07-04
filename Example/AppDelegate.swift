@@ -94,11 +94,9 @@ class SliderGestureViewController: UIViewController {
 		if gesture.state == .Changed {
 			let translation = gesture.translationInView(gesture.view)
 //			print("x: \(translation.x)")
-			xDelta -= translation.y
-			yDelta -= translation.x
-			
-//			x = xOriginal + Int(pow(xDelta, CGFloat(y)))
-			
+			xDelta += translation.x
+			yDelta -= translation.y
+						
 			if y == -3 {
 				x = xOriginal + xDelta / 1000.0
 			}
@@ -121,14 +119,21 @@ class SliderGestureViewController: UIViewController {
 				x = xOriginal + xDelta * 1000.0
 			}
 			
-//			x = xOriginal + Int(xDelta / 10.0)
-			y = yOriginal + Int(yDelta / 10.0)
+			y = yOriginal + Int(yDelta / 50.0)
 			if y < -3 {
 				y = -3
 			}
 			if y > 3 {
 				y = 3
 			}
+			
+			if y != yOriginal {
+				yOriginal = y
+				yDelta = 0
+				xOriginal = x
+				xDelta = 0
+			}
+			
 			updateLabel()
 			gesture.setTranslation(CGPointZero, inView: gesture.view)
 		}
