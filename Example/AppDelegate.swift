@@ -39,11 +39,12 @@ class SliderGestureViewController: UIViewController {
 		return instance
 	}()
 	
-	var value: Int = 0
-	var changeIndex: Int = 0
+	var x: CGFloat = 0
+	var y: Int = 0
 	
 	func updateLabel() {
-		label.text = "\(value)\n\(changeIndex)"
+		let xs = String(format: "%.3f", x)
+		label.text = "\(xs)\n\(y)"
 		view.setNeedsLayout()
 	}
 	
@@ -60,9 +61,11 @@ class SliderGestureViewController: UIViewController {
 		label.center = focusView.center
 	}
 	
-	var originalValue = 0
-	var accum: CGFloat = 0
-	
+	var xOriginal: CGFloat = 0
+	var yOriginal: Int = 0
+
+	var xDelta: CGFloat = 0
+	var yDelta: CGFloat = 0
 	
 	var counter = 0
 	func handlePan(gesture: UIPanGestureRecognizer) {
@@ -70,16 +73,50 @@ class SliderGestureViewController: UIViewController {
 		counter += 1
 		
 		if gesture.state == .Began {
-			originalValue = value
-			accum = 0
+			xOriginal = x
+			yOriginal = y
+			xDelta = 0
+			yDelta = 0
 		}
 		
 		if gesture.state == .Changed {
 			let translation = gesture.translationInView(gesture.view)
-			print("x: \(translation.x)")
-			accum += translation.x
+//			print("x: \(translation.x)")
+			xDelta -= translation.y
+			yDelta -= translation.x
 			
-			value = originalValue + Int(accum / 10.0)
+//			x = xOriginal + Int(pow(xDelta, CGFloat(y)))
+			
+			if y == -3 {
+				x = xOriginal + xDelta / 1000.0
+			}
+			if y == -2 {
+				x = xOriginal + xDelta / 100.0
+			}
+			if y == -1 {
+				x = xOriginal + xDelta / 10.0
+			}
+			if y == 0 {
+				x = xOriginal + xDelta
+			}
+			if y == 1 {
+				x = xOriginal + xDelta * 10.0
+			}
+			if y == 2 {
+				x = xOriginal + xDelta * 100.0
+			}
+			if y == 3 {
+				x = xOriginal + xDelta * 1000.0
+			}
+			
+//			x = xOriginal + Int(xDelta / 10.0)
+			y = yOriginal + Int(yDelta / 10.0)
+			if y < -3 {
+				y = -3
+			}
+			if y > 3 {
+				y = 3
+			}
 			updateLabel()
 			gesture.setTranslation(CGPointZero, inView: gesture.view)
 		}
