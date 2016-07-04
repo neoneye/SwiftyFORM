@@ -1,12 +1,19 @@
 // MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import UIKit
 
+
+/*
+TODO: horizontal pan skal ikke ændre på tal som er mindre end magnifier.. alle tal i second part skal være låst.
+TODO: istedetfor vertical pan for at ændre på magnifier, så brug force touch eller long press
+TODO: double tap to switch to textfield mode
+*/
 class SliderGestureViewController: UIViewController {
 	override func loadView() {
 		super.loadView()
 		view.backgroundColor = UIColor.lightGrayColor()
 		view.addSubview(focusView)
 		view.addSubview(label)
+		view.addSubview(titleLabel)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -27,7 +34,17 @@ class SliderGestureViewController: UIViewController {
 	
 	lazy var focusView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.redColor()
+		instance.backgroundColor = UIColor.whiteColor()
+		return instance
+	}()
+	
+	lazy var titleLabel: UILabel = {
+		let instance = UILabel()
+		instance.text = "Value"
+		instance.numberOfLines = 0
+		instance.textAlignment = .Left
+		instance.font = UIFont.boldSystemFontOfSize(18)
+//		instance.font = UIFont(name: "Menlo-Regular", size: 18)
 		return instance
 	}()
 	
@@ -36,6 +53,7 @@ class SliderGestureViewController: UIViewController {
 		instance.text = "-"
 		instance.numberOfLines = 0
 		instance.textAlignment = .Right
+		instance.font = UIFont(name: "Menlo-Regular", size: 18)
 		return instance
 	}()
 	
@@ -43,7 +61,31 @@ class SliderGestureViewController: UIViewController {
 	var y: Int = 0
 	
 	func updateLabel() {
+		
 		let xs = String(format: "%.3f", x)
+		
+		var cutpoint = y + 3
+		if y >= 0 {
+			cutpoint += 1
+		}
+		var fp = ""
+		var sp = ""
+		for (index, char) in xs.characters.reverse().enumerate() {
+			if index >= cutpoint {
+				fp = "\(char)\(fp)"
+			} else {
+				sp = "\(char)\(sp)"
+			}
+		}
+
+		let firstPart = NSAttributedString(string: fp, attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
+		let secondPart = NSAttributedString(string: sp, attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()])
+		
+		let text = NSMutableAttributedString()
+		text.appendAttributedString(firstPart)
+		text.appendAttributedString(secondPart)
+
+		
 		var magnitude = ""
 		switch y {
 		case -3: magnitude = "0.001"
@@ -56,21 +98,31 @@ class SliderGestureViewController: UIViewController {
 		default:
 			magnitude = ""
 		}
-		label.text = "\(xs)\n\(magnitude)\n\(y)"
+//		label.text = "\(xs)\n\(magnitude)\n\(y)"
+		label.attributedText = text
 		view.setNeedsLayout()
 	}
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 		
-		var f = view.bounds.insetBy(dx: 40, dy: 10)
-		f.size.height = 100
+		var f = view.bounds.insetBy(dx: 0, dy: 10)
+		f.size.height = 64
 		f.origin.y = view.bounds.midY - 50
 		focusView.frame = f
 		
-		let size = label.sizeThatFits(f.size)
-		label.frame = CGRect(origin: CGPointZero, size: size)
-		label.center = focusView.center
+		do {
+			let size = titleLabel.sizeThatFits(f.size)
+			let labelx = f.minX + 20
+			let labely = f.midY - size.height / 2
+			titleLabel.frame = CGRect(origin: CGPoint(x: labelx, y: labely), size: size)
+		}
+		do {
+			let size = label.sizeThatFits(f.size)
+			let labelx = f.maxX - size.width - 20
+			let labely = f.midY - size.height / 2
+			label.frame = CGRect(origin: CGPoint(x: labelx, y: labely), size: size)
+		}
 	}
 	
 	var xOriginal: CGFloat = 0
@@ -94,9 +146,9 @@ class SliderGestureViewController: UIViewController {
 		if gesture.state == .Changed {
 			let translation = gesture.translationInView(gesture.view)
 //			print("x: \(translation.x)")
-			xDelta += translation.x
+			xDelta += translation.x * 0.02
 			yDelta -= translation.y
-						
+			
 			if y == -3 {
 				x = xOriginal + xDelta / 1000.0
 			}
@@ -119,7 +171,7 @@ class SliderGestureViewController: UIViewController {
 				x = xOriginal + xDelta * 1000.0
 			}
 			
-			y = yOriginal + Int(yDelta / 50.0)
+			y = yOriginal + Int(yDelta / 75.0)
 			if y < -3 {
 				y = -3
 			}
