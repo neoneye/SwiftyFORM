@@ -44,7 +44,19 @@ class SliderGestureViewController: UIViewController {
 	
 	func updateLabel() {
 		let xs = String(format: "%.3f", x)
-		label.text = "\(xs)\n\(y)"
+		var magnitude = ""
+		switch y {
+		case -3: magnitude = "0.001"
+		case -2: magnitude = "0.010"
+		case -1: magnitude = "0.100"
+		case  0: magnitude = "1.000"
+		case  1: magnitude = "10.000"
+		case  2: magnitude = "100.000"
+		case  3: magnitude = "1000.000"
+		default:
+			magnitude = ""
+		}
+		label.text = "\(xs)\n\(magnitude)\n\(y)"
 		view.setNeedsLayout()
 	}
 	
