@@ -28,6 +28,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("DatePicker With Initial Value").viewController(DatePickerValueViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("Other")
+		builder += ViewControllerFormItem().title("Static & Attributed Text").viewController(StaticTextAndAttributedTextViewController.self)
 		builder += ViewControllerFormItem().title("Buttons").viewController(ButtonsViewController.self)
 		builder += ViewControllerFormItem().title("Sliders").viewController(SlidersViewController.self)
 		builder += ViewControllerFormItem().title("Segmented Controls").viewController(SegmentedControlsViewController.self)
@@ -36,16 +37,5 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
 		builder += ViewControllerFormItem().title("Custom Cells").viewController(CustomViewController.self)
 		builder += ViewControllerFormItem().title("Work In Progress").viewController(WorkInProgressViewController.self)
-        
-        builder += SectionHeaderTitleFormItem().title("Attributed Text")
-        builder += AttributedTextFormItem()
-            .title("Without attributes")
-        builder += AttributedTextFormItem()
-			.title("Underlined Bold Orange 🍊", [
-                NSForegroundColorAttributeName: UIColor.orangeColor(),
-                NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
-                NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
-                ])
-			.value("Value", [NSForegroundColorAttributeName: UIColor.greenColor()])
 	}
 }
