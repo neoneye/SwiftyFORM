@@ -88,7 +88,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitStaticText(object: StaticTextFormItem) {
+    func visitStaticText(object: StaticTextFormItem) {
 		var model = StaticTextCellModel()
 		model.title = object.title
 		model.value = object.value
@@ -107,6 +107,28 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 	}
+    
+    func visitAttributedText(object: AttributedTextFormItem) {
+        var model = AttributedTextCellModel()
+        model.title = object.title
+        model.value = object.value
+        model.attribute = object.attribute
+        let cell = AttributedTextCell(model: model)
+        cells.append(cell)
+        
+        weak var weakCell = cell
+        object.syncCellWithValue = { (value: String) in
+            SwiftyFormLog("sync value \(value)")
+            if let c = weakCell {
+                var m = AttributedTextCellModel()
+                m.title = c.model.title
+                m.attribute = c.model.attribute
+                m.value = value
+                c.model = m
+                c.loadWithModel(m)
+            }
+        }
+    }
 	
 	func visitTextField(object: TextFieldFormItem) {
 		var model = TextFieldFormItemCellModel()
