@@ -36,5 +36,16 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
 		builder += ViewControllerFormItem().title("Custom Cells").viewController(CustomViewController.self)
 		builder += ViewControllerFormItem().title("Work In Progress").viewController(WorkInProgressViewController.self)
+        
+        builder += SectionHeaderTitleFormItem().title("Attributed Text")
+        builder += AttributedTextFormItem()
+            .title("Without attributes")
+        builder += AttributedTextFormItem()
+            .attribute([
+                NSForegroundColorAttributeName: UIColor.orangeColor(),
+                NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
+                NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+                ])
+            .title("Underlined Bold Orange 🍊")
 	}
 }

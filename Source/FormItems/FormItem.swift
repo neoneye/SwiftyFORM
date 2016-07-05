@@ -6,6 +6,7 @@ public protocol FormItemVisitor {
 	func visitMeta(object: MetaFormItem)
 	func visitCustom(object: CustomFormItem)
 	func visitStaticText(object: StaticTextFormItem)
+    func visitAttributedText(object: AttributedTextFormItem)
 	func visitTextField(object: TextFieldFormItem)
 	func visitTextView(object: TextViewFormItem)
 	func visitViewController(object: ViewControllerFormItem)
@@ -22,6 +23,12 @@ public protocol FormItemVisitor {
 	func visitSectionFooterTitle(object: SectionFooterTitleFormItem)
 	func visitSectionFooterView(object: SectionFooterViewFormItem)
 	func visitSegmentedControl(object: SegmentedControlFormItem)
+}
+
+public extension FormItemVisitor {
+    func visitAttributedText(object: AttributedTextFormItem) {
+        self.visitStaticText(object)
+    }
 }
 
 public class FormItem: NSObject {
