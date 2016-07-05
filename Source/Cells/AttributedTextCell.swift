@@ -2,9 +2,8 @@
 import UIKit
 
 public struct AttributedTextCellModel {
-    var title: String = ""
-    var value: String = ""
-    var attribute: [String : AnyObject] = [:]
+	var titleAttributedText: NSAttributedString?
+	var valueAttributedText: NSAttributedString?
 }
 
 public class AttributedTextCell: UITableViewCell {
@@ -22,7 +21,7 @@ public class AttributedTextCell: UITableViewCell {
     
     public func loadWithModel(model: AttributedTextCellModel) {
         selectionStyle = .None
-        textLabel?.attributedText = NSAttributedString(string: model.title, attributes: model.attribute)
-        detailTextLabel?.text = model.value
+        textLabel?.attributedText = model.titleAttributedText
+        detailTextLabel?.attributedText = model.valueAttributedText
     }
 }

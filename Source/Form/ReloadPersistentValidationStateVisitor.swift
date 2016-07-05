@@ -13,6 +13,7 @@ class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	func visitMeta(object: MetaFormItem) {}
 	func visitCustom(object: CustomFormItem) {}
 	func visitStaticText(object: StaticTextFormItem) {}
+	func visitAttributedText(object: AttributedTextFormItem) {}
 	
 	func visitTextField(object: TextFieldFormItem) {
 		object.reloadPersistentValidationState()

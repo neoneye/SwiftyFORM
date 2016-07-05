@@ -25,12 +25,6 @@ public protocol FormItemVisitor {
 	func visitSegmentedControl(object: SegmentedControlFormItem)
 }
 
-public extension FormItemVisitor {
-    func visitAttributedText(object: AttributedTextFormItem) {
-        self.visitStaticText(object)
-    }
-}
-
 public class FormItem: NSObject {
 	
 	public override init() {

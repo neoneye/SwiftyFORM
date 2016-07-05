@@ -41,11 +41,11 @@ public class FirstViewController: FormViewController {
         builder += AttributedTextFormItem()
             .title("Without attributes")
         builder += AttributedTextFormItem()
-            .attribute([
+			.title("Underlined Bold Orange 🍊", [
                 NSForegroundColorAttributeName: UIColor.orangeColor(),
                 NSFontAttributeName: UIFont.boldSystemFontOfSize(20),
                 NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
                 ])
-            .title("Underlined Bold Orange 🍊")
+			.value("Value", [NSForegroundColorAttributeName: UIColor.greenColor()])
 	}
 }

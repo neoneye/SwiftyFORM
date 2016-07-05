@@ -110,20 +110,18 @@ class PopulateTableView: FormItemVisitor {
     
     func visitAttributedText(object: AttributedTextFormItem) {
         var model = AttributedTextCellModel()
-        model.title = object.title
-        model.value = object.value
-        model.attribute = object.attribute
+        model.titleAttributedText = object.title
+        model.valueAttributedText = object.value
         let cell = AttributedTextCell(model: model)
         cells.append(cell)
         
         weak var weakCell = cell
-        object.syncCellWithValue = { (value: String) in
+        object.syncCellWithValue = { (value: NSAttributedString?) in
             SwiftyFormLog("sync value \(value)")
             if let c = weakCell {
                 var m = AttributedTextCellModel()
-                m.title = c.model.title
-                m.attribute = c.model.attribute
-                m.value = value
+                m.titleAttributedText = c.model.titleAttributedText
+                m.valueAttributedText = value
                 c.model = m
                 c.loadWithModel(m)
             }
