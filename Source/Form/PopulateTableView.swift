@@ -107,6 +107,26 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 	}
+    
+    func visitAttributedText(object: AttributedTextFormItem) {
+        var model = AttributedTextCellModel()
+        model.titleAttributedText = object.title
+        model.valueAttributedText = object.value
+        let cell = AttributedTextCell(model: model)
+        cells.append(cell)
+        
+        weak var weakCell = cell
+        object.syncCellWithValue = { (value: NSAttributedString?) in
+            SwiftyFormLog("sync value \(value)")
+            if let c = weakCell {
+                var m = AttributedTextCellModel()
+                m.titleAttributedText = c.model.titleAttributedText
+                m.valueAttributedText = value
+                c.model = m
+                c.loadWithModel(m)
+            }
+        }
+    }
 	
 	func visitTextField(object: TextFieldFormItem) {
 		var model = TextFieldFormItemCellModel()

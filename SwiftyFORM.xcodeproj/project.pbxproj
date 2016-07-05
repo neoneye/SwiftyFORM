@@ -79,6 +79,8 @@
 		42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */; };
 		42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005171B96348200986B3B /* NSBundle+LoadView.swift */; };
 		42D5DE701A38167400D5C368 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D5DE651A38167400D5C368 /* SwiftyFORM.framework */; };
+		739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649121D2B6B7400E12A96 /* AttributedTextCell.swift */; };
+		739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		42D005171B96348200986B3B /* NSBundle+LoadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBundle+LoadView.swift"; sourceTree = "<group>"; };
 		42D5DE651A38167400D5C368 /* SwiftyFORM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyFORM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5DE6F1A38167400D5C368 /* SwiftyFORMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyFORMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		739649121D2B6B7400E12A96 /* AttributedTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextCell.swift; sourceTree = "<group>"; };
+		739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextFormItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 		42108D091B34E9F60067FEAA /* FormItems */ = {
 			isa = PBXGroup;
 			children = (
+				739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */,
 				42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */,
 				42D0050D1B96241100986B3B /* CustomFormItem.swift */,
 				42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */,
@@ -254,6 +259,7 @@
 				428682FC1B346CFE0028DB2F /* SimpleToolbar.swift */,
 				428682FF1B346CFE0028DB2F /* SliderCell.swift */,
 				428683001B346CFE0028DB2F /* StaticTextCell.swift */,
+				739649121D2B6B7400E12A96 /* AttributedTextCell.swift */,
 				428683011B346CFE0028DB2F /* StepperCell.swift */,
 				428683021B346CFE0028DB2F /* SwitchCell.swift */,
 				428683031B346CFE0028DB2F /* TextFieldCell.swift */,
@@ -462,7 +468,9 @@
 				428683321B346CFE0028DB2F /* OptionViewControllerCell.swift in Sources */,
 				428683511B346CFE0028DB2F /* RegularExpressionSpecification.swift in Sources */,
 				42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */,
+				739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */,
 				428683581B346CFE0028DB2F /* UITableView+PrevNext.swift in Sources */,
+				739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */,
 				42108D1E1B34E9F60067FEAA /* StaticTextFormItem.swift in Sources */,
 				4286835A1B346CFE0028DB2F /* UIView+LookupCell.swift in Sources */,
 				42108D231B34E9F60067FEAA /* ViewControllerFormItem.swift in Sources */,
