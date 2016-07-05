@@ -23,7 +23,7 @@ public class SimpleToolbar: UIToolbar {
 			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
 			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: "<<", style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
+		return UIBarButtonItem(title: "◀︎", style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}()
 	
 	public lazy var nextButton: UIBarButtonItem = {
@@ -32,7 +32,7 @@ public class SimpleToolbar: UIToolbar {
 			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
 			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: ">>", style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
+		return UIBarButtonItem(title: "▶", style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}()
 	
 	public lazy var closeButton: UIBarButtonItem = {
