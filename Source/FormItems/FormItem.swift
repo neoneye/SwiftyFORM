@@ -6,6 +6,7 @@ public protocol FormItemVisitor {
 	func visitMeta(object: MetaFormItem)
 	func visitCustom(object: CustomFormItem)
 	func visitStaticText(object: StaticTextFormItem)
+    func visitAttributedText(object: AttributedTextFormItem)
 	func visitTextField(object: TextFieldFormItem)
 	func visitTextView(object: TextViewFormItem)
 	func visitViewController(object: ViewControllerFormItem)

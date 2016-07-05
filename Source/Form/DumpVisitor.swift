@@ -70,6 +70,15 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 		dict["value"] = object.value
 	}
+
+	public func visitAttributedText(object: AttributedTextFormItem) {
+		dict["class"] = "AttributedTextFormItem"
+		dict["elementIdentifier"] = object.elementIdentifier
+		dict["styleIdentifier"] = object.styleIdentifier
+		dict["styleClass"] = object.styleClass
+		dict["title"] = object.title?.string
+		dict["value"] = object.value?.string
+	}
 	
 	public func visitTextField(object: TextFieldFormItem) {
 		dict["class"] = "TextFieldFormItem"
