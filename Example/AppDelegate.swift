@@ -53,19 +53,38 @@ class SliderGestureViewController: UIViewController {
 		instance.text = "-"
 		instance.numberOfLines = 0
 		instance.textAlignment = .Right
-		instance.font = UIFont(name: "Menlo-Regular", size: 18)
+		instance.font = UIFont.systemFontOfSize(20)
+//		instance.font = UIFont(name: "Menlo-Regular", size: 18)
 		return instance
 	}()
 	
-	var x: CGFloat = 0
-	var y: Int = 3
+	var x: Int = 0
+	var y: Int = 0
+	
+	let scale: Int = 3
 	
 	func updateLabel() {
+		let xx = CGFloat(x) * 0.001
 		
-		let xs = String(format: "%.3f", x)
+		let xs: String
+		if y >= 6 {
+			xs = String(format: "%08.3f", xx)
+		} else {
+			if y >= 5 {
+				xs = String(format: "%07.3f", xx)
+			} else {
+				if y >= 4 {
+					xs = String(format: "%06.3f", xx)
+				} else {
+					xs = String(format: "%.3f", xx)
+				}
+			}
+		}
+		
+//		let xs = String(format: "%08.3f", xx)
 		
 		var cutpoint = y
-		if y >= 3 {
+		if y >= scale {
 			cutpoint += 1
 		}
 		var fp = ""
@@ -125,7 +144,7 @@ class SliderGestureViewController: UIViewController {
 		}
 	}
 	
-	var xOriginal: CGFloat = 0
+	var xOriginal: Int = 0
 	var yOriginal: Int = 0
 
 	var xDelta: CGFloat = 0
@@ -146,32 +165,14 @@ class SliderGestureViewController: UIViewController {
 		if gesture.state == .Changed {
 			let translation = gesture.translationInView(gesture.view)
 //			print("x: \(translation.x)")
-			xDelta += translation.x * 0.02
-			yDelta -= translation.y
+			xDelta -= translation.y * 0.1
+			yDelta -= translation.x * 0.05
 			
-			if y == 0 {
-				x = xOriginal + xDelta / 1000.0
-			}
-			if y == 1 {
-				x = xOriginal + xDelta / 100.0
-			}
-			if y == 2 {
-				x = xOriginal + xDelta / 10.0
-			}
-			if y == 3 {
-				x = xOriginal + xDelta
-			}
-			if y == 4 {
-				x = xOriginal + xDelta * 10.0
-			}
-			if y == 5 {
-				x = xOriginal + xDelta * 100.0
-			}
-			if y == 6 {
-				x = xOriginal + xDelta * 1000.0
-			}
+			let xd = Int(floor(xDelta + 0.5))
+			let scale = Int(pow(Float(10), Float(y)))
+			x = xOriginal + xd * scale
 			
-			y = yOriginal + Int(yDelta / 75.0)
+			y = yOriginal + Int(yDelta)
 			if y < 0 {
 				y = 0
 			}
