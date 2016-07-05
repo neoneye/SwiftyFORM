@@ -58,14 +58,14 @@ class SliderGestureViewController: UIViewController {
 	}()
 	
 	var x: CGFloat = 0
-	var y: Int = 0
+	var y: Int = 3
 	
 	func updateLabel() {
 		
 		let xs = String(format: "%.3f", x)
 		
-		var cutpoint = y + 3
-		if y >= 0 {
+		var cutpoint = y
+		if y >= 3 {
 			cutpoint += 1
 		}
 		var fp = ""
@@ -86,18 +86,18 @@ class SliderGestureViewController: UIViewController {
 		text.appendAttributedString(secondPart)
 
 		
-		var magnitude = ""
-		switch y {
-		case -3: magnitude = "0.001"
-		case -2: magnitude = "0.010"
-		case -1: magnitude = "0.100"
-		case  0: magnitude = "1.000"
-		case  1: magnitude = "10.000"
-		case  2: magnitude = "100.000"
-		case  3: magnitude = "1000.000"
-		default:
-			magnitude = ""
-		}
+//		var magnitude = ""
+//		switch y {
+//		case 0: magnitude = "0.001"
+//		case 1: magnitude = "0.010"
+//		case 2: magnitude = "0.100"
+//		case 3: magnitude = "1.000"
+//		case 4: magnitude = "10.000"
+//		case 5: magnitude = "100.000"
+//		case 6: magnitude = "1000.000"
+//		default:
+//			magnitude = ""
+//		}
 //		label.text = "\(xs)\n\(magnitude)\n\(y)"
 		label.attributedText = text
 		view.setNeedsLayout()
@@ -149,34 +149,34 @@ class SliderGestureViewController: UIViewController {
 			xDelta += translation.x * 0.02
 			yDelta -= translation.y
 			
-			if y == -3 {
+			if y == 0 {
 				x = xOriginal + xDelta / 1000.0
 			}
-			if y == -2 {
+			if y == 1 {
 				x = xOriginal + xDelta / 100.0
 			}
-			if y == -1 {
+			if y == 2 {
 				x = xOriginal + xDelta / 10.0
 			}
-			if y == 0 {
+			if y == 3 {
 				x = xOriginal + xDelta
 			}
-			if y == 1 {
+			if y == 4 {
 				x = xOriginal + xDelta * 10.0
 			}
-			if y == 2 {
+			if y == 5 {
 				x = xOriginal + xDelta * 100.0
 			}
-			if y == 3 {
+			if y == 6 {
 				x = xOriginal + xDelta * 1000.0
 			}
 			
 			y = yOriginal + Int(yDelta / 75.0)
-			if y < -3 {
-				y = -3
+			if y < 0 {
+				y = 0
 			}
-			if y > 3 {
-				y = 3
+			if y > 6 {
+				y = 6
 			}
 			
 			if y != yOriginal {
