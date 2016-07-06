@@ -33,6 +33,7 @@
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
+		42685D471D2D7FC1008ABC3D /* ScientificSliderViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D461D2D7FC1008ABC3D /* ScientificSliderViewController2.swift */; };
 		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
@@ -113,6 +114,7 @@
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
+		42685D461D2D7FC1008ABC3D /* ScientificSliderViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController2.swift; sourceTree = "<group>"; };
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
 		42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
 		42CEBF951A3BA2B50048E072 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +211,7 @@
 			children = (
 				42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */,
 				42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */,
+				42685D461D2D7FC1008ABC3D /* ScientificSliderViewController2.swift */,
 			);
 			path = WorkInProgress;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
 				42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */,
+				42685D471D2D7FC1008ABC3D /* ScientificSliderViewController2.swift in Sources */,
 				42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
