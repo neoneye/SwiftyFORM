@@ -2,6 +2,9 @@
 import UIKit
 import SwiftyFORM
 
+class MyCollectionView: UICollectionView {
+}
+
 class FlowLayout: UICollectionViewFlowLayout {
 	override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
 		return nil
@@ -17,6 +20,15 @@ class FlowLayout: UICollectionViewFlowLayout {
 		headerReferenceSize = CGSizeZero
 		footerReferenceSize = CGSizeZero
 	}
+	
+//	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+//		return true
+//	}
+	
+//	override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+//		var result = [UICollectionViewLayoutAttributes]()
+//		for item in self.itemA
+//	}
 }
 
 class SliderCell: UICollectionViewCell {
@@ -72,7 +84,6 @@ class SliderCell: UICollectionViewCell {
 	}
 }
 
-
 class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 	
 	var scale: CGFloat = 1.0
@@ -114,7 +125,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //				self?.collectionView.addGestureRecognizer(gesture)
 //			})
 			
-//			layout.itemSize = computeItemSize()
+			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
 //			collectionView.collectionViewLayout.invalidateLayout()
 		}
@@ -137,7 +148,11 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		super.viewWillAppear(animated)
 		view.addGestureRecognizer(pinchGestureRecognizer)
 		
+		layout.itemSize = computeItemSize()
+		layout.invalidateLayout()
 		collectionView.reloadData()
+		collectionView.contentOffset = CGPointZero
+		collectionView.contentInset = UIEdgeInsetsZero
 	}
 
 	override func viewDidDisappear(animated: Bool) {
@@ -152,8 +167,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	func computeItemSize() -> CGSize {
 		let w = round(50 * scale)
 //		return CGSize(width: w, height: collectionView.bounds.height)
-//		return CGSize(width: w, height: collectionViewHeight)
-		return CGSize(width: w, height: 40)
+		return CGSize(width: w, height: collectionViewHeight)
+//		return CGSize(width: w, height: 40)
 //		return CGSize(width: w, height: 150)
 	}
 	
@@ -165,7 +180,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		instance.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
 //		instance.headerReferenceSize = CGSizeZero
 //		instance.footerReferenceSize = CGSizeZero
-//		instance.itemSize = computeItemSize()
+		instance.itemSize = computeItemSize()
 		return instance
 	}
 	
@@ -185,10 +200,9 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		return instance
 	}()
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//		bounds.
-		return computeItemSize()
-	}
+//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//		return computeItemSize()
+//	}
 	
 //	func collectionView_setup() {
 //		collectionView.delegate = self
