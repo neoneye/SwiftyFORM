@@ -84,7 +84,7 @@ class SliderCell: UICollectionViewCell {
 	}
 }
 
-class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
 	
 	var scale: CGFloat = 1.0
 	var originalScale: CGFloat = 1.0
@@ -116,7 +116,13 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 
 	func updateLabel() {
-		let x: CGFloat = collectionView.contentOffset.x
+		let size = computeItemSize()
+		let w = size.width
+		if w < 0.1 {
+			valueLabel.text = "---"
+			return
+		}
+		let x: CGFloat = collectionView.contentOffset.x / w
 		let s = String(format: "%.3f", x)
 		valueLabel.text = s
 	}
@@ -127,8 +133,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
-//		print("!!!!!!!")
-		
 		if gesture.state == .Began {
 			originalScale = scale
 		}
@@ -204,7 +208,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 	
 	func computeItemSize() -> CGSize {
-		let w = round(50 * scale)
+		let w = round(25 * scale)
 //		return CGSize(width: w, height: collectionView.bounds.height)
 		return CGSize(width: w, height: collectionViewHeight)
 //		return CGSize(width: w, height: 40)
@@ -239,6 +243,14 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		return instance
 	}()
 	
+	var counter = 0
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		counter += 1
+//		print("!!!!!! \(counter)")
+		// TODO: only invoke every 0.2 second. This function gets hammered when scrolling
+		updateLabel()
+	}
+	
 //	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 //		return computeItemSize()
 //	}
@@ -254,7 +266,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 100
+		return 1000
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
