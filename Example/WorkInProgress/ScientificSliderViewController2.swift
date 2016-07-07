@@ -95,7 +95,17 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		view.addSubview(collectionView)
 		view.addSubview(titleLabel)
 		view.addSubview(valueLabel)
+		view.addSubview(usageLabel)
 	}
+	
+	lazy var usageLabel: UILabel = {
+		let instance = UILabel()
+		instance.text = "Pinch to adjust magnitude.\n\nPan left/right to adjust value."
+		instance.numberOfLines = 0
+		instance.textAlignment = .Center
+		instance.font = UIFont.systemFontOfSize(17)
+		return instance
+	}()
 	
 	lazy var titleLabel: UILabel = {
 		let instance = UILabel()
@@ -167,6 +177,15 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
+
+		
+		do {
+			let frame = view.bounds.insetBy(dx: 10, dy: 80)
+			let (f0, _) = frame.divide(200, fromEdge: .MinYEdge)
+			usageLabel.frame = f0
+		}
+
+		
 		var frame = view.bounds
 		frame.size.height = collectionViewHeight
 		frame.origin.y = (view.bounds.height - frame.height) * 0.5
