@@ -93,6 +93,32 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		super.loadView()
 		view.backgroundColor = UIColor.lightGrayColor()
 		view.addSubview(collectionView)
+		view.addSubview(titleLabel)
+		view.addSubview(valueLabel)
+	}
+	
+	lazy var titleLabel: UILabel = {
+		let instance = UILabel()
+		instance.text = "Value"
+		instance.numberOfLines = 0
+		instance.textAlignment = .Left
+		instance.font = UIFont.boldSystemFontOfSize(18)
+		return instance
+	}()
+	
+	lazy var valueLabel: UILabel = {
+		let instance = UILabel()
+		instance.text = "-"
+		instance.numberOfLines = 0
+		instance.textAlignment = .Right
+		instance.font = UIFont.systemFontOfSize(20)
+		return instance
+	}()
+
+	func updateLabel() {
+		let x: CGFloat = collectionView.contentOffset.x
+		let s = String(format: "%.3f", x)
+		valueLabel.text = s
 	}
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
@@ -128,6 +154,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
 //			collectionView.collectionViewLayout.invalidateLayout()
+			
+			updateLabel()
 		}
 	}
 	
@@ -142,6 +170,17 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		collectionView.setNeedsLayout()
 //		collectionView.reloadData()
 //		layout.invalidateLayout()
+		
+		titleLabel.sizeToFit()
+		valueLabel.sizeToFit()
+		
+		let s0 = titleLabel.bounds.size
+		let f0 = CGRect(x: 10, y: frame.minY - s0.height - 10, width: view.bounds.width - 20, height: s0.height)
+		titleLabel.frame = f0
+
+		let s1 = valueLabel.bounds.size
+		let f1 = CGRect(x: 10, y: frame.minY - s1.height - 10, width: view.bounds.width - 20, height: s1.height)
+		valueLabel.frame = f1
 	}
 	
 	override func viewWillAppear(animated: Bool) {
