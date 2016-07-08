@@ -103,7 +103,7 @@ class SliderCell: UICollectionViewCell {
 	}
 }
 
-class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
+class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	
 	var originalScale: CGFloat = 1.0
 	var originalValue: CGFloat?
@@ -185,8 +185,13 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
 		let instance = UIPinchGestureRecognizer(target: self, action: #selector(ScientificSliderViewController2.handlePinch))
+		instance.delegate = self
 		return instance
 	}()
+	
+	func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+		return true
+	}
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
