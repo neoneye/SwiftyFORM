@@ -9,6 +9,8 @@ class CollectionViewModel {
 	var scaleRounded: CGFloat {
 		return floor(scale + 0.5)
 	}
+	
+	static let height: CGFloat = 130
 }
 
 class MyCollectionView: UICollectionView {
@@ -36,7 +38,7 @@ class FlowLayout: UICollectionViewFlowLayout {
 		guard let model = self.model else {
 			return CGSizeZero
 		}
-		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: 100)
+		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: CollectionViewModel.height)
 	}
 	
 
@@ -230,8 +232,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		}
 	}
 	
-	let collectionViewHeight: CGFloat = 100
-	
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 
@@ -244,7 +244,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 
 		
 		var frame = view.bounds
-		frame.size.height = collectionViewHeight
+		frame.size.height = CollectionViewModel.height
 		frame.origin.y = (view.bounds.height - frame.height) * 0.5
 		collectionView.frame = frame
 //		collectionView.setNeedsLayout()
@@ -285,7 +285,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	func computeItemSize() -> CGSize {
 //		return CGSize(width: w, height: collectionView.bounds.height)
-		return CGSize(width: model.scaleRounded, height: collectionViewHeight)
+		return CGSize(width: model.scaleRounded, height: CollectionViewModel.height)
 //		return CGSize(width: w, height: 40)
 //		return CGSize(width: w, height: 150)
 	}
