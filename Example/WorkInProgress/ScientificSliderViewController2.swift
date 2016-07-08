@@ -147,15 +147,36 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 
 	func updateLabel() {
+		if let value = self.value {
+			valueLabel.text = String(format: "%.3f", value)
+		} else {
+			valueLabel.text = "---"
+		}
+	}
+	
+	var value: CGFloat? {
 		let size = computeItemSize()
 		let w = size.width
 		if w < 0.1 {
-			valueLabel.text = "---"
+			return nil
+		}
+		let halfWidth = collectionView.bounds.width / 2
+		let midX = collectionView.contentOffset.x + halfWidth
+		let x: CGFloat = midX / w
+		return x
+	}
+	
+	func scrollToValue(value: CGFloat) {
+		let size = computeItemSize()
+		let w = size.width
+		if w < 0.1 {
 			return
 		}
-		let x: CGFloat = collectionView.contentOffset.x / w
-		let s = String(format: "%.3f", x)
-		valueLabel.text = s
+		
+		let halfWidth = collectionView.bounds.width / 2
+		let offsetX: CGFloat = (w * value) - halfWidth
+//		collectionView.contentOffset
+		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
@@ -168,6 +189,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 			originalScale = model.scale
 		}
 		if gesture.state == .Changed {
+			let originalValue: CGFloat? = self.value
+			
 			var scale = originalScale * gesture.scale
 			if scale < 0.0 {
 				scale = 0.01
@@ -190,6 +213,10 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
 //			collectionView.collectionViewLayout.invalidateLayout()
+			
+			if let value = originalValue {
+				scrollToValue(value)
+			}
 			
 			updateLabel()
 		}
