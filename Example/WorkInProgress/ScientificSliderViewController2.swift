@@ -2,10 +2,17 @@
 import UIKit
 import SwiftyFORM
 
+class CollectionViewModel {
+	var count = 1000
+	var scale: CGFloat = 1.0
+}
+
 class MyCollectionView: UICollectionView {
 }
 
 class FlowLayout: UICollectionViewFlowLayout {
+	weak var model: CollectionViewModel?
+	
 	override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
 		return nil
 	}
@@ -16,11 +23,19 @@ class FlowLayout: UICollectionViewFlowLayout {
 		scrollDirection = .Horizontal
 		minimumInteritemSpacing = 1
 		minimumLineSpacing = 1
-		sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+		sectionInset = UIEdgeInsetsZero
 		headerReferenceSize = CGSizeZero
 		footerReferenceSize = CGSizeZero
 	}
 	
+	override func collectionViewContentSize() -> CGSize {
+		guard let model = self.model else {
+			return CGSizeZero
+		}
+		return CGSize(width: CGFloat(model.count * 25 + (model.count + 1)) * model.scale, height: 100)
+	}
+	
+
 //	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
 //		return true
 //	}
@@ -86,17 +101,23 @@ class SliderCell: UICollectionViewCell {
 
 class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
 	
-	var scale: CGFloat = 1.0
 	var originalScale: CGFloat = 1.0
 	
 	override func loadView() {
 		super.loadView()
+		self.automaticallyAdjustsScrollViewInsets = false
+		
 		view.backgroundColor = UIColor.lightGrayColor()
 		view.addSubview(collectionView)
 		view.addSubview(titleLabel)
 		view.addSubview(valueLabel)
 		view.addSubview(usageLabel)
 	}
+	
+	lazy var model: CollectionViewModel = {
+		let instance = CollectionViewModel()
+		return instance
+	}()
 	
 	lazy var usageLabel: UILabel = {
 		let instance = UILabel()
@@ -144,13 +165,14 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
-			originalScale = scale
+			originalScale = model.scale
 		}
 		if gesture.state == .Changed {
-			scale = originalScale * gesture.scale
+			var scale = originalScale * gesture.scale
 			if scale < 0.0 {
 				scale = 0.01
 			}
+			model.scale = scale
 			
 			
 //			[self.collectionView removeGestureRecognizer:self.gesture];
@@ -227,7 +249,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 	
 	func computeItemSize() -> CGSize {
-		let w = round(25 * scale)
+		let w = round(25 * model.scale)
 //		return CGSize(width: w, height: collectionView.bounds.height)
 		return CGSize(width: w, height: collectionViewHeight)
 //		return CGSize(width: w, height: 40)
@@ -243,6 +265,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		instance.headerReferenceSize = CGSizeZero
 //		instance.footerReferenceSize = CGSizeZero
 		instance.itemSize = computeItemSize()
+		instance.model = self.model
 		return instance
 	}
 	
@@ -252,13 +275,13 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		instance.backgroundColor = UIColor.whiteColor()
 		instance.delegate = self
 		instance.dataSource = self
-//		instance.bounces = false
+		instance.bounces = false
+		instance.alwaysBounceHorizontal = true
+		instance.alwaysBounceVertical = false
+//		instance.pagingEnabled = false
+//		instance.directionalLockEnabled = true
 //		instance.allowsSelection = false
 		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
-		
-//		instance.minimumZoomScale = 1.0
-//		instance.maximumZoomScale = 2.0
-//		instance.zoomScale = 1.5
 		return instance
 	}()
 	
@@ -285,7 +308,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 1000
+		return model.count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
