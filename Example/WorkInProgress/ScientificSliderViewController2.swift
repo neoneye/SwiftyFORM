@@ -66,42 +66,32 @@ class SliderCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		addSubview(tl)
-		addSubview(tr)
-		addSubview(bl)
-		addSubview(br)
+		addSubview(leftBorder)
+		addSubview(label)
 	}
 	
-	lazy var tl: UIView = {
+	lazy var leftBorder: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.redColor()
+		instance.backgroundColor = UIColor.blackColor()
 		return instance
 	}()
 	
-	lazy var tr: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor.blueColor()
-		return instance
-	}()
-	
-	lazy var bl: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor.greenColor()
-		return instance
-	}()
-	
-	lazy var br: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor.whiteColor()
+	lazy var label: UILabel = {
+		let instance = UILabel()
+		instance.text = "42"
 		return instance
 	}()
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		tl.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
-		tr.frame = CGRect(x: bounds.maxX - 10, y: 0, width: 10, height: 10)
-		bl.frame = CGRect(x: 0, y: bounds.maxY - 10, width: 10, height: 10)
-		br.frame = CGRect(x: bounds.maxX - 10, y: bounds.maxY - 10, width: 10, height: 10)
+		leftBorder.frame = CGRect(x: 0, y: 0, width: 1, height: bounds.height)
+		
+		let labelHidden = self.bounds.width < 30
+		label.hidden = labelHidden
+
+		label.sizeToFit()
+		let labelFrame = label.frame
+		label.frame = CGRect(x: 7, y: 5, width: bounds.width - 10, height: labelFrame.height)
 	}
 }
 
@@ -305,7 +295,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	lazy var collectionView: UICollectionView = {
 		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
-//		instance.showsHorizontalScrollIndicator = false
+		instance.showsHorizontalScrollIndicator = false
+		instance.showsVerticalScrollIndicator = false
 		instance.backgroundColor = UIColor.whiteColor()
 		instance.delegate = self
 		instance.dataSource = self
@@ -347,8 +338,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SliderCell.identifier, forIndexPath: indexPath) as! SliderCell
-		cell.backgroundColor = UIColor.blackColor()
-		
+		cell.label.text = String(indexPath.row % 10)
 		return cell
 	}
 	
