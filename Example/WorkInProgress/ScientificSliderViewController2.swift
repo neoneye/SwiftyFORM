@@ -4,7 +4,7 @@ import SwiftyFORM
 
 class CollectionViewModel {
 	var count = 1000
-	var scale: CGFloat = 25.0
+	var scale: CGFloat = 60.0
 	
 	var scaleRounded: CGFloat {
 		return floor(scale + 0.5)
@@ -110,6 +110,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		view.addSubview(titleLabel)
 		view.addSubview(valueLabel)
 		view.addSubview(usageLabel)
+		view.addSubview(leftCoverView)
+		view.addSubview(rightCoverView)
 	}
 	
 	lazy var model: CollectionViewModel = {
@@ -241,6 +243,12 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		collectionView.reloadData()
 //		layout.invalidateLayout()
 		
+		let (leftFrame, _) = frame.divide(floor(view.bounds.width/2) - 1, fromEdge: .MinXEdge)
+		leftCoverView.frame = leftFrame
+
+		let (rightFrame, _) = frame.divide(floor(view.bounds.width/2), fromEdge: .MaxXEdge)
+		rightCoverView.frame = rightFrame
+		
 		titleLabel.sizeToFit()
 		valueLabel.sizeToFit()
 		
@@ -251,6 +259,9 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		let s1 = valueLabel.bounds.size
 		let f1 = CGRect(x: 10, y: frame.minY - s1.height - 10, width: view.bounds.width - 20, height: s1.height)
 		valueLabel.frame = f1
+		
+		
+		
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -307,6 +318,20 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		instance.directionalLockEnabled = true
 //		instance.allowsSelection = false
 		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
+		return instance
+	}()
+	
+	lazy var leftCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.userInteractionEnabled = false
+		return instance
+	}()
+	
+	lazy var rightCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.userInteractionEnabled = false
 		return instance
 	}()
 	
