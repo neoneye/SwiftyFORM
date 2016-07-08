@@ -4,7 +4,11 @@ import SwiftyFORM
 
 class CollectionViewModel {
 	var count = 1000
-	var scale: CGFloat = 1.0
+	var scale: CGFloat = 25.0
+	
+	var scaleRounded: CGFloat {
+		return floor(scale + 0.5)
+	}
 }
 
 class MyCollectionView: UICollectionView {
@@ -21,8 +25,8 @@ class FlowLayout: UICollectionViewFlowLayout {
 		super.prepareLayout()
 		
 		scrollDirection = .Horizontal
-		minimumInteritemSpacing = 1
-		minimumLineSpacing = 1
+		minimumInteritemSpacing = 0
+		minimumLineSpacing = 0
 		sectionInset = UIEdgeInsetsZero
 		headerReferenceSize = CGSizeZero
 		footerReferenceSize = CGSizeZero
@@ -32,7 +36,7 @@ class FlowLayout: UICollectionViewFlowLayout {
 		guard let model = self.model else {
 			return CGSizeZero
 		}
-		return CGSize(width: CGFloat(model.count * 25 + (model.count + 1)) * model.scale, height: 100)
+		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: 100)
 	}
 	
 
@@ -102,6 +106,8 @@ class SliderCell: UICollectionViewCell {
 class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate {
 	
 	var originalScale: CGFloat = 1.0
+	var originalValue: CGFloat?
+
 	
 	override func loadView() {
 		super.loadView()
@@ -155,27 +161,25 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}
 	
 	var value: CGFloat? {
-		let size = computeItemSize()
-		let w = size.width
-		if w < 0.1 {
+		let scale = model.scaleRounded
+		if scale < 0.1 {
 			return nil
 		}
+		
 		let halfWidth = collectionView.bounds.width / 2
 		let midX = collectionView.contentOffset.x + halfWidth
-		let x: CGFloat = midX / w
+		let x: CGFloat = midX / scale
 		return x
 	}
 	
 	func scrollToValue(value: CGFloat) {
-		let size = computeItemSize()
-		let w = size.width
-		if w < 0.1 {
+		let scale = model.scaleRounded
+		if scale < 0.1 {
 			return
 		}
 		
 		let halfWidth = collectionView.bounds.width / 2
-		let offsetX: CGFloat = (w * value) - halfWidth
-//		collectionView.contentOffset
+		let offsetX: CGFloat = round((scale * value) - halfWidth)
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
 	
@@ -187,10 +191,9 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
 			originalScale = model.scale
+			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let originalValue: CGFloat? = self.value
-			
 			var scale = originalScale * gesture.scale
 			if scale < 0.0 {
 				scale = 0.01
@@ -276,9 +279,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 	
 	func computeItemSize() -> CGSize {
-		let w = round(25 * model.scale)
 //		return CGSize(width: w, height: collectionView.bounds.height)
-		return CGSize(width: w, height: collectionViewHeight)
+		return CGSize(width: model.scaleRounded, height: collectionViewHeight)
 //		return CGSize(width: w, height: 40)
 //		return CGSize(width: w, height: 150)
 	}
