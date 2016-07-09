@@ -31,14 +31,14 @@ class MyCollectionView: UICollectionView {
 	
 	lazy var leftCoverView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
 		instance.userInteractionEnabled = false
 		return instance
 	}()
 	
 	lazy var rightCoverView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
 		instance.userInteractionEnabled = false
 		return instance
 	}()
@@ -76,16 +76,6 @@ class FlowLayout: UICollectionViewFlowLayout {
 		}
 		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: CollectionViewModel.height)
 	}
-	
-
-//	override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
-//		return true
-//	}
-	
-//	override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//		var result = [UICollectionViewLayoutAttributes]()
-//		for item in self.itemA
-//	}
 }
 
 class SliderCell: UICollectionViewCell {
@@ -233,22 +223,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 			}
 			model.scale = scale
 			
-			
-//			[self.collectionView removeGestureRecognizer:self.gesture];
-//			UICollectionViewFlowLayout *newLayout = [[UICollectionViewFlowLayout alloc] init];
-//			[self.collectionView setCollectionViewLayout:newLayout animated:YES completion:^(BOOL finished) {
-//			[self.collectionView addGestureRecognizer:self.gesture];
-//			}];
-			
-//			collectionView.removeGestureRecognizer(gesture)
-//			let layout = createFlowLayout()
-//			collectionView.setCollectionViewLayout(layout, animated: true, completion: { [weak self] (finished) in
-//				self?.collectionView.addGestureRecognizer(gesture)
-//			})
-			
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
-//			collectionView.collectionViewLayout.invalidateLayout()
 			
 			if let value = originalValue {
 				scrollToValue(value)
@@ -273,9 +249,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		frame.size.height = CollectionViewModel.height
 		frame.origin.y = (view.bounds.height - frame.height) * 0.5
 		collectionView.frame = frame
-//		collectionView.setNeedsLayout()
-//		collectionView.reloadData()
-//		layout.invalidateLayout()
 		
 		titleLabel.sizeToFit()
 		valueLabel.sizeToFit()
@@ -310,10 +283,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 	
 	func computeItemSize() -> CGSize {
-//		return CGSize(width: w, height: collectionView.bounds.height)
 		return CGSize(width: model.scaleRounded, height: CollectionViewModel.height)
-//		return CGSize(width: w, height: 40)
-//		return CGSize(width: w, height: 150)
 	}
 	
 	func createFlowLayout() -> FlowLayout {
@@ -339,9 +309,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
-//		instance.pagingEnabled = false
-//		instance.directionalLockEnabled = true
-//		instance.allowsSelection = false
 		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
 		return instance
 	}()
@@ -354,20 +321,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		updateLabel()
 	}
 	
-//	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//		return computeItemSize()
-//	}
-	
-//	func collectionView_setup() {
-//		collectionView.delegate = self
-//		collectionView.dataSource = self
-//	}
-	
-//	func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-//		return collectionView
-//	}
-	
-
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return model.count
 	}
