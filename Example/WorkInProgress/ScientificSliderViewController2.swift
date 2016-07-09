@@ -14,6 +14,42 @@ class CollectionViewModel {
 }
 
 class MyCollectionView: UICollectionView {
+	override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+		super.init(frame: frame, collectionViewLayout: layout)
+		commonInit()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func commonInit() {
+		addSubview(leftCoverView)
+		addSubview(rightCoverView)
+	}
+	
+	lazy var leftCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.userInteractionEnabled = false
+		return instance
+	}()
+	
+	lazy var rightCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
+		instance.userInteractionEnabled = false
+		return instance
+	}()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+
+		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
+		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
+		rightCoverView.frame = rightFrame
+	}
 }
 
 class FlowLayout: UICollectionViewFlowLayout {
@@ -110,8 +146,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		view.addSubview(titleLabel)
 		view.addSubview(valueLabel)
 		view.addSubview(usageLabel)
-		view.addSubview(leftCoverView)
-		view.addSubview(rightCoverView)
 	}
 	
 	lazy var model: CollectionViewModel = {
@@ -243,10 +277,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		collectionView.reloadData()
 //		layout.invalidateLayout()
 		
-		let (leftFrame, rightFrame) = frame.divide(round(view.bounds.width/2), fromEdge: .MinXEdge)
-		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
-		rightCoverView.frame = rightFrame
-		
 		titleLabel.sizeToFit()
 		valueLabel.sizeToFit()
 		
@@ -299,8 +329,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		return instance
 	}
 	
-	lazy var collectionView: UICollectionView = {
-		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
+	lazy var collectionView: MyCollectionView = {
+		let instance = MyCollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
 		instance.showsHorizontalScrollIndicator = false
 		instance.showsVerticalScrollIndicator = false
 		instance.backgroundColor = UIColor.whiteColor()
@@ -313,20 +343,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		instance.directionalLockEnabled = true
 //		instance.allowsSelection = false
 		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
-		return instance
-	}()
-	
-	lazy var leftCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
-		instance.userInteractionEnabled = false
-		return instance
-	}()
-	
-	lazy var rightCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0.0, green: 0, blue: 0, alpha: 0.125)
-		instance.userInteractionEnabled = false
 		return instance
 	}()
 	
