@@ -243,10 +243,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 //		collectionView.reloadData()
 //		layout.invalidateLayout()
 		
-		let (leftFrame, _) = frame.divide(floor(view.bounds.width/2) - 1, fromEdge: .MinXEdge)
-		leftCoverView.frame = leftFrame
-
-		let (rightFrame, _) = frame.divide(floor(view.bounds.width/2), fromEdge: .MaxXEdge)
+		let (leftFrame, rightFrame) = frame.divide(round(view.bounds.width/2), fromEdge: .MinXEdge)
+		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
 		rightCoverView.frame = rightFrame
 		
 		titleLabel.sizeToFit()
@@ -259,9 +257,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		let s1 = valueLabel.bounds.size
 		let f1 = CGRect(x: 10, y: frame.minY - s1.height - 10, width: view.bounds.width - 20, height: s1.height)
 		valueLabel.frame = f1
-		
-		
-		
 	}
 	
 	override func viewWillAppear(animated: Bool) {
