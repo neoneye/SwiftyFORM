@@ -43,7 +43,7 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 	private let footerBlock: TableViewSectionPart.CreateBlock
 	
 	init(cells: [UITableViewCell], headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
-		self.cells = SpecialArray(cells: cells)
+		self.cells = SpecialArray.create(cells: cells)
 		self.headerBlock = headerBlock
 		self.footerBlock = footerBlock
 		super.init()
