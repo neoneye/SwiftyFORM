@@ -92,6 +92,7 @@ class SliderCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
+		backgroundColor = UIColor.whiteColor()
 		addSubview(leftBorder)
 		addSubview(label)
 	}
@@ -250,6 +251,11 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		frame.origin.y = (view.bounds.height - frame.height) * 0.5
 		collectionView.frame = frame
 		
+
+		let halfWidth = round(frame.width/2)-1
+		collectionView.contentInset = UIEdgeInsets(top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+
+		
 		titleLabel.sizeToFit()
 		valueLabel.sizeToFit()
 		
@@ -269,8 +275,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		layout.itemSize = computeItemSize()
 		layout.invalidateLayout()
 		collectionView.reloadData()
-		collectionView.contentOffset = CGPointZero
-		collectionView.contentInset = UIEdgeInsetsZero
 	}
 
 	override func viewDidDisappear(animated: Bool) {
@@ -303,13 +307,14 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		let instance = MyCollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
 		instance.showsHorizontalScrollIndicator = false
 		instance.showsVerticalScrollIndicator = false
-		instance.backgroundColor = UIColor.whiteColor()
+		instance.backgroundColor = UIColor.blackColor()
 		instance.delegate = self
 		instance.dataSource = self
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
 		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
+		instance.contentInset = UIEdgeInsetsZero
 		return instance
 	}()
 	
