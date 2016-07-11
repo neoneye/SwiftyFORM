@@ -6,6 +6,11 @@ public class FirstViewController: FormViewController {
 	override public func populate(builder: FormBuilder) {
 		builder.demo_showInfo("Welcome to SwiftyFORM\na new form framework\nfor iOS 9")
 
+		builder += PrecisionSliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		builder += PrecisionSliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
