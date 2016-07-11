@@ -10,9 +10,12 @@ public struct PrecisionSliderCellModel {
 	var valueDidChange: Float -> Void = { (value: Float) in
 		SwiftyFormLog("value \(value)")
 	}
+	
+	var expandAction: Void -> Void = { }
 }
 
-public class PrecisionSliderCell: UITableViewCell, CellHeightProvider {
+
+public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate {
 	public let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {
@@ -29,6 +32,10 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider {
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return 60
+	}
+	
+	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+		model.expandAction()
 	}
 }
 

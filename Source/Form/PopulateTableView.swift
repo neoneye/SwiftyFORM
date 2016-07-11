@@ -407,7 +407,12 @@ class PopulateTableView: FormItemVisitor {
 		model.valueDidChange = { (value: Float) in
 			SwiftyFormLog("value did change \(value)")
 			weakObject?.sliderDidChange(value)
-			return
+		}
+		
+		model.expandAction = {
+			SwiftyFormLog("!!!!!!! expand row")
+			
+			// TODO: insert/delete rows
 		}
 		
 		let cell = PrecisionSliderCell(model: model)
@@ -417,7 +422,6 @@ class PopulateTableView: FormItemVisitor {
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
 //			weakCell?.setValueWithoutSync(value, animated: animated)
-			return
 		}
 		
 		let cellExpanded = PrecisionSliderCellExpanded()
