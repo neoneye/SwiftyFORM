@@ -38,12 +38,12 @@ public enum TableViewSectionPart {
 }
 
 public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDelegate {
-	private let cells: [UITableViewCell]
+	private let cells: SpecialArray
 	private let headerBlock: TableViewSectionPart.CreateBlock
 	private let footerBlock: TableViewSectionPart.CreateBlock
 	
 	init(cells: [UITableViewCell], headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
-		self.cells = cells
+		self.cells = SpecialArray(cells: cells)
 		self.headerBlock = headerBlock
 		self.footerBlock = footerBlock
 		super.init()
