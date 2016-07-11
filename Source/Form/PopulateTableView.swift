@@ -396,6 +396,31 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
+	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
+		var model = SliderCellModel()
+		model.minimumValue = object.minimumValue
+		model.maximumValue = object.maximumValue
+		model.value = object.value
+		
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Float) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.sliderDidChange(value)
+			return
+		}
+		
+		let cell = SliderCell(model: model)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Float, animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+			return
+		}
+	}
+	
 	func visitSection(object: SectionFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			return TableViewSectionPart.None

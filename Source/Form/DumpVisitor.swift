@@ -181,6 +181,16 @@ public class DumpVisitor: FormItemVisitor {
 		dict["maximumValue"] = object.maximumValue
 	}
 	
+	public func visitPrecisionSlider(object: PrecisionSliderFormItem) {
+		dict["class"] = "PrecisionSliderFormItem"
+		dict["elementIdentifier"] = object.elementIdentifier
+		dict["styleIdentifier"] = object.styleIdentifier
+		dict["styleClass"] = object.styleClass
+		dict["value"] = object.value
+		dict["minimumValue"] = object.minimumValue
+		dict["maximumValue"] = object.maximumValue
+	}
+	
 	public func visitSection(object: SectionFormItem) {
 		dict["class"] = "SectionFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
