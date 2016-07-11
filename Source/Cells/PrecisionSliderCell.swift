@@ -33,6 +33,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider {
 }
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
+	weak var collapsedCell: PrecisionSliderCell?
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return 160

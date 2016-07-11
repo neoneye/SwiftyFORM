@@ -397,7 +397,7 @@ class PopulateTableView: FormItemVisitor {
 	}
 	
 	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
-		var model = SliderCellModel()
+		var model = PrecisionSliderCellModel()
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
 		model.value = object.value
@@ -410,15 +410,19 @@ class PopulateTableView: FormItemVisitor {
 			return
 		}
 		
-		let cell = SliderCell(model: model)
+		let cell = PrecisionSliderCell(model: model)
 		cells.append(cell)
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
-			weakCell?.setValueWithoutSync(value, animated: animated)
+//			weakCell?.setValueWithoutSync(value, animated: animated)
 			return
 		}
+		
+		let cellExpanded = PrecisionSliderCellExpanded()
+		cellExpanded.collapsedCell = cell
+		cells.append(cellExpanded)
 	}
 	
 	func visitSection(object: SectionFormItem) {
