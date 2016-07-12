@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public struct PrecisionSliderCellModel {
+public class PrecisionSliderCellModel {
 	var title: String = ""
 	var value: Float = 0.0
 	var minimumValue: Float = 0.0
@@ -16,6 +16,7 @@ public struct PrecisionSliderCellModel {
 
 
 public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate {
+	weak var expandedCell: PrecisionSliderCellExpanded?
 	public let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {

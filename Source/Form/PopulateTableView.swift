@@ -403,7 +403,16 @@ class PopulateTableView: FormItemVisitor {
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
 		model.value = object.value
+
 		
+		let cell = PrecisionSliderCell(model: model)
+		let cellExpanded = PrecisionSliderCellExpanded()
+
+		cells.append(cell)
+		cells.appendHidden(cellExpanded)
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
 		
 		weak var weakObject = object
 		model.valueDidChange = { (value: Float) in
@@ -411,14 +420,13 @@ class PopulateTableView: FormItemVisitor {
 			weakObject?.sliderDidChange(value)
 		}
 		
+		weak var weakCells = cells
 		model.expandAction = {
 			SwiftyFormLog("!!!!!!! expand row")
 			
 			// TODO: insert/delete rows
+			
 		}
-		
-		let cell = PrecisionSliderCell(model: model)
-		cells.append(cell)
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
@@ -426,9 +434,6 @@ class PopulateTableView: FormItemVisitor {
 //			weakCell?.setValueWithoutSync(value, animated: animated)
 		}
 		
-		let cellExpanded = PrecisionSliderCellExpanded()
-		cellExpanded.collapsedCell = cell
-		cells.appendHidden(cellExpanded)
 	}
 	
 	func visitSection(object: SectionFormItem) {
