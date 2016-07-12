@@ -420,15 +420,20 @@ class PopulateTableView: FormItemVisitor {
 			weakObject?.sliderDidChange(value)
 		}
 		
-		weak var weakCells = cells
-		model.expandAction = {
-			SwiftyFormLog("!!!!!!! expand row")
+		weak var weakVC: FormViewController? = self.model.viewController as? FormViewController
+		weak var weakCell = cell
+		weak var weakCellExpanded = cellExpanded
+
+		model.expandCollapseAction = { (indexPath: NSIndexPath, tableView: UITableView) in
+			SwiftyFormLog("expand row")
 			
-			// TODO: insert/delete rows
+			guard let vc = weakVC, cell = weakCell, cellExpanded = weakCellExpanded else {
+				return
+			}
 			
+			vc.expandCollapse(cell: cell, expandedCell: cellExpanded, indexPath: indexPath)
 		}
 		
-		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
 //			weakCell?.setValueWithoutSync(value, animated: animated)

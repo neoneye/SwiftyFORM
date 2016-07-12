@@ -11,7 +11,8 @@ public class PrecisionSliderCellModel {
 		SwiftyFormLog("value \(value)")
 	}
 	
-	var expandAction: Void -> Void = { }
+	typealias ExpandCollapseAction = (indexPath: NSIndexPath, tableView: UITableView) -> Void
+	var expandCollapseAction: ExpandCollapseAction?
 }
 
 
@@ -36,7 +37,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		model.expandAction()
+		model.expandCollapseAction?(indexPath: indexPath, tableView: tableView)
 	}
 }
 

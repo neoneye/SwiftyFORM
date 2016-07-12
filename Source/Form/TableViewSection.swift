@@ -38,7 +38,7 @@ public enum TableViewSectionPart {
 }
 
 public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDelegate {
-	private let cells: SpecialArray
+	public let cells: SpecialArray
 	private let headerBlock: TableViewSectionPart.CreateBlock
 	private let footerBlock: TableViewSectionPart.CreateBlock
 	
@@ -125,7 +125,7 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 public class TableViewSectionArray : NSObject, UITableViewDataSource, UITableViewDelegate {
 	public typealias SectionType = protocol<NSObjectProtocol, UITableViewDataSource, UITableViewDelegate>
 	
-	private var sections: [SectionType]
+	public let sections: [SectionType]
 	
 	public init(sections: [SectionType]) {
 		self.sections = sections
