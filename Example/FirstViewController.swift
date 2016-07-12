@@ -10,6 +10,8 @@ public class FirstViewController: FormViewController {
 		builder += PrecisionSliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
 		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
 		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		builder += PrecisionSliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
+		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
 		
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
