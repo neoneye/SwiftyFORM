@@ -17,14 +17,14 @@ public class FormViewController: UIViewController {
 
 	override public func loadView() {
 		SwiftyFormLog("super loadview")
-		self.view = self.tableView
+		view = tableView
 		
-		keyboardHandler = KeyboardHandler(tableView: self.tableView)
+		keyboardHandler = KeyboardHandler(tableView: tableView)
 		
-		self.populate(formBuilder)
-		self.title = formBuilder.navigationTitle
+		populate(formBuilder)
+		title = formBuilder.navigationTitle
 		
-		dataSource = formBuilder.result(self)
+		dataSource = formBuilder.result(viewController: self, tableView: tableView)
 		self.tableView.dataSource = dataSource
 		self.tableView.delegate = dataSource
 	}
@@ -36,7 +36,7 @@ public class FormViewController: UIViewController {
 	override public func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		self.keyboardHandler?.addObservers()
+		keyboardHandler?.addObservers()
 
 		// Fade out, so that the user can see what row has been updated
 		if let indexPath = tableView.indexPathForSelectedRow {
