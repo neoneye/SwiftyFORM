@@ -42,7 +42,7 @@ struct PopulateTableViewModel {
 class PopulateTableView: FormItemVisitor {
 	let model: PopulateTableViewModel
 	
-	var cells = [UITableViewCell]()
+	var cells: SpecialArray = SpecialArray.createEmpty()
 	var sections = [TableViewSection]()
 	var headerBlock: TableViewSectionPart.CreateBlock?
 	
@@ -58,10 +58,11 @@ class PopulateTableView: FormItemVisitor {
 			headerBlock = block
 		}
 		
+		cells.reloadVisibleCells()
 		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
 		sections.append(section)
 
-		cells = [UITableViewCell]()
+		cells = SpecialArray.createEmpty()
 		self.headerBlock = nil
 	}
 	
@@ -426,7 +427,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cellExpanded = PrecisionSliderCellExpanded()
 		cellExpanded.collapsedCell = cell
-		cells.append(cellExpanded)
+		cells.appendHidden(cellExpanded)
 	}
 	
 	func visitSection(object: SectionFormItem) {

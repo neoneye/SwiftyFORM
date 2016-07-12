@@ -13,12 +13,16 @@ public class CellWrapper {
 
 
 public class SpecialArray {
-	let cells: [CellWrapper]
+	var cells: [CellWrapper]
 	var visibleCells = [CellWrapper]()
 	
 	static func create(cells cells: [UITableViewCell]) -> SpecialArray {
 		let cellWrappers = cells.map { CellWrapper(cell: $0, hidden: false) }
 		return SpecialArray(cells: cellWrappers)
+	}
+	
+	static func createEmpty() -> SpecialArray {
+		return SpecialArray(cells: [])
 	}
 	
 	init(cells: [CellWrapper]) {
@@ -36,5 +40,15 @@ public class SpecialArray {
 	
 	var count: Int {
 		return visibleCells.count
+	}
+	
+	func append(cell: UITableViewCell) {
+		let cellWrapper = CellWrapper(cell: cell, hidden: false)
+		cells.append(cellWrapper)
+	}
+
+	func appendHidden(cell: UITableViewCell) {
+		let cellWrapper = CellWrapper(cell: cell, hidden: true)
+		cells.append(cellWrapper)
 	}
 }
