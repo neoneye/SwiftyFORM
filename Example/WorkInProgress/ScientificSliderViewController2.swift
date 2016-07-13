@@ -25,6 +25,15 @@ class MyCollectionView: UICollectionView {
 	}
 	
 	func commonInit() {
+		showsHorizontalScrollIndicator = false
+		showsVerticalScrollIndicator = false
+		backgroundColor = UIColor.blackColor()
+		bounces = false
+		alwaysBounceHorizontal = true
+		alwaysBounceVertical = false
+		registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
+		contentInset = UIEdgeInsetsZero
+
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
 	}
@@ -299,16 +308,8 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	lazy var collectionView: MyCollectionView = {
 		let instance = MyCollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
-		instance.showsHorizontalScrollIndicator = false
-		instance.showsVerticalScrollIndicator = false
-		instance.backgroundColor = UIColor.blackColor()
 		instance.delegate = self
 		instance.dataSource = self
-		instance.bounces = false
-		instance.alwaysBounceHorizontal = true
-		instance.alwaysBounceVertical = false
-		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
-		instance.contentInset = UIEdgeInsetsZero
 		return instance
 	}()
 	
