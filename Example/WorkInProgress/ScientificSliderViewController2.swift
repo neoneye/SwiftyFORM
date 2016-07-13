@@ -7,80 +7,22 @@ class CollectionViewModel {
 	var scale: CGFloat = 60.0
 	
 	var scaleRounded: CGFloat {
-		return floor(scale + 0.5)
+		let result = floor(scale + 0.5)
+		if result < 0.1 {
+			return 0.1
+		}
+		return result
 	}
 	
 	static let height: CGFloat = 130
 }
 
-class MyCollectionView: UICollectionView {
-	override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-		super.init(frame: frame, collectionViewLayout: layout)
-		commonInit()
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		commonInit()
-	}
-	
-	func commonInit() {
-		showsHorizontalScrollIndicator = false
-		showsVerticalScrollIndicator = false
-		backgroundColor = UIColor.blackColor()
-		bounces = false
-		alwaysBounceHorizontal = true
-		alwaysBounceVertical = false
-		registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
-		contentInset = UIEdgeInsetsZero
-
-		addSubview(leftCoverView)
-		addSubview(rightCoverView)
-	}
-	
-	lazy var leftCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-		instance.userInteractionEnabled = false
-		return instance
-	}()
-	
-	lazy var rightCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
-		instance.userInteractionEnabled = false
-		return instance
-	}()
-	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-
-		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
-		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
-		rightCoverView.frame = rightFrame
-	}
-}
-
 class FlowLayout: UICollectionViewFlowLayout {
 	weak var model: CollectionViewModel?
 	
-	override func layoutAttributesForSupplementaryViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-		return nil
-	}
-	
-	override func prepareLayout() {
-		super.prepareLayout()
-		
-		scrollDirection = .Horizontal
-		minimumInteritemSpacing = 0
-		minimumLineSpacing = 0
-		sectionInset = UIEdgeInsetsZero
-		headerReferenceSize = CGSizeZero
-		footerReferenceSize = CGSizeZero
-	}
-	
 	override func collectionViewContentSize() -> CGSize {
 		guard let model = self.model else {
+			print("no model")
 			return CGSizeZero
 		}
 		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: CollectionViewModel.height)
@@ -114,7 +56,7 @@ class SliderCell: UICollectionViewCell {
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
-		instance.text = "42"
+		instance.text = "0"
 		return instance
 	}()
 	
@@ -131,25 +73,192 @@ class SliderCell: UICollectionViewCell {
 	}
 }
 
-class ScientificSliderViewController2: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	
+class MyView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	var originalScale: CGFloat = 1.0
 	var originalValue: CGFloat?
+	
+	typealias ValueDidChange = Void -> Void
+	var valueDidChange: ValueDidChange?
 
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+
+	func commonInit() {
+		addSubview(collectionView)
+		addSubview(leftCoverView)
+		addSubview(rightCoverView)
+	}
+	
+	func viewWillAppear() {
+		addGestureRecognizer(pinchGestureRecognizer)
+		
+		layout.itemSize = computeItemSize()
+		layout.invalidateLayout()
+		collectionView.reloadData()
+	}
+	
+	func viewDidDisappear() {
+		removeGestureRecognizer(pinchGestureRecognizer)
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		collectionView.frame = bounds
+		
+		let halfWidth = round(bounds.width/2)-1
+		collectionView.contentInset = UIEdgeInsets(top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+
+		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
+		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
+		rightCoverView.frame = rightFrame
+	}
+
+	lazy var leftCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+		instance.userInteractionEnabled = false
+		return instance
+	}()
+	
+	lazy var rightCoverView: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+		instance.userInteractionEnabled = false
+		return instance
+	}()
+
+	lazy var model: CollectionViewModel = {
+		let instance = CollectionViewModel()
+		return instance
+	}()
+	
+	var value: CGFloat? {
+		let scale = model.scaleRounded
+		if scale < 0.1 {
+			return nil
+		}
+		
+		let halfWidth = collectionView.bounds.width / 2
+		let midX = collectionView.contentOffset.x + halfWidth
+		let x: CGFloat = midX / scale
+		return x
+	}
+	
+	func scrollToValue(value: CGFloat) {
+		let scale = model.scaleRounded
+		if scale < 0.1 {
+			return
+		}
+		
+		let halfWidth = collectionView.bounds.width / 2
+		let offsetX: CGFloat = round((scale * value) - halfWidth)
+		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+	}
+	
+	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
+		let instance = UIPinchGestureRecognizer(target: self, action: #selector(MyView.handlePinch))
+		instance.delegate = self
+		return instance
+	}()
+	
+	func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+		return true
+	}
+	
+	func handlePinch(gesture: UIPinchGestureRecognizer) {
+		if gesture.state == .Began {
+			originalScale = model.scale
+			originalValue = self.value
+		}
+		if gesture.state == .Changed {
+			var scale = originalScale * gesture.scale
+			if scale < 0.0 {
+				scale = 0.01
+			}
+			model.scale = scale
+			
+			layout.itemSize = computeItemSize()
+			layout.invalidateLayout()
+			
+			if let value = originalValue {
+				scrollToValue(value)
+			}
+			
+			valueDidChange?()
+		}
+	}
+	
+	func computeItemSize() -> CGSize {
+		return CGSize(width: model.scaleRounded, height: CollectionViewModel.height)
+	}
+	
+	lazy var layout: FlowLayout = {
+		let instance = FlowLayout()
+		instance.scrollDirection = .Horizontal
+		instance.minimumInteritemSpacing = 0
+		instance.minimumLineSpacing = 0
+		instance.sectionInset = UIEdgeInsetsZero
+		instance.headerReferenceSize = CGSizeZero
+		instance.footerReferenceSize = CGSizeZero
+		instance.itemSize = self.computeItemSize()
+		instance.model = self.model
+		return instance
+	}()
+	
+	lazy var collectionView: UICollectionView = {
+		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
+		instance.showsHorizontalScrollIndicator = false
+		instance.showsVerticalScrollIndicator = false
+		instance.backgroundColor = UIColor.blackColor()
+		instance.bounces = false
+		instance.alwaysBounceHorizontal = true
+		instance.alwaysBounceVertical = false
+		instance.registerClass(SliderCell.self, forCellWithReuseIdentifier: SliderCell.identifier)
+		instance.contentInset = UIEdgeInsetsZero
+		instance.delegate = self
+		instance.dataSource = self
+		return instance
+	}()
+	
+	func scrollViewDidScroll(scrollView: UIScrollView) {
+		valueDidChange?()
+	}
+	
+	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return model.count
+	}
+	
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SliderCell.identifier, forIndexPath: indexPath) as! SliderCell
+		cell.label.text = String(indexPath.row % 10)
+		return cell
+	}
+}
+
+class ScientificSliderViewController2: UIViewController {
 	
 	override func loadView() {
 		super.loadView()
 		self.automaticallyAdjustsScrollViewInsets = false
 		
 		view.backgroundColor = UIColor.lightGrayColor()
-		view.addSubview(collectionView)
+		view.addSubview(myView)
 		view.addSubview(titleLabel)
 		view.addSubview(valueLabel)
 		view.addSubview(usageLabel)
 	}
 	
-	lazy var model: CollectionViewModel = {
-		let instance = CollectionViewModel()
+	lazy var myView: MyView = {
+		let instance = MyView()
+		instance.valueDidChange = { [weak self] in
+			self?.updateLabel()
+		}
 		return instance
 	}()
 	
@@ -181,66 +290,10 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	}()
 
 	func updateLabel() {
-		if let value = self.value {
+		if let value = myView.value {
 			valueLabel.text = String(format: "%.3f", value)
 		} else {
 			valueLabel.text = "---"
-		}
-	}
-	
-	var value: CGFloat? {
-		let scale = model.scaleRounded
-		if scale < 0.1 {
-			return nil
-		}
-		
-		let halfWidth = collectionView.bounds.width / 2
-		let midX = collectionView.contentOffset.x + halfWidth
-		let x: CGFloat = midX / scale
-		return x
-	}
-	
-	func scrollToValue(value: CGFloat) {
-		let scale = model.scaleRounded
-		if scale < 0.1 {
-			return
-		}
-		
-		let halfWidth = collectionView.bounds.width / 2
-		let offsetX: CGFloat = round((scale * value) - halfWidth)
-		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
-	}
-	
-	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
-		let instance = UIPinchGestureRecognizer(target: self, action: #selector(ScientificSliderViewController2.handlePinch))
-		instance.delegate = self
-		return instance
-	}()
-	
-	func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-		return true
-	}
-	
-	func handlePinch(gesture: UIPinchGestureRecognizer) {
-		if gesture.state == .Began {
-			originalScale = model.scale
-			originalValue = self.value
-		}
-		if gesture.state == .Changed {
-			var scale = originalScale * gesture.scale
-			if scale < 0.0 {
-				scale = 0.01
-			}
-			model.scale = scale
-			
-			layout.itemSize = computeItemSize()
-			layout.invalidateLayout()
-			
-			if let value = originalValue {
-				scrollToValue(value)
-			}
-			
-			updateLabel()
 		}
 	}
 	
@@ -258,11 +311,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		var frame = view.bounds
 		frame.size.height = CollectionViewModel.height
 		frame.origin.y = (view.bounds.height - frame.height) * 0.5
-		collectionView.frame = frame
-		
-
-		let halfWidth = round(frame.width/2)-1
-		collectionView.contentInset = UIEdgeInsets(top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+		myView.frame = frame
 
 		
 		titleLabel.sizeToFit()
@@ -279,51 +328,11 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-		view.addGestureRecognizer(pinchGestureRecognizer)
-		
-		layout.itemSize = computeItemSize()
-		layout.invalidateLayout()
-		collectionView.reloadData()
+		myView.viewWillAppear()
 	}
 
 	override func viewDidDisappear(animated: Bool) {
 		super.viewDidDisappear(animated)
-		view.removeGestureRecognizer(pinchGestureRecognizer)
-	}
-	
-	lazy var layout: FlowLayout = {
-		return self.createFlowLayout()
-	}()
-	
-	func computeItemSize() -> CGSize {
-		return CGSize(width: model.scaleRounded, height: CollectionViewModel.height)
-	}
-	
-	func createFlowLayout() -> FlowLayout {
-		let instance = FlowLayout()
-		instance.itemSize = computeItemSize()
-		instance.model = self.model
-		return instance
-	}
-	
-	lazy var collectionView: MyCollectionView = {
-		let instance = MyCollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
-		instance.delegate = self
-		instance.dataSource = self
-		return instance
-	}()
-	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
-		updateLabel()
-	}
-	
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return model.count
-	}
-	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SliderCell.identifier, forIndexPath: indexPath) as! SliderCell
-		cell.label.text = String(indexPath.row % 10)
-		return cell
+		myView.viewDidDisappear()
 	}
 }
