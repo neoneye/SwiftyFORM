@@ -292,12 +292,6 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 	
 	func createFlowLayout() -> FlowLayout {
 		let instance = FlowLayout()
-//		instance.scrollDirection = .Horizontal
-//		instance.minimumInteritemSpacing = 1
-//		instance.minimumLineSpacing = 1
-//		instance.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//		instance.headerReferenceSize = CGSizeZero
-//		instance.footerReferenceSize = CGSizeZero
 		instance.itemSize = computeItemSize()
 		instance.model = self.model
 		return instance
@@ -318,11 +312,7 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		return instance
 	}()
 	
-	var counter = 0
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-		counter += 1
-//		print("!!!!!! \(counter)")
-		// TODO: only invoke every 0.2 second. This function gets hammered when scrolling
 		updateLabel()
 	}
 	
@@ -334,17 +324,5 @@ class ScientificSliderViewController2: UIViewController, UICollectionViewDelegat
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SliderCell.identifier, forIndexPath: indexPath) as! SliderCell
 		cell.label.text = String(indexPath.row % 10)
 		return cell
-	}
-	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-		return UIEdgeInsetsZero
-	}
-	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-		return CGSizeZero
-	}
-	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-		return CGSizeZero
 	}
 }
