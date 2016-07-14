@@ -92,18 +92,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		addSubview(collectionView)
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
-	}
-	
-	func viewWillAppear() {
 		addGestureRecognizer(pinchGestureRecognizer)
-		
-		layout.itemSize = computeItemSize()
-		layout.invalidateLayout()
-		collectionView.reloadData()
-	}
-	
-	func viewDidDisappear() {
-		removeGestureRecognizer(pinchGestureRecognizer)
 	}
 	
 	override func layoutSubviews() {
