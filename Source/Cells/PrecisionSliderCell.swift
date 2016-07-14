@@ -253,10 +253,9 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		self.model = model
 		super.init(style: .Value1, reuseIdentifier: nil)
 		selectionStyle = .None
-		textLabel?.text = model.title
-		detailTextLabel?.text = "Value"
-		
 		clipsToBounds = true
+		textLabel?.text = model.title
+		reloadValueLabel()
 	}
 	
 	public required init(coder aDecoder: NSCoder) {
@@ -270,6 +269,20 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
 		model.expandCollapseAction?(indexPath: indexPath, tableView: tableView)
 	}
+	
+	func reloadValueLabel() {
+		detailTextLabel?.text = String(format: "%.3f", model.value)
+	}
+	
+	func sliderDidChange(newValue: Double?) {
+		let newValueOrZero = newValue ?? 0.0
+		if model.value == newValue {
+			return
+		}
+		model.value = newValueOrZero
+		model.valueDidChange(newValueOrZero)
+		reloadValueLabel()
+	}
 }
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
@@ -279,8 +292,16 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		return PrecisionSlider_InnerModel.height
 	}
 	
+	func updateValue() {
+		collapsedCell?.sliderDidChange(sliderView.value)
+	}
+	
 	lazy var sliderView: PrecisionSliderView = {
-		return PrecisionSliderView()
+		let instance = PrecisionSliderView()
+		instance.valueDidChange = { [weak self] in
+			self?.updateValue()
+		}
+		return instance
 	}()
 	
 	public init() {
