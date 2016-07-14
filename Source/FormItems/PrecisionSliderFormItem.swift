@@ -12,26 +12,26 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 	
-	public var minimumValue: Float = 0.0
-	public func minimumValue(minimumValue: Float) -> Self {
+	public var minimumValue: Double = 0.0
+	public func minimumValue(minimumValue: Double) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
-	public var maximumValue: Float = 1.0
-	public func maximumValue(maximumValue: Float) -> Self {
+	public var maximumValue: Double = 1.0
+	public func maximumValue(maximumValue: Double) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
 	
 	
-	typealias SyncBlock = (value: Float, animated: Bool) -> Void
-	var syncCellWithValue: SyncBlock = { (value: Float, animated: Bool) in
+	typealias SyncBlock = (value: Double, animated: Bool) -> Void
+	var syncCellWithValue: SyncBlock = { (value: Double, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
-	internal var innerValue: Float = 0.0
-	public var value: Float {
+	internal var innerValue: Double = 0.0
+	public var value: Double {
 		get {
 			return self.innerValue
 		}
@@ -39,22 +39,22 @@ public class PrecisionSliderFormItem: FormItem {
 			self.setValue(newValue, animated: false)
 		}
 	}
-	public func value(value: Float) -> Self {
+	public func value(value: Double) -> Self {
 		setValue(value, animated: false)
 		return self
 	}
 	
-	public func setValue(value: Float, animated: Bool) {
+	public func setValue(value: Double, animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value: value, animated: animated)
 	}
 
-	public typealias SliderDidChangeBlock = (value: Float) -> Void
-	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
+	public typealias SliderDidChangeBlock = (value: Double) -> Void
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Double) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func sliderDidChange(value: Float) {
+	public func sliderDidChange(value: Double) {
 		innerValue = value
 		sliderDidChangeBlock(value: value)
 	}

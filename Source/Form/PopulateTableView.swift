@@ -416,7 +416,7 @@ class PopulateTableView: FormItemVisitor {
 		cell.expandedCell = cellExpanded
 		
 		weak var weakObject = object
-		model.valueDidChange = { (value: Float) in
+		model.valueDidChange = { (value: Double) in
 			SwiftyFormLog("value did change \(value)")
 			weakObject?.sliderDidChange(value)
 		}
@@ -435,7 +435,7 @@ class PopulateTableView: FormItemVisitor {
 			vc.expandCollapse(cell: cell, expandedCell: cellExpanded, indexPath: indexPath)
 		}
 		
-		object.syncCellWithValue = { (value: Float, animated: Bool) in
+		object.syncCellWithValue = { (value: Double, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
 //			weakCell?.setValueWithoutSync(value, animated: animated)
 		}

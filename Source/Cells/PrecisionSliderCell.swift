@@ -232,11 +232,11 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 
 public class PrecisionSliderCellModel {
 	var title: String?
-	var value: Float = 0.0
-	var minimumValue: Float = 0.0
-	var maximumValue: Float = 1.0
+	var value: Double = 0.0
+	var minimumValue: Double = 0.0
+	var maximumValue: Double = 1.0
 	
-	var valueDidChange: Float -> Void = { (value: Float) in
+	var valueDidChange: Double -> Void = { (value: Double) in
 		SwiftyFormLog("value \(value)")
 	}
 	
