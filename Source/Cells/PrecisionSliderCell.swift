@@ -3,9 +3,9 @@ import UIKit
 
 class PrecisionSlider_InnerModel {
 	var count = 1000
-	var scale: CGFloat = 60.0
+	var scale: Double = 60.0
 	
-	var scaleRounded: CGFloat {
+	var scaleRounded: Double {
 		let result = floor(scale + 0.5)
 		if result < 0.1 {
 			return 0.1
@@ -24,7 +24,7 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			print("no model")
 			return CGSizeZero
 		}
-		return CGSize(width: model.scaleRounded * CGFloat(model.count), height: PrecisionSlider_InnerModel.height)
+		return CGSize(width: CGFloat(model.scaleRounded * Double(model.count)), height: PrecisionSlider_InnerModel.height)
 	}
 }
 
@@ -73,8 +73,8 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 }
 
 class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	var originalScale: CGFloat = 1.0
-	var originalValue: CGFloat?
+	var originalScale: Double = 1.0
+	var originalValue: Double?
 	
 	typealias ValueDidChange = Void -> Void
 	var valueDidChange: ValueDidChange?
@@ -126,26 +126,26 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		return instance
 	}()
 	
-	var value: CGFloat? {
+	var value: Double? {
 		let scale = model.scaleRounded
 		if scale < 0.1 {
 			return nil
 		}
 		
-		let halfWidth = collectionView.bounds.width / 2
-		let midX = collectionView.contentOffset.x + halfWidth
-		let x: CGFloat = midX / scale
+		let halfWidth: CGFloat = collectionView.bounds.width / 2
+		let midX: CGFloat = collectionView.contentOffset.x + halfWidth
+		let x = Double(midX) / scale
 		return x
 	}
 	
-	func scrollToValue(value: CGFloat) {
+	func scrollToValue(value: Double) {
 		let scale = model.scaleRounded
 		if scale < 0.1 {
 			return
 		}
 		
-		let halfWidth = collectionView.bounds.width / 2
-		let offsetX: CGFloat = round((scale * value) - halfWidth)
+		let halfWidth = Double(collectionView.bounds.width / 2)
+		let offsetX = CGFloat(round((scale * value) - halfWidth))
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
 	
@@ -165,7 +165,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			var scale = originalScale * gesture.scale
+			var scale = originalScale * Double(gesture.scale)
 			if scale < 0.0 {
 				scale = 0.01
 			}
@@ -183,7 +183,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func computeItemSize() -> CGSize {
-		return CGSize(width: model.scaleRounded, height: PrecisionSlider_InnerModel.height)
+		return CGSize(width: CGFloat(model.scaleRounded), height: PrecisionSlider_InnerModel.height)
 	}
 	
 	lazy var layout: PrecisionSlider_InnerCollectionViewFlowLayout = {
