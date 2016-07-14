@@ -231,7 +231,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 
 
 public class PrecisionSliderCellModel {
-	var title: String = ""
+	var title: String?
 	var value: Float = 0.0
 	var minimumValue: Float = 0.0
 	var maximumValue: Float = 1.0
@@ -251,8 +251,10 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 
 	public init(model: PrecisionSliderCellModel) {
 		self.model = model
-		super.init(style: .Default, reuseIdentifier: nil)
+		super.init(style: .Value1, reuseIdentifier: nil)
 		selectionStyle = .None
+		textLabel?.text = model.title
+		detailTextLabel?.text = "Value"
 		
 		clipsToBounds = true
 	}

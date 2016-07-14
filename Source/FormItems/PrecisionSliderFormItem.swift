@@ -6,6 +6,12 @@ public class PrecisionSliderFormItem: FormItem {
 		visitor.visitPrecisionSlider(self)
 	}
 	
+	public var title: String = ""
+	public func title(title: String) -> Self {
+		self.title = title
+		return self
+	}
+	
 	public var minimumValue: Float = 0.0
 	public func minimumValue(minimumValue: Float) -> Self {
 		self.minimumValue = minimumValue

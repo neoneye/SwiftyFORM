@@ -403,6 +403,7 @@ class PopulateTableView: FormItemVisitor {
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
 		model.value = object.value
+		model.title = object.title
 
 		
 		let cell = PrecisionSliderCell(model: model)
