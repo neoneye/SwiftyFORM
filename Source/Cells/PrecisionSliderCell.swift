@@ -292,14 +292,14 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		return PrecisionSlider_InnerModel.height
 	}
 	
-	func updateValue() {
+	func sliderDidChange() {
 		collapsedCell?.sliderDidChange(sliderView.value)
 	}
 	
 	lazy var sliderView: PrecisionSliderView = {
 		let instance = PrecisionSliderView()
 		instance.valueDidChange = { [weak self] in
-			self?.updateValue()
+			self?.sliderDidChange()
 		}
 		return instance
 	}()
