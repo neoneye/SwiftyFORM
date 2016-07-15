@@ -103,6 +103,9 @@ public class FormViewController: UIViewController {
 		tableView.beginUpdates()
 		tableView.deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
 		tableView.insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
+		if let indexPath = tableView.indexPathForSelectedRow {
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		}
 		tableView.endUpdates()
 		
 		SwiftyFormLog("did expand")
