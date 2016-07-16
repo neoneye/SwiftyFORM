@@ -302,9 +302,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	
 	lazy var sliderView: PrecisionSliderView = {
 		let instance = PrecisionSliderView()
-		instance.valueDidChange = { [weak self] in
-			self?.sliderDidChange()
-		}
+		instance.valueDidChange = nil
 		return instance
 	}()
 	
@@ -320,5 +318,28 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		sliderView.frame = bounds
+		
+		let tinyDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Float(NSEC_PER_SEC)))
+		dispatch_after(tinyDelay, dispatch_get_main_queue()) {
+			self.assignInitialValue()
+		}
+	}
+	
+	func assignInitialValue() {
+		if sliderView.valueDidChange != nil {
+			return
+		}
+		guard let model = collapsedCell?.model else {
+			return
+		}
+		/*
+		First we scroll to the right offset
+		Next establish two way binding
+		*/
+		sliderView.scrollToValue(model.value)
+
+		sliderView.valueDidChange = { [weak self] in
+			self?.sliderDidChange()
+		}
 	}
 }
