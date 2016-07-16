@@ -67,7 +67,11 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		return cells[indexPath.row]
+		let cell = cells[indexPath.row]
+		if let theCell = cell as? CellForRowDelegate {
+			return theCell.form_cellForRow(indexPath, tableView: tableView)
+		}
+		return cell
 	}
 	
 	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

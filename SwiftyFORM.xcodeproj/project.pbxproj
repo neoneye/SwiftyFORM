@@ -22,6 +22,7 @@
 		42108D211B34E9F60067FEAA /* TextFieldFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D141B34E9F60067FEAA /* TextFieldFormItem.swift */; };
 		42108D221B34E9F60067FEAA /* TextViewFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D151B34E9F60067FEAA /* TextViewFormItem.swift */; };
 		42108D231B34E9F60067FEAA /* ViewControllerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */; };
+		4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */; };
 		4259A2C41C23759B00DB4CEB /* AccessoryButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */; };
 		425DED631D2823A600EDF891 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DED621D2823A600EDF891 /* SegmentedControlCell.swift */; };
 		425DED651D28257000EDF891 /* SegmentedControlFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DED641D28257000EDF891 /* SegmentedControlFormItem.swift */; };
@@ -112,6 +113,7 @@
 		42108D141B34E9F60067FEAA /* TextFieldFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldFormItem.swift; sourceTree = "<group>"; };
 		42108D151B34E9F60067FEAA /* TextViewFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewFormItem.swift; sourceTree = "<group>"; };
 		42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFormItem.swift; sourceTree = "<group>"; };
+		4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellForRowDelegate.swift; sourceTree = "<group>"; };
 		4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessoryButtonDelegate.swift; sourceTree = "<group>"; };
 		425DED621D2823A600EDF891 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
 		425DED641D28257000EDF891 /* SegmentedControlFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlFormItem.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */,
+				4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */,
 				428683091B346CFE0028DB2F /* CellHeightProvider.swift */,
 				428683071B346CFE0028DB2F /* Command.swift */,
 				428683081B346CFE0028DB2F /* DumpVisitor.swift */,
@@ -293,13 +296,13 @@
 				428683141B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift */,
 				4286830E1B346CFE0028DB2F /* SelectOptionDelegate.swift */,
 				4286830A1B346CFE0028DB2F /* SelectRowDelegate.swift */,
+				42685D4E1D340D99008ABC3D /* SpecialArray.swift */,
 				428683101B346CFE0028DB2F /* TableViewSection.swift */,
 				428683151B346CFE0028DB2F /* TitleWidth.swift */,
 				428683161B346CFE0028DB2F /* ValidateResult.swift */,
 				428683171B346CFE0028DB2F /* ValidateVisitor.swift */,
 				428683111B346CFE0028DB2F /* Validator.swift */,
 				42D0050F1B96243000986B3B /* WillDisplayCellDelegate.swift */,
-				42685D4E1D340D99008ABC3D /* SpecialArray.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				428683511B346CFE0028DB2F /* RegularExpressionSpecification.swift in Sources */,
 				42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */,
 				739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */,
+				4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */,
 				428683581B346CFE0028DB2F /* UITableView+PrevNext.swift in Sources */,
 				739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */,
 				42108D1E1B34E9F60067FEAA /* StaticTextFormItem.swift in Sources */,
