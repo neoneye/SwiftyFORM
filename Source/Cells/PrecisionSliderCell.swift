@@ -150,6 +150,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		
 		let halfWidth = Double(collectionView.bounds.width / 2)
 		let offsetX = CGFloat(round((scale * value) - halfWidth))
+		//print("offsetX: \(offsetX)    [ \(scale) * \(value) - \(halfWidth) ]")
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
 	
