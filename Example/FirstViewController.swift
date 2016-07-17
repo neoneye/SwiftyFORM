@@ -6,6 +6,12 @@ public class FirstViewController: FormViewController {
 	override public func populate(builder: FormBuilder) {
 		builder.demo_showInfo("Welcome to SwiftyFORM\na new form framework\nfor iOS 9")
 
+		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(3.14159).value(1.57079).title("PI")
+		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(3.5).value(0.0).title("X")
+		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(3.5).value(3.25).title("Y")
+		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(3.5).value(3.5).title("Z")
+		builder += PrecisionSliderFormItem().minimumValue(-0.5).maximumValue(0.5).value(0.0).title("A")
+		builder += PrecisionSliderFormItem().minimumValue(-1.0).maximumValue(1.0).value(0.0).title("B")
 		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(255.0).value(255.0).title("Red")
 		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(360.0).value(0.0).title("Degrees")
 		builder += PrecisionSliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(-100.0).title("Green")
@@ -13,7 +19,6 @@ public class FirstViewController: FormViewController {
 		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
 		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(100.0).value(50.0).title("Water level")
 		builder += SliderFormItem().minimumValue(-100.0).maximumValue(100.0).value(0.0)
-		builder += PrecisionSliderFormItem().minimumValue(0.0).maximumValue(3.14159).value(1.57079).title("PI")
 		
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
