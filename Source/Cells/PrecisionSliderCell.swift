@@ -2,6 +2,9 @@
 import UIKit
 
 class PrecisionSlider_InnerModel {
+	var minimumValue: Double = 0.0
+	var maximumValue: Double = 100.0
+
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
@@ -152,7 +155,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		
 		let halfWidth: CGFloat = collectionView.bounds.width / 2
 		let midX: CGFloat = collectionView.contentOffset.x + halfWidth
-		let x = Double(midX) / scale
+		let x = Double(midX) / scale + model.minimumValue
 		return x
 	}
 	
@@ -162,8 +165,10 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 			return
 		}
 		
+		let valueAdjusted = value - model.minimumValue
+		
 		let halfWidth = Double(collectionView.bounds.width / 2)
-		let offsetX = CGFloat(round((scale * value) - halfWidth))
+		let offsetX = CGFloat(round((scale * valueAdjusted) - halfWidth))
 		//print("offsetX: \(offsetX)    [ \(scale) * \(value) - \(halfWidth) ]")
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
@@ -362,6 +367,9 @@ extension PrecisionSliderCellModel {
 			instance.hasPartialItemAfter = true
 			instance.sizeOfPartialItemAfter = sizeAfter
 		}
+		
+		instance.minimumValue = minimumValue
+		instance.maximumValue = maximumValue
 		
 		return instance
 	}
