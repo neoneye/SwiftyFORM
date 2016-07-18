@@ -2,7 +2,14 @@
 import UIKit
 
 class PrecisionSlider_InnerModel {
-	var count = 1000
+	var hasPartialItemBefore = false
+	var sizeOfPartialItemBefore: Double = 0.0
+	
+	var numberOfItems = 100
+
+	var hasPartialItemAfter = false
+	var sizeOfPartialItemAfter: Double = 0.0
+	
 	var scale: Double = 60.0
 	
 	var scaleRounded: Double {
@@ -24,7 +31,16 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			print("no model")
 			return CGSizeZero
 		}
-		return CGSize(width: CGFloat(model.scaleRounded * Double(model.count)), height: PrecisionSlider_InnerModel.height)
+
+		var length: Double = Double(model.numberOfItems)
+		if model.hasPartialItemBefore {
+			length += model.sizeOfPartialItemBefore
+		}
+		if model.hasPartialItemAfter {
+			length += model.sizeOfPartialItemAfter
+		}
+		
+		return CGSize(width: CGFloat(model.scaleRounded * length), height: PrecisionSlider_InnerModel.height)
 	}
 }
 
@@ -80,6 +96,8 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	var originalScale: Double = 1.0
 	var originalValue: Double?
 	
+	var model = PrecisionSlider_InnerModel()
+	
 	typealias ValueDidChange = Void -> Void
 	var valueDidChange: ValueDidChange?
 	
@@ -87,6 +105,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		super.init(frame: frame)
 		commonInit()
 	}
+
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		commonInit()
@@ -122,11 +141,6 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		let instance = UIView()
 		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
 		instance.userInteractionEnabled = false
-		return instance
-	}()
-	
-	lazy var model: PrecisionSlider_InnerModel = {
-		let instance = PrecisionSlider_InnerModel()
 		return instance
 	}()
 	
@@ -224,7 +238,14 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return model.count
+		var count = model.numberOfItems
+		if model.hasPartialItemBefore {
+			count += 1
+		}
+		if model.hasPartialItemAfter {
+			count += 1
+		}
+		return count
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -232,6 +253,32 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		cell.label.text = String(indexPath.row % 10)
 		return cell
 	}
+	
+	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		var row = indexPath.row
+		if model.hasPartialItemBefore {
+			if row == 0 {
+				return CGSize(
+					width: CGFloat(model.scaleRounded * model.sizeOfPartialItemBefore),
+					height: PrecisionSlider_InnerModel.height
+				)
+			}
+			row -= 1
+		}
+		if row >= model.numberOfItems {
+			if model.hasPartialItemAfter {
+				return CGSize(
+					width: CGFloat(model.scaleRounded * model.sizeOfPartialItemAfter),
+					height: PrecisionSlider_InnerModel.height
+				)
+			}
+		}
+		return CGSize(
+			width: CGFloat(model.scaleRounded),
+			height: PrecisionSlider_InnerModel.height
+		)
+	}
+
 }
 
 
@@ -290,6 +337,36 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 }
 
+extension PrecisionSliderCellModel {
+	func sliderViewModel() -> PrecisionSlider_InnerModel {
+		let instance = PrecisionSlider_InnerModel()
+		var count = Int(floor(maximumValue) - ceil(minimumValue))
+		if count < 0 {
+			print("WARNING: count is negative. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
+			count = 0
+		}
+		instance.numberOfItems = count
+
+		let sizeBefore = ceil(minimumValue) - minimumValue
+		//print("size before: \(sizeBefore)    \(minimumValue)")
+		if sizeBefore > 0.0000001 {
+			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
+			instance.hasPartialItemBefore = true
+			instance.sizeOfPartialItemBefore = sizeBefore
+		}
+
+		let sizeAfter = maximumValue - floor(maximumValue)
+		//print("size after: \(sizeAfter)    \(maximumValue)")
+		if sizeAfter > 0.0000001 {
+			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
+			instance.hasPartialItemAfter = true
+			instance.sizeOfPartialItemAfter = sizeAfter
+		}
+		
+		return instance
+	}
+}
+
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	weak var collapsedCell: PrecisionSliderCell?
 
@@ -333,6 +410,14 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		guard let model = collapsedCell?.model else {
 			return
 		}
+		
+		let sliderViewModel = model.sliderViewModel()
+		sliderView.model = sliderViewModel
+		sliderView.layout.model = sliderViewModel
+		sliderView.setNeedsLayout()
+		sliderView.setNeedsDisplay()
+		sliderView.collectionView.reloadData()
+		
 		/*
 		First we scroll to the right offset
 		Next establish two way binding
