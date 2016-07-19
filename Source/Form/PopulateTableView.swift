@@ -399,7 +399,7 @@ class PopulateTableView: FormItemVisitor {
 	}
 	
 	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
-		var model = PrecisionSliderCellModel()
+		let model = PrecisionSliderCellModel()
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
 		model.value = object.value
