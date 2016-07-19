@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-class PrecisionSlider_InnerModel {
+class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
@@ -34,6 +34,23 @@ class PrecisionSlider_InnerModel {
 	}
 	
 	static let height: CGFloat = 130
+	
+	var debugDescription: String {
+		var strings = [String]()
+		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
+		if hasPartialItemBefore {
+			strings.append(String(format: "partial-before: %.5f", sizeOfPartialItemBefore))
+		} else {
+			strings.append("no partial-before")
+		}
+		strings.append("full: \(numberOfItems)")
+		if hasPartialItemAfter {
+			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
+		} else {
+			strings.append("no partial-after")
+		}
+		return strings.joinWithSeparator(" , ")
+	}
 }
 
 class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -271,6 +288,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		if model.hasPartialItemAfter {
 			count += 1
 		}
+		//print("number of items: \(count)")
 		return count
 	}
 	
@@ -290,25 +308,31 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		var row = indexPath.row
 		if model.hasPartialItemBefore {
 			if row == 0 {
-				return CGSize(
+				let size = CGSize(
 					width: CGFloat(model.lengthOfPartialItemBefore),
 					height: PrecisionSlider_InnerModel.height
 				)
+				//print("size for partial-before \(indexPath.row) \(size.width)")
+				return size
 			}
 			row -= 1
 		}
 		if row >= model.numberOfItems {
 			if model.hasPartialItemAfter {
-				return CGSize(
+				let size = CGSize(
 					width: CGFloat(model.lengthOfPartialItemAfter),
 					height: PrecisionSlider_InnerModel.height
 				)
+				//print("size for partial-after \(indexPath.row) \(size.width)")
+				return size
 			}
 		}
-		return CGSize(
+		let size = CGSize(
 			width: CGFloat(model.lengthOfFullItem),
 			height: PrecisionSlider_InnerModel.height
 		)
+		//print("size for full \(indexPath.row) \(size.width)")
+		return size
 	}
 
 }
@@ -447,6 +471,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		}
 		
 		let sliderViewModel = model.sliderViewModel()
+		//print("sliderViewModel \(sliderViewModel.debugDescription)")
 		sliderView.model = sliderViewModel
 		sliderView.layout.model = sliderViewModel
 		sliderView.setNeedsLayout()
