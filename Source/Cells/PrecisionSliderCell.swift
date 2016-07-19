@@ -53,6 +53,8 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 		if model.hasPartialItemAfter {
 			length += model.lengthOfPartialItemAfter
 		}
+		// Add 1 so the value can reach max and beyond. Otherwise the value cannot quite reach max. 
+		length += 1
 		
 		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
 	}
@@ -169,14 +171,23 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		let right = contentInset.right
 		
 		let minimumValue = model.minimumValue
+		let maximumValue = model.maximumValue
 		let width = collectionView.bounds.width
 		let halfWidth: CGFloat = width / 2
 		let contentOffset = collectionView.contentOffset.x
 //		let midX: CGFloat = contentOffset + halfWidth
 		let midX: CGFloat = contentOffset + left
-		let result = Double(midX) / scale + minimumValue
+		var result = Double(midX) / scale + minimumValue
 //		print("\(result) = \(midX) / \(scale) + \(minimumValue)   where midx = \(contentOffset) + \(width) / 2")
 		print("\(result) = \(midX) / \(scale) + \(minimumValue)   where midx = \(contentOffset) + \(left)")
+		if result < minimumValue {
+			print("clamp to min \(minimumValue)")
+			result = minimumValue
+		}
+		if result > maximumValue {
+			print("clamp to max \(maximumValue)")
+			result = maximumValue
+		}
 		return result
 	}
 	
