@@ -15,12 +15,22 @@ class PrecisionSlider_InnerModel {
 	
 	var scale: Double = 60.0
 	
-	var scaleRounded: Double {
-		let result = floor(scale + 0.5)
+	var lengthOfFullItem: Double {
+		let result = ceil(scale)
 		if result < 0.1 {
 			return 0.1
 		}
 		return result
+	}
+	
+	var lengthOfAllFullItems: Double {
+		return Double(numberOfItems) * lengthOfFullItem
+	}
+	var lengthOfPartialItemBefore: Double {
+		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
+	}
+	var lengthOfPartialItemAfter: Double {
+		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
 	}
 	
 	static let height: CGFloat = 130
@@ -35,15 +45,16 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			return CGSizeZero
 		}
 
-		var length: Double = Double(model.numberOfItems)
+		var length: Double = 0
 		if model.hasPartialItemBefore {
-			length += model.sizeOfPartialItemBefore
+			length += model.lengthOfPartialItemBefore
 		}
+		length += model.lengthOfAllFullItems
 		if model.hasPartialItemAfter {
-			length += model.sizeOfPartialItemAfter
+			length += model.lengthOfPartialItemAfter
 		}
 		
-		return CGSize(width: CGFloat(model.scaleRounded * length), height: PrecisionSlider_InnerModel.height)
+		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
 	}
 }
 
@@ -148,7 +159,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}()
 	
 	var value: Double? {
-		let scale = model.scaleRounded
+		let scale = model.lengthOfFullItem
 		if scale < 0.1 {
 			return nil
 		}
@@ -170,13 +181,14 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func scrollToValue(value: Double) {
-		let scale = model.scaleRounded
+		let scale = model.lengthOfFullItem
 		if scale < 0.1 {
 			return
 		}
 		
 		let valueAdjusted = value - model.minimumValue
 		
+		// TODO: use contentInset.left
 		let halfWidth = Double(collectionView.bounds.width / 2)
 		let offsetX = CGFloat(round((scale * valueAdjusted) - halfWidth))
 		//print("offsetX: \(offsetX)    [ \(scale) * \(value) - \(halfWidth) ]")
@@ -217,7 +229,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func computeItemSize() -> CGSize {
-		return CGSize(width: CGFloat(model.scaleRounded), height: PrecisionSlider_InnerModel.height)
+		return CGSize(width: CGFloat(model.lengthOfFullItem), height: PrecisionSlider_InnerModel.height)
 	}
 	
 	lazy var layout: PrecisionSlider_InnerCollectionViewFlowLayout = {
@@ -280,7 +292,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		if model.hasPartialItemBefore {
 			if row == 0 {
 				return CGSize(
-					width: CGFloat(model.scaleRounded * model.sizeOfPartialItemBefore),
+					width: CGFloat(model.lengthOfPartialItemBefore),
 					height: PrecisionSlider_InnerModel.height
 				)
 			}
@@ -289,13 +301,13 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		if row >= model.numberOfItems {
 			if model.hasPartialItemAfter {
 				return CGSize(
-					width: CGFloat(model.scaleRounded * model.sizeOfPartialItemAfter),
+					width: CGFloat(model.lengthOfPartialItemAfter),
 					height: PrecisionSlider_InnerModel.height
 				)
 			}
 		}
 		return CGSize(
-			width: CGFloat(model.scaleRounded),
+			width: CGFloat(model.lengthOfFullItem),
 			height: PrecisionSlider_InnerModel.height
 		)
 	}
