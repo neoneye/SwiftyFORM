@@ -27,7 +27,7 @@ class PrecisionSlider_InnerModel {
 		return Double(numberOfItems) * lengthOfFullItem
 	}
 	var lengthOfPartialItemBefore: Double {
-		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
+		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
 	}
 	var lengthOfPartialItemAfter: Double {
 		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
