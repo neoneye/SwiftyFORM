@@ -183,15 +183,13 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 			return nil
 		}
 		
-		let minimumValue = model.minimumValue
-		let maximumValue = model.maximumValue
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
-		var result = Double(midX) / scale + minimumValue
-		if result < minimumValue {
-			result = minimumValue
+		var result = Double(midX) / scale + model.minimumValue
+		if result < model.minimumValue {
+			result = model.minimumValue
 		}
-		if result > maximumValue {
-			result = maximumValue
+		if result > model.maximumValue {
+			result = model.maximumValue
 		}
 		return result
 	}
@@ -201,13 +199,19 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 		if scale < 0.1 {
 			return
 		}
+
+		var clampedValue = value
+		if clampedValue < model.minimumValue {
+			clampedValue = model.minimumValue
+		}
+		if clampedValue > model.maximumValue {
+			clampedValue = model.maximumValue
+		}
 		
-		let valueAdjusted = value - model.minimumValue
-		
-		// TODO: use contentInset.left
-		let halfWidth = Double(collectionView.bounds.width / 2)
-		let offsetX = CGFloat(round((scale * valueAdjusted) - halfWidth))
-		//print("offsetX: \(offsetX)    [ \(scale) * \(value) - \(halfWidth) ]")
+		let valueAdjusted = clampedValue - model.minimumValue
+		let contentInsetLet = Double(collectionView.contentInset.left)
+		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
+		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 	}
 	
