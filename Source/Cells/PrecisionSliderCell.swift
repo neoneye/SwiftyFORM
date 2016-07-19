@@ -8,7 +8,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
-	var numberOfItems = 100
+	var numberOfFullItems = 100
 
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
@@ -24,7 +24,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 	
 	var lengthOfAllFullItems: Double {
-		return Double(numberOfItems) * lengthOfFullItem
+		return Double(numberOfFullItems) * lengthOfFullItem
 	}
 	var lengthOfPartialItemBefore: Double {
 		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
@@ -43,7 +43,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		} else {
 			strings.append("no partial-before")
 		}
-		strings.append("full: \(numberOfItems)")
+		strings.append("full: \(numberOfFullItems)")
 		if hasPartialItemAfter {
 			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
 		} else {
@@ -281,7 +281,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		var count = model.numberOfItems
+		var count = model.numberOfFullItems
 		if model.hasPartialItemBefore {
 			count += 1
 		}
@@ -317,7 +317,7 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 			}
 			row -= 1
 		}
-		if row >= model.numberOfItems {
+		if row >= model.numberOfFullItems {
 			if model.hasPartialItemAfter {
 				let size = CGSize(
 					width: CGFloat(model.lengthOfPartialItemAfter),
@@ -401,7 +401,7 @@ extension PrecisionSliderCellModel {
 			print("WARNING: count is negative. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
 			count = 0
 		}
-		instance.numberOfItems = count
+		instance.numberOfFullItems = count
 
 		let sizeBefore = ceil(minimumValue) - minimumValue
 		//print("size before: \(sizeBefore)    \(minimumValue)")
