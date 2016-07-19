@@ -153,10 +153,20 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 			return nil
 		}
 		
-		let halfWidth: CGFloat = collectionView.bounds.width / 2
-		let midX: CGFloat = collectionView.contentOffset.x + halfWidth
-		let x = Double(midX) / scale + model.minimumValue
-		return x
+		let contentInset = collectionView.contentInset
+		let left = contentInset.left
+		let right = contentInset.right
+		
+		let minimumValue = model.minimumValue
+		let width = collectionView.bounds.width
+		let halfWidth: CGFloat = width / 2
+		let contentOffset = collectionView.contentOffset.x
+//		let midX: CGFloat = contentOffset + halfWidth
+		let midX: CGFloat = contentOffset + left
+		let result = Double(midX) / scale + minimumValue
+//		print("\(result) = \(midX) / \(scale) + \(minimumValue)   where midx = \(contentOffset) + \(width) / 2")
+		print("\(result) = \(midX) / \(scale) + \(minimumValue)   where midx = \(contentOffset) + \(left)")
+		return result
 	}
 	
 	func scrollToValue(value: Double) {
