@@ -5,14 +5,40 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
+	/*
+	This is used when the range is tiny and doesn't cross any integer boundary.
+	Example of such a range: from min=0.4 to max=0.6
+	here the size of the range is 0.2, which is (max - min)
+	*/
 	var hasOnePartialItem = false
 	var sizeOfOnePartialItem: Double = 0.0
 	
+	/*
+	This is used when the range-start crosses an integer boundary.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a partial-item-before
+	with the range from min=0.7 to max=1.0
+	here the size of the range is 0.3  (max - min)
+	*/
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
+	/*
+	This is used when the range is crossing zero or more integer boundaries.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a full items will span from min=1.0 to max=3.0
+	here the number of full items is 2  (max - min)
+	The size of a full item is alway 1, since it's full.
+	*/
 	var numberOfFullItems = 100
 
+	/*
+	This is used when the range-end crosses an integer boundary.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a partial-item-after
+	with the range from min=3.0 to max=3.3
+	here the size of the range is 0.3  (max - min)
+	*/
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
 	
