@@ -5,6 +5,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
+	var hasOnePartialItem = false
+	var sizeOfOnePartialItem: Double = 0.0
+	
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
@@ -26,6 +29,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var lengthOfAllFullItems: Double {
 		return Double(numberOfFullItems) * lengthOfFullItem
 	}
+	var lengthOfOnePartialItem: Double {
+		return ceil(lengthOfFullItem * sizeOfOnePartialItem)
+	}
 	var lengthOfPartialItemBefore: Double {
 		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
 	}
@@ -38,16 +44,15 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
+		if hasOnePartialItem {
+			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
+		}
 		if hasPartialItemBefore {
 			strings.append(String(format: "partial-before: %.5f", sizeOfPartialItemBefore))
-		} else {
-			strings.append("no partial-before")
 		}
 		strings.append("full: \(numberOfFullItems)")
 		if hasPartialItemAfter {
 			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
-		} else {
-			strings.append("no partial-after")
 		}
 		return strings.joinWithSeparator(" , ")
 	}
@@ -63,6 +68,9 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 		}
 
 		var length: Double = 0
+		if model.hasOnePartialItem {
+			length += model.lengthOfOnePartialItem
+		}
 		if model.hasPartialItemBefore {
 			length += model.lengthOfPartialItemBefore
 		}
@@ -286,6 +294,9 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		var count = model.numberOfFullItems
+		if model.hasOnePartialItem {
+			count += 1
+		}
 		if model.hasPartialItemBefore {
 			count += 1
 		}
@@ -309,6 +320,14 @@ class PrecisionSliderView: UIView, UICollectionViewDelegateFlowLayout, UICollect
 	}
 	
 	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+		if model.hasOnePartialItem {
+			let size = CGSize(
+				width: CGFloat(model.lengthOfOnePartialItem),
+				height: PrecisionSlider_InnerModel.height
+			)
+			//print("size for one-partial \(indexPath.row) \(size.width)")
+			return size
+		}
 		var row = indexPath.row
 		if model.hasPartialItemBefore {
 			if row == 0 {
@@ -400,10 +419,20 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 extension PrecisionSliderCellModel {
 	func sliderViewModel() -> PrecisionSlider_InnerModel {
 		let instance = PrecisionSlider_InnerModel()
-		var count = Int(floor(maximumValue) - ceil(minimumValue))
+		instance.minimumValue = minimumValue
+		instance.maximumValue = maximumValue
+		
+		let count = Int(floor(maximumValue) - ceil(minimumValue))
 		if count < 0 {
-			print("WARNING: count is negative. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
-			count = 0
+			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
+			instance.numberOfFullItems = 0
+			instance.hasOnePartialItem = true
+			instance.sizeOfOnePartialItem = maximumValue - minimumValue
+			instance.hasPartialItemBefore = false
+			instance.sizeOfPartialItemBefore = 0
+			instance.hasPartialItemAfter = false
+			instance.sizeOfPartialItemAfter = 0
+			return instance
 		}
 		instance.numberOfFullItems = count
 
@@ -422,9 +451,6 @@ extension PrecisionSliderCellModel {
 			instance.hasPartialItemAfter = true
 			instance.sizeOfPartialItemAfter = sizeAfter
 		}
-		
-		instance.minimumValue = minimumValue
-		instance.maximumValue = maximumValue
 		
 		return instance
 	}
