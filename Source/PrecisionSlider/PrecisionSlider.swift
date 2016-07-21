@@ -1,160 +1,6 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
-	var minimumValue: Double = 0.0
-	var maximumValue: Double = 100.0
-	
-	/*
-	This is used when the range is tiny and doesn't cross any integer boundary.
-	Example of such a range: from min=0.4 to max=0.6
-	here the size of the range is 0.2, which is (max - min)
-	*/
-	var hasOnePartialItem = false
-	var sizeOfOnePartialItem: Double = 0.0
-	
-	/*
-	This is used when the range-start crosses an integer boundary.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a partial-item-before
-	with the range from min=0.7 to max=1.0
-	here the size of the range is 0.3  (max - min)
-	*/
-	var hasPartialItemBefore = false
-	var sizeOfPartialItemBefore: Double = 0.0
-	
-	/*
-	This is used when the range is crossing zero or more integer boundaries.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a full items will span from min=1.0 to max=3.0
-	here the number of full items is 2  (max - min)
-	The size of a full item is alway 1, since it's full.
-	*/
-	var numberOfFullItems = 100
-	
-	/*
-	This is used when the range-end crosses an integer boundary.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a partial-item-after
-	with the range from min=3.0 to max=3.3
-	here the size of the range is 0.3  (max - min)
-	*/
-	var hasPartialItemAfter = false
-	var sizeOfPartialItemAfter: Double = 0.0
-	
-	var scale: Double = 60.0
-	
-	var lengthOfFullItem: Double {
-		let result = ceil(scale)
-		if result < 0.1 {
-			return 0.1
-		}
-		return result
-	}
-	
-	var lengthOfAllFullItems: Double {
-		return Double(numberOfFullItems) * lengthOfFullItem
-	}
-	var lengthOfOnePartialItem: Double {
-		return ceil(lengthOfFullItem * sizeOfOnePartialItem)
-	}
-	var lengthOfPartialItemBefore: Double {
-		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
-	}
-	var lengthOfPartialItemAfter: Double {
-		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
-	}
-	
-	static let height: CGFloat = 130
-	
-	var debugDescription: String {
-		var strings = [String]()
-		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
-		if hasOnePartialItem {
-			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
-		}
-		if hasPartialItemBefore {
-			strings.append(String(format: "partial-before: %.5f", sizeOfPartialItemBefore))
-		}
-		strings.append("full: \(numberOfFullItems)")
-		if hasPartialItemAfter {
-			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
-		}
-		return strings.joinWithSeparator(" , ")
-	}
-}
-
-class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout {
-	weak var model: PrecisionSlider_InnerModel?
-	
-	override func collectionViewContentSize() -> CGSize {
-		guard let model = self.model else {
-			print("no model")
-			return CGSizeZero
-		}
-		
-		var length: Double = 0
-		if model.hasOnePartialItem {
-			length += model.lengthOfOnePartialItem
-		}
-		if model.hasPartialItemBefore {
-			length += model.lengthOfPartialItemBefore
-		}
-		length += model.lengthOfAllFullItems
-		if model.hasPartialItemAfter {
-			length += model.lengthOfPartialItemAfter
-		}
-		// Add 1 so the value can reach max and beyond. Otherwise the value cannot quite reach max.
-		length += 1
-		
-		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
-	}
-}
-
-class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
-	static let identifier = "cell"
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-		commonInit()
-	}
-	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		commonInit()
-	}
-	
-	func commonInit() {
-		backgroundColor = UIColor.whiteColor()
-		addSubview(leftBorder)
-		addSubview(label)
-	}
-	
-	lazy var leftBorder: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
-		return instance
-	}()
-	
-	lazy var label: UILabel = {
-		let instance = UILabel()
-		instance.text = "0"
-		return instance
-	}()
-	
-	override func layoutSubviews() {
-		super.layoutSubviews()
-		leftBorder.frame = CGRect(x: 0, y: 0, width: 1, height: bounds.height)
-		
-		let labelHidden = self.bounds.width < 30
-		label.hidden = labelHidden
-		
-		label.sizeToFit()
-		let labelFrame = label.frame
-		label.frame = CGRect(x: 7, y: 5, width: bounds.width - 10, height: labelFrame.height)
-	}
-}
-
 /*
 1 finger pan to adjust slider
 2 finger pinch to zoom slider precision
@@ -382,5 +228,162 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		)
 		//print("size for full \(indexPath.row) \(size.width)")
 		return size
+	}
+}
+
+
+// MARK: - Classes used internally by PrecisionSlider
+
+class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
+	var minimumValue: Double = 0.0
+	var maximumValue: Double = 100.0
+	
+	/*
+	This is used when the range is tiny and doesn't cross any integer boundary.
+	Example of such a range: from min=0.4 to max=0.6
+	here the size of the range is 0.2, which is (max - min)
+	*/
+	var hasOnePartialItem = false
+	var sizeOfOnePartialItem: Double = 0.0
+	
+	/*
+	This is used when the range-start crosses an integer boundary.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a partial-item-before
+	with the range from min=0.7 to max=1.0
+	here the size of the range is 0.3  (max - min)
+	*/
+	var hasPartialItemBefore = false
+	var sizeOfPartialItemBefore: Double = 0.0
+	
+	/*
+	This is used when the range is crossing zero or more integer boundaries.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a full items will span from min=1.0 to max=3.0
+	here the number of full items is 2  (max - min)
+	The size of a full item is alway 1, since it's full.
+	*/
+	var numberOfFullItems = 100
+	
+	/*
+	This is used when the range-end crosses an integer boundary.
+	Example of such a range: from min=0.7 to max=3.3
+	In this case there will be a partial-item-after
+	with the range from min=3.0 to max=3.3
+	here the size of the range is 0.3  (max - min)
+	*/
+	var hasPartialItemAfter = false
+	var sizeOfPartialItemAfter: Double = 0.0
+	
+	var scale: Double = 60.0
+	
+	var lengthOfFullItem: Double {
+		let result = ceil(scale)
+		if result < 0.1 {
+			return 0.1
+		}
+		return result
+	}
+	
+	var lengthOfAllFullItems: Double {
+		return Double(numberOfFullItems) * lengthOfFullItem
+	}
+	var lengthOfOnePartialItem: Double {
+		return ceil(lengthOfFullItem * sizeOfOnePartialItem)
+	}
+	var lengthOfPartialItemBefore: Double {
+		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
+	}
+	var lengthOfPartialItemAfter: Double {
+		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
+	}
+	
+	static let height: CGFloat = 130
+	
+	var debugDescription: String {
+		var strings = [String]()
+		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
+		if hasOnePartialItem {
+			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
+		}
+		if hasPartialItemBefore {
+			strings.append(String(format: "partial-before: %.5f", sizeOfPartialItemBefore))
+		}
+		strings.append("full: \(numberOfFullItems)")
+		if hasPartialItemAfter {
+			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
+		}
+		return strings.joinWithSeparator(" , ")
+	}
+}
+
+class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout {
+	weak var model: PrecisionSlider_InnerModel?
+	
+	override func collectionViewContentSize() -> CGSize {
+		guard let model = self.model else {
+			print("no model")
+			return CGSizeZero
+		}
+		
+		var length: Double = 0
+		if model.hasOnePartialItem {
+			length += model.lengthOfOnePartialItem
+		}
+		if model.hasPartialItemBefore {
+			length += model.lengthOfPartialItemBefore
+		}
+		length += model.lengthOfAllFullItems
+		if model.hasPartialItemAfter {
+			length += model.lengthOfPartialItemAfter
+		}
+		// Add 1 so the value can reach max and beyond. Otherwise the value cannot quite reach max.
+		length += 1
+		
+		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
+	}
+}
+
+class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
+	static let identifier = "cell"
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func commonInit() {
+		backgroundColor = UIColor.whiteColor()
+		addSubview(leftBorder)
+		addSubview(label)
+	}
+	
+	lazy var leftBorder: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var label: UILabel = {
+		let instance = UILabel()
+		instance.text = "0"
+		return instance
+	}()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		leftBorder.frame = CGRect(x: 0, y: 0, width: 1, height: bounds.height)
+		
+		let labelHidden = self.bounds.width < 30
+		label.hidden = labelHidden
+		
+		label.sizeToFit()
+		let labelFrame = label.frame
+		label.frame = CGRect(x: 7, y: 5, width: bounds.width - 10, height: labelFrame.height)
 	}
 }
