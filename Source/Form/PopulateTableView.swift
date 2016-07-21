@@ -437,7 +437,11 @@ class PopulateTableView: FormItemVisitor {
 		
 		object.syncCellWithValue = { (value: Double, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
-//			weakCell?.setValueWithoutSync(value, animated: animated)
+			if let model = weakCell?.model {
+				model.value = value
+			}
+			weakCell?.reloadValueLabel()
+			weakCellExpanded?.setValueWithoutSync(value, animated: animated)
 		}
 		
 	}

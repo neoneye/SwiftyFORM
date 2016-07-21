@@ -104,10 +104,10 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	}
 	
 	func sliderDidChange() {
-		collapsedCell?.sliderDidChange(sliderView.value)
+		collapsedCell?.sliderDidChange(slider.value)
 	}
 	
-	lazy var sliderView: PrecisionSlider = {
+	lazy var slider: PrecisionSlider = {
 		let instance = PrecisionSlider()
 		instance.valueDidChange = nil
 		return instance
@@ -115,7 +115,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	
 	public init() {
 		super.init(style: .Default, reuseIdentifier: nil)
-		addSubview(sliderView)
+		addSubview(slider)
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
@@ -124,7 +124,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		sliderView.frame = bounds
+		slider.frame = bounds
 		
 		let tinyDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Float(NSEC_PER_SEC)))
 		dispatch_after(tinyDelay, dispatch_get_main_queue()) {
@@ -133,7 +133,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	}
 	
 	func assignInitialValue() {
-		if sliderView.valueDidChange != nil {
+		if slider.valueDidChange != nil {
 			return
 		}
 		guard let model = collapsedCell?.model else {
@@ -142,20 +142,25 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		
 		let sliderViewModel = model.sliderViewModel()
 		//print("sliderViewModel \(sliderViewModel.debugDescription)")
-		sliderView.model = sliderViewModel
-		sliderView.layout.model = sliderViewModel
-		sliderView.setNeedsLayout()
-		sliderView.setNeedsDisplay()
-		sliderView.collectionView.reloadData()
+		slider.model = sliderViewModel
+		slider.layout.model = sliderViewModel
+		slider.setNeedsLayout()
+		slider.setNeedsDisplay()
+		slider.collectionView.reloadData()
 		
 		/*
 		First we scroll to the right offset
 		Next establish two way binding
 		*/
-		sliderView.scrollToValue(model.value)
+		slider.setValue(model.value, animated: false)
 
-		sliderView.valueDidChange = { [weak self] in
+		slider.valueDidChange = { [weak self] in
 			self?.sliderDidChange()
 		}
+	}
+	
+	func setValueWithoutSync(value: Double, animated: Bool) {
+		SwiftyFormLog("set value \(value), animated \(animated)")
+		slider.setValue(value, animated: animated)
 	}
 }

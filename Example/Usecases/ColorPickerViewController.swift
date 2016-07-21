@@ -90,5 +90,7 @@ class ColorPickerViewController: FormViewController {
 		assignRandomValue(slider0)
 		assignRandomValue(slider1)
 		assignRandomValue(slider2)
+		updateSummary()
+		updateColor()
 	}
 }

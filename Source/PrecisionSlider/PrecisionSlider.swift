@@ -74,7 +74,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return result
 	}
 	
-	func scrollToValue(value: Double) {
+	func setValue(value: Double, animated: Bool) {
 		let scale = model.lengthOfFullItem
 		if scale < 0.1 {
 			return
@@ -92,7 +92,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let contentInsetLet = Double(collectionView.contentInset.left)
 		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
 		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")
-		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
+		
+		let originalValueDidChange = valueDidChange
+		valueDidChange = nil
+		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+		valueDidChange = originalValueDidChange
 	}
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
@@ -121,7 +125,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			layout.invalidateLayout()
 			
 			if let value = originalValue {
-				scrollToValue(value)
+				setValue(value, animated: false)
 			}
 			
 			valueDidChange?()
