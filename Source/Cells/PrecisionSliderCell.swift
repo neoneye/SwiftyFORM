@@ -57,10 +57,17 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 }
 
 extension PrecisionSliderCellModel {
-	func sliderViewModel() -> PrecisionSlider_InnerModel {
+	func sliderViewModel(sliderWidthInPixels sliderWidthInPixels: Double) -> PrecisionSlider_InnerModel {
 		let instance = PrecisionSlider_InnerModel()
 		instance.minimumValue = minimumValue
 		instance.maximumValue = maximumValue
+		
+		let rangeLength = maximumValue - minimumValue
+		if sliderWidthInPixels > 10 && rangeLength > 0.001 {
+			instance.scale = sliderWidthInPixels / rangeLength
+		} else {
+			instance.scale = 10
+		}
 		
 		let count = Int(floor(maximumValue) - ceil(minimumValue))
 		if count < 0 {
@@ -97,6 +104,11 @@ extension PrecisionSliderCellModel {
 }
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
+	struct Constants {
+		static let insetForInitialZoom: CGFloat = 10.0
+	}
+	
+
 	weak var collapsedCell: PrecisionSliderCell?
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
@@ -140,7 +152,8 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 			return
 		}
 		
-		let sliderViewModel = model.sliderViewModel()
+		let sliderWidth = slider.bounds.width - Constants.insetForInitialZoom
+		let sliderViewModel = model.sliderViewModel(sliderWidthInPixels: Double(sliderWidth))
 		//print("sliderViewModel \(sliderViewModel.debugDescription)")
 		slider.model = sliderViewModel
 		slider.layout.model = sliderViewModel
