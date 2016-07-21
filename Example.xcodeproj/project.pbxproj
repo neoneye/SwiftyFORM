@@ -43,6 +43,7 @@
 		42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005191B96395D00986B3B /* CustomViewController.swift */; };
 		42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */; };
 		42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC81D4152490066E45A /* ColorPickerViewController.swift */; };
+		42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,7 @@
 		42D005191B96395D00986B3B /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsViewController.swift; sourceTree = "<group>"; };
 		42FABBC81D4152490066E45A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
+		42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlidersViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
 				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
+				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
 				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
 				42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */,
@@ -386,6 +389,7 @@
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
 				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
+				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
 				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
 				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
 				42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */,
