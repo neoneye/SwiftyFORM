@@ -2,8 +2,8 @@
 import UIKit
 
 /*
-1 finger pan to adjust slider
-2 finger pinch to zoom slider precision
+one-finger pan to adjust slider
+two-finger pinch to adjust zoom
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	var originalScale: Double = 1.0
