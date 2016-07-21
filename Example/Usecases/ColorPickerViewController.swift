@@ -14,6 +14,8 @@ class ColorPickerViewController: FormViewController {
 		
 		builder += SectionHeaderTitleFormItem().title("Summary")
 		builder += summary
+		builder += SectionFormItem()
+		builder += randomizeButton
 		
 		updateSummary()
 		updateColor()
@@ -69,5 +71,24 @@ class ColorPickerViewController: FormViewController {
 			alpha: 1.0
 		)
 		view?.backgroundColor = color
+	}
+
+	lazy var randomizeButton: ButtonFormItem = {
+		let instance = ButtonFormItem()
+		instance.title("Randomize")
+		instance.action = { [weak self] in
+			self?.randomize()
+		}
+		return instance
+	}()
+	
+	func assignRandomValue(formItem: PrecisionSliderFormItem) {
+		formItem.value = Double(randomInt(0, 255)) / 255.0
+	}
+	
+	func randomize() {
+		assignRandomValue(slider0)
+		assignRandomValue(slider1)
+		assignRandomValue(slider2)
 	}
 }
