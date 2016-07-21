@@ -42,6 +42,7 @@
 		42D005161B9631F400986B3B /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D005141B9631F400986B3B /* LoadingCell.xib */; };
 		42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005191B96395D00986B3B /* CustomViewController.swift */; };
 		42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */; };
+		42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC81D4152490066E45A /* ColorPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +127,7 @@
 		42D005141B9631F400986B3B /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		42D005191B96395D00986B3B /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsViewController.swift; sourceTree = "<group>"; };
+		42FABBC81D4152490066E45A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				423D17021BAF3A9B00A9859F /* Area51 */,
 				42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */,
+				42FABBC81D4152490066E45A /* ColorPickerViewController.swift */,
 				42108D281B3576110067FEAA /* MaleFemaleViewController.swift */,
 				42108D291B3576110067FEAA /* RateAppViewController.swift */,
 				42108D2A1B3576110067FEAA /* ReportViewController.swift */,
@@ -397,6 +400,7 @@
 				42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
+				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
