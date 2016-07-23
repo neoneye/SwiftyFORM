@@ -42,5 +42,13 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_100).maximumValue(-15_000).value(-18_000).title("A -20.1 -15")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_000).value(-18_000).title("B -20 -15")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_100).value(-18_000).title("C -20 -15.1")
+		
+		builder += SectionHeaderTitleFormItem().title("Decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(     -100).maximumValue(     100).value(0).title("0 decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(1).minimumValue(    -1000).maximumValue(    1000).value(0).title("1 decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(2).minimumValue(   -10000).maximumValue(   10000).value(0).title("2 decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(  -100000).maximumValue(  100000).value(0).title("3 decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(4).minimumValue( -1000000).maximumValue( 1000000).value(0).title("4 decimal places")
+		builder += PrecisionSliderFormItem().decimalPlaces(5).minimumValue(-10000000).maximumValue(10000000).value(0).title("5 decimal places")
 	}
 }
