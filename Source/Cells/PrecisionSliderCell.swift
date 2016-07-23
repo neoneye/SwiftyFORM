@@ -21,6 +21,25 @@ public class PrecisionSliderCellModel {
 	}
 }
 
+public struct PrecisionSliderCellFormatter {
+	public static func format(value value: Int, decimalPlaces: UInt) -> String {
+		let decimalScale: Int = Int(pow(Double(10), Double(decimalPlaces)))
+		let integerValue = abs(value / decimalScale)
+		let sign: String = value < 0 ? "-" : ""
+		
+		let fractionString: String
+		if decimalPlaces > 0 {
+			let fractionValue = abs(value % decimalScale)
+			let fmt = ".%0\(decimalPlaces)i"
+			fractionString = String(format: fmt, fractionValue)
+		} else {
+			fractionString = ""
+		}
+		
+		return "\(sign)\(integerValue)\(fractionString)"
+	}
+}
+
 
 public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate {
 	weak var expandedCell: PrecisionSliderCellExpanded?
@@ -48,8 +67,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 	
 	func reloadValueLabel() {
-		// TODO: use decimal places
-		detailTextLabel?.text = String(format: "%.3f", model.actualValue)
+		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
 	
 	func sliderDidChange(newValueOrNil: Double?) {
