@@ -3,16 +3,22 @@ import UIKit
 
 public class PrecisionSliderCellModel {
 	var title: String?
-	var value: Double = 0.0
-	var minimumValue: Double = 0.0
-	var maximumValue: Double = 1.0
+	var decimalPlaces: UInt = 3
+	var value: Int = 0
+	var minimumValue: Int = 0
+	var maximumValue: Int = 1000
 	
-	var valueDidChange: Double -> Void = { (value: Double) in
+	var valueDidChange: Int -> Void = { (value: Int) in
 		SwiftyFormLog("value \(value)")
 	}
 	
 	typealias ExpandCollapseAction = (indexPath: NSIndexPath, tableView: UITableView) -> Void
 	var expandCollapseAction: ExpandCollapseAction?
+
+	var actualValue: Double {
+		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
+		return Double(value) / decimalScale
+	}
 }
 
 
@@ -42,12 +48,19 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 	
 	func reloadValueLabel() {
-		detailTextLabel?.text = String(format: "%.3f", model.value)
+		// TODO: use decimal places
+		detailTextLabel?.text = String(format: "%.3f", model.actualValue)
 	}
 	
-	func sliderDidChange(newValue: Double?) {
-		let newValueOrZero = newValue ?? 0.0
-		if model.value == newValue {
+	func sliderDidChange(newValueOrNil: Double?) {
+		var newValueOrZero: Int = 0
+		
+		if let newValue = newValueOrNil {
+			let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
+			newValueOrZero = Int(round(newValue * decimalScale))
+		}
+		
+		if model.value == newValueOrZero {
 			return
 		}
 		model.value = newValueOrZero
@@ -57,14 +70,19 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 }
 
 extension PrecisionSliderCellModel {
+	
 	func sliderViewModel(sliderWidthInPixels sliderWidthInPixels: Double) -> PrecisionSlider_InnerModel {
+		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
+		let minimumValue = Double(self.minimumValue) / decimalScale
+		let maximumValue = Double(self.maximumValue) / decimalScale
+		
 		let instance = PrecisionSlider_InnerModel()
 		instance.minimumValue = minimumValue
 		instance.maximumValue = maximumValue
 		
 		let rangeLength = maximumValue - minimumValue
 		if sliderWidthInPixels > 10 && rangeLength > 0.001 {
-			instance.scale = sliderWidthInPixels / rangeLength
+			instance.scale = sliderWidthInPixels / Double(rangeLength)
 		} else {
 			instance.scale = 10
 		}
@@ -161,19 +179,29 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		slider.setNeedsDisplay()
 		slider.collectionView.reloadData()
 		
+
+		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
+		let scaledValue = Double(model.value) / decimalScale
+
 		/*
 		First we scroll to the right offset
 		Next establish two way binding
 		*/
-		slider.setValue(model.value, animated: false)
+		slider.setValue(scaledValue, animated: false)
 
 		slider.valueDidChange = { [weak self] in
 			self?.sliderDidChange()
 		}
 	}
 	
-	func setValueWithoutSync(value: Double, animated: Bool) {
+	func setValueWithoutSync(value: Int, animated: Bool) {
+		guard let model = collapsedCell?.model else {
+			return
+		}
 		SwiftyFormLog("set value \(value), animated \(animated)")
-		slider.setValue(value, animated: animated)
+		
+		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
+		let scaledValue = Double(value) / decimalScale
+		slider.setValue(scaledValue, animated: animated)
 	}
 }

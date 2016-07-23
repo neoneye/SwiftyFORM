@@ -400,6 +400,7 @@ class PopulateTableView: FormItemVisitor {
 	
 	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
 		let model = PrecisionSliderCellModel()
+		model.decimalPlaces = object.decimalPlaces
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
 		model.value = object.value
@@ -416,7 +417,7 @@ class PopulateTableView: FormItemVisitor {
 		cell.expandedCell = cellExpanded
 		
 		weak var weakObject = object
-		model.valueDidChange = { (value: Double) in
+		model.valueDidChange = { (value: Int) in
 			SwiftyFormLog("value did change \(value)")
 			weakObject?.sliderDidChange(value)
 		}
@@ -431,7 +432,7 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		
-		object.syncCellWithValue = { (value: Double, animated: Bool) in
+		object.syncCellWithValue = { (value: Int, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
 			if let model = weakCell?.model {
 				model.value = value

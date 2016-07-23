@@ -22,9 +22,9 @@ class ColorPickerViewController: FormViewController {
 	}
 	
 	lazy var slider0: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().minimumValue(0.0).maximumValue(1.0).value(0.5)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Red"
-		instance.sliderDidChangeBlock = { [weak self] (value: Double) in
+		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 			self?.updateColor()
 		}
@@ -32,9 +32,9 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	lazy var slider1: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().minimumValue(0.0).maximumValue(1.0).value(0.5)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Green"
-		instance.sliderDidChangeBlock = { [weak self] (value: Double) in
+		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 			self?.updateColor()
 		}
@@ -42,9 +42,9 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	lazy var slider2: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().minimumValue(0.0).maximumValue(1.0).value(0.5)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Blue"
-		instance.sliderDidChangeBlock = { [weak self] (value: Double) in
+		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 			self?.updateColor()
 		}
@@ -57,17 +57,17 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	func updateSummary() {
-		let s0 = String(format: "%.3f", slider0.value)
-		let s1 = String(format: "%.3f", slider1.value)
-		let s2 = String(format: "%.3f", slider2.value)
+		let s0 = String(format: "%.3f", slider0.actualValue)
+		let s1 = String(format: "%.3f", slider1.actualValue)
+		let s2 = String(format: "%.3f", slider2.actualValue)
 		summary.value = "\(s0) , \(s1) , \(s2)"
 	}
 	
 	func updateColor() {
 		let color = UIColor(
-			red: CGFloat(slider0.value),
-			green: CGFloat(slider1.value),
-			blue: CGFloat(slider2.value),
+			red: CGFloat(slider0.actualValue),
+			green: CGFloat(slider1.actualValue),
+			blue: CGFloat(slider2.actualValue),
 			alpha: 1.0
 		)
 		view?.backgroundColor = color
@@ -83,7 +83,7 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	func assignRandomValue(formItem: PrecisionSliderFormItem) {
-		formItem.value = Double(randomInt(0, 255)) / 255.0
+		formItem.value = randomInt(0, 1000)
 	}
 	
 	func randomize() {
