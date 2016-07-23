@@ -34,7 +34,7 @@ class WillPopOptionViewController: WillPopCommandProtocol {
 
 struct PopulateTableViewModel {
 	var viewController: UIViewController
-	var tableView: UITableView
+	var tableView: UITableView   // TODO: change to FormTableView
 	var toolbarMode: ToolbarMode
 }
 
@@ -421,18 +421,14 @@ class PopulateTableView: FormItemVisitor {
 			weakObject?.sliderDidChange(value)
 		}
 		
-		weak var weakVC: FormViewController? = self.model.viewController as? FormViewController
 		weak var weakCell = cell
 		weak var weakCellExpanded = cellExpanded
 
-		model.expandCollapseAction = { (indexPath: NSIndexPath, tableView: UITableView) in
+		model.expandCollapseAction = { (indexPath: NSIndexPath, tableView: UITableView) in // TODO: change tableview to FormTableView
 			SwiftyFormLog("expand row")
-			
-			guard let vc = weakVC, cell = weakCell, cellExpanded = weakCellExpanded else {
-				return
+			if let tv = tableView as? FormTableView {
+				tv.expandCollapse(cell: cell, expandedCell: cellExpanded, indexPath: indexPath)
 			}
-			
-			vc.expandCollapse(cell: cell, expandedCell: cellExpanded, indexPath: indexPath)
 		}
 		
 		object.syncCellWithValue = { (value: Double, animated: Bool) in
@@ -443,7 +439,6 @@ class PopulateTableView: FormItemVisitor {
 			weakCell?.reloadValueLabel()
 			weakCellExpanded?.setValueWithoutSync(value, animated: animated)
 		}
-		
 	}
 	
 	func visitSection(object: SectionFormItem) {
