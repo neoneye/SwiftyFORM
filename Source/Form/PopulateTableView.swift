@@ -424,14 +424,6 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		weak var weakCellExpanded = cellExpanded
-
-		model.expandCollapseAction = { (indexPath: NSIndexPath, tableView: UITableView) in // TODO: change tableview to FormTableView
-			SwiftyFormLog("expand row")
-			if let tv = tableView as? FormTableView {
-				tv.expandCollapse(cell: cell, expandedCell: cellExpanded, indexPath: indexPath)
-			}
-		}
-		
 		object.syncCellWithValue = { (value: Int, animated: Bool) in
 			SwiftyFormLog("sync value \(value)")
 			if let model = weakCell?.model {

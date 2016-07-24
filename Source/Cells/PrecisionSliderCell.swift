@@ -12,9 +12,6 @@ public class PrecisionSliderCellModel {
 		SwiftyFormLog("value \(value)")
 	}
 	
-	typealias ExpandCollapseAction = (indexPath: NSIndexPath, tableView: UITableView) -> Void
-	var expandCollapseAction: ExpandCollapseAction?
-
 	var actualValue: Double {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(value) / decimalScale
@@ -63,7 +60,13 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		model.expandCollapseAction?(indexPath: indexPath, tableView: tableView)
+		guard let tableView = tableView as? FormTableView else {
+			return
+		}
+		guard let expandedCell = expandedCell else {
+			return
+		}
+		tableView.expandCollapse(cell: self, expandedCell: expandedCell, indexPath: indexPath)
 	}
 	
 	func reloadValueLabel() {
