@@ -38,11 +38,11 @@ public enum TableViewSectionPart {
 }
 
 public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDelegate {
-	private let cells: [UITableViewCell]
+	public let cells: TableViewCellArray
 	private let headerBlock: TableViewSectionPart.CreateBlock
 	private let footerBlock: TableViewSectionPart.CreateBlock
 	
-	init(cells: [UITableViewCell], headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
+	init(cells: TableViewCellArray, headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
 		self.cells = cells
 		self.headerBlock = headerBlock
 		self.footerBlock = footerBlock
@@ -67,7 +67,11 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		return cells[indexPath.row]
+		let cell = cells[indexPath.row]
+		if let theCell = cell as? CellForRowDelegate {
+			return theCell.form_cellForRow(indexPath, tableView: tableView)
+		}
+		return cell
 	}
 	
 	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -125,7 +129,7 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 public class TableViewSectionArray : NSObject, UITableViewDataSource, UITableViewDelegate {
 	public typealias SectionType = protocol<NSObjectProtocol, UITableViewDataSource, UITableViewDelegate>
 	
-	private var sections: [SectionType]
+	public let sections: [SectionType]
 	
 	public init(sections: [SectionType]) {
 		self.sections = sections

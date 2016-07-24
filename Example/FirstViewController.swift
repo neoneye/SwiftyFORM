@@ -12,6 +12,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Change Password").viewController(ChangePasswordViewController.self)
 		builder += ViewControllerFormItem().title("Report").viewController(ReportViewController.self)
 		builder += ViewControllerFormItem().title("Rate").viewController(RateAppViewController.self)
+		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("TextField")
 		builder += ViewControllerFormItem().title("Valid & Invalid").viewController(TextFieldValidInvalidViewController.self)
@@ -31,6 +32,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Static & Attributed Text").viewController(StaticTextAndAttributedTextViewController.self)
 		builder += ViewControllerFormItem().title("Buttons").viewController(ButtonsViewController.self)
 		builder += ViewControllerFormItem().title("Sliders").viewController(SlidersViewController.self)
+		builder += ViewControllerFormItem().title("Precision Sliders").viewController(PrecisionSlidersViewController.self)
 		builder += ViewControllerFormItem().title("Segmented Controls").viewController(SegmentedControlsViewController.self)
 		builder += ViewControllerFormItem().title("Options").viewController(OptionsViewController.self)
 		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)

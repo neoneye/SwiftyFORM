@@ -42,7 +42,7 @@ struct PopulateTableViewModel {
 class PopulateTableView: FormItemVisitor {
 	let model: PopulateTableViewModel
 	
-	var cells = [UITableViewCell]()
+	var cells: TableViewCellArray = TableViewCellArray.createEmpty()
 	var sections = [TableViewSection]()
 	var headerBlock: TableViewSectionPart.CreateBlock?
 	
@@ -58,10 +58,11 @@ class PopulateTableView: FormItemVisitor {
 			headerBlock = block
 		}
 		
+		cells.reloadVisibleItems()
 		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
 		sections.append(section)
 
-		cells = [UITableViewCell]()
+		cells = TableViewCellArray.createEmpty()
 		self.headerBlock = nil
 	}
 	
@@ -393,6 +394,42 @@ class PopulateTableView: FormItemVisitor {
 			SwiftyFormLog("sync value \(value)")
 			weakCell?.setValueWithoutSync(value, animated: animated)
 			return
+		}
+	}
+	
+	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
+		let model = PrecisionSliderCellModel()
+		model.decimalPlaces = object.decimalPlaces
+		model.minimumValue = object.minimumValue
+		model.maximumValue = object.maximumValue
+		model.value = object.value
+		model.title = object.title
+
+		
+		let cell = PrecisionSliderCell(model: model)
+		let cellExpanded = PrecisionSliderCellExpanded()
+
+		cells.append(cell)
+		cells.appendHidden(cellExpanded)
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Int) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.sliderDidChange(value)
+		}
+		
+		weak var weakCell = cell
+		weak var weakCellExpanded = cellExpanded
+		object.syncCellWithValue = { (value: Int, animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			if let model = weakCell?.model {
+				model.value = value
+			}
+			weakCell?.reloadValueLabel()
+			weakCellExpanded?.setValueWithoutSync(value, animated: animated)
 		}
 	}
 	

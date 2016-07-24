@@ -47,6 +47,9 @@ class SlidersViewController: FormViewController {
 	}()
 	
 	func updateSummary() {
-		summary.value = "\(slider0.value) : \(slider1.value) : \(slider2.value)"
+		let s0 = String(format: "%.1f", slider0.value)
+		let s1 = String(format: "%.1f", slider1.value)
+		let s2 = String(format: "%.1f", slider2.value)
+		summary.value = "\(s0) , \(s1) , \(s2)"
 	}
 }
