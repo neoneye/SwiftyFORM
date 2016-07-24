@@ -34,7 +34,6 @@ class WillPopOptionViewController: WillPopCommandProtocol {
 
 struct PopulateTableViewModel {
 	var viewController: UIViewController
-	var tableView: UITableView   // TODO: change to FormTableView
 	var toolbarMode: ToolbarMode
 }
 

@@ -24,7 +24,7 @@ public class FormViewController: UIViewController {
 		populate(formBuilder)
 		title = formBuilder.navigationTitle
 		
-		dataSource = formBuilder.result(viewController: self, tableView: tableView)
+		dataSource = formBuilder.result(self)
 		self.tableView.dataSource = dataSource
 		self.tableView.delegate = dataSource
 	}
