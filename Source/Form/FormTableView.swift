@@ -35,22 +35,22 @@ public class FormTableView: UITableView {
 		var deletion = [NSIndexPath]()
 		
 		var row = 0
-		for c in section.cells.cells {
+		for item in section.cells.allItems {
 			
-			if c.cell === expandedCell {
-				if c.hidden {
-					c.hidden = false
-					section.cells.reloadVisibleCells()
+			if item.cell === expandedCell {
+				if item.hidden {
+					item.hidden = false
+					section.cells.reloadVisibleItems()
 					insertion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
 					break
 				} else {
-					c.hidden = true
-					section.cells.reloadVisibleCells()
+					item.hidden = true
+					section.cells.reloadVisibleItems()
 					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
 				}
 			}
 			
-			if c.hidden {
+			if item.hidden {
 				continue
 			}
 			row += 1

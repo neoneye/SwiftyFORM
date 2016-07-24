@@ -58,7 +58,7 @@ class PopulateTableView: FormItemVisitor {
 			headerBlock = block
 		}
 		
-		cells.reloadVisibleCells()
+		cells.reloadVisibleItems()
 		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
 		sections.append(section)
 

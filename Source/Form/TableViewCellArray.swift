@@ -2,10 +2,10 @@
 import UIKit
 
 public class TableViewCellArrayItem {
-	let cell: UITableViewCell
-	var hidden: Bool
+	public let cell: UITableViewCell
+	public var hidden: Bool
 	
-	init(cell: UITableViewCell, hidden: Bool) {
+	public init(cell: UITableViewCell, hidden: Bool) {
 		self.cell = cell
 		self.hidden = hidden
 	}
@@ -13,42 +13,42 @@ public class TableViewCellArrayItem {
 
 
 public class TableViewCellArray {
-	var cells: [TableViewCellArrayItem]
-	var visibleCells = [TableViewCellArrayItem]()
+	private(set) var allItems: [TableViewCellArrayItem]
+	private(set) var visibleItems = [TableViewCellArrayItem]()
 	
-	static func create(cells cells: [UITableViewCell]) -> TableViewCellArray {
+	public static func create(cells cells: [UITableViewCell]) -> TableViewCellArray {
 		let cellWrappers = cells.map { TableViewCellArrayItem(cell: $0, hidden: false) }
 		return TableViewCellArray(cells: cellWrappers)
 	}
 	
-	static func createEmpty() -> TableViewCellArray {
+	public static func createEmpty() -> TableViewCellArray {
 		return TableViewCellArray(cells: [])
 	}
 	
-	init(cells: [TableViewCellArrayItem]) {
-		self.cells = cells
-		reloadVisibleCells()
+	public init(cells: [TableViewCellArrayItem]) {
+		self.allItems = cells
+		reloadVisibleItems()
 	}
 	
-	func reloadVisibleCells() {
-		visibleCells = cells.filter { $0.hidden == false }
+	public func reloadVisibleItems() {
+		visibleItems = allItems.filter { $0.hidden == false }
 	}
 	
-	subscript(index: Int) -> UITableViewCell {
-		return visibleCells[index].cell
+	public subscript(index: Int) -> UITableViewCell {
+		return visibleItems[index].cell
 	}
 	
-	var count: Int {
-		return visibleCells.count
+	public var count: Int {
+		return visibleItems.count
 	}
 	
-	func append(cell: UITableViewCell) {
+	public func append(cell: UITableViewCell) {
 		let cellWrapper = TableViewCellArrayItem(cell: cell, hidden: false)
-		cells.append(cellWrapper)
+		allItems.append(cellWrapper)
 	}
 
-	func appendHidden(cell: UITableViewCell) {
+	public func appendHidden(cell: UITableViewCell) {
 		let cellWrapper = TableViewCellArrayItem(cell: cell, hidden: true)
-		cells.append(cellWrapper)
+		allItems.append(cellWrapper)
 	}
 }
