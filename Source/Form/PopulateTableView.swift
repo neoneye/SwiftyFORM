@@ -42,7 +42,7 @@ struct PopulateTableViewModel {
 class PopulateTableView: FormItemVisitor {
 	let model: PopulateTableViewModel
 	
-	var cells: SpecialArray = SpecialArray.createEmpty()
+	var cells: TableViewCellArray = TableViewCellArray.createEmpty()
 	var sections = [TableViewSection]()
 	var headerBlock: TableViewSectionPart.CreateBlock?
 	
@@ -62,7 +62,7 @@ class PopulateTableView: FormItemVisitor {
 		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
 		sections.append(section)
 
-		cells = SpecialArray.createEmpty()
+		cells = TableViewCellArray.createEmpty()
 		self.headerBlock = nil
 	}
 	

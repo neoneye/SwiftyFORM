@@ -30,7 +30,7 @@
 		4262DF971B34824E00DC2083 /* SwiftFORMImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4262DF961B34824E00DC2083 /* SwiftFORMImages.xcassets */; };
 		42685D4B1D34039B008ABC3D /* PrecisionSliderFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D4A1D34039B008ABC3D /* PrecisionSliderFormItem.swift */; };
 		42685D4D1D340733008ABC3D /* PrecisionSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D4C1D340733008ABC3D /* PrecisionSliderCell.swift */; };
-		42685D4F1D340D99008ABC3D /* SpecialArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D4E1D340D99008ABC3D /* SpecialArray.swift */; };
+		42685D4F1D340D99008ABC3D /* TableViewCellArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D4E1D340D99008ABC3D /* TableViewCellArray.swift */; };
 		4286832C1B346CFE0028DB2F /* SwiftyFORM.h in Headers */ = {isa = PBXBuildFile; fileRef = 428682F71B346CFE0028DB2F /* SwiftyFORM.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4286832E1B346CFE0028DB2F /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428682FA1B346CFE0028DB2F /* ButtonCell.swift */; };
 		4286832F1B346CFE0028DB2F /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428682FB1B346CFE0028DB2F /* DatePickerCell.swift */; };
@@ -123,7 +123,7 @@
 		4262DF961B34824E00DC2083 /* SwiftFORMImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SwiftFORMImages.xcassets; sourceTree = "<group>"; };
 		42685D4A1D34039B008ABC3D /* PrecisionSliderFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSliderFormItem.swift; sourceTree = "<group>"; };
 		42685D4C1D340733008ABC3D /* PrecisionSliderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSliderCell.swift; sourceTree = "<group>"; };
-		42685D4E1D340D99008ABC3D /* SpecialArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialArray.swift; sourceTree = "<group>"; };
+		42685D4E1D340D99008ABC3D /* TableViewCellArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellArray.swift; sourceTree = "<group>"; };
 		428682F71B346CFE0028DB2F /* SwiftyFORM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyFORM.h; sourceTree = "<group>"; };
 		428682FA1B346CFE0028DB2F /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		428682FB1B346CFE0028DB2F /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 				428683141B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift */,
 				4286830E1B346CFE0028DB2F /* SelectOptionDelegate.swift */,
 				4286830A1B346CFE0028DB2F /* SelectRowDelegate.swift */,
-				42685D4E1D340D99008ABC3D /* SpecialArray.swift */,
+				42685D4E1D340D99008ABC3D /* TableViewCellArray.swift */,
 				428683101B346CFE0028DB2F /* TableViewSection.swift */,
 				428683151B346CFE0028DB2F /* TitleWidth.swift */,
 				428683161B346CFE0028DB2F /* ValidateResult.swift */,
@@ -525,7 +525,7 @@
 				4286834D1B346CFE0028DB2F /* CountSpecification.swift in Sources */,
 				428683481B346CFE0028DB2F /* TitleWidth.swift in Sources */,
 				428683441B346CFE0028DB2F /* Validator.swift in Sources */,
-				42685D4F1D340D99008ABC3D /* SpecialArray.swift in Sources */,
+				42685D4F1D340D99008ABC3D /* TableViewCellArray.swift in Sources */,
 				42108D1C1B34E9F60067FEAA /* SectionFormItem.swift in Sources */,
 				428683551B346CFE0028DB2F /* KeyboardHandler.swift in Sources */,
 				4286833D1B346CFE0028DB2F /* SelectRowDelegate.swift in Sources */,
