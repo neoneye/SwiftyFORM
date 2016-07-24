@@ -13,7 +13,7 @@ public class FormTableView: UITableView {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func expandCollapse(cell cell: PrecisionSliderCell, expandedCell: PrecisionSliderCellExpanded, indexPath: NSIndexPath) {
+	public func expandCollapse(expandedCell expandedCell: UITableViewCell, indexPath: NSIndexPath) {
 		guard let dataSource = dataSource as? TableViewSectionArray else {
 			SwiftyFormLog("cannot expand row. The dataSource is nil")
 			return

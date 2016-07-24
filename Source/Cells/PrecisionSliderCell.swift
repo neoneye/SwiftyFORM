@@ -66,7 +66,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		guard let expandedCell = expandedCell else {
 			return
 		}
-		tableView.expandCollapse(cell: self, expandedCell: expandedCell, indexPath: indexPath)
+		tableView.expandCollapse(expandedCell: expandedCell, indexPath: indexPath)
 	}
 	
 	func reloadValueLabel() {
