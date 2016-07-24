@@ -17,6 +17,7 @@ public protocol FormItemVisitor {
 	func visitSwitch(object: SwitchFormItem)
 	func visitStepper(object: StepperFormItem)
 	func visitSlider(object: SliderFormItem)
+	func visitPrecisionSlider(object: PrecisionSliderFormItem)
 	func visitSection(object: SectionFormItem)
 	func visitSectionHeaderTitle(object: SectionHeaderTitleFormItem)
 	func visitSectionHeaderView(object: SectionHeaderViewFormItem)
