@@ -6,7 +6,9 @@ class ColorPickerViewController: FormViewController {
 	override func populate(builder: FormBuilder) {
 		builder.navigationTitle = "Color picker"
 		builder.toolbarMode = .None
-		
+
+		builder.demo_showInfo("Tap row to expand/collapse.\nPinch to change precision.\nPan to change value.")
+
 		builder += SectionHeaderTitleFormItem().title("Components")
 		builder += slider0
 		builder += slider1
@@ -22,7 +24,7 @@ class ColorPickerViewController: FormViewController {
 	}
 	
 	lazy var slider0: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().decimalPlaces(4).minimumValue(0).maximumValue(10000).value(5000)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Red"
 		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
@@ -32,7 +34,7 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	lazy var slider1: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().decimalPlaces(4).minimumValue(0).maximumValue(10000).value(5000)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Green"
 		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
@@ -42,7 +44,7 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	lazy var slider2: PrecisionSliderFormItem = {
-		let instance = PrecisionSliderFormItem().decimalPlaces(4).minimumValue(0).maximumValue(10000).value(5000)
+		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)
 		instance.title = "Blue"
 		instance.sliderDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
@@ -57,9 +59,9 @@ class ColorPickerViewController: FormViewController {
 	}()
 	
 	func updateSummary() {
-		let s0 = String(format: "%.4f", slider0.actualValue)
-		let s1 = String(format: "%.4f", slider1.actualValue)
-		let s2 = String(format: "%.4f", slider2.actualValue)
+		let s0 = String(format: "%.3f", slider0.actualValue)
+		let s1 = String(format: "%.3f", slider1.actualValue)
+		let s2 = String(format: "%.3f", slider2.actualValue)
 		summary.value = "\(s0) , \(s1) , \(s2)"
 	}
 	
