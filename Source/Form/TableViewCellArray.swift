@@ -17,16 +17,16 @@ public class TableViewCellArray {
 	private(set) var visibleItems = [TableViewCellArrayItem]()
 	
 	public static func create(cells cells: [UITableViewCell]) -> TableViewCellArray {
-		let cellWrappers = cells.map { TableViewCellArrayItem(cell: $0, hidden: false) }
-		return TableViewCellArray(cells: cellWrappers)
+		let items = cells.map { TableViewCellArrayItem(cell: $0, hidden: false) }
+		return TableViewCellArray(allItems: items)
 	}
 	
 	public static func createEmpty() -> TableViewCellArray {
-		return TableViewCellArray(cells: [])
+		return TableViewCellArray(allItems: [])
 	}
 	
-	public init(cells: [TableViewCellArrayItem]) {
-		self.allItems = cells
+	public init(allItems: [TableViewCellArrayItem]) {
+		self.allItems = allItems
 		reloadVisibleItems()
 	}
 	
@@ -43,12 +43,12 @@ public class TableViewCellArray {
 	}
 	
 	public func append(cell: UITableViewCell) {
-		let cellWrapper = TableViewCellArrayItem(cell: cell, hidden: false)
-		allItems.append(cellWrapper)
+		let item = TableViewCellArrayItem(cell: cell, hidden: false)
+		allItems.append(item)
 	}
 
 	public func appendHidden(cell: UITableViewCell) {
-		let cellWrapper = TableViewCellArrayItem(cell: cell, hidden: true)
-		allItems.append(cellWrapper)
+		let item = TableViewCellArrayItem(cell: cell, hidden: true)
+		allItems.append(item)
 	}
 }
