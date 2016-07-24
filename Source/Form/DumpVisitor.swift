@@ -189,6 +189,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 		dict["minimumValue"] = object.minimumValue
 		dict["maximumValue"] = object.maximumValue
+		dict["decimalPlaces"] = object.decimalPlaces
 	}
 	
 	public func visitSection(object: SectionFormItem) {
