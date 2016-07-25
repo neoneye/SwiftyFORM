@@ -64,7 +64,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
-		var result = Double(midX) / scale + model.minimumValue
+		var result = Double(midX) / scale + model.minimumValue - 0.5
 		if result < model.minimumValue {
 			result = model.minimumValue
 		}
@@ -88,7 +88,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			clampedValue = model.maximumValue
 		}
 		
-		let valueAdjusted = clampedValue - model.minimumValue
+		let valueAdjusted = clampedValue - model.minimumValue + 0.5
 		let contentInsetLet = Double(collectionView.contentInset.left)
 		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
 		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")

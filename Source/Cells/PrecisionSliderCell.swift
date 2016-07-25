@@ -120,7 +120,7 @@ extension PrecisionSliderCellModel {
 			instance.sizeOfPartialItemAfter = 0
 			return instance
 		}
-		instance.numberOfFullItems = count
+		instance.numberOfFullItems = count + 1
 
 		let sizeBefore = ceil(minimumValue) - minimumValue
 		//print("size before: \(sizeBefore)    \(minimumValue)")
