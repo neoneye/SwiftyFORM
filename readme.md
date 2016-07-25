@@ -47,6 +47,23 @@ Then, run the following command:
 $ pod install
 ```
 
+### Carthage
+
+To integrate SwiftForms into your Xcode project using Carthage, specify it in your `Cartfile`:
+```
+github "neoneye/SwiftyFORM" ~> 0.9
+```
+
+Then, run the following command:
+```bash
+$ carthage update
+```
+
+Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/Build/iOS/`) to your project's _Linked Frameworks and Libraries_ in the _General_ tab, and add a new _Run Script_ Build Phase:
+- Set `/bin/bash` as the shell
+- write `/usr/local/bin/carthage copy-frameworks` in the script body
+- add `$(SRCROOT)/Carthage/Build/iOS/SwiftyFORM.framework` to the input files 
+
 ## Usage
 
 ### Change password form
