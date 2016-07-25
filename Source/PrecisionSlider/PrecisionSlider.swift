@@ -363,11 +363,11 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	
 	func commonInit() {
 		backgroundColor = UIColor.whiteColor()
-		addSubview(leftBorder)
+		addSubview(mark)
 		addSubview(label)
 	}
 	
-	lazy var leftBorder: UIView = {
+	lazy var mark: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor.blackColor()
 		return instance
@@ -381,13 +381,15 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		leftBorder.frame = CGRect(x: 0, y: 0, width: 1, height: bounds.height)
+		let midX = floor(bounds.midX)
+		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 		let labelHidden = self.bounds.width < 30
 		label.hidden = labelHidden
 		
 		label.sizeToFit()
 		let labelFrame = label.frame
-		label.frame = CGRect(x: 7, y: 5, width: bounds.width - 10, height: labelFrame.height)
+		let labelX = round(midX - labelFrame.width / 2)
+		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
 	}
 }
