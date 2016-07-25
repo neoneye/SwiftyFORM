@@ -220,6 +220,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if model.markers == 1 {
 			let displayValue = index % 10
 			cell.label.text = String(displayValue)
+
+			cell.mark.backgroundColor = UIColor.blackColor()
 		}
 		if model.markers == 2 {
 			if index % 2 == 0 {
@@ -229,14 +231,28 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			} else {
 				cell.label.text = nil
 			}
+			if index % 2 == 0 {
+				cell.mark.backgroundColor = UIColor.blackColor()
+			} else {
+				cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+			}
 		}
-		if model.markers == 4 {
-			if index % 4 == 0 {
-				let adjustedIndex = index / 4
+		if model.markers == 10 {
+			if index % 10 == 0 {
+				let adjustedIndex = index / 10
 				let displayValue = adjustedIndex % 10
 				cell.label.text = String(displayValue)
 			} else {
 				cell.label.text = nil
+			}
+			if index % 10 == 0 {
+				cell.mark.backgroundColor = UIColor.blackColor()
+			} else {
+				if abs(index % 10) == 5 {
+					cell.mark.backgroundColor = UIColor.blackColor()
+				} else {
+					cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+				}
 			}
 		}
 		if Constants.alternatingBackgroundColors {
@@ -302,8 +318,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var markers = 1
 	
 	func updateRange() {
-		if scale > 200 {
-			markers = 4
+		if scale > 250 {
+			markers = 10
 		} else {
 			if scale > 100 {
 				markers = 2
@@ -492,7 +508,7 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 		let labelHidden = self.bounds.width < 30
-		label.hidden = labelHidden
+//		label.hidden = labelHidden
 		
 		label.sizeToFit()
 		let labelFrame = label.frame
