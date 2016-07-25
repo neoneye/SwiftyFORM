@@ -131,7 +131,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				scale = 0.01
 			}
 			model.scale = scale
+			let markersBefore = model.markers
+			model.updateRange()
+			let markersAfter = model.markers
 			updateContentInset()
+			
+			if markersBefore != markersAfter {
+				collectionView.reloadData()
+			}
 			
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
@@ -269,7 +276,26 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 	
+	var originalMaximumValue: Double = 0.0
+	var originalMinimumValue: Double = 100.0
+	
+	var markers = 1
+	
 	func updateRange() {
+		if scale > 200 {
+			markers = 4
+		} else {
+			if scale > 100 {
+				markers = 2
+			} else {
+				markers = 1
+			}
+		}
+//		print("!!!!!!!! \(markers)  \(scale)")
+		
+		maximumValue = originalMaximumValue * Double(markers)
+		minimumValue = originalMinimumValue * Double(markers)
+		
 		let count = Int(floor(maximumValue) - ceil(minimumValue))
 		if count < 0 {
 			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
@@ -299,6 +325,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			hasPartialItemAfter = true
 			sizeOfPartialItemAfter = sizeAfter
 		}
+		
+//		print("model: \(self)")
 	}
 	
 	/*
@@ -341,7 +369,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var scale: Double = 60.0
 	
 	var lengthOfFullItem: Double {
-		let result = ceil(scale)
+		let result = ceil(scale / Double(markers))
 		if result < 0.1 {
 			return 0.1
 		}

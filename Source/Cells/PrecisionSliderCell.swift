@@ -98,8 +98,8 @@ extension PrecisionSliderCellModel {
 		let maximumValue = Double(self.maximumValue) / decimalScale
 		
 		let instance = PrecisionSlider_InnerModel()
-		instance.minimumValue = minimumValue
-		instance.maximumValue = maximumValue
+		instance.originalMinimumValue = minimumValue
+		instance.originalMaximumValue = maximumValue
 		
 		let rangeLength = maximumValue - minimumValue
 		if sliderWidthInPixels > 10 && rangeLength > 0.001 {
