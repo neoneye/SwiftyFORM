@@ -21,8 +21,9 @@ SwiftyFORM is a form framework for iOS written in Swift.
 - Xcode7.3.1 (7D1014)
 - iOS 9
 
-## Installation
-### CocoaPods
+# INSTALLATION
+
+## CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
 
@@ -48,7 +49,9 @@ Then, run the following command:
 $ pod install
 ```
 
-### Carthage
+## Carthage
+
+[Link to demo project that shows a minimal SwiftyFORM app using Carthage](https://github.com/neoneye/SwiftyFORM-Carthage-Example).
 
 To integrate SwiftForms into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
@@ -65,7 +68,8 @@ Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/B
 - write `/usr/local/bin/carthage copy-frameworks` in the script body
 - add `$(SRCROOT)/Carthage/Build/iOS/SwiftyFORM.framework` to the input files 
 
-## Usage
+
+# USAGE
 
 ### Change password form
 
@@ -121,6 +125,6 @@ class ChangePasswordViewController: FormViewController {
 ```
 
 
-## License
+# MIT LICENSE
 
 SwiftyFORM is released under the MIT license. See LICENSE for details.
