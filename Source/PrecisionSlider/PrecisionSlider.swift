@@ -187,10 +187,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
 		
 		let index = Int(floor(model.minimumValue)) + indexPath.row
-		var displayValue = index % 10
-		if displayValue < 0 {
-			displayValue += 10
-		}
+		let displayValue = index % 10
 		cell.label.text = String(displayValue)
 		return cell
 	}
