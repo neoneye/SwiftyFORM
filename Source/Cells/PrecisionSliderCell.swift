@@ -107,37 +107,8 @@ extension PrecisionSliderCellModel {
 		} else {
 			instance.scale = 10
 		}
-		
-		let count = Int(floor(maximumValue) - ceil(minimumValue))
-		if count < 0 {
-			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
-			instance.numberOfFullItems = 0
-			instance.hasOnePartialItem = true
-			instance.sizeOfOnePartialItem = maximumValue - minimumValue
-			instance.hasPartialItemBefore = false
-			instance.sizeOfPartialItemBefore = 0
-			instance.hasPartialItemAfter = false
-			instance.sizeOfPartialItemAfter = 0
-			return instance
-		}
-		instance.numberOfFullItems = count + 1
 
-		let sizeBefore = ceil(minimumValue) - minimumValue
-		//print("size before: \(sizeBefore)    \(minimumValue)")
-		if sizeBefore > 0.0000001 {
-			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
-			instance.hasPartialItemBefore = true
-			instance.sizeOfPartialItemBefore = sizeBefore
-		}
-
-		let sizeAfter = maximumValue - floor(maximumValue)
-		//print("size after: \(sizeAfter)    \(maximumValue)")
-		if sizeAfter > 0.0000001 {
-			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
-			instance.hasPartialItemAfter = true
-			instance.sizeOfPartialItemAfter = sizeAfter
-		}
-		
+		instance.updateRange()
 		return instance
 	}
 }

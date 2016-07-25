@@ -269,6 +269,38 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 	
+	func updateRange() {
+		let count = Int(floor(maximumValue) - ceil(minimumValue))
+		if count < 0 {
+			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
+			numberOfFullItems = 0
+			hasOnePartialItem = true
+			sizeOfOnePartialItem = maximumValue - minimumValue
+			hasPartialItemBefore = false
+			sizeOfPartialItemBefore = 0
+			hasPartialItemAfter = false
+			sizeOfPartialItemAfter = 0
+			return
+		}
+		numberOfFullItems = count + 1
+		
+		let sizeBefore = ceil(minimumValue) - minimumValue
+		//print("size before: \(sizeBefore)    \(minimumValue)")
+		if sizeBefore > 0.0000001 {
+			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
+			hasPartialItemBefore = true
+			sizeOfPartialItemBefore = sizeBefore
+		}
+		
+		let sizeAfter = maximumValue - floor(maximumValue)
+		//print("size after: \(sizeAfter)    \(maximumValue)")
+		if sizeAfter > 0.0000001 {
+			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
+			hasPartialItemAfter = true
+			sizeOfPartialItemAfter = sizeAfter
+		}
+	}
+	
 	/*
 	This is used when the range is tiny and doesn't cross any integer boundary.
 	Example of such a range: from min=0.4 to max=0.6
