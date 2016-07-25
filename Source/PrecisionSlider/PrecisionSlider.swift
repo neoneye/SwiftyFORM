@@ -6,6 +6,10 @@ one-finger pan to adjust slider
 two-finger pinch to adjust zoom
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+	struct Constants {
+		static let alternatingBackgroundColors = false
+	}
+	
 	var originalScale: Double = 1.0
 	var originalValue: Double?
 	
@@ -197,6 +201,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let index = Int(floor(model.minimumValue)) + indexPath.row
 		let displayValue = index % 10
 		cell.label.text = String(displayValue)
+		if Constants.alternatingBackgroundColors {
+			if index % 2 == 0 {
+				cell.backgroundColor = UIColor(red: 0.8, green: 0.9, blue: 0.9, alpha: 1.0)
+			} else {
+				cell.backgroundColor = UIColor(red: 0.4, green: 0.9, blue: 0.9, alpha: 1.0)
+			}
+		}
 		return cell
 	}
 	
