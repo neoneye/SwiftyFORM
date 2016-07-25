@@ -7,7 +7,7 @@ two-finger pinch to adjust zoom
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	struct Constants {
-		static let alternatingBackgroundColors = true
+		static let alternatingBackgroundColors = false
 	}
 	
 	var originalScale: Double = 1.0
@@ -217,8 +217,28 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
 		
 		let index = Int(floor(model.minimumValue)) + indexPath.row
-		let displayValue = index % 10
-		cell.label.text = String(displayValue)
+		if model.markers == 1 {
+			let displayValue = index % 10
+			cell.label.text = String(displayValue)
+		}
+		if model.markers == 2 {
+			if index % 2 == 0 {
+				let adjustedIndex = index / 2
+				let displayValue = adjustedIndex % 10
+				cell.label.text = String(displayValue)
+			} else {
+				cell.label.text = nil
+			}
+		}
+		if model.markers == 4 {
+			if index % 4 == 0 {
+				let adjustedIndex = index / 4
+				let displayValue = adjustedIndex % 10
+				cell.label.text = String(displayValue)
+			} else {
+				cell.label.text = nil
+			}
+		}
 		if Constants.alternatingBackgroundColors {
 			if index % 2 == 0 {
 				cell.backgroundColor = UIColor(red: 0.8, green: 0.9, blue: 0.9, alpha: 1.0)
