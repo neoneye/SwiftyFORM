@@ -7,7 +7,7 @@ two-finger pinch to adjust zoom
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	struct Constants {
-		static let alternatingBackgroundColors = false
+		static let alternatingBackgroundColors = true
 	}
 	
 	var originalScale: Double = 1.0
@@ -169,6 +169,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
+		instance.registerClass(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewCell.identifier)
 		instance.contentInset = UIEdgeInsetsZero
 		instance.delegate = self
@@ -196,6 +197,16 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
+		if indexPath.row == count - 1 {
+			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
+			
+			let index = Int(floor(model.minimumValue)) + indexPath.row
+			let displayValue = index % 10
+			cell.label.text = String(displayValue)
+			cell.backgroundColor = UIColor.redColor()
+			return cell
+		}
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
 		
 		let index = Int(floor(model.minimumValue)) + indexPath.row
@@ -366,6 +377,52 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 
 class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	static let identifier = "cell"
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func commonInit() {
+		backgroundColor = UIColor.whiteColor()
+		addSubview(mark)
+		addSubview(label)
+	}
+	
+	lazy var mark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var label: UILabel = {
+		let instance = UILabel()
+		instance.text = "0"
+		return instance
+	}()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		let midX = floor(bounds.midX)
+		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
+		
+		let labelHidden = self.bounds.width < 30
+		label.hidden = labelHidden
+		
+		label.sizeToFit()
+		let labelFrame = label.frame
+		let labelX = round(midX - labelFrame.width / 2)
+		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
+	}
+}
+
+class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
+	static let identifier = "last_cell"
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
