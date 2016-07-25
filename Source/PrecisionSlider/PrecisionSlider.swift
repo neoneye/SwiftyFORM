@@ -255,6 +255,20 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				}
 			}
 		}
+		if model.markers == 20 {
+			if index % 20 == 0 {
+				let adjustedIndex = index / 20
+				let displayValue = adjustedIndex % 10
+				cell.label.text = String(displayValue)
+			} else {
+				cell.label.text = nil
+			}
+			if index % 2 == 0 {
+				cell.mark.backgroundColor = UIColor.blackColor()
+			} else {
+				cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+			}
+		}
 		if Constants.alternatingBackgroundColors {
 			if index % 2 == 0 {
 				cell.backgroundColor = UIColor(red: 0.8, green: 0.9, blue: 0.9, alpha: 1.0)
@@ -318,13 +332,17 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var markers = 1
 	
 	func updateRange() {
-		if scale > 250 {
-			markers = 10
+		if scale > 800 {
+			markers = 20
 		} else {
-			if scale > 100 {
-				markers = 2
+			if scale > 250 {
+				markers = 10
 			} else {
-				markers = 1
+				if scale > 100 {
+					markers = 2
+				} else {
+					markers = 1
+				}
 			}
 		}
 //		print("!!!!!!!! \(markers)  \(scale)")
