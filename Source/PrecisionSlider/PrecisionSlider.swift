@@ -31,12 +31,19 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addGestureRecognizer(pinchGestureRecognizer)
 	}
 	
+	func updateContentInset() {
+		let scale = CGFloat(model.lengthOfFullItem)
+		let halfWidth = round(bounds.width/2)
+		let halfScale = round(scale / 2)
+		let inset = halfWidth - halfScale
+		collectionView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+	}
+	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		collectionView.frame = bounds
 		
-		let halfWidth = round(bounds.width/2)-1
-		collectionView.contentInset = UIEdgeInsets(top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+		updateContentInset()
 		
 		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
 		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
@@ -64,7 +71,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
-		var result = Double(midX) / scale + model.minimumValue - 0.5
+		var result = Double(midX) / scale + model.minimumValue
 		if result < model.minimumValue {
 			result = model.minimumValue
 		}
@@ -88,7 +95,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			clampedValue = model.maximumValue
 		}
 		
-		let valueAdjusted = clampedValue - model.minimumValue + 0.5
+		let valueAdjusted = clampedValue - model.minimumValue
 		let contentInsetLet = Double(collectionView.contentInset.left)
 		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
 		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")
@@ -120,6 +127,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				scale = 0.01
 			}
 			model.scale = scale
+			updateContentInset()
 			
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
