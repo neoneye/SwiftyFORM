@@ -53,7 +53,7 @@ $ pod install
 
 [Link to demo project that shows a minimal SwiftyFORM app using Carthage](https://github.com/neoneye/SwiftyFORM-Carthage-Example).
 
-To integrate SwiftForms into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
 github "neoneye/SwiftyFORM" ~> 0.9
 ```
