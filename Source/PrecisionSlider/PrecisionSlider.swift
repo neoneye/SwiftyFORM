@@ -411,6 +411,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			hasPartialItemBefore = true
 			sizeOfPartialItemBefore = sizeBefore
 			numberOfFullItems -= 1
+		} else {
+			hasPartialItemBefore = false
+			sizeOfPartialItemBefore = 0
 		}
 		
 		let sizeAfter = maximumValue - floor(maximumValue)
@@ -420,6 +423,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			hasPartialItemAfter = true
 			sizeOfPartialItemAfter = sizeAfter
 			numberOfFullItems -= 1
+		} else {
+			hasPartialItemAfter = false
+			sizeOfPartialItemAfter = 0
 		}
 		
 		// TODO: deal with negative number of full items
@@ -497,6 +503,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	var debugDescription: String {
 		var strings = [String]()
+		strings.append("markers: \(markers)")
+		strings.append(String(format: "scale: %.5f", scale))
 		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
