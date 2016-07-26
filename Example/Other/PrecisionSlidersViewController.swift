@@ -21,10 +21,13 @@ class PrecisionSlidersViewController: FormViewController {
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-750).maximumValue(750).value(0).title("D -0.75 0.75")
 
 		builder += SectionHeaderTitleFormItem().title("Partial & full, mixed")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_100).maximumValue(6_000).value(2_000).title("D 1.1 6.0")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_400).maximumValue(6_000).value(2_000).title("D 1.4 6.0")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_600).maximumValue(6_000).value(2_000).title("D 1.6 6.0")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_900).maximumValue(6_000).value(2_000).title("D 1.9 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(4_100).value(4_000).title("D 0 4.1")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(4_400).value(4_000).title("D 0 4.4")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(4_600).value(4_000).title("D 0 4.6")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(4_900).value(4_000).title("D 0 4.9")
+
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_400).maximumValue(4_400).value(4_000).title("D 1.4 4.4")
+		
 		//		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(3_141).value(1_570).title("D 0 PI")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(3_600).value(3_000).title("D 0 3.6")
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-100_000).maximumValue(100_000).value(-100_000).title("A -100 100")
@@ -35,6 +38,12 @@ class PrecisionSlidersViewController: FormViewController {
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_000).maximumValue(1_000).value(0).title("F -1 1")
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-2_666).maximumValue(2_666).value(-2_000).title("G -2.666 2.666")
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-5_220).maximumValue(5_220).value(0).title("H -5.22 5.22")
+
+		builder += SectionHeaderTitleFormItem().title("First cell")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_100).maximumValue(6_000).value(2_000).title("D 1.1 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_400).maximumValue(6_000).value(2_000).title("D 1.4 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_600).maximumValue(6_000).value(2_000).title("D 1.6 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_900).maximumValue(6_000).value(2_000).title("D 1.9 6.0")
 
 		builder += SectionHeaderTitleFormItem().title("Partial & full, positive")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(255_000).value(255_000).title("A 0 255")

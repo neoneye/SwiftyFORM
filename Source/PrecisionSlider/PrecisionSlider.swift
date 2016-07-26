@@ -38,12 +38,15 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	func updateContentInset() {
 		let halfWidth = round(bounds.width/2)
 		let inset = halfWidth - round(CGFloat(model.lengthOfFullItem) / 2)
+		var insetLeft = inset
+		var insetRight = inset
 		if model.hasPartialItemBefore {
-			let insetLeft = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemBefore)
-			collectionView.contentInset = UIEdgeInsets(top: 0, left: insetLeft, bottom: 0, right: inset)
-			return
+			insetLeft = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemBefore)
 		}
-		collectionView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+		if model.hasPartialItemAfter {
+			insetRight = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemAfter)
+		}
+		collectionView.contentInset = UIEdgeInsets(top: 0, left: insetLeft, bottom: 0, right: insetRight)
 	}
 	
 	override func layoutSubviews() {
@@ -298,6 +301,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
+			cell.configure(model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
 			return cell
 		}
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
@@ -339,7 +343,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if row >= model.numberOfFullItems {
 			if model.hasPartialItemAfter {
 				let size = CGSize(
-					width: CGFloat(model.lengthOfPartialItemAfter),
+					width: CGFloat(model.lengthOfFullItem * 2),
 					height: PrecisionSlider_InnerModel.height
 				)
 				//print("size for partial-after \(indexPath.row) \(size.width)")
@@ -415,7 +419,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
 			hasPartialItemAfter = true
 			sizeOfPartialItemAfter = sizeAfter
+			numberOfFullItems -= 1
 		}
+		
+		// TODO: deal with negative number of full items
 		
 //		print("model: \(self)")
 	}
@@ -523,7 +530,7 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 		}
 		length += model.lengthOfAllFullItems
 		if model.hasPartialItemAfter {
-			length += model.lengthOfPartialItemAfter
+			length += model.lengthOfFullItem * 2
 		}
 		
 		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
@@ -562,15 +569,15 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		let midX = floor(bounds.midX)
-		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
+		let markX = floor(bounds.midX)
+		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 //		let labelHidden = self.bounds.width < 30
 //		label.hidden = labelHidden
 		
 		label.sizeToFit()
 		let labelFrame = label.frame
-		let labelX = round(midX - labelFrame.width / 2)
+		let labelX = round(markX - labelFrame.width / 2)
 		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
 	}
 }
@@ -624,19 +631,19 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		let midX = bounds.maxX - CGFloat(floor(fullLength / 2))
-		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
+		let markX = bounds.maxX - CGFloat(floor(fullLength / 2))
+		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 		let labelHidden = self.bounds.width < 30
 		label.hidden = labelHidden
 		
 		label.sizeToFit()
 		let labelFrame = label.frame
-		let labelX = round(midX - labelFrame.width / 2)
+		let labelX = round(markX - labelFrame.width / 2)
 		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
 		
-		let midX2 = bounds.maxX - CGFloat(floor(fullLength / 2 + partialLength))
-		partialMark.frame = CGRect(x: midX2, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
+		let partialMarkX = bounds.maxX - CGFloat(floor(fullLength / 2 + partialLength))
+		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
 	}
 }
 
@@ -656,10 +663,17 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	func commonInit() {
 		backgroundColor = UIColor.redColor()
 		addSubview(mark)
+		addSubview(partialMark)
 		addSubview(label)
 	}
 	
 	lazy var mark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var partialMark: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor.blackColor()
 		return instance
@@ -671,17 +685,29 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 		return instance
 	}()
 	
+	private var partialLength: Double = 0.0
+	private var fullLength: Double = 0.0
+	
+	func configure(partialLength: Double, fullLength: Double) {
+		self.partialLength = partialLength
+		self.fullLength = fullLength
+		setNeedsLayout()
+	}
+	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		let midX = floor(bounds.midX)
-		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
+		let markX = CGFloat(floor(fullLength / 2))
+		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 		let labelHidden = self.bounds.width < 30
 		label.hidden = labelHidden
 		
 		label.sizeToFit()
 		let labelFrame = label.frame
-		let labelX = round(midX - labelFrame.width / 2)
+		let labelX = round(markX - labelFrame.width / 2)
 		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
+		
+		let partialMarkX = CGFloat(floor(fullLength / 2 + partialLength))
+		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
 	}
 }
