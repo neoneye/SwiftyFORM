@@ -177,6 +177,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
+		instance.registerClass(PrecisionSlider_InnerCollectionViewFirstCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewCell.identifier)
 		instance.contentInset = UIEdgeInsetsZero
@@ -204,73 +205,92 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return count
 	}
 	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
-		if indexPath.row == count - 1 {
-			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
-			
-			let index = Int(floor(model.minimumValue)) + indexPath.row
-			let displayValue = index % 10
-			cell.label.text = String(displayValue)
-			cell.backgroundColor = UIColor.redColor()
-			return cell
-		}
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
-		
+	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
 		let index = Int(floor(model.minimumValue)) + indexPath.row
 		if model.markers == 1 {
 			let displayValue = index % 10
-			cell.label.text = String(displayValue)
+			return String(displayValue)
+		}
+		if model.markers == 2 {
+			if index % 2 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 2
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		if model.markers == 10 {
+			if index % 10 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 10
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		if model.markers == 20 {
+			if index % 20 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 20
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		return nil
+	}
 
-			cell.mark.backgroundColor = UIColor.blackColor()
+	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
+		let index = Int(floor(model.minimumValue)) + indexPath.row
+		if model.markers == 1 {
+			return UIColor.blackColor()
 		}
 		if model.markers == 2 {
 			if index % 2 == 0 {
-				let adjustedIndex = index / 2
-				let displayValue = adjustedIndex % 10
-				cell.label.text = String(displayValue)
+				return UIColor.blackColor()
 			} else {
-				cell.label.text = nil
-			}
-			if index % 2 == 0 {
-				cell.mark.backgroundColor = UIColor.blackColor()
-			} else {
-				cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+				return UIColor(white: 0.8, alpha: 1.0)
 			}
 		}
 		if model.markers == 10 {
 			if index % 10 == 0 {
-				let adjustedIndex = index / 10
-				let displayValue = adjustedIndex % 10
-				cell.label.text = String(displayValue)
-			} else {
-				cell.label.text = nil
+				return UIColor.blackColor()
 			}
-			if index % 10 == 0 {
-				cell.mark.backgroundColor = UIColor.blackColor()
+			if abs(index % 10) == 5 {
+				return UIColor.blackColor()
 			} else {
-				if abs(index % 10) == 5 {
-					cell.mark.backgroundColor = UIColor.blackColor()
-				} else {
-					cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-				}
+				return UIColor(white: 0.8, alpha: 1.0)
 			}
 		}
 		if model.markers == 20 {
-			if index % 20 == 0 {
-				let adjustedIndex = index / 20
-				let displayValue = adjustedIndex % 10
-				cell.label.text = String(displayValue)
-			} else {
-				cell.label.text = nil
-			}
 			if index % 2 == 0 {
-				cell.mark.backgroundColor = UIColor.blackColor()
+				return UIColor.blackColor()
 			} else {
-				cell.mark.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+				return UIColor(white: 0.8, alpha: 1.0)
 			}
 		}
+		return nil
+	}
+	
+	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		let labelText: String? = labelTextForIndexPath(indexPath)
+		let markColor: UIColor? = markColorForIndexPath(indexPath)
+		
+		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
+		if indexPath.row == 0 {
+			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFirstCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
+			cell.label.text = labelText
+			return cell
+		}
+		if indexPath.row == count - 1 {
+			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
+			cell.label.text = labelText
+			return cell
+		}
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
+		cell.label.text = labelText
+		cell.mark.backgroundColor = markColor
+
 		if Constants.alternatingBackgroundColors {
+			let index = Int(floor(model.minimumValue)) + indexPath.row
 			if index % 2 == 0 {
 				cell.backgroundColor = UIColor(red: 0.8, green: 0.9, blue: 0.9, alpha: 1.0)
 			} else {
@@ -535,6 +555,52 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	}
 }
 
+class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
+	static let identifier = "first_cell"
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func commonInit() {
+		backgroundColor = UIColor.greenColor()
+		addSubview(mark)
+		addSubview(label)
+	}
+	
+	lazy var mark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var label: UILabel = {
+		let instance = UILabel()
+		instance.text = "0"
+		return instance
+	}()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+		let midX = floor(bounds.midX)
+		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
+		
+		let labelHidden = self.bounds.width < 30
+		label.hidden = labelHidden
+		
+		label.sizeToFit()
+		let labelFrame = label.frame
+		let labelX = round(midX - labelFrame.width / 2)
+		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
+	}
+}
+
 class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	static let identifier = "last_cell"
 	
@@ -549,7 +615,7 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		backgroundColor = UIColor.whiteColor()
+		backgroundColor = UIColor.redColor()
 		addSubview(mark)
 		addSubview(label)
 	}
