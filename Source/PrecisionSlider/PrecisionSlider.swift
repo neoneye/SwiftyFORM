@@ -173,7 +173,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
 		instance.showsHorizontalScrollIndicator = false
 		instance.showsVerticalScrollIndicator = false
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.whiteColor()
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
@@ -504,7 +504,6 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		backgroundColor = UIColor.whiteColor()
 		addSubview(mark)
 		addSubview(label)
 	}
