@@ -284,14 +284,17 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let markColor: UIColor? = markColorForIndexPath(indexPath)
 		
 		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
-		if indexPath.row == 0 {
+		let isFirst = indexPath.row == 0
+		let isLast = indexPath.row == count - 1
+		
+		if isFirst && model.hasPartialItemBefore {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFirstCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
 			cell.configure(model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
 			return cell
 		}
-		if indexPath.row == count - 1 {
+		if isLast && model.hasPartialItemAfter {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
@@ -516,15 +519,12 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			length += model.lengthOfOnePartialItem
 		}
 		if model.hasPartialItemBefore {
-			length += model.lengthOfFullItem
-//			length += model.lengthOfPartialItemBefore
+			length += model.lengthOfFullItem * 2
 		}
 		length += model.lengthOfAllFullItems
 		if model.hasPartialItemAfter {
 			length += model.lengthOfPartialItemAfter
 		}
-		// Add 1 so the value can reach max and beyond. Otherwise the value cannot quite reach max.
-		length += 1
 		
 		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
 	}
