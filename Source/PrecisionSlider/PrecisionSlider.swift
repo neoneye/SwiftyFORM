@@ -36,10 +36,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func updateContentInset() {
-		let scale = CGFloat(model.lengthOfFullItem)
 		let halfWidth = round(bounds.width/2)
-		let halfScale = round(scale / 2)
-		let inset = halfWidth - halfScale
+		let inset = halfWidth - round(CGFloat(model.lengthOfFullItem) / 2)
+		if model.hasPartialItemBefore {
+			let insetLeft = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemBefore)
+			collectionView.contentInset = UIEdgeInsets(top: 0, left: insetLeft, bottom: 0, right: inset)
+			return
+		}
 		collectionView.contentInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
 	}
 	
@@ -76,13 +79,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
 		var result = Double(midX) / scale + model.minimumValue
-		result /= Double(model.markers)
 		if result < model.minimumValue {
 			result = model.minimumValue
 		}
 		if result > model.maximumValue {
 			result = model.maximumValue
 		}
+		result /= Double(model.markers)
 		return result
 	}
 	
@@ -132,14 +135,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				scale = 0.01
 			}
 			model.scale = scale
-			let markersBefore = model.markers
+//			let markersBefore = model.markers
 			model.updateRange()
-			let markersAfter = model.markers
+//			let markersAfter = model.markers
 			updateContentInset()
 			
-			if markersBefore != markersAfter {
+//			if markersBefore != markersAfter {
 				collectionView.reloadData()
-			}
+//			}
 			
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
@@ -206,7 +209,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
-		let index = Int(floor(model.minimumValue)) + indexPath.row
+		var index = Int(floor(model.minimumValue)) + indexPath.row
+		if model.hasPartialItemBefore {
+			index += 1
+		}
 		if model.markers == 1 {
 			let displayValue = index % 10
 			return String(displayValue)
@@ -239,7 +245,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 
 	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
-		let index = Int(floor(model.minimumValue)) + indexPath.row
+		var index = Int(floor(model.minimumValue)) + indexPath.row
+		if model.hasPartialItemBefore {
+			index += 1
+		}
 		if model.markers == 1 {
 			return UIColor.blackColor()
 		}
@@ -278,11 +287,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if indexPath.row == 0 {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFirstCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
 			cell.label.text = labelText
+			cell.mark.backgroundColor = markColor
+			cell.configure(model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
 			return cell
 		}
 		if indexPath.row == count - 1 {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
 			cell.label.text = labelText
+			cell.mark.backgroundColor = markColor
 			return cell
 		}
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
@@ -313,7 +325,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if model.hasPartialItemBefore {
 			if row == 0 {
 				let size = CGSize(
-					width: CGFloat(model.lengthOfPartialItemBefore),
+					width: CGFloat(model.lengthOfFullItem * 2),
 					height: PrecisionSlider_InnerModel.height
 				)
 				//print("size for partial-before \(indexPath.row) \(size.width)")
@@ -391,6 +403,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
 			hasPartialItemBefore = true
 			sizeOfPartialItemBefore = sizeBefore
+			numberOfFullItems -= 1
 		}
 		
 		let sizeAfter = maximumValue - floor(maximumValue)
@@ -460,8 +473,14 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var lengthOfPartialItemBefore: Double {
 		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
 	}
+	var remainingLengthOfPartialItemBefore: Double {
+		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemBefore))
+	}
 	var lengthOfPartialItemAfter: Double {
 		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
+	}
+	var remainingLengthOfPartialItemAfter: Double {
+		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemAfter))
 	}
 	
 	static let height: CGFloat = 130
@@ -497,7 +516,8 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			length += model.lengthOfOnePartialItem
 		}
 		if model.hasPartialItemBefore {
-			length += model.lengthOfPartialItemBefore
+			length += model.lengthOfFullItem
+//			length += model.lengthOfPartialItemBefore
 		}
 		length += model.lengthOfAllFullItems
 		if model.hasPartialItemAfter {
@@ -545,7 +565,7 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 		let midX = floor(bounds.midX)
 		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
-		let labelHidden = self.bounds.width < 30
+//		let labelHidden = self.bounds.width < 30
 //		label.hidden = labelHidden
 		
 		label.sizeToFit()
@@ -571,10 +591,17 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	func commonInit() {
 		backgroundColor = UIColor.greenColor()
 		addSubview(mark)
+		addSubview(partialMark)
 		addSubview(label)
 	}
 	
 	lazy var mark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var partialMark: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor.blackColor()
 		return instance
@@ -586,9 +613,18 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 		return instance
 	}()
 	
+	private var partialLength: Double = 0.0
+	private var fullLength: Double = 0.0
+	
+	func configure(partialLength: Double, fullLength: Double) {
+		self.partialLength = partialLength
+		self.fullLength = fullLength
+		setNeedsLayout()
+	}
+	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-		let midX = floor(bounds.midX)
+		let midX = bounds.maxX - CGFloat(floor(fullLength / 2))
 		mark.frame = CGRect(x: midX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
 		let labelHidden = self.bounds.width < 30
@@ -598,6 +634,9 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 		let labelFrame = label.frame
 		let labelX = round(midX - labelFrame.width / 2)
 		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
+		
+		let midX2 = bounds.maxX - CGFloat(floor(fullLength / 2 + partialLength))
+		partialMark.frame = CGRect(x: midX2, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
 	}
 }
 
