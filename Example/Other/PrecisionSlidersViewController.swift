@@ -21,6 +21,12 @@ class PrecisionSlidersViewController: FormViewController {
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-750).maximumValue(750).value(0).title("D -0.75 0.75")
 
 		builder += SectionHeaderTitleFormItem().title("Partial & full, mixed")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_100).maximumValue(6_000).value(2_000).title("D 1.1 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_400).maximumValue(6_000).value(2_000).title("D 1.4 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_600).maximumValue(6_000).value(2_000).title("D 1.6 6.0")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(1_900).maximumValue(6_000).value(2_000).title("D 1.9 6.0")
+		//		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(3_141).value(1_570).title("D 0 PI")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(3_600).value(3_000).title("D 0 3.6")
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-100_000).maximumValue(100_000).value(-100_000).title("A -100 100")
 //		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_333).maximumValue(1_333).value(0).title("B -1.333 1.333")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-3_000).maximumValue(3_000).value(0).title("C -3 3")
