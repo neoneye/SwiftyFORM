@@ -273,6 +273,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		return nil
 	}
 	
+	let markMajorColor = UIColor.blackColor()
+	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
+	
 	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
 		if case .ZoomOut = zoomMode {
 			return UIColor.redColor()
@@ -282,30 +285,30 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			index += 1
 		}
 		if markers == 1 {
-			return UIColor.blackColor()
+			return markMajorColor
 		}
 		if markers == 2 {
 			if index % 2 == 0 {
-				return UIColor.blackColor()
+				return markMajorColor
 			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
+				return markMinorColor
 			}
 		}
 		if markers == 10 {
 			if index % 10 == 0 {
-				return UIColor.blackColor()
+				return markMajorColor
 			}
 			if abs(index % 10) == 5 {
-				return UIColor.blackColor()
+				return markMajorColor
 			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
+				return markMinorColor
 			}
 		}
 		if markers == 20 {
 			if index % 2 == 0 {
-				return UIColor.blackColor()
+				return markMajorColor
 			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
+				return markMinorColor
 			}
 		}
 		return nil
