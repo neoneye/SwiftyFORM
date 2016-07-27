@@ -60,9 +60,14 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			zoomMode = .ZoomOut(count: 10)
 			return
 		}
+		if scale > 0.6 {
+			markers = 50
+			zoomMode = .ZoomOut(count: 50)
+			return
+		}
 
-		markers = 50
-		zoomMode = .ZoomOut(count: 50)
+		markers = 100
+		zoomMode = .ZoomOut(count: 100)
 	}
 	
 	func updateRange() {
@@ -202,40 +207,68 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	
 	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
-		if case .ZoomOut = zoomMode {
-			return nil
-		}
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
 		}
-		if markers == 1 {
+
+		switch zoomMode {
+		case .None:
 			let displayValue = index % 10
 			return String(displayValue)
-		}
-		if markers == 2 {
-			if index % 2 != 0 {
-				return nil
+		case let .ZoomIn(count):
+			if count == 2 {
+				if index % 2 != 0 {
+					return nil
+				}
+				let adjustedIndex = index / 2
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
 			}
-			let adjustedIndex = index / 2
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
-		}
-		if markers == 10 {
-			if index % 10 != 0 {
-				return nil
+			if count == 10 {
+				if index % 10 != 0 {
+					return nil
+				}
+				let adjustedIndex = index / 10
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
 			}
-			let adjustedIndex = index / 10
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
-		}
-		if markers == 20 {
-			if index % 20 != 0 {
-				return nil
+			if count == 20 {
+				if index % 20 != 0 {
+					return nil
+				}
+				let adjustedIndex = index / 20
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
 			}
-			let adjustedIndex = index / 20
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
+		case let .ZoomOut(count):
+			if count == 5 {
+				if index % 2 != 0 {
+					return nil
+				}
+				let adjustedIndex = index / 2
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
+			}
+			if count == 10 {
+				let adjustedIndex = index
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
+			}
+			if count == 50 {
+				if index % 2 != 0 {
+					return nil
+				}
+				let adjustedIndex = index / 2
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
+			}
+			if count == 100 {
+				let adjustedIndex = index
+				let displayValue = adjustedIndex % 10
+				return String(displayValue)
+			}
+			return nil
 		}
 		return nil
 	}
