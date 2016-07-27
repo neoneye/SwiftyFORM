@@ -142,15 +142,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				scale = 0.01
 			}
 			model.scale = scale
-//			let markersBefore = model.markers
 			model.updateRange()
-//			let markersAfter = model.markers
 			updateContentInset()
-			
-//			if markersBefore != markersAfter {
-				collectionView.reloadData()
-//			}
-			
+			collectionView.reloadData()
 			layout.itemSize = computeItemSize()
 			layout.invalidateLayout()
 			
