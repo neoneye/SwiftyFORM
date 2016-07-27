@@ -8,26 +8,69 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var originalMaximumValue: Double = 0.0
 	var originalMinimumValue: Double = 100.0
 	
-	var markers = 1
-	
-	func updateRange() {
-		if scale > 800 {
-			markers = 20
-		} else {
-			if scale > 250 {
-				markers = 10
-			} else {
-				if scale > 100 {
-					markers = 2
-				} else {
-					markers = 1
-				}
+	enum ZoomMode {
+		case None
+		case ZoomIn(count: UInt)
+		case ZoomOut(count: UInt)
+		
+		var scalar: Double {
+			switch self {
+			case .None:
+				return 1
+			case let .ZoomIn(count):
+				return Double(count)
+			case let .ZoomOut(count):
+				return 1 / Double(count)
 			}
 		}
-		//		print("!!!!!!!! \(markers)  \(scale)")
+	}
+	
+	var zoomMode = ZoomMode.None
+	
+	var markers = 1
+	
+	func reloadZoomMode() {
+		if scale > 800 {
+			markers = 20
+			zoomMode = .ZoomIn(count: 20)
+			return
+		}
+		if scale > 250 {
+			markers = 10
+			zoomMode = .ZoomIn(count: 10)
+			return
+		}
+		if scale > 100 {
+			markers = 2
+			zoomMode = .ZoomIn(count: 2)
+			return
+		}
+		if scale > 30 {
+			markers = 1
+			zoomMode = .None
+			return
+		}
+		if scale > 10 {
+			markers = 5
+			zoomMode = .ZoomOut(count: 5)
+			return
+		}
+		if scale > 3 {
+			markers = 10
+			zoomMode = .ZoomOut(count: 10)
+			return
+		}
+
+		markers = 50
+		zoomMode = .ZoomOut(count: 50)
+	}
+	
+	func updateRange() {
+		reloadZoomMode()
+		print("markers: \(markers)  \(zoomMode)  scale: \(scale)")
 		
-		maximumValue = originalMaximumValue * Double(markers)
-		minimumValue = originalMinimumValue * Double(markers)
+		maximumValue = originalMaximumValue * zoomMode.scalar
+		minimumValue = originalMinimumValue * zoomMode.scalar
 		
 		var count = Int(floor(maximumValue) - ceil(minimumValue)) + 1
 		
@@ -114,7 +157,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var scale: Double = 60.0
 	
 	var lengthOfFullItem: Double {
-		let result = ceil(scale / Double(markers))
+		let result = ceil(scale / zoomMode.scalar)
 		if result < 0.1 {
 			return 0.1
 		}
@@ -159,6 +202,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	
 	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
+		if case .ZoomOut = zoomMode {
+			return nil
+		}
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
@@ -195,6 +241,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 	
 	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
+		if case .ZoomOut = zoomMode {
+			return UIColor.redColor()
+		}
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1

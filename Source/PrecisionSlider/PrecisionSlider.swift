@@ -92,7 +92,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if result > model.maximumValue {
 			result = model.maximumValue
 		}
-		result /= Double(model.markers)
+		result /= model.zoomMode.scalar
 		return result
 	}
 	
@@ -102,7 +102,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			return
 		}
 		
-		var clampedValue = value * Double(model.markers)
+		var clampedValue = value * model.zoomMode.scalar
 		if clampedValue < model.minimumValue {
 			clampedValue = model.minimumValue
 		}
