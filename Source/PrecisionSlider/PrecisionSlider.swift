@@ -183,6 +183,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
+		instance.registerClass(PrecisionSlider_InnerCollectionViewSingleCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewSingleCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewFirstCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewCell.identifier)
@@ -287,6 +288,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let markColor: UIColor? = markColorForIndexPath(indexPath)
 		
 		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
+		if count <= 1 {
+			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewSingleCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewSingleCell
+			return cell
+		}
+		
 		let isFirst = indexPath.row == 0
 		let isLast = indexPath.row == count - 1
 		
@@ -722,5 +728,48 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 		let (_, remain) = leftHalf.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
 		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
 		label.frame = slice
+	}
+}
+
+class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
+	static let identifier = "single_cell"
+	
+	override init(frame: CGRect) {
+		super.init(frame: frame)
+		commonInit()
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)
+		commonInit()
+	}
+	
+	func commonInit() {
+		backgroundColor = UIColor.orangeColor()
+		addSubview(leftMark)
+		addSubview(rightMark)
+	}
+	
+	lazy var leftMark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	lazy var rightMark: UIView = {
+		let instance = UIView()
+		instance.backgroundColor = UIColor.blackColor()
+		return instance
+	}()
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
+
+		let insetBounds = bounds.insetBy(dx: 0, dy: 30)
+		let (leftFrame, _) = insetBounds.divide(1, fromEdge: .MinXEdge)
+		leftMark.frame = leftFrame
+
+		let (rightFrame, _) = insetBounds.divide(1, fromEdge: .MaxXEdge)
+		rightMark.frame = rightFrame
 	}
 }
