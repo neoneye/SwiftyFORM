@@ -426,9 +426,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			sizeOfPartialItemAfter = 0
 		}
 		
-		// TODO: deal with negative number of full items
+		// prevent negative number of items
 		if count < 0 {
-//			print("!!!!!!!!!!! TODO: negative number of full items")
+			// In this case use the "single_cell"
 //			print("maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
 			numberOfFullItems = 0
 			hasOnePartialItem = true
