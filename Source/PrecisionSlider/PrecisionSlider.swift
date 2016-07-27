@@ -124,7 +124,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-		return true
+		return false
 	}
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
