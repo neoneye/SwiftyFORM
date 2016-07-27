@@ -277,41 +277,62 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
 	
 	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
-		if case .ZoomOut = zoomMode {
-			return UIColor.redColor()
-		}
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
 		}
-		if markers == 1 {
+		
+		switch zoomMode {
+		case .None:
 			return markMajorColor
-		}
-		if markers == 2 {
-			if index % 2 == 0 {
+		case let .ZoomIn(count):
+			if count == 2 {
+				if index % 2 == 0 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+			if count == 10 {
+				if index % 10 == 0 {
+					return markMajorColor
+				}
+				if abs(index % 10) == 5 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+			if count == 20 {
+				if index % 2 == 0 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+		case let .ZoomOut(count):
+			if count == 5 {
+				if index % 2 == 0 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+			if count == 10 {
 				return markMajorColor
-			} else {
-				return markMinorColor
+			}
+			if count == 50 {
+				if index % 2 == 0 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+			if count == 100 {
+				return markMajorColor
 			}
 		}
-		if markers == 10 {
-			if index % 10 == 0 {
-				return markMajorColor
-			}
-			if abs(index % 10) == 5 {
-				return markMajorColor
-			} else {
-				return markMinorColor
-			}
-		}
-		if markers == 20 {
-			if index % 2 == 0 {
-				return markMajorColor
-			} else {
-				return markMinorColor
-			}
-		}
-		return nil
+		return UIColor.redColor()
 	}
 
 	
