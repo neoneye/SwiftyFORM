@@ -764,12 +764,8 @@ class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
-
 		let insetBounds = bounds.insetBy(dx: 0, dy: 30)
-		let (leftFrame, _) = insetBounds.divide(1, fromEdge: .MinXEdge)
-		leftMark.frame = leftFrame
-
-		let (rightFrame, _) = insetBounds.divide(1, fromEdge: .MaxXEdge)
-		rightMark.frame = rightFrame
+		leftMark.frame  = insetBounds.divide(1, fromEdge: .MinXEdge).slice
+		rightMark.frame = insetBounds.divide(1, fromEdge: .MaxXEdge).slice
 	}
 }
