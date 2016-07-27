@@ -547,6 +547,13 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 	}
 }
 
+struct PrecisionSlider_InnerCollectionViewCellConstants {
+	struct Label {
+		static let topInset: CGFloat = 5
+		static let height: CGFloat = 25
+	}
+}
+
 class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	static let identifier = "cell"
 	
@@ -573,6 +580,8 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
+		instance.textAlignment = .Center
+		instance.lineBreakMode = .ByClipping
 		instance.text = "0"
 		return instance
 	}()
@@ -582,13 +591,9 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 		let markX = floor(bounds.midX)
 		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
-//		let labelHidden = self.bounds.width < 30
-//		label.hidden = labelHidden
-		
-		label.sizeToFit()
-		let labelFrame = label.frame
-		let labelX = round(markX - labelFrame.width / 2)
-		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
+		let (_, remain) = bounds.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
+		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		label.frame = slice
 	}
 }
 
@@ -626,6 +631,8 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
+		instance.textAlignment = .Center
+		instance.lineBreakMode = .ByClipping
 		instance.text = "0"
 		return instance
 	}()
@@ -644,16 +651,13 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 		let markX = bounds.maxX - CGFloat(floor(fullLength / 2))
 		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
-		let labelHidden = self.bounds.width < 30
-		label.hidden = labelHidden
-		
-		label.sizeToFit()
-		let labelFrame = label.frame
-		let labelX = round(markX - labelFrame.width / 2)
-		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
-		
 		let partialMarkX = bounds.maxX - CGFloat(floor(fullLength / 2 + partialLength))
 		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
+
+		let (_, rightHalf) = bounds.divide(CGFloat(fullLength), fromEdge: .MinXEdge)
+		let (_, remain) = rightHalf.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
+		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		label.frame = slice
 	}
 }
 
@@ -691,6 +695,8 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
+		instance.textAlignment = .Center
+		instance.lineBreakMode = .ByClipping
 		instance.text = "0"
 		return instance
 	}()
@@ -709,15 +715,12 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 		let markX = CGFloat(floor(fullLength / 2))
 		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
-		let labelHidden = self.bounds.width < 30
-		label.hidden = labelHidden
-		
-		label.sizeToFit()
-		let labelFrame = label.frame
-		let labelX = round(markX - labelFrame.width / 2)
-		label.frame = CGRect(x: labelX, y: 5, width: labelFrame.width, height: labelFrame.height)
-		
 		let partialMarkX = CGFloat(floor(fullLength / 2 + partialLength))
 		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
+		
+		let (leftHalf, _) = bounds.divide(CGFloat(fullLength), fromEdge: .MinXEdge)
+		let (_, remain) = leftHalf.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
+		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		label.frame = slice
 	}
 }
