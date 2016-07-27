@@ -157,6 +157,79 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	static let height: CGFloat = 130
 	
+	
+	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
+		var index = Int(floor(minimumValue)) + indexPath.row
+		if hasPartialItemBefore {
+			index += 1
+		}
+		if markers == 1 {
+			let displayValue = index % 10
+			return String(displayValue)
+		}
+		if markers == 2 {
+			if index % 2 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 2
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		if markers == 10 {
+			if index % 10 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 10
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		if markers == 20 {
+			if index % 20 != 0 {
+				return nil
+			}
+			let adjustedIndex = index / 20
+			let displayValue = adjustedIndex % 10
+			return String(displayValue)
+		}
+		return nil
+	}
+	
+	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
+		var index = Int(floor(minimumValue)) + indexPath.row
+		if hasPartialItemBefore {
+			index += 1
+		}
+		if markers == 1 {
+			return UIColor.blackColor()
+		}
+		if markers == 2 {
+			if index % 2 == 0 {
+				return UIColor.blackColor()
+			} else {
+				return UIColor(white: 0.7, alpha: 1.0)
+			}
+		}
+		if markers == 10 {
+			if index % 10 == 0 {
+				return UIColor.blackColor()
+			}
+			if abs(index % 10) == 5 {
+				return UIColor.blackColor()
+			} else {
+				return UIColor(white: 0.7, alpha: 1.0)
+			}
+		}
+		if markers == 20 {
+			if index % 2 == 0 {
+				return UIColor.blackColor()
+			} else {
+				return UIColor(white: 0.7, alpha: 1.0)
+			}
+		}
+		return nil
+	}
+
+	
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append("markers: \(markers)")

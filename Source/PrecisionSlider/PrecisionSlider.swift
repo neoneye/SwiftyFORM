@@ -216,85 +216,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return count
 	}
 	
-	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
-		var index = Int(floor(model.minimumValue)) + indexPath.row
-		if model.hasPartialItemBefore {
-			index += 1
-		}
-		if model.markers == 1 {
-			let displayValue = index % 10
-			return String(displayValue)
-		}
-		if model.markers == 2 {
-			if index % 2 != 0 {
-				return nil
-			}
-			let adjustedIndex = index / 2
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
-		}
-		if model.markers == 10 {
-			if index % 10 != 0 {
-				return nil
-			}
-			let adjustedIndex = index / 10
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
-		}
-		if model.markers == 20 {
-			if index % 20 != 0 {
-				return nil
-			}
-			let adjustedIndex = index / 20
-			let displayValue = adjustedIndex % 10
-			return String(displayValue)
-		}
-		return nil
-	}
-
-	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
-		var index = Int(floor(model.minimumValue)) + indexPath.row
-		if model.hasPartialItemBefore {
-			index += 1
-		}
-		if model.markers == 1 {
-			return UIColor.blackColor()
-		}
-		if model.markers == 2 {
-			if index % 2 == 0 {
-				return UIColor.blackColor()
-			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
-			}
-		}
-		if model.markers == 10 {
-			if index % 10 == 0 {
-				return UIColor.blackColor()
-			}
-			if abs(index % 10) == 5 {
-				return UIColor.blackColor()
-			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
-			}
-		}
-		if model.markers == 20 {
-			if index % 2 == 0 {
-				return UIColor.blackColor()
-			} else {
-				return UIColor(white: 0.7, alpha: 1.0)
-			}
-		}
-		return nil
-	}
-	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		if model.hasOnePartialItem {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewSingleCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewSingleCell
 			return cell
 		}
 		
-		let labelText: String? = labelTextForIndexPath(indexPath)
-		let markColor: UIColor? = markColorForIndexPath(indexPath)
+		let labelText: String?  = model.labelTextForIndexPath(indexPath)
+		let markColor: UIColor? = model.markColorForIndexPath(indexPath)
 		
 		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
 		let isFirst = indexPath.row == 0
