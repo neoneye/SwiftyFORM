@@ -71,7 +71,7 @@ The `label` is shown above the `mark`.
 This kind of cell is twice as wide as a full_cell.
 
 This cell is used when the minimumValue doesn't align with any marker.
-In this case there is a little bit of air between the `partialMark` and the last `mark`.
+In this case there is a little bit of air between the `partialMark` and the first `mark`.
 
 This cell is not used when the minimumValue aligns perfectly to a marker.
 In that case a full_cell is used.
