@@ -190,7 +190,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.registerClass(PrecisionSlider_InnerCollectionViewSingleCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewSingleCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewFirstCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier)
 		instance.registerClass(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
-		instance.registerClass(PrecisionSlider_InnerCollectionViewCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewCell.identifier)
+		instance.registerClass(PrecisionSlider_InnerCollectionViewFullCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFullCell.identifier)
 		instance.contentInset = UIEdgeInsetsZero
 		instance.delegate = self
 		instance.dataSource = self
@@ -314,7 +314,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			cell.configure(model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
 			return cell
 		}
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewCell
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFullCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFullCell
 		cell.label.text = labelText
 		cell.mark.backgroundColor = markColor
 
@@ -568,8 +568,16 @@ struct PrecisionSlider_InnerCollectionViewCellConstants {
 	static let colorizeCells = false
 }
 
-class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
-	static let identifier = "cell"
+
+/**
+The cell displays a `mark` and displays a `label`.
+
+The `label` is shown above the `mark`.
+
+The `mark` is centered.
+*/
+class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
+	static let identifier = "full_cell"
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -611,6 +619,20 @@ class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
 	}
 }
 
+
+/**
+The cell displays two markers, `partialMark` and `mark`, and displays a `label`.
+
+The `label` is shown above the `mark`.
+
+This kind of cell is twice as wide as a full_cell.
+
+This cell is used when the minimumValue doesn't align with any marker.
+In this case there is a little bit of air between the `partialMark` and the last `mark`.
+
+This cell is not used when the minimumValue aligns perfectly to a marker.
+In that case a full_cell is used.
+*/
 class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	static let identifier = "first_cell"
 	
@@ -677,6 +699,20 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	}
 }
 
+
+/**
+The cell displays two markers, `mark` and `partialMark`, and displays a `label`.
+
+The `label` is shown above the `mark`.
+
+This kind of cell is twice as wide as a full_cell.
+
+This cell is used when the maximumValue doesn't align with any marker.
+In this case there is a little bit of air between the last `mark` and the `partialMark`.
+
+This cell is not used when the maxmimumValue aligns perfectly to a marker.
+In that case a full_cell is used.
+*/
 class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	static let identifier = "last_cell"
 	
@@ -743,6 +779,16 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	}
 }
 
+
+/**
+The cell displays two markers, `leftMark` and `rightMark`.
+ 
+The `leftMark` indicates where the minimumValue is.
+The `rightMark` indicates where the maximumValue is.
+
+This cell is used when the scale is so narrow, that there isn't any room for: full_cell, first_cell, last_cell
+A last resort to show something meaningful.
+*/
 class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	static let identifier = "single_cell"
 	
