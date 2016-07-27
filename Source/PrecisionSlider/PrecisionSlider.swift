@@ -37,6 +37,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func updateContentInset() {
 		let halfWidth = round(bounds.width/2)
+		if model.hasOnePartialItem {
+			collectionView.contentInset = UIEdgeInsets(top: 0, left: halfWidth, bottom: 0, right: halfWidth)
+			return
+		}
 		let inset = halfWidth - round(CGFloat(model.lengthOfFullItem) / 2)
 		var insetLeft = inset
 		var insetRight = inset
@@ -284,15 +288,15 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let labelText: String? = labelTextForIndexPath(indexPath)
-		let markColor: UIColor? = markColorForIndexPath(indexPath)
-		
-		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
-		if count <= 1 {
+		if model.hasOnePartialItem {
 			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewSingleCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewSingleCell
 			return cell
 		}
 		
+		let labelText: String? = labelTextForIndexPath(indexPath)
+		let markColor: UIColor? = markColorForIndexPath(indexPath)
+		
+		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
 		let isFirst = indexPath.row == 0
 		let isLast = indexPath.row == count - 1
 		
@@ -396,19 +400,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		maximumValue = originalMaximumValue * Double(markers)
 		minimumValue = originalMinimumValue * Double(markers)
 		
-		let count = Int(floor(maximumValue) - ceil(minimumValue))
-		if count < 0 {
-			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
-			numberOfFullItems = 0
-			hasOnePartialItem = true
-			sizeOfOnePartialItem = maximumValue - minimumValue
-			hasPartialItemBefore = false
-			sizeOfPartialItemBefore = 0
-			hasPartialItemAfter = false
-			sizeOfPartialItemAfter = 0
-			return
-		}
-		numberOfFullItems = count + 1
+		var count = Int(floor(maximumValue) - ceil(minimumValue)) + 1
 		
 		let sizeBefore = ceil(minimumValue) - minimumValue
 		//print("size before: \(sizeBefore)    \(minimumValue)")
@@ -416,7 +408,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
 			hasPartialItemBefore = true
 			sizeOfPartialItemBefore = sizeBefore
-			numberOfFullItems -= 1
+			count -= 1
 		} else {
 			hasPartialItemBefore = false
 			sizeOfPartialItemBefore = 0
@@ -428,13 +420,27 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
 			hasPartialItemAfter = true
 			sizeOfPartialItemAfter = sizeAfter
-			numberOfFullItems -= 1
+			count -= 1
 		} else {
 			hasPartialItemAfter = false
 			sizeOfPartialItemAfter = 0
 		}
 		
 		// TODO: deal with negative number of full items
+		if count < 0 {
+//			print("!!!!!!!!!!! TODO: negative number of full items")
+//			print("maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
+			numberOfFullItems = 0
+			hasOnePartialItem = true
+			sizeOfOnePartialItem = maximumValue - minimumValue
+			hasPartialItemBefore = false
+			sizeOfPartialItemBefore = 0
+			hasPartialItemAfter = false
+			sizeOfPartialItemAfter = 0
+		} else {
+			numberOfFullItems = count
+			hasOnePartialItem = false
+		}
 		
 //		print("model: \(self)")
 	}
@@ -506,10 +512,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 	
 	var lengthOfContent: Double {
-		var length: Double = 0
 		if hasOnePartialItem {
-			length += lengthOfOnePartialItem
+			return lengthOfOnePartialItem
 		}
+		var length: Double = 0
 		if hasPartialItemBefore {
 			length += lengthOfFullItem * 2
 		}
@@ -558,6 +564,8 @@ struct PrecisionSlider_InnerCollectionViewCellConstants {
 		static let topInset: CGFloat = 5
 		static let height: CGFloat = 25
 	}
+	
+	static let colorizeCells = false
 }
 
 class PrecisionSlider_InnerCollectionViewCell: UICollectionViewCell {
@@ -617,7 +625,9 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		backgroundColor = UIColor.greenColor()
+		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
+			backgroundColor = UIColor.greenColor()
+		}
 		addSubview(mark)
 		addSubview(partialMark)
 		addSubview(label)
@@ -681,7 +691,9 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		backgroundColor = UIColor.redColor()
+		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
+			backgroundColor = UIColor.redColor()
+		}
 		addSubview(mark)
 		addSubview(partialMark)
 		addSubview(label)
@@ -745,7 +757,9 @@ class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	}
 	
 	func commonInit() {
-		backgroundColor = UIColor.orangeColor()
+		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
+			backgroundColor = UIColor.blueColor()
+		}
 		addSubview(leftMark)
 		addSubview(rightMark)
 	}
