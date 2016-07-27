@@ -62,14 +62,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	lazy var leftCoverView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
 		instance.userInteractionEnabled = false
 		return instance
 	}()
 	
 	lazy var rightCoverView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
 		instance.userInteractionEnabled = false
 		return instance
 	}()
@@ -259,7 +259,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			if index % 2 == 0 {
 				return UIColor.blackColor()
 			} else {
-				return UIColor(white: 0.8, alpha: 1.0)
+				return UIColor(white: 0.7, alpha: 1.0)
 			}
 		}
 		if model.markers == 10 {
@@ -269,14 +269,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			if abs(index % 10) == 5 {
 				return UIColor.blackColor()
 			} else {
-				return UIColor(white: 0.8, alpha: 1.0)
+				return UIColor(white: 0.7, alpha: 1.0)
 			}
 		}
 		if model.markers == 20 {
 			if index % 2 == 0 {
 				return UIColor.blackColor()
 			} else {
-				return UIColor(white: 0.8, alpha: 1.0)
+				return UIColor(white: 0.7, alpha: 1.0)
 			}
 		}
 		return nil
