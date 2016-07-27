@@ -499,6 +499,21 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemAfter))
 	}
 	
+	var lengthOfContent: Double {
+		var length: Double = 0
+		if hasOnePartialItem {
+			length += lengthOfOnePartialItem
+		}
+		if hasPartialItemBefore {
+			length += lengthOfFullItem * 2
+		}
+		length += lengthOfAllFullItems
+		if hasPartialItemAfter {
+			length += lengthOfFullItem * 2
+		}
+		return length
+	}
+	
 	static let height: CGFloat = 130
 	
 	var debugDescription: String {
@@ -528,20 +543,7 @@ class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout 
 			print("no model")
 			return CGSizeZero
 		}
-		
-		var length: Double = 0
-		if model.hasOnePartialItem {
-			length += model.lengthOfOnePartialItem
-		}
-		if model.hasPartialItemBefore {
-			length += model.lengthOfFullItem * 2
-		}
-		length += model.lengthOfAllFullItems
-		if model.hasPartialItemAfter {
-			length += model.lengthOfFullItem * 2
-		}
-		
-		return CGSize(width: CGFloat(length), height: PrecisionSlider_InnerModel.height)
+		return CGSize(width: CGFloat(model.lengthOfContent), height: PrecisionSlider_InnerModel.height)
 	}
 }
 
