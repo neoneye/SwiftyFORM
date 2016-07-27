@@ -33,15 +33,20 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(4_900).value(4_000).title("D 0 4.9")
 		
 		builder += SectionHeaderTitleFormItem().title("Partial full positive negative")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-100_000).maximumValue(100_000).value(-100_000).title("A -100 100")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_333).maximumValue(1_333).value(0).title("B -1.333 1.333")
-		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-3_000).maximumValue(3_000).value(0).title("C -3 3")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_333).maximumValue(1_333).value(0).title("A -1.333 1.333")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-3_000).maximumValue(3_000).value(0).title("B -3 3")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-8_900).maximumValue(8_900).value(0).title("C -8.9 8.9")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-250).maximumValue(3_250).value(1_500).title("D -0.25 3.25")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-500).maximumValue(500).value(0).title("E -0.5 0.5")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_000).maximumValue(1_000).value(0).title("F -1 1")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-2_666).maximumValue(2_666).value(-2_000).title("G -2.666 2.666")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-5_220).maximumValue(5_220).value(0).title("H -5.22 5.22")
 
+		builder += SectionHeaderTitleFormItem().title("Huge positive negative")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-475_000).maximumValue(475_000).value(0).title("A -475 475")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-100_000).maximumValue(100_000).value(0).title("B -100 100")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-333_333).maximumValue(333_333).value(0).title("C -333.333 333.333")
+		
 		builder += SectionHeaderTitleFormItem().title("Partial full positive")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(255_000).value(255_000).title("A 0 255")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(100_000).value(50_000).title("B 0 100")
