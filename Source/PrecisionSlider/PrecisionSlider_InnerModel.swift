@@ -195,6 +195,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	static let height: CGFloat = 130
 	
+	func modulo10String(index: Int) -> String {
+		let displayValue = index % 10
+		return String(displayValue)
+	}
 	
 	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
 		var index = Int(floor(minimumValue)) + indexPath.row
@@ -211,52 +215,38 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 				if index % 2 != 0 {
 					return nil
 				}
-				let adjustedIndex = index / 2
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index / 2)
 			}
 			if count == 10 {
 				if index % 10 != 0 {
 					return nil
 				}
-				let adjustedIndex = index / 10
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index / 10)
 			}
 			if count == 20 {
 				if index % 20 != 0 {
 					return nil
 				}
-				let adjustedIndex = index / 20
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index / 20)
 			}
 		case let .ZoomOut(count):
 			if count == 5 {
 				if index % 2 != 0 {
 					return nil
 				}
-				let adjustedIndex = index / 2
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index / 2)
 			}
 			if count == 10 {
-				let adjustedIndex = index
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index)
 			}
 			if count == 50 {
 				if index % 2 != 0 {
 					return nil
 				}
-				let adjustedIndex = index / 2
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index / 2)
 			}
 			if count == 100 {
-				let adjustedIndex = index
-				let displayValue = adjustedIndex % 10
-				return String(displayValue)
+				return modulo10String(index)
 			}
 			return nil
 		}
