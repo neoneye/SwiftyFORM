@@ -115,7 +115,7 @@ extension PrecisionSliderCellModel {
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 	struct Constants {
-		static let insetForInitialZoom: CGFloat = 10.0
+		static let insetForInitialZoom: CGFloat = 30.0
 	}
 	
 
