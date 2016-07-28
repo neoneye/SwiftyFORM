@@ -28,6 +28,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var zoomMode = ZoomMode.None
 	
 	func reloadZoomMode() {
+		if scale > 25000 {
+			zoomMode = .ZoomIn(count: 1000)
+			return
+		}
 		if scale > 9000 {
 			zoomMode = .ZoomIn(count: 200)
 			return
@@ -249,6 +253,12 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 				}
 				return modulo10String(index / 2)
 			}
+			if count == 1000 {
+				if index % 10 != 0 {
+					return nil
+				}
+				return modulo10String(index / 10)
+			}
 		case let .ZoomOut(count):
 			if count == 5 {
 				if index % 2 != 0 {
@@ -322,6 +332,16 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			}
 			if count == 200 {
 				if index % 2 == 0 {
+					return markMajorColor
+				} else {
+					return markMinorColor
+				}
+			}
+			if count == 1000 {
+				if index % 10 == 0 {
+					return markMajorColor
+				}
+				if abs(index % 10) == 5 {
 					return markMajorColor
 				} else {
 					return markMinorColor
