@@ -72,8 +72,12 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			zoomMode = .ZoomOut(count: 100)
 			return
 		}
+		if scale > 0.15 {
+			zoomMode = .ZoomOut(count: 500)
+			return
+		}
 
-		zoomMode = .ZoomOut(count: 500)
+		zoomMode = .ZoomOut(count: 1000)
 	}
 	
 	func updateRange() {
@@ -288,6 +292,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 				}
 				return modulo10String(index / 2)
 			}
+			if count == 1000 {
+				return modulo10String(index)
+			}
 			return nil
 		}
 		return nil
@@ -384,6 +391,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 				} else {
 					return markMinorColor
 				}
+			}
+			if count == 1000 {
+				return markMajorColor
 			}
 		}
 		return UIColor.redColor()
