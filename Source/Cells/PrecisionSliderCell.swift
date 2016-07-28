@@ -107,8 +107,6 @@ extension PrecisionSliderCellModel {
 		} else {
 			instance.scale = 10
 		}
-
-		instance.updateRange()
 		return instance
 	}
 }
@@ -164,13 +162,9 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		
 		let sliderWidth = slider.bounds.width - Constants.insetForInitialZoom
 		let sliderViewModel = model.sliderViewModel(sliderWidthInPixels: Double(sliderWidth))
-		//print("sliderViewModel \(sliderViewModel.debugDescription)")
 		slider.model = sliderViewModel
 		slider.layout.model = sliderViewModel
-		slider.setNeedsLayout()
-		slider.setNeedsDisplay()
-		slider.collectionView.reloadData()
-		
+		slider.reloadSlider()
 
 		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
 		let scaledValue = Double(model.value) / decimalScale

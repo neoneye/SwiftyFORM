@@ -142,11 +142,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 				scale = 0.01
 			}
 			model.scale = scale
-			model.updateRange()
-			updateContentInset()
-			collectionView.reloadData()
-			layout.itemSize = computeItemSize()
-			layout.invalidateLayout()
+			reloadSlider()
 			
 			if let value = originalValue {
 				setValue(value, animated: false)
@@ -154,6 +150,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			
 			valueDidChange?()
 		}
+	}
+	
+	func reloadSlider() {
+		model.updateRange()
+		updateContentInset()
+		collectionView.reloadData()
+		layout.itemSize = computeItemSize()
+		layout.invalidateLayout()
 	}
 	
 	func computeItemSize() -> CGSize {
