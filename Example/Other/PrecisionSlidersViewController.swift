@@ -46,6 +46,9 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-475_000).maximumValue(475_000).value(0).title("A -475 475")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-100_000).maximumValue(100_000).value(0).title("B -100 100")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-333_333).maximumValue(333_333).value(0).title("C -333.333 333.333")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-1_000_000).maximumValue(1_000_000).value(0).title("D -1000 1000")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-33_000_000).maximumValue(33_000_000).value(0).title("E -33k 33k")
+		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-256_000_000).maximumValue(256_000_000).value(0).title("F -256k 256k")
 		
 		builder += SectionHeaderTitleFormItem().title("Partial full positive")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(255_000).value(255_000).title("A 0 255")
