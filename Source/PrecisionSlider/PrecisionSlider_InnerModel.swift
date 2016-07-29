@@ -256,117 +256,12 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		if hasPartialItemBefore {
 			index += 1
 		}
-		
-		switch zoomMode {
-		case .None:
-			return markMajorColor
-		case let .ZoomIn(count):
-			if count == 2 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 10 {
-				if index % 10 == 0 {
-					return markMajorColor
-				}
-				if abs(index % 10) == 5 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 20 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 100 {
-				if index % 10 == 0 {
-					return markMajorColor
-				}
-				if abs(index % 10) == 5 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 200 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 1000 {
-				if index % 10 == 0 {
-					return markMajorColor
-				}
-				if abs(index % 10) == 5 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-		case let .ZoomOut(count):
-			if count == 5 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 10 {
-				return markMajorColor
-			}
-			if count == 50 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 100 {
-				return markMajorColor
-			}
-			if count == 500 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 1000 {
-				return markMajorColor
-			}
-			if count == 5000 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 10000 {
-				return markMajorColor
-			}
-			if count == 50000 {
-				if index % 2 == 0 {
-					return markMajorColor
-				} else {
-					return markMinorColor
-				}
-			}
-			if count == 100000 {
-				return markMajorColor
-			}
+		switch zoomMode.markerType(index: index) {
+		case .Major: return markMajorColor
+		case .Minor: return markMinorColor
+		case .Other: return UIColor.redColor()
 		}
-		return UIColor.redColor()
 	}
-
 	
 	var debugDescription: String {
 		var strings = [String]()

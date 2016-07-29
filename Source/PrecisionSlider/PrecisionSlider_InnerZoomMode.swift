@@ -36,4 +36,51 @@ enum PrecisionSlider_InnerZoomMode {
 		if scale >     0.0004 { return .ZoomOut(count: 50000) }
 		return .ZoomOut(count: 100000)
 	}
+	
+	enum MarkerType {
+	case Major
+	case Minor
+	case Other
+	}
+	
+	func markerType(index index: Int) -> MarkerType {
+		switch self {
+		case .None:
+			return .Major
+		case let .ZoomIn(count):
+			switch count {
+			case 2, 20, 200:
+				if index % 2 == 0 {
+					return .Major
+				} else {
+					return .Minor
+				}
+			case 10, 100, 1000:
+				if index % 10 == 0 {
+					return .Major
+				}
+				if abs(index % 10) == 5 {
+					return .Major
+				} else {
+					return .Minor
+				}
+			default:
+				return .Other
+			}
+		case let .ZoomOut(count):
+			switch count {
+			case 5, 50, 500, 5000, 50000:
+				if index % 2 == 0 {
+					return .Major
+				} else {
+					return .Minor
+				}
+			case 10, 100, 1000, 10000, 100000:
+				return .Major
+			default:
+				return .Other
+			}
+		}
+	}
+
 }
