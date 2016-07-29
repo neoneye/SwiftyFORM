@@ -31,8 +31,8 @@ public class PrecisionSliderFormItem: FormItem {
 	}
 	
 	
-	typealias SyncBlock = (value: Int, animated: Bool) -> Void
-	var syncCellWithValue: SyncBlock = { (value: Int, animated: Bool) in
+	typealias SyncBlock = (value: Int) -> Void
+	var syncCellWithValue: SyncBlock = { (value: Int) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
@@ -42,17 +42,17 @@ public class PrecisionSliderFormItem: FormItem {
 			return self.innerValue
 		}
 		set {
-			self.setValue(newValue, animated: false)
+			self.updateValue(newValue)
 		}
 	}
 	public func value(value: Int) -> Self {
-		setValue(value, animated: false)
+		updateValue(value)
 		return self
 	}
 	
-	public func setValue(value: Int, animated: Bool) {
+	public func updateValue(value: Int) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value: value)
 	}
 	
 	public var actualValue: Double {

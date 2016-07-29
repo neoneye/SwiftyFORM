@@ -6,8 +6,8 @@ one-finger pan to adjust slider
 two-finger pinch to adjust zoom
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	var originalScale: Double = 1.0
-	var originalValue: Double?
+	var originalScale: Double = 1
+	var originalValue: Double = 0
 	
 	var model = PrecisionSlider_InnerModel()
 	
@@ -73,11 +73,16 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.userInteractionEnabled = false
 		return instance
 	}()
+
+	var value: Double {
+		get { return valueFromContentOffset() }
+		set { setContentOffset(newValue) }
+	}
 	
-	var value: Double? {
+	func valueFromContentOffset() -> Double {
 		let scale = model.lengthOfFullItem
-		if scale < 0.1 {
-			return nil
+		if scale < 0.001 {
+			return model.fallbackValue
 		}
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
@@ -92,9 +97,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return result
 	}
 	
-	func setValue(value: Double, animated: Bool) {
+	func setContentOffset(value: Double) {
 		let scale = model.lengthOfFullItem
-		if scale < 0.1 {
+		if scale < 0.001 {
 			return
 		}
 		
@@ -113,7 +118,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		
 		let originalValueDidChange = valueDidChange
 		valueDidChange = nil
-		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: animated)
+		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
 		valueDidChange = originalValueDidChange
 	}
 	
@@ -147,9 +152,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
 			reloadSlider()
 			
-			if let value = originalValue {
-				setValue(value, animated: false)
-			}
+			self.value = originalValue
 			
 			valueDidChange?()
 		}

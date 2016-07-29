@@ -180,21 +180,21 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		First we scroll to the right offset
 		Next establish two way binding
 		*/
-		slider.setValue(scaledValue, animated: false)
+		slider.value = scaledValue
 
 		slider.valueDidChange = { [weak self] in
 			self?.sliderDidChange()
 		}
 	}
 	
-	func setValueWithoutSync(value: Int, animated: Bool) {
+	func setValueWithoutSync(value: Int) {
 		guard let model = collapsedCell?.model else {
 			return
 		}
-		SwiftyFormLog("set value \(value), animated \(animated)")
+		SwiftyFormLog("set value \(value)")
 		
 		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
 		let scaledValue = Double(value) / decimalScale
-		slider.setValue(scaledValue, animated: animated)
+		slider.value = scaledValue
 	}
 }

@@ -2,11 +2,15 @@
 import Foundation
 
 class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
-	var minimumValue: Double = 0.0
-	var maximumValue: Double = 100.0
-	
 	var originalMaximumValue: Double = 0.0
 	var originalMinimumValue: Double = 100.0
+	
+	var fallbackValue: Double {
+		return (originalMaximumValue - originalMinimumValue) / 2
+	}
+	
+	var minimumValue: Double = 0.0
+	var maximumValue: Double = 100.0
 	
 	var zoomMode = PrecisionSlider_InnerZoomMode.None
 	
