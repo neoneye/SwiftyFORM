@@ -67,42 +67,50 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 	
 	/*
-	This is used when the range is tiny and doesn't cross any integer boundary.
-	Example of such a range: from min=0.4 to max=0.6
-	here the size of the range is 0.2, which is (max - min)
+	This is used as a last resort when the range is too tiny that no other cells can be shown.
+	
+	The single_cell shows two markers.
+	 1. Shows a `leftMark` for the minimumValue
+	 2. Shows a `rightMark` for the maximumValue
 	*/
 	var hasOnePartialItem = false
 	var sizeOfOnePartialItem: Double = 0.0
 	
 	/*
-	This is used when the range-start crosses an integer boundary.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a partial-item-before
-	with the range from min=0.7 to max=1.0
-	here the size of the range is 0.3  (max - min)
+	This is used when the minimumValue doesn't align with any marker.
+	
+	The first_cell is two cells wide.
+	The first_cell shows two markers. 
+	 1. Shows a `mark` for the nearest marker to minimumValue
+	 2. Shows a `partialMark` that indicates where the minimumValue is located
 	*/
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
 	/*
-	This is used when the range is crossing zero or more integer boundaries.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a full items will span from min=1.0 to max=3.0
-	here the number of full items is 2  (max - min)
-	The size of a full item is alway 1, since it's full.
-	*/
-	var numberOfFullItems = 100
+	This is used when the maximumValue doesn't align with any marker.
 	
-	/*
-	This is used when the range-end crosses an integer boundary.
-	Example of such a range: from min=0.7 to max=3.3
-	In this case there will be a partial-item-after
-	with the range from min=3.0 to max=3.3
-	here the size of the range is 0.3  (max - min)
+	The last_cell is two cells wide.
+	The last_cell shows two markers.
+	 1. Shows a `mark` for the nearest marker to maximumValue
+	 2. Shows a `partialMark` that indicates where the maximumValue is located
 	*/
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
 	
+	/*
+	The full_cell is used for showing markers inbetween minimumValue and maximumValue.
+	
+	A full_cell shows a marker at midX.
+	
+	Example of such a range: from min=5.0 to max=6.0
+	In this case there will be 2 full cells
+	 * Cell 1: spans from min=4.5 to max=5.5 with a marker shown at 5.0
+	 * Cell 2: spans from min=5.5 to max=6.5 with a marker shown at 6.0
+	*/
+	var numberOfFullItems = 100
+	
+
 	var scale: Double = 60.0
 	var minimumScale: Double = 40.0
 	var maximumScale: Double = 80.0
