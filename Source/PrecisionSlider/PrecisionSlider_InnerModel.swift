@@ -23,81 +23,32 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 				return 1 / Double(count)
 			}
 		}
+		
+		static func create(scale: Double) -> ZoomMode {
+			if scale > 25000      { return .ZoomIn(count: 1000) }
+			if scale >  9000      { return .ZoomIn(count: 200) }
+			if scale >  2500      { return .ZoomIn(count: 100) }
+			if scale >   800      { return .ZoomIn(count: 20) }
+			if scale >   250      { return .ZoomIn(count: 10) }
+			if scale >   100      { return .ZoomIn(count: 2) }
+			if scale >    30      { return .None }
+			if scale >    10      { return .ZoomOut(count: 5) }
+			if scale >     3      { return .ZoomOut(count: 10) }
+			if scale >     0.6    { return .ZoomOut(count: 50) }
+			if scale >     0.3    { return .ZoomOut(count: 100) }
+			if scale >     0.15   { return .ZoomOut(count: 500) }
+			if scale >     0.032  { return .ZoomOut(count: 1000) }
+			if scale >     0.004  { return .ZoomOut(count: 5000) }
+			if scale >     0.0025 { return .ZoomOut(count: 10000) }
+			if scale >     0.0004 { return .ZoomOut(count: 50000) }
+			return .ZoomOut(count: 100000)
+		}
 	}
 	
 	var zoomMode = ZoomMode.None
 	
-	func reloadZoomMode() {
-		if scale > 25000 {
-			zoomMode = .ZoomIn(count: 1000)
-			return
-		}
-		if scale > 9000 {
-			zoomMode = .ZoomIn(count: 200)
-			return
-		}
-		if scale > 2500 {
-			zoomMode = .ZoomIn(count: 100)
-			return
-		}
-		if scale > 800 {
-			zoomMode = .ZoomIn(count: 20)
-			return
-		}
-		if scale > 250 {
-			zoomMode = .ZoomIn(count: 10)
-			return
-		}
-		if scale > 100 {
-			zoomMode = .ZoomIn(count: 2)
-			return
-		}
-		if scale > 30 {
-			zoomMode = .None
-			return
-		}
-		if scale > 10 {
-			zoomMode = .ZoomOut(count: 5)
-			return
-		}
-		if scale > 3 {
-			zoomMode = .ZoomOut(count: 10)
-			return
-		}
-		if scale > 0.6 {
-			zoomMode = .ZoomOut(count: 50)
-			return
-		}
-		if scale > 0.3 {
-			zoomMode = .ZoomOut(count: 100)
-			return
-		}
-		if scale > 0.15 {
-			zoomMode = .ZoomOut(count: 500)
-			return
-		}
-		if scale > 0.032 {
-			zoomMode = .ZoomOut(count: 1000)
-			return
-		}
-		if scale > 0.004 {
-			zoomMode = .ZoomOut(count: 5000)
-			return
-		}
-		if scale > 0.0025 {
-			zoomMode = .ZoomOut(count: 10000)
-			return
-		}
-		if scale > 0.0004 {
-			zoomMode = .ZoomOut(count: 50000)
-			return
-		}
-
-		zoomMode = .ZoomOut(count: 100000)
-	}
-	
 	func updateRange() {
-		reloadZoomMode()
+		zoomMode = ZoomMode.create(scale)
 		//print("zoomMode: \(zoomMode)  scale: \(scale)")
 		
 		maximumValue = originalMaximumValue * zoomMode.scalar
