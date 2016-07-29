@@ -91,8 +91,12 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 }
 
 extension PrecisionSliderCellModel {
+	struct Constants {
+		static let initialInset: CGFloat = 30.0
+		static let maxZoomedOutInset: CGFloat = 100.0
+	}
 	
-	func sliderViewModel(sliderWidthInPixels sliderWidthInPixels: Double) -> PrecisionSlider_InnerModel {
+	func sliderViewModel(sliderWidth sliderWidth: CGFloat) -> PrecisionSlider_InnerModel {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		let minimumValue = Double(self.minimumValue) / decimalScale
 		let maximumValue = Double(self.maximumValue) / decimalScale
@@ -102,21 +106,25 @@ extension PrecisionSliderCellModel {
 		instance.originalMaximumValue = maximumValue
 		
 		let rangeLength = maximumValue - minimumValue
-		if sliderWidthInPixels > 10 && rangeLength > 0.001 {
-			instance.scale = sliderWidthInPixels / Double(rangeLength)
+		
+		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
+		if initialSliderWidth > 10 && rangeLength > 0.001 {
+			instance.scale = initialSliderWidth / rangeLength
 		} else {
 			instance.scale = 10
+		}
+
+		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOutInset)
+		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
+			instance.minimumScale = maxZoomOutSliderWidth / rangeLength
+		} else {
+			instance.minimumScale = 10
 		}
 		return instance
 	}
 }
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
-	struct Constants {
-		static let insetForInitialZoom: CGFloat = 30.0
-	}
-	
-
 	weak var collapsedCell: PrecisionSliderCell?
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
@@ -160,8 +168,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 			return
 		}
 		
-		let sliderWidth = slider.bounds.width - Constants.insetForInitialZoom
-		let sliderViewModel = model.sliderViewModel(sliderWidthInPixels: Double(sliderWidth))
+		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
 		slider.model = sliderViewModel
 		slider.layout.model = sliderViewModel
 		slider.reloadSlider()

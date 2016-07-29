@@ -137,7 +137,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			if scale < 0.0 {
 				scale = 0.01
 			}
+			if scale < model.minimumScale {
+				scale = model.minimumScale
+			}
+			if model.scale == scale {
+				return // no need to update UI
+			}
 			model.scale = scale
+			//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
 			reloadSlider()
 			
 			if let value = originalValue {

@@ -100,6 +100,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var sizeOfPartialItemAfter: Double = 0.0
 	
 	var scale: Double = 60.0
+	var minimumScale: Double = 60.0
 	
 	var lengthOfFullItem: Double {
 		let result = ceil(scale / zoomMode.scalar)
@@ -172,7 +173,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
 		strings.append(String(format: "scale: %.5f", scale))
-		strings.append(String(format: "range: %.5f %.5f", minimumValue, maximumValue))
+		strings.append(String(format: "scale-range: %.5f", minimumScale))
+		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
 		}
