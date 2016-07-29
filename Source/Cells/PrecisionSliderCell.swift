@@ -91,63 +91,50 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 }
 
 extension PrecisionSliderCellModel {
+	struct Constants {
+		static let initialInset: CGFloat = 30.0
+		static let maxZoomedOut_Inset: CGFloat = 100.0
+		static let maxZoomedIn_DistanceBetweenMarks: Double = 60
+	}
 	
-	func sliderViewModel(sliderWidthInPixels sliderWidthInPixels: Double) -> PrecisionSlider_InnerModel {
+	func sliderViewModel(sliderWidth sliderWidth: CGFloat) -> PrecisionSlider_InnerModel {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		let minimumValue = Double(self.minimumValue) / decimalScale
 		let maximumValue = Double(self.maximumValue) / decimalScale
 		
 		let instance = PrecisionSlider_InnerModel()
-		instance.minimumValue = minimumValue
-		instance.maximumValue = maximumValue
+		instance.originalMinimumValue = minimumValue
+		instance.originalMaximumValue = maximumValue
 		
 		let rangeLength = maximumValue - minimumValue
-		if sliderWidthInPixels > 10 && rangeLength > 0.001 {
-			instance.scale = sliderWidthInPixels / Double(rangeLength)
+		
+		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
+		if initialSliderWidth > 10 && rangeLength > 0.001 {
+			instance.scale = initialSliderWidth / rangeLength
 		} else {
 			instance.scale = 10
 		}
-		
-		let count = Int(floor(maximumValue) - ceil(minimumValue))
-		if count < 0 {
-			//print("partial item that doesn't cross a integer boundary. maximumValue=\(maximumValue)  minimumValue=\(minimumValue)")
-			instance.numberOfFullItems = 0
-			instance.hasOnePartialItem = true
-			instance.sizeOfOnePartialItem = maximumValue - minimumValue
-			instance.hasPartialItemBefore = false
-			instance.sizeOfPartialItemBefore = 0
-			instance.hasPartialItemAfter = false
-			instance.sizeOfPartialItemAfter = 0
-			return instance
-		}
-		instance.numberOfFullItems = count
 
-		let sizeBefore = ceil(minimumValue) - minimumValue
-		//print("size before: \(sizeBefore)    \(minimumValue)")
-		if sizeBefore > 0.0000001 {
-			//print("partial item before. size: \(sizeBefore)   minimumValue: \(minimumValue)")
-			instance.hasPartialItemBefore = true
-			instance.sizeOfPartialItemBefore = sizeBefore
+		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
+		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
+			instance.minimumScale = maxZoomOutSliderWidth / rangeLength
+		} else {
+			instance.minimumScale = 10
 		}
 
-		let sizeAfter = maximumValue - floor(maximumValue)
-		//print("size after: \(sizeAfter)    \(maximumValue)")
-		if sizeAfter > 0.0000001 {
-			//print("partial item after. size: \(sizeAfter)   minimumValue: \(maximumValue)")
-			instance.hasPartialItemAfter = true
-			instance.sizeOfPartialItemAfter = sizeAfter
-		}
+		instance.maximumScale = Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale
 		
+		// Prevent negative scale-range
+		if instance.minimumScale > instance.maximumScale {
+			//print("preventing negative scale-range: from \(instance.minimumScale) to \(instance.maximumScale)")
+			instance.maximumScale = instance.minimumScale
+			instance.scale = instance.minimumScale
+		}
 		return instance
 	}
 }
 
 public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
-	struct Constants {
-		static let insetForInitialZoom: CGFloat = 10.0
-	}
-	
-
 	weak var collapsedCell: PrecisionSliderCell?
 
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
@@ -191,15 +178,10 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 			return
 		}
 		
-		let sliderWidth = slider.bounds.width - Constants.insetForInitialZoom
-		let sliderViewModel = model.sliderViewModel(sliderWidthInPixels: Double(sliderWidth))
-		//print("sliderViewModel \(sliderViewModel.debugDescription)")
+		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
 		slider.model = sliderViewModel
 		slider.layout.model = sliderViewModel
-		slider.setNeedsLayout()
-		slider.setNeedsDisplay()
-		slider.collectionView.reloadData()
-		
+		slider.reloadSlider()
 
 		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
 		let scaledValue = Double(model.value) / decimalScale
@@ -208,21 +190,21 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		First we scroll to the right offset
 		Next establish two way binding
 		*/
-		slider.setValue(scaledValue, animated: false)
+		slider.value = scaledValue
 
 		slider.valueDidChange = { [weak self] in
 			self?.sliderDidChange()
 		}
 	}
 	
-	func setValueWithoutSync(value: Int, animated: Bool) {
+	func setValueWithoutSync(value: Int) {
 		guard let model = collapsedCell?.model else {
 			return
 		}
-		SwiftyFormLog("set value \(value), animated \(animated)")
+		SwiftyFormLog("set value \(value)")
 		
 		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
 		let scaledValue = Double(value) / decimalScale
-		slider.setValue(scaledValue, animated: animated)
+		slider.value = scaledValue
 	}
 }
