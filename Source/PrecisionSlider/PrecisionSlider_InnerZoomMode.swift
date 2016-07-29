@@ -18,6 +18,7 @@ enum PrecisionSlider_InnerZoomMode {
 	}
 	
 	static func create(scale: Double) -> PrecisionSlider_InnerZoomMode {
+		if scale > 80000      { return .ZoomIn(count: 2000) }
 		if scale > 25000      { return .ZoomIn(count: 1000) }
 		if scale >  9000      { return .ZoomIn(count: 200) }
 		if scale >  2500      { return .ZoomIn(count: 100) }
@@ -49,7 +50,7 @@ enum PrecisionSlider_InnerZoomMode {
 			return .Major
 		case let .ZoomIn(count):
 			switch count {
-			case 2, 20, 200:
+			case 2, 20, 200, 2000:
 				if index % 2 == 0 {
 					return .Major
 				} else {
@@ -95,7 +96,7 @@ enum PrecisionSlider_InnerZoomMode {
 			return modulo10String(index)
 		case let .ZoomIn(count):
 			switch count {
-			case 2, 20, 200:
+			case 2, 20, 200, 2000:
 				if index % 2 != 0 {
 					return nil
 				}
