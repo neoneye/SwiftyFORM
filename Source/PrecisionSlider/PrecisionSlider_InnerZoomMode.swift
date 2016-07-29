@@ -92,94 +92,35 @@ enum PrecisionSlider_InnerZoomMode {
 	func markerText(index: Int) -> String? {
 		switch self {
 		case .None:
-			let displayValue = index % 10
-			return String(displayValue)
+			return modulo10String(index)
 		case let .ZoomIn(count):
-			if count == 2 {
+			switch count {
+			case 2, 20, 200:
 				if index % 2 != 0 {
 					return nil
 				}
 				return modulo10String(index / 2)
-			}
-			if count == 10 {
+			case 10, 100, 1000:
 				if index % 10 != 0 {
 					return nil
 				}
 				return modulo10String(index / 10)
-			}
-			if count == 20 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100 {
-				if index % 10 != 0 {
-					return nil
-				}
-				return modulo10String(index / 10)
-			}
-			if count == 200 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 1000 {
-				if index % 10 != 0 {
-					return nil
-				}
-				return modulo10String(index / 10)
+			default:
+				return nil
 			}
 		case let .ZoomOut(count):
-			if count == 5 {
+			switch count {
+			case 5, 50, 500, 5000, 50000:
 				if index % 2 != 0 {
 					return nil
 				}
 				return modulo10String(index / 2)
-			}
-			if count == 10 {
+			case 10, 100, 1000, 10000, 100000:
 				return modulo10String(index)
+			default:
+				return nil
 			}
-			if count == 50 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100 {
-				return modulo10String(index)
-			}
-			if count == 500 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 1000 {
-				return modulo10String(index)
-			}
-			if count == 5000 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 10000 {
-				return modulo10String(index)
-			}
-			if count == 50000 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100000 {
-				return modulo10String(index)
-			}
-			return nil
 		}
-		return nil
 	}
 
 }
