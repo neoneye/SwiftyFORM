@@ -104,7 +104,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var sizeOfPartialItemAfter: Double = 0.0
 	
 	var scale: Double = 60.0
-	var minimumScale: Double = 60.0
+	var minimumScale: Double = 40.0
+	var maximumScale: Double = 80.0
 	
 	var lengthOfFullItem: Double {
 		let result = ceil(scale / zoomMode.scalar)

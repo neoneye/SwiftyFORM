@@ -93,7 +93,8 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 extension PrecisionSliderCellModel {
 	struct Constants {
 		static let initialInset: CGFloat = 30.0
-		static let maxZoomedOutInset: CGFloat = 100.0
+		static let maxZoomedOut_Inset: CGFloat = 100.0
+		static let maxZoomedIn_DistanceBetweenMarks: Double = 60
 	}
 	
 	func sliderViewModel(sliderWidth sliderWidth: CGFloat) -> PrecisionSlider_InnerModel {
@@ -114,12 +115,14 @@ extension PrecisionSliderCellModel {
 			instance.scale = 10
 		}
 
-		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOutInset)
+		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
 			instance.minimumScale = maxZoomOutSliderWidth / rangeLength
 		} else {
 			instance.minimumScale = 10
 		}
+
+		instance.maximumScale = Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale
 		return instance
 	}
 }

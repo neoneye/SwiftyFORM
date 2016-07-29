@@ -142,7 +142,12 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			if scale < 0.0 {
 				scale = 0.01
 			}
+			if scale > model.maximumScale {
+				//print("clamp max")
+				scale = model.maximumScale
+			}
 			if scale < model.minimumScale {
+				//print("clamp min")
 				scale = model.minimumScale
 			}
 			if model.scale == scale {
