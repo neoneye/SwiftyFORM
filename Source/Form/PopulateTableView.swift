@@ -423,13 +423,13 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		weak var weakCellExpanded = cellExpanded
-		object.syncCellWithValue = { (value: Int, animated: Bool) in
+		object.syncCellWithValue = { (value: Int) in
 			SwiftyFormLog("sync value \(value)")
 			if let model = weakCell?.model {
 				model.value = value
 			}
 			weakCell?.reloadValueLabel()
-			weakCellExpanded?.setValueWithoutSync(value, animated: animated)
+			weakCellExpanded?.setValueWithoutSync(value)
 		}
 	}
 	
