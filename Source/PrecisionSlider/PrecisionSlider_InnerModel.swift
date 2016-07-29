@@ -145,107 +145,12 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	static let height: CGFloat = 130
 	
-	func modulo10String(index: Int) -> String {
-		let displayValue = index % 10
-		return String(displayValue)
-	}
-	
 	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
 		}
-
-		switch zoomMode {
-		case .None:
-			let displayValue = index % 10
-			return String(displayValue)
-		case let .ZoomIn(count):
-			if count == 2 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 10 {
-				if index % 10 != 0 {
-					return nil
-				}
-				return modulo10String(index / 10)
-			}
-			if count == 20 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100 {
-				if index % 10 != 0 {
-					return nil
-				}
-				return modulo10String(index / 10)
-			}
-			if count == 200 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 1000 {
-				if index % 10 != 0 {
-					return nil
-				}
-				return modulo10String(index / 10)
-			}
-		case let .ZoomOut(count):
-			if count == 5 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 10 {
-				return modulo10String(index)
-			}
-			if count == 50 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100 {
-				return modulo10String(index)
-			}
-			if count == 500 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 1000 {
-				return modulo10String(index)
-			}
-			if count == 5000 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 10000 {
-				return modulo10String(index)
-			}
-			if count == 50000 {
-				if index % 2 != 0 {
-					return nil
-				}
-				return modulo10String(index / 2)
-			}
-			if count == 100000 {
-				return modulo10String(index)
-			}
-			return nil
-		}
-		return nil
+		return zoomMode.markerText(index)
 	}
 	
 	let markMajorColor = UIColor.blackColor()
