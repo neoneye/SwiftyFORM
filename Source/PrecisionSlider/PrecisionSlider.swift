@@ -140,14 +140,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if gesture.state == .Changed {
 			var scale = originalScale * Double(gesture.scale)
 			if scale < 0.0 {
+				// ensure scale never goes below zero
 				scale = 0.01
 			}
 			if scale > model.maximumScale {
-				//print("clamp max")
 				scale = model.maximumScale
 			}
 			if scale < model.minimumScale {
-				//print("clamp min")
 				scale = model.minimumScale
 			}
 			if model.scale == scale {

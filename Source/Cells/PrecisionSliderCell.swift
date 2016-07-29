@@ -123,6 +123,13 @@ extension PrecisionSliderCellModel {
 		}
 
 		instance.maximumScale = Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale
+		
+		// Prevent negative scale-range
+		if instance.minimumScale > instance.maximumScale {
+			//print("preventing negative scale-range: from \(instance.minimumScale) to \(instance.maximumScale)")
+			instance.maximumScale = instance.minimumScale
+			instance.scale = instance.minimumScale
+		}
 		return instance
 	}
 }
