@@ -40,6 +40,7 @@
 		42D005151B9631F400986B3B /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005131B9631F400986B3B /* LoadingCell.swift */; };
 		42D005161B9631F400986B3B /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D005141B9631F400986B3B /* LoadingCell.xib */; };
 		42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005191B96395D00986B3B /* CustomViewController.swift */; };
+		42D2975D1D4CD6C100561780 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D2975C1D4CD6C100561780 /* Random.swift */; };
 		42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */; };
 		42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC81D4152490066E45A /* ColorPickerViewController.swift */; };
 		42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */; };
@@ -125,6 +126,7 @@
 		42D005131B9631F400986B3B /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		42D005141B9631F400986B3B /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		42D005191B96395D00986B3B /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		42D2975C1D4CD6C100561780 /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsViewController.swift; sourceTree = "<group>"; };
 		42FABBC81D4152490066E45A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlidersViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				42589DC61B3447EA007CA8C1 /* TextField */,
 				42589DCC1B3447EA007CA8C1 /* TextView */,
 				42108D271B3576110067FEAA /* Usecases */,
+				42D2975B1D4CD6C100561780 /* Util */,
 				42685D3E1D2D6AB2008ABC3D /* WorkInProgress */,
 			);
 			path = Example;
@@ -280,6 +283,14 @@
 				42D005141B9631F400986B3B /* LoadingCell.xib */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		42D2975B1D4CD6C100561780 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				42D2975C1D4CD6C100561780 /* Random.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +408,7 @@
 				42D005151B9631F400986B3B /* LoadingCell.swift in Sources */,
 				42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */,
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
+				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
