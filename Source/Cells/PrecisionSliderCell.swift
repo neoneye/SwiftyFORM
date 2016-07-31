@@ -92,6 +92,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 
 extension PrecisionSliderCellModel {
 	struct Constants {
+		static let markerSpacing: Double = 30.0
 		static let initialInset: CGFloat = 30.0
 		static let maxZoomedOut_Inset: CGFloat = 100.0
 		static let maxZoomedIn_DistanceBetweenMarks: Double = 60
@@ -108,21 +109,24 @@ extension PrecisionSliderCellModel {
 		
 		let rangeLength = maximumValue - minimumValue
 		
+		let markerSpacing = Constants.markerSpacing
+		instance.markerSpacing = markerSpacing
+		
 		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
 		if initialSliderWidth > 10 && rangeLength > 0.001 {
-			instance.scale = initialSliderWidth / rangeLength
+			instance.scale = log10((initialSliderWidth / rangeLength) / markerSpacing)
 		} else {
-			instance.scale = 10
+			instance.scale = 0
 		}
 
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
-			instance.minimumScale = maxZoomOutSliderWidth / rangeLength
+			instance.minimumScale = log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing)
 		} else {
-			instance.minimumScale = 10
+			instance.minimumScale = 0
 		}
 
-		instance.maximumScale = Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale
+		instance.maximumScale = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
 		
 		// Prevent negative scale-range
 		if instance.minimumScale > instance.maximumScale {
@@ -130,6 +134,7 @@ extension PrecisionSliderCellModel {
 			instance.maximumScale = instance.minimumScale
 			instance.scale = instance.minimumScale
 		}
+		//SwiftyFormLog("slider model: \(instance)")
 		return instance
 	}
 }

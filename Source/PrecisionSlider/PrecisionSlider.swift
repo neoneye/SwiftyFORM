@@ -153,7 +153,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let scale = originalScale * Double(gesture.scale)
+			let scale = log10(pow(10, originalScale) * Double(gesture.scale))
 			changeScale(scale: scale, value: originalValue)
 			valueDidChange?()
 		}
@@ -174,11 +174,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalScale = model.scale
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale * 2
-		let scale1: Double = originalScale * 4
-		let scale2: Double = originalScale * 6
-		let scale3: Double = originalScale * 8
-		let scale4: Double = originalScale * 10
+		let scale0: Double = originalScale + 0.2
+		let scale1: Double = originalScale + 0.4
+		let scale2: Double = originalScale + 0.6
+		let scale3: Double = originalScale + 0.8
+		let scale4: Double = originalScale + 1.0
 
 		let clampedScale = clampScale(scale4)
 		if model.scale == clampedScale {
@@ -221,11 +221,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalScale = model.scale
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale / 2
-		let scale1: Double = originalScale / 4
-		let scale2: Double = originalScale / 6
-		let scale3: Double = originalScale / 8
-		let scale4: Double = originalScale / 10
+		let scale0: Double = originalScale - 0.2
+		let scale1: Double = originalScale - 0.4
+		let scale2: Double = originalScale - 0.6
+		let scale3: Double = originalScale - 0.8
+		let scale4: Double = originalScale - 1.0
 		
 		let clampedScale = clampScale(scale4)
 		if model.scale == clampedScale {
@@ -255,10 +255,6 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func clampScale(scale: Double) -> Double {
 		var clampedScale = scale
-		if clampedScale < 0.0 {
-			// ensure scale never goes below zero
-			clampedScale = 0.01
-		}
 		if clampedScale > model.maximumScale {
 			clampedScale = model.maximumScale
 		}

@@ -111,12 +111,14 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var numberOfFullItems = 100
 	
 
-	var scale: Double = 60.0
-	var minimumScale: Double = 40.0
-	var maximumScale: Double = 80.0
+	var markerSpacing: Double = 30
+	
+	var scale: Double = 0.0
+	var minimumScale: Double = -5.0
+	var maximumScale: Double = 5.0
 	
 	var lengthOfFullItem: Double {
-		let result = ceil(scale / zoomMode.scalar)
+		let result = ceil(pow(10, scale) * markerSpacing / zoomMode.scalar)
 		if result < 0.1 {
 			return 0.1
 		}
