@@ -29,6 +29,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
 		addGestureRecognizer(pinchGestureRecognizer)
+		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
+		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
 	}
 	
 	func updateContentInset() {
@@ -161,6 +163,77 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			valueDidChange?()
 		}
 	}
+	
+	lazy var oneTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleOneTouchDoubleTap))
+		instance.numberOfTapsRequired = 2
+		instance.numberOfTouchesRequired = 1
+		return instance
+	}()
+
+	lazy var twoTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleTwoTouchDoubleTap))
+		instance.numberOfTapsRequired = 2
+		instance.numberOfTouchesRequired = 2
+		return instance
+	}()
+	
+	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+		print("zoom in")
+		let originalScale = model.scale
+		let originalValue = self.value
+
+		var scale = originalScale * 10
+		if scale < 0.0 {
+			// ensure scale never goes below zero
+			scale = 0.01
+		}
+		if scale > model.maximumScale {
+			scale = model.maximumScale
+		}
+		if scale < model.minimumScale {
+			scale = model.minimumScale
+		}
+		if model.scale == scale {
+			return // no need to update UI
+		}
+		model.scale = scale
+		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
+		reloadSlider()
+		
+		self.value = originalValue
+		
+		valueDidChange?()
+	}
+	
+	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+		print("zoom out")
+		let originalScale = model.scale
+		let originalValue = self.value
+		
+		var scale = originalScale / 10
+		if scale < 0.0 {
+			// ensure scale never goes below zero
+			scale = 0.01
+		}
+		if scale > model.maximumScale {
+			scale = model.maximumScale
+		}
+		if scale < model.minimumScale {
+			scale = model.minimumScale
+		}
+		if model.scale == scale {
+			return // no need to update UI
+		}
+		model.scale = scale
+		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
+		reloadSlider()
+		
+		self.value = originalValue
+		
+		valueDidChange?()
+	}
+	
 	
 	func reloadSlider() {
 		model.updateRange()
