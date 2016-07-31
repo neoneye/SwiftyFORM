@@ -13,7 +13,7 @@ struct PrecisionSlider_InnerCollectionViewCellConstants {
 
 
 /**
-The cell displays a `mark` and displays a `label`.
+This cell displays a `mark` and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -64,7 +64,7 @@ class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `partialMark` and `mark`, and displays a `label`.
+This cell displays two markers, `partialMark` and `mark`, and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -144,7 +144,7 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `mark` and `partialMark`, and displays a `label`.
+This cell displays two markers, `mark` and `partialMark`, and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -224,7 +224,7 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `leftMark` and `rightMark`.
+This cell displays two markers, `leftMark` and `rightMark`.
 
 The `leftMark` indicates where the minimumValue is.
 The `rightMark` indicates where the maximumValue is.
