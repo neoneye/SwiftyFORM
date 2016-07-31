@@ -186,7 +186,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
 		strings.append(String(format: "scale: %.5f", scale))
-		strings.append(String(format: "scale-range: %.5f", minimumScale))
+		strings.append(String(format: "scale-range: %.5f %.5f", minimumScale, maximumScale))
 		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
