@@ -40,3 +40,22 @@ Expected behavior:
 
 
 
+# PrecisionSlider - Zoom can be slow
+
+Difficulty level: HARD
+
+During a zoom operation the slider has to reload its collectionview.
+The cells are assigned new sizes. Mark-labels are assigned new texts.
+If there are too many cells, then the collectionview can be really slow to reload.
+At any given time max ~100 cells is visible at any given zoom level.
+
+It's gets noticable when you zoom-in a lot. 
+Example: Create a slider that goes from -100k to +100k with 3 decimal places.
+Zoom-in 7 times, to the 3 decimal place. Now zooming is slow.
+
+What could be causing this:
+ 1. The collectionview gets way too many cells to keep track of.
+ 2. The cells are not perfectly pixel-aligned.
+
+Solution:
+Don't use collectionview/scrollview. Use a custom view, perhaps spritekit based.
