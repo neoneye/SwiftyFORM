@@ -1,9 +1,16 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-/*
-one-finger pan to adjust slider
-two-finger pinch to adjust zoom
+/**
+PrecisionSlider
+
+These gestures are available:
+
+ 1. One-finger pan to adjust value
+ 2. Two-finger pinch to adjust zoom
+ 3. Double-tap to x10 zoom
+ 4. Double-2finger-tap to x10 unzoom
+
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	var originalScale: Double = 1
@@ -29,6 +36,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
 		addGestureRecognizer(pinchGestureRecognizer)
+		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
+		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
 	}
 	
 	func updateContentInset() {
@@ -73,6 +82,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.userInteractionEnabled = false
 		return instance
 	}()
+	
+	
+	// MARK: Value get/set
 
 	var value: Double {
 		get { return valueFromContentOffset() }
@@ -122,6 +134,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		valueDidChange = originalValueDidChange
 	}
 	
+	
+	// MARK: pinch gesture for zoom in/out
+	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
 		let instance = UIPinchGestureRecognizer(target: self, action: #selector(PrecisionSlider.handlePinch))
 		instance.delegate = self
@@ -138,28 +153,127 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			var scale = originalScale * Double(gesture.scale)
-			if scale < 0.0 {
-				// ensure scale never goes below zero
-				scale = 0.01
-			}
-			if scale > model.maximumScale {
-				scale = model.maximumScale
-			}
-			if scale < model.minimumScale {
-				scale = model.minimumScale
-			}
-			if model.scale == scale {
-				return // no need to update UI
-			}
-			model.scale = scale
-			//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
-			reloadSlider()
-			
-			self.value = originalValue
-			
+			let scale = log10(pow(10, originalScale) * Double(gesture.scale))
+			changeScale(scale: scale, value: originalValue)
 			valueDidChange?()
 		}
+	}
+	
+	
+	// MARK: one-finger double-tap for zoom in
+	
+	lazy var oneTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleOneTouchDoubleTap))
+		instance.numberOfTapsRequired = 2
+		instance.numberOfTouchesRequired = 1
+		return instance
+	}()
+
+	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+		SwiftyFormLog("zoom in")
+		let originalScale = model.scale
+		let originalValue = self.value
+		
+		let scale0: Double = originalScale + 0.2
+		let scale1: Double = originalScale + 0.4
+		let scale2: Double = originalScale + 0.6
+		let scale3: Double = originalScale + 0.8
+		let scale4: Double = originalScale + 1.0
+
+		let clampedScale = clampScale(scale4)
+		if model.scale == clampedScale {
+			return // already zoomed in, no need to update UI
+		}
+
+		changeScale(scale: scale0, value: originalValue)
+
+		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
+		dispatch_after(delay, dispatch_get_main_queue()) {
+			self.changeScale(scale: scale1, value: originalValue)
+
+			dispatch_after(delay, dispatch_get_main_queue()) {
+				self.changeScale(scale: scale2, value: originalValue)
+
+				dispatch_after(delay, dispatch_get_main_queue()) {
+					self.changeScale(scale: scale3, value: originalValue)
+					
+					dispatch_after(delay, dispatch_get_main_queue()) {
+						self.changeScale(scale: scale4, value: originalValue)
+						self.valueDidChange?()
+					}
+				}
+			}
+		}
+	}
+	
+	
+	// MARK: two-finger double-tap for zoom out
+	
+	lazy var twoTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
+		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleTwoTouchDoubleTap))
+		instance.numberOfTapsRequired = 2
+		instance.numberOfTouchesRequired = 2
+		return instance
+	}()
+	
+	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+		SwiftyFormLog("zoom out")
+		let originalScale = model.scale
+		let originalValue = self.value
+		
+		let scale0: Double = originalScale - 0.2
+		let scale1: Double = originalScale - 0.4
+		let scale2: Double = originalScale - 0.6
+		let scale3: Double = originalScale - 0.8
+		let scale4: Double = originalScale - 1.0
+		
+		let clampedScale = clampScale(scale4)
+		if model.scale == clampedScale {
+			return // already zoomed out, no need to update UI
+		}
+		
+		changeScale(scale: scale0, value: originalValue)
+		
+		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
+		dispatch_after(delay, dispatch_get_main_queue()) {
+			self.changeScale(scale: scale1, value: originalValue)
+			
+			dispatch_after(delay, dispatch_get_main_queue()) {
+				self.changeScale(scale: scale2, value: originalValue)
+				
+				dispatch_after(delay, dispatch_get_main_queue()) {
+					self.changeScale(scale: scale3, value: originalValue)
+					
+					dispatch_after(delay, dispatch_get_main_queue()) {
+						self.changeScale(scale: scale4, value: originalValue)
+						self.valueDidChange?()
+					}
+				}
+			}
+		}
+	}
+
+	func clampScale(scale: Double) -> Double {
+		var clampedScale = scale
+		if clampedScale > model.maximumScale {
+			clampedScale = model.maximumScale
+		}
+		if clampedScale < model.minimumScale {
+			clampedScale = model.minimumScale
+		}
+		return clampedScale
+	}
+
+	func changeScale(scale scale: Double, value: Double) {
+		let clampedScale = clampScale(scale)
+		if model.scale == clampedScale {
+			return // no need to update UI
+		}
+		model.scale = clampedScale
+		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
+		reloadSlider()
+		
+		self.value = value
 	}
 	
 	func reloadSlider() {

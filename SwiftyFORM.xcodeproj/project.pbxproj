@@ -71,7 +71,6 @@
 		428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683231B346CFE0028DB2F /* Dictionary+Update.swift */; };
 		428683551B346CFE0028DB2F /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683241B346CFE0028DB2F /* KeyboardHandler.swift */; };
 		428683561B346CFE0028DB2F /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683251B346CFE0028DB2F /* Logging.swift */; };
-		428683571B346CFE0028DB2F /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683261B346CFE0028DB2F /* Math.swift */; };
 		428683581B346CFE0028DB2F /* UITableView+PrevNext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683271B346CFE0028DB2F /* UITableView+PrevNext.swift */; };
 		428683591B346CFE0028DB2F /* UIView+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683281B346CFE0028DB2F /* UIView+FirstResponder.swift */; };
 		4286835A1B346CFE0028DB2F /* UIView+LookupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683291B346CFE0028DB2F /* UIView+LookupCell.swift */; };
@@ -168,7 +167,6 @@
 		428683231B346CFE0028DB2F /* Dictionary+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Update.swift"; sourceTree = "<group>"; };
 		428683241B346CFE0028DB2F /* KeyboardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		428683251B346CFE0028DB2F /* Logging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		428683261B346CFE0028DB2F /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		428683271B346CFE0028DB2F /* UITableView+PrevNext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+PrevNext.swift"; sourceTree = "<group>"; };
 		428683281B346CFE0028DB2F /* UIView+FirstResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+FirstResponder.swift"; sourceTree = "<group>"; };
 		428683291B346CFE0028DB2F /* UIView+LookupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LookupCell.swift"; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				428683231B346CFE0028DB2F /* Dictionary+Update.swift */,
 				428683241B346CFE0028DB2F /* KeyboardHandler.swift */,
 				428683251B346CFE0028DB2F /* Logging.swift */,
-				428683261B346CFE0028DB2F /* Math.swift */,
 				42096E711B358A7E0068B084 /* ShowInfo.swift */,
 				42096E721B358A7E0068B084 /* SubmitButton.swift */,
 				428683271B346CFE0028DB2F /* UITableView+PrevNext.swift */,
@@ -543,7 +540,6 @@
 				428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */,
 				428683521B346CFE0028DB2F /* Specification.swift in Sources */,
 				4286835C1B346CFE0028DB2F /* UIViewController+Alert.swift in Sources */,
-				428683571B346CFE0028DB2F /* Math.swift in Sources */,
 				428683561B346CFE0028DB2F /* Logging.swift in Sources */,
 				42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */,
 				428683331B346CFE0028DB2F /* SliderCell.swift in Sources */,

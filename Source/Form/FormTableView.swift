@@ -34,6 +34,9 @@ public class FormTableView: UITableView {
 		var insertion = [NSIndexPath]()
 		var deletion = [NSIndexPath]()
 		
+		var isExpand = false
+		var isCollapse = false
+		
 		var row = 0
 		for item in section.cells.allItems {
 			
@@ -42,11 +45,13 @@ public class FormTableView: UITableView {
 					item.hidden = false
 					section.cells.reloadVisibleItems()
 					insertion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
+					isExpand = true
 					break
 				} else {
 					item.hidden = true
 					section.cells.reloadVisibleItems()
 					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
+					isCollapse = true
 				}
 			}
 			
@@ -56,6 +61,16 @@ public class FormTableView: UITableView {
 			row += 1
 		}
 		
+		CATransaction.begin()
+		CATransaction.setCompletionBlock({
+			if isExpand {
+				self.didExpand_scrollToVisible(indexPath)
+			}
+			if isCollapse {
+				self.didCollapse_scrollToVisible(indexPath)
+			}
+		})
+		
 		beginUpdates()
 		deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
 		insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
@@ -64,6 +79,72 @@ public class FormTableView: UITableView {
 		}
 		endUpdates()
 		
+		CATransaction.commit()
+		
 		SwiftyFormLog("did expand")
+	}
+	
+	/**
+	This is supposed to be run after the expand row animation has completed.
+	This function ensures that the main row and its expanded row are both fully visible.
+	If the rows are obscured it will scrolls to make them visible.
+	*/
+	private func didExpand_scrollToVisible(indexPath: NSIndexPath) {
+		let rect = rectForRowAtIndexPath(indexPath)
+		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
+		//SwiftyFormLog("focusArea_minY \(focusArea_minY)    \(rect.minY) \(contentOffset.y) \(contentInset.top)")
+		if focusArea_minY < 0 {
+			SwiftyFormLog("focus area is outside the top. Scrolling to make it visible")
+			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+			return
+		}
+		
+		// Expanded row
+		let expanded_indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
+		let expanded_rect = rectForRowAtIndexPath(expanded_indexPath)
+		let focusArea_maxY = expanded_rect.maxY - (contentOffset.y + contentInset.top)
+		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(expanded_rect.maxY) \(contentOffset.y) \(contentInset.top)")
+		
+		let bottomMaxY = bounds.height - (contentInset.bottom + contentInset.top)
+		//SwiftyFormLog("bottomMaxY: \(bottomMaxY) \(bounds.height) \(contentInset.bottom) \(contentInset.top)")
+		
+		if focusArea_maxY > bottomMaxY {
+			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
+			scrollToRowAtIndexPath(expanded_indexPath, atScrollPosition: .Bottom, animated: true)
+			return
+		}
+		
+		SwiftyFormLog("focus area is inside. No need to scroll")
+	}
+
+	/**
+	This is supposed to be run after the collapse row animation has completed.
+	This function ensures that the collapsed row is fully visible.
+	If the row is obscured it will scroll to make the row visible.
+	*/
+	private func didCollapse_scrollToVisible(indexPath: NSIndexPath) {
+		let rect = rectForRowAtIndexPath(indexPath)
+		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
+		//SwiftyFormLog("focusArea_minY \(focusArea_minY)    \(rect.minY) \(contentOffset.y) \(contentInset.top)")
+		
+		if focusArea_minY < 0 {
+			SwiftyFormLog("focus area is outside the top. Scrolling to make it visible")
+			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+			return
+		}
+		
+		let focusArea_maxY = rect.maxY - (contentOffset.y + contentInset.top)
+		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(rect.maxY) \(contentOffset.y) \(contentInset.top)")
+		
+		let bottomMaxY = bounds.height - (contentInset.bottom + contentInset.top)
+		//SwiftyFormLog("bottomMaxY: \(bottomMaxY) \(bounds.height) \(contentInset.bottom) \(contentInset.top)")
+		
+		if focusArea_maxY > bottomMaxY {
+			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
+			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+			return
+		}
+		
+		SwiftyFormLog("focus area is inside. No need to scroll")
 	}
 }
