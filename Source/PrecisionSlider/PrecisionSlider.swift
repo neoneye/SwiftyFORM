@@ -163,7 +163,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 
 	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
-		print("zoom in")
+		SwiftyFormLog("zoom in")
 		let originalScale = model.scale
 		let originalValue = self.value
 		
@@ -210,7 +210,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
-		print("zoom out")
+		SwiftyFormLog("zoom out")
 		let originalScale = model.scale
 		let originalValue = self.value
 		
