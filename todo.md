@@ -54,8 +54,10 @@ Example: Create a slider that goes from -100k to +100k with 3 decimal places.
 Zoom-in 7 times, to the 3 decimal place. Now zooming is slow.
 
 What could be causing this:
- 1. The collectionview gets way too many cells to keep track of.
- 2. The cells are not perfectly pixel-aligned.
+ 1. Lots of calls to computed variables, such as lengthOfFullItem. 
+ 2. The collectionview gets way too many cells to keep track of.
+ 3. The cells are not perfectly pixel-aligned.
 
 Solution:
+Precompute the lenghts, see if it impacts performance.
 Don't use collectionview/scrollview. Use a custom view, perhaps spritekit based.
