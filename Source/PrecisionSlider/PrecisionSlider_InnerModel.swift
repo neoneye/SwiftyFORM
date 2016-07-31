@@ -66,7 +66,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		//		print("model: \(self)")
 	}
 	
-	/*
+	/**
 	This is used as a last resort when the range is too tiny that no other cells can be shown.
 	
 	The single_cell shows two markers.
@@ -76,7 +76,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasOnePartialItem = false
 	var sizeOfOnePartialItem: Double = 0.0
 	
-	/*
+	/**
 	This is used when the minimumValue doesn't align with any marker.
 	
 	The first_cell is two cells wide.
@@ -87,7 +87,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
-	/*
+	/**
 	This is used when the maximumValue doesn't align with any marker.
 	
 	The last_cell is two cells wide.
@@ -98,7 +98,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
 	
-	/*
+	/**
 	The full_cell is used for showing markers inbetween minimumValue and maximumValue.
 	
 	A full_cell shows a marker at midX.
@@ -112,11 +112,25 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 
 	var markerSpacing: Double = 30
+
+	/**
+	The `scale` is logarithmic
 	
+	 1. scale  2 == 100   zoomed out
+	 2. scale  1 == 10
+	 3. scale  0 == 1     normal
+	 4. scale -1 == 0.1
+	 5. scale -2 == 0.01  zoomed in
+	
+	The scale works best in the range -3 to +3.
+	Scale values outside -6 to +6 are extreme.
+	*/
 	var scale: Double = 0.0
 	var minimumScale: Double = -5.0
 	var maximumScale: Double = 5.0
 	
+	
+	/// length is in pixels
 	var lengthOfFullItem: Double {
 		let result = ceil(pow(10, scale) * markerSpacing / zoomMode.scalar)
 		if result < 0.1 {
