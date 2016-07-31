@@ -75,6 +75,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.userInteractionEnabled = false
 		return instance
 	}()
+	
+	
+	// MARK: Value get/set
 
 	var value: Double {
 		get { return valueFromContentOffset() }
@@ -124,6 +127,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		valueDidChange = originalValueDidChange
 	}
 	
+	
+	// MARK: pinch gesture for zoom in/out
+	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
 		let instance = UIPinchGestureRecognizer(target: self, action: #selector(PrecisionSlider.handlePinch))
 		instance.delegate = self
@@ -140,29 +146,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			var scale = originalScale * Double(gesture.scale)
-			if scale < 0.0 {
-				// ensure scale never goes below zero
-				scale = 0.01
-			}
-			if scale > model.maximumScale {
-				scale = model.maximumScale
-			}
-			if scale < model.minimumScale {
-				scale = model.minimumScale
-			}
-			if model.scale == scale {
-				return // no need to update UI
-			}
-			model.scale = scale
-			//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
-			reloadSlider()
-			
-			self.value = originalValue
-			
+			let scale = originalScale * Double(gesture.scale)
+			changeScale(scale: scale, value: originalValue)
 			valueDidChange?()
 		}
 	}
+	
+	
+	// MARK: one-finger double-tap for zoom in
 	
 	lazy var oneTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleOneTouchDoubleTap))
@@ -171,6 +162,46 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
+	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+		print("zoom in")
+		let originalScale = model.scale
+		let originalValue = self.value
+		
+		let scale0: Double = originalScale * 2
+		let scale1: Double = originalScale * 4
+		let scale2: Double = originalScale * 6
+		let scale3: Double = originalScale * 8
+		let scale4: Double = originalScale * 10
+
+		let clampedScale = clampScale(scale4)
+		if model.scale == clampedScale {
+			return // already zoomed in, no need to update UI
+		}
+
+		changeScale(scale: scale0, value: originalValue)
+
+		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
+		dispatch_after(delay, dispatch_get_main_queue()) {
+			self.changeScale(scale: scale1, value: originalValue)
+
+			dispatch_after(delay, dispatch_get_main_queue()) {
+				self.changeScale(scale: scale2, value: originalValue)
+
+				dispatch_after(delay, dispatch_get_main_queue()) {
+					self.changeScale(scale: scale3, value: originalValue)
+					
+					dispatch_after(delay, dispatch_get_main_queue()) {
+						self.changeScale(scale: scale4, value: originalValue)
+						self.valueDidChange?()
+					}
+				}
+			}
+		}
+	}
+	
+	
+	// MARK: two-finger double-tap for zoom out
+	
 	lazy var twoTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleTwoTouchDoubleTap))
 		instance.numberOfTapsRequired = 2
@@ -178,62 +209,69 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 	
-	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
-		print("zoom in")
-		let originalScale = model.scale
-		let originalValue = self.value
-
-		var scale = originalScale * 10
-		if scale < 0.0 {
-			// ensure scale never goes below zero
-			scale = 0.01
-		}
-		if scale > model.maximumScale {
-			scale = model.maximumScale
-		}
-		if scale < model.minimumScale {
-			scale = model.minimumScale
-		}
-		if model.scale == scale {
-			return // no need to update UI
-		}
-		model.scale = scale
-		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
-		reloadSlider()
-		
-		self.value = originalValue
-		
-		valueDidChange?()
-	}
-	
 	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		print("zoom out")
 		let originalScale = model.scale
 		let originalValue = self.value
 		
-		var scale = originalScale / 10
-		if scale < 0.0 {
+		let scale0: Double = originalScale / 2
+		let scale1: Double = originalScale / 4
+		let scale2: Double = originalScale / 6
+		let scale3: Double = originalScale / 8
+		let scale4: Double = originalScale / 10
+		
+		let clampedScale = clampScale(scale4)
+		if model.scale == clampedScale {
+			return // already zoomed out, no need to update UI
+		}
+		
+		changeScale(scale: scale0, value: originalValue)
+		
+		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
+		dispatch_after(delay, dispatch_get_main_queue()) {
+			self.changeScale(scale: scale1, value: originalValue)
+			
+			dispatch_after(delay, dispatch_get_main_queue()) {
+				self.changeScale(scale: scale2, value: originalValue)
+				
+				dispatch_after(delay, dispatch_get_main_queue()) {
+					self.changeScale(scale: scale3, value: originalValue)
+					
+					dispatch_after(delay, dispatch_get_main_queue()) {
+						self.changeScale(scale: scale4, value: originalValue)
+						self.valueDidChange?()
+					}
+				}
+			}
+		}
+	}
+
+	func clampScale(scale: Double) -> Double {
+		var clampedScale = scale
+		if clampedScale < 0.0 {
 			// ensure scale never goes below zero
-			scale = 0.01
+			clampedScale = 0.01
 		}
-		if scale > model.maximumScale {
-			scale = model.maximumScale
+		if clampedScale > model.maximumScale {
+			clampedScale = model.maximumScale
 		}
-		if scale < model.minimumScale {
-			scale = model.minimumScale
+		if clampedScale < model.minimumScale {
+			clampedScale = model.minimumScale
 		}
-		if model.scale == scale {
+		return clampedScale
+	}
+
+	func changeScale(scale scale: Double, value: Double) {
+		let clampedScale = clampScale(scale)
+		if model.scale == clampedScale {
 			return // no need to update UI
 		}
-		model.scale = scale
+		model.scale = clampedScale
 		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
 		reloadSlider()
 		
-		self.value = originalValue
-		
-		valueDidChange?()
+		self.value = value
 	}
-	
 	
 	func reloadSlider() {
 		model.updateRange()
