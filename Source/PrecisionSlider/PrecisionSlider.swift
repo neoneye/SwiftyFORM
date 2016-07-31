@@ -1,9 +1,16 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-/*
-one-finger pan to adjust slider
-two-finger pinch to adjust zoom
+/**
+PrecisionSlider
+
+These gestures are available:
+
+ 1. One-finger pan to adjust value
+ 2. Two-finger pinch to adjust zoom
+ 3. Double-tap to x10 zoom
+ 4. Double-2finger-tap to x10 unzoom
+
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
 	var originalScale: Double = 1
