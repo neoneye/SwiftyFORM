@@ -283,11 +283,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func clampScale(scale: Double) -> Double {
 		var clampedScale = scale
-		if clampedScale > model.maximumScale {
-			clampedScale = model.maximumScale
+		if clampedScale > model.maximumZoom {
+			clampedScale = model.maximumZoom
 		}
-		if clampedScale < model.minimumScale {
-			clampedScale = model.minimumScale
+		if clampedScale < model.minimumZoom {
+			clampedScale = model.minimumZoom
 		}
 		return clampedScale
 	}

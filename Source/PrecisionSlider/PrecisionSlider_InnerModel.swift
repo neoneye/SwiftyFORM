@@ -114,20 +114,20 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var markerSpacing: Double = 30
 
 	/**
-	The `scale` is logarithmic
+	The `zoom` factor is logarithmic
 	
-	 1. scale  2 == 100   zoomed out
-	 2. scale  1 == 10
-	 3. scale  0 == 1     normal
-	 4. scale -1 == 0.1
-	 5. scale -2 == 0.01  zoomed in
+	 1. zoom-factor +2 == 100   zoomed out
+	 2. zoom-factor +1 == 10
+	 3. zoom-factor  0 == 1     normal
+	 4. zoom-factor -1 == 0.1
+	 5. zoom-factor -2 == 0.01  zoomed in
 	
-	The scale works best in the range -3 to +3.
-	Scale values outside -6 to +6 are extreme.
+	The zoom works best in the range -3 to +3.
+	A zoom factor outside -6 to +6 is extreme.
 	*/
 	var zoom: Double = 0.0
-	var minimumScale: Double = -5.0
-	var maximumScale: Double = 5.0
+	var minimumZoom: Double = -5.0
+	var maximumZoom: Double = 5.0
 	
 	
 	/// length is in pixels
@@ -202,7 +202,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
 		strings.append(String(format: "scale: %.5f", zoom))
-		strings.append(String(format: "scale-range: %.5f %.5f", minimumScale, maximumScale))
+		strings.append(String(format: "scale-range: %.5f %.5f", minimumZoom, maximumZoom))
 		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))

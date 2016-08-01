@@ -150,26 +150,26 @@ extension PrecisionSliderCellModel {
 		// Determine how far zoom-out is possible
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
-			instance.minimumScale = log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing)
+			instance.minimumZoom = log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing)
 		} else {
-			instance.minimumScale = 0
+			instance.minimumZoom = 0
 		}
 
 		// Determine how far zoom-in is possible
-		instance.maximumScale = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
+		instance.maximumZoom = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
 		
 		// Prevent negative scale-range
-		if instance.minimumScale > instance.maximumScale {
-			//print("preventing negative scale-range: from \(instance.minimumScale) to \(instance.maximumScale)")
-			instance.maximumScale = instance.minimumScale
+		if instance.minimumZoom > instance.maximumZoom {
+			//print("preventing negative scale-range: from \(instance.minimumZoom) to \(instance.maximumZoom)")
+			instance.maximumZoom = instance.minimumZoom
 		}
 		
 		// Prevent scale from going outside the scale-range
-		if instance.zoom < instance.minimumScale {
-			instance.zoom = instance.minimumScale
+		if instance.zoom < instance.minimumZoom {
+			instance.zoom = instance.minimumZoom
 		}
-		if instance.zoom > instance.maximumScale {
-			instance.zoom = instance.maximumScale
+		if instance.zoom > instance.maximumZoom {
+			instance.zoom = instance.maximumZoom
 		}
 		//SwiftyFormLog("slider model: \(instance)")
 		return instance
