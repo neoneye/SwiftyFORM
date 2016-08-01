@@ -404,7 +404,7 @@ class PopulateTableView: FormItemVisitor {
 		model.maximumValue = object.maximumValue
 		model.value = object.value
 		model.title = object.title
-
+		model.initialZoom = object.initialZoom
 		
 		let cell = PrecisionSliderCell(model: model)
 		let cellExpanded = PrecisionSliderCellExpanded()

@@ -7,7 +7,7 @@ public class PrecisionSliderCellModel {
 	var value: Int = 0
 	var minimumValue: Int = 0
 	var maximumValue: Int = 1000
-	
+	var initialZoom: Float?
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -134,13 +134,20 @@ extension PrecisionSliderCellModel {
 		let markerSpacing = Constants.markerSpacing
 		instance.markerSpacing = markerSpacing
 		
+		// Automatically determine a zoom factor so that the whole slider is visible
 		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
 		if initialSliderWidth > 10 && rangeLength > 0.001 {
 			instance.scale = log10((initialSliderWidth / rangeLength) / markerSpacing)
 		} else {
 			instance.scale = 0
 		}
+		
+		// Override the zoom factor if an initial zoom has been provided
+		if let zoom = initialZoom {
+			instance.scale = Double(zoom)
+		}
 
+		// Determine how far zoom-out is possible
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
 			instance.minimumScale = log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing)
@@ -148,13 +155,21 @@ extension PrecisionSliderCellModel {
 			instance.minimumScale = 0
 		}
 
+		// Determine how far zoom-in is possible
 		instance.maximumScale = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
 		
 		// Prevent negative scale-range
 		if instance.minimumScale > instance.maximumScale {
 			//print("preventing negative scale-range: from \(instance.minimumScale) to \(instance.maximumScale)")
 			instance.maximumScale = instance.minimumScale
+		}
+		
+		// Prevent scale from going outside the scale-range
+		if instance.scale < instance.minimumScale {
 			instance.scale = instance.minimumScale
+		}
+		if instance.scale > instance.maximumScale {
+			instance.scale = instance.maximumScale
 		}
 		//SwiftyFormLog("slider model: \(instance)")
 		return instance
