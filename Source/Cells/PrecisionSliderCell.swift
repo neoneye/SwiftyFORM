@@ -82,24 +82,29 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
 	
-	func sliderDidChange(newValueOrNil: Double?) {
-		var newValueOrZero: Int = 0
-		
-		if let newValue = newValueOrNil {
+	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+		var valueUpdated = false
+		if changeModel.valueUpdated {
 			let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
-			newValueOrZero = Int(round(newValue * decimalScale))
+			let newValue = Int(round(changeModel.value * decimalScale))
+			if model.value != newValue {
+				model.value = newValue
+				valueUpdated = true
+			}
 		}
 		
-		if model.value == newValueOrZero {
+		// TODO: compare changeModel.zoom with self.zoom and set zoomUpdated accordingly
+		
+		if !valueUpdated && !changeModel.zoomUpdated {
+			print("ignore slider change. Nothing has changed")
 			return
 		}
-		model.value = newValueOrZero
 		
 		let changeModel = PrecisionSliderCellModel.SliderDidChangeModel(
-			value: newValueOrZero,
-			valueUpdated: true,
-			zoom: 0,  // TODO: pass zoom all the way from the slider
-			zoomUpdated: false
+			value: model.value,
+			valueUpdated: valueUpdated,
+			zoom: changeModel.zoom,
+			zoomUpdated: changeModel.zoomUpdated
 		)
 		
 		model.valueDidChange(changeModel: changeModel)
@@ -163,8 +168,8 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		return PrecisionSlider_InnerModel.height
 	}
 	
-	func sliderDidChange() {
-		collapsedCell?.sliderDidChange(slider.value)
+	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+		collapsedCell?.sliderDidChange(changeModel)
 	}
 	
 	lazy var slider: PrecisionSlider = {
@@ -214,8 +219,8 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		*/
 		slider.value = scaledValue
 
-		slider.valueDidChange = { [weak self] in
-			self?.sliderDidChange()
+		slider.valueDidChange = { [weak self] (changeModel: PrecisionSlider.SliderDidChangeModel) in
+			self?.sliderDidChange(changeModel)
 		}
 	}
 	

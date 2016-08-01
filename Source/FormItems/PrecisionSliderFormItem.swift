@@ -73,6 +73,12 @@ public class PrecisionSliderFormItem: FormItem {
 	}
 	
 	public func sliderDidChange(changeModel: SliderDidChangeModel) {
+		if changeModel.valueUpdated {
+			print("value: \(changeModel.value)")
+		}
+		if changeModel.zoomUpdated {
+			print("zoom: \(changeModel.zoom)")
+		}
 		innerValue = changeModel.value
 		//TODO: innerZoom = changeModel.zoom
 		sliderDidChangeBlock(changeModel: changeModel)

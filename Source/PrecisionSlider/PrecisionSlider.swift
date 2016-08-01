@@ -18,8 +18,15 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	var model = PrecisionSlider_InnerModel()
 	
-	typealias ValueDidChange = Void -> Void
-	var valueDidChange: ValueDidChange?
+	struct SliderDidChangeModel {
+		let value: Double
+		let valueUpdated: Bool
+		let zoom: Float
+		let zoomUpdated: Bool
+	}
+	
+	typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	var valueDidChange: SliderDidChangeBlock?
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -155,7 +162,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if gesture.state == .Changed {
 			let scale = log10(pow(10, originalScale) * Double(gesture.scale))
 			changeScale(scale: scale, value: originalValue)
-			valueDidChange?()
+			
+			let changeModel = SliderDidChangeModel(
+				value: originalValue,
+				valueUpdated: false,
+				zoom: Float(model.scale),
+				zoomUpdated: true
+			)
+			valueDidChange?(changeModel: changeModel)
 		}
 	}
 	
@@ -199,7 +213,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
 						self.changeScale(scale: scale4, value: originalValue)
-						self.valueDidChange?()
+
+						let changeModel = SliderDidChangeModel(
+							value: originalValue,
+							valueUpdated: false,
+							zoom: Float(self.model.scale),
+							zoomUpdated: true
+						)
+						self.valueDidChange?(changeModel: changeModel)
 					}
 				}
 			}
@@ -246,7 +267,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
 						self.changeScale(scale: scale4, value: originalValue)
-						self.valueDidChange?()
+
+						let changeModel = SliderDidChangeModel(
+							value: originalValue,
+							valueUpdated: false,
+							zoom: Float(self.model.scale),
+							zoomUpdated: true
+						)
+						self.valueDidChange?(changeModel: changeModel)
 					}
 				}
 			}
@@ -320,7 +348,16 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-		valueDidChange?()
+		guard let valueDidChange = self.valueDidChange else {
+			return
+		}
+		let changeModel = SliderDidChangeModel(
+			value: self.value,
+			valueUpdated: true,
+			zoom: Float(self.model.scale),
+			zoomUpdated: false
+		)
+		valueDidChange(changeModel: changeModel)
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
