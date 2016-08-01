@@ -229,8 +229,8 @@ This cell displays two markers, `leftMark` and `rightMark`.
 The `leftMark` indicates where the minimumValue is.
 The `rightMark` indicates where the maximumValue is.
 
-This cell is used when the scale is so narrow, that there isn't any room for: full_cell, first_cell, last_cell
-A last resort to show something meaningful.
+This cell is used when the content length too narrow, that there isn't any room for: full_cell, first_cell, last_cell
+This cell is a last resort to show something meaningful.
 */
 class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	static let identifier = "single_cell"

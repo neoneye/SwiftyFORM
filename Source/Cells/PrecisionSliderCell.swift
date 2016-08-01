@@ -158,13 +158,13 @@ extension PrecisionSliderCellModel {
 		// Determine how far zoom-in is possible
 		instance.maximumZoom = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
 		
-		// Prevent negative scale-range
+		// Prevent negative zoom-range
 		if instance.minimumZoom > instance.maximumZoom {
-			//print("preventing negative scale-range: from \(instance.minimumZoom) to \(instance.maximumZoom)")
+			//print("preventing negative zoom-range: from \(instance.minimumZoom) to \(instance.maximumZoom)")
 			instance.maximumZoom = instance.minimumZoom
 		}
 		
-		// Prevent scale from going outside the scale-range
+		// Prevent zoom from going outside the zoom-range
 		if instance.zoom < instance.minimumZoom {
 			instance.zoom = instance.minimumZoom
 		}

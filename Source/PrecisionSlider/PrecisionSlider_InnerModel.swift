@@ -16,7 +16,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	func updateRange() {
 		zoomMode = PrecisionSlider_InnerZoomMode.create(zoom)
-		//print("zoomMode: \(zoomMode)  scale: \(scale)")
+		//print("zoomMode: \(zoomMode)  zoom: \(zoom)")
 		
 		maximumValue = originalMaximumValue * zoomMode.scalar
 		minimumValue = originalMinimumValue * zoomMode.scalar
@@ -201,8 +201,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
-		strings.append(String(format: "scale: %.5f", zoom))
-		strings.append(String(format: "scale-range: %.5f %.5f", minimumZoom, maximumZoom))
+		strings.append(String(format: "zoom: %.5f", zoom))
+		strings.append(String(format: "zoom-range: %.5f %.5f", minimumZoom, maximumZoom))
 		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
