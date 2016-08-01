@@ -99,13 +99,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func valueFromContentOffset() -> Double {
-		let scale = model.lengthOfFullItem
-		if scale < 0.001 {
+		let length = model.lengthOfFullItem
+		if length < 0.001 {
 			return model.fallbackValue
 		}
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
-		var result = Double(midX) / scale + model.minimumValue
+		var result = Double(midX) / length + model.minimumValue
 		if result < model.minimumValue {
 			result = model.minimumValue
 		}
@@ -117,8 +117,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func setContentOffset(value: Double) {
-		let scale = model.lengthOfFullItem
-		if scale < 0.001 {
+		let length = model.lengthOfFullItem
+		if length < 0.001 {
 			return
 		}
 		
@@ -132,8 +132,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		
 		let valueAdjusted = clampedValue - model.minimumValue
 		let contentInsetLet = Double(collectionView.contentInset.left)
-		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
-		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")
+		let offsetX = CGFloat(round((length * valueAdjusted) - contentInsetLet))
+		//print("offsetX: \(offsetX)    [ \(length) * \(valueAdjusted) - \(contentInsetLet) ]")
 		
 		let originalValueDidChange = valueDidChange
 		valueDidChange = nil
@@ -160,8 +160,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let scale = log10(pow(10, originalZoom) * Double(gesture.scale))
-			changeScale(scale: scale, value: originalValue)
+			let zoom = log10(pow(10, originalZoom) * Double(gesture.scale))
+			changeZoom(zoom: zoom, value: originalValue)
 			
 			let changeModel = SliderDidChangeModel(
 				value: originalValue,
@@ -188,31 +188,31 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalZoom + 0.2
-		let scale1: Double = originalZoom + 0.4
-		let scale2: Double = originalZoom + 0.6
-		let scale3: Double = originalZoom + 0.8
-		let scale4: Double = originalZoom + 1.0
+		let zoom0: Double = originalZoom + 0.2
+		let zoom1: Double = originalZoom + 0.4
+		let zoom2: Double = originalZoom + 0.6
+		let zoom3: Double = originalZoom + 0.8
+		let zoom4: Double = originalZoom + 1.0
 
-		let clampedScale = clampScale(scale4)
-		if model.zoom == clampedScale {
+		let clampedZoom = clampZoom(zoom4)
+		if model.zoom == clampedZoom {
 			return // already zoomed in, no need to update UI
 		}
 
-		changeScale(scale: scale0, value: originalValue)
+		changeZoom(zoom: zoom0, value: originalValue)
 
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
 		dispatch_after(delay, dispatch_get_main_queue()) {
-			self.changeScale(scale: scale1, value: originalValue)
+			self.changeZoom(zoom: zoom1, value: originalValue)
 
 			dispatch_after(delay, dispatch_get_main_queue()) {
-				self.changeScale(scale: scale2, value: originalValue)
+				self.changeZoom(zoom: zoom2, value: originalValue)
 
 				dispatch_after(delay, dispatch_get_main_queue()) {
-					self.changeScale(scale: scale3, value: originalValue)
+					self.changeZoom(zoom: zoom3, value: originalValue)
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
-						self.changeScale(scale: scale4, value: originalValue)
+						self.changeZoom(zoom: zoom4, value: originalValue)
 
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
@@ -242,31 +242,31 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalZoom - 0.2
-		let scale1: Double = originalZoom - 0.4
-		let scale2: Double = originalZoom - 0.6
-		let scale3: Double = originalZoom - 0.8
-		let scale4: Double = originalZoom - 1.0
+		let zoom0: Double = originalZoom - 0.2
+		let zoom1: Double = originalZoom - 0.4
+		let zoom2: Double = originalZoom - 0.6
+		let zoom3: Double = originalZoom - 0.8
+		let zoom4: Double = originalZoom - 1.0
 		
-		let clampedScale = clampScale(scale4)
-		if model.zoom == clampedScale {
+		let clampedZoom = clampZoom(zoom4)
+		if model.zoom == clampedZoom {
 			return // already zoomed out, no need to update UI
 		}
 		
-		changeScale(scale: scale0, value: originalValue)
+		changeZoom(zoom: zoom0, value: originalValue)
 		
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
 		dispatch_after(delay, dispatch_get_main_queue()) {
-			self.changeScale(scale: scale1, value: originalValue)
+			self.changeZoom(zoom: zoom1, value: originalValue)
 			
 			dispatch_after(delay, dispatch_get_main_queue()) {
-				self.changeScale(scale: scale2, value: originalValue)
+				self.changeZoom(zoom: zoom2, value: originalValue)
 				
 				dispatch_after(delay, dispatch_get_main_queue()) {
-					self.changeScale(scale: scale3, value: originalValue)
+					self.changeZoom(zoom: zoom3, value: originalValue)
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
-						self.changeScale(scale: scale4, value: originalValue)
+						self.changeZoom(zoom: zoom4, value: originalValue)
 
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
@@ -281,23 +281,23 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 
-	func clampScale(scale: Double) -> Double {
-		var clampedScale = scale
-		if clampedScale > model.maximumZoom {
-			clampedScale = model.maximumZoom
+	func clampZoom(zoom: Double) -> Double {
+		var clampedZoom = zoom
+		if clampedZoom > model.maximumZoom {
+			clampedZoom = model.maximumZoom
 		}
-		if clampedScale < model.minimumZoom {
-			clampedScale = model.minimumZoom
+		if clampedZoom < model.minimumZoom {
+			clampedZoom = model.minimumZoom
 		}
-		return clampedScale
+		return clampedZoom
 	}
 
-	func changeScale(scale scale: Double, value: Double) {
-		let clampedScale = clampScale(scale)
-		if model.zoom == clampedScale {
+	func changeZoom(zoom zoom: Double, value: Double) {
+		let clampedZoom = clampZoom(zoom)
+		if model.zoom == clampedZoom {
 			return // no need to update UI
 		}
-		model.zoom = clampedScale
+		model.zoom = clampedZoom
 		//print(String(format: "update zoom: %.5f   \(model.zoomMode)", zoom))
 		reloadSlider()
 		
