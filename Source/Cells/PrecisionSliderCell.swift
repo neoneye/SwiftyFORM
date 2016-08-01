@@ -137,14 +137,14 @@ extension PrecisionSliderCellModel {
 		// Automatically determine a zoom factor so that the whole slider is visible
 		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
 		if initialSliderWidth > 10 && rangeLength > 0.001 {
-			instance.scale = log10((initialSliderWidth / rangeLength) / markerSpacing)
+			instance.zoom = log10((initialSliderWidth / rangeLength) / markerSpacing)
 		} else {
-			instance.scale = 0
+			instance.zoom = 0
 		}
 		
 		// Override the zoom factor if an initial zoom has been provided
 		if let zoom = initialZoom {
-			instance.scale = Double(zoom)
+			instance.zoom = Double(zoom)
 		}
 
 		// Determine how far zoom-out is possible
@@ -165,11 +165,11 @@ extension PrecisionSliderCellModel {
 		}
 		
 		// Prevent scale from going outside the scale-range
-		if instance.scale < instance.minimumScale {
-			instance.scale = instance.minimumScale
+		if instance.zoom < instance.minimumScale {
+			instance.zoom = instance.minimumScale
 		}
-		if instance.scale > instance.maximumScale {
-			instance.scale = instance.maximumScale
+		if instance.zoom > instance.maximumScale {
+			instance.zoom = instance.maximumScale
 		}
 		//SwiftyFormLog("slider model: \(instance)")
 		return instance

@@ -15,7 +15,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var zoomMode = PrecisionSlider_InnerZoomMode.None
 	
 	func updateRange() {
-		zoomMode = PrecisionSlider_InnerZoomMode.create(scale)
+		zoomMode = PrecisionSlider_InnerZoomMode.create(zoom)
 		//print("zoomMode: \(zoomMode)  scale: \(scale)")
 		
 		maximumValue = originalMaximumValue * zoomMode.scalar
@@ -125,14 +125,14 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	The scale works best in the range -3 to +3.
 	Scale values outside -6 to +6 are extreme.
 	*/
-	var scale: Double = 0.0
+	var zoom: Double = 0.0
 	var minimumScale: Double = -5.0
 	var maximumScale: Double = 5.0
 	
 	
 	/// length is in pixels
 	var lengthOfFullItem: Double {
-		let result = ceil(pow(10, scale) * markerSpacing / zoomMode.scalar)
+		let result = ceil(pow(10, zoom) * markerSpacing / zoomMode.scalar)
 		if result < 0.1 {
 			return 0.1
 		}
@@ -201,7 +201,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
-		strings.append(String(format: "scale: %.5f", scale))
+		strings.append(String(format: "scale: %.5f", zoom))
 		strings.append(String(format: "scale-range: %.5f %.5f", minimumScale, maximumScale))
 		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {

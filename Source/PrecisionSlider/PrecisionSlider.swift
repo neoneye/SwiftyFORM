@@ -156,7 +156,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
-			originalScale = model.scale
+			originalScale = model.zoom
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
@@ -166,7 +166,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			let changeModel = SliderDidChangeModel(
 				value: originalValue,
 				valueUpdated: false,
-				zoom: Float(model.scale),
+				zoom: Float(model.zoom),
 				zoomUpdated: true
 			)
 			valueDidChange?(changeModel: changeModel)
@@ -185,7 +185,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
-		let originalScale = model.scale
+		let originalScale = model.zoom
 		let originalValue = self.value
 		
 		let scale0: Double = originalScale + 0.2
@@ -195,7 +195,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let scale4: Double = originalScale + 1.0
 
 		let clampedScale = clampScale(scale4)
-		if model.scale == clampedScale {
+		if model.zoom == clampedScale {
 			return // already zoomed in, no need to update UI
 		}
 
@@ -217,7 +217,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
-							zoom: Float(self.model.scale),
+							zoom: Float(self.model.zoom),
 							zoomUpdated: true
 						)
 						self.valueDidChange?(changeModel: changeModel)
@@ -239,7 +239,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
-		let originalScale = model.scale
+		let originalScale = model.zoom
 		let originalValue = self.value
 		
 		let scale0: Double = originalScale - 0.2
@@ -249,7 +249,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let scale4: Double = originalScale - 1.0
 		
 		let clampedScale = clampScale(scale4)
-		if model.scale == clampedScale {
+		if model.zoom == clampedScale {
 			return // already zoomed out, no need to update UI
 		}
 		
@@ -271,7 +271,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
-							zoom: Float(self.model.scale),
+							zoom: Float(self.model.zoom),
 							zoomUpdated: true
 						)
 						self.valueDidChange?(changeModel: changeModel)
@@ -294,11 +294,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func changeScale(scale scale: Double, value: Double) {
 		let clampedScale = clampScale(scale)
-		if model.scale == clampedScale {
+		if model.zoom == clampedScale {
 			return // no need to update UI
 		}
-		model.scale = clampedScale
-		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
+		model.zoom = clampedScale
+		//print(String(format: "update zoom: %.5f   \(model.zoomMode)", zoom))
 		reloadSlider()
 		
 		self.value = value
@@ -354,7 +354,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let changeModel = SliderDidChangeModel(
 			value: self.value,
 			valueUpdated: true,
-			zoom: Float(self.model.scale),
+			zoom: Float(self.model.zoom),
 			zoomUpdated: false
 		)
 		valueDidChange(changeModel: changeModel)
