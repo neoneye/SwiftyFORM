@@ -13,7 +13,7 @@ These gestures are available:
 
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	var originalScale: Double = 1
+	var originalZoom: Double = 0
 	var originalValue: Double = 0
 	
 	var model = PrecisionSlider_InnerModel()
@@ -156,11 +156,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
-			originalScale = model.zoom
+			originalZoom = model.zoom
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let scale = log10(pow(10, originalScale) * Double(gesture.scale))
+			let scale = log10(pow(10, originalZoom) * Double(gesture.scale))
 			changeScale(scale: scale, value: originalValue)
 			
 			let changeModel = SliderDidChangeModel(
@@ -185,14 +185,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
-		let originalScale = model.zoom
+		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale + 0.2
-		let scale1: Double = originalScale + 0.4
-		let scale2: Double = originalScale + 0.6
-		let scale3: Double = originalScale + 0.8
-		let scale4: Double = originalScale + 1.0
+		let scale0: Double = originalZoom + 0.2
+		let scale1: Double = originalZoom + 0.4
+		let scale2: Double = originalZoom + 0.6
+		let scale3: Double = originalZoom + 0.8
+		let scale4: Double = originalZoom + 1.0
 
 		let clampedScale = clampScale(scale4)
 		if model.zoom == clampedScale {
@@ -239,14 +239,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
-		let originalScale = model.zoom
+		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale - 0.2
-		let scale1: Double = originalScale - 0.4
-		let scale2: Double = originalScale - 0.6
-		let scale3: Double = originalScale - 0.8
-		let scale4: Double = originalScale - 1.0
+		let scale0: Double = originalZoom - 0.2
+		let scale1: Double = originalZoom - 0.4
+		let scale2: Double = originalZoom - 0.6
+		let scale3: Double = originalZoom - 0.8
+		let scale4: Double = originalZoom - 1.0
 		
 		let clampedScale = clampScale(scale4)
 		if model.zoom == clampedScale {
