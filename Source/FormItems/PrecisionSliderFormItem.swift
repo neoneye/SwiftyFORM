@@ -59,14 +59,22 @@ public class PrecisionSliderFormItem: FormItem {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(innerValue) / decimalScale
 	}
+	
+	public struct SliderDidChangeModel {
+		let value: Int
+		let valueUpdated: Bool
+		let zoom: Float
+		let zoomUpdated: Bool
+	}
 
-	public typealias SliderDidChangeBlock = (value: Int) -> Void
-	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Int) in
+	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func sliderDidChange(value: Int) {
-		innerValue = value
-		sliderDidChangeBlock(value: value)
+	public func sliderDidChange(changeModel: SliderDidChangeModel) {
+		innerValue = changeModel.value
+		//TODO: innerZoom = changeModel.zoom
+		sliderDidChangeBlock(changeModel: changeModel)
 	}
 }

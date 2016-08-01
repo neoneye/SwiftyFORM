@@ -8,8 +8,17 @@ public class PrecisionSliderCellModel {
 	var minimumValue: Int = 0
 	var maximumValue: Int = 1000
 	
-	var valueDidChange: Int -> Void = { (value: Int) in
-		SwiftyFormLog("value \(value)")
+
+	public struct SliderDidChangeModel {
+		let value: Int
+		let valueUpdated: Bool
+		let zoom: Float
+		let zoomUpdated: Bool
+	}
+	
+	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	var valueDidChange: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
+		SwiftyFormLog("value \(changeModel.value)  zoom \(changeModel.zoom)")
 	}
 	
 	var actualValue: Double {
@@ -85,7 +94,15 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 			return
 		}
 		model.value = newValueOrZero
-		model.valueDidChange(newValueOrZero)
+		
+		let changeModel = PrecisionSliderCellModel.SliderDidChangeModel(
+			value: newValueOrZero,
+			valueUpdated: true,
+			zoom: 0,  // TODO: pass zoom all the way from the slider
+			zoomUpdated: false
+		)
+		
+		model.valueDidChange(changeModel: changeModel)
 		reloadValueLabel()
 	}
 }
