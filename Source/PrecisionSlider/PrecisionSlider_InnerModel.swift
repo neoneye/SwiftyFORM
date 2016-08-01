@@ -128,7 +128,17 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var zoom: Float = 0
 	var minimumZoom: Float = -5
 	var maximumZoom: Float = 5
-	
+
+	func clampZoom(zoom: Float) -> Float {
+		if zoom > maximumZoom {
+			return maximumZoom
+		}
+		if zoom < minimumZoom {
+			return minimumZoom
+		}
+		return zoom
+	}
+
 	
 	/// length is in pixels
 	var lengthOfFullItem: Double {

@@ -194,7 +194,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let zoom3 = originalZoom + 0.8
 		let zoom4 = originalZoom + 1.0
 
-		let clampedZoom = clampZoom(zoom4)
+		let clampedZoom = model.clampZoom(zoom4)
 		if model.zoom == clampedZoom {
 			return // already zoomed in, no need to update UI
 		}
@@ -248,7 +248,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let zoom3 = originalZoom - 0.8
 		let zoom4 = originalZoom - 1.0
 		
-		let clampedZoom = clampZoom(zoom4)
+		let clampedZoom = model.clampZoom(zoom4)
 		if model.zoom == clampedZoom {
 			return // already zoomed out, no need to update UI
 		}
@@ -281,19 +281,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 
-	func clampZoom(zoom: Float) -> Float {
-		var clampedZoom = zoom
-		if clampedZoom > model.maximumZoom {
-			clampedZoom = model.maximumZoom
-		}
-		if clampedZoom < model.minimumZoom {
-			clampedZoom = model.minimumZoom
-		}
-		return clampedZoom
-	}
-
 	func changeZoom(zoom zoom: Float, value: Double) {
-		let clampedZoom = clampZoom(zoom)
+		let clampedZoom = model.clampZoom(zoom)
 		if model.zoom == clampedZoom {
 			return // no need to update UI
 		}
