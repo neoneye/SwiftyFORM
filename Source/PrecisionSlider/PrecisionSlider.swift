@@ -62,6 +62,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if model.hasPartialItemAfter {
 			insetRight = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemAfter)
 		}
+		/*
+		Add pixels to left/right insets, in order to make the maximumValue reachable.
+		Otherwise it's only possible to slide to a value very very close to maximumValue,
+		however the last 0.001 may be missing, so you only get 0.999 and never quite reach 1.0
+		*/
+		insetLeft += 1
+		insetRight += 1
 		collectionView.contentInset = UIEdgeInsets(top: 0, left: insetLeft, bottom: 0, right: insetRight)
 	}
 	
