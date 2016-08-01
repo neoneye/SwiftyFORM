@@ -106,12 +106,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
 		var result = Double(midX) / length + model.minimumValue
-		if result < model.minimumValue {
-			result = model.minimumValue
-		}
-		if result > model.maximumValue {
-			result = model.maximumValue
-		}
+		result = model.clampValue(result)
 		result /= model.zoomMode.scalar
 		return result
 	}
@@ -123,12 +118,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 		
 		var clampedValue = value * model.zoomMode.scalar
-		if clampedValue < model.minimumValue {
-			clampedValue = model.minimumValue
-		}
-		if clampedValue > model.maximumValue {
-			clampedValue = model.maximumValue
-		}
+		clampedValue = model.clampValue(clampedValue)
 		
 		let valueAdjusted = clampedValue - model.minimumValue
 		let contentInsetLet = Double(collectionView.contentInset.left)

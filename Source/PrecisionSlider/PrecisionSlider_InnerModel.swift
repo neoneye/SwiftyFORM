@@ -11,6 +11,17 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
+
+	func clampValue(value: Double) -> Double {
+		if value > maximumValue {
+			return maximumValue
+		}
+		if value < minimumValue {
+			return minimumValue
+		}
+		return value
+	}
+
 	
 	var zoomMode = PrecisionSlider_InnerZoomMode.None
 	
