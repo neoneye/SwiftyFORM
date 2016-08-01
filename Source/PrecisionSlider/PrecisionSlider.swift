@@ -13,7 +13,7 @@ These gestures are available:
 
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	var originalZoom: Double = 0
+	var originalZoom: Float = 0
 	var originalValue: Double = 0
 	
 	var model = PrecisionSlider_InnerModel()
@@ -160,13 +160,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let zoom = log10(pow(10, originalZoom) * Double(gesture.scale))
+			let zoom = Float(log10(pow(10, Double(originalZoom)) * Double(gesture.scale)))
 			changeZoom(zoom: zoom, value: originalValue)
 			
 			let changeModel = SliderDidChangeModel(
 				value: originalValue,
 				valueUpdated: false,
-				zoom: Float(model.zoom),
+				zoom: model.zoom,
 				zoomUpdated: true
 			)
 			valueDidChange?(changeModel: changeModel)
@@ -188,11 +188,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let zoom0: Double = originalZoom + 0.2
-		let zoom1: Double = originalZoom + 0.4
-		let zoom2: Double = originalZoom + 0.6
-		let zoom3: Double = originalZoom + 0.8
-		let zoom4: Double = originalZoom + 1.0
+		let zoom0 = originalZoom + 0.2
+		let zoom1 = originalZoom + 0.4
+		let zoom2 = originalZoom + 0.6
+		let zoom3 = originalZoom + 0.8
+		let zoom4 = originalZoom + 1.0
 
 		let clampedZoom = clampZoom(zoom4)
 		if model.zoom == clampedZoom {
@@ -217,7 +217,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
-							zoom: Float(self.model.zoom),
+							zoom: self.model.zoom,
 							zoomUpdated: true
 						)
 						self.valueDidChange?(changeModel: changeModel)
@@ -242,11 +242,11 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let zoom0: Double = originalZoom - 0.2
-		let zoom1: Double = originalZoom - 0.4
-		let zoom2: Double = originalZoom - 0.6
-		let zoom3: Double = originalZoom - 0.8
-		let zoom4: Double = originalZoom - 1.0
+		let zoom0 = originalZoom - 0.2
+		let zoom1 = originalZoom - 0.4
+		let zoom2 = originalZoom - 0.6
+		let zoom3 = originalZoom - 0.8
+		let zoom4 = originalZoom - 1.0
 		
 		let clampedZoom = clampZoom(zoom4)
 		if model.zoom == clampedZoom {
@@ -271,7 +271,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
-							zoom: Float(self.model.zoom),
+							zoom: self.model.zoom,
 							zoomUpdated: true
 						)
 						self.valueDidChange?(changeModel: changeModel)
@@ -281,7 +281,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 
-	func clampZoom(zoom: Double) -> Double {
+	func clampZoom(zoom: Float) -> Float {
 		var clampedZoom = zoom
 		if clampedZoom > model.maximumZoom {
 			clampedZoom = model.maximumZoom
@@ -292,7 +292,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return clampedZoom
 	}
 
-	func changeZoom(zoom zoom: Double, value: Double) {
+	func changeZoom(zoom zoom: Float, value: Double) {
 		let clampedZoom = clampZoom(zoom)
 		if model.zoom == clampedZoom {
 			return // no need to update UI
@@ -354,7 +354,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let changeModel = SliderDidChangeModel(
 			value: self.value,
 			valueUpdated: true,
-			zoom: Float(self.model.zoom),
+			zoom: self.model.zoom,
 			zoomUpdated: false
 		)
 		valueDidChange(changeModel: changeModel)

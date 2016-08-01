@@ -137,26 +137,26 @@ extension PrecisionSliderCellModel {
 		// Automatically determine a zoom factor so that the whole slider is visible
 		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
 		if initialSliderWidth > 10 && rangeLength > 0.001 {
-			instance.zoom = log10((initialSliderWidth / rangeLength) / markerSpacing)
+			instance.zoom = Float(log10((initialSliderWidth / rangeLength) / markerSpacing))
 		} else {
 			instance.zoom = 0
 		}
 		
 		// Override the zoom factor if an initial zoom has been provided
 		if let zoom = initialZoom {
-			instance.zoom = Double(zoom)
+			instance.zoom = zoom
 		}
 
 		// Determine how far zoom-out is possible
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
-			instance.minimumZoom = log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing)
+			instance.minimumZoom = Float(log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing))
 		} else {
 			instance.minimumZoom = 0
 		}
 
 		// Determine how far zoom-in is possible
-		instance.maximumZoom = log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing)
+		instance.maximumZoom = Float(log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing))
 		
 		// Prevent negative zoom-range
 		if instance.minimumZoom > instance.maximumZoom {

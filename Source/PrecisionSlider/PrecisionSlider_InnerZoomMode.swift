@@ -17,7 +17,7 @@ enum PrecisionSlider_InnerZoomMode {
 		}
 	}
 	
-	static func create(zoom: Double) -> PrecisionSlider_InnerZoomMode {
+	static func create(zoom: Float) -> PrecisionSlider_InnerZoomMode {
 		if zoom >  4.92 { return .ZoomIn(count: 100000) }
 		if zoom >  4.42 { return .ZoomIn(count: 20000) }
 		if zoom >  3.92 { return .ZoomIn(count: 10000) }

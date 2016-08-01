@@ -125,14 +125,14 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	The zoom works best in the range -3 to +3.
 	A zoom factor outside -6 to +6 is extreme.
 	*/
-	var zoom: Double = 0.0
-	var minimumZoom: Double = -5.0
-	var maximumZoom: Double = 5.0
+	var zoom: Float = 0
+	var minimumZoom: Float = -5
+	var maximumZoom: Float = 5
 	
 	
 	/// length is in pixels
 	var lengthOfFullItem: Double {
-		let result = ceil(pow(10, zoom) * markerSpacing / zoomMode.scalar)
+		let result = ceil(pow(10, Double(zoom)) * markerSpacing / zoomMode.scalar)
 		if result < 0.1 {
 			return 0.1
 		}
