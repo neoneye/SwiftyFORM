@@ -94,10 +94,10 @@ public class PrecisionSliderFormItem: FormItem {
 	}
 	
 	public struct SliderDidChangeModel {
-		let value: Int
-		let valueUpdated: Bool
-		let zoom: Float
-		let zoomUpdated: Bool
+		public let value: Int
+		public let valueUpdated: Bool
+		public let zoom: Float
+		public let zoomUpdated: Bool
 	}
 
 	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
