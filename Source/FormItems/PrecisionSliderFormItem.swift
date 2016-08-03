@@ -11,8 +11,41 @@ public class PrecisionSliderFormItem: FormItem {
 		self.title = title
 		return self
 	}
+
+	/** 
+	Initial zoom factor
 	
-	public var decimalPlaces: UInt = 3
+	Automatically determines the best zoom when `initialZoom` is nil
+	When zoom is 0 that means no-zoom
+	When zoom is +1 that means zoom-in  x10
+	When zoom is -1 that means zoom-out x10
+	When zoom is +2 that means zoom-in  x100
+	When zoom is -2 that means zoom-out x100
+	The zoom range is from -5 to +5.
+	*/
+	public var initialZoom: Float? {
+		willSet {
+			if let zoom = newValue {
+				assert(zoom >= -10, "initialZoom is far outside the zoom-range")
+				assert(zoom <= 10, "initialZoom is far outside the zoom-range")
+			}
+		}
+	}
+	public func initialZoom(initialZoom: Float) -> Self {
+		self.initialZoom = initialZoom
+		return self
+	}
+
+	/**
+	Number of decimal places
+	
+	The number can be from 0 to +5.
+	*/
+	public var decimalPlaces: UInt = 3  {
+		willSet {
+			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
+		}
+	}
 	public func decimalPlaces(decimalPlaces: UInt) -> Self {
 		self.decimalPlaces = decimalPlaces
 		return self
@@ -59,14 +92,21 @@ public class PrecisionSliderFormItem: FormItem {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(innerValue) / decimalScale
 	}
+	
+	public struct SliderDidChangeModel {
+		public let value: Int
+		public let valueUpdated: Bool
+		public let zoom: Float
+		public let zoomUpdated: Bool
+	}
 
-	public typealias SliderDidChangeBlock = (value: Int) -> Void
-	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Int) in
+	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func sliderDidChange(value: Int) {
-		innerValue = value
-		sliderDidChangeBlock(value: value)
+	public func sliderDidChange(changeModel: SliderDidChangeModel) {
+		innerValue = changeModel.value
+		sliderDidChangeBlock(changeModel: changeModel)
 	}
 }

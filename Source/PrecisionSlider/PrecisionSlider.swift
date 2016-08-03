@@ -13,13 +13,20 @@ These gestures are available:
 
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
-	var originalScale: Double = 1
+	var originalZoom: Float = 0
 	var originalValue: Double = 0
 	
 	var model = PrecisionSlider_InnerModel()
 	
-	typealias ValueDidChange = Void -> Void
-	var valueDidChange: ValueDidChange?
+	struct SliderDidChangeModel {
+		let value: Double
+		let valueUpdated: Bool
+		let zoom: Float
+		let zoomUpdated: Bool
+	}
+	
+	typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	var valueDidChange: SliderDidChangeBlock?
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -55,6 +62,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		if model.hasPartialItemAfter {
 			insetRight = halfWidth - CGFloat(model.lengthOfFullItem / 2 + model.remainingLengthOfPartialItemAfter)
 		}
+		/*
+		Add pixels to left/right insets, in order to make the maximumValue reachable.
+		Otherwise it's only possible to slide to a value very very close to maximumValue,
+		however the last 0.001 may be missing, so you only get 0.999 and never quite reach 1.0
+		*/
+		insetLeft += 1
+		insetRight += 1
 		collectionView.contentInset = UIEdgeInsets(top: 0, left: insetLeft, bottom: 0, right: insetRight)
 	}
 	
@@ -82,7 +96,18 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.userInteractionEnabled = false
 		return instance
 	}()
+
+	var enablePropagationCounter = 0
 	
+	func disablePropagation() {
+		enablePropagationCounter -= 1
+	}
+	
+	func enablePropagation() {
+		enablePropagationCounter += 1
+	}
+	
+
 	
 	// MARK: Value get/set
 
@@ -92,46 +117,36 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func valueFromContentOffset() -> Double {
-		let scale = model.lengthOfFullItem
-		if scale < 0.001 {
+		let length = model.lengthOfFullItem
+		if length < 0.001 {
 			return model.fallbackValue
 		}
 		
 		let midX: CGFloat = collectionView.contentOffset.x + collectionView.contentInset.left
-		var result = Double(midX) / scale + model.minimumValue
-		if result < model.minimumValue {
-			result = model.minimumValue
-		}
-		if result > model.maximumValue {
-			result = model.maximumValue
-		}
+		var result = Double(midX) / length + model.minimumValue
+		result = model.clampValue(result)
 		result /= model.zoomMode.scalar
 		return result
 	}
 	
+	/**
+	Scroll the collectionview so that the center indicator is aligned with the value.
+	*/
 	func setContentOffset(value: Double) {
-		let scale = model.lengthOfFullItem
-		if scale < 0.001 {
+		let length = model.lengthOfFullItem
+		if length < 0.001 {
 			return
 		}
 		
 		var clampedValue = value * model.zoomMode.scalar
-		if clampedValue < model.minimumValue {
-			clampedValue = model.minimumValue
-		}
-		if clampedValue > model.maximumValue {
-			clampedValue = model.maximumValue
-		}
+		clampedValue = model.clampValue(clampedValue)
 		
 		let valueAdjusted = clampedValue - model.minimumValue
 		let contentInsetLet = Double(collectionView.contentInset.left)
-		let offsetX = CGFloat(round((scale * valueAdjusted) - contentInsetLet))
-		//print("offsetX: \(offsetX)    [ \(scale) * \(valueAdjusted) - \(contentInsetLet) ]")
-		
-		let originalValueDidChange = valueDidChange
-		valueDidChange = nil
+		let offsetX = CGFloat(round((length * valueAdjusted) - contentInsetLet))
+		//print("offsetX: \(offsetX)    [ \(length) * \(valueAdjusted) - \(contentInsetLet) ]")
+
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
-		valueDidChange = originalValueDidChange
 	}
 	
 	
@@ -149,13 +164,24 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handlePinch(gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .Began {
-			originalScale = model.scale
+			originalZoom = model.zoom
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
-			let scale = log10(pow(10, originalScale) * Double(gesture.scale))
-			changeScale(scale: scale, value: originalValue)
-			valueDidChange?()
+			let zoomBefore = model.zoom
+			let zoom = Float(log10(pow(10, Double(originalZoom)) * Double(gesture.scale)))
+			changeZoom(zoom: zoom, value: originalValue)
+			let zoomAfter = model.zoom
+			
+			if zoomBefore != zoomAfter {
+				let changeModel = SliderDidChangeModel(
+					value: originalValue,
+					valueUpdated: false,
+					zoom: model.zoom,
+					zoomUpdated: true
+				)
+				valueDidChange?(changeModel: changeModel)
+			}
 		}
 	}
 	
@@ -171,35 +197,44 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
-		let originalScale = model.scale
+		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale + 0.2
-		let scale1: Double = originalScale + 0.4
-		let scale2: Double = originalScale + 0.6
-		let scale3: Double = originalScale + 0.8
-		let scale4: Double = originalScale + 1.0
+		let zoom0 = originalZoom + 0.2
+		let zoom1 = originalZoom + 0.4
+		let zoom2 = originalZoom + 0.6
+		let zoom3 = originalZoom + 0.8
+		let zoom4 = originalZoom + 1.0
 
-		let clampedScale = clampScale(scale4)
-		if model.scale == clampedScale {
+		let clampedZoom = model.clampZoom(zoom4)
+		if model.zoom == clampedZoom {
 			return // already zoomed in, no need to update UI
 		}
 
-		changeScale(scale: scale0, value: originalValue)
+		disablePropagation()
+		changeZoom(zoom: zoom0, value: originalValue)
 
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
 		dispatch_after(delay, dispatch_get_main_queue()) {
-			self.changeScale(scale: scale1, value: originalValue)
+			self.changeZoom(zoom: zoom1, value: originalValue)
 
 			dispatch_after(delay, dispatch_get_main_queue()) {
-				self.changeScale(scale: scale2, value: originalValue)
+				self.changeZoom(zoom: zoom2, value: originalValue)
 
 				dispatch_after(delay, dispatch_get_main_queue()) {
-					self.changeScale(scale: scale3, value: originalValue)
+					self.changeZoom(zoom: zoom3, value: originalValue)
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
-						self.changeScale(scale: scale4, value: originalValue)
-						self.valueDidChange?()
+						self.changeZoom(zoom: zoom4, value: originalValue)
+						self.enablePropagation()
+
+						let changeModel = SliderDidChangeModel(
+							value: originalValue,
+							valueUpdated: false,
+							zoom: self.model.zoom,
+							zoomUpdated: true
+						)
+						self.valueDidChange?(changeModel: changeModel)
 					}
 				}
 			}
@@ -218,59 +253,57 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
-		let originalScale = model.scale
+		let originalZoom = model.zoom
 		let originalValue = self.value
 		
-		let scale0: Double = originalScale - 0.2
-		let scale1: Double = originalScale - 0.4
-		let scale2: Double = originalScale - 0.6
-		let scale3: Double = originalScale - 0.8
-		let scale4: Double = originalScale - 1.0
+		let zoom0 = originalZoom - 0.2
+		let zoom1 = originalZoom - 0.4
+		let zoom2 = originalZoom - 0.6
+		let zoom3 = originalZoom - 0.8
+		let zoom4 = originalZoom - 1.0
 		
-		let clampedScale = clampScale(scale4)
-		if model.scale == clampedScale {
+		let clampedZoom = model.clampZoom(zoom4)
+		if model.zoom == clampedZoom {
 			return // already zoomed out, no need to update UI
 		}
 		
-		changeScale(scale: scale0, value: originalValue)
+		disablePropagation()
+		changeZoom(zoom: zoom0, value: originalValue)
 		
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
 		dispatch_after(delay, dispatch_get_main_queue()) {
-			self.changeScale(scale: scale1, value: originalValue)
+			self.changeZoom(zoom: zoom1, value: originalValue)
 			
 			dispatch_after(delay, dispatch_get_main_queue()) {
-				self.changeScale(scale: scale2, value: originalValue)
+				self.changeZoom(zoom: zoom2, value: originalValue)
 				
 				dispatch_after(delay, dispatch_get_main_queue()) {
-					self.changeScale(scale: scale3, value: originalValue)
+					self.changeZoom(zoom: zoom3, value: originalValue)
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
-						self.changeScale(scale: scale4, value: originalValue)
-						self.valueDidChange?()
+						self.changeZoom(zoom: zoom4, value: originalValue)
+						self.enablePropagation()
+
+						let changeModel = SliderDidChangeModel(
+							value: originalValue,
+							valueUpdated: false,
+							zoom: self.model.zoom,
+							zoomUpdated: true
+						)
+						self.valueDidChange?(changeModel: changeModel)
 					}
 				}
 			}
 		}
 	}
 
-	func clampScale(scale: Double) -> Double {
-		var clampedScale = scale
-		if clampedScale > model.maximumScale {
-			clampedScale = model.maximumScale
-		}
-		if clampedScale < model.minimumScale {
-			clampedScale = model.minimumScale
-		}
-		return clampedScale
-	}
-
-	func changeScale(scale scale: Double, value: Double) {
-		let clampedScale = clampScale(scale)
-		if model.scale == clampedScale {
+	func changeZoom(zoom zoom: Float, value: Double) {
+		let clampedZoom = model.clampZoom(zoom)
+		if model.zoom == clampedZoom {
 			return // no need to update UI
 		}
-		model.scale = clampedScale
-		//print(String(format: "update scale: %.5f   \(model.zoomMode)", scale))
+		model.zoom = clampedZoom
+		//print(String(format: "update zoom: %.5f   \(model.zoomMode)", zoom))
 		reloadSlider()
 		
 		self.value = value
@@ -320,7 +353,19 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
-		valueDidChange?()
+		if enablePropagationCounter < 0 {
+			return
+		}
+		guard let valueDidChange = self.valueDidChange else {
+			return
+		}
+		let changeModel = SliderDidChangeModel(
+			value: self.value,
+			valueUpdated: true,
+			zoom: self.model.zoom,
+			zoomUpdated: false
+		)
+		valueDidChange(changeModel: changeModel)
 	}
 	
 	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

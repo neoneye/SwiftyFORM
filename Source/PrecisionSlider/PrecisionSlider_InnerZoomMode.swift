@@ -17,27 +17,27 @@ enum PrecisionSlider_InnerZoomMode {
 		}
 	}
 	
-	static func create(scale: Double) -> PrecisionSlider_InnerZoomMode {
-		if scale >  4.92 { return .ZoomIn(count: 100000) }
-		if scale >  4.42 { return .ZoomIn(count: 20000) }
-		if scale >  3.92 { return .ZoomIn(count: 10000) }
-		if scale >  3.42 { return .ZoomIn(count: 2000) }
-		if scale >  2.92 { return .ZoomIn(count: 1000) }
-		if scale >  2.47 { return .ZoomIn(count: 200) }
-		if scale >  1.91 { return .ZoomIn(count: 100) }
-		if scale >  1.41 { return .ZoomIn(count: 20) }
-		if scale >  0.90 { return .ZoomIn(count: 10) }
-		if scale >  0.47 { return .ZoomIn(count: 2) }
-		if scale >  0.0  { return .None }
-		if scale > -0.47 { return .ZoomOut(count: 5) }
-		if scale > -1.0  { return .ZoomOut(count: 10) }
-		if scale > -1.69 { return .ZoomOut(count: 50) }
-		if scale > -2.0  { return .ZoomOut(count: 100) }
-		if scale > -2.30 { return .ZoomOut(count: 500) }
-		if scale > -2.97 { return .ZoomOut(count: 1000) }
-		if scale > -3.87 { return .ZoomOut(count: 5000) }
-		if scale > -4.07 { return .ZoomOut(count: 10000) }
-		if scale > -4.87 { return .ZoomOut(count: 50000) }
+	static func create(zoom: Float) -> PrecisionSlider_InnerZoomMode {
+		if zoom >  4.92 { return .ZoomIn(count: 100000) }
+		if zoom >  4.42 { return .ZoomIn(count: 20000) }
+		if zoom >  3.92 { return .ZoomIn(count: 10000) }
+		if zoom >  3.42 { return .ZoomIn(count: 2000) }
+		if zoom >  2.92 { return .ZoomIn(count: 1000) }
+		if zoom >  2.47 { return .ZoomIn(count: 200) }
+		if zoom >  1.91 { return .ZoomIn(count: 100) }
+		if zoom >  1.41 { return .ZoomIn(count: 20) }
+		if zoom >  0.90 { return .ZoomIn(count: 10) }
+		if zoom >  0.47 { return .ZoomIn(count: 2) }
+		if zoom >  0.0  { return .None }
+		if zoom > -0.47 { return .ZoomOut(count: 5) }
+		if zoom > -1.0  { return .ZoomOut(count: 10) }
+		if zoom > -1.69 { return .ZoomOut(count: 50) }
+		if zoom > -2.0  { return .ZoomOut(count: 100) }
+		if zoom > -2.30 { return .ZoomOut(count: 500) }
+		if zoom > -2.97 { return .ZoomOut(count: 1000) }
+		if zoom > -3.87 { return .ZoomOut(count: 5000) }
+		if zoom > -4.07 { return .ZoomOut(count: 10000) }
+		if zoom > -4.87 { return .ZoomOut(count: 50000) }
 		return .ZoomOut(count: 100000)
 	}
 	
