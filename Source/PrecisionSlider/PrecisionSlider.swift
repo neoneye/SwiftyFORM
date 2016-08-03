@@ -96,7 +96,18 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.userInteractionEnabled = false
 		return instance
 	}()
+
+	var enablePropagationCounter = 0
 	
+	func disablePropagation() {
+		enablePropagationCounter -= 1
+	}
+	
+	func enablePropagation() {
+		enablePropagationCounter += 1
+	}
+	
+
 	
 	// MARK: Value get/set
 
@@ -118,6 +129,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return result
 	}
 	
+	/**
+	Scroll the collectionview so that the center indicator is aligned with the value.
+	*/
 	func setContentOffset(value: Double) {
 		let length = model.lengthOfFullItem
 		if length < 0.001 {
@@ -131,11 +145,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let contentInsetLet = Double(collectionView.contentInset.left)
 		let offsetX = CGFloat(round((length * valueAdjusted) - contentInsetLet))
 		//print("offsetX: \(offsetX)    [ \(length) * \(valueAdjusted) - \(contentInsetLet) ]")
-		
-		let originalValueDidChange = valueDidChange
-		valueDidChange = nil
+
 		collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
-		valueDidChange = originalValueDidChange
 	}
 	
 	
@@ -196,6 +207,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			return // already zoomed in, no need to update UI
 		}
 
+		disablePropagation()
 		changeZoom(zoom: zoom0, value: originalValue)
 
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
@@ -210,6 +222,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
 						self.changeZoom(zoom: zoom4, value: originalValue)
+						self.enablePropagation()
 
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
@@ -250,6 +263,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			return // already zoomed out, no need to update UI
 		}
 		
+		disablePropagation()
 		changeZoom(zoom: zoom0, value: originalValue)
 		
 		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
@@ -264,6 +278,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 					
 					dispatch_after(delay, dispatch_get_main_queue()) {
 						self.changeZoom(zoom: zoom4, value: originalValue)
+						self.enablePropagation()
 
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
@@ -334,6 +349,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
+		if enablePropagationCounter < 0 {
+			return
+		}
 		guard let valueDidChange = self.valueDidChange else {
 			return
 		}
