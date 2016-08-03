@@ -7,9 +7,18 @@ public class PrecisionSliderCellModel {
 	var value: Int = 0
 	var minimumValue: Int = 0
 	var maximumValue: Int = 1000
+	var initialZoom: Float?
+
+	public struct SliderDidChangeModel {
+		let value: Int
+		let valueUpdated: Bool
+		let zoom: Float
+		let zoomUpdated: Bool
+	}
 	
-	var valueDidChange: Int -> Void = { (value: Int) in
-		SwiftyFormLog("value \(value)")
+	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	var valueDidChange: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
+		SwiftyFormLog("value \(changeModel.value)  zoom \(changeModel.zoom)")
 	}
 	
 	var actualValue: Double {
@@ -73,25 +82,37 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
 	
-	func sliderDidChange(newValueOrNil: Double?) {
-		var newValueOrZero: Int = 0
-		
-		if let newValue = newValueOrNil {
+	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+		var valueUpdated = false
+		if changeModel.valueUpdated {
 			let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
-			newValueOrZero = Int(round(newValue * decimalScale))
+			let newValue = Int(round(changeModel.value * decimalScale))
+			if model.value != newValue {
+				model.value = newValue
+				valueUpdated = true
+			}
 		}
 		
-		if model.value == newValueOrZero {
+		if !valueUpdated && !changeModel.zoomUpdated {
+			//print("ignore slider change. Nothing has changed")
 			return
 		}
-		model.value = newValueOrZero
-		model.valueDidChange(newValueOrZero)
+		
+		let changeModel = PrecisionSliderCellModel.SliderDidChangeModel(
+			value: model.value,
+			valueUpdated: valueUpdated,
+			zoom: changeModel.zoom,
+			zoomUpdated: changeModel.zoomUpdated
+		)
+		
+		model.valueDidChange(changeModel: changeModel)
 		reloadValueLabel()
 	}
 }
 
 extension PrecisionSliderCellModel {
 	struct Constants {
+		static let markerSpacing: Double = 30.0
 		static let initialInset: CGFloat = 30.0
 		static let maxZoomedOut_Inset: CGFloat = 100.0
 		static let maxZoomedIn_DistanceBetweenMarks: Double = 60
@@ -108,28 +129,47 @@ extension PrecisionSliderCellModel {
 		
 		let rangeLength = maximumValue - minimumValue
 		
+		let markerSpacing = Constants.markerSpacing
+		instance.markerSpacing = markerSpacing
+		
+		// Automatically determine a zoom factor so that the whole slider is visible
 		let initialSliderWidth = Double(sliderWidth - Constants.initialInset)
 		if initialSliderWidth > 10 && rangeLength > 0.001 {
-			instance.scale = initialSliderWidth / rangeLength
+			instance.zoom = Float(log10((initialSliderWidth / rangeLength) / markerSpacing))
 		} else {
-			instance.scale = 10
+			instance.zoom = 0
+		}
+		
+		// Override the zoom factor if an initial zoom has been provided
+		if let zoom = initialZoom {
+			instance.zoom = zoom
 		}
 
+		// Determine how far zoom-out is possible
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
-			instance.minimumScale = maxZoomOutSliderWidth / rangeLength
+			instance.minimumZoom = Float(log10((maxZoomOutSliderWidth / rangeLength) / markerSpacing))
 		} else {
-			instance.minimumScale = 10
+			instance.minimumZoom = 0
 		}
 
-		instance.maximumScale = Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale
+		// Determine how far zoom-in is possible
+		instance.maximumZoom = Float(log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing))
 		
-		// Prevent negative scale-range
-		if instance.minimumScale > instance.maximumScale {
-			//print("preventing negative scale-range: from \(instance.minimumScale) to \(instance.maximumScale)")
-			instance.maximumScale = instance.minimumScale
-			instance.scale = instance.minimumScale
+		// Prevent negative zoom-range
+		if instance.minimumZoom > instance.maximumZoom {
+			//print("preventing negative zoom-range: from \(instance.minimumZoom) to \(instance.maximumZoom)")
+			instance.maximumZoom = instance.minimumZoom
 		}
+		
+		// Prevent zoom from going outside the zoom-range
+		if instance.zoom < instance.minimumZoom {
+			instance.zoom = instance.minimumZoom
+		}
+		if instance.zoom > instance.maximumZoom {
+			instance.zoom = instance.maximumZoom
+		}
+		//SwiftyFormLog("slider model: \(instance)")
 		return instance
 	}
 }
@@ -141,8 +181,8 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		return PrecisionSlider_InnerModel.height
 	}
 	
-	func sliderDidChange() {
-		collapsedCell?.sliderDidChange(slider.value)
+	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+		collapsedCell?.sliderDidChange(changeModel)
 	}
 	
 	lazy var slider: PrecisionSlider = {
@@ -192,8 +232,8 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		*/
 		slider.value = scaledValue
 
-		slider.valueDidChange = { [weak self] in
-			self?.sliderDidChange()
+		slider.valueDidChange = { [weak self] (changeModel: PrecisionSlider.SliderDidChangeModel) in
+			self?.sliderDidChange(changeModel)
 		}
 	}
 	

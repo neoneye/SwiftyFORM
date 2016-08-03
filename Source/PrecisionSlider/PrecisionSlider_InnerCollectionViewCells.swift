@@ -13,7 +13,7 @@ struct PrecisionSlider_InnerCollectionViewCellConstants {
 
 
 /**
-The cell displays a `mark` and displays a `label`.
+This cell displays a `mark` and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -64,7 +64,7 @@ class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `partialMark` and `mark`, and displays a `label`.
+This cell displays two markers, `partialMark` and `mark`, and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -144,7 +144,7 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `mark` and `partialMark`, and displays a `label`.
+This cell displays two markers, `mark` and `partialMark`, and displays a `label`.
 
 The `label` is shown above the `mark`.
 
@@ -224,13 +224,13 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 
 
 /**
-The cell displays two markers, `leftMark` and `rightMark`.
+This cell displays two markers, `leftMark` and `rightMark`.
 
 The `leftMark` indicates where the minimumValue is.
 The `rightMark` indicates where the maximumValue is.
 
-This cell is used when the scale is so narrow, that there isn't any room for: full_cell, first_cell, last_cell
-A last resort to show something meaningful.
+This cell is used when the content length too narrow, that there isn't any room for: full_cell, first_cell, last_cell
+This cell is a last resort to show something meaningful.
 */
 class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	static let identifier = "single_cell"

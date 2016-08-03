@@ -404,7 +404,7 @@ class PopulateTableView: FormItemVisitor {
 		model.maximumValue = object.maximumValue
 		model.value = object.value
 		model.title = object.title
-
+		model.initialZoom = object.initialZoom
 		
 		let cell = PrecisionSliderCell(model: model)
 		let cellExpanded = PrecisionSliderCellExpanded()
@@ -416,9 +416,15 @@ class PopulateTableView: FormItemVisitor {
 		cell.expandedCell = cellExpanded
 		
 		weak var weakObject = object
-		model.valueDidChange = { (value: Int) in
-			SwiftyFormLog("value did change \(value)")
-			weakObject?.sliderDidChange(value)
+		model.valueDidChange = { (changeModel: PrecisionSliderCellModel.SliderDidChangeModel) in
+			SwiftyFormLog("value did change \(changeModel.value)")
+			let model = PrecisionSliderFormItem.SliderDidChangeModel(
+				value: changeModel.value,
+				valueUpdated: changeModel.valueUpdated,
+				zoom: changeModel.zoom,
+				zoomUpdated: changeModel.zoomUpdated
+			)
+			weakObject?.sliderDidChange(model)
 		}
 		
 		weak var weakCell = cell

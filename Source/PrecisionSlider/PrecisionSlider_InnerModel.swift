@@ -11,12 +11,23 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
+
+	func clampValue(value: Double) -> Double {
+		if value > maximumValue {
+			return maximumValue
+		}
+		if value < minimumValue {
+			return minimumValue
+		}
+		return value
+	}
+
 	
 	var zoomMode = PrecisionSlider_InnerZoomMode.None
 	
 	func updateRange() {
-		zoomMode = PrecisionSlider_InnerZoomMode.create(scale)
-		//print("zoomMode: \(zoomMode)  scale: \(scale)")
+		zoomMode = PrecisionSlider_InnerZoomMode.create(zoom)
+		//print("zoomMode: \(zoomMode)  zoom: \(zoom)")
 		
 		maximumValue = originalMaximumValue * zoomMode.scalar
 		minimumValue = originalMinimumValue * zoomMode.scalar
@@ -66,7 +77,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		//		print("model: \(self)")
 	}
 	
-	/*
+	/**
 	This is used as a last resort when the range is too tiny that no other cells can be shown.
 	
 	The single_cell shows two markers.
@@ -76,7 +87,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasOnePartialItem = false
 	var sizeOfOnePartialItem: Double = 0.0
 	
-	/*
+	/**
 	This is used when the minimumValue doesn't align with any marker.
 	
 	The first_cell is two cells wide.
@@ -87,7 +98,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
 	
-	/*
+	/**
 	This is used when the maximumValue doesn't align with any marker.
 	
 	The last_cell is two cells wide.
@@ -98,7 +109,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
 	
-	/*
+	/**
 	The full_cell is used for showing markers inbetween minimumValue and maximumValue.
 	
 	A full_cell shows a marker at midX.
@@ -111,12 +122,38 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var numberOfFullItems = 100
 	
 
-	var scale: Double = 60.0
-	var minimumScale: Double = 40.0
-	var maximumScale: Double = 80.0
+	var markerSpacing: Double = 30
+
+	/**
+	The `zoom` factor is logarithmic
 	
+	 1. zoom-factor +2 == 100   zoomed out
+	 2. zoom-factor +1 == 10
+	 3. zoom-factor  0 == 1     normal
+	 4. zoom-factor -1 == 0.1
+	 5. zoom-factor -2 == 0.01  zoomed in
+	
+	The zoom works best in the range -3 to +3.
+	A zoom factor outside -6 to +6 is extreme.
+	*/
+	var zoom: Float = 0
+	var minimumZoom: Float = -5
+	var maximumZoom: Float = 5
+
+	func clampZoom(zoom: Float) -> Float {
+		if zoom > maximumZoom {
+			return maximumZoom
+		}
+		if zoom < minimumZoom {
+			return minimumZoom
+		}
+		return zoom
+	}
+
+	
+	/// length is in pixels
 	var lengthOfFullItem: Double {
-		let result = ceil(scale / zoomMode.scalar)
+		let result = ceil(pow(10, Double(zoom)) * markerSpacing / zoomMode.scalar)
 		if result < 0.1 {
 			return 0.1
 		}
@@ -185,8 +222,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")
-		strings.append(String(format: "scale: %.5f", scale))
-		strings.append(String(format: "scale-range: %.5f", minimumScale))
+		strings.append(String(format: "zoom: %.5f", zoom))
+		strings.append(String(format: "zoom-range: %.5f %.5f", minimumZoom, maximumZoom))
 		strings.append(String(format: "value-range: %.5f %.5f", minimumValue, maximumValue))
 		if hasOnePartialItem {
 			strings.append(String(format: "one-partial: %.5f", sizeOfOnePartialItem))
