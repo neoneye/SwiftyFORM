@@ -93,10 +93,8 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 			}
 		}
 		
-		// TODO: compare changeModel.zoom with self.zoom and set zoomUpdated accordingly
-		
 		if !valueUpdated && !changeModel.zoomUpdated {
-			print("ignore slider change. Nothing has changed")
+			//print("ignore slider change. Nothing has changed")
 			return
 		}
 		
