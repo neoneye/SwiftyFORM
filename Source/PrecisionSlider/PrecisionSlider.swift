@@ -168,16 +168,20 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			originalValue = self.value
 		}
 		if gesture.state == .Changed {
+			let zoomBefore = model.zoom
 			let zoom = Float(log10(pow(10, Double(originalZoom)) * Double(gesture.scale)))
 			changeZoom(zoom: zoom, value: originalValue)
+			let zoomAfter = model.zoom
 			
-			let changeModel = SliderDidChangeModel(
-				value: originalValue,
-				valueUpdated: false,
-				zoom: model.zoom,
-				zoomUpdated: true
-			)
-			valueDidChange?(changeModel: changeModel)
+			if zoomBefore != zoomAfter {
+				let changeModel = SliderDidChangeModel(
+					value: originalValue,
+					valueUpdated: false,
+					zoom: model.zoom,
+					zoomUpdated: true
+				)
+				valueDidChange?(changeModel: changeModel)
+			}
 		}
 	}
 	
