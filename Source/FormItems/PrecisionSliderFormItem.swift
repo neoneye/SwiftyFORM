@@ -39,7 +39,7 @@ public class PrecisionSliderFormItem: FormItem {
 	/**
 	Number of decimal places
 	
-	The number can be from 0 to +5.
+	The number can go from 0 to +5.
 	*/
 	public var decimalPlaces: UInt = 3  {
 		willSet {
@@ -63,6 +63,11 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 	
+	public var zoomUI = false
+	public func enableZoomUI() -> Self {
+		self.zoomUI = true
+		return self
+	}
 	
 	typealias SyncBlock = (value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in

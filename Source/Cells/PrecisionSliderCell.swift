@@ -8,6 +8,7 @@ public class PrecisionSliderCellModel {
 	var minimumValue: Int = 0
 	var maximumValue: Int = 1000
 	var initialZoom: Float?
+	var zoomUI = false
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -218,10 +219,13 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 			return
 		}
 		
+		slider.zoomUIHidden = !model.zoomUI
+
 		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
 		slider.model = sliderViewModel
 		slider.layout.model = sliderViewModel
 		slider.reloadSlider()
+		slider.reloadZoomLabel()
 
 		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
 		let scaledValue = Double(model.value) / decimalScale
