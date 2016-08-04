@@ -42,6 +42,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addSubview(collectionView)
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
+		addSubview(zoomInButton)
+		addSubview(zoomOutButton)
 		addGestureRecognizer(pinchGestureRecognizer)
 		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
 		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
@@ -77,10 +79,20 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		collectionView.frame = bounds
 		
 		updateContentInset()
+
+		do {
+			let (left, right) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
+			leftCoverView.frame = left.divide(1, fromEdge: .MaxXEdge).remainder
+			rightCoverView.frame = right
+		}
 		
-		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
-		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
-		rightCoverView.frame = rightFrame
+		do {
+			let right = bounds.divide(40, fromEdge: .MaxXEdge).slice
+			let (a, b) = right.divide(40, fromEdge: .MaxYEdge)
+			let (c, _) = b.divide(40, fromEdge: .MaxYEdge)
+			zoomInButton.frame = a
+			zoomOutButton.frame = c
+		}
 	}
 	
 	lazy var leftCoverView: UIView = {
@@ -297,6 +309,75 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 
+	// MARK: button for zoom in
+	
+	lazy var zoomInButton: UIButton = {
+		let instance = UIButton(type: .Custom)
+		instance.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.33, alpha: 1.0), forState: .Normal)
+		instance.setTitle("+", forState: .Normal)
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), forControlEvents: .TouchUpInside)
+		return instance
+	}()
+	
+	func zoomInButtonAction() {
+		let originalZoom = model.zoom
+		let originalValue = self.value
+		
+		let clampedZoom = model.clampZoom(originalZoom + 1.0)
+		if model.zoom == clampedZoom {
+			return // already zoomed in, no need to update UI
+		}
+		
+		disablePropagation()
+		changeZoom(zoom: clampedZoom, value: originalValue)
+		enablePropagation()
+		
+		let changeModel = SliderDidChangeModel(
+			value: originalValue,
+			valueUpdated: false,
+			zoom: model.zoom,
+			zoomUpdated: true
+		)
+		valueDidChange?(changeModel: changeModel)
+	}
+	
+	
+	// MARK: button for zoom out
+	
+	lazy var zoomOutButton: UIButton = {
+		let instance = UIButton(type: .Custom)
+		instance.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.33, alpha: 1.0), forState: .Normal)
+		instance.setTitle("-", forState: .Normal)
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), forControlEvents: .TouchUpInside)
+		return instance
+	}()
+	
+	func zoomOutButtonAction() {
+		let originalZoom = model.zoom
+		let originalValue = self.value
+		
+		let clampedZoom = model.clampZoom(originalZoom - 1.0)
+		if model.zoom == clampedZoom {
+			return // already zoomed out, no need to update UI
+		}
+		
+		disablePropagation()
+		changeZoom(zoom: clampedZoom, value: originalValue)
+		enablePropagation()
+		
+		let changeModel = SliderDidChangeModel(
+			value: originalValue,
+			valueUpdated: false,
+			zoom: model.zoom,
+			zoomUpdated: true
+		)
+		valueDidChange?(changeModel: changeModel)
+	}
+	
+
+	
 	func changeZoom(zoom zoom: Float, value: Double) {
 		let clampedZoom = model.clampZoom(zoom)
 		if model.zoom == clampedZoom {
