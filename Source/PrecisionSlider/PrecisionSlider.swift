@@ -314,8 +314,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			}
 		}
 	}
-	
 
+	
+	func hideZoomUI() {
+		zoomLabel.hidden = true
+		zoomInButton.hidden = true
+		zoomOutButton.hidden = true
+	}
+	
 	// MARK: Label that shows the current zoom factor
 	
 	lazy var zoomLabel: UILabel = {
