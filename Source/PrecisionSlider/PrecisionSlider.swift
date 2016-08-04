@@ -44,6 +44,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addSubview(rightCoverView)
 		addSubview(zoomInButton)
 		addSubview(zoomOutButton)
+		addSubview(zoomLabel)
 		addGestureRecognizer(pinchGestureRecognizer)
 		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
 		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
@@ -87,11 +88,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 		
 		do {
-			let right = bounds.divide(40, fromEdge: .MaxXEdge).slice
-			let (a, b) = right.divide(40, fromEdge: .MaxYEdge)
-			let (c, _) = b.divide(40, fromEdge: .MaxYEdge)
+			let halfHeight = floor(bounds.height / 2)
+			let right = bounds.divide(halfHeight, fromEdge: .MaxXEdge).slice
+			let (a, b) = right.divide(halfHeight, fromEdge: .MaxYEdge)
 			zoomInButton.frame = a
-			zoomOutButton.frame = c
+			zoomOutButton.frame = b
+			
+			zoomLabel.frame = right
 		}
 	}
 	
@@ -186,6 +189,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			let zoomAfter = model.zoom
 			
 			if zoomBefore != zoomAfter {
+				reloadZoomLabel()
 				let changeModel = SliderDidChangeModel(
 					value: originalValue,
 					valueUpdated: false,
@@ -240,6 +244,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
+						self.reloadZoomLabel()
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
@@ -296,6 +301,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
+						self.reloadZoomLabel()
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
@@ -308,13 +314,27 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			}
 		}
 	}
+	
+	lazy var zoomLabel: UILabel = {
+		let instance = UILabel()
+		instance.textColor = UIColor(white: 0.2, alpha: 1.0)
+		instance.text = "0.0"
+		instance.font = UIFont.systemFontOfSize(12)
+		instance.textAlignment = .Center
+		return instance
+	}()
+	
+	func reloadZoomLabel() {
+		zoomLabel.text = String(format: "%.1f", model.zoom)
+	}
 
 	// MARK: button for zoom in
 	
 	lazy var zoomInButton: UIButton = {
 		let instance = UIButton(type: .Custom)
-		instance.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.33, alpha: 1.0), forState: .Normal)
+		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
+		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
 		instance.setTitle("+", forState: .Normal)
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), forControlEvents: .TouchUpInside)
 		return instance
@@ -333,6 +353,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		changeZoom(zoom: clampedZoom, value: originalValue)
 		enablePropagation()
 		
+		reloadZoomLabel()
 		let changeModel = SliderDidChangeModel(
 			value: originalValue,
 			valueUpdated: false,
@@ -347,8 +368,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	lazy var zoomOutButton: UIButton = {
 		let instance = UIButton(type: .Custom)
-		instance.backgroundColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.33, alpha: 1.0), forState: .Normal)
+		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
+		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
 		instance.setTitle("-", forState: .Normal)
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), forControlEvents: .TouchUpInside)
 		return instance
@@ -367,6 +389,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		changeZoom(zoom: clampedZoom, value: originalValue)
 		enablePropagation()
 		
+		reloadZoomLabel()
 		let changeModel = SliderDidChangeModel(
 			value: originalValue,
 			valueUpdated: false,
