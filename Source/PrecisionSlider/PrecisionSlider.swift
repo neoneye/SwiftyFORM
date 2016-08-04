@@ -165,7 +165,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: pinch gesture for zoom in/out
+	// MARK: Pinch gesture for zoom in/out
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
 		let instance = UIPinchGestureRecognizer(target: self, action: #selector(PrecisionSlider.handlePinch))
@@ -202,7 +202,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: one-finger double-tap for zoom in
+	// MARK: Gesture 'one-finger double-tap' for zoom in
 	
 	lazy var oneTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleOneTouchDoubleTap))
@@ -259,7 +259,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: two-finger double-tap for zoom out
+	// MARK: Gesture 'two-finger double-tap' for zoom out
 	
 	lazy var twoTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleTwoTouchDoubleTap))
@@ -315,6 +315,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 	
+
+	// MARK: Label that shows the current zoom factor
+	
 	lazy var zoomLabel: UILabel = {
 		let instance = UILabel()
 		instance.textColor = UIColor(white: 0.2, alpha: 1.0)
@@ -328,7 +331,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		zoomLabel.text = String(format: "%.1f", model.zoom)
 	}
 
-	// MARK: button for zoom in
+
+	// MARK: Button for zoom in
 	
 	lazy var zoomInButton: UIButton = {
 		let instance = UIButton(type: .Custom)
@@ -364,7 +368,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: button for zoom out
+	// MARK: Button for zoom out
 	
 	lazy var zoomOutButton: UIButton = {
 		let instance = UIButton(type: .Custom)
@@ -455,6 +459,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.dataSource = self
 		return instance
 	}()
+	
+	
+	// MARK: UICollectionView delegate/datasource
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		if enablePropagationCounter < 0 {
