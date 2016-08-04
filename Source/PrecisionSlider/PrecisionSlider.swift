@@ -339,6 +339,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
 		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
 		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.showsTouchWhenHighlighted = true
 		instance.setTitle("+", forState: .Normal)
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), forControlEvents: .TouchUpInside)
 		return instance
@@ -375,6 +376,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
 		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
 		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.showsTouchWhenHighlighted = true
 		instance.setTitle("-", forState: .Normal)
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), forControlEvents: .TouchUpInside)
 		return instance
