@@ -39,15 +39,18 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func commonInit() {
-		addSubview(collectionView)
+		addSubview(collectionViewWrapper)
+		collectionViewWrapper.addSubview(collectionView)
+		
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
 		addSubview(zoomInButton)
 		addSubview(zoomOutButton)
 		addSubview(zoomLabel)
-		addGestureRecognizer(pinchGestureRecognizer)
-		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
-		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
+
+		collectionViewWrapper.addGestureRecognizer(pinchGestureRecognizer)
+		collectionViewWrapper.addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
+		collectionViewWrapper.addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
 	}
 	
 	func updateContentInset() {
@@ -77,6 +80,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
+		collectionViewWrapper.frame = bounds
 		collectionView.frame = bounds
 		
 		updateContentInset()
@@ -87,13 +91,12 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			rightCoverView.frame = right
 		}
 		
-		do {
+		if !zoomUIHidden {
 			let halfHeight = floor(bounds.height / 2)
 			let right = bounds.divide(halfHeight, fromEdge: .MaxXEdge).slice
 			let (a, b) = right.divide(halfHeight, fromEdge: .MaxYEdge)
-			zoomInButton.frame = a
-			zoomOutButton.frame = b
-			
+			zoomOutButton.frame = a
+			zoomInButton.frame = b
 			zoomLabel.frame = right
 		}
 	}
@@ -316,13 +319,22 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 
 	
-	func hideZoomUI() {
-		zoomLabel.hidden = true
-		zoomInButton.hidden = true
-		zoomOutButton.hidden = true
+	// MARK: Zoom UI
+	
+	var zoomUIHidden: Bool {
+		get {
+			return zoomLabel.hidden && zoomInButton.hidden && zoomOutButton.hidden
+		}
+		set {
+			zoomLabel.hidden = newValue
+			zoomInButton.hidden = newValue
+			zoomOutButton.hidden = newValue
+			setNeedsLayout()
+		}
 	}
 	
-	// MARK: Label that shows the current zoom factor
+
+	// MARK: Zoom UI - Label that shows the current zoom factor
 	
 	lazy var zoomLabel: UILabel = {
 		let instance = UILabel()
@@ -338,7 +350,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 
 
-	// MARK: Button for zoom in
+	// MARK: Zoom UI - Button for zoom in
 	
 	lazy var zoomInButton: UIButton = {
 		let instance = UIButton(type: .Custom)
@@ -375,7 +387,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: Button for zoom out
+	// MARK: Zoom UI - Button for zoom out
 	
 	lazy var zoomOutButton: UIButton = {
 		let instance = UIButton(type: .Custom)
@@ -448,6 +460,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.itemSize = self.computeItemSize()
 		instance.model = self.model
 		return instance
+	}()
+
+	/**
+	The collectionview is wrapped in a plain UIView, that doesn't do anything.
+	This lets us install custom gesture recognizers for pinch and double-tap.
+	*/
+	lazy var collectionViewWrapper: UIView = {
+		return UIView()
 	}()
 	
 	lazy var collectionView: UICollectionView = {

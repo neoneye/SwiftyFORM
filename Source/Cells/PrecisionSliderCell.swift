@@ -220,7 +220,7 @@ public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
 		}
 		
 		if !model.zoomUI {
-			slider.hideZoomUI()
+			slider.zoomUIHidden = false
 		}
 
 		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
