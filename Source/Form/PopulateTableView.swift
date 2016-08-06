@@ -229,11 +229,23 @@ class PopulateTableView: FormItemVisitor {
 		model.initialZoom = object.initialZoom
 		model.zoomUI = object.zoomUI
 		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+		}
+		
 		let cell = PrecisionSliderCell(model: model)
 		let cellExpanded = PrecisionSliderCellExpanded()
 
 		cells.append(cell)
-		cells.appendHidden(cellExpanded)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
