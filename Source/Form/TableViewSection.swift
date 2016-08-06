@@ -8,7 +8,7 @@ public enum TableViewSectionPart {
 	
 	typealias CreateBlock = Void -> TableViewSectionPart
 	
-	func title() -> String? {
+	var title: String? {
 		switch self {
 		case let .TitleString(string):
 			return string
@@ -17,7 +17,7 @@ public enum TableViewSectionPart {
 		}
 	}
 
-	func view() -> UIView? {
+	var view: UIView? {
 		switch self {
 		case let .TitleView(view):
 			return view
@@ -26,7 +26,7 @@ public enum TableViewSectionPart {
 		}
 	}
 	
-	func height() -> CGFloat {
+	var height: CGFloat {
 		switch self {
 		case let .TitleView(view):
 			let view2: UIView = view
@@ -75,27 +75,27 @@ public class TableViewSection : NSObject, UITableViewDataSource, UITableViewDele
 	}
 	
 	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return header.title()
+		return header.title
 	}
 	
 	public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-		return footer.title()
+		return footer.title
 	}
 
 	public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		return header.view()
+		return header.view
 	}
 
 	public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return footer.view()
+		return footer.view
 	}
 
 	public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return header.height()
+		return header.height
 	}
 	
 	public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return footer.height()
+		return footer.height
 	}
 	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
