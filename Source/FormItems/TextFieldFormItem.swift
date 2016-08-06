@@ -3,7 +3,7 @@ import Foundation
 
 public class TextFieldFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitTextField(self)
+		visitor.visit(self)
 	}
 	
 	public var keyboardType: UIKeyboardType = .Default

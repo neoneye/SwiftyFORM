@@ -3,7 +3,7 @@ import Foundation
 
 public class SwitchFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSwitch(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""

@@ -3,7 +3,7 @@ import Foundation
 
 public class SectionFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSection(self)
+		visitor.visit(self)
 	}
 }
 
@@ -14,7 +14,7 @@ public class SectionHeaderTitleFormItem: FormItem {
 	}
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSectionHeaderTitle(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String?
@@ -26,7 +26,7 @@ public class SectionHeaderTitleFormItem: FormItem {
 
 public class SectionHeaderViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSectionHeaderView(self)
+		visitor.visit(self)
 	}
 	
 	public typealias CreateUIView = Void -> UIView?
@@ -40,7 +40,7 @@ public class SectionFooterTitleFormItem: FormItem {
 	}
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSectionFooterTitle(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String?
@@ -52,7 +52,7 @@ public class SectionFooterTitleFormItem: FormItem {
 
 public class SectionFooterViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSectionFooterView(self)
+		visitor.visit(self)
 	}
 	
 	public typealias CreateUIView = Void -> UIView?

@@ -3,7 +3,7 @@ import Foundation
 
 public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitPrecisionSlider(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""

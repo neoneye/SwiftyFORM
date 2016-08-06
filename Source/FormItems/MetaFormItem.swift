@@ -4,7 +4,7 @@ import Foundation
 /// This is an invisible field, that is submitted along with the json
 public class MetaFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitMeta(self)
+		visitor.visit(self)
 	}
 	
 	public var value: AnyObject?

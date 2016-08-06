@@ -17,7 +17,7 @@ public class OptionRowModel: CustomStringConvertible {
 
 public class OptionPickerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitOptionPicker(self)
+		visitor.visit(self)
 	}
 	
 	public var placeholder: String = ""
@@ -85,7 +85,7 @@ public class OptionPickerFormItem: FormItem {
 
 public class OptionRowFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitOptionRow(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""

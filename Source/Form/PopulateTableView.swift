@@ -67,11 +67,11 @@ class PopulateTableView: FormItemVisitor {
 	}
 	
 	
-	func visitMeta(object: MetaFormItem) {
+	func visit(object: MetaFormItem) {
 		// this item is not visual
 	}
 
-	func visitCustom(object: CustomFormItem) {
+	func visit(object: CustomFormItem) {
 		let context = CustomFormItem.Context(
 			viewController: model.viewController
 		)
@@ -89,7 +89,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitStaticText(object: StaticTextFormItem) {
+	func visit(object: StaticTextFormItem) {
 		var model = StaticTextCellModel()
 		model.title = object.title
 		model.value = object.value
@@ -109,7 +109,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
     
-    func visitAttributedText(object: AttributedTextFormItem) {
+    func visit(object: AttributedTextFormItem) {
         var model = AttributedTextCellModel()
         model.titleAttributedText = object.title
         model.valueAttributedText = object.value
@@ -129,7 +129,7 @@ class PopulateTableView: FormItemVisitor {
         }
     }
 	
-	func visitTextField(object: TextFieldFormItem) {
+	func visit(object: TextFieldFormItem) {
 		var model = TextFieldFormItemCellModel()
 		model.toolbarMode = self.model.toolbarMode
 		model.title = object.title
@@ -179,7 +179,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitTextView(object: TextViewFormItem) {
+	func visit(object: TextViewFormItem) {
 		var model = TextViewCellModel()
 		model.toolbarMode = self.model.toolbarMode
 		model.title = object.title
@@ -202,7 +202,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 
-	func visitViewController(object: ViewControllerFormItem) {
+	func visit(object: ViewControllerFormItem) {
 		let model = ViewControllerFormItemCellModel(title: object.title, placeholder: object.placeholder)
 		let willPopViewController = WillPopCustomViewController(object: object)
 		
@@ -232,7 +232,7 @@ class PopulateTableView: FormItemVisitor {
 		return command
 	}
 
-	func visitOptionPicker(object: OptionPickerFormItem) {
+	func visit(object: OptionPickerFormItem) {
 		var model = OptionViewControllerCellModel()
 		model.title = object.title
 		model.placeholder = object.placeholder
@@ -267,7 +267,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitDatePicker(object: DatePickerFormItem) {
+	func visit(object: DatePickerFormItem) {
 		var model = DatePickerCellModel()
 		model.title = object.title
 		model.toolbarMode = self.model.toolbarMode
@@ -298,7 +298,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitButton(object: ButtonFormItem) {
+	func visit(object: ButtonFormItem) {
 		var model = ButtonCellModel()
 		model.title = object.title
 		model.action = object.action
@@ -306,7 +306,7 @@ class PopulateTableView: FormItemVisitor {
 		cells.append(cell)
 	}
 
-	func visitOptionRow(object: OptionRowFormItem) {
+	func visit(object: OptionRowFormItem) {
 		weak var weakViewController = self.model.viewController
 		let cell = OptionCell(model: object) {
 			SwiftyFormLog("did select option")
@@ -319,7 +319,7 @@ class PopulateTableView: FormItemVisitor {
 		cells.append(cell)
 	}
 	
-	func visitSwitch(object: SwitchFormItem) {
+	func visit(object: SwitchFormItem) {
 		var model = SwitchCellModel()
 		model.title = object.title
 		
@@ -345,7 +345,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitStepper(object: StepperFormItem) {
+	func visit(object: StepperFormItem) {
 		var model = StepperCellModel()
 		model.title = object.title
 		model.value = object.value
@@ -372,7 +372,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 
-	func visitSlider(object: SliderFormItem) {
+	func visit(object: SliderFormItem) {
 		var model = SliderCellModel()
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
@@ -397,7 +397,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
+	func visit(object: PrecisionSliderFormItem) {
 		let model = PrecisionSliderCellModel()
 		model.decimalPlaces = object.decimalPlaces
 		model.minimumValue = object.minimumValue
@@ -440,14 +440,14 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitSection(object: SectionFormItem) {
+	func visit(object: SectionFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			return TableViewSectionPart.None
 		}
 		closeSection(footerBlock)
 	}
 
-	func visitSectionHeaderTitle(object: SectionHeaderTitleFormItem) {
+	func visit(object: SectionHeaderTitleFormItem) {
 		if cells.count > 0 || self.headerBlock != nil {
 			let footerBlock: TableViewSectionPart.CreateBlock = {
 				return TableViewSectionPart.None
@@ -464,7 +464,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitSectionHeaderView(object: SectionHeaderViewFormItem) {
+	func visit(object: SectionHeaderViewFormItem) {
 		if cells.count > 0 || self.headerBlock != nil {
 			let footerBlock: TableViewSectionPart.CreateBlock = {
 				return TableViewSectionPart.None
@@ -482,7 +482,7 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 
-	func visitSectionFooterTitle(object: SectionFooterTitleFormItem) {
+	func visit(object: SectionFooterTitleFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			var footer = TableViewSectionPart.None
 			if let title = object.title {
@@ -493,7 +493,7 @@ class PopulateTableView: FormItemVisitor {
 		closeSection(footerBlock)
 	}
 	
-	func visitSectionFooterView(object: SectionFooterViewFormItem) {
+	func visit(object: SectionFooterViewFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			let view: UIView? = object.viewBlock?()
 			var item = TableViewSectionPart.None
@@ -505,7 +505,7 @@ class PopulateTableView: FormItemVisitor {
 		closeSection(footerBlock)
 	}
 	
-	func visitSegmentedControl(object: SegmentedControlFormItem) {
+	func visit(object: SegmentedControlFormItem) {
 		var model = SegmentedControlCellModel()
 		model.title = object.title
 		model.items = object.items

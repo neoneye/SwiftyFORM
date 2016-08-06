@@ -17,7 +17,7 @@ public class ViewControllerFormItemPopContext {
 
 public class ViewControllerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitViewController(self)
+		visitor.visit(self)
 	}
 	
 	public var placeholder: String = ""

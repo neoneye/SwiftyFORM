@@ -3,7 +3,7 @@ import Foundation
 
 public class StepperFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitStepper(self)
+		visitor.visit(self)
 	}
 
 	public var title: String = ""

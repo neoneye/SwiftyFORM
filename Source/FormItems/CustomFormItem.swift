@@ -14,6 +14,6 @@ public class CustomFormItem: FormItem {
 	public var createCell: CreateCell = { _ in throw CustomFormItemError.CouldNotCreate }
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitCustom(self)
+		visitor.visit(self)
 	}
 }

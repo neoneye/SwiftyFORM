@@ -3,7 +3,7 @@ import Foundation
 
 public class StaticTextFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitStaticText(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""

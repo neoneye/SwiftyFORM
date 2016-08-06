@@ -10,29 +10,29 @@ class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 		}
 	}
 	
-	func visitMeta(object: MetaFormItem) {}
-	func visitCustom(object: CustomFormItem) {}
-	func visitStaticText(object: StaticTextFormItem) {}
-	func visitAttributedText(object: AttributedTextFormItem) {}
+	func visit(object: MetaFormItem) {}
+	func visit(object: CustomFormItem) {}
+	func visit(object: StaticTextFormItem) {}
+	func visit(object: AttributedTextFormItem) {}
 	
-	func visitTextField(object: TextFieldFormItem) {
+	func visit(object: TextFieldFormItem) {
 		object.reloadPersistentValidationState()
 	}
 	
-	func visitTextView(object: TextViewFormItem) {}
-	func visitViewController(object: ViewControllerFormItem) {}
-	func visitOptionPicker(object: OptionPickerFormItem) {}
-	func visitDatePicker(object: DatePickerFormItem) {}
-	func visitButton(object: ButtonFormItem) {}
-	func visitOptionRow(object: OptionRowFormItem) {}
-	func visitSwitch(object: SwitchFormItem) {}
-	func visitStepper(object: StepperFormItem) {}
-	func visitSlider(object: SliderFormItem) {}
-	func visitPrecisionSlider(object: PrecisionSliderFormItem) {}
-	func visitSection(object: SectionFormItem) {}
-	func visitSectionHeaderTitle(object: SectionHeaderTitleFormItem) {}
-	func visitSectionHeaderView(object: SectionHeaderViewFormItem) {}
-	func visitSectionFooterTitle(object: SectionFooterTitleFormItem) {}
-	func visitSectionFooterView(object: SectionFooterViewFormItem) {}
-	func visitSegmentedControl(object: SegmentedControlFormItem) {}
+	func visit(object: TextViewFormItem) {}
+	func visit(object: ViewControllerFormItem) {}
+	func visit(object: OptionPickerFormItem) {}
+	func visit(object: DatePickerFormItem) {}
+	func visit(object: ButtonFormItem) {}
+	func visit(object: OptionRowFormItem) {}
+	func visit(object: SwitchFormItem) {}
+	func visit(object: StepperFormItem) {}
+	func visit(object: SliderFormItem) {}
+	func visit(object: PrecisionSliderFormItem) {}
+	func visit(object: SectionFormItem) {}
+	func visit(object: SectionHeaderTitleFormItem) {}
+	func visit(object: SectionHeaderViewFormItem) {}
+	func visit(object: SectionFooterTitleFormItem) {}
+	func visit(object: SectionFooterViewFormItem) {}
+	func visit(object: SegmentedControlFormItem) {}
 }

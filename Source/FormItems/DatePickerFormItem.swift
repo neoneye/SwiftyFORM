@@ -17,7 +17,7 @@ public enum DatePickerFormItemMode {
 
 public class DatePickerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitDatePicker(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""

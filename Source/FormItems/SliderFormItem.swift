@@ -3,7 +3,7 @@ import Foundation
 
 public class SliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSlider(self)
+		visitor.visit(self)
 	}
 	
 	public var minimumValue: Float = 0.0

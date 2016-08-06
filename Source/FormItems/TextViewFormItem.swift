@@ -3,7 +3,7 @@ import Foundation
 
 public class TextViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitTextView(self)
+		visitor.visit(self)
 	}
 	
 	public var placeholder: String = ""

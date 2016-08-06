@@ -47,7 +47,7 @@ public class DumpVisitor: FormItemVisitor {
 	
 	private var dict = Dictionary<String, AnyObject>()
 	
-	public func visitMeta(object: MetaFormItem) {
+	public func visit(object: MetaFormItem) {
 		dict["class"] = "MetaFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -55,14 +55,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 
-	public func visitCustom(object: CustomFormItem) {
+	public func visit(object: CustomFormItem) {
 		dict["class"] = "CustomFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
 	
-	public func visitStaticText(object: StaticTextFormItem) {
+	public func visit(object: StaticTextFormItem) {
 		dict["class"] = "StaticTextFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -71,7 +71,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 
-	public func visitAttributedText(object: AttributedTextFormItem) {
+	public func visit(object: AttributedTextFormItem) {
 		dict["class"] = "AttributedTextFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -80,7 +80,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value?.string
 	}
 	
-	public func visitTextField(object: TextFieldFormItem) {
+	public func visit(object: TextFieldFormItem) {
 		dict["class"] = "TextFieldFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -90,7 +90,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["placeholder"] = object.placeholder
 	}
 	
-	public func visitTextView(object: TextViewFormItem) {
+	public func visit(object: TextViewFormItem) {
 		dict["class"] = "TextViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -99,7 +99,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 	
-	public func visitViewController(object: ViewControllerFormItem) {
+	public func visit(object: ViewControllerFormItem) {
 		dict["class"] = "ViewControllerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -107,7 +107,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 	}
 	
-	public func visitOptionPicker(object: OptionPickerFormItem) {
+	public func visit(object: OptionPickerFormItem) {
 		dict["class"] = "OptionPickerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -124,7 +124,7 @@ public class DumpVisitor: FormItemVisitor {
 		return NSNull()
 	}
 	
-	public func visitDatePicker(object: DatePickerFormItem) {
+	public func visit(object: DatePickerFormItem) {
 		dict["class"] = "DatePickerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -137,7 +137,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["maximumDate"] = convertOptionalDateToJSON(object.minimumDate)
 	}
 	
-	public func visitButton(object: ButtonFormItem) {
+	public func visit(object: ButtonFormItem) {
 		dict["class"] = "ButtonFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -145,7 +145,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 	}
 	
-	public func visitOptionRow(object: OptionRowFormItem) {
+	public func visit(object: OptionRowFormItem) {
 		dict["class"] = "OptionRowFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -154,7 +154,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["state"] = object.selected
 	}
 
-	public func visitSwitch(object: SwitchFormItem) {
+	public func visit(object: SwitchFormItem) {
 		dict["class"] = "SwitchFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -163,7 +163,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 
-	public func visitStepper(object: StepperFormItem) {
+	public func visit(object: StepperFormItem) {
 		dict["class"] = "StepperFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -171,7 +171,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 	}
 	
-	public func visitSlider(object: SliderFormItem) {
+	public func visit(object: SliderFormItem) {
 		dict["class"] = "SliderFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -181,7 +181,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["maximumValue"] = object.maximumValue
 	}
 	
-	public func visitPrecisionSlider(object: PrecisionSliderFormItem) {
+	public func visit(object: PrecisionSliderFormItem) {
 		dict["class"] = "PrecisionSliderFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -192,14 +192,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["decimalPlaces"] = object.decimalPlaces
 	}
 	
-	public func visitSection(object: SectionFormItem) {
+	public func visit(object: SectionFormItem) {
 		dict["class"] = "SectionFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
 	
-	public func visitSectionHeaderTitle(object: SectionHeaderTitleFormItem) {
+	public func visit(object: SectionHeaderTitleFormItem) {
 		dict["class"] = "SectionHeaderTitleFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -207,14 +207,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 	}
 	
-	public func visitSectionHeaderView(object: SectionHeaderViewFormItem) {
+	public func visit(object: SectionHeaderViewFormItem) {
 		dict["class"] = "SectionHeaderViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
 	
-	public func visitSectionFooterTitle(object: SectionFooterTitleFormItem) {
+	public func visit(object: SectionFooterTitleFormItem) {
 		dict["class"] = "SectionFooterTitleFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
@@ -222,14 +222,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 	}
 
-	public func visitSectionFooterView(object: SectionFooterViewFormItem) {
+	public func visit(object: SectionFooterViewFormItem) {
 		dict["class"] = "SectionFooterViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
 
-	public func visitSegmentedControl(object: SegmentedControlFormItem) {
+	public func visit(object: SegmentedControlFormItem) {
 		dict["class"] = "SegmentedControlFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
