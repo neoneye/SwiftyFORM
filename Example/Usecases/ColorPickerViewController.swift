@@ -73,6 +73,9 @@ class ColorPickerViewController: FormViewController {
 			alpha: 1.0
 		)
 		view?.backgroundColor = color
+		
+		navigationController?.navigationBar.barTintColor = color
+		navigationController?.navigationBar.translucent = false
 	}
 
 	lazy var randomizeButton: ButtonFormItem = {
@@ -94,5 +97,13 @@ class ColorPickerViewController: FormViewController {
 		assignRandomValue(slider2)
 		updateSummary()
 		updateColor()
+	}
+
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		// restore the navigationbar theme when leaving this page
+		navigationController?.navigationBar.barTintColor = nil
+		navigationController?.navigationBar.translucent = true
 	}
 }
