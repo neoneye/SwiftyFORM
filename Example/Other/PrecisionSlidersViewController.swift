@@ -7,6 +7,11 @@ class PrecisionSlidersViewController: FormViewController {
 		builder.navigationTitle = "Precision Sliders"
 		builder.toolbarMode = .None
 		
+		builder += SectionHeaderTitleFormItem().title("Behavior")
+		builder += PrecisionSliderFormItem().title("A Collapsed").behavior(.Collapsed)
+		builder += PrecisionSliderFormItem().title("B Expanded").behavior(.Expanded)
+		builder += PrecisionSliderFormItem().title("C ExpandedAlways").behavior(.ExpandedAlways)
+
 		builder += SectionHeaderTitleFormItem().title("Zoom UI enabled")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(0).maximumValue(255).value(127).title("A 0 255").enableZoomUI()
 		builder += PrecisionSliderFormItem().decimalPlaces(2).minimumValue(-100).maximumValue(100).value(25).title("B -1 1").enableZoomUI()

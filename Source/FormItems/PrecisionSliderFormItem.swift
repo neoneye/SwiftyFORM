@@ -12,7 +12,18 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 
-	/** 
+	public enum Behavior {
+		case Collapsed
+		case Expanded
+		case ExpandedAlways
+	}
+	public var behavior = Behavior.Collapsed
+	public func behavior(behavior: Behavior) -> Self {
+		self.behavior = behavior
+		return self
+	}
+	
+	/**
 	Initial zoom factor
 	
 	Automatically determines the best zoom when `initialZoom` is nil
