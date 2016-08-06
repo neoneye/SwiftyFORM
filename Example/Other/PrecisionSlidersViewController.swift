@@ -68,6 +68,11 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_000).value(-18_000).title("B -20 -15")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_100).value(-18_000).title("C -20 -15.1")
 		
+		builder += SectionHeaderTitleFormItem().title("Behavior")
+		builder += PrecisionSliderFormItem().title("A Initially collapsed").behavior(.Collapsed)
+		builder += PrecisionSliderFormItem().title("B Initially expanded").behavior(.Expanded)
+		builder += PrecisionSliderFormItem().title("C Always expanded").behavior(.ExpandedAlways)
+		
 		builder += SectionHeaderTitleFormItem().title("Decimal places")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-1000).maximumValue(1000).value(0).title("0 decimal places")
 		builder += PrecisionSliderFormItem().decimalPlaces(1).minimumValue(-1000).maximumValue(1000).value(0).title("1 decimal places")

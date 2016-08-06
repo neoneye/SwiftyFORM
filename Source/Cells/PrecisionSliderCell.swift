@@ -9,6 +9,7 @@ public class PrecisionSliderCellModel {
 	var maximumValue: Int = 1000
 	var initialZoom: Float?
 	var zoomUI = false
+	var expandCollapseWhenSelectingRow = true
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -74,6 +75,9 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 			return
 		}
 		guard let expandedCell = expandedCell else {
+			return
+		}
+		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
 		tableView.expandCollapse(expandedCell: expandedCell, indexPath: indexPath)
