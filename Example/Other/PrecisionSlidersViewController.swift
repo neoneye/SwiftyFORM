@@ -7,11 +7,6 @@ class PrecisionSlidersViewController: FormViewController {
 		builder.navigationTitle = "Precision Sliders"
 		builder.toolbarMode = .None
 		
-		builder += SectionHeaderTitleFormItem().title("Behavior")
-		builder += PrecisionSliderFormItem().title("A Collapsed").behavior(.Collapsed)
-		builder += PrecisionSliderFormItem().title("B Expanded").behavior(.Expanded)
-		builder += PrecisionSliderFormItem().title("C ExpandedAlways").behavior(.ExpandedAlways)
-
 		builder += SectionHeaderTitleFormItem().title("Zoom UI enabled")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(0).maximumValue(255).value(127).title("A 0 255").enableZoomUI()
 		builder += PrecisionSliderFormItem().decimalPlaces(2).minimumValue(-100).maximumValue(100).value(25).title("B -1 1").enableZoomUI()
@@ -72,6 +67,11 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_100).maximumValue(-15_000).value(-18_000).title("A -20.1 -15")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_000).value(-18_000).title("B -20 -15")
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_100).value(-18_000).title("C -20 -15.1")
+		
+		builder += SectionHeaderTitleFormItem().title("Behavior")
+		builder += PrecisionSliderFormItem().title("A Initially collapsed").behavior(.Collapsed)
+		builder += PrecisionSliderFormItem().title("B Initially expanded").behavior(.Expanded)
+		builder += PrecisionSliderFormItem().title("C Always expanded").behavior(.ExpandedAlways)
 		
 		builder += SectionHeaderTitleFormItem().title("Decimal places")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-1000).maximumValue(1000).value(0).title("0 decimal places")
