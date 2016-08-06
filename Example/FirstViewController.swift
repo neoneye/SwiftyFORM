@@ -7,11 +7,11 @@ public class FirstViewController: FormViewController {
 		builder.demo_showInfo("Welcome to SwiftyFORM\na new form framework\nfor iOS 9")
 
 		builder += SectionHeaderTitleFormItem().title("Usecases")
-		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
 		builder += ViewControllerFormItem().title("Change Password").viewController(ChangePasswordViewController.self)
 		builder += ViewControllerFormItem().title("Report").viewController(ReportViewController.self)
 		builder += ViewControllerFormItem().title("Rate").viewController(RateAppViewController.self)
+		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 
 		builder += SectionHeaderTitleFormItem().title("TextField")
 		builder += ViewControllerFormItem().title("Valid & Invalid").viewController(TextFieldValidInvalidViewController.self)
