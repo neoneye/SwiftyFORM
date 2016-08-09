@@ -140,12 +140,31 @@ class PopulateTableView: FormItemVisitor {
 			return
 		}
 		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+		}
+		
 		let cell = DatePickerCell(model: model)
+		let cellExpanded = DatePickerCellExpanded()
+		
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+
 		
 		SwiftyFormLog("will assign date \(object.value)")
 		cell.setDateWithoutSync(object.value, animated: false)
 		SwiftyFormLog("did assign date \(object.value)")
-		cells.append(cell)
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in

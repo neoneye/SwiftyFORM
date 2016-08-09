@@ -26,6 +26,17 @@ public class DatePickerFormItem: FormItem {
 		return self
 	}
 	
+	public enum Behavior {
+		case Collapsed
+		case Expanded
+		case ExpandedAlways
+	}
+	public var behavior = Behavior.Collapsed
+	public func behavior(behavior: Behavior) -> Self {
+		self.behavior = behavior
+		return self
+	}
+	
 	typealias SyncBlock = (date: NSDate?, animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (date: NSDate?, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
