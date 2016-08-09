@@ -1,6 +1,13 @@
 // MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
 import UIKit
 
+struct DatePickerCellConstants {
+	struct CellExpanded {
+		static let height: CGFloat = 216
+	}
+}
+
+
 public struct DatePickerCellModel {
 	var title: String = ""
 	var toolbarMode: ToolbarMode = .Simple
@@ -250,12 +257,12 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	
 }
 
+
 public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 	weak var collapsedCell: DatePickerCell?
 	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
-//		return PrecisionSlider_InnerModel.height
-		return 159 // TODO:
+		return DatePickerCellConstants.CellExpanded.height
 	}
 	
 	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
