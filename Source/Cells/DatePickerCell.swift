@@ -66,21 +66,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		detailTextLabel?.textColor = color
 	}
 	
-	public func resolveLocale() -> NSLocale {
-		return model.locale ?? NSLocale.currentLocale()
-	}
-	
-//	public lazy var datePicker: UIDatePicker = {
-//		let instance = UIDatePicker()
-//		instance.datePickerMode = self.model.datePickerMode
-//		instance.minimumDate = self.model.minimumDate
-//		instance.maximumDate = self.model.maximumDate
-//		instance.addTarget(self, action: #selector(DatePickerCell.valueChanged), forControlEvents: .ValueChanged)
-//		instance.locale = self.resolveLocale()
-//		return instance
-//		}()
-	
-
 //	public lazy var toolbar: SimpleToolbar = {
 //		let instance = SimpleToolbar()
 //		weak var weakSelf = self
@@ -134,13 +119,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 //		return nil
 //	}
 
-	public func valueChanged() {
-//		let date = datePicker.date
-//		model.valueDidChange(date)
-//
-//		updateValue()
-	}
-	
 	public func obtainDateStyle(datePickerMode: UIDatePickerMode) -> NSDateFormatterStyle {
 		switch datePickerMode {
 		case .Time:
@@ -269,13 +247,26 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 //		collapsedCell?.sliderDidChange(changeModel)
 	}
 	
-	
-	
 	lazy var datePicker: UIDatePicker = {
 		let instance = UIDatePicker()
+		instance.addTarget(self, action: #selector(DatePickerCellExpanded.valueChanged), forControlEvents: .ValueChanged)
 //		instance.valueDidChange = nil
 		return instance
 	}()
+	
+	func configure(model: DatePickerCellModel) {
+		datePicker.datePickerMode = model.datePickerMode
+		datePicker.minimumDate = model.minimumDate
+		datePicker.maximumDate = model.maximumDate
+		datePicker.locale = model.locale ?? NSLocale.currentLocale()
+	}
+	
+	public func valueChanged() {
+		//		let date = datePicker.date
+		//		model.valueDidChange(date)
+		//
+		//		updateValue()
+	}
 	
 	public init() {
 		super.init(style: .Default, reuseIdentifier: nil)

@@ -161,6 +161,7 @@ class PopulateTableView: FormItemVisitor {
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
 
+		cellExpanded.configure(model)
 		
 		SwiftyFormLog("will assign date \(object.value)")
 		cell.setDateWithoutSync(object.value, animated: false)
