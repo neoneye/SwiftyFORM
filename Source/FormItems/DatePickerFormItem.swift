@@ -61,4 +61,15 @@ public class DatePickerFormItem: FormItem {
 	public var locale: NSLocale? // default is [NSLocale currentLocale]. setting nil returns to default
 	public var minimumDate: NSDate? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	public var maximumDate: NSDate? // default is nil
+	
+	
+	public typealias ValueDidChangeBlock = (value: NSDate) -> Void
+	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: NSDate) in
+		SwiftyFormLog("not overridden")
+	}
+	
+	public func valueDidChange(value: NSDate) {
+		innerValue = value
+		valueDidChangeBlock(value: value)
+	}
 }

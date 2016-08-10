@@ -24,6 +24,9 @@ class DatePickerBindingViewController: FormViewController {
 		instance.title("Date")
 		instance.datePickerMode = .Date
 		instance.behavior = .ExpandedAlways
+		instance.valueDidChangeBlock = { [weak self] _ in
+			self?.updateSummary()
+		}
 		return instance
 	}()
 	

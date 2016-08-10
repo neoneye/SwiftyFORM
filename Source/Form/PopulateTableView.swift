@@ -136,12 +136,6 @@ class PopulateTableView: FormItemVisitor {
 		
 		object.innerValue = model.resolvedDate
 		
-		weak var weakObject = object
-		model.valueDidChange = { (date: NSDate) in
-			SwiftyFormLog("value did change \(date)")
-			weakObject?.innerValue = date
-		}
-		
 		switch object.behavior {
 		case .Collapsed, .Expanded:
 			model.expandCollapseWhenSelectingRow = true
@@ -169,6 +163,12 @@ class PopulateTableView: FormItemVisitor {
 		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
 			SwiftyFormLog("sync date \(date)")
 			weakCell?.setDateWithoutSync(date, animated: animated)
+		}
+
+		weak var weakObject = object
+		model.valueDidChange = { (date: NSDate) in
+			SwiftyFormLog("value did change \(date)")
+			weakObject?.valueDidChange(date)
 		}
 	}
 	
