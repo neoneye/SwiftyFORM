@@ -20,6 +20,10 @@ public struct DatePickerCellModel {
 	var valueDidChange: NSDate -> Void = { (date: NSDate) in
 		SwiftyFormLog("date \(date)")
 	}
+	
+	var resolvedLocale: NSLocale {
+		return locale ?? NSLocale.currentLocale()
+	}
 }
 
 public class DatePickerCell: UITableViewCell, SelectRowDelegate {
@@ -258,7 +262,7 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 		datePicker.datePickerMode = model.datePickerMode
 		datePicker.minimumDate = model.minimumDate
 		datePicker.maximumDate = model.maximumDate
-		datePicker.locale = model.locale ?? NSLocale.currentLocale()
+		datePicker.locale = model.resolvedLocale
 	}
 	
 	public func valueChanged() {
