@@ -125,7 +125,7 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: DatePickerFormItem
 	
 	func visit(object: DatePickerFormItem) {
-		var model = DatePickerCellModel()
+		let model = DatePickerCellModel()
 		model.title = object.title
 		model.toolbarMode = self.model.toolbarMode
 		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
