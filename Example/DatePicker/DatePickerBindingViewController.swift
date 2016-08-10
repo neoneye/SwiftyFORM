@@ -66,7 +66,7 @@ class DatePickerBindingViewController: FormViewController {
 			datePicker.value = NSDate()
 			return
 		}
-		datePicker.value = offsetDate(date, days: 1)
+		datePicker.setValue(offsetDate(date, days: 1), animated: true)
 	}
 
 	func decrement() {
@@ -74,7 +74,7 @@ class DatePickerBindingViewController: FormViewController {
 			datePicker.value = NSDate()
 			return
 		}
-		datePicker.value = offsetDate(date, days: -1)
+		datePicker.setValue(offsetDate(date, days: -1), animated: true)
 	}
 	
 }

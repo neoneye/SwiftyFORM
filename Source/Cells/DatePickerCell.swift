@@ -171,12 +171,14 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		detailTextLabel?.text = humanReadableValue
 	}
 	
-	public func setDateWithoutSync(date: NSDate?, animated: Bool) {
+	func setDateWithoutSync(date: NSDate?, animated: Bool) {
 		SwiftyFormLog("set date \(date), animated \(animated)")
-//		datePicker.setDate(date ?? NSDate(), animated: animated)
+		model.date = date
 		updateValue()
+		
+		expandedCell?.datePicker.setDate(model.resolvedDate, animated: animated)
 	}
-
+	
 /*	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
 		// Hide the datepicker wheel, if it's already visible
 		// Otherwise show the datepicker

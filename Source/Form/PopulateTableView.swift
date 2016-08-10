@@ -137,7 +137,6 @@ class PopulateTableView: FormItemVisitor {
 		model.valueDidChange = { (date: NSDate) in
 			SwiftyFormLog("value did change \(date)")
 			weakObject?.innerValue = date
-			return
 		}
 		
 		switch object.behavior {
@@ -171,7 +170,6 @@ class PopulateTableView: FormItemVisitor {
 		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
 			SwiftyFormLog("sync date \(date)")
 			weakCell?.setDateWithoutSync(date, animated: animated)
-			return
 		}
 	}
 	
