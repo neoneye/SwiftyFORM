@@ -261,14 +261,12 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 			return
 		}
 		let model = collapsedCell.model
-		model.date = datePicker.date
+		let date = datePicker.date
+		model.date = date
 		
 		collapsedCell.updateValue()
 		
-		//		let date = datePicker.date
-		//		model.valueDidChange(date)
-		//
-		//		updateValue()
+		model.valueDidChange(date)
 	}
 	
 	public init() {
