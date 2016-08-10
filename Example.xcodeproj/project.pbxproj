@@ -19,6 +19,7 @@
 		423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17031BAF3A9B00A9859F /* AliensViewController.swift */; };
 		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; };
 		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; };
+		423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */; };
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
 		42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */; };
@@ -104,6 +105,7 @@
 		423D17031BAF3A9B00A9859F /* AliensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliensViewController.swift; sourceTree = "<group>"; };
 		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
 		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
+		423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerBindingViewController.swift; sourceTree = "<group>"; };
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
 		42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerValueViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		42589DAE1B3447E1007CA8C1 /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
+				423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */,
 				42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */,
 				42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */,
 				42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */,
@@ -413,6 +416,7 @@
 				42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
+				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
