@@ -132,6 +132,9 @@ class PopulateTableView: FormItemVisitor {
 		model.locale = object.locale
 		model.minimumDate = object.minimumDate
 		model.maximumDate = object.maximumDate
+		model.date = object.value
+		
+		object.innerValue = model.resolvedDate
 		
 		weak var weakObject = object
 		model.valueDidChange = { (date: NSDate) in
@@ -161,10 +164,6 @@ class PopulateTableView: FormItemVisitor {
 		cell.expandedCell = cellExpanded
 
 		cellExpanded.configure(model)
-		
-		SwiftyFormLog("will assign date \(object.value)")
-		cell.setDateWithoutSync(object.value, animated: false)
-		SwiftyFormLog("did assign date \(object.value)")
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in

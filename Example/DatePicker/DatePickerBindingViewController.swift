@@ -62,19 +62,21 @@ class DatePickerBindingViewController: FormViewController {
 	}
 	
 	func increment() {
-		guard let date = datePicker.value else {
+		if let date = datePicker.value {
+			datePicker.setValue(offsetDate(date, days: 1), animated: true)
+		} else {
 			datePicker.value = NSDate()
-			return
 		}
-		datePicker.setValue(offsetDate(date, days: 1), animated: true)
+		updateSummary()
 	}
 
 	func decrement() {
-		guard let date = datePicker.value else {
+		if let date = datePicker.value {
+			datePicker.setValue(offsetDate(date, days: -1), animated: true)
+		} else {
 			datePicker.value = NSDate()
-			return
 		}
-		datePicker.setValue(offsetDate(date, days: -1), animated: true)
+		updateSummary()
 	}
 	
 }
