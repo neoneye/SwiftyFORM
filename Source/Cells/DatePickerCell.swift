@@ -8,13 +8,14 @@ struct DatePickerCellConstants {
 }
 
 
-public struct DatePickerCellModel {
+public class DatePickerCellModel {
 	var title: String = ""
 	var toolbarMode: ToolbarMode = .Simple
 	var datePickerMode: UIDatePickerMode = .DateAndTime
 	var locale: NSLocale? = nil // default is [NSLocale currentLocale]. setting nil returns to default
 	var minimumDate: NSDate? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	var maximumDate: NSDate? = nil // default is nil
+	var date: NSDate? = nil
 	var expandCollapseWhenSelectingRow = true
 	
 	var valueDidChange: NSDate -> Void = { (date: NSDate) in
@@ -23,6 +24,10 @@ public struct DatePickerCellModel {
 	
 	var resolvedLocale: NSLocale {
 		return locale ?? NSLocale.currentLocale()
+	}
+
+	var resolvedDate: NSDate {
+		return date ?? NSDate()
 	}
 }
 
@@ -149,31 +154,21 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 	
-	public func humanReadableValue() -> String {
-		return "TODO"
-//		if model.datePickerMode == .CountDownTimer {
-//			let t = datePicker.countDownDuration
-//			let date = NSDate(timeIntervalSinceReferenceDate: t)
-//			let calendar = NSCalendar(identifier: NSCalendarIdentifierGregorian)!
-//			calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-//			let components = calendar.components([NSCalendarUnit.Hour, NSCalendarUnit.Minute], fromDate: date)
-//			let hour = components.hour
-//			let minute = components.minute
-//			return String(format: "%02d:%02d", hour, minute)
-//		}
-//		if true {
-//			let date = datePicker.date
-//			//SwiftyFormLog("date: \(date)")
-//			let dateFormatter = NSDateFormatter()
-//			dateFormatter.locale = self.resolveLocale()
-//			dateFormatter.dateStyle = obtainDateStyle(model.datePickerMode)
-//			dateFormatter.timeStyle = obtainTimeStyle(model.datePickerMode)
-//			return dateFormatter.stringFromDate(date)
-//		}
+	public var humanReadableValue: String {
+		if model.datePickerMode == .CountDownTimer {
+			return "Unsupported"
+		}
+		let date = model.resolvedDate
+		//SwiftyFormLog("date: \(date)")
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.locale = model.resolvedLocale
+		dateFormatter.dateStyle = obtainDateStyle(model.datePickerMode)
+		dateFormatter.timeStyle = obtainTimeStyle(model.datePickerMode)
+		return dateFormatter.stringFromDate(date)
 	}
 
 	public func updateValue() {
-		detailTextLabel?.text = humanReadableValue()
+		detailTextLabel?.text = humanReadableValue
 	}
 	
 	public func setDateWithoutSync(date: NSDate?, animated: Bool) {
@@ -247,10 +242,6 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 		return DatePickerCellConstants.CellExpanded.height
 	}
 	
-	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
-//		collapsedCell?.sliderDidChange(changeModel)
-	}
-	
 	lazy var datePicker: UIDatePicker = {
 		let instance = UIDatePicker()
 		instance.addTarget(self, action: #selector(DatePickerCellExpanded.valueChanged), forControlEvents: .ValueChanged)
@@ -266,6 +257,14 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 	}
 	
 	public func valueChanged() {
+		guard let collapsedCell = collapsedCell else {
+			return
+		}
+		let model = collapsedCell.model
+		model.date = datePicker.date
+		
+		collapsedCell.updateValue()
+		
 		//		let date = datePicker.date
 		//		model.valueDidChange(date)
 		//
