@@ -29,7 +29,7 @@ public class FormTableView: UITableView {
 			return
 		}
 		
-		SwiftyFormLog("will expand")
+		SwiftyFormLog("will expand collapse")
 		
 		var insertion = [NSIndexPath]()
 		var deletion = [NSIndexPath]()
@@ -37,29 +37,37 @@ public class FormTableView: UITableView {
 		var isExpand = false
 		var isCollapse = false
 		
-		var row = 0
-		for item in section.cells.allItems {
-			
+		var toBeHidden = [TableViewCellArrayItem]()
+		var toBeVisible = [TableViewCellArrayItem]()
+
+		// If the expanded cell already is visible then collapse it
+		for (row, item) in section.cells.visibleItems.enumerate() {
 			if item.cell === expandedCell {
-				if item.hidden {
-					item.hidden = false
-					section.cells.reloadVisibleItems()
-					insertion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
-					isExpand = true
-					break
-				} else {
-					item.hidden = true
-					section.cells.reloadVisibleItems()
-					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
-					isCollapse = true
-				}
+				toBeHidden.append(item)
+				deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
+				isCollapse = true
 			}
-			
-			if item.hidden {
-				continue
-			}
-			row += 1
 		}
+		
+		// If the expanded cell is hidden then expand it
+		for item in section.cells.allItems {
+			if item.hidden && item.cell === expandedCell {
+				toBeVisible.append(item)
+				let rowWithExpandedCell = indexPath.row+1
+				insertion.append(NSIndexPath(forRow: rowWithExpandedCell, inSection: indexPath.section))
+				isExpand = true
+			}
+		}
+		
+
+		toBeHidden.forEach  { $0.hidden = true  }
+		toBeVisible.forEach { $0.hidden = false }
+		
+		if toBeHidden.count + toBeVisible.count > 0 {
+			section.cells.reloadVisibleItems()
+		}
+		
+		//print("delete: \(deletion)   insert: \(insertion)    isExpand: \(isExpand)   isCollapse: \(isCollapse)")
 		
 		CATransaction.begin()
 		CATransaction.setCompletionBlock({
@@ -81,7 +89,7 @@ public class FormTableView: UITableView {
 		
 		CATransaction.commit()
 		
-		SwiftyFormLog("did expand")
+		SwiftyFormLog("did expand collapse")
 	}
 	
 	/**
