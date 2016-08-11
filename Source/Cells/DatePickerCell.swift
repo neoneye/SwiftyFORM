@@ -15,7 +15,7 @@ public class DatePickerCellModel {
 	var locale: NSLocale? = nil // default is [NSLocale currentLocale]. setting nil returns to default
 	var minimumDate: NSDate? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	var maximumDate: NSDate? = nil // default is nil
-	var date: NSDate? = nil
+	var date: NSDate = NSDate()
 	var expandCollapseWhenSelectingRow = true
 	
 	var valueDidChange: NSDate -> Void = { (date: NSDate) in
@@ -24,10 +24,6 @@ public class DatePickerCellModel {
 	
 	var resolvedLocale: NSLocale {
 		return locale ?? NSLocale.currentLocale()
-	}
-
-	var resolvedDate: NSDate {
-		return date ?? NSDate()
 	}
 }
 
@@ -158,7 +154,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		if model.datePickerMode == .CountDownTimer {
 			return "Unsupported"
 		}
-		let date = model.resolvedDate
+		let date = model.date
 		//SwiftyFormLog("date: \(date)")
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.locale = model.resolvedLocale
@@ -171,12 +167,12 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		detailTextLabel?.text = humanReadableValue
 	}
 	
-	func setDateWithoutSync(date: NSDate?, animated: Bool) {
+	func setDateWithoutSync(date: NSDate, animated: Bool) {
 		SwiftyFormLog("set date \(date), animated \(animated)")
 		model.date = date
 		updateValue()
 		
-		expandedCell?.datePicker.setDate(model.resolvedDate, animated: animated)
+		expandedCell?.datePicker.setDate(model.date, animated: animated)
 	}
 	
 /*	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {

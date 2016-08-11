@@ -134,8 +134,6 @@ class PopulateTableView: FormItemVisitor {
 		model.maximumDate = object.maximumDate
 		model.date = object.value
 		
-		object.innerValue = model.resolvedDate
-		
 		switch object.behavior {
 		case .Collapsed, .Expanded:
 			model.expandCollapseWhenSelectingRow = true
@@ -160,7 +158,7 @@ class PopulateTableView: FormItemVisitor {
 		cellExpanded.configure(model)
 		
 		weak var weakCell = cell
-		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
+		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
 			SwiftyFormLog("sync date \(date)")
 			weakCell?.setDateWithoutSync(date, animated: animated)
 		}

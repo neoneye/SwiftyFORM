@@ -77,11 +77,14 @@ class SignUpViewController: FormViewController {
 		return instance
 		}()
 	
-	func offsetDate(date: NSDate, years: Int) -> NSDate? {
+	func offsetDate(date: NSDate, years: Int) -> NSDate {
 		let dateComponents = NSDateComponents()
 		dateComponents.year = years
 		let calendar = NSCalendar.currentCalendar()
-		return calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0))
+		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+			return date
+		}
+		return resultDate
 	}
 
 	lazy var birthday: DatePickerFormItem = {
@@ -128,7 +131,7 @@ class SignUpViewController: FormViewController {
 		return strings[i]
 	}
 	
-	func pickRandomDate() -> NSDate? {
+	func pickRandomDate() -> NSDate {
 		let i = randomInt(20, 60)
 		let today = NSDate()
 		return offsetDate(today, years: -i)
@@ -143,7 +146,7 @@ class SignUpViewController: FormViewController {
 		userName.value = pickRandom(["john", "Jane", "steve", "Bill", "einstein", "Newton"])
 		password.value = pickRandom(["1234", "0000", "111111", "abc", "111122223333"])
 		email.value = pickRandom(["hello@example.com", "hi@example.com", "feedback@example.com", "unsubscribe@example.com", "not-a-valid-email"])
-		birthday.value = self.pickRandomDate()
+		birthday.value = pickRandomDate()
 		subscribeToNewsletter.value = pickRandomBoolean()
 	}
 	

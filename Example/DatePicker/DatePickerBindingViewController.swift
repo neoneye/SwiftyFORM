@@ -49,37 +49,30 @@ class DatePickerBindingViewController: FormViewController {
 	}()
 	
 	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("Date").value("-")
+		return StaticTextFormItem().title("NSDate").value("-")
 	}()
 	
 	func updateSummary() {
 		summary.value = "\(datePicker.value)"
 	}
-
 	
-	func offsetDate(date: NSDate, days: Int) -> NSDate? {
+	func offsetDate(date: NSDate, days: Int) -> NSDate {
 		let dateComponents = NSDateComponents()
 		dateComponents.day = days
 		let calendar = NSCalendar.currentCalendar()
-		return calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0))
+		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+			return date
+		}
+		return resultDate
 	}
 	
 	func increment() {
-		if let date = datePicker.value {
-			datePicker.setValue(offsetDate(date, days: 1), animated: true)
-		} else {
-			datePicker.value = NSDate()
-		}
+		datePicker.setValue(offsetDate(datePicker.value, days: 1), animated: true)
 		updateSummary()
 	}
 
 	func decrement() {
-		if let date = datePicker.value {
-			datePicker.setValue(offsetDate(date, days: -1), animated: true)
-		} else {
-			datePicker.value = NSDate()
-		}
+		datePicker.setValue(offsetDate(datePicker.value, days: -1), animated: true)
 		updateSummary()
 	}
-	
 }

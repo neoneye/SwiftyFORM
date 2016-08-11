@@ -37,13 +37,13 @@ public class DatePickerFormItem: FormItem {
 		return self
 	}
 	
-	typealias SyncBlock = (date: NSDate?, animated: Bool) -> Void
-	var syncCellWithValue: SyncBlock = { (date: NSDate?, animated: Bool) in
+	typealias SyncBlock = (date: NSDate, animated: Bool) -> Void
+	var syncCellWithValue: SyncBlock = { (date: NSDate, animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(date)")
 	}
 	
-	internal var innerValue: NSDate? = nil
-	public var value: NSDate? {
+	internal var innerValue = NSDate()
+	public var value: NSDate {
 		get {
 			return self.innerValue
 		}
@@ -52,7 +52,7 @@ public class DatePickerFormItem: FormItem {
 		}
 	}
 	
-	public func setValue(date: NSDate?, animated: Bool) {
+	public func setValue(date: NSDate, animated: Bool) {
 		innerValue = date
 		syncCellWithValue(date: date, animated: animated)
 	}
