@@ -59,6 +59,19 @@ public class FormTableView: UITableView {
 			}
 		}
 		
+		let shouldCollapseAllOtherCells = false
+		if isExpand && shouldCollapseAllOtherCells {
+			for (row, item) in section.cells.visibleItems.enumerate() {
+				if item.cell === expandedCell {
+					continue
+				}
+				
+				if item.cell is DatePickerCellExpanded {
+					toBeHidden.append(item)
+					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
+				}
+			}
+		}
 
 		toBeHidden.forEach  { $0.hidden = true  }
 		toBeVisible.forEach { $0.hidden = false }
