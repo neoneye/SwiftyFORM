@@ -51,7 +51,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 
 		self.model = model
 		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .Default
+		selectionStyle = .None
 		textLabel?.text = model.title
 		
 		updateValue()
