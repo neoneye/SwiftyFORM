@@ -38,69 +38,120 @@ public class FormTableView: UITableView {
 		var isCollapse = false
 		
 		var toBeHidden = [TableViewCellArrayItem]()
-		var toBeVisible = [TableViewCellArrayItem]()
+//		var toBeVisible = [TableViewCellArrayItem]()
 
 		// If the expanded cell already is visible then collapse it
 		for (row, item) in section.cells.visibleItems.enumerate() {
 			if item.cell === expandedCell {
+				item.hidden = true
 				toBeHidden.append(item)
 				deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
 				isCollapse = true
+				continue
+			}
+			if item.cell is DatePickerCellExpanded {
+				item.hidden = true
+				toBeHidden.append(item)
+				deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
 			}
 		}
+
+		if !deletion.isEmpty {
+			section.cells.reloadVisibleItems()
+		}
+		
+		if !deletion.isEmpty {
+			beginUpdates()
+			deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
+			endUpdates()
+		}
+		
+//		if !deletion.isEmpty {
+//			toBeHidden.forEach  { $0.hidden = true  }
+//			section.cells.reloadVisibleItems()
+//		}
+
+
 		
 		// If the expanded cell is hidden then expand it
+		var visibleRow = -1
 		for item in section.cells.allItems {
-			if item.hidden && item.cell === expandedCell {
-				toBeVisible.append(item)
-				let rowWithExpandedCell = indexPath.row+1
+			if !item.hidden {
+				visibleRow += 1
+			}
+			if item.cell === expandedCell && isCollapse {
+				continue
+			}
+			
+			if item.cell === expandedCell {
+//				toBeVisible.append(item)
+				item.hidden = false
+				let rowWithExpandedCell = visibleRow+1
 				insertion.append(NSIndexPath(forRow: rowWithExpandedCell, inSection: indexPath.section))
 				isExpand = true
 			}
 		}
-		
-		let shouldCollapseAllOtherCells = false
-		if isExpand && shouldCollapseAllOtherCells {
-			for (row, item) in section.cells.visibleItems.enumerate() {
-				if item.cell === expandedCell {
-					continue
-				}
-				
-				if item.cell is DatePickerCellExpanded {
-					toBeHidden.append(item)
-					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
-				}
-			}
-		}
-
-		toBeHidden.forEach  { $0.hidden = true  }
-		toBeVisible.forEach { $0.hidden = false }
-		
-		if toBeHidden.count + toBeVisible.count > 0 {
+		if !insertion.isEmpty {
 			section.cells.reloadVisibleItems()
 		}
 		
-		//print("delete: \(deletion)   insert: \(insertion)    isExpand: \(isExpand)   isCollapse: \(isCollapse)")
+//		let shouldCollapseAllOtherCells = true
+//		if isExpand && shouldCollapseAllOtherCells {
+//			for (row, item) in section.cells.visibleItems.enumerate() {
+//				if item.cell === expandedCell {
+//					continue
+//				}
+//				
+//				if item.cell is DatePickerCellExpanded {
+//					toBeHidden.append(item)
+//					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
+//				}
+//			}
+//		}
+
+//		toBeHidden.forEach  { $0.hidden = true  }
+//		toBeVisible.forEach { $0.hidden = false }
+//		
+//		if toBeHidden.count + toBeVisible.count > 0 {
+//			section.cells.reloadVisibleItems()
+//		}
 		
-		CATransaction.begin()
-		CATransaction.setCompletionBlock({
-			if isExpand {
-				self.didExpand_scrollToVisible(indexPath)
-			}
-			if isCollapse {
-				self.didCollapse_scrollToVisible(indexPath)
-			}
-		})
+		print("delete: \(deletion)   insert: \(insertion)    isExpand: \(isExpand)   isCollapse: \(isCollapse)")
 		
-		beginUpdates()
-		deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
-		insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
-		if let indexPath = indexPathForSelectedRow {
-			deselectRowAtIndexPath(indexPath, animated: true)
+//		CATransaction.begin()
+//		CATransaction.setCompletionBlock({
+//			if isExpand {
+//				self.didExpand_scrollToVisible(indexPath)
+//			}
+//			if isCollapse {
+//				self.didCollapse_scrollToVisible(indexPath)
+//			}
+//		})
+		
+//		if !deletion.isEmpty {
+//			beginUpdates()
+//			deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
+//			endUpdates()
+//		}
+
+		if !insertion.isEmpty {
+			beginUpdates()
+			insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
+			endUpdates()
 		}
-		endUpdates()
 		
-		CATransaction.commit()
+//		beginUpdates()
+//		deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
+//		insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
+//		endUpdates()
+	
+//		if let indexPath = indexPathForSelectedRow {
+//			beginUpdates()
+//			deselectRowAtIndexPath(indexPath, animated: true)
+//			endUpdates()
+//		}
+		
+//		CATransaction.commit()
 		
 		SwiftyFormLog("did expand collapse")
 	}
