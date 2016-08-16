@@ -67,19 +67,17 @@ public class FormTableView: UITableView {
 		
 		// If the expanded cell is hidden then expand it
 		for (sectionIndex, section) in sections.enumerate() {
-			var visibleRow = -1
+			var row = 0
 			for item in section.cells.allItems {
 				if !item.hidden {
-					visibleRow += 1
+					row += 1
 				}
 				if item.cell === expandedCell && isCollapse {
 					continue
 				}
-				
 				if item.cell === expandedCell {
 					item.hidden = false
-					let rowWithExpandedCell = visibleRow+1
-					insertion.append(NSIndexPath(forRow: rowWithExpandedCell, inSection: sectionIndex))
+					insertion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
 					isExpand = true
 				}
 			}
