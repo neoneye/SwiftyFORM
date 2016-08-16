@@ -80,7 +80,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
-		tableView.expandCollapse(expandedCell: expandedCell, indexPath: indexPath)
+		tableView.expandCollapse(expandedCell: expandedCell)
 	}
 	
 	func reloadValueLabel() {

@@ -13,14 +13,14 @@ public class FormTableView: UITableView {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func expandCollapse(expandedCell expandedCell: UITableViewCell, indexPath: NSIndexPath) {
+	public func expandCollapse(expandedCell expandedCell: UITableViewCell) {
 		guard let dataSource = dataSource as? TableViewSectionArray else {
 			SwiftyFormLog("cannot expand row. The dataSource is nil")
 			return
 		}
 		
-		if indexPath.section >= dataSource.sections.count {
-			SwiftyFormLog("cannot expand row. The indexPath.section is out of range")
+		guard let sections = dataSource.sections as? [TableViewSection] else {
+			print("expected all sections to be of the type TableViewSection")
 			return
 		}
 		
@@ -32,11 +32,6 @@ public class FormTableView: UITableView {
 		var isExpand = false
 		var isCollapse = false
 		
-		guard let sections = dataSource.sections as? [TableViewSection] else {
-			print("expected all sections to be of the type TableViewSection")
-			return
-		}
-
 		let shouldCollapseAllOtherCells = true
 
 		// If the expanded cell already is visible then collapse it

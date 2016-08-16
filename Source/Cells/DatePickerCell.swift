@@ -227,7 +227,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
-		tableView.expandCollapse(expandedCell: expandedCell, indexPath: indexPath)
+		tableView.expandCollapse(expandedCell: expandedCell)
 	}
 	
 }
