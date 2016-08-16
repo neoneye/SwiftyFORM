@@ -25,105 +25,54 @@ public class FormTableView: UITableView {
 		}
 		
 		SwiftyFormLog("will expand collapse")
-		
-		var insertion = [NSIndexPath]()
-		var deletion = [NSIndexPath]()
-		
-		var isExpand = false
-		var isCollapse = false
-		
-		let shouldCollapseAllOtherCells = true
 
 		// If the expanded cell already is visible then collapse it
-		for (sectionIndex, section) in sections.enumerate() {
-			for (row, item) in section.cells.visibleItems.enumerate() {
-				if item.cell === expandedCell {
-					item.hidden = true
-					deletion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
-					isCollapse = true
-					continue
-				}
-				if shouldCollapseAllOtherCells {
-					if item.cell is DatePickerCellExpanded {
-						item.hidden = true
-						deletion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
-					}
-				}
-			}
-		}
-
-		if !deletion.isEmpty {
-			for section in sections {
-				section.cells.reloadVisibleItems()
-			}
-		}
+		let whatToCollapse = WhatToCollapse.process(
+			expandedCell: expandedCell,
+			shouldCollapseAllOtherCells: true,
+			sections: sections
+		)
+		print("whatToCollapse: \(whatToCollapse)")
 		
-		if !deletion.isEmpty {
+		if !whatToCollapse.indexPaths.isEmpty {
 			beginUpdates()
-			deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
+			deleteRowsAtIndexPaths(whatToCollapse.indexPaths, withRowAnimation: .Fade)
 			endUpdates()
 		}
-		
 		
 		// If the expanded cell is hidden then expand it
-		for (sectionIndex, section) in sections.enumerate() {
-			var row = 0
-			for item in section.cells.allItems {
-				if !item.hidden {
-					row += 1
-				}
-				if item.cell === expandedCell && isCollapse {
-					continue
-				}
-				if item.cell === expandedCell {
-					item.hidden = false
-					insertion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
-					isExpand = true
-				}
-			}
-		}
-		if !insertion.isEmpty {
-			for section in sections {
-				section.cells.reloadVisibleItems()
-			}
-		}
-		
-		print("delete: \(deletion)   insert: \(insertion)    isExpand: \(isExpand)   isCollapse: \(isCollapse)")
-		
-//		CATransaction.begin()
-//		CATransaction.setCompletionBlock({
-//			if isExpand {
-//				self.didExpand_scrollToVisible(indexPath)
-//			}
-//			if isCollapse {
-//				self.didCollapse_scrollToVisible(indexPath)
-//			}
-//		})
-		
-//		if !deletion.isEmpty {
-//			beginUpdates()
-//			deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
-//			endUpdates()
-//		}
+		let whatToExpand = WhatToExpand.process(
+			expandedCell: expandedCell,
+			sections: sections,
+			isCollapse: whatToCollapse.isCollapse
+		)
+		print("whatToExpand: \(whatToExpand)")
 
-		if !insertion.isEmpty {
+		if !whatToExpand.indexPaths.isEmpty {
+			CATransaction.begin()
+			CATransaction.setCompletionBlock({
+				// Ensure that the expanded row is visible
+				if let indexPath = whatToExpand.expandedIndexPath {
+					// TODO: clean up.. don't want to subtract by 1
+					let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
+					print("scroll to visible: \(indexPath2)")
+					self.didExpand_scrollToVisible(indexPath2)
+				}
+			})
+
 			beginUpdates()
-			insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
+			insertRowsAtIndexPaths(whatToExpand.indexPaths, withRowAnimation: .Fade)
+			endUpdates()
+			
+			CATransaction.commit()
+		}
+		
+		// Deselect if needed
+		if let indexPath = indexPathForSelectedRow {
+			beginUpdates()
+			deselectRowAtIndexPath(indexPath, animated: true)
 			endUpdates()
 		}
-		
-//		beginUpdates()
-//		deleteRowsAtIndexPaths(deletion, withRowAnimation: .Fade)
-//		insertRowsAtIndexPaths(insertion, withRowAnimation: .Fade)
-//		endUpdates()
-	
-//		if let indexPath = indexPathForSelectedRow {
-//			beginUpdates()
-//			deselectRowAtIndexPath(indexPath, animated: true)
-//			endUpdates()
-//		}
-		
-//		CATransaction.commit()
 		
 		SwiftyFormLog("did expand collapse")
 	}
@@ -160,35 +109,79 @@ public class FormTableView: UITableView {
 		
 		SwiftyFormLog("focus area is inside. No need to scroll")
 	}
+}
 
-	/**
-	This is supposed to be run after the collapse row animation has completed.
-	This function ensures that the collapsed row is fully visible.
-	If the row is obscured it will scroll to make the row visible.
-	*/
-	private func didCollapse_scrollToVisible(indexPath: NSIndexPath) {
-		let rect = rectForRowAtIndexPath(indexPath)
-		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
-		//SwiftyFormLog("focusArea_minY \(focusArea_minY)    \(rect.minY) \(contentOffset.y) \(contentInset.top)")
+
+struct WhatToCollapse {
+	let indexPaths: [NSIndexPath]
+	let isCollapse: Bool
+	
+	static func process(expandedCell expandedCell: UITableViewCell, shouldCollapseAllOtherCells: Bool, sections: [TableViewSection]) -> WhatToCollapse {
+		var indexPaths = [NSIndexPath]()
+		var isCollapse = false
 		
-		if focusArea_minY < 0 {
-			SwiftyFormLog("focus area is outside the top. Scrolling to make it visible")
-			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
-			return
+		// If the expanded cell already is visible then collapse it
+		for (sectionIndex, section) in sections.enumerate() {
+			for (row, item) in section.cells.visibleItems.enumerate() {
+				if item.cell === expandedCell {
+					item.hidden = true
+					indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+					isCollapse = true
+					continue
+				}
+				if shouldCollapseAllOtherCells {
+					if item.cell is DatePickerCellExpanded {
+						item.hidden = true
+						indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+					}
+				}
+			}
 		}
 		
-		let focusArea_maxY = rect.maxY - (contentOffset.y + contentInset.top)
-		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(rect.maxY) \(contentOffset.y) \(contentInset.top)")
-		
-		let bottomMaxY = bounds.height - (contentInset.bottom + contentInset.top)
-		//SwiftyFormLog("bottomMaxY: \(bottomMaxY) \(bounds.height) \(contentInset.bottom) \(contentInset.top)")
-		
-		if focusArea_maxY > bottomMaxY {
-			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
-			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
-			return
+		if !indexPaths.isEmpty {
+			for section in sections {
+				section.cells.reloadVisibleItems()
+			}
 		}
+		return WhatToCollapse(indexPaths: indexPaths, isCollapse: isCollapse)
+	}
+}
+
+
+struct WhatToExpand {
+	let indexPaths: [NSIndexPath]
+	let isExpand: Bool
+	let expandedIndexPath: NSIndexPath?
+	
+	static func process(expandedCell expandedCell: UITableViewCell, sections: [TableViewSection], isCollapse: Bool) -> WhatToExpand {
+		var indexPaths = [NSIndexPath]()
+		var isExpand = false
+		var expandedIndexPath: NSIndexPath?
 		
-		SwiftyFormLog("focus area is inside. No need to scroll")
+		// If the expanded cell is hidden then expand it
+		for (sectionIndex, section) in sections.enumerate() {
+			var row = 0
+			for item in section.cells.allItems {
+				if !item.hidden {
+					row += 1
+				}
+				if item.cell === expandedCell && isCollapse {
+					continue
+				}
+				if item.cell === expandedCell {
+					item.hidden = false
+					let indexPath = NSIndexPath(forRow: row, inSection: sectionIndex)
+					indexPaths.append(indexPath)
+					isExpand = true
+					expandedIndexPath = indexPath
+				}
+			}
+		}
+		if !indexPaths.isEmpty {
+			for section in sections {
+				section.cells.reloadVisibleItems()
+			}
+		}
+		return WhatToExpand(indexPaths: indexPaths, isExpand: isExpand, expandedIndexPath: expandedIndexPath)
 	}
 }
