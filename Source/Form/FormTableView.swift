@@ -24,11 +24,6 @@ public class FormTableView: UITableView {
 			return
 		}
 		
-//		guard let section = dataSource.sections[indexPath.section] as? TableViewSection else {
-//			SwiftyFormLog("cannot expand row. The indexPath.section has the wrong type")
-//			return
-//		}
-		
 		SwiftyFormLog("will expand collapse")
 		
 		var insertion = [NSIndexPath]()
@@ -37,28 +32,27 @@ public class FormTableView: UITableView {
 		var isExpand = false
 		var isCollapse = false
 		
-		var toBeHidden = [TableViewCellArrayItem]()
-//		var toBeVisible = [TableViewCellArrayItem]()
-		
 		guard let sections = dataSource.sections as? [TableViewSection] else {
 			print("expected all sections to be of the type TableViewSection")
 			return
 		}
+
+		let shouldCollapseAllOtherCells = true
 
 		// If the expanded cell already is visible then collapse it
 		for (sectionIndex, section) in sections.enumerate() {
 			for (row, item) in section.cells.visibleItems.enumerate() {
 				if item.cell === expandedCell {
 					item.hidden = true
-					toBeHidden.append(item)
 					deletion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
 					isCollapse = true
 					continue
 				}
-				if item.cell is DatePickerCellExpanded {
-					item.hidden = true
-					toBeHidden.append(item)
-					deletion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+				if shouldCollapseAllOtherCells {
+					if item.cell is DatePickerCellExpanded {
+						item.hidden = true
+						deletion.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+					}
 				}
 			}
 		}
@@ -75,12 +69,6 @@ public class FormTableView: UITableView {
 			endUpdates()
 		}
 		
-//		if !deletion.isEmpty {
-//			toBeHidden.forEach  { $0.hidden = true  }
-//			section.cells.reloadVisibleItems()
-//		}
-
-
 		
 		// If the expanded cell is hidden then expand it
 		for (sectionIndex, section) in sections.enumerate() {
@@ -94,7 +82,6 @@ public class FormTableView: UITableView {
 				}
 				
 				if item.cell === expandedCell {
-					//				toBeVisible.append(item)
 					item.hidden = false
 					let rowWithExpandedCell = visibleRow+1
 					insertion.append(NSIndexPath(forRow: rowWithExpandedCell, inSection: sectionIndex))
@@ -107,27 +94,6 @@ public class FormTableView: UITableView {
 				section.cells.reloadVisibleItems()
 			}
 		}
-		
-//		let shouldCollapseAllOtherCells = true
-//		if isExpand && shouldCollapseAllOtherCells {
-//			for (row, item) in section.cells.visibleItems.enumerate() {
-//				if item.cell === expandedCell {
-//					continue
-//				}
-//				
-//				if item.cell is DatePickerCellExpanded {
-//					toBeHidden.append(item)
-//					deletion.append(NSIndexPath(forRow: row, inSection: indexPath.section))
-//				}
-//			}
-//		}
-
-//		toBeHidden.forEach  { $0.hidden = true  }
-//		toBeVisible.forEach { $0.hidden = false }
-//		
-//		if toBeHidden.count + toBeVisible.count > 0 {
-//			section.cells.reloadVisibleItems()
-//		}
 		
 		print("delete: \(deletion)   insert: \(insertion)    isExpand: \(isExpand)   isCollapse: \(isCollapse)")
 		
