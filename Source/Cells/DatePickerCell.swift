@@ -17,6 +17,7 @@ public class DatePickerCellModel {
 	var maximumDate: NSDate? = nil // default is nil
 	var date: NSDate = NSDate()
 	var expandCollapseWhenSelectingRow = true
+	var selectionStyle = UITableViewCellSelectionStyle.Default
 	
 	var valueDidChange: NSDate -> Void = { (date: NSDate) in
 		SwiftyFormLog("date \(date)")
@@ -47,7 +48,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 
 		self.model = model
 		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .None
+		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
 		
 		updateValue()

@@ -10,6 +10,7 @@ public class PrecisionSliderCellModel {
 	var initialZoom: Float?
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
+	var selectionStyle = UITableViewCellSelectionStyle.Default
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -56,7 +57,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	public init(model: PrecisionSliderCellModel) {
 		self.model = model
 		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .None
+		selectionStyle = model.selectionStyle
 		clipsToBounds = true
 		textLabel?.text = model.title
 		reloadValueLabel()

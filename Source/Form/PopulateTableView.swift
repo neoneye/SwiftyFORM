@@ -137,8 +137,10 @@ class PopulateTableView: FormItemVisitor {
 		switch object.behavior {
 		case .Collapsed, .Expanded:
 			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
 		case .ExpandedAlways:
 			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
 		}
 		
 		let cell = DatePickerCell(model: model)
@@ -247,8 +249,10 @@ class PopulateTableView: FormItemVisitor {
 		switch object.behavior {
 		case .Collapsed, .Expanded:
 			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
 		case .ExpandedAlways:
 			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
 		}
 		
 		let cell = PrecisionSliderCell(model: model)
