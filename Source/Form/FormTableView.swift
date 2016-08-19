@@ -35,6 +35,13 @@ public class FormTableView: UITableView {
 		print("whatToCollapse: \(whatToCollapse)")
 		
 		if !whatToCollapse.indexPaths.isEmpty {
+
+			for indexPath in whatToCollapse.indexPaths {
+				// TODO: clean up.. don't want to subtract by 1
+				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
+				self.assignDefaultColors(indexPath2, sections: sections)
+			}
+			
 			beginUpdates()
 			deleteRowsAtIndexPaths(whatToCollapse.indexPaths, withRowAnimation: .Fade)
 			endUpdates()
@@ -107,6 +114,21 @@ public class FormTableView: UITableView {
 			cell.assignTintColors()
 		}
 	}
+	
+	func assignDefaultColors(indexPath: NSIndexPath, sections: [TableViewSection]) {
+		print("assign default colors: \(indexPath)")
+		
+		guard let item = lookup(indexPath: indexPath, sections: sections) else {
+			print("no visible cell for indexPath: \(indexPath)")
+			return
+		}
+		
+		// TODO: remove hardcoded type DatePickerCell
+		if let cell = item.cell as? DatePickerCell {
+			cell.assignDefaultColors()
+		}
+	}
+
 	
 	/**
 	This is supposed to be run after the expand row animation has completed.
