@@ -66,7 +66,18 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	
 	/// hide keyboard when the user starts scrolling
 	public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-		scrollView.form_firstResponder()?.resignFirstResponder()
+		guard let responder = scrollView.form_firstResponder() else {
+			return
+		}
+		
+		// TODO: remove hardcoded type
+		if responder is DatePickerCell {
+			// We don't want our inline date picker to be collapsed when scrolling
+			return
+		}
+		
+		// Collapse the keyboard when scrolling
+		responder.resignFirstResponder()
 	}
 	
 	/// hide keyboard when the user taps the status bar
