@@ -49,6 +49,13 @@ public class FormTableView: UITableView {
 		print("whatToExpand: \(whatToExpand)")
 
 		if !whatToExpand.indexPaths.isEmpty {
+			
+			if let indexPath = whatToExpand.expandedIndexPath {
+				// TODO: clean up.. don't want to subtract by 1
+				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
+				self.assignTintColors(indexPath2, sections: sections)
+			}
+			
 			CATransaction.begin()
 			CATransaction.setCompletionBlock({
 				// Ensure that the expanded row is visible
@@ -75,6 +82,30 @@ public class FormTableView: UITableView {
 		}
 		
 		SwiftyFormLog("did expand collapse")
+	}
+	
+	func lookup(indexPath indexPath: NSIndexPath, sections: [TableViewSection]) -> TableViewCellArrayItem? {
+		if indexPath.section < 0 { return nil }
+		if indexPath.row < 0 { return nil }
+		if indexPath.section >= sections.count { return nil }
+		let section = sections[indexPath.section]
+		let items = section.cells.visibleItems
+		if indexPath.row >= items.count { return nil }
+		return items[indexPath.row]
+	}
+	
+	func assignTintColors(indexPath: NSIndexPath, sections: [TableViewSection]) {
+		print("assign tint colors: \(indexPath)")
+		
+		guard let item = lookup(indexPath: indexPath, sections: sections) else {
+			print("no visible cell for indexPath: \(indexPath)")
+			return
+		}
+
+		// TODO: remove hardcoded type DatePickerCell
+		if let cell = item.cell as? DatePickerCell {
+			cell.assignTintColors()
+		}
 	}
 	
 	/**
@@ -130,7 +161,7 @@ struct WhatToCollapse {
 					continue
 				}
 				if shouldCollapseAllOtherCells {
-					if item.cell is DatePickerCellExpanded {
+					if item.cell is DatePickerCellExpanded { // TODO: remove hardcoded type
 						item.hidden = true
 						indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
 					}
