@@ -219,7 +219,32 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		guard let tableView = tableView as? FormTableView else {
+		if isFirstResponder() {
+			resignFirstResponder()
+		} else {
+			becomeFirstResponder()
+		}
+	}
+
+	public override func canBecomeFirstResponder() -> Bool {
+		return true
+	}
+	
+	public override func becomeFirstResponder() -> Bool {
+		if !super.becomeFirstResponder() {
+			return false
+		}
+		expandCollapse()
+		return true
+	}
+	
+	public override func resignFirstResponder() -> Bool {
+		expandCollapse()
+		return super.resignFirstResponder()
+	}
+
+	public func expandCollapse() {
+		guard let tableView = form_tableView() as? FormTableView else {
 			return
 		}
 		guard let expandedCell = expandedCell else {
