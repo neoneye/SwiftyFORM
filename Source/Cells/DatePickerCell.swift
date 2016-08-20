@@ -128,6 +128,9 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+		if model.expandCollapseWhenSelectingRow == false {
+			return
+		}
 		if isFirstResponder() {
 			resignFirstResponder()
 		} else {
@@ -159,9 +162,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 			return
 		}
 		guard let expandedCell = expandedCell else {
-			return
-		}
-		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
 		tableView.expandCollapse(expandedCell: expandedCell)

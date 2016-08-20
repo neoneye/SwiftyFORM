@@ -29,7 +29,7 @@ public class FormTableView: UITableView {
 		// If the expanded cell already is visible then collapse it
 		let whatToCollapse = WhatToCollapse.process(
 			expandedCell: expandedCell,
-			shouldCollapseAllOtherCells: true,
+			attemptCollapseAllOtherCells: true,
 			sections: sections
 		)
 		print("whatToCollapse: \(whatToCollapse)")
@@ -169,7 +169,7 @@ struct WhatToCollapse {
 	let indexPaths: [NSIndexPath]
 	let isCollapse: Bool
 	
-	static func process(expandedCell expandedCell: UITableViewCell, shouldCollapseAllOtherCells: Bool, sections: [TableViewSection]) -> WhatToCollapse {
+	static func process(expandedCell expandedCell: UITableViewCell, attemptCollapseAllOtherCells: Bool, sections: [TableViewSection]) -> WhatToCollapse {
 		var indexPaths = [NSIndexPath]()
 		var isCollapse = false
 		
@@ -182,10 +182,15 @@ struct WhatToCollapse {
 					isCollapse = true
 					continue
 				}
-				if shouldCollapseAllOtherCells {
-					if item.cell is DatePickerCellExpanded { // TODO: remove hardcoded type
-						item.hidden = true
-						indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+				if attemptCollapseAllOtherCells {
+					if let expandedCell = item.cell as? DatePickerCellExpanded { // TODO: remove hardcoded type
+						if let collapsedCell = expandedCell.collapsedCell {
+							// If it's behavior is AlwaysExpanded, then we don't want it collapsed
+							if collapsedCell.model.expandCollapseWhenSelectingRow {
+								item.hidden = true
+								indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+							}
+						}
 					}
 				}
 			}
