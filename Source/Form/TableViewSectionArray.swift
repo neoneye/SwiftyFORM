@@ -41,6 +41,17 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		super.init()
 	}
 	
+	func findItem(cell: UITableViewCell?) -> TableViewCellArrayItem? {
+		for section in sections {
+			for item in section.cells.allItems {
+				if item.cell === cell {
+					return item
+				}
+			}
+		}
+		return nil
+	}
+	
 	func findVisibleItem(indexPath indexPath: NSIndexPath) -> TableViewCellArrayItem? {
 		if indexPath.section < 0 { return nil }
 		if indexPath.row < 0 { return nil }
