@@ -14,12 +14,12 @@ public class FormTableView: UITableView {
 	}
 	
 	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell) {
-		guard let dataSource = dataSource as? TableViewSectionArray else {
+		guard let sectionArray = dataSource as? TableViewSectionArray else {
 			SwiftyFormLog("cannot expand row. The dataSource is nil")
 			return
 		}
 		
-		let sections = dataSource.sections
+		let sections = sectionArray.sections
 		
 		SwiftyFormLog("will expand collapse")
 
@@ -36,7 +36,7 @@ public class FormTableView: UITableView {
 			for indexPath in whatToCollapse.indexPaths {
 				// TODO: clean up.. don't want to subtract by 1
 				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				self.assignDefaultColors(indexPath2, sections: sections)
+				self.assignDefaultColors(indexPath2, sectionArray: sectionArray)
 			}
 			
 			beginUpdates()
@@ -57,7 +57,7 @@ public class FormTableView: UITableView {
 			if let indexPath = whatToExpand.expandedIndexPath {
 				// TODO: clean up.. don't want to subtract by 1
 				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				self.assignTintColors(indexPath2, sections: sections)
+				self.assignTintColors(indexPath2, sectionArray: sectionArray)
 			}
 			
 			CATransaction.begin()
@@ -81,20 +81,10 @@ public class FormTableView: UITableView {
 		SwiftyFormLog("did expand collapse")
 	}
 	
-	func lookup(indexPath indexPath: NSIndexPath, sections: [TableViewSection]) -> TableViewCellArrayItem? {
-		if indexPath.section < 0 { return nil }
-		if indexPath.row < 0 { return nil }
-		if indexPath.section >= sections.count { return nil }
-		let section = sections[indexPath.section]
-		let items = section.cells.visibleItems
-		if indexPath.row >= items.count { return nil }
-		return items[indexPath.row]
-	}
-	
-	func assignTintColors(indexPath: NSIndexPath, sections: [TableViewSection]) {
+	func assignTintColors(indexPath: NSIndexPath, sectionArray: TableViewSectionArray) {
 		print("assign tint colors: \(indexPath)")
 		
-		guard let item = lookup(indexPath: indexPath, sections: sections) else {
+		guard let item = sectionArray.findVisibleItem(indexPath: indexPath) else {
 			print("no visible cell for indexPath: \(indexPath)")
 			return
 		}
@@ -105,10 +95,10 @@ public class FormTableView: UITableView {
 		}
 	}
 	
-	func assignDefaultColors(indexPath: NSIndexPath, sections: [TableViewSection]) {
+	func assignDefaultColors(indexPath: NSIndexPath, sectionArray: TableViewSectionArray) {
 		print("assign default colors: \(indexPath)")
 		
-		guard let item = lookup(indexPath: indexPath, sections: sections) else {
+		guard let item = sectionArray.findVisibleItem(indexPath: indexPath) else {
 			print("no visible cell for indexPath: \(indexPath)")
 			return
 		}
