@@ -84,7 +84,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		
 		tableView.toggleExpandCollapse(expandedCell: expandedCell)
 
-		setSelected(false, animated: true)
+		form_deselectRow()
 	}
 	
 	func reloadValueLabel() {

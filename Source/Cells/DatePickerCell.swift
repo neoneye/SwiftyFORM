@@ -138,7 +138,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		} else {
 			becomeFirstResponder()
 		}
-		setSelected(false, animated: true)
+		form_deselectRow()
 	}
 
 
