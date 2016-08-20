@@ -4,7 +4,7 @@ import SwiftyFORM
 
 public class FirstViewController: FormViewController {
 	override public func populate(builder: FormBuilder) {
-		builder.demo_showInfo("Welcome to SwiftyFORM\na new form framework\nfor iOS 9")
+		builder.demo_showInfo("Welcome to the\nSwiftyFORM example app\nthat shows everything")
 
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
