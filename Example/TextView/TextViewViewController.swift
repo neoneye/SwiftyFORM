@@ -2,10 +2,10 @@
 import UIKit
 import SwiftyFORM
 
-class TextViewValidationViewController: FormViewController {
+class TextViewViewController: FormViewController {
 
 	override func populate(builder: FormBuilder) {
-		builder.navigationTitle = "Validation"
+		builder.navigationTitle = "TextViews"
 		builder += longSummary
 		builder += notes
 		builder += commentArea

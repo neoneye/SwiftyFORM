@@ -21,7 +21,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Return Key").viewController(TextFieldReturnKeyViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("TextView")
-		builder += ViewControllerFormItem().title("Validation").viewController(TextViewValidationViewController.self)
+		builder += ViewControllerFormItem().title("TextViews").viewController(TextViewViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("DatePicker")
 		builder += ViewControllerFormItem().title("DatePicker With Locale").viewController(DatePickerLocaleViewController.self)

@@ -28,7 +28,7 @@
 		42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */; };
 		42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */; };
 		42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */; };
-		42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */; };
+		42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */; };
 		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
 		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
@@ -114,7 +114,7 @@
 		42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReturnKeyViewController.swift; sourceTree = "<group>"; };
 		42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTabThroughFormViewController.swift; sourceTree = "<group>"; };
 		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
-		42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewValidationViewController.swift; sourceTree = "<group>"; };
+		42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 		42589DCC1B3447EA007CA8C1 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
-				42589DCD1B3447EA007CA8C1 /* TextViewValidationViewController.swift */,
+				42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */,
 			);
 			path = TextView;
 			sourceTree = "<group>";
@@ -418,7 +418,7 @@
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
-				42589DDF1B3447EA007CA8C1 /* TextViewValidationViewController.swift in Sources */,
+				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
