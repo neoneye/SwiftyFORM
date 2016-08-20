@@ -131,6 +131,19 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
+		
+		guard let tableView = form_tableView() as? FormTableView else {
+			return
+		}
+		if DeveloperSettings.shared.mode == 1 {
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		}
+		if DeveloperSettings.shared.mode == 2 {
+			tableView.beginUpdates()
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			tableView.endUpdates()
+		}
+
 		if isFirstResponder() {
 			resignFirstResponder()
 		} else {

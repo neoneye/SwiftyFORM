@@ -8,6 +8,8 @@ class ColorPickerViewController: FormViewController {
 		builder.toolbarMode = .None
 
 		builder.demo_showInfo("Tap row to expand/collapse.\nPinch to change precision.\nPan to change value.")
+		
+		builder += mode
 
 		builder += SectionHeaderTitleFormItem().title("Components")
 		builder += slider0
@@ -22,6 +24,16 @@ class ColorPickerViewController: FormViewController {
 		updateSummary()
 		updateColor()
 	}
+	
+	lazy var mode: SegmentedControlFormItem = {
+		let instance = SegmentedControlFormItem()
+		instance.title = "Mode"
+		instance.items = ["A mode", "B mode", "C mode", "D mode"]
+		instance.valueDidChangeBlock = { value in
+			DeveloperSettings.shared.mode = value
+		}
+		return instance
+	}()
 	
 	lazy var slider0: PrecisionSliderFormItem = {
 		let instance = PrecisionSliderFormItem().decimalPlaces(3).minimumValue(0).maximumValue(1000).value(500)

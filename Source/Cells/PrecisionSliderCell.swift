@@ -81,6 +81,17 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		if model.expandCollapseWhenSelectingRow == false {
 			return
 		}
+		
+		if DeveloperSettings.shared.mode == 1 {
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		}
+		if DeveloperSettings.shared.mode == 2 {
+			tableView.beginUpdates()
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			tableView.endUpdates()
+		}
+
+
 		tableView.expandCollapse(expandedCell: expandedCell)
 	}
 	

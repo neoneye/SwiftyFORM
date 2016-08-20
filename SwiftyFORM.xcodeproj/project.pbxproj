@@ -88,6 +88,7 @@
 		42D297571D49611300561780 /* PrecisionSlider_InnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D297561D49611300561780 /* PrecisionSlider_InnerModel.swift */; };
 		42D297591D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D297581D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift */; };
 		42D5DE701A38167400D5C368 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D5DE651A38167400D5C368 /* SwiftyFORM.framework */; };
+		42F7521C1D68D91E0014C6ED /* DeveloperSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7521B1D68D91E0014C6ED /* DeveloperSettings.swift */; };
 		42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC31D4143650066E45A /* PrecisionSlider.swift */; };
 		739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649121D2B6B7400E12A96 /* AttributedTextCell.swift */; };
 		739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */; };
@@ -188,6 +189,7 @@
 		42D297581D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider_InnerZoomMode.swift; sourceTree = "<group>"; };
 		42D5DE651A38167400D5C368 /* SwiftyFORM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyFORM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5DE6F1A38167400D5C368 /* SwiftyFORMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyFORMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F7521B1D68D91E0014C6ED /* DeveloperSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperSettings.swift; sourceTree = "<group>"; };
 		42FABBC31D4143650066E45A /* PrecisionSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider.swift; sourceTree = "<group>"; };
 		739649121D2B6B7400E12A96 /* AttributedTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextCell.swift; sourceTree = "<group>"; };
 		739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextFormItem.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				428683291B346CFE0028DB2F /* UIView+LookupCell.swift */,
 				4286832A1B346CFE0028DB2F /* UIView+LookupTableView.swift */,
 				4286832B1B346CFE0028DB2F /* UIViewController+Alert.swift */,
+				42F7521B1D68D91E0014C6ED /* DeveloperSettings.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				4286833D1B346CFE0028DB2F /* SelectRowDelegate.swift in Sources */,
 				428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */,
 				428683521B346CFE0028DB2F /* Specification.swift in Sources */,
+				42F7521C1D68D91E0014C6ED /* DeveloperSettings.swift in Sources */,
 				4286835C1B346CFE0028DB2F /* UIViewController+Alert.swift in Sources */,
 				428683561B346CFE0028DB2F /* Logging.swift in Sources */,
 				42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */,

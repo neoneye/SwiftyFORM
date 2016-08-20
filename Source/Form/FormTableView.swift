@@ -82,10 +82,19 @@ public class FormTableView: UITableView {
 		}
 		
 		// Deselect if needed
-		if let indexPath = indexPathForSelectedRow {
-			beginUpdates()
-			deselectRowAtIndexPath(indexPath, animated: true)
-			endUpdates()
+		if DeveloperSettings.shared.mode == 0 {
+			if let indexPath = indexPathForSelectedRow {
+				print("!!!!!!!!!!deselect: \(indexPath)")
+				beginUpdates()
+				deselectRowAtIndexPath(indexPath, animated: true)
+				endUpdates()
+			}
+		}
+		if DeveloperSettings.shared.mode == 3 {
+			if let indexPath = indexPathForSelectedRow {
+				print("!!!!!!!!!!deselect: \(indexPath)")
+				deselectRowAtIndexPath(indexPath, animated: true)
+			}
 		}
 		
 		SwiftyFormLog("did expand collapse")
