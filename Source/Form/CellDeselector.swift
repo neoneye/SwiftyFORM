@@ -18,7 +18,7 @@ extension UITableViewCell {
 	This works on iPhone, but not on iPad where the row stays selected.
 
 	The indexPath of the cell may change during animation because rows are inserted/removed.
-	Most insert/remove animations are shorter than this.
+	Most insert/remove animations are shorter than half a second.
 	Thus I attempt to deselect again after 500ms.
 	*/
 	func form_deselectRow() {
