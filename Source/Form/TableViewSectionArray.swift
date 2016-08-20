@@ -1,39 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public struct RowRef {
-	public let item: TableViewCellArrayItem
-	public let sectionArray: TableViewSectionArray
-	public let tableView: UITableView
-	public let indexPath: NSIndexPath
-	
-	func resolveIndexPath() -> NSIndexPath? {
-		return sectionArray.indexPathForItem(item)
-	}
-}
-
-public protocol SelectRowDelegate2 {
-	func form_didSelectRow(row: RowRef)
-}
-
-
-extension TableViewCellArrayItem {
-	func didSelectRow(sectionArray: TableViewSectionArray, _ tableView: UITableView, _ indexPath: NSIndexPath) {
-		if let cell = self.cell as? SelectRowDelegate {
-			cell.form_didSelectRow(indexPath, tableView: tableView)
-		}
-		if let cell = self.cell as? SelectRowDelegate2 {
-			let row = RowRef(item: self, sectionArray: sectionArray, tableView: tableView, indexPath: indexPath)
-			cell.form_didSelectRow(row)
-		}
-	}
-}
-
 public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableViewDelegate {
-	struct Constants {
-		static let findVisibleItem = true
-	}
-	
 	public let sections: [TableViewSection]
 	
 	public init(sections: [TableViewSection]) {
@@ -89,11 +57,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		if Constants.findVisibleItem {
-			findVisibleItem(indexPath: indexPath)?.didSelectRow(self, tableView, indexPath)
-		} else {
-			sections[indexPath.section].tableView(tableView, didSelectRowAtIndexPath: indexPath)
-		}
+		sections[indexPath.section].tableView(tableView, didSelectRowAtIndexPath: indexPath)
 	}
 	
 	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
