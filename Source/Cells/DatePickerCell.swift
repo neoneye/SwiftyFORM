@@ -127,12 +127,26 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 		return 60
 	}
 	
+	var isExpandedCellVisible: Bool {
+		guard let sectionArray = form_tableView()?.dataSource as? TableViewSectionArray else {
+			return false
+		}
+		guard let expandedItem = sectionArray.findItem(expandedCell) else {
+			return false
+		}
+		if expandedItem.hidden {
+			return false
+		}
+		return true
+	}
+	
 	public func form_didSelectRow(row: RowRef) {
 		if model.expandCollapseWhenSelectingRow == false {
+			print("cell is always expanded")
 			return
 		}
-		
-		if isFirstResponder() {
+
+		if isExpandedCellVisible {
 			resignFirstResponder()
 		} else {
 			becomeFirstResponder()
@@ -144,6 +158,9 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 	// MARK: UIResponder
 	
 	public override func canBecomeFirstResponder() -> Bool {
+		if model.expandCollapseWhenSelectingRow == false {
+			return false
+		}
 		return true
 	}
 	
@@ -151,7 +168,13 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 		if !super.becomeFirstResponder() {
 			return false
 		}
-		expandCollapse()
+
+		if isExpandedCellVisible {
+			assignTintColors()
+		} else {
+			expandCollapse()
+		}
+
 		return true
 	}
 	
