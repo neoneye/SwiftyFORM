@@ -71,59 +71,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		textLabel?.textColor = color
 		detailTextLabel?.textColor = color
 	}
-	
-//	public lazy var toolbar: SimpleToolbar = {
-//		let instance = SimpleToolbar()
-//		weak var weakSelf = self
-//		instance.jumpToPrevious = {
-//			if let cell = weakSelf {
-//				cell.gotoPrevious()
-//			}
-//		}
-//		instance.jumpToNext = {
-//			if let cell = weakSelf {
-//				cell.gotoNext()
-//			}
-//		}
-//		instance.dismissKeyboard = {
-//			if let cell = weakSelf {
-//				cell.dismissKeyboard()
-//			}
-//		}
-//		return instance
-//		}()
-//	
-//	public func updateToolbarButtons() {
-//		if model.toolbarMode == .Simple {
-//			toolbar.updateButtonConfiguration(self)
-//		}
-//	}
-//	
-//	public func gotoPrevious() {
-//		SwiftyFormLog("make previous cell first responder")
-//		form_makePreviousCellFirstResponder()
-//	}
-//	
-//	public func gotoNext() {
-//		SwiftyFormLog("make next cell first responder")
-//		form_makeNextCellFirstResponder()
-//	}
-	
-//	public func dismissKeyboard() {
-//		SwiftyFormLog("dismiss keyboard")
-//		resignFirstResponder()
-//	}
-	
-//	public override var inputView: UIView? {
-//		return datePicker
-//	}
-//	
-//	public override var inputAccessoryView: UIView? {
-//		if model.toolbarMode == .Simple {
-//			return toolbar
-//		}
-//		return nil
-//	}
 
 	public func obtainDateStyle(datePickerMode: UIDatePickerMode) -> NSDateFormatterStyle {
 		switch datePickerMode {
@@ -176,44 +123,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		expandedCell?.datePicker.setDate(model.date, animated: animated)
 	}
 	
-/*	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		// Hide the datepicker wheel, if it's already visible
-		// Otherwise show the datepicker
-		
-		let alreadyFirstResponder = (self.form_firstResponder() != nil)
-		if alreadyFirstResponder {
-			tableView.form_firstResponder()?.resignFirstResponder()
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
-			return
-		}
-		
-		//SwiftyFormLog("will invoke")
-		// hide keyboard when the user taps this kind of row
-		tableView.form_firstResponder()?.resignFirstResponder()
-		self.becomeFirstResponder()
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		//SwiftyFormLog("did invoke")
-	}*/
-	
-	// MARK: UIResponder
-	
-	/*public override func canBecomeFirstResponder() -> Bool {
-		return true
-	}
-	
-	public override func becomeFirstResponder() -> Bool {
-		let result = super.becomeFirstResponder()
-		updateToolbarButtons()
-		assignTintColors()
-		return result
-	}
-	
-	public override func resignFirstResponder() -> Bool {
-		super.resignFirstResponder()
-		assignDefaultColors()
-		return true
-	}*/
-
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
@@ -226,6 +135,8 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 
+	// MARK: UIResponder
+	
 	public override func canBecomeFirstResponder() -> Bool {
 		return true
 	}
