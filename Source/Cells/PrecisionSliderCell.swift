@@ -82,7 +82,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 			return
 		}
 		
-		tableView.expandCollapse(expandedCell: expandedCell)
+		tableView.toggleExpandCollapse(expandedCell: expandedCell)
 
 		setSelected(false, animated: true)
 	}

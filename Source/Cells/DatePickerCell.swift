@@ -127,19 +127,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 		return 60
 	}
 	
-	var isExpandedCellVisible: Bool {
-		guard let sectionArray = form_tableView()?.dataSource as? TableViewSectionArray else {
-			return false
-		}
-		guard let expandedItem = sectionArray.findItem(expandedCell) else {
-			return false
-		}
-		if expandedItem.hidden {
-			return false
-		}
-		return true
-	}
-	
 	public func form_didSelectRow(row: RowRef) {
 		if model.expandCollapseWhenSelectingRow == false {
 			print("cell is always expanded")
@@ -168,29 +155,53 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 		if !super.becomeFirstResponder() {
 			return false
 		}
-
-		if isExpandedCellVisible {
-			assignTintColors()
-		} else {
-			expandCollapse()
-		}
-
+		expand()
 		return true
 	}
 	
 	public override func resignFirstResponder() -> Bool {
-		expandCollapse()
+		collapse()
 		return super.resignFirstResponder()
 	}
 
-	public func expandCollapse() {
+	
+	// MARK: Expand collapse
+
+	var isExpandedCellVisible: Bool {
+		guard let sectionArray = form_tableView()?.dataSource as? TableViewSectionArray else {
+			return false
+		}
+		guard let expandedItem = sectionArray.findItem(expandedCell) else {
+			return false
+		}
+		if expandedItem.hidden {
+			return false
+		}
+		return true
+	}
+	
+	func toggleExpandCollapse() {
 		guard let tableView = form_tableView() as? FormTableView else {
 			return
 		}
 		guard let expandedCell = expandedCell else {
 			return
 		}
-		tableView.expandCollapse(expandedCell: expandedCell)
+		tableView.toggleExpandCollapse(expandedCell: expandedCell)
+	}
+	
+	func expand() {
+		if isExpandedCellVisible {
+			assignTintColors()
+		} else {
+			toggleExpandCollapse()
+		}
+	}
+	
+	func collapse() {
+		if isExpandedCellVisible {
+			toggleExpandCollapse()
+		}
 	}
 	
 }
