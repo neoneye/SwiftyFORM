@@ -14,6 +14,11 @@ class DatePickerBindingViewController: FormViewController {
 
 		builder += SectionFormItem()
 		builder += summary
+
+		builder += SectionFormItem()
+		builder += toggleDatePicker0
+		builder += toggleDatePicker1
+		builder += toggleDatePicker2
 		
 		updateSummary()
 	}
@@ -75,4 +80,29 @@ class DatePickerBindingViewController: FormViewController {
 		datePicker.setValue(offsetDate(datePicker.value, days: -1), animated: true)
 		updateSummary()
 	}
+
+	lazy var toggleDatePicker0: DatePickerFormItem = {
+		let instance = DatePickerFormItem()
+		instance.title("Toggle 0")
+		instance.datePickerMode = .Time
+		instance.behavior = .Expanded
+		return instance
+	}()
+	
+	lazy var toggleDatePicker1: DatePickerFormItem = {
+		let instance = DatePickerFormItem()
+		instance.title("Toggle 1")
+		instance.datePickerMode = .Time
+		instance.behavior = .Collapsed
+		return instance
+	}()
+	
+	lazy var toggleDatePicker2: DatePickerFormItem = {
+		let instance = DatePickerFormItem()
+		instance.title("Toggle 2")
+		instance.datePickerMode = .Time
+		instance.behavior = .Collapsed
+		return instance
+	}()
+	
 }
