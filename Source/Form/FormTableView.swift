@@ -19,10 +19,6 @@ public class FormTableView: UITableView {
 			return
 		}
 		
-//		guard let sections = dataSource.sections as? [TableViewSection] else {
-//			print("expected all sections to be of the type TableViewSection")
-//			return
-//		}
 		let sections = dataSource.sections
 		
 		SwiftyFormLog("will expand collapse")
@@ -80,22 +76,6 @@ public class FormTableView: UITableView {
 			endUpdates()
 			
 			CATransaction.commit()
-		}
-		
-		// Deselect if needed
-		if DeveloperSettings.shared.mode == 0 {
-			if let indexPath = indexPathForSelectedRow {
-				print("!!!!!!!!!!deselect: \(indexPath)")
-				beginUpdates()
-				deselectRowAtIndexPath(indexPath, animated: true)
-				endUpdates()
-			}
-		}
-		if DeveloperSettings.shared.mode == 3 {
-			if let indexPath = indexPathForSelectedRow {
-				print("!!!!!!!!!!deselect: \(indexPath)")
-				deselectRowAtIndexPath(indexPath, animated: true)
-			}
 		}
 		
 		SwiftyFormLog("did expand collapse")

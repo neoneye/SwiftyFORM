@@ -132,77 +132,14 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate2 {
 			return
 		}
 		
-		guard let tableView = form_tableView() as? FormTableView else {
-			return
-		}
-		if DeveloperSettings.shared.mode == 4 {
-//			setSelected(false, animated: true)
-		}
-		
-		if DeveloperSettings.shared.mode == 1 {
-			tableView.deselectRowAtIndexPath(row.indexPath, animated: true)
-		}
-		if DeveloperSettings.shared.mode == 2 {
-			tableView.beginUpdates()
-			tableView.deselectRowAtIndexPath(row.indexPath, animated: true)
-			tableView.endUpdates()
-		}
-		
 		if isFirstResponder() {
 			resignFirstResponder()
 		} else {
 			becomeFirstResponder()
 		}
-
-		if DeveloperSettings.shared.mode == 4 {
-//								tableView.beginUpdates()
-			setSelected(false, animated: true)
-//								tableView.endUpdates()
-
-/*			let tinyDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Float(NSEC_PER_SEC)))
-			dispatch_after(tinyDelay, dispatch_get_main_queue()) {
-				if let ip = row.resolveIndexPath() {
-					print("deselecting: \(ip)")
-//					tableView.beginUpdates()
-//					tableView.deselectRowAtIndexPath(ip, animated: true)
-					self.setSelected(false, animated: true)
-//					tableView.endUpdates()
-				}
-			}*/
-
-			
-//			if let ip = row.resolveIndexPath() {
-//				print("deselecting: \(ip)")
-//				tableView.beginUpdates()
-//				tableView.deselectRowAtIndexPath(ip, animated: true)
-//				tableView.endUpdates()
-//			}
-		}
+		setSelected(false, animated: true)
 	}
-	
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		if model.expandCollapseWhenSelectingRow == false {
-			return
-		}
-		
-		guard let tableView = form_tableView() as? FormTableView else {
-			return
-		}
-		if DeveloperSettings.shared.mode == 1 {
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		}
-		if DeveloperSettings.shared.mode == 2 {
-			tableView.beginUpdates()
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
-			tableView.endUpdates()
-		}
 
-		if isFirstResponder() {
-			resignFirstResponder()
-		} else {
-			becomeFirstResponder()
-		}
-	}
 
 	// MARK: UIResponder
 	

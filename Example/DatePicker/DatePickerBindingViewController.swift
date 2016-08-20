@@ -14,7 +14,6 @@ class DatePickerBindingViewController: FormViewController {
 
 		builder += SectionFormItem()
 		builder += summary
-		builder += mode
 
 		builder += SectionFormItem()
 		builder += toggleDatePicker0
@@ -23,17 +22,6 @@ class DatePickerBindingViewController: FormViewController {
 		
 		updateSummary()
 	}
-	
-	lazy var mode: SegmentedControlFormItem = {
-		let instance = SegmentedControlFormItem()
-		instance.title = "Mode"
-		instance.items = ["Aa", "Bb", "Cc", "Dd", "Ee"]
-		instance.valueDidChangeBlock = { value in
-			DeveloperSettings.shared.mode = value
-		}
-		return instance
-	}()
-	
 	
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
