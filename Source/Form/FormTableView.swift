@@ -19,10 +19,11 @@ public class FormTableView: UITableView {
 			return
 		}
 		
-		guard let sections = dataSource.sections as? [TableViewSection] else {
-			print("expected all sections to be of the type TableViewSection")
-			return
-		}
+//		guard let sections = dataSource.sections as? [TableViewSection] else {
+//			print("expected all sections to be of the type TableViewSection")
+//			return
+//		}
+		let sections = dataSource.sections
 		
 		SwiftyFormLog("will expand collapse")
 

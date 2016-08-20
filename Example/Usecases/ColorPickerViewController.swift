@@ -28,7 +28,7 @@ class ColorPickerViewController: FormViewController {
 	lazy var mode: SegmentedControlFormItem = {
 		let instance = SegmentedControlFormItem()
 		instance.title = "Mode"
-		instance.items = ["A mode", "B mode", "C mode", "D mode"]
+		instance.items = ["Aa", "Bb", "Cc", "Dd", "Ee"]
 		instance.valueDidChangeBlock = { value in
 			DeveloperSettings.shared.mode = value
 		}

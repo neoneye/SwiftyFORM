@@ -93,6 +93,10 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 
 
 		tableView.expandCollapse(expandedCell: expandedCell)
+
+		if DeveloperSettings.shared.mode == 4 {
+			setSelected(false, animated: true)
+		}
 	}
 	
 	func reloadValueLabel() {
