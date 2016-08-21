@@ -50,7 +50,7 @@ public struct PrecisionSliderCellFormatter {
 }
 
 
-public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, AssignAppearance {
+public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: PrecisionSliderExpandedCell?
 	public let model: PrecisionSliderCellModel
 
@@ -68,34 +68,6 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
-		return 60
-	}
-	
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		if model.expandCollapseWhenSelectingRow == false {
-			return
-		}
-		
-		guard let tableView = form_tableView() else {
-			return
-		}
-		guard let sectionArray = tableView.dataSource as? TableViewSectionArray else {
-			return
-		}
-		guard let expandedCell = expandedCell else {
-			return
-		}
-		ToggleExpandCollapse.execute(
-			toggleCell: self,
-			expandedCell: expandedCell,
-			tableView: tableView,
-			sectionArray: sectionArray
-		)
-
-		form_deselectRow()
-	}
-	
 	func reloadValueLabel() {
 		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
@@ -126,6 +98,96 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		model.valueDidChange(changeModel: changeModel)
 		reloadValueLabel()
 	}
+	
+	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+		return 60
+	}
+	
+	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+		if model.expandCollapseWhenSelectingRow == false {
+			//print("cell is always expanded")
+			return
+		}
+		
+		if isExpandedCellVisible {
+			resignFirstResponder()
+		} else {
+			becomeFirstResponder()
+		}
+		form_deselectRow()
+	}
+
+	
+	// MARK: UIResponder
+	
+	public override func canBecomeFirstResponder() -> Bool {
+		if model.expandCollapseWhenSelectingRow == false {
+			return false
+		}
+		return true
+	}
+	
+	public override func becomeFirstResponder() -> Bool {
+		if !super.becomeFirstResponder() {
+			return false
+		}
+		expand()
+		return true
+	}
+	
+	public override func resignFirstResponder() -> Bool {
+		collapse()
+		return super.resignFirstResponder()
+	}
+	
+	
+	// MARK: Expand collapse
+	
+	var isExpandedCellVisible: Bool {
+		guard let sectionArray = form_tableView()?.dataSource as? TableViewSectionArray else {
+			return false
+		}
+		guard let expandedItem = sectionArray.findItem(expandedCell) else {
+			return false
+		}
+		if expandedItem.hidden {
+			return false
+		}
+		return true
+	}
+	
+	func toggleExpandCollapse() {
+		guard let tableView = form_tableView() else {
+			return
+		}
+		guard let sectionArray = tableView.dataSource as? TableViewSectionArray else {
+			return
+		}
+		guard let expandedCell = expandedCell else {
+			return
+		}
+		ToggleExpandCollapse.execute(
+			toggleCell: self,
+			expandedCell: expandedCell,
+			tableView: tableView,
+			sectionArray: sectionArray
+		)
+	}
+	
+	func expand() {
+		if isExpandedCellVisible {
+			assignTintColors()
+		} else {
+			toggleExpandCollapse()
+		}
+	}
+	
+	func collapse() {
+		if isExpandedCellVisible {
+			toggleExpandCollapse()
+		}
+	}
+
 	
 	// MARK: AssignAppearance
 
@@ -212,8 +274,9 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 	}
 	
 	public var isCollapsable: Bool {
+		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 		// TODO: Do I want auto collapse of precision slider cells?
-		return false
+//		return false
 	}
 	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
