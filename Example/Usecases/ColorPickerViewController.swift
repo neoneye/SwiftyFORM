@@ -8,7 +8,7 @@ class ColorPickerViewController: FormViewController {
 		builder.toolbarMode = .None
 
 		builder.demo_showInfo("Tap row to expand/collapse.\nPinch to change precision.\nPan to change value.")
-
+		
 		builder += SectionHeaderTitleFormItem().title("Components")
 		builder += slider0
 		builder += slider1

@@ -125,33 +125,50 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: DatePickerFormItem
 	
 	func visit(object: DatePickerFormItem) {
-		var model = DatePickerCellModel()
+		let model = DatePickerCellModel()
 		model.title = object.title
 		model.toolbarMode = self.model.toolbarMode
 		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
 		model.locale = object.locale
 		model.minimumDate = object.minimumDate
 		model.maximumDate = object.maximumDate
+		model.date = object.value
 		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
+		}
+		
+		let cell = DatePickerToggleCell(model: model)
+		let cellExpanded = DatePickerExpandedCell()
+		
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+
+		cellExpanded.configure(model)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
+			SwiftyFormLog("sync date \(date)")
+			weakCell?.setDateWithoutSync(date, animated: animated)
+		}
+
 		weak var weakObject = object
 		model.valueDidChange = { (date: NSDate) in
 			SwiftyFormLog("value did change \(date)")
-			weakObject?.innerValue = date
-			return
-		}
-		
-		let cell = DatePickerCell(model: model)
-		
-		SwiftyFormLog("will assign date \(object.value)")
-		cell.setDateWithoutSync(object.value, animated: false)
-		SwiftyFormLog("did assign date \(object.value)")
-		cells.append(cell)
-		
-		weak var weakCell = cell
-		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
-			SwiftyFormLog("sync date \(date)")
-			weakCell?.setDateWithoutSync(date, animated: animated)
-			return
+			weakObject?.valueDidChange(date)
 		}
 	}
 	
@@ -228,16 +245,19 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.initialZoom = object.initialZoom
 		model.zoomUI = object.zoomUI
+		model.collapseWhenResigning = object.collapseWhenResigning
 		
 		switch object.behavior {
 		case .Collapsed, .Expanded:
 			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
 		case .ExpandedAlways:
 			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
 		}
 		
-		let cell = PrecisionSliderCell(model: model)
-		let cellExpanded = PrecisionSliderCellExpanded()
+		let cell = PrecisionSliderToggleCell(model: model)
+		let cellExpanded = PrecisionSliderExpandedCell()
 
 		cells.append(cell)
 		switch object.behavior {

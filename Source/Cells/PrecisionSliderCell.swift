@@ -10,6 +10,8 @@ public class PrecisionSliderCellModel {
 	var initialZoom: Float?
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
+	var collapseWhenResigning = false
+	var selectionStyle = UITableViewCellSelectionStyle.Default
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -49,40 +51,24 @@ public struct PrecisionSliderCellFormatter {
 }
 
 
-public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate {
-	weak var expandedCell: PrecisionSliderCellExpanded?
+public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+	weak var expandedCell: PrecisionSliderExpandedCell?
 	public let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {
 		self.model = model
 		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .None
+		selectionStyle = model.selectionStyle
 		clipsToBounds = true
 		textLabel?.text = model.title
 		reloadValueLabel()
+		assignDefaultColors()
 	}
 	
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
-		return 60
-	}
-	
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		guard let tableView = tableView as? FormTableView else {
-			return
-		}
-		guard let expandedCell = expandedCell else {
-			return
-		}
-		if model.expandCollapseWhenSelectingRow == false {
-			return
-		}
-		tableView.expandCollapse(expandedCell: expandedCell, indexPath: indexPath)
-	}
-	
 	func reloadValueLabel() {
 		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
@@ -112,6 +98,111 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		
 		model.valueDidChange(changeModel: changeModel)
 		reloadValueLabel()
+	}
+	
+	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+		return 60
+	}
+	
+	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+		if model.expandCollapseWhenSelectingRow == false {
+			//print("cell is always expanded")
+			return
+		}
+		
+		if isExpandedCellVisible {
+			resignFirstResponder()
+			collapse()
+		} else {
+			becomeFirstResponder()
+		}
+		form_deselectRow()
+	}
+
+	
+	// MARK: UIResponder
+	
+	public override func canBecomeFirstResponder() -> Bool {
+		if model.expandCollapseWhenSelectingRow == false {
+			return false
+		}
+		return true
+	}
+	
+	public override func becomeFirstResponder() -> Bool {
+		if !super.becomeFirstResponder() {
+			return false
+		}
+		expand()
+		return true
+	}
+	
+	public override func resignFirstResponder() -> Bool {
+		if model.collapseWhenResigning {
+			collapse()
+		}
+		return super.resignFirstResponder()
+	}
+	
+	
+	// MARK: Expand collapse
+	
+	var isExpandedCellVisible: Bool {
+		guard let sectionArray = form_tableView()?.dataSource as? TableViewSectionArray else {
+			return false
+		}
+		guard let expandedItem = sectionArray.findItem(expandedCell) else {
+			return false
+		}
+		if expandedItem.hidden {
+			return false
+		}
+		return true
+	}
+	
+	func toggleExpandCollapse() {
+		guard let tableView = form_tableView() else {
+			return
+		}
+		guard let sectionArray = tableView.dataSource as? TableViewSectionArray else {
+			return
+		}
+		guard let expandedCell = expandedCell else {
+			return
+		}
+		ToggleExpandCollapse.execute(
+			toggleCell: self,
+			expandedCell: expandedCell,
+			tableView: tableView,
+			sectionArray: sectionArray
+		)
+	}
+	
+	func expand() {
+		if isExpandedCellVisible {
+			assignTintColors()
+		} else {
+			toggleExpandCollapse()
+		}
+	}
+	
+	func collapse() {
+		if isExpandedCellVisible {
+			toggleExpandCollapse()
+		}
+	}
+
+	
+	// MARK: AssignAppearance
+
+	public func assignDefaultColors() {
+		textLabel?.textColor = UIColor.blackColor()
+		detailTextLabel?.textColor = UIColor.grayColor()
+	}
+	
+	public func assignTintColors() {
+		textLabel?.textColor = tintColor
+		detailTextLabel?.textColor = tintColor
 	}
 }
 
@@ -179,9 +270,22 @@ extension PrecisionSliderCellModel {
 	}
 }
 
-public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
-	weak var collapsedCell: PrecisionSliderCell?
+public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
+	weak var collapsedCell: PrecisionSliderToggleCell?
 
+	public var toggleCell: UITableViewCell? {
+		return collapsedCell
+	}
+	
+	public var isCollapsable: Bool {
+		if let cell = collapsedCell {
+			if cell.model.expandCollapseWhenSelectingRow {
+				return cell.model.collapseWhenResigning
+			}
+		}
+		return false
+	}
+	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return PrecisionSlider_InnerModel.height
 	}

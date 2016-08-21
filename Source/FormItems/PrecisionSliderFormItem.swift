@@ -23,6 +23,12 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 	
+	public var collapseWhenResigning = false
+	public func shouldCollapseWhenResigning() -> Self {
+		self.collapseWhenResigning = true
+		return self
+	}
+	
 	/**
 	Initial zoom factor
 	
