@@ -18,9 +18,14 @@ public class FormTableView: UITableView {
 			SwiftyFormLog("cannot expand row. The dataSource is nil")
 			return
 		}
-		
-		let sections = sectionArray.sections
-		
+		sectionArray.toggleExpandCollapse(expandedCell: expandedCell, tableView: self)
+	}
+}
+
+
+extension TableViewSectionArray {
+
+	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell, tableView: FormTableView) {
 		SwiftyFormLog("will expand collapse")
 
 		// If the expanded cell already is visible then collapse it
@@ -36,12 +41,12 @@ public class FormTableView: UITableView {
 			for indexPath in whatToCollapse.indexPaths {
 				// TODO: clean up.. don't want to subtract by 1
 				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				self.assignDefaultColors(indexPath2, sectionArray: sectionArray)
+				assignDefaultColors(indexPath2)
 			}
 			
-			beginUpdates()
-			deleteRowsAtIndexPaths(whatToCollapse.indexPaths, withRowAnimation: .Fade)
-			endUpdates()
+			tableView.beginUpdates()
+			tableView.deleteRowsAtIndexPaths(whatToCollapse.indexPaths, withRowAnimation: .Fade)
+			tableView.endUpdates()
 		}
 		
 		// If the expanded cell is hidden then expand it
@@ -57,7 +62,7 @@ public class FormTableView: UITableView {
 			if let indexPath = whatToExpand.expandedIndexPath {
 				// TODO: clean up.. don't want to subtract by 1
 				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				self.assignTintColors(indexPath2, sectionArray: sectionArray)
+				assignTintColors(indexPath2)
 			}
 			
 			CATransaction.begin()
@@ -67,13 +72,13 @@ public class FormTableView: UITableView {
 					// TODO: clean up.. don't want to subtract by 1
 					let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
 					print("scroll to visible: \(indexPath2)")
-					self.didExpand_scrollToVisible(indexPath2)
+					tableView.form_scrollToVisibleAfterExpand(indexPath2)
 				}
 			})
 
-			beginUpdates()
-			insertRowsAtIndexPaths(whatToExpand.indexPaths, withRowAnimation: .Fade)
-			endUpdates()
+			tableView.beginUpdates()
+			tableView.insertRowsAtIndexPaths(whatToExpand.indexPaths, withRowAnimation: .Fade)
+			tableView.endUpdates()
 			
 			CATransaction.commit()
 		}
@@ -81,10 +86,10 @@ public class FormTableView: UITableView {
 		SwiftyFormLog("did expand collapse")
 	}
 	
-	func assignTintColors(indexPath: NSIndexPath, sectionArray: TableViewSectionArray) {
+	func assignTintColors(indexPath: NSIndexPath) {
 		print("assign tint colors: \(indexPath)")
 		
-		guard let item = sectionArray.findVisibleItem(indexPath: indexPath) else {
+		guard let item = findVisibleItem(indexPath: indexPath) else {
 			print("no visible cell for indexPath: \(indexPath)")
 			return
 		}
@@ -94,10 +99,10 @@ public class FormTableView: UITableView {
 		}
 	}
 	
-	func assignDefaultColors(indexPath: NSIndexPath, sectionArray: TableViewSectionArray) {
+	func assignDefaultColors(indexPath: NSIndexPath) {
 		print("assign default colors: \(indexPath)")
 		
-		guard let item = sectionArray.findVisibleItem(indexPath: indexPath) else {
+		guard let item = findVisibleItem(indexPath: indexPath) else {
 			print("no visible cell for indexPath: \(indexPath)")
 			return
 		}
@@ -105,40 +110,6 @@ public class FormTableView: UITableView {
 		if let cell = item.cell as? AssignAppearance {
 			cell.assignDefaultColors()
 		}
-	}
-
-	
-	/**
-	This is supposed to be run after the expand row animation has completed.
-	This function ensures that the main row and its expanded row are both fully visible.
-	If the rows are obscured it will scrolls to make them visible.
-	*/
-	private func didExpand_scrollToVisible(indexPath: NSIndexPath) {
-		let rect = rectForRowAtIndexPath(indexPath)
-		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
-		//SwiftyFormLog("focusArea_minY \(focusArea_minY)    \(rect.minY) \(contentOffset.y) \(contentInset.top)")
-		if focusArea_minY < 0 {
-			SwiftyFormLog("focus area is outside the top. Scrolling to make it visible")
-			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
-			return
-		}
-		
-		// Expanded row
-		let expanded_indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-		let expanded_rect = rectForRowAtIndexPath(expanded_indexPath)
-		let focusArea_maxY = expanded_rect.maxY - (contentOffset.y + contentInset.top)
-		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(expanded_rect.maxY) \(contentOffset.y) \(contentInset.top)")
-		
-		let bottomMaxY = bounds.height - (contentInset.bottom + contentInset.top)
-		//SwiftyFormLog("bottomMaxY: \(bottomMaxY) \(bounds.height) \(contentInset.bottom) \(contentInset.top)")
-		
-		if focusArea_maxY > bottomMaxY {
-			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
-			scrollToRowAtIndexPath(expanded_indexPath, atScrollPosition: .Bottom, animated: true)
-			return
-		}
-		
-		SwiftyFormLog("focus area is inside. No need to scroll")
 	}
 }
 

@@ -11,6 +11,7 @@
 		42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E721B358A7E0068B084 /* SubmitButton.swift */; };
 		420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */; };
 		420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */; };
+		420F6CCB1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */; };
 		42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */; };
 		42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */; };
 		42108D191B34E9F60067FEAA /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0C1B34E9F60067FEAA /* FormItem.swift */; };
@@ -112,6 +113,7 @@
 		42096E721B358A7E0068B084 /* SubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontCollapseWhenScrolling.swift; sourceTree = "<group>"; };
 		420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignAppearance.swift; sourceTree = "<group>"; };
+		420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ScrollToVisibleAfterExpand.swift"; sourceTree = "<group>"; };
 		42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
 		42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerFormItem.swift; sourceTree = "<group>"; };
 		42108D0C1B34E9F60067FEAA /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
@@ -351,17 +353,18 @@
 			isa = PBXGroup;
 			children = (
 				428683221B346CFE0028DB2F /* DebugViewController.swift */,
+				42F7521B1D68D91E0014C6ED /* DeveloperSettings.swift */,
 				428683231B346CFE0028DB2F /* Dictionary+Update.swift */,
 				428683241B346CFE0028DB2F /* KeyboardHandler.swift */,
 				428683251B346CFE0028DB2F /* Logging.swift */,
 				42096E711B358A7E0068B084 /* ShowInfo.swift */,
 				42096E721B358A7E0068B084 /* SubmitButton.swift */,
 				428683271B346CFE0028DB2F /* UITableView+PrevNext.swift */,
+				420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */,
 				428683281B346CFE0028DB2F /* UIView+FirstResponder.swift */,
 				428683291B346CFE0028DB2F /* UIView+LookupCell.swift */,
 				4286832A1B346CFE0028DB2F /* UIView+LookupTableView.swift */,
 				4286832B1B346CFE0028DB2F /* UIViewController+Alert.swift */,
-				42F7521B1D68D91E0014C6ED /* DeveloperSettings.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */,
 				42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */,
 				42685D4D1D340733008ABC3D /* PrecisionSliderCell.swift in Sources */,
+				420F6CCB1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift in Sources */,
 				4286833B1B346CFE0028DB2F /* DumpVisitor.swift in Sources */,
 				42108D201B34E9F60067FEAA /* SwitchFormItem.swift in Sources */,
 				428683471B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift in Sources */,
