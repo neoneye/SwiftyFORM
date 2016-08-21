@@ -28,8 +28,8 @@ public class DatePickerCellModel {
 	}
 }
 
-public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
-	weak var expandedCell: DatePickerCellExpanded?
+public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+	weak var expandedCell: DatePickerExpandedCell?
 	public let model: DatePickerCellModel
 
 	public init(model: DatePickerCellModel) {
@@ -215,8 +215,8 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 }
 
 
-public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
-	weak var collapsedCell: DatePickerCell?
+public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
+	weak var collapsedCell: DatePickerToggleCell?
 
 	public var toggleCell: UITableViewCell? {
 		return collapsedCell
@@ -238,7 +238,7 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider, WillDi
 
 	lazy var datePicker: UIDatePicker = {
 		let instance = UIDatePicker()
-		instance.addTarget(self, action: #selector(DatePickerCellExpanded.valueChanged), forControlEvents: .ValueChanged)
+		instance.addTarget(self, action: #selector(DatePickerExpandedCell.valueChanged), forControlEvents: .ValueChanged)
 		return instance
 	}()
 	

@@ -143,8 +143,8 @@ class PopulateTableView: FormItemVisitor {
 			model.selectionStyle = .None
 		}
 		
-		let cell = DatePickerCell(model: model)
-		let cellExpanded = DatePickerCellExpanded()
+		let cell = DatePickerToggleCell(model: model)
+		let cellExpanded = DatePickerExpandedCell()
 		
 		cells.append(cell)
 		switch object.behavior {
