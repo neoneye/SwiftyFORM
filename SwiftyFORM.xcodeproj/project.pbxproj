@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E711B358A7E0068B084 /* ShowInfo.swift */; };
 		42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E721B358A7E0068B084 /* SubmitButton.swift */; };
+		420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */; };
 		42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */; };
 		42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */; };
 		42108D191B34E9F60067FEAA /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0C1B34E9F60067FEAA /* FormItem.swift */; };
@@ -108,6 +109,7 @@
 /* Begin PBXFileReference section */
 		42096E711B358A7E0068B084 /* ShowInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowInfo.swift; sourceTree = "<group>"; };
 		42096E721B358A7E0068B084 /* SubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontCollapseWhenScrolling.swift; sourceTree = "<group>"; };
 		42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
 		42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerFormItem.swift; sourceTree = "<group>"; };
 		42108D0C1B34E9F60067FEAA /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */,
 				428683091B346CFE0028DB2F /* CellHeightProvider.swift */,
 				428683071B346CFE0028DB2F /* Command.swift */,
+				420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */,
 				428683081B346CFE0028DB2F /* DumpVisitor.swift */,
 				4286830C1B346CFE0028DB2F /* FormBuilder.swift */,
 				4286830F1B346CFE0028DB2F /* FormTableView.swift */,
@@ -526,6 +529,7 @@
 				428683361B346CFE0028DB2F /* SwitchCell.swift in Sources */,
 				4286833A1B346CFE0028DB2F /* Command.swift in Sources */,
 				428683311B346CFE0028DB2F /* OptionCell.swift in Sources */,
+				420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */,
 				425DED631D2823A600EDF891 /* SegmentedControlCell.swift in Sources */,
 				4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */,
 				42D297551D49579E00561780 /* PrecisionSlider_InnerCollectionViewCells.swift in Sources */,

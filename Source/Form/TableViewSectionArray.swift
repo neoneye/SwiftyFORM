@@ -104,13 +104,15 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 			return
 		}
 		
-		// TODO: remove hardcoded type
-		if responder is DatePickerCell {
-			// We don't want our inline date picker to be collapsed when scrolling
+		if responder is DontCollapseWhenScrolling {
+			// Don't collapse inline controls, such as inline date pickers, 
+			// since there are more screen estate for the user to move around.
 			return
 		}
-		
-		// Collapse the keyboard when scrolling
+
+		// Scenario: A textfield is the first responder and has a visible keyboard
+		// There is little screen estate for the user to find a button to dismiss the keyboard
+		// Thus we want the keyboard to collapse when scrolling.
 		responder.resignFirstResponder()
 	}
 	

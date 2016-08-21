@@ -28,7 +28,7 @@ public class DatePickerCellModel {
 	}
 }
 
-public class DatePickerCell: UITableViewCell, SelectRowDelegate {
+public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling {
 	weak var expandedCell: DatePickerCellExpanded?
 	public let model: DatePickerCellModel
 
@@ -129,7 +129,7 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
-			print("cell is always expanded")
+			//print("cell is always expanded")
 			return
 		}
 
