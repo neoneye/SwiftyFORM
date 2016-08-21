@@ -255,8 +255,8 @@ class PopulateTableView: FormItemVisitor {
 			model.selectionStyle = .None
 		}
 		
-		let cell = PrecisionSliderCell(model: model)
-		let cellExpanded = PrecisionSliderCellExpanded()
+		let cell = PrecisionSliderToggleCell(model: model)
+		let cellExpanded = PrecisionSliderExpandedCell()
 
 		cells.append(cell)
 		switch object.behavior {

@@ -50,8 +50,8 @@ public struct PrecisionSliderCellFormatter {
 }
 
 
-public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, AssignAppearance {
-	weak var expandedCell: PrecisionSliderCellExpanded?
+public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, AssignAppearance {
+	weak var expandedCell: PrecisionSliderExpandedCell?
 	public let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {
@@ -204,8 +204,8 @@ extension PrecisionSliderCellModel {
 	}
 }
 
-public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider, ExpandedCell {
-	weak var collapsedCell: PrecisionSliderCell?
+public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
+	weak var collapsedCell: PrecisionSliderToggleCell?
 
 	public var toggleCell: UITableViewCell? {
 		return collapsedCell
