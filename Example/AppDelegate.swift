@@ -6,7 +6,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-		let vc = DatePickerValueViewController()
+		let vc = FirstViewController()
 		let window = UIWindow(frame: UIScreen.mainScreen().bounds)
 		window.rootViewController = UINavigationController(rootViewController: vc)
 		window.tintColor = nil
