@@ -210,9 +210,17 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 }
 
 
-public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate {
+public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
 	weak var collapsedCell: DatePickerCell?
+
+	public var toggleCell: UITableViewCell? {
+		return collapsedCell
+	}
 	
+	public var isCollapsable: Bool {
+		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
+	}
+
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return DatePickerCellConstants.CellExpanded.height
 	}

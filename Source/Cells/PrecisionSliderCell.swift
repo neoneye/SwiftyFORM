@@ -200,9 +200,18 @@ extension PrecisionSliderCellModel {
 	}
 }
 
-public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider {
+public class PrecisionSliderCellExpanded: UITableViewCell, CellHeightProvider, ExpandedCell {
 	weak var collapsedCell: PrecisionSliderCell?
 
+	public var toggleCell: UITableViewCell? {
+		return collapsedCell
+	}
+	
+	public var isCollapsable: Bool {
+		// TODO: Do I want auto collapse of precision slider cells?
+		return false
+	}
+	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return PrecisionSlider_InnerModel.height
 	}

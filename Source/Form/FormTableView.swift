@@ -14,6 +14,12 @@ public class FormTableView: UITableView {
 	}
 }
 
+public protocol ExpandedCell {
+	var toggleCell: UITableViewCell? { get }
+
+	// `false` when its behavior is AlwaysExpanded, in this case we don't want it collapsed
+	var isCollapsable: Bool { get }
+}
 
 extension TableViewSectionArray {
 
@@ -22,20 +28,21 @@ extension TableViewSectionArray {
 
 		// If the expanded cell already is visible then collapse it
 		let whatToCollapse = WhatToCollapse.process(
+			toggleCell: toggleCell,
 			expandedCell: expandedCell,
-			attemptCollapseAllOtherCells: true,
+			attemptCollapseAllExpandedCells: true,
 			sectionArray: self
 		)
 		print("whatToCollapse: \(whatToCollapse)")
 		
 		if !whatToCollapse.indexPaths.isEmpty {
-
-			for indexPath in whatToCollapse.indexPaths {
-				// TODO: clean up.. don't want to subtract by 1
-				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				assignDefaultColors(indexPath2)
-			}
 			
+			for cell in whatToCollapse.toggleCells {
+				if let cell2 = cell as? AssignAppearance {
+					cell2.assignDefaultColors()
+				}
+			}
+
 			tableView.beginUpdates()
 			tableView.deleteRowsAtIndexPaths(whatToCollapse.indexPaths, withRowAnimation: .Fade)
 			tableView.endUpdates()
@@ -78,46 +85,36 @@ extension TableViewSectionArray {
 		
 		SwiftyFormLog("did expand collapse")
 	}
-	
-	func assignDefaultColors(indexPath: NSIndexPath) {
-		print("assign default colors: \(indexPath)")
-		
-		guard let item = findVisibleItem(indexPath: indexPath) else {
-			print("no visible cell for indexPath: \(indexPath)")
-			return
-		}
-		
-		if let cell = item.cell as? AssignAppearance {
-			cell.assignDefaultColors()
-		}
-	}
 }
 
 
 struct WhatToCollapse {
 	let indexPaths: [NSIndexPath]
+	let toggleCells: [UITableViewCell]
 	let isCollapse: Bool
 	
-	static func process(expandedCell expandedCell: UITableViewCell, attemptCollapseAllOtherCells: Bool, sectionArray: TableViewSectionArray) -> WhatToCollapse {
+	/// If the expanded cell already is visible then collapse it
+	static func process(toggleCell toggleCell: UITableViewCell, expandedCell: UITableViewCell, attemptCollapseAllExpandedCells: Bool, sectionArray: TableViewSectionArray) -> WhatToCollapse {
 		var indexPaths = [NSIndexPath]()
+		var toggleCells = [UITableViewCell]()
 		var isCollapse = false
 		
-		// If the expanded cell already is visible then collapse it
 		for (sectionIndex, section) in sectionArray.sections.enumerate() {
 			for (row, item) in section.cells.visibleItems.enumerate() {
 				if item.cell === expandedCell {
 					item.hidden = true
 					indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+					toggleCells.append(toggleCell)
 					isCollapse = true
 					continue
 				}
-				if attemptCollapseAllOtherCells {
-					if let expandedCell = item.cell as? DatePickerCellExpanded { // TODO: remove hardcoded type
-						if let collapsedCell = expandedCell.collapsedCell {
-							// If it's behavior is AlwaysExpanded, then we don't want it collapsed
-							if collapsedCell.model.expandCollapseWhenSelectingRow {
+				if attemptCollapseAllExpandedCells {
+					if let expandedCell2 = item.cell as? ExpandedCell {
+						if expandedCell2.isCollapsable {
+							if let toggleCell2 = expandedCell2.toggleCell {
 								item.hidden = true
 								indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+								toggleCells.append(toggleCell2)
 							}
 						}
 					}
@@ -128,7 +125,7 @@ struct WhatToCollapse {
 		if !indexPaths.isEmpty {
 			sectionArray.reloadVisibleItems()
 		}
-		return WhatToCollapse(indexPaths: indexPaths, isCollapse: isCollapse)
+		return WhatToCollapse(indexPaths: indexPaths, toggleCells: toggleCells, isCollapse: isCollapse)
 	}
 }
 
@@ -136,7 +133,7 @@ struct WhatToCollapse {
 struct WhatToExpand {
 	let indexPaths: [NSIndexPath]
 	
-	// If the expanded cell is hidden then expand it
+	/// If the expanded cell is hidden then expand it
 	static func process(expandedCell expandedCell: UITableViewCell, sectionArray: TableViewSectionArray, isCollapse: Bool) -> WhatToExpand {
 		
 		if isCollapse {
