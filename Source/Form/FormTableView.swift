@@ -135,36 +135,24 @@ struct WhatToCollapse {
 
 struct WhatToExpand {
 	let indexPaths: [NSIndexPath]
-	let isExpand: Bool
-	let expandedIndexPath: NSIndexPath?
 	
 	static func process(expandedCell expandedCell: UITableViewCell, sectionArray: TableViewSectionArray, isCollapse: Bool) -> WhatToExpand {
 		var indexPaths = [NSIndexPath]()
-		var isExpand = false
-		var expandedIndexPath: NSIndexPath?
 		
 		// If the expanded cell is hidden then expand it
-		for (sectionIndex, section) in sectionArray.sections.enumerate() {
-			var row = 0
-			for item in section.cells.allItems {
-				if !item.hidden {
-					row += 1
-				}
-				if item.cell === expandedCell && isCollapse {
-					continue
-				}
-				if item.cell === expandedCell {
+		if !isCollapse {
+			if let item = sectionArray.findItem(expandedCell) {
+				if item.hidden {
 					item.hidden = false
-					let indexPath = NSIndexPath(forRow: row, inSection: sectionIndex)
-					indexPaths.append(indexPath)
-					isExpand = true
-					expandedIndexPath = indexPath
+					sectionArray.reloadVisibleItems()
+					
+					if let indexPath = sectionArray.indexPathForItem(item) {
+						indexPaths.append(indexPath)
+					}
 				}
 			}
 		}
-		if !indexPaths.isEmpty {
-			sectionArray.reloadVisibleItems()
-		}
-		return WhatToExpand(indexPaths: indexPaths, isExpand: isExpand, expandedIndexPath: expandedIndexPath)
+		
+		return WhatToExpand(indexPaths: indexPaths)
 	}
 }
