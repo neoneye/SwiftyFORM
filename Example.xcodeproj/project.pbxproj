@@ -22,7 +22,7 @@
 		423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */; };
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
-		42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */; };
+		42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */; };
 		42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */; };
 		42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */; };
 		42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */; };
@@ -108,7 +108,7 @@
 		423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerBindingViewController.swift; sourceTree = "<group>"; };
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
-		42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerValueViewController.swift; sourceTree = "<group>"; };
+		42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerInitialValueViewController.swift; sourceTree = "<group>"; };
 		42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
 		42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldKeyboardTypesViewController.swift; sourceTree = "<group>"; };
 		42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReturnKeyViewController.swift; sourceTree = "<group>"; };
@@ -174,9 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */,
+				42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */,
 				42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */,
 				42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */,
-				42589DB11B3447E1007CA8C1 /* DatePickerValueViewController.swift */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -413,7 +413,7 @@
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
-				42589DB81B3447E1007CA8C1 /* DatePickerValueViewController.swift in Sources */,
+				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,

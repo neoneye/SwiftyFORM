@@ -26,7 +26,7 @@ public class FirstViewController: FormViewController {
 		builder += SectionHeaderTitleFormItem().title("DatePicker")
 		builder += ViewControllerFormItem().title("DatePicker With Locale").viewController(DatePickerLocaleViewController.self)
 		builder += ViewControllerFormItem().title("DatePicker With Range").viewController(DatePickerRangeViewController.self)
-		builder += ViewControllerFormItem().title("DatePicker With Initial Value").viewController(DatePickerValueViewController.self)
+		builder += ViewControllerFormItem().title("DatePicker With Initial Value").viewController(DatePickerInitialValueViewController.self)
 		builder += ViewControllerFormItem().title("DatePicker With Bindings").viewController(DatePickerBindingViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("Other")

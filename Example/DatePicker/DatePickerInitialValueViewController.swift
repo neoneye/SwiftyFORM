@@ -2,7 +2,7 @@
 import UIKit
 import SwiftyFORM
 
-class DatePickerValueViewController: FormViewController {
+class DatePickerInitialValueViewController: FormViewController {
 	
 	lazy var datePicker_time_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
