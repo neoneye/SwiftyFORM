@@ -7,7 +7,7 @@ class DatePickerBindingViewController: FormViewController {
 	override func populate(builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
 		builder.toolbarMode = .Simple
-		builder += SectionHeaderTitleFormItem(title: "Manipulate the date")
+		builder += SectionHeaderTitleFormItem(title: "Always expanded")
 		builder += datePicker
 		builder += incrementButton
 		builder += decrementButton
@@ -16,6 +16,8 @@ class DatePickerBindingViewController: FormViewController {
 		builder += summary
 
 		builder += SectionFormItem()
+		builder += StaticTextFormItem().title("Collapse & expand")
+		builder += userName
 		builder += toggleDatePicker0
 		builder += toggleDatePicker1
 		builder += toggleDatePicker2
@@ -80,6 +82,16 @@ class DatePickerBindingViewController: FormViewController {
 		updateSummary()
 	}
 
+	// MARK: Collapse / expand
+	
+	lazy var userName: TextFieldFormItem = {
+		let instance = TextFieldFormItem()
+		instance.title("User Name").placeholder("required")
+		instance.keyboardType = .ASCIICapable
+		instance.autocorrectionType = .No
+		return instance
+	}()
+	
 	lazy var toggleDatePicker0: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title("Toggle 0")
