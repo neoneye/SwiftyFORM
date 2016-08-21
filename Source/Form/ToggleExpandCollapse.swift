@@ -12,16 +12,15 @@ public protocol ExpandedCell {
 
 public struct ToggleExpandCollapse {
 	public static func execute(toggleCell toggleCell: UITableViewCell, expandedCell: UITableViewCell, tableView: UITableView, sectionArray: TableViewSectionArray) {
-		SwiftyFormLog("will expand collapse")
+		//SwiftyFormLog("will expand collapse")
 		
 		// If the expanded cell already is visible then collapse it
 		let whatToCollapse = WhatToCollapse.process(
 			toggleCell: toggleCell,
 			expandedCell: expandedCell,
-			attemptCollapseAllExpandedCells: true,
 			sectionArray: sectionArray
 		)
-		print("whatToCollapse: \(whatToCollapse)")
+		//print("whatToCollapse: \(whatToCollapse)")
 		
 		if !whatToCollapse.indexPaths.isEmpty {
 			
@@ -42,7 +41,7 @@ public struct ToggleExpandCollapse {
 			sectionArray: sectionArray,
 			isCollapse: whatToCollapse.isCollapse
 		)
-		print("whatToExpand: \(whatToExpand)")
+		//print("whatToExpand: \(whatToExpand)")
 		
 		if !whatToExpand.indexPaths.isEmpty {
 			
@@ -59,7 +58,7 @@ public struct ToggleExpandCollapse {
 			CATransaction.setCompletionBlock({
 				// Ensure that the toggleCell and expandedCell are visible
 				if let indexPath = toggleIndexPath {
-					print("scroll to visible: \(indexPath)")
+					//print("scroll to visible: \(indexPath)")
 					tableView.form_scrollToVisibleAfterExpand(indexPath)
 				}
 			})
@@ -71,7 +70,7 @@ public struct ToggleExpandCollapse {
 			CATransaction.commit()
 		}
 		
-		SwiftyFormLog("did expand collapse")
+		//SwiftyFormLog("did expand collapse")
 	}
 }
 
@@ -82,7 +81,7 @@ struct WhatToCollapse {
 	let isCollapse: Bool
 	
 	/// If the expanded cell already is visible then collapse it
-	static func process(toggleCell toggleCell: UITableViewCell, expandedCell: UITableViewCell, attemptCollapseAllExpandedCells: Bool, sectionArray: TableViewSectionArray) -> WhatToCollapse {
+	static func process(toggleCell toggleCell: UITableViewCell, expandedCell: UITableViewCell, sectionArray: TableViewSectionArray) -> WhatToCollapse {
 		var indexPaths = [NSIndexPath]()
 		var toggleCells = [UITableViewCell]()
 		var isCollapse = false
@@ -96,15 +95,11 @@ struct WhatToCollapse {
 					isCollapse = true
 					continue
 				}
-				if attemptCollapseAllExpandedCells {
-					if let expandedCell2 = item.cell as? ExpandedCell {
-						if expandedCell2.isCollapsable {
-							if let toggleCell2 = expandedCell2.toggleCell {
-								item.hidden = true
-								indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
-								toggleCells.append(toggleCell2)
-							}
-						}
+				if let expandedCell2 = item.cell as? ExpandedCell where expandedCell2.isCollapsable {
+					if let toggleCell2 = expandedCell2.toggleCell {
+						item.hidden = true
+						indexPaths.append(NSIndexPath(forRow: row, inSection: sectionIndex))
+						toggleCells.append(toggleCell2)
 					}
 				}
 			}
