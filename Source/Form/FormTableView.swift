@@ -136,23 +136,31 @@ struct WhatToCollapse {
 struct WhatToExpand {
 	let indexPaths: [NSIndexPath]
 	
+	// If the expanded cell is hidden then expand it
 	static func process(expandedCell expandedCell: UITableViewCell, sectionArray: TableViewSectionArray, isCollapse: Bool) -> WhatToExpand {
-		var indexPaths = [NSIndexPath]()
 		
-		// If the expanded cell is hidden then expand it
-		if !isCollapse {
-			if let item = sectionArray.findItem(expandedCell) {
-				if item.hidden {
-					item.hidden = false
-					sectionArray.reloadVisibleItems()
-					
-					if let indexPath = sectionArray.indexPathForItem(item) {
-						indexPaths.append(indexPath)
-					}
-				}
-			}
+		if isCollapse {
+			return WhatToExpand(indexPaths: [])
 		}
 		
-		return WhatToExpand(indexPaths: indexPaths)
+		guard let item = sectionArray.findItem(expandedCell) else {
+			return WhatToExpand(indexPaths: [])
+		}
+		
+		if !item.hidden {
+			return WhatToExpand(indexPaths: [])
+		}
+		
+		// The expanded cell is hidden. Make it visible
+		
+		item.hidden = false
+		sectionArray.reloadVisibleItems()
+		
+		guard let indexPath = sectionArray.indexPathForItem(item) else {
+			print("ERROR: Expected indexPath, but got nil. At this point the item is supposed to be visible")
+			return WhatToExpand(indexPaths: [])
+		}
+		
+		return WhatToExpand(indexPaths: [indexPath])
 	}
 }
