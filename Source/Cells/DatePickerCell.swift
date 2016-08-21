@@ -28,7 +28,7 @@ public class DatePickerCellModel {
 	}
 }
 
-public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling {
+public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: DatePickerCellExpanded?
 	public let model: DatePickerCellModel
 
@@ -60,18 +60,6 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func assignDefaultColors() {
-		textLabel?.textColor = UIColor.blackColor()
-		detailTextLabel?.textColor = UIColor.grayColor()
-	}
-	
-	public func assignTintColors() {
-		let color = self.tintColor
-		SwiftyFormLog("assigning tint color: \(color)")
-		textLabel?.textColor = color
-		detailTextLabel?.textColor = color
-	}
-
 	public func obtainDateStyle(datePickerMode: UIDatePickerMode) -> NSDateFormatterStyle {
 		switch datePickerMode {
 		case .Time:
@@ -204,6 +192,19 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 		}
 	}
 	
+	
+	// MARK: AssignAppearance
+	
+	public func assignDefaultColors() {
+		textLabel?.textColor = UIColor.blackColor()
+		detailTextLabel?.textColor = UIColor.grayColor()
+	}
+	
+	public func assignTintColors() {
+		let color = self.tintColor
+		textLabel?.textColor = color
+		detailTextLabel?.textColor = color
+	}
 }
 
 

@@ -10,6 +10,7 @@
 		42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E711B358A7E0068B084 /* ShowInfo.swift */; };
 		42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E721B358A7E0068B084 /* SubmitButton.swift */; };
 		420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */; };
+		420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */; };
 		42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */; };
 		42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */; };
 		42108D191B34E9F60067FEAA /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0C1B34E9F60067FEAA /* FormItem.swift */; };
@@ -110,6 +111,7 @@
 		42096E711B358A7E0068B084 /* ShowInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowInfo.swift; sourceTree = "<group>"; };
 		42096E721B358A7E0068B084 /* SubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontCollapseWhenScrolling.swift; sourceTree = "<group>"; };
+		420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignAppearance.swift; sourceTree = "<group>"; };
 		42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
 		42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerFormItem.swift; sourceTree = "<group>"; };
 		42108D0C1B34E9F60067FEAA /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */,
+				420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */,
 				42F7521D1D6917CD0014C6ED /* CellDeselector.swift */,
 				4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */,
 				428683091B346CFE0028DB2F /* CellHeightProvider.swift */,
@@ -534,6 +537,7 @@
 				4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */,
 				42D297551D49579E00561780 /* PrecisionSlider_InnerCollectionViewCells.swift in Sources */,
 				42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */,
+				420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */,
 				42108D1F1B34E9F60067FEAA /* StepperFormItem.swift in Sources */,
 				428683401B346CFE0028DB2F /* FormViewController.swift in Sources */,
 				42108D1B1B34E9F60067FEAA /* OptionPickerFormItem.swift in Sources */,

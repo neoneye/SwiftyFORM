@@ -50,7 +50,7 @@ public struct PrecisionSliderCellFormatter {
 }
 
 
-public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate {
+public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, AssignAppearance {
 	weak var expandedCell: PrecisionSliderCellExpanded?
 	public let model: PrecisionSliderCellModel
 
@@ -61,6 +61,7 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		clipsToBounds = true
 		textLabel?.text = model.title
 		reloadValueLabel()
+		assignDefaultColors()
 	}
 	
 	public required init(coder aDecoder: NSCoder) {
@@ -116,6 +117,19 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 		
 		model.valueDidChange(changeModel: changeModel)
 		reloadValueLabel()
+	}
+	
+	// MARK: AssignAppearance
+
+	public func assignDefaultColors() {
+		textLabel?.textColor = UIColor.blackColor()
+		detailTextLabel?.textColor = UIColor.grayColor()
+	}
+	
+	public func assignTintColors() {
+		let color = self.tintColor
+		textLabel?.textColor = color
+		detailTextLabel?.textColor = color
 	}
 }
 

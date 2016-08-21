@@ -89,8 +89,7 @@ public class FormTableView: UITableView {
 			return
 		}
 
-		// TODO: remove hardcoded type DatePickerCell
-		if let cell = item.cell as? DatePickerCell {
+		if let cell = item.cell as? AssignAppearance {
 			cell.assignTintColors()
 		}
 	}
@@ -103,8 +102,7 @@ public class FormTableView: UITableView {
 			return
 		}
 		
-		// TODO: remove hardcoded type DatePickerCell
-		if let cell = item.cell as? DatePickerCell {
+		if let cell = item.cell as? AssignAppearance {
 			cell.assignDefaultColors()
 		}
 	}
