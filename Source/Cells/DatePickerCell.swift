@@ -201,9 +201,8 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 	}
 	
 	public func assignTintColors() {
-		let color = self.tintColor
-		textLabel?.textColor = color
-		detailTextLabel?.textColor = color
+		textLabel?.textColor = tintColor
+		detailTextLabel?.textColor = tintColor
 	}
 }
 
