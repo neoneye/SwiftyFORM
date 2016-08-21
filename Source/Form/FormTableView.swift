@@ -24,7 +24,7 @@ extension TableViewSectionArray {
 		let whatToCollapse = WhatToCollapse.process(
 			expandedCell: expandedCell,
 			attemptCollapseAllOtherCells: true,
-			sections: sections
+			sectionArray: self
 		)
 		print("whatToCollapse: \(whatToCollapse)")
 		
@@ -44,7 +44,7 @@ extension TableViewSectionArray {
 		// If the expanded cell is hidden then expand it
 		let whatToExpand = WhatToExpand.process(
 			expandedCell: expandedCell,
-			sections: sections,
+			sectionArray: self,
 			isCollapse: whatToCollapse.isCollapse
 		)
 		print("whatToExpand: \(whatToExpand)")
@@ -98,12 +98,12 @@ struct WhatToCollapse {
 	let indexPaths: [NSIndexPath]
 	let isCollapse: Bool
 	
-	static func process(expandedCell expandedCell: UITableViewCell, attemptCollapseAllOtherCells: Bool, sections: [TableViewSection]) -> WhatToCollapse {
+	static func process(expandedCell expandedCell: UITableViewCell, attemptCollapseAllOtherCells: Bool, sectionArray: TableViewSectionArray) -> WhatToCollapse {
 		var indexPaths = [NSIndexPath]()
 		var isCollapse = false
 		
 		// If the expanded cell already is visible then collapse it
-		for (sectionIndex, section) in sections.enumerate() {
+		for (sectionIndex, section) in sectionArray.sections.enumerate() {
 			for (row, item) in section.cells.visibleItems.enumerate() {
 				if item.cell === expandedCell {
 					item.hidden = true
@@ -126,9 +126,7 @@ struct WhatToCollapse {
 		}
 		
 		if !indexPaths.isEmpty {
-			for section in sections {
-				section.cells.reloadVisibleItems()
-			}
+			sectionArray.reloadVisibleItems()
 		}
 		return WhatToCollapse(indexPaths: indexPaths, isCollapse: isCollapse)
 	}
@@ -140,13 +138,13 @@ struct WhatToExpand {
 	let isExpand: Bool
 	let expandedIndexPath: NSIndexPath?
 	
-	static func process(expandedCell expandedCell: UITableViewCell, sections: [TableViewSection], isCollapse: Bool) -> WhatToExpand {
+	static func process(expandedCell expandedCell: UITableViewCell, sectionArray: TableViewSectionArray, isCollapse: Bool) -> WhatToExpand {
 		var indexPaths = [NSIndexPath]()
 		var isExpand = false
 		var expandedIndexPath: NSIndexPath?
 		
 		// If the expanded cell is hidden then expand it
-		for (sectionIndex, section) in sections.enumerate() {
+		for (sectionIndex, section) in sectionArray.sections.enumerate() {
 			var row = 0
 			for item in section.cells.allItems {
 				if !item.hidden {
@@ -165,9 +163,7 @@ struct WhatToExpand {
 			}
 		}
 		if !indexPaths.isEmpty {
-			for section in sections {
-				section.cells.reloadVisibleItems()
-			}
+			sectionArray.reloadVisibleItems()
 		}
 		return WhatToExpand(indexPaths: indexPaths, isExpand: isExpand, expandedIndexPath: expandedIndexPath)
 	}

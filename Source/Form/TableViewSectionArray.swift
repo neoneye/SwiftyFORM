@@ -41,6 +41,12 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return nil
 	}
 	
+	func reloadVisibleItems() {
+		for section in sections {
+			section.cells.reloadVisibleItems()
+		}
+	}
+	
 
 	// MARK: UITableViewDataSource, UITableViewDelegate
 	
