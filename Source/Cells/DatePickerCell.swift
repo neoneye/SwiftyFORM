@@ -207,17 +207,22 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate {
 }
 
 
-public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
+public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate {
 	weak var collapsedCell: DatePickerCell?
 	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return DatePickerCellConstants.CellExpanded.height
 	}
-	
+
+	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: NSIndexPath) {
+		if let model = collapsedCell?.model {
+			configure(model)
+		}
+	}
+
 	lazy var datePicker: UIDatePicker = {
 		let instance = UIDatePicker()
 		instance.addTarget(self, action: #selector(DatePickerCellExpanded.valueChanged), forControlEvents: .ValueChanged)
-//		instance.valueDidChange = nil
 		return instance
 	}()
 	
@@ -226,6 +231,7 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 		datePicker.minimumDate = model.minimumDate
 		datePicker.maximumDate = model.maximumDate
 		datePicker.locale = model.resolvedLocale
+		datePicker.date = model.date
 	}
 	
 	public func valueChanged() {
@@ -253,51 +259,5 @@ public class DatePickerCellExpanded: UITableViewCell, CellHeightProvider {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		datePicker.frame = bounds
-		
-//		let tinyDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Float(NSEC_PER_SEC)))
-//		dispatch_after(tinyDelay, dispatch_get_main_queue()) {
-//			self.assignInitialValue()
-//		}
 	}
-	
-//	func assignInitialValue() {
-//		if slider.valueDidChange != nil {
-//			return
-//		}
-//		guard let model = collapsedCell?.model else {
-//			return
-//		}
-//		
-//		slider.zoomUIHidden = !model.zoomUI
-//		
-//		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
-//		slider.model = sliderViewModel
-//		slider.layout.model = sliderViewModel
-//		slider.reloadSlider()
-//		slider.reloadZoomLabel()
-//		
-//		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
-//		let scaledValue = Double(model.value) / decimalScale
-//		
-//		/*
-//		First we scroll to the right offset
-//		Next establish two way binding
-//		*/
-//		slider.value = scaledValue
-//		
-//		slider.valueDidChange = { [weak self] (changeModel: PrecisionSlider.SliderDidChangeModel) in
-//			self?.sliderDidChange(changeModel)
-//		}
-//	}
-	
-//	func setValueWithoutSync(value: Int) {
-//		guard let model = collapsedCell?.model else {
-//			return
-//		}
-//		SwiftyFormLog("set value \(value)")
-//		
-//		let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
-//		let scaledValue = Double(value) / decimalScale
-//		slider.value = scaledValue
-//	}
 }
