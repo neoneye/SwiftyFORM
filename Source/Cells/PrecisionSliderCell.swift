@@ -10,6 +10,7 @@ public class PrecisionSliderCellModel {
 	var initialZoom: Float?
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
+	var collapseWhenResigning = false
 	var selectionStyle = UITableViewCellSelectionStyle.Default
 
 	public struct SliderDidChangeModel {
@@ -111,6 +112,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		
 		if isExpandedCellVisible {
 			resignFirstResponder()
+			collapse()
 		} else {
 			becomeFirstResponder()
 		}
@@ -136,7 +138,9 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	}
 	
 	public override func resignFirstResponder() -> Bool {
-		collapse()
+		if model.collapseWhenResigning {
+			collapse()
+		}
 		return super.resignFirstResponder()
 	}
 	
@@ -274,9 +278,12 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 	}
 	
 	public var isCollapsable: Bool {
-		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
-		// TODO: Do I want auto collapse of precision slider cells?
-//		return false
+		if let cell = collapsedCell {
+			if cell.model.expandCollapseWhenSelectingRow {
+				return cell.model.collapseWhenResigning
+			}
+		}
+		return false
 	}
 	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {

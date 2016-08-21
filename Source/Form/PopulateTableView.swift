@@ -245,6 +245,7 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.initialZoom = object.initialZoom
 		model.zoomUI = object.zoomUI
+		model.collapseWhenResigning = object.collapseWhenResigning
 		
 		switch object.behavior {
 		case .Collapsed, .Expanded:

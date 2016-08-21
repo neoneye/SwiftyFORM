@@ -7,9 +7,9 @@ class SlidersAndTextFieldsViewController: FormViewController {
 		builder.navigationTitle = "Sliders and TextFields"
 		builder.toolbarMode = .Simple
 		builder += textField0
-		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-100).maximumValue(100).value(0).title("Slider 0")
+		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-100).maximumValue(100).value(0).title("Slider 0").shouldCollapseWhenResigning()
 		builder += textField1
-		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-100).maximumValue(100).value(0).title("Slider 1")
+		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-100).maximumValue(100).value(0).title("Slider 1").shouldCollapseWhenResigning()
 		builder += textField2
 	}
 	
