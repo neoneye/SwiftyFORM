@@ -25,7 +25,7 @@ public class FormTableView: UITableView {
 
 extension TableViewSectionArray {
 
-	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell, tableView: FormTableView) {
+	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell, tableView: UITableView) {
 		SwiftyFormLog("will expand collapse")
 
 		// If the expanded cell already is visible then collapse it
