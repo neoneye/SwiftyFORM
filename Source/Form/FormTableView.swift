@@ -17,7 +17,7 @@ public class FormTableView: UITableView {
 
 extension TableViewSectionArray {
 
-	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell, tableView: UITableView) {
+	public func toggleExpandCollapse(toggleCell toggleCell: UITableViewCell, expandedCell: UITableViewCell, tableView: UITableView) {
 		SwiftyFormLog("will expand collapse")
 
 		// If the expanded cell already is visible then collapse it
@@ -51,20 +51,21 @@ extension TableViewSectionArray {
 
 		if !whatToExpand.indexPaths.isEmpty {
 			
-			if let indexPath = whatToExpand.expandedIndexPath {
-				// TODO: clean up.. don't want to subtract by 1
-				let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-				assignTintColors(indexPath2)
+			var toggleIndexPath: NSIndexPath?
+			if let item = findItem(toggleCell) {
+				toggleIndexPath = indexPathForItem(item)
+			}
+			
+			if let cell = toggleCell as? AssignAppearance {
+				cell.assignTintColors()
 			}
 			
 			CATransaction.begin()
 			CATransaction.setCompletionBlock({
-				// Ensure that the expanded row is visible
-				if let indexPath = whatToExpand.expandedIndexPath {
-					// TODO: clean up.. don't want to subtract by 1
-					let indexPath2 = NSIndexPath(forRow: indexPath.row-1, inSection: indexPath.section)
-					print("scroll to visible: \(indexPath2)")
-					tableView.form_scrollToVisibleAfterExpand(indexPath2)
+				// Ensure that the toggleCell and expandedCell are visible
+				if let indexPath = toggleIndexPath {
+					print("scroll to visible: \(indexPath)")
+					tableView.form_scrollToVisibleAfterExpand(indexPath)
 				}
 			})
 
@@ -76,19 +77,6 @@ extension TableViewSectionArray {
 		}
 		
 		SwiftyFormLog("did expand collapse")
-	}
-	
-	func assignTintColors(indexPath: NSIndexPath) {
-		print("assign tint colors: \(indexPath)")
-		
-		guard let item = findVisibleItem(indexPath: indexPath) else {
-			print("no visible cell for indexPath: \(indexPath)")
-			return
-		}
-
-		if let cell = item.cell as? AssignAppearance {
-			cell.assignTintColors()
-		}
 	}
 	
 	func assignDefaultColors(indexPath: NSIndexPath) {
