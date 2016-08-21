@@ -38,6 +38,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
 		builder += ViewControllerFormItem().title("Custom Cells").viewController(CustomViewController.self)
+		builder += ViewControllerFormItem().title("Sliders & TextFields").viewController(SlidersAndTextFieldsViewController.self)
 		builder += ViewControllerFormItem().title("Precision Sliders").viewController(PrecisionSlidersViewController.self)
 		builder += ViewControllerFormItem().title("Work In Progress").viewController(WorkInProgressViewController.self)
 	}

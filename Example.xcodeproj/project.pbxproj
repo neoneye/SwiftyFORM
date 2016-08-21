@@ -10,6 +10,7 @@
 		42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6B1B357CEE0068B084 /* SlidersViewController.swift */; };
 		42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6D1B357ECA0068B084 /* OptionsViewController.swift */; };
 		42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */; };
+		420F6CCF1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */; };
 		42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D251B356C5B0067FEAA /* FirstViewController.swift */; };
 		42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D281B3576110067FEAA /* MaleFemaleViewController.swift */; };
 		42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D291B3576110067FEAA /* RateAppViewController.swift */; };
@@ -96,6 +97,7 @@
 		42096E6B1B357CEE0068B084 /* SlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersViewController.swift; sourceTree = "<group>"; };
 		42096E6D1B357ECA0068B084 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersAndTextFieldsViewController.swift; sourceTree = "<group>"; };
 		42108D251B356C5B0067FEAA /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		42108D281B3576110067FEAA /* MaleFemaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaleFemaleViewController.swift; sourceTree = "<group>"; };
 		42108D291B3576110067FEAA /* RateAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateAppViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
+				420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */,
 				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
 				42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */,
 				42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */,
@@ -403,6 +406,7 @@
 				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
 				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
 				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
+				420F6CCF1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift in Sources */,
 				42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */,
 				42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */,
 				42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */,
