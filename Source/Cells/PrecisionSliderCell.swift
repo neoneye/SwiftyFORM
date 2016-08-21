@@ -73,17 +73,21 @@ public class PrecisionSliderCell: UITableViewCell, CellHeightProvider, SelectRow
 	}
 	
 	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
-		guard let tableView = tableView as? FormTableView else {
+		if model.expandCollapseWhenSelectingRow == false {
+			return
+		}
+		
+		guard let tableView = form_tableView() else {
+			return
+		}
+		guard let sectionArray = tableView.dataSource as? TableViewSectionArray else {
 			return
 		}
 		guard let expandedCell = expandedCell else {
 			return
 		}
-		if model.expandCollapseWhenSelectingRow == false {
-			return
-		}
-		
-		tableView.toggleExpandCollapse(expandedCell: expandedCell)
+		sectionArray.toggleExpandCollapse(expandedCell: expandedCell, tableView: tableView)
+
 
 		form_deselectRow()
 	}

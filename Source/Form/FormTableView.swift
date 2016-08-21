@@ -12,14 +12,6 @@ public class FormTableView: UITableView {
 	public required init(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
-	
-	public func toggleExpandCollapse(expandedCell expandedCell: UITableViewCell) {
-		guard let sectionArray = dataSource as? TableViewSectionArray else {
-			SwiftyFormLog("cannot expand row. The dataSource is nil")
-			return
-		}
-		sectionArray.toggleExpandCollapse(expandedCell: expandedCell, tableView: self)
-	}
 }
 
 

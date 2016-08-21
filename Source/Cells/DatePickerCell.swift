@@ -169,13 +169,16 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 	}
 	
 	func toggleExpandCollapse() {
-		guard let tableView = form_tableView() as? FormTableView else {
+		guard let tableView = form_tableView() else {
+			return
+		}
+		guard let sectionArray = tableView.dataSource as? TableViewSectionArray else {
 			return
 		}
 		guard let expandedCell = expandedCell else {
 			return
 		}
-		tableView.toggleExpandCollapse(expandedCell: expandedCell)
+		sectionArray.toggleExpandCollapse(expandedCell: expandedCell, tableView: tableView)
 	}
 	
 	func expand() {
