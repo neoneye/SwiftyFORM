@@ -178,7 +178,12 @@ public class DatePickerCell: UITableViewCell, SelectRowDelegate, DontCollapseWhe
 		guard let expandedCell = expandedCell else {
 			return
 		}
-		sectionArray.toggleExpandCollapse(toggleCell: self, expandedCell: expandedCell, tableView: tableView)
+		ToggleExpandCollapse.execute(
+			toggleCell: self,
+			expandedCell: expandedCell,
+			tableView: tableView,
+			sectionArray: sectionArray
+		)
 	}
 	
 	func expand() {

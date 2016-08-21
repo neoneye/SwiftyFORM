@@ -12,6 +12,7 @@
 		420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */; };
 		420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */; };
 		420F6CCB1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */; };
+		420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */; };
 		42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */; };
 		42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */; };
 		42108D191B34E9F60067FEAA /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0C1B34E9F60067FEAA /* FormItem.swift */; };
@@ -114,6 +115,7 @@
 		420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontCollapseWhenScrolling.swift; sourceTree = "<group>"; };
 		420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignAppearance.swift; sourceTree = "<group>"; };
 		420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ScrollToVisibleAfterExpand.swift"; sourceTree = "<group>"; };
+		420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleExpandCollapse.swift; sourceTree = "<group>"; };
 		42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
 		42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerFormItem.swift; sourceTree = "<group>"; };
 		42108D0C1B34E9F60067FEAA /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				423E31401D6383FE0048D8C3 /* TableViewSectionArray.swift */,
 				423E31421D6384700048D8C3 /* TableViewSectionPart.swift */,
 				428683151B346CFE0028DB2F /* TitleWidth.swift */,
+				420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */,
 				428683161B346CFE0028DB2F /* ValidateResult.swift */,
 				428683171B346CFE0028DB2F /* ValidateVisitor.swift */,
 				428683111B346CFE0028DB2F /* Validator.swift */,
@@ -581,6 +584,7 @@
 				428683501B346CFE0028DB2F /* PredicateSpecification.swift in Sources */,
 				4286833F1B346CFE0028DB2F /* FormBuilder.swift in Sources */,
 				428683371B346CFE0028DB2F /* TextFieldCell.swift in Sources */,
+				420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */,
 				423E31431D6384700048D8C3 /* TableViewSectionPart.swift in Sources */,
 				42D297591D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift in Sources */,
 				425DED651D28257000EDF891 /* SegmentedControlFormItem.swift in Sources */,
