@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class CustomFormItem: FormItem {
@@ -14,6 +14,6 @@ public class CustomFormItem: FormItem {
 	public var createCell: CreateCell = { _ in throw CustomFormItemError.CouldNotCreate }
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitCustom(self)
+		visitor.visit(self)
 	}
 }

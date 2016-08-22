@@ -39,12 +39,18 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	func commonInit() {
-		addSubview(collectionView)
+		addSubview(collectionViewWrapper)
+		collectionViewWrapper.addSubview(collectionView)
+		
 		addSubview(leftCoverView)
 		addSubview(rightCoverView)
-		addGestureRecognizer(pinchGestureRecognizer)
-		addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
-		addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
+		addSubview(zoomInButton)
+		addSubview(zoomOutButton)
+		addSubview(zoomLabel)
+
+		collectionViewWrapper.addGestureRecognizer(pinchGestureRecognizer)
+		collectionViewWrapper.addGestureRecognizer(oneTouchDoubleTapGestureRecognizer)
+		collectionViewWrapper.addGestureRecognizer(twoTouchDoubleTapGestureRecognizer)
 	}
 	
 	func updateContentInset() {
@@ -74,13 +80,25 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
+		collectionViewWrapper.frame = bounds
 		collectionView.frame = bounds
 		
 		updateContentInset()
+
+		do {
+			let (left, right) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
+			leftCoverView.frame = left.divide(1, fromEdge: .MaxXEdge).remainder
+			rightCoverView.frame = right
+		}
 		
-		let (leftFrame, rightFrame) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
-		leftCoverView.frame = CGRect(x: leftFrame.origin.x, y: leftFrame.origin.y, width: leftFrame.size.width - 1, height: leftFrame.size.height)
-		rightCoverView.frame = rightFrame
+		if !zoomUIHidden {
+			let halfHeight = floor(bounds.height / 2)
+			let right = bounds.divide(halfHeight, fromEdge: .MaxXEdge).slice
+			let (a, b) = right.divide(halfHeight, fromEdge: .MaxYEdge)
+			zoomOutButton.frame = a
+			zoomInButton.frame = b
+			zoomLabel.frame = right
+		}
 	}
 	
 	lazy var leftCoverView: UIView = {
@@ -150,7 +168,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: pinch gesture for zoom in/out
+	// MARK: Pinch gesture for zoom in/out
 	
 	lazy var pinchGestureRecognizer: UIPinchGestureRecognizer = {
 		let instance = UIPinchGestureRecognizer(target: self, action: #selector(PrecisionSlider.handlePinch))
@@ -174,6 +192,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			let zoomAfter = model.zoom
 			
 			if zoomBefore != zoomAfter {
+				reloadZoomLabel()
 				let changeModel = SliderDidChangeModel(
 					value: originalValue,
 					valueUpdated: false,
@@ -186,7 +205,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: one-finger double-tap for zoom in
+	// MARK: Gesture 'one-finger double-tap' for zoom in
 	
 	lazy var oneTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleOneTouchDoubleTap))
@@ -228,6 +247,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
+						self.reloadZoomLabel()
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
@@ -242,7 +262,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 	
 	
-	// MARK: two-finger double-tap for zoom out
+	// MARK: Gesture 'two-finger double-tap' for zoom out
 	
 	lazy var twoTouchDoubleTapGestureRecognizer: UITapGestureRecognizer = {
 		let instance = UITapGestureRecognizer(target: self, action: #selector(PrecisionSlider.handleTwoTouchDoubleTap))
@@ -284,6 +304,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
+						self.reloadZoomLabel()
 						let changeModel = SliderDidChangeModel(
 							value: originalValue,
 							valueUpdated: false,
@@ -297,6 +318,113 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		}
 	}
 
+	
+	// MARK: Zoom UI
+	
+	var zoomUIHidden: Bool {
+		get {
+			return zoomLabel.hidden && zoomInButton.hidden && zoomOutButton.hidden
+		}
+		set {
+			zoomLabel.hidden = newValue
+			zoomInButton.hidden = newValue
+			zoomOutButton.hidden = newValue
+			setNeedsLayout()
+		}
+	}
+	
+
+	// MARK: Zoom UI - Label that shows the current zoom factor
+	
+	lazy var zoomLabel: UILabel = {
+		let instance = UILabel()
+		instance.textColor = UIColor(white: 0.2, alpha: 1.0)
+		instance.text = "0.0"
+		instance.font = UIFont.systemFontOfSize(12)
+		instance.textAlignment = .Center
+		return instance
+	}()
+	
+	func reloadZoomLabel() {
+		zoomLabel.text = String(format: "%.1f", model.zoom)
+	}
+
+
+	// MARK: Zoom UI - Button for zoom in
+	
+	lazy var zoomInButton: UIButton = {
+		let instance = UIButton(type: .Custom)
+		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
+		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.showsTouchWhenHighlighted = true
+		instance.setTitle("+", forState: .Normal)
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), forControlEvents: .TouchUpInside)
+		return instance
+	}()
+	
+	func zoomInButtonAction() {
+		let originalZoom = model.zoom
+		let originalValue = self.value
+		
+		let clampedZoom = model.clampZoom(originalZoom + 1.0)
+		if model.zoom == clampedZoom {
+			return // already zoomed in, no need to update UI
+		}
+		
+		disablePropagation()
+		changeZoom(zoom: clampedZoom, value: originalValue)
+		enablePropagation()
+		
+		reloadZoomLabel()
+		let changeModel = SliderDidChangeModel(
+			value: originalValue,
+			valueUpdated: false,
+			zoom: model.zoom,
+			zoomUpdated: true
+		)
+		valueDidChange?(changeModel: changeModel)
+	}
+	
+	
+	// MARK: Zoom UI - Button for zoom out
+	
+	lazy var zoomOutButton: UIButton = {
+		let instance = UIButton(type: .Custom)
+		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
+		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.showsTouchWhenHighlighted = true
+		instance.setTitle("-", forState: .Normal)
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), forControlEvents: .TouchUpInside)
+		return instance
+	}()
+	
+	func zoomOutButtonAction() {
+		let originalZoom = model.zoom
+		let originalValue = self.value
+		
+		let clampedZoom = model.clampZoom(originalZoom - 1.0)
+		if model.zoom == clampedZoom {
+			return // already zoomed out, no need to update UI
+		}
+		
+		disablePropagation()
+		changeZoom(zoom: clampedZoom, value: originalValue)
+		enablePropagation()
+		
+		reloadZoomLabel()
+		let changeModel = SliderDidChangeModel(
+			value: originalValue,
+			valueUpdated: false,
+			zoom: model.zoom,
+			zoomUpdated: true
+		)
+		valueDidChange?(changeModel: changeModel)
+	}
+	
+
+	
 	func changeZoom(zoom zoom: Float, value: Double) {
 		let clampedZoom = model.clampZoom(zoom)
 		if model.zoom == clampedZoom {
@@ -333,6 +461,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.model = self.model
 		return instance
 	}()
+
+	/**
+	The collectionview is wrapped in a plain UIView, that doesn't do anything.
+	This lets us install custom gesture recognizers for pinch and double-tap.
+	*/
+	lazy var collectionViewWrapper: UIView = {
+		return UIView()
+	}()
 	
 	lazy var collectionView: UICollectionView = {
 		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
@@ -351,6 +487,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		instance.dataSource = self
 		return instance
 	}()
+	
+	
+	// MARK: UICollectionView delegate/datasource
 	
 	func scrollViewDidScroll(scrollView: UIScrollView) {
 		if enablePropagationCounter < 0 {

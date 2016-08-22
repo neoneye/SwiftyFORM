@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -77,11 +77,14 @@ class SignUpViewController: FormViewController {
 		return instance
 		}()
 	
-	func offsetDate(date: NSDate, years: Int) -> NSDate? {
+	func offsetDate(date: NSDate, years: Int) -> NSDate {
 		let dateComponents = NSDateComponents()
 		dateComponents.year = years
 		let calendar = NSCalendar.currentCalendar()
-		return calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0))
+		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+			return date
+		}
+		return resultDate
 	}
 
 	lazy var birthday: DatePickerFormItem = {
@@ -103,7 +106,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var metaData: MetaFormItem = {
 		let instance = MetaFormItem()
-		var dict = Dictionary<String, AnyObject>()
+		var dict = [String: AnyObject]()
 		dict["key0"] = "I'm hidden text"
 		dict["key1"] = "I'm included when exporting to JSON"
 		dict["key2"] = "Can be used to pass extra info along with the JSON"
@@ -128,7 +131,7 @@ class SignUpViewController: FormViewController {
 		return strings[i]
 	}
 	
-	func pickRandomDate() -> NSDate? {
+	func pickRandomDate() -> NSDate {
 		let i = randomInt(20, 60)
 		let today = NSDate()
 		return offsetDate(today, years: -i)
@@ -140,16 +143,16 @@ class SignUpViewController: FormViewController {
 	}
 	
 	func randomize() {
-		userName.value = pickRandom(["john", "Jane", "steve", "Bill", "einstein", "Newton"])
+		userName.value = pickRandom(["john", "jane", "steve", "bill", "einstein", "newton"])
 		password.value = pickRandom(["1234", "0000", "111111", "abc", "111122223333"])
 		email.value = pickRandom(["hello@example.com", "hi@example.com", "feedback@example.com", "unsubscribe@example.com", "not-a-valid-email"])
-		birthday.value = self.pickRandomDate()
+		birthday.value = pickRandomDate()
 		subscribeToNewsletter.value = pickRandomBoolean()
 	}
 	
 	lazy var jsonButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("JSON")
+		instance.title("View JSON")
 		instance.action = { [weak self] in
 			if let vc = self {
 				DebugViewController.showJSON(vc, jsonData: vc.formBuilder.dump())

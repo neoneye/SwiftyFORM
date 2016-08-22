@@ -1,9 +1,9 @@
-// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class SliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitSlider(self)
+		visitor.visit(self)
 	}
 	
 	public var minimumValue: Float = 0.0

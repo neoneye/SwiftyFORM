@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -8,7 +8,7 @@ class ColorPickerViewController: FormViewController {
 		builder.toolbarMode = .None
 
 		builder.demo_showInfo("Tap row to expand/collapse.\nPinch to change precision.\nPan to change value.")
-
+		
 		builder += SectionHeaderTitleFormItem().title("Components")
 		builder += slider0
 		builder += slider1
@@ -73,6 +73,9 @@ class ColorPickerViewController: FormViewController {
 			alpha: 1.0
 		)
 		view?.backgroundColor = color
+		
+		navigationController?.navigationBar.barTintColor = color
+		navigationController?.navigationBar.translucent = false
 	}
 
 	lazy var randomizeButton: ButtonFormItem = {
@@ -94,5 +97,13 @@ class ColorPickerViewController: FormViewController {
 		assignRandomValue(slider2)
 		updateSummary()
 		updateColor()
+	}
+
+	override func viewWillDisappear(animated: Bool) {
+		super.viewWillDisappear(animated)
+		
+		// restore the navigationbar theme when leaving this page
+		navigationController?.navigationBar.barTintColor = nil
+		navigationController?.navigationBar.translucent = true
 	}
 }

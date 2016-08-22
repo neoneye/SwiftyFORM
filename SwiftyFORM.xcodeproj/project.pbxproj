@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E711B358A7E0068B084 /* ShowInfo.swift */; };
 		42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E721B358A7E0068B084 /* SubmitButton.swift */; };
+		420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */; };
+		420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */; };
+		420F6CCB1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */; };
+		420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */; };
 		42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */; };
 		42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */; };
 		42108D191B34E9F60067FEAA /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D0C1B34E9F60067FEAA /* FormItem.swift */; };
@@ -24,6 +28,8 @@
 		42108D231B34E9F60067FEAA /* ViewControllerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */; };
 		4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */; };
 		4229CE0A1D43C450002C28A7 /* PrecisionSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4229CE081D43C386002C28A7 /* PrecisionSliderTests.swift */; };
+		423E31411D6383FE0048D8C3 /* TableViewSectionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E31401D6383FE0048D8C3 /* TableViewSectionArray.swift */; };
+		423E31431D6384700048D8C3 /* TableViewSectionPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E31421D6384700048D8C3 /* TableViewSectionPart.swift */; };
 		4259A2C41C23759B00DB4CEB /* AccessoryButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */; };
 		425DED631D2823A600EDF891 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DED621D2823A600EDF891 /* SegmentedControlCell.swift */; };
 		425DED651D28257000EDF891 /* SegmentedControlFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 425DED641D28257000EDF891 /* SegmentedControlFormItem.swift */; };
@@ -86,6 +92,7 @@
 		42D297571D49611300561780 /* PrecisionSlider_InnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D297561D49611300561780 /* PrecisionSlider_InnerModel.swift */; };
 		42D297591D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D297581D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift */; };
 		42D5DE701A38167400D5C368 /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D5DE651A38167400D5C368 /* SwiftyFORM.framework */; };
+		42F7521E1D6917CD0014C6ED /* CellDeselector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F7521D1D6917CD0014C6ED /* CellDeselector.swift */; };
 		42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC31D4143650066E45A /* PrecisionSlider.swift */; };
 		739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649121D2B6B7400E12A96 /* AttributedTextCell.swift */; };
 		739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */; };
@@ -104,6 +111,10 @@
 /* Begin PBXFileReference section */
 		42096E711B358A7E0068B084 /* ShowInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowInfo.swift; sourceTree = "<group>"; };
 		42096E721B358A7E0068B084 /* SubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DontCollapseWhenScrolling.swift; sourceTree = "<group>"; };
+		420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignAppearance.swift; sourceTree = "<group>"; };
+		420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+ScrollToVisibleAfterExpand.swift"; sourceTree = "<group>"; };
+		420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleExpandCollapse.swift; sourceTree = "<group>"; };
 		42108D0A1B34E9F60067FEAA /* ButtonFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonFormItem.swift; sourceTree = "<group>"; };
 		42108D0B1B34E9F60067FEAA /* DatePickerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerFormItem.swift; sourceTree = "<group>"; };
 		42108D0C1B34E9F60067FEAA /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
@@ -119,6 +130,8 @@
 		42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFormItem.swift; sourceTree = "<group>"; };
 		4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellForRowDelegate.swift; sourceTree = "<group>"; };
 		4229CE081D43C386002C28A7 /* PrecisionSliderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSliderTests.swift; sourceTree = "<group>"; };
+		423E31401D6383FE0048D8C3 /* TableViewSectionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionArray.swift; sourceTree = "<group>"; };
+		423E31421D6384700048D8C3 /* TableViewSectionPart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewSectionPart.swift; sourceTree = "<group>"; };
 		4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessoryButtonDelegate.swift; sourceTree = "<group>"; };
 		425DED621D2823A600EDF891 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
 		425DED641D28257000EDF891 /* SegmentedControlFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlFormItem.swift; sourceTree = "<group>"; };
@@ -184,6 +197,7 @@
 		42D297581D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider_InnerZoomMode.swift; sourceTree = "<group>"; };
 		42D5DE651A38167400D5C368 /* SwiftyFORM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyFORM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D5DE6F1A38167400D5C368 /* SwiftyFORMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyFORMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		42F7521D1D6917CD0014C6ED /* CellDeselector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDeselector.swift; sourceTree = "<group>"; };
 		42FABBC31D4143650066E45A /* PrecisionSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider.swift; sourceTree = "<group>"; };
 		739649121D2B6B7400E12A96 /* AttributedTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextCell.swift; sourceTree = "<group>"; };
 		739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextFormItem.swift; sourceTree = "<group>"; };
@@ -292,9 +306,12 @@
 			isa = PBXGroup;
 			children = (
 				4259A2C31C23759B00DB4CEB /* AccessoryButtonDelegate.swift */,
+				420F6CC81D69C17F009D5F57 /* AssignAppearance.swift */,
+				42F7521D1D6917CD0014C6ED /* CellDeselector.swift */,
 				4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */,
 				428683091B346CFE0028DB2F /* CellHeightProvider.swift */,
 				428683071B346CFE0028DB2F /* Command.swift */,
+				420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */,
 				428683081B346CFE0028DB2F /* DumpVisitor.swift */,
 				4286830C1B346CFE0028DB2F /* FormBuilder.swift */,
 				4286830F1B346CFE0028DB2F /* FormTableView.swift */,
@@ -307,7 +324,10 @@
 				4286830A1B346CFE0028DB2F /* SelectRowDelegate.swift */,
 				42685D4E1D340D99008ABC3D /* TableViewCellArray.swift */,
 				428683101B346CFE0028DB2F /* TableViewSection.swift */,
+				423E31401D6383FE0048D8C3 /* TableViewSectionArray.swift */,
+				423E31421D6384700048D8C3 /* TableViewSectionPart.swift */,
 				428683151B346CFE0028DB2F /* TitleWidth.swift */,
+				420F6CCC1D6A1044009D5F57 /* ToggleExpandCollapse.swift */,
 				428683161B346CFE0028DB2F /* ValidateResult.swift */,
 				428683171B346CFE0028DB2F /* ValidateVisitor.swift */,
 				428683111B346CFE0028DB2F /* Validator.swift */,
@@ -340,6 +360,7 @@
 				42096E711B358A7E0068B084 /* ShowInfo.swift */,
 				42096E721B358A7E0068B084 /* SubmitButton.swift */,
 				428683271B346CFE0028DB2F /* UITableView+PrevNext.swift */,
+				420F6CCA1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift */,
 				428683281B346CFE0028DB2F /* UIView+FirstResponder.swift */,
 				428683291B346CFE0028DB2F /* UIView+LookupCell.swift */,
 				4286832A1B346CFE0028DB2F /* UIView+LookupTableView.swift */,
@@ -489,6 +510,7 @@
 				42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */,
 				42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */,
 				42685D4D1D340733008ABC3D /* PrecisionSliderCell.swift in Sources */,
+				420F6CCB1D69EBAC009D5F57 /* UITableView+ScrollToVisibleAfterExpand.swift in Sources */,
 				4286833B1B346CFE0028DB2F /* DumpVisitor.swift in Sources */,
 				42108D201B34E9F60067FEAA /* SwitchFormItem.swift in Sources */,
 				428683471B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift in Sources */,
@@ -498,6 +520,7 @@
 				42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */,
 				42108D211B34E9F60067FEAA /* TextFieldFormItem.swift in Sources */,
 				428683341B346CFE0028DB2F /* StaticTextCell.swift in Sources */,
+				423E31411D6383FE0048D8C3 /* TableViewSectionArray.swift in Sources */,
 				428683531B346CFE0028DB2F /* DebugViewController.swift in Sources */,
 				428683461B346CFE0028DB2F /* PopulateTableView.swift in Sources */,
 				428683321B346CFE0028DB2F /* OptionViewControllerCell.swift in Sources */,
@@ -513,10 +536,12 @@
 				428683361B346CFE0028DB2F /* SwitchCell.swift in Sources */,
 				4286833A1B346CFE0028DB2F /* Command.swift in Sources */,
 				428683311B346CFE0028DB2F /* OptionCell.swift in Sources */,
+				420F6CC71D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift in Sources */,
 				425DED631D2823A600EDF891 /* SegmentedControlCell.swift in Sources */,
 				4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */,
 				42D297551D49579E00561780 /* PrecisionSlider_InnerCollectionViewCells.swift in Sources */,
 				42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */,
+				420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */,
 				42108D1F1B34E9F60067FEAA /* StepperFormItem.swift in Sources */,
 				428683401B346CFE0028DB2F /* FormViewController.swift in Sources */,
 				42108D1B1B34E9F60067FEAA /* OptionPickerFormItem.swift in Sources */,
@@ -542,6 +567,7 @@
 				4286835C1B346CFE0028DB2F /* UIViewController+Alert.swift in Sources */,
 				428683561B346CFE0028DB2F /* Logging.swift in Sources */,
 				42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */,
+				42F7521E1D6917CD0014C6ED /* CellDeselector.swift in Sources */,
 				428683331B346CFE0028DB2F /* SliderCell.swift in Sources */,
 				428683301B346CFE0028DB2F /* SimpleToolbar.swift in Sources */,
 				42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */,
@@ -554,6 +580,8 @@
 				428683501B346CFE0028DB2F /* PredicateSpecification.swift in Sources */,
 				4286833F1B346CFE0028DB2F /* FormBuilder.swift in Sources */,
 				428683371B346CFE0028DB2F /* TextFieldCell.swift in Sources */,
+				420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */,
+				423E31431D6384700048D8C3 /* TableViewSectionPart.swift in Sources */,
 				42D297591D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift in Sources */,
 				425DED651D28257000EDF891 /* SegmentedControlFormItem.swift in Sources */,
 			);

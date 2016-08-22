@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
 protocol WillPopCommandProtocol {
@@ -67,11 +67,43 @@ class PopulateTableView: FormItemVisitor {
 	}
 	
 	
-	func visitMeta(object: MetaFormItem) {
-		// this item is not visual
+	// MARK: AttributedTextFormItem
+	
+	func visit(object: AttributedTextFormItem) {
+		var model = AttributedTextCellModel()
+		model.titleAttributedText = object.title
+		model.valueAttributedText = object.value
+		let cell = AttributedTextCell(model: model)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: NSAttributedString?) in
+			SwiftyFormLog("sync value \(value)")
+			if let c = weakCell {
+				var m = AttributedTextCellModel()
+				m.titleAttributedText = c.model.titleAttributedText
+				m.valueAttributedText = value
+				c.model = m
+				c.loadWithModel(m)
+			}
+		}
 	}
 
-	func visitCustom(object: CustomFormItem) {
+	
+	// MARK: ButtonFormItem
+	
+	func visit(object: ButtonFormItem) {
+		var model = ButtonCellModel()
+		model.title = object.title
+		model.action = object.action
+		let cell = ButtonCell(model: model)
+		cells.append(cell)
+	}
+	
+
+	// MARK: CustomFormItem
+	
+	func visit(object: CustomFormItem) {
 		let context = CustomFormItem.Context(
 			viewController: model.viewController
 		)
@@ -89,13 +121,324 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitStaticText(object: StaticTextFormItem) {
+	
+	// MARK: DatePickerFormItem
+	
+	func visit(object: DatePickerFormItem) {
+		let model = DatePickerCellModel()
+		model.title = object.title
+		model.toolbarMode = self.model.toolbarMode
+		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
+		model.locale = object.locale
+		model.minimumDate = object.minimumDate
+		model.maximumDate = object.maximumDate
+		model.date = object.value
+		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
+		}
+		
+		let cell = DatePickerToggleCell(model: model)
+		let cellExpanded = DatePickerExpandedCell()
+		
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+
+		cellExpanded.configure(model)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
+			SwiftyFormLog("sync date \(date)")
+			weakCell?.setDateWithoutSync(date, animated: animated)
+		}
+
+		weak var weakObject = object
+		model.valueDidChange = { (date: NSDate) in
+			SwiftyFormLog("value did change \(date)")
+			weakObject?.valueDidChange(date)
+		}
+	}
+	
+	func mapDatePickerMode(mode: DatePickerFormItemMode) -> UIDatePickerMode {
+		switch mode {
+		case .Date: return UIDatePickerMode.Date
+		case .Time: return UIDatePickerMode.Time
+		case .DateAndTime: return UIDatePickerMode.DateAndTime
+		}
+	}
+	
+	
+	// MARK: MetaFormItem
+	
+	func visit(object: MetaFormItem) {
+		// this item is not visual
+	}
+	
+	
+	// MARK: OptionPickerFormItem
+	
+	func visit(object: OptionPickerFormItem) {
+		var model = OptionViewControllerCellModel()
+		model.title = object.title
+		model.placeholder = object.placeholder
+		model.optionField = object
+		model.selectedOptionRow = object.selected
+
+		weak var weakObject = object
+		model.valueDidChange = { (value: OptionRowModel?) in
+			SwiftyFormLog("propagate from cell to model. value \(value)")
+			weakObject?.innerSelected = value
+			weakObject?.valueDidChange(selected: value)
+		}
+		
+		let cell = OptionViewControllerCell(
+			parentViewController: self.model.viewController,
+			model: model
+		)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (selected: OptionRowModel?) in
+			SwiftyFormLog("propagate from model to cell. option: \(selected?.title)")
+			weakCell?.setSelectedOptionRowWithoutPropagation(selected)
+		}
+	}
+	
+	
+	// MARK: OptionRowFormItem
+	
+	func visit(object: OptionRowFormItem) {
+		weak var weakViewController = self.model.viewController
+		let cell = OptionCell(model: object) {
+			SwiftyFormLog("did select option")
+			if let vc = weakViewController {
+				if let x = vc as? SelectOptionDelegate {
+					x.form_willSelectOption(object)
+				}
+			}
+		}
+		cells.append(cell)
+	}
+	
+	
+	// MARK: PrecisionSliderFormItem
+	
+	func visit(object: PrecisionSliderFormItem) {
+		let model = PrecisionSliderCellModel()
+		model.decimalPlaces = object.decimalPlaces
+		model.minimumValue = object.minimumValue
+		model.maximumValue = object.maximumValue
+		model.value = object.value
+		model.title = object.title
+		model.initialZoom = object.initialZoom
+		model.zoomUI = object.zoomUI
+		model.collapseWhenResigning = object.collapseWhenResigning
+		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
+		}
+		
+		let cell = PrecisionSliderToggleCell(model: model)
+		let cellExpanded = PrecisionSliderExpandedCell()
+
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+		
+		weak var weakObject = object
+		model.valueDidChange = { (changeModel: PrecisionSliderCellModel.SliderDidChangeModel) in
+			SwiftyFormLog("value did change \(changeModel.value)")
+			let model = PrecisionSliderFormItem.SliderDidChangeModel(
+				value: changeModel.value,
+				valueUpdated: changeModel.valueUpdated,
+				zoom: changeModel.zoom,
+				zoomUpdated: changeModel.zoomUpdated
+			)
+			weakObject?.sliderDidChange(model)
+		}
+		
+		weak var weakCell = cell
+		weak var weakCellExpanded = cellExpanded
+		object.syncCellWithValue = { (value: Int) in
+			SwiftyFormLog("sync value \(value)")
+			if let model = weakCell?.model {
+				model.value = value
+			}
+			weakCell?.reloadValueLabel()
+			weakCellExpanded?.setValueWithoutSync(value)
+		}
+	}
+	
+	
+	// MARK: SectionFooterTitleFormItem
+	
+	func visit(object: SectionFooterTitleFormItem) {
+		let footerBlock: TableViewSectionPart.CreateBlock = {
+			var footer = TableViewSectionPart.None
+			if let title = object.title {
+				footer = TableViewSectionPart.TitleString(string: title)
+			}
+			return footer
+		}
+		closeSection(footerBlock)
+	}
+	
+	
+	// MARK: SectionFooterViewFormItem
+	
+	func visit(object: SectionFooterViewFormItem) {
+		let footerBlock: TableViewSectionPart.CreateBlock = {
+			let view: UIView? = object.viewBlock?()
+			var item = TableViewSectionPart.None
+			if let view = view {
+				item = TableViewSectionPart.TitleView(view: view)
+			}
+			return item
+		}
+		closeSection(footerBlock)
+	}
+	
+	
+	// MARK: SectionFormItem
+	
+	func visit(object: SectionFormItem) {
+		let footerBlock: TableViewSectionPart.CreateBlock = {
+			return TableViewSectionPart.None
+		}
+		closeSection(footerBlock)
+	}
+	
+	
+	// MARK: SectionHeaderTitleFormItem
+	
+	func visit(object: SectionHeaderTitleFormItem) {
+		if cells.count > 0 || self.headerBlock != nil {
+			let footerBlock: TableViewSectionPart.CreateBlock = {
+				return TableViewSectionPart.None
+			}
+			closeSection(footerBlock)
+		}
+
+		self.headerBlock = {
+			var item = TableViewSectionPart.None
+			if let title = object.title {
+				item = TableViewSectionPart.TitleString(string: title)
+			}
+			return item
+		}
+	}
+	
+	
+	// MARK: SectionHeaderViewFormItem
+	
+	func visit(object: SectionHeaderViewFormItem) {
+		if cells.count > 0 || self.headerBlock != nil {
+			let footerBlock: TableViewSectionPart.CreateBlock = {
+				return TableViewSectionPart.None
+			}
+			closeSection(footerBlock)
+		}
+
+		self.headerBlock = {
+			let view: UIView? = object.viewBlock?()
+			var item = TableViewSectionPart.None
+			if let view = view {
+				item = TableViewSectionPart.TitleView(view: view)
+			}
+			return item
+		}
+	}
+	
+	
+	// MARK: SegmentedControlFormItem
+	
+	func visit(object: SegmentedControlFormItem) {
+		var model = SegmentedControlCellModel()
+		model.title = object.title
+		model.items = object.items
+		model.value = object.selected
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Int) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.valueDidChange(value)
+			return
+		}
+		
+		let cell = SegmentedControlCell(model: model)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Int) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value)
+			return
+		}
+	}
+	
+	
+	// MARK: SliderFormItem
+	
+	func visit(object: SliderFormItem) {
+		var model = SliderCellModel()
+		model.minimumValue = object.minimumValue
+		model.maximumValue = object.maximumValue
+		model.value = object.value
+		
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Float) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.sliderDidChange(value)
+			return
+		}
+		
+		let cell = SliderCell(model: model)
+		cells.append(cell)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Float, animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+			return
+		}
+	}
+	
+	
+	// MARK: StaticTextFormItem
+	
+	func visit(object: StaticTextFormItem) {
 		var model = StaticTextCellModel()
 		model.title = object.title
 		model.value = object.value
 		let cell = StaticTextCell(model: model)
 		cells.append(cell)
-
+		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
 			SwiftyFormLog("sync value \(value)")
@@ -108,28 +451,70 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 	}
-    
-    func visitAttributedText(object: AttributedTextFormItem) {
-        var model = AttributedTextCellModel()
-        model.titleAttributedText = object.title
-        model.valueAttributedText = object.value
-        let cell = AttributedTextCell(model: model)
-        cells.append(cell)
-        
-        weak var weakCell = cell
-        object.syncCellWithValue = { (value: NSAttributedString?) in
-            SwiftyFormLog("sync value \(value)")
-            if let c = weakCell {
-                var m = AttributedTextCellModel()
-                m.titleAttributedText = c.model.titleAttributedText
-                m.valueAttributedText = value
-                c.model = m
-                c.loadWithModel(m)
-            }
-        }
-    }
 	
-	func visitTextField(object: TextFieldFormItem) {
+	
+	// MARK: StepperFormItem
+	
+	func visit(object: StepperFormItem) {
+		var model = StepperCellModel()
+		model.title = object.title
+		model.value = object.value
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Int) in
+			SwiftyFormLog("value \(value)")
+			weakObject?.innerValue = value
+			return
+		}
+		
+		let cell = StepperCell(model: model)
+		cells.append(cell)
+		
+		SwiftyFormLog("will assign value \(object.value)")
+		cell.setValueWithoutSync(object.value, animated: true)
+		SwiftyFormLog("did assign value \(object.value)")
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Int, animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+			return
+		}
+	}
+	
+	
+	// MARK: SwitchFormItem
+	
+	func visit(object: SwitchFormItem) {
+		var model = SwitchCellModel()
+		model.title = object.title
+		
+		weak var weakObject = object
+		model.valueDidChange = { (value: Bool) in
+			SwiftyFormLog("value did change \(value)")
+			weakObject?.switchDidChange(value)
+			return
+		}
+		
+		let cell = SwitchCell(model: model)
+		cells.append(cell)
+		
+		SwiftyFormLog("will assign value \(object.value)")
+		cell.setValueWithoutSync(object.value, animated: false)
+		SwiftyFormLog("did assign value \(object.value)")
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: Bool, animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+			return
+		}
+	}
+	
+	
+	// MARK: TextFieldFormItem
+	
+	func visit(object: TextFieldFormItem) {
 		var model = TextFieldFormItemCellModel()
 		model.toolbarMode = self.model.toolbarMode
 		model.title = object.title
@@ -170,7 +555,7 @@ class PopulateTableView: FormItemVisitor {
 			}
 			return 0
 		}
-
+		
 		object.assignTitleWidth = { (width: CGFloat) in
 			if let cell = weakCell {
 				cell.titleWidthMode = TextFieldFormItemCell.TitleWidthMode.Assign(width: width)
@@ -179,7 +564,10 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 	
-	func visitTextView(object: TextViewFormItem) {
+	
+	// MARK: TextViewFormItem
+	
+	func visit(object: TextViewFormItem) {
 		var model = TextViewCellModel()
 		model.toolbarMode = self.model.toolbarMode
 		model.title = object.title
@@ -193,7 +581,7 @@ class PopulateTableView: FormItemVisitor {
 		let cell = TextViewCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)
-
+		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
 			SwiftyFormLog("sync value \(value)")
@@ -201,8 +589,11 @@ class PopulateTableView: FormItemVisitor {
 			return
 		}
 	}
-
-	func visitViewController(object: ViewControllerFormItem) {
+	
+	
+	// MARK: ViewControllerFormItem
+	
+	func visit(object: ViewControllerFormItem) {
 		let model = ViewControllerFormItemCellModel(title: object.title, placeholder: object.placeholder)
 		let willPopViewController = WillPopCustomViewController(object: object)
 		
@@ -230,301 +621,5 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		return command
-	}
-
-	func visitOptionPicker(object: OptionPickerFormItem) {
-		var model = OptionViewControllerCellModel()
-		model.title = object.title
-		model.placeholder = object.placeholder
-		model.optionField = object
-		model.selectedOptionRow = object.selected
-
-		weak var weakObject = object
-		model.valueDidChange = { (value: OptionRowModel?) in
-			SwiftyFormLog("propagate from cell to model. value \(value)")
-			weakObject?.innerSelected = value
-			weakObject?.valueDidChange(selected: value)
-		}
-		
-		let cell = OptionViewControllerCell(
-			parentViewController: self.model.viewController,
-			model: model
-		)
-		cells.append(cell)
-		
-		weak var weakCell = cell
-		object.syncCellWithValue = { (selected: OptionRowModel?) in
-			SwiftyFormLog("propagate from model to cell. option: \(selected?.title)")
-			weakCell?.setSelectedOptionRowWithoutPropagation(selected)
-		}
-	}
-	
-	func mapDatePickerMode(mode: DatePickerFormItemMode) -> UIDatePickerMode {
-		switch mode {
-		case .Date: return UIDatePickerMode.Date
-		case .Time: return UIDatePickerMode.Time
-		case .DateAndTime: return UIDatePickerMode.DateAndTime
-		}
-	}
-	
-	func visitDatePicker(object: DatePickerFormItem) {
-		var model = DatePickerCellModel()
-		model.title = object.title
-		model.toolbarMode = self.model.toolbarMode
-		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
-		model.locale = object.locale
-		model.minimumDate = object.minimumDate
-		model.maximumDate = object.maximumDate
-		
-		weak var weakObject = object
-		model.valueDidChange = { (date: NSDate) in
-			SwiftyFormLog("value did change \(date)")
-			weakObject?.innerValue = date
-			return
-		}
-		
-		let cell = DatePickerCell(model: model)
-		
-		SwiftyFormLog("will assign date \(object.value)")
-		cell.setDateWithoutSync(object.value, animated: false)
-		SwiftyFormLog("did assign date \(object.value)")
-		cells.append(cell)
-		
-		weak var weakCell = cell
-		object.syncCellWithValue = { (date: NSDate?, animated: Bool) in
-			SwiftyFormLog("sync date \(date)")
-			weakCell?.setDateWithoutSync(date, animated: animated)
-			return
-		}
-	}
-	
-	func visitButton(object: ButtonFormItem) {
-		var model = ButtonCellModel()
-		model.title = object.title
-		model.action = object.action
-		let cell = ButtonCell(model: model)
-		cells.append(cell)
-	}
-
-	func visitOptionRow(object: OptionRowFormItem) {
-		weak var weakViewController = self.model.viewController
-		let cell = OptionCell(model: object) {
-			SwiftyFormLog("did select option")
-			if let vc = weakViewController {
-				if let x = vc as? SelectOptionDelegate {
-					x.form_willSelectOption(object)
-				}
-			}
-		}
-		cells.append(cell)
-	}
-	
-	func visitSwitch(object: SwitchFormItem) {
-		var model = SwitchCellModel()
-		model.title = object.title
-		
-		weak var weakObject = object
-		model.valueDidChange = { (value: Bool) in
-			SwiftyFormLog("value did change \(value)")
-			weakObject?.switchDidChange(value)
-			return
-		}
-
-		let cell = SwitchCell(model: model)
-		cells.append(cell)
-
-		SwiftyFormLog("will assign value \(object.value)")
-		cell.setValueWithoutSync(object.value, animated: false)
-		SwiftyFormLog("did assign value \(object.value)")
-
-		weak var weakCell = cell
-		object.syncCellWithValue = { (value: Bool, animated: Bool) in
-			SwiftyFormLog("sync value \(value)")
-			weakCell?.setValueWithoutSync(value, animated: animated)
-			return
-		}
-	}
-	
-	func visitStepper(object: StepperFormItem) {
-		var model = StepperCellModel()
-		model.title = object.title
-		model.value = object.value
-
-		weak var weakObject = object
-		model.valueDidChange = { (value: Int) in
-			SwiftyFormLog("value \(value)")
-			weakObject?.innerValue = value
-			return
-		}
-
-		let cell = StepperCell(model: model)
-		cells.append(cell)
-
-		SwiftyFormLog("will assign value \(object.value)")
-		cell.setValueWithoutSync(object.value, animated: true)
-		SwiftyFormLog("did assign value \(object.value)")
-
-		weak var weakCell = cell
-		object.syncCellWithValue = { (value: Int, animated: Bool) in
-			SwiftyFormLog("sync value \(value)")
-			weakCell?.setValueWithoutSync(value, animated: animated)
-			return
-		}
-	}
-
-	func visitSlider(object: SliderFormItem) {
-		var model = SliderCellModel()
-		model.minimumValue = object.minimumValue
-		model.maximumValue = object.maximumValue
-		model.value = object.value
-
-		
-		weak var weakObject = object
-		model.valueDidChange = { (value: Float) in
-			SwiftyFormLog("value did change \(value)")
-			weakObject?.sliderDidChange(value)
-			return
-		}
-
-		let cell = SliderCell(model: model)
-		cells.append(cell)
-
-		weak var weakCell = cell
-		object.syncCellWithValue = { (value: Float, animated: Bool) in
-			SwiftyFormLog("sync value \(value)")
-			weakCell?.setValueWithoutSync(value, animated: animated)
-			return
-		}
-	}
-	
-	func visitPrecisionSlider(object: PrecisionSliderFormItem) {
-		let model = PrecisionSliderCellModel()
-		model.decimalPlaces = object.decimalPlaces
-		model.minimumValue = object.minimumValue
-		model.maximumValue = object.maximumValue
-		model.value = object.value
-		model.title = object.title
-		model.initialZoom = object.initialZoom
-		
-		let cell = PrecisionSliderCell(model: model)
-		let cellExpanded = PrecisionSliderCellExpanded()
-
-		cells.append(cell)
-		cells.appendHidden(cellExpanded)
-		
-		cellExpanded.collapsedCell = cell
-		cell.expandedCell = cellExpanded
-		
-		weak var weakObject = object
-		model.valueDidChange = { (changeModel: PrecisionSliderCellModel.SliderDidChangeModel) in
-			SwiftyFormLog("value did change \(changeModel.value)")
-			let model = PrecisionSliderFormItem.SliderDidChangeModel(
-				value: changeModel.value,
-				valueUpdated: changeModel.valueUpdated,
-				zoom: changeModel.zoom,
-				zoomUpdated: changeModel.zoomUpdated
-			)
-			weakObject?.sliderDidChange(model)
-		}
-		
-		weak var weakCell = cell
-		weak var weakCellExpanded = cellExpanded
-		object.syncCellWithValue = { (value: Int) in
-			SwiftyFormLog("sync value \(value)")
-			if let model = weakCell?.model {
-				model.value = value
-			}
-			weakCell?.reloadValueLabel()
-			weakCellExpanded?.setValueWithoutSync(value)
-		}
-	}
-	
-	func visitSection(object: SectionFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.None
-		}
-		closeSection(footerBlock)
-	}
-
-	func visitSectionHeaderTitle(object: SectionHeaderTitleFormItem) {
-		if cells.count > 0 || self.headerBlock != nil {
-			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
-			}
-			closeSection(footerBlock)
-		}
-
-		self.headerBlock = {
-			var item = TableViewSectionPart.None
-			if let title = object.title {
-				item = TableViewSectionPart.TitleString(string: title)
-			}
-			return item
-		}
-	}
-	
-	func visitSectionHeaderView(object: SectionHeaderViewFormItem) {
-		if cells.count > 0 || self.headerBlock != nil {
-			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
-			}
-			closeSection(footerBlock)
-		}
-
-		self.headerBlock = {
-			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
-			if let view = view {
-				item = TableViewSectionPart.TitleView(view: view)
-			}
-			return item
-		}
-	}
-
-	func visitSectionFooterTitle(object: SectionFooterTitleFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			var footer = TableViewSectionPart.None
-			if let title = object.title {
-				footer = TableViewSectionPart.TitleString(string: title)
-			}
-			return footer
-		}
-		closeSection(footerBlock)
-	}
-	
-	func visitSectionFooterView(object: SectionFooterViewFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
-			if let view = view {
-				item = TableViewSectionPart.TitleView(view: view)
-			}
-			return item
-		}
-		closeSection(footerBlock)
-	}
-	
-	func visitSegmentedControl(object: SegmentedControlFormItem) {
-		var model = SegmentedControlCellModel()
-		model.title = object.title
-		model.items = object.items
-		model.value = object.selected
-		
-		weak var weakObject = object
-		model.valueDidChange = { (value: Int) in
-			SwiftyFormLog("value did change \(value)")
-			weakObject?.valueDidChange(value)
-			return
-		}
-		
-		let cell = SegmentedControlCell(model: model)
-		cells.append(cell)
-		
-		weak var weakCell = cell
-		object.syncCellWithValue = { (value: Int) in
-			SwiftyFormLog("sync value \(value)")
-			weakCell?.setValueWithoutSync(value)
-			return
-		}
 	}
 }

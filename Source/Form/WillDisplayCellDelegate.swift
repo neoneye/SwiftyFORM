@@ -1,6 +1,6 @@
-// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-@objc public protocol WillDisplayCellDelegate {
+public protocol WillDisplayCellDelegate {
 	func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: NSIndexPath)
 }

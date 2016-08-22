@@ -1,6 +1,6 @@
-// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-@objc public protocol CellHeightProvider {
+public protocol CellHeightProvider {
 	func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat
 }

@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
-class TextViewValidationViewController: FormViewController {
+class TextViewViewController: FormViewController {
 
 	override func populate(builder: FormBuilder) {
-		builder.navigationTitle = "Validation"
+		builder.navigationTitle = "TextViews"
 		builder += longSummary
 		builder += notes
 		builder += commentArea

@@ -1,10 +1,14 @@
-[![License](https://img.shields.io/badge/license-MIT-gray.svg)](http://cocoadocs.org/docsets/SwiftForms)
-[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoadocs.org/docsets/SwiftForms)
+[![License](https://img.shields.io/badge/license-MIT-gray.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
+[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 # SwiftyFORM
 
+![SwiftyFORM logo](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png)
+
 SwiftyFORM is a form framework for iOS written in Swift.
+
+Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tree/develop) branch.
 
 
 ## Features
@@ -27,17 +31,17 @@ SwiftyFORM is a form framework for iOS written in Swift.
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
 
-CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
 ```
 
-To integrate SwiftForms into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate SwiftyFORM into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 pod 'SwiftyFORM'
@@ -55,7 +59,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 0.9
+github "neoneye/SwiftyFORM" ~> 0.10
 ```
 
 Then, run the following command:
@@ -124,7 +128,6 @@ class ChangePasswordViewController: FormViewController {
 }
 ```
 
+# 📄 CHANGE LOG
 
-# MIT LICENSE
-
-SwiftyFORM is released under the MIT license. See LICENSE for details.
+### See [changelog.md](https://github.com/neoneye/SwiftyFORM/blob/master/changelog.md) 👀

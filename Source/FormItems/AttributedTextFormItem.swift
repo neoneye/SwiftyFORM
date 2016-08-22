@@ -3,7 +3,7 @@ import Foundation
 
 public class AttributedTextFormItem: FormItem {
     override func accept(visitor: FormItemVisitor) {
-        visitor.visitAttributedText(self)
+        visitor.visit(self)
     }
     
 	public var title: NSAttributedString?

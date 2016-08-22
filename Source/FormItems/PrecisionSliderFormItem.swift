@@ -3,7 +3,7 @@ import Foundation
 
 public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitPrecisionSlider(self)
+		visitor.visit(self)
 	}
 	
 	public var title: String = ""
@@ -12,7 +12,24 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 
-	/** 
+	public enum Behavior {
+		case Collapsed
+		case Expanded
+		case ExpandedAlways
+	}
+	public var behavior = Behavior.Collapsed
+	public func behavior(behavior: Behavior) -> Self {
+		self.behavior = behavior
+		return self
+	}
+	
+	public var collapseWhenResigning = false
+	public func shouldCollapseWhenResigning() -> Self {
+		self.collapseWhenResigning = true
+		return self
+	}
+	
+	/**
 	Initial zoom factor
 	
 	Automatically determines the best zoom when `initialZoom` is nil
@@ -39,7 +56,7 @@ public class PrecisionSliderFormItem: FormItem {
 	/**
 	Number of decimal places
 	
-	The number can be from 0 to +5.
+	The number can go from 0 to +5.
 	*/
 	public var decimalPlaces: UInt = 3  {
 		willSet {
@@ -63,6 +80,11 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 	
+	public var zoomUI = false
+	public func enableZoomUI() -> Self {
+		self.zoomUI = true
+		return self
+	}
 	
 	typealias SyncBlock = (value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in

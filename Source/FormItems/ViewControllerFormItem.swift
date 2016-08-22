@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2015 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class ViewControllerFormItemPopContext {
@@ -17,7 +17,7 @@ public class ViewControllerFormItemPopContext {
 
 public class ViewControllerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visitViewController(self)
+		visitor.visit(self)
 	}
 	
 	public var placeholder: String = ""
