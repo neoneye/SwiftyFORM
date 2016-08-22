@@ -152,7 +152,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var jsonButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("JSON")
+		instance.title("View JSON")
 		instance.action = { [weak self] in
 			if let vc = self {
 				DebugViewController.showJSON(vc, jsonData: vc.formBuilder.dump())
