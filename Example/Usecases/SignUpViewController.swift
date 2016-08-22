@@ -143,7 +143,7 @@ class SignUpViewController: FormViewController {
 	}
 	
 	func randomize() {
-		userName.value = pickRandom(["john", "Jane", "steve", "Bill", "einstein", "Newton"])
+		userName.value = pickRandom(["john", "jane", "steve", "bill", "einstein", "newton"])
 		password.value = pickRandom(["1234", "0000", "111111", "abc", "111122223333"])
 		email.value = pickRandom(["hello@example.com", "hi@example.com", "feedback@example.com", "unsubscribe@example.com", "not-a-valid-email"])
 		birthday.value = pickRandomDate()
