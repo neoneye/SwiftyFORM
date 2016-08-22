@@ -129,8 +129,3 @@ class ChangePasswordViewController: FormViewController {
 # 📄 CHANGE LOG
 
 ### See [changelog.md](https://github.com/neoneye/SwiftyFORM/blob/master/changelog.md) 👀
-
-
-# MIT LICENSE
-
-SwiftyFORM is released under the MIT license. See LICENSE for details.
