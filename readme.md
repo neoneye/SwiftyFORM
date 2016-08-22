@@ -31,7 +31,7 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
 
-CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+You can install it with the following command:
 
 ```bash
 $ gem install cocoapods
