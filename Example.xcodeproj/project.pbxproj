@@ -21,6 +21,7 @@
 		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; };
 		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; };
 		423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */; };
+		4244C6941D6B864600FE1ECB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */; };
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
 		42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */; };
@@ -38,7 +39,6 @@
 		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
-		42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */; };
 		42D005151B9631F400986B3B /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005131B9631F400986B3B /* LoadingCell.swift */; };
 		42D005161B9631F400986B3B /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D005141B9631F400986B3B /* LoadingCell.xib */; };
 		42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005191B96395D00986B3B /* CustomViewController.swift */; };
@@ -108,6 +108,7 @@
 		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
 		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
 		423E313D1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerBindingViewController.swift; sourceTree = "<group>"; };
+		4244C6931D6B864600FE1ECB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
 		42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerInitialValueViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		42CEBF991A3BA2B50048E072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42CEBFA11A3BA2B50048E072 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		42CEBFA41A3BA2B50048E072 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		42D005131B9631F400986B3B /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		42D005141B9631F400986B3B /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		42D005191B96395D00986B3B /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 				42589DAE1B3447E1007CA8C1 /* DatePicker */,
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
-				42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */,
+				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
 				42589DC21B3447EA007CA8C1 /* Other */,
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
@@ -384,8 +384,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D005161B9631F400986B3B /* LoadingCell.xib in Resources */,
-				42CEBFA51A3BA2B50048E072 /* LaunchScreen.xib in Resources */,
 				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
+				4244C6941D6B864600FE1ECB /* LaunchScreen.storyboard in Resources */,
 				423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,12 +449,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		42CEBFA31A3BA2B50048E072 /* LaunchScreen.xib */ = {
+		4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				42CEBFA41A3BA2B50048E072 /* Base */,
+				4244C6931D6B864600FE1ECB /* Base */,
 			);
-			name = LaunchScreen.xib;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
