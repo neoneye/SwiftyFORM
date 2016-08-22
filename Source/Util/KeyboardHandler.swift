@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2014 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
 /// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell
