@@ -2,18 +2,20 @@
 import Foundation
 
 public class DumpVisitor: FormItemVisitor {
+	private typealias StringToAnyObject = [String: AnyObject]
+	
 	public init() {
 	}
 	
 	class func dump(prettyPrinted: Bool = true, items: [FormItem]) -> NSData {
-		var result = [Dictionary<String, AnyObject>]()
+		var result = [StringToAnyObject]()
 		var rowNumber: Int = 0
 		for item in items {
 			let dumpVisitor = DumpVisitor()
 			item.accept(dumpVisitor)
 			
 			
-			var dict = Dictionary<String, AnyObject>()
+			var dict = StringToAnyObject()
 			dict["row"] = rowNumber
 			
 			let validateVisitor = ValidateVisitor()
@@ -45,7 +47,7 @@ public class DumpVisitor: FormItemVisitor {
 		return NSData()
 	}
 	
-	private var dict = Dictionary<String, AnyObject>()
+	private var dict = StringToAnyObject()
 	
 	public func visit(object: MetaFormItem) {
 		dict["class"] = "MetaFormItem"

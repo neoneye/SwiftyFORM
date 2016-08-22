@@ -106,7 +106,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var metaData: MetaFormItem = {
 		let instance = MetaFormItem()
-		var dict = Dictionary<String, AnyObject>()
+		var dict = [String: AnyObject]()
 		dict["key0"] = "I'm hidden text"
 		dict["key1"] = "I'm included when exporting to JSON"
 		dict["key2"] = "Can be used to pass extra info along with the JSON"
