@@ -6,6 +6,8 @@
 
 SwiftyFORM is a form framework for iOS written in Swift.
 
+![SwiftyFORM logo](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png)
+
 
 ## Features
 
