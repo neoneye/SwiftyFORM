@@ -41,7 +41,7 @@ To integrate SwiftyFORM into your Xcode project using CocoaPods, specify it in y
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 pod 'SwiftyFORM'
@@ -59,7 +59,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 0.9
+github "neoneye/SwiftyFORM" ~> 0.10
 ```
 
 Then, run the following command:
