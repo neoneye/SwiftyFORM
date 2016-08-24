@@ -28,6 +28,14 @@ public class DatePickerCellModel {
 	}
 }
 
+
+/**
+# Date picker toggle-cell
+
+### Tap this row to toggle
+
+This causes the inline date picker to expand/collapse
+*/
 public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: DatePickerExpandedCell?
 	public let model: DatePickerCellModel
@@ -215,6 +223,11 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 }
 
 
+/**
+# Date picker expanded-cell
+
+Row containing only a `UIDatePicker`
+*/
 public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
 	weak var collapsedCell: DatePickerToggleCell?
 
