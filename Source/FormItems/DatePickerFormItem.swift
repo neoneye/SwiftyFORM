@@ -37,16 +37,16 @@ public class DatePickerFormItem: FormItem {
 	### Collapsed
 	
 	When the `behavior` is set to `Collapsed` then
-	date picker starts out being hidden.
+	the date picker starts out being hidden.
 	
 	The user has to tap the row to expand it.
-	This will cause other inline date pickers to collapse.
+	This will collapse other inline date pickers.
 	
 
 	### Expanded
 	
 	When the `behavior` is set to `Expanded` then
-	date picker starts out being visible.
+	the date picker starts out being visible.
 	
 	The user has to tap the row to collapse it.
 	Or if another control becomes first respond this will collapse it.
