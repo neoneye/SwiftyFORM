@@ -16,9 +16,9 @@ public class PickerViewCellModel {
 	
 	var titles = [[String]]()
 	
-//	var valueDidChange: NSDate -> Void = { (date: NSDate) in
-//		SwiftyFormLog("date \(date)")
-//	}
+	var valueDidChange: [Int] -> Void = { (selectedRows: [Int]) in
+		SwiftyFormLog("selectedRows \(selectedRows)")
+	}
 }
 
 
@@ -214,12 +214,20 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 			return
 		}
 		let model = collapsedCell.model
+		
+		var selectedRows = [Int]()
+		for (component, _) in titles.enumerate() {
+			let row: Int = pickerView.selectedRowInComponent(component)
+			selectedRows.append(row)
+		}
+		print("selected rows: \(selectedRows)")
+		
 //		let date = datePicker.date
 //		model.date = date
 //		
 //		collapsedCell.updateValue()
-//		
-//		model.valueDidChange(date)
+		
+		model.valueDidChange(selectedRows)
 	}
 	
 	public init() {
@@ -251,25 +259,6 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	}
 	
 	public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		print("picked \(row) \(component)")
+		valueChanged()
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
