@@ -14,6 +14,8 @@ public class PickerViewCellModel {
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.Default
 	
+	var titles = [[String]]()
+	
 //	var valueDidChange: NSDate -> Void = { (date: NSDate) in
 //		SwiftyFormLog("date \(date)")
 //	}
@@ -199,12 +201,11 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		return instance
 	}()
 	
+	var titles = [[String]]()
+	
 	func configure(model: PickerViewCellModel) {
-//		pickerView.datePickerMode = model.datePickerMode
-//		pickerView.minimumDate = model.minimumDate
-//		pickerView.maximumDate = model.maximumDate
-//		pickerView.locale = model.resolvedLocale
-//		pickerView.date = model.date
+		titles = model.titles
+		pickerView.reloadAllComponents()
 	}
 	
 	public func valueChanged() {
@@ -237,19 +238,19 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	// MARK: UIPickerViewDataSource / UIPickerViewDelegate
 	
 	public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-		return 1
+		return titles.count
 	}
 	
 	public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return 5
+		return titles[component].count
 	}
 	
 	public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return "\(row)"
+		return titles[component][row]
 	}
- 
+	
 	public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		print("picked \(row)")
+		print("picked \(row) \(component)")
 	}
 }
 

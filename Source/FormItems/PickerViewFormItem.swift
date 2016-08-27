@@ -56,5 +56,8 @@ public class PickerViewFormItem: FormItem {
 		return self
 	}
 	
+	
+	public var pickerTitles = [[String]]()
+	
 	// TODO: picker view value
 }

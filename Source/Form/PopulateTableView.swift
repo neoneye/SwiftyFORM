@@ -631,6 +631,7 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.toolbarMode = self.model.toolbarMode
 //		model.date = object.value
+		model.titles = object.pickerTitles
 		
 		switch object.behavior {
 		case .Collapsed, .Expanded:
