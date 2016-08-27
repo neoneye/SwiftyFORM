@@ -17,6 +17,7 @@
 		42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2A1B3576110067FEAA /* ReportViewController.swift */; };
 		42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2B1B3576110067FEAA /* SignUpViewController.swift */; };
 		42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D331B357A440067FEAA /* ButtonsViewController.swift */; };
+		422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */; };
 		423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17031BAF3A9B00A9859F /* AliensViewController.swift */; };
 		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; };
 		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; };
@@ -104,6 +105,7 @@
 		42108D2A1B3576110067FEAA /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		42108D2B1B3576110067FEAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		42108D331B357A440067FEAA /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
+		422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		423D17031BAF3A9B00A9859F /* AliensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliensViewController.swift; sourceTree = "<group>"; };
 		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
 		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
 				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
+				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
 				420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */,
@@ -424,6 +427,7 @@
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
+				422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */,
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
