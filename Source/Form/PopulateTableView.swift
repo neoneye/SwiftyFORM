@@ -627,6 +627,46 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: PickerViewFormItem
 	
 	func visit(object: PickerViewFormItem) {
-		// TODO: install a value picker
+		let model = PickerViewCellModel()
+		model.title = object.title
+		model.toolbarMode = self.model.toolbarMode
+//		model.date = object.value
+		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
+		}
+		
+		let cell = PickerViewToggleCell(model: model)
+		let cellExpanded = PickerViewExpandedCell()
+		
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+		
+		cellExpanded.configure(model)
+		
+//		weak var weakCell = cell
+//		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
+//			SwiftyFormLog("sync date \(date)")
+//			weakCell?.setDateWithoutSync(date, animated: animated)
+//		}
+//		
+//		weak var weakObject = object
+//		model.valueDidChange = { (date: NSDate) in
+//			SwiftyFormLog("value did change \(date)")
+//			weakObject?.valueDidChange(date)
+//		}
 	}
 }
