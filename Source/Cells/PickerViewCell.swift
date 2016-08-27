@@ -206,6 +206,7 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	func configure(model: PickerViewCellModel) {
 		titles = model.titles
 		pickerView.reloadAllComponents()
+		pickerView.setNeedsLayout()
 	}
 	
 	public func valueChanged() {
