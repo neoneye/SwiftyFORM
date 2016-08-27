@@ -622,4 +622,11 @@ class PopulateTableView: FormItemVisitor {
 		}
 		return command
 	}
+
+	
+	// MARK: PickerViewFormItem
+	
+	func visit(object: PickerViewFormItem) {
+		// TODO: install a value picker
+	}
 }

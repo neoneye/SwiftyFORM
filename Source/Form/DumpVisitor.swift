@@ -237,4 +237,11 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
+	
+	public func visit(object: PickerViewFormItem) {
+		dict["class"] = "PickerViewFormItem"
+		dict["elementIdentifier"] = object.elementIdentifier
+		dict["styleIdentifier"] = object.styleIdentifier
+		dict["styleClass"] = object.styleClass
+	}
 }
