@@ -3,6 +3,7 @@ import UIKit
 
 
 public protocol FormItemVisitor {
+	func visit(object: AttributedTextFormItem)
 	func visit(object: ButtonFormItem)
 	func visit(object: CustomFormItem)
 	func visit(object: DatePickerFormItem)
@@ -23,7 +24,6 @@ public protocol FormItemVisitor {
 	func visit(object: TextFieldFormItem)
 	func visit(object: TextViewFormItem)
 	func visit(object: ViewControllerFormItem)
-	func visit(object: AttributedTextFormItem)
 }
 
 public class FormItem: NSObject {
