@@ -19,6 +19,21 @@ public class PickerViewCellModel {
 	var valueDidChange: [Int] -> Void = { (selectedRows: [Int]) in
 		SwiftyFormLog("selectedRows \(selectedRows)")
 	}
+	
+	func assignFallbackValue() {
+		if value.count == titles.count {
+			return
+		}
+		var selectedRows = [Int]()
+		for rows in titles {
+			if rows.isEmpty {
+				selectedRows.append(-1)
+			} else {
+				selectedRows.append(0)
+			}
+		}
+		value = selectedRows
+	}
 
 	var humanReadableValue: String {
 		var result = [String]()

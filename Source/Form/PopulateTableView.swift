@@ -630,6 +630,7 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.value = object.value
 		model.titles = object.pickerTitles
+		model.assignFallbackValue()
 		
 		switch object.behavior {
 		case .Collapsed, .Expanded:
