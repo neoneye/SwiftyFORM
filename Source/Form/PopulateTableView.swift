@@ -628,7 +628,7 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: PickerViewFormItem) {
 		let model = PickerViewCellModel()
 		model.title = object.title
-//		model.date = object.value
+		model.value = object.value
 		model.titles = object.pickerTitles
 		
 		switch object.behavior {
@@ -656,12 +656,12 @@ class PopulateTableView: FormItemVisitor {
 		
 		cellExpanded.configure(model)
 		
-//		weak var weakCell = cell
-//		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
-//			SwiftyFormLog("sync date \(date)")
-//			weakCell?.setDateWithoutSync(date, animated: animated)
-//		}
-//		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: [Int], animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+		}
+		
 		weak var weakObject = object
 		model.valueDidChange = { (selectedRows: [Int]) in
 			SwiftyFormLog("value did change \(selectedRows)")

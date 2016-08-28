@@ -59,15 +59,34 @@ public class PickerViewFormItem: FormItem {
 	
 	public var pickerTitles = [[String]]()
 	
-	// TODO: picker view value
+
+	typealias SyncBlock = (value: [Int], animated: Bool) -> Void
+	var syncCellWithValue: SyncBlock = { (value: [Int], animated: Bool) in
+		SwiftyFormLog("sync is not overridden: \(value)")
+	}
 	
+	internal var innerValue = [Int]()
+	public var value: [Int] {
+		get {
+			return self.innerValue
+		}
+		set {
+			self.setValue(newValue, animated: false)
+		}
+	}
+	
+	public func setValue(value: [Int], animated: Bool) {
+		innerValue = value
+		syncCellWithValue(value: value, animated: animated)
+	}
+
 	public typealias ValueDidChangeBlock = (value: [Int]) -> Void
 	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
 		SwiftyFormLog("not overridden")
 	}
 
 	public func valueDidChange(value: [Int]) {
-//TODO:		innerValue = value
+		innerValue = value
 		valueDidChangeBlock(value: value)
 	}
 }

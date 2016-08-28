@@ -14,6 +14,7 @@ public class PickerViewCellModel {
 	var selectionStyle = UITableViewCellSelectionStyle.Default
 	
 	var titles = [[String]]()
+	var value = [Int]()
 	
 	var valueDidChange: [Int] -> Void = { (selectedRows: [Int]) in
 		SwiftyFormLog("selectedRows \(selectedRows)")
@@ -55,13 +56,17 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		detailTextLabel?.text = humanReadableValue
 	}
 	
-//	func setDateWithoutSync(date: NSDate, animated: Bool) {
-//		SwiftyFormLog("set date \(date), animated \(animated)")
-//		model.date = date
-//		updateValue()
-//		
-//		expandedCell?.pickerView.setDate(model.date, animated: animated)
-//	}
+	func setValueWithoutSync(value: [Int], animated: Bool) {
+		if value.count != model.titles.count {
+			print("Expected the number of components to be the same")
+			return
+		}
+		SwiftyFormLog("set value \(value), animated \(animated)")
+		model.value = value
+		updateValue()
+		
+		expandedCell?.pickerView.form_selectRows(value, animated: animated)
+	}
 	
 	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
 		return 60
@@ -206,6 +211,7 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		titles = model.titles
 		pickerView.reloadAllComponents()
 		pickerView.setNeedsLayout()
+		pickerView.form_selectRows(model.value, animated: false)
 	}
 	
 	public func valueChanged() {
@@ -221,11 +227,8 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		}
 		print("selected rows: \(selectedRows)")
 		
-//		let date = datePicker.date
-//		model.date = date
-//		
-//		collapsedCell.updateValue()
-		
+		model.value = selectedRows
+		collapsedCell.updateValue()
 		model.valueDidChange(selectedRows)
 	}
 	
@@ -259,5 +262,13 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	
 	public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		valueChanged()
+	}
+}
+
+extension UIPickerView {
+	func form_selectRows(rows: [Int], animated: Bool) {
+		for (component, row) in rows.enumerate() {
+			selectRow(row, inComponent: component, animated: animated)
+		}
 	}
 }

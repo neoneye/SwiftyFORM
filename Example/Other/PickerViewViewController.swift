@@ -8,6 +8,8 @@ class PickerViewViewController: FormViewController {
 		builder += picker0
 		builder += picker1
 		builder += picker2
+		builder += SectionHeaderTitleFormItem().title("Buttons")
+		builder += randomizeButton
 	}
 	
 	lazy var picker0: PickerViewFormItem = {
@@ -27,4 +29,31 @@ class PickerViewViewController: FormViewController {
 		instance.pickerTitles = [["00", "01"], ["10", "11"], ["20", "21"]]
 		return instance
 	}()
+
+	lazy var randomizeButton: ButtonFormItem = {
+		let instance = ButtonFormItem()
+		instance.title("Randomize")
+		instance.action = { [weak self] in
+			self?.randomize()
+		}
+		return instance
+	}()
+	
+	func assignRandomValues(pickerView: PickerViewFormItem) {
+		var selectedRows = [Int]()
+		for rows in pickerView.pickerTitles {
+			if rows.count > 0 {
+				selectedRows.append(randomInt(0, rows.count-1))
+			} else {
+				selectedRows.append(-1)
+			}
+		}
+		pickerView.setValue(selectedRows, animated: true)
+	}
+	
+	func randomize() {
+		assignRandomValues(picker0)
+		assignRandomValues(picker1)
+		assignRandomValues(picker2)
+	}
 }
