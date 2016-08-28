@@ -8,27 +8,50 @@ class PickerViewViewController: FormViewController {
 		builder += picker0
 		builder += picker1
 		builder += picker2
-		builder += SectionHeaderTitleFormItem().title("Buttons")
+		builder += SectionHeaderTitleFormItem().title("Misc")
+		builder += summary
 		builder += randomizeButton
+		
+		updateSummary()
 	}
 	
 	lazy var picker0: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("1 component").behavior(.Expanded)
 		instance.pickerTitles = [["0", "1", "2", "3", "4", "5", "6"]]
+		instance.valueDidChangeBlock = { [weak self] _ in
+			self?.updateSummary()
+		}
 		return instance
 	}()
 	
 	lazy var picker1: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("2 components")
 		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12", "13", "14"]]
+		instance.valueDidChangeBlock = { [weak self] _ in
+			self?.updateSummary()
+		}
 		return instance
 	}()
 	
 	lazy var picker2: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("3 components")
-		instance.pickerTitles = [["00", "01"], ["10", "11"], ["20", "21"]]
+		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12"], ["20", "21", "22", "23", "24"]]
+		instance.valueDidChangeBlock = { [weak self] _ in
+			self?.updateSummary()
+		}
 		return instance
 	}()
+
+	lazy var summary: StaticTextFormItem = {
+		return StaticTextFormItem().title("Values").value("-")
+	}()
+	
+	func updateSummary() {
+		let s0 = "\(picker0.value)"
+		let s1 = "\(picker1.value)"
+		let s2 = "\(picker2.value)"
+		summary.value = "\(s0) , \(s1) , \(s2)"
+	}
 
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -55,5 +78,6 @@ class PickerViewViewController: FormViewController {
 		assignRandomValues(picker0)
 		assignRandomValues(picker1)
 		assignRandomValues(picker2)
+		updateSummary()
 	}
 }
