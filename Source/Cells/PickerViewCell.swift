@@ -10,7 +10,6 @@ struct PickerViewCellConstants {
 
 public class PickerViewCellModel {
 	var title: String = ""
-	var toolbarMode: ToolbarMode = .Simple
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.Default
 	

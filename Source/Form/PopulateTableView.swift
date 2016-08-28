@@ -127,7 +127,6 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: DatePickerFormItem) {
 		let model = DatePickerCellModel()
 		model.title = object.title
-		model.toolbarMode = self.model.toolbarMode
 		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
 		model.locale = object.locale
 		model.minimumDate = object.minimumDate
@@ -629,7 +628,6 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: PickerViewFormItem) {
 		let model = PickerViewCellModel()
 		model.title = object.title
-		model.toolbarMode = self.model.toolbarMode
 //		model.date = object.value
 		model.titles = object.pickerTitles
 		
