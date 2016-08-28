@@ -664,10 +664,10 @@ class PopulateTableView: FormItemVisitor {
 //			weakCell?.setDateWithoutSync(date, animated: animated)
 //		}
 //		
-//		weak var weakObject = object
-//		model.valueDidChange = { (date: NSDate) in
-//			SwiftyFormLog("value did change \(date)")
-//			weakObject?.valueDidChange(date)
-//		}
+		weak var weakObject = object
+		model.valueDidChange = { (selectedRows: [Int]) in
+			SwiftyFormLog("value did change \(selectedRows)")
+			weakObject?.valueDidChange(selectedRows)
+		}
 	}
 }

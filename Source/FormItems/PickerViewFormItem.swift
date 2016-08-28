@@ -60,4 +60,14 @@ public class PickerViewFormItem: FormItem {
 	public var pickerTitles = [[String]]()
 	
 	// TODO: picker view value
+	
+	public typealias ValueDidChangeBlock = (value: [Int]) -> Void
+	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
+		SwiftyFormLog("not overridden")
+	}
+
+	public func valueDidChange(value: [Int]) {
+//TODO:		innerValue = value
+		valueDidChangeBlock(value: value)
+	}
 }
