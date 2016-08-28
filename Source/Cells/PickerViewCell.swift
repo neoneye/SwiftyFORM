@@ -19,6 +19,15 @@ public class PickerViewCellModel {
 	var valueDidChange: [Int] -> Void = { (selectedRows: [Int]) in
 		SwiftyFormLog("selectedRows \(selectedRows)")
 	}
+
+	var humanReadableValue: String {
+		var result = [String]()
+		for (component, row) in value.enumerate() {
+			let title = titles[component][row]
+			result.append(title)
+		}
+		return result.joinWithSeparator(",")
+	}
 }
 
 
@@ -48,12 +57,8 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	public var humanReadableValue: String {
-		return "TODO: human readable value"
-	}
-
 	public func updateValue() {
-		detailTextLabel?.text = humanReadableValue
+		detailTextLabel?.text = model.humanReadableValue
 	}
 	
 	func setValueWithoutSync(value: [Int], animated: Bool) {
