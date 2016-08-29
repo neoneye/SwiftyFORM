@@ -3,12 +3,14 @@ import UIKit
 
 
 public protocol FormItemVisitor {
+	func visit(object: AttributedTextFormItem)
 	func visit(object: ButtonFormItem)
 	func visit(object: CustomFormItem)
 	func visit(object: DatePickerFormItem)
 	func visit(object: MetaFormItem)
 	func visit(object: OptionPickerFormItem)
 	func visit(object: OptionRowFormItem)
+	func visit(object: PickerViewFormItem)
 	func visit(object: PrecisionSliderFormItem)
 	func visit(object: SectionFooterTitleFormItem)
 	func visit(object: SectionFooterViewFormItem)
@@ -23,7 +25,6 @@ public protocol FormItemVisitor {
 	func visit(object: TextFieldFormItem)
 	func visit(object: TextViewFormItem)
 	func visit(object: ViewControllerFormItem)
-	func visit(object: AttributedTextFormItem)
 }
 
 public class FormItem: NSObject {
