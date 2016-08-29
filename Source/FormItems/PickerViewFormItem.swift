@@ -65,9 +65,27 @@ public class PickerViewFormItem: FormItem {
 		SwiftyFormLog("sync is not overridden: \(value)")
 	}
 	
+	private func maybeAssignFallbackValue() {
+		if innerValue.count == pickerTitles.count {
+			return
+		}
+		// If not initialized then select the first rows
+		var selectedRows = [Int]()
+		for rows in pickerTitles {
+			if rows.isEmpty {
+				selectedRows.append(-1)
+			} else {
+				selectedRows.append(0)
+			}
+		}
+		innerValue = selectedRows
+	}
+	
+	
 	internal var innerValue = [Int]()
 	public var value: [Int] {
 		get {
+			maybeAssignFallbackValue()
 			return self.innerValue
 		}
 		set {
