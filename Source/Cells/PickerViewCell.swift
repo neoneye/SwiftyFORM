@@ -230,7 +230,7 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 			let row: Int = pickerView.selectedRowInComponent(component)
 			selectedRows.append(row)
 		}
-		print("selected rows: \(selectedRows)")
+		//print("selected rows: \(selectedRows)")
 		
 		model.value = selectedRows
 		collapsedCell.updateValue()
@@ -239,7 +239,7 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	
 	public init() {
 		super.init(style: .Default, reuseIdentifier: nil)
-		addSubview(pickerView)
+		contentView.addSubview(pickerView)
 	}
 	
 	required public init?(coder aDecoder: NSCoder) {
@@ -248,8 +248,22 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		pickerView.frame = bounds
+		pickerView.frame = contentView.bounds
+		
+		/*
+		Workaround:
+		UIPickerView gets messed up on orientation change
+		
+		This is a very old problem
+		On iOS9, as of 29 aug 2016, it's still a problem.
+		http://stackoverflow.com/questions/7576679/uipickerview-as-inputview-gets-messed-up-on-orientation-change
+		http://stackoverflow.com/questions/9767234/why-wont-uipickerview-resize-the-first-time-i-change-device-orientation-on-its
+		
+		The following line solves the problem.
+		*/
+		pickerView.setNeedsLayout()
 	}
+	
 
 	// MARK: UIPickerViewDataSource / UIPickerViewDelegate
 	
@@ -267,6 +281,10 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	
 	public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		valueChanged()
+	}
+	
+	public func pickerView(pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+		return 44
 	}
 }
 
