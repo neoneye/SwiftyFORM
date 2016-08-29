@@ -15,6 +15,7 @@ public class PickerViewCellModel {
 	
 	var titles = [[String]]()
 	var value = [Int]()
+	var humanReadableValueSeparator: String?
 	
 	var valueDidChange: [Int] -> Void = { (selectedRows: [Int]) in
 		SwiftyFormLog("selectedRows \(selectedRows)")
@@ -26,7 +27,7 @@ public class PickerViewCellModel {
 			let title = titles[component][row]
 			result.append(title)
 		}
-		return result.joinWithSeparator(",")
+		return result.joinWithSeparator(humanReadableValueSeparator ?? ",")
 	}
 }
 

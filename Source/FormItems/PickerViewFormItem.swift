@@ -59,6 +59,8 @@ public class PickerViewFormItem: FormItem {
 	
 	public var pickerTitles = [[String]]()
 	
+	public var humanReadableValueSeparator: String?
+	
 
 	typealias SyncBlock = (value: [Int], animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: [Int], animated: Bool) in

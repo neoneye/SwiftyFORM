@@ -27,6 +27,7 @@ class PickerViewViewController: FormViewController {
 	lazy var picker1: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("2 components")
 		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12", "13", "14"]]
+		instance.humanReadableValueSeparator = " :: "
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
@@ -36,6 +37,7 @@ class PickerViewViewController: FormViewController {
 	lazy var picker2: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("3 components")
 		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12"], ["20", "21", "22", "23", "24"]]
+		instance.humanReadableValueSeparator = " % "
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
