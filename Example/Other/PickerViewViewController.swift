@@ -49,10 +49,10 @@ class PickerViewViewController: FormViewController {
 	}()
 	
 	func updateSummary() {
-		let s0 = "\(picker0.value)"
-		let s1 = "\(picker1.value)"
-		let s2 = "\(picker2.value)"
-		summary.value = "\(s0) , \(s1) , \(s2)"
+		let v0 = picker0.value
+		let v1 = picker1.value
+		let v2 = picker2.value
+		summary.value = "\(v0) , \(v1) , \(v2)"
 	}
 
 	lazy var randomizeButton: ButtonFormItem = {
