@@ -5,6 +5,7 @@
  * Added `PickerViewFormItem` that makes it possible to use inline `UIPickerView`.
  * Added `PickerViewViewController` that shows how to use the `PickerViewFormItem`.
  * Sorted visitor functions alphabetically.
+ * Added more examples to the `readme`
 
 ### 0.10.0
 
