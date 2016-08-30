@@ -1,0 +1,8 @@
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+import SwiftyFORM
+
+class Tutorial0_StaticText_ViewController: FormViewController {
+	override func populate(builder: FormBuilder) {
+		builder += StaticTextFormItem().title("Hello").value("World")
+	}
+}
