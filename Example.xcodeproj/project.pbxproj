@@ -17,6 +17,7 @@
 		42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2A1B3576110067FEAA /* ReportViewController.swift */; };
 		42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2B1B3576110067FEAA /* SignUpViewController.swift */; };
 		42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D331B357A440067FEAA /* ButtonsViewController.swift */; };
+		422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */; };
 		423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17031BAF3A9B00A9859F /* AliensViewController.swift */; };
 		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; };
 		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; };
@@ -37,6 +38,9 @@
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
 		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
+		42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */; };
+		42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */; };
+		42C6DD9B1D76264F00D82DC9 /* Tutorial2_ChildViewController_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD9A1D76264F00D82DC9 /* Tutorial2_ChildViewController_ViewController.swift */; };
 		42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */; };
 		42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42CEBFA11A3BA2B50048E072 /* Images.xcassets */; };
 		42D005151B9631F400986B3B /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D005131B9631F400986B3B /* LoadingCell.swift */; };
@@ -104,6 +108,7 @@
 		42108D2A1B3576110067FEAA /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		42108D2B1B3576110067FEAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		42108D331B357A440067FEAA /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
+		422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
 		423D17031BAF3A9B00A9859F /* AliensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliensViewController.swift; sourceTree = "<group>"; };
 		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
 		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +128,9 @@
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
 		42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
+		42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial0_StaticText_ViewController.swift; sourceTree = "<group>"; };
+		42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial1_TextField_ViewController.swift; sourceTree = "<group>"; };
+		42C6DD9A1D76264F00D82DC9 /* Tutorial2_ChildViewController_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial2_ChildViewController_ViewController.swift; sourceTree = "<group>"; };
 		42CEBF951A3BA2B50048E072 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42CEBF991A3BA2B50048E072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42CEBF9A1A3BA2B50048E072 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
 				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
+				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
 				420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */,
@@ -236,6 +245,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		42C6DD921D76253200D82DC9 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */,
+				42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */,
+				42C6DD9A1D76264F00D82DC9 /* Tutorial2_ChildViewController_ViewController.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		42CEBF8C1A3BA2B50048E072 = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +285,7 @@
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
 				42589DCC1B3447EA007CA8C1 /* TextView */,
+				42C6DD921D76253200D82DC9 /* Tutorial */,
 				42108D271B3576110067FEAA /* Usecases */,
 				42D2975B1D4CD6C100561780 /* Util */,
 				42685D3E1D2D6AB2008ABC3D /* WorkInProgress */,
@@ -401,6 +421,7 @@
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
+				42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
 				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
 				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
@@ -414,6 +435,7 @@
 				42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */,
 				42D005151B9631F400986B3B /* LoadingCell.swift in Sources */,
 				42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */,
+				42C6DD9B1D76264F00D82DC9 /* Tutorial2_ChildViewController_ViewController.swift in Sources */,
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
@@ -422,8 +444,10 @@
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
+				42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
+				422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */,
 				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,

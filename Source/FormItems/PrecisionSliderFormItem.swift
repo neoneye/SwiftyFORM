@@ -1,6 +1,20 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
+/**
+# Inline precision slider
+
+### Tap to expand/collapse
+
+### Pinch to zoom for better precision
+
+### Double-tap for zoom
+
+### two-finger double-tap for unzoom
+
+Behind the scenes this creates a `PrecisionSlider`. This is not a standard Apple control.
+Please contact Simon Strandgaard if you have questions regarding it.
+*/
 public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(self)
@@ -12,6 +26,35 @@ public class PrecisionSliderFormItem: FormItem {
 		return self
 	}
 
+	/**
+	### Collapsed
+	
+	When the `behavior` is set to `Collapsed` then
+	the precision slider starts out being hidden.
+	
+	The user has to tap the row to expand it.
+	This will collapse other inline precision sliders that has `collapseWhenResigning=true`.
+	This will not affect other inline precison sliders where `collapseWhenResigning=false`.
+
+	
+	### Expanded
+	
+	When the `behavior` is set to `Expanded` then
+	the precision slider starts out being visible.
+	
+	The user has to tap the row to collapse it.
+	
+	Also if `collapseWhenResigning=true` and
+	another control becomes first respond then this will collapse it.
+	When the keyboard appears this will collapse it.
+	
+	
+	### ExpandedAlways
+	
+	When the `behavior` is set to `ExpandedAlways` then
+	the precision slider is always expanded. It cannot be collapsed.
+	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
+	*/
 	public enum Behavior {
 		case Collapsed
 		case Expanded
@@ -30,7 +73,7 @@ public class PrecisionSliderFormItem: FormItem {
 	}
 	
 	/**
-	Initial zoom factor
+	# Initial zoom factor
 	
 	Automatically determines the best zoom when `initialZoom` is nil
 	When zoom is 0 that means no-zoom
@@ -54,7 +97,7 @@ public class PrecisionSliderFormItem: FormItem {
 	}
 
 	/**
-	Number of decimal places
+	# Number of decimal places
 	
 	The number can go from 0 to +5.
 	*/

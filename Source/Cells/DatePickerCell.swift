@@ -10,7 +10,6 @@ struct DatePickerCellConstants {
 
 public class DatePickerCellModel {
 	var title: String = ""
-	var toolbarMode: ToolbarMode = .Simple
 	var datePickerMode: UIDatePickerMode = .DateAndTime
 	var locale: NSLocale? = nil // default is [NSLocale currentLocale]. setting nil returns to default
 	var minimumDate: NSDate? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
@@ -28,6 +27,14 @@ public class DatePickerCellModel {
 	}
 }
 
+
+/**
+# Date picker toggle-cell
+
+### Tap this row to toggle
+
+This causes the inline date picker to expand/collapse
+*/
 public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: DatePickerExpandedCell?
 	public let model: DatePickerCellModel
@@ -215,6 +222,11 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 }
 
 
+/**
+# Date picker expanded-cell
+
+Row containing only a `UIDatePicker`
+*/
 public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
 	weak var collapsedCell: DatePickerToggleCell?
 

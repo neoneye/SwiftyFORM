@@ -51,6 +51,13 @@ public struct PrecisionSliderCellFormatter {
 }
 
 
+/**
+# Precision slider toggle-cell
+
+### Tap this row to toggle
+
+This causes the inline precision slider to expand/collapse
+*/
 public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: PrecisionSliderExpandedCell?
 	public let model: PrecisionSliderCellModel
@@ -270,6 +277,13 @@ extension PrecisionSliderCellModel {
 	}
 }
 
+
+/**
+# Precision slider expanded-cell
+
+Row containing only a `PrecisionSlider`. This is not a standard Apple control.
+Please contact Simon Strandgaard if you have questions regarding it.
+*/
 public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
 	weak var collapsedCell: PrecisionSliderToggleCell?
 

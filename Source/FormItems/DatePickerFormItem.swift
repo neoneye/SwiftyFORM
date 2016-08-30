@@ -15,6 +15,13 @@ public enum DatePickerFormItemMode {
 	}
 }
 
+/**
+# Inline date picker
+
+### Tap to expand/collapse
+
+Behind the scenes this creates a `UIDatePicker`.
+*/
 public class DatePickerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(self)
@@ -26,6 +33,32 @@ public class DatePickerFormItem: FormItem {
 		return self
 	}
 	
+	/**
+	### Collapsed
+	
+	When the `behavior` is set to `Collapsed` then
+	the date picker starts out being hidden.
+	
+	The user has to tap the row to expand it.
+	This will collapse other inline date pickers.
+	
+
+	### Expanded
+	
+	When the `behavior` is set to `Expanded` then
+	the date picker starts out being visible.
+	
+	The user has to tap the row to collapse it.
+	Or if another control becomes first respond this will collapse it.
+	When the keyboard appears this will collapse it.
+	
+	
+	### ExpandedAlways
+	
+	When the `behavior` is set to `ExpandedAlways` then
+	the date picker is always expanded. It cannot be collapsed.
+	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
+	*/
 	public enum Behavior {
 		case Collapsed
 		case Expanded

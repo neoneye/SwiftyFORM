@@ -1,5 +1,12 @@
 ## 📄 Change Log
 
+### 0.11.0
+
+ * Added `PickerViewFormItem` that makes it possible to use inline `UIPickerView`.
+ * Added `PickerViewViewController` that shows how to use the `PickerViewFormItem`.
+ * Sorted visitor functions alphabetically.
+ * Added more examples to the `readme`
+
 ### 0.10.0
 
  * Date pickers are now inline. Previous the date pickers was iOS6 style and shown at the bottom of the screen. It felt old. (#8)

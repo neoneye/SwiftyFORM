@@ -127,7 +127,6 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: DatePickerFormItem) {
 		let model = DatePickerCellModel()
 		model.title = object.title
-		model.toolbarMode = self.model.toolbarMode
 		model.datePickerMode = mapDatePickerMode(object.datePickerMode)
 		model.locale = object.locale
 		model.minimumDate = object.minimumDate
@@ -621,5 +620,53 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		return command
+	}
+
+	
+	// MARK: PickerViewFormItem
+	
+	func visit(object: PickerViewFormItem) {
+		let model = PickerViewCellModel()
+		model.title = object.title
+		model.value = object.value
+		model.titles = object.pickerTitles
+		model.humanReadableValueSeparator = object.humanReadableValueSeparator
+		
+		switch object.behavior {
+		case .Collapsed, .Expanded:
+			model.expandCollapseWhenSelectingRow = true
+			model.selectionStyle = .Default
+		case .ExpandedAlways:
+			model.expandCollapseWhenSelectingRow = false
+			model.selectionStyle = .None
+		}
+		
+		let cell = PickerViewToggleCell(model: model)
+		let cellExpanded = PickerViewExpandedCell()
+		
+		cells.append(cell)
+		switch object.behavior {
+		case .Collapsed:
+			cells.appendHidden(cellExpanded)
+		case .Expanded, .ExpandedAlways:
+			cells.append(cellExpanded)
+		}
+		
+		cellExpanded.collapsedCell = cell
+		cell.expandedCell = cellExpanded
+		
+		cellExpanded.configure(model)
+		
+		weak var weakCell = cell
+		object.syncCellWithValue = { (value: [Int], animated: Bool) in
+			SwiftyFormLog("sync value \(value)")
+			weakCell?.setValueWithoutSync(value, animated: animated)
+		}
+		
+		weak var weakObject = object
+		model.valueDidChange = { (selectedRows: [Int]) in
+			SwiftyFormLog("value did change \(selectedRows)")
+			weakObject?.valueDidChange(selectedRows)
+		}
 	}
 }

@@ -2,6 +2,7 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [JuseongJee](https://github.com/JuseongJee)
 * [Walter Carli](https://github.com/Walkersneps)
 * [Jungho Bang](https://github.com/bangtoven)
 * [Tawheed Raheem](https://github.com/tawrahim)

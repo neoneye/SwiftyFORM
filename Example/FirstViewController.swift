@@ -7,6 +7,11 @@ public class FirstViewController: FormViewController {
 		builder.navigationTitle = "SwiftyFORM"
 		builder.demo_showInfo("Welcome to the\nSwiftyFORM example app\nthat shows everything")
 
+		builder += SectionHeaderTitleFormItem().title("Tutorial")
+		builder += ViewControllerFormItem().title("StaticText").viewController(Tutorial0_StaticText_ViewController.self)
+		builder += ViewControllerFormItem().title("TextField").viewController(Tutorial1_TextField_ViewController.self)
+		builder += ViewControllerFormItem().title("Child ViewController").viewController(Tutorial2_ChildViewController_ViewController.self)
+		
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
 		builder += ViewControllerFormItem().title("Change Password").viewController(ChangePasswordViewController.self)
@@ -39,6 +44,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
 		builder += ViewControllerFormItem().title("Custom Cells").viewController(CustomViewController.self)
+		builder += ViewControllerFormItem().title("PickerView").viewController(PickerViewViewController.self)
 		builder += ViewControllerFormItem().title("Sliders & TextFields").viewController(SlidersAndTextFieldsViewController.self)
 		builder += ViewControllerFormItem().title("Precision Sliders").viewController(PrecisionSlidersViewController.self)
 		builder += ViewControllerFormItem().title("Work In Progress").viewController(WorkInProgressViewController.self)
