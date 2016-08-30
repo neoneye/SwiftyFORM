@@ -21,7 +21,7 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 ## Features
 
 - [x] Several form items, such as textfield, buttons, sliders
-- [x] Some form items can be expand/collapse, such as datepicker, pickerview
+- [x] Some form items can expand/collapse, such as datepicker, pickerview
 - [x] You can create your own custom form items
 - [x] Align textfields across multiple rows
 - [x] Form validation rule engine
