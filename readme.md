@@ -68,6 +68,8 @@ class MyViewController: FormViewController {
 
 ### Advanced - date picker
 
+![DatePicker with prev button and next button](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/datepicker_nextprev.jpg "DatePicker with prev button and next button")
+
 ```swift
 class DatePickerBindingViewController: FormViewController {
 	override func populate(builder: FormBuilder) {
