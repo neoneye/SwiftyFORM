@@ -7,7 +7,12 @@ class DatePickerBindingViewController: FormViewController {
 	override func populate(builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
 		builder.toolbarMode = .Simple
-		builder += SectionHeaderTitleFormItem(title: "Always expanded")
+		
+		let section0 = SectionFormItem()
+		section0.sectionType = .None
+		
+		builder += section0
+//		builder += SectionHeaderTitleFormItem(title: "Always expanded")
 		builder += datePicker
 		builder += incrementButton
 		builder += decrementButton

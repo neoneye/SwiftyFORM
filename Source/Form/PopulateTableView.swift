@@ -50,8 +50,11 @@ class PopulateTableView: FormItemVisitor {
 		self.model = model
 	}
 	
-	func closeSection(footerBlock: TableViewSectionPart.CreateBlock) {
+	func closeSection(useDefaultHeader useDefaultHeader: Bool, footerBlock: TableViewSectionPart.CreateBlock) {
 		var headerBlock: Void -> TableViewSectionPart = {
+			if useDefaultHeader {
+				return TableViewSectionPart.Default
+			}
 			return TableViewSectionPart.None
 		}
 		if let block = self.headerBlock {
@@ -298,13 +301,13 @@ class PopulateTableView: FormItemVisitor {
 	
 	func visit(object: SectionFooterTitleFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
-			var footer = TableViewSectionPart.None
+			var footer = TableViewSectionPart.Default
 			if let title = object.title {
 				footer = TableViewSectionPart.TitleString(string: title)
 			}
 			return footer
 		}
-		closeSection(footerBlock)
+		closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 	}
 	
 	
@@ -313,13 +316,13 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionFooterViewFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
+			var item = TableViewSectionPart.Default
 			if let view = view {
 				item = TableViewSectionPart.TitleView(view: view)
 			}
 			return item
 		}
-		closeSection(footerBlock)
+		closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 	}
 	
 	
@@ -328,8 +331,18 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			return TableViewSectionPart.None
+//			return TableViewSectionPart.Default
 		}
-		closeSection(footerBlock)
+		
+		let useDefaultHeader: Bool
+		switch object.sectionType {
+		case .None:
+			useDefaultHeader = false
+		case .Default:
+			useDefaultHeader = true
+		}
+		
+		closeSection(useDefaultHeader: useDefaultHeader, footerBlock: footerBlock)
 	}
 	
 	
@@ -338,13 +351,13 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionHeaderTitleFormItem) {
 		if cells.count > 0 || self.headerBlock != nil {
 			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
+				return TableViewSectionPart.Default
 			}
-			closeSection(footerBlock)
+			closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 		}
 
 		self.headerBlock = {
-			var item = TableViewSectionPart.None
+			var item = TableViewSectionPart.Default
 			if let title = object.title {
 				item = TableViewSectionPart.TitleString(string: title)
 			}
@@ -358,14 +371,14 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionHeaderViewFormItem) {
 		if cells.count > 0 || self.headerBlock != nil {
 			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
+				return TableViewSectionPart.Default
 			}
-			closeSection(footerBlock)
+			closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 		}
 
 		self.headerBlock = {
 			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
+			var item = TableViewSectionPart.Default
 			if let view = view {
 				item = TableViewSectionPart.TitleView(view: view)
 			}

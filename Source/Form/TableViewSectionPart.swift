@@ -2,6 +2,7 @@
 import UIKit
 
 public enum TableViewSectionPart {
+	case Default
 	case None
 	case TitleString(string: String)
 	case TitleView(view: UIView)
@@ -28,6 +29,8 @@ public enum TableViewSectionPart {
 	
 	var height: CGFloat {
 		switch self {
+		case .None:
+			return CGFloat.min
 		case let .TitleView(view):
 			let view2: UIView = view
 			return view2.frame.size.height

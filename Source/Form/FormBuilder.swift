@@ -65,9 +65,9 @@ public class FormBuilder: NSObject {
 			item.accept(v)
 		}
 		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.None
+			return TableViewSectionPart.Default
 		}
-		v.closeSection(footerBlock)
+		v.closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 		
 		for alignLeftItem in alignLeftItems {
 			let widthArray: [CGFloat] = alignLeftItem.items.map {
