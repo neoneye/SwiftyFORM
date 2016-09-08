@@ -21,6 +21,7 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("Non-SwiftyFORM")
+		builder += ViewControllerFormItem().title("UICollectionViewController").viewController(MyCollectionViewController.self)
 		builder += ViewControllerFormItem().title("UITableViewController").viewController(MyTableViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("TextField")
