@@ -20,6 +20,9 @@ public class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
 
+		builder += SectionHeaderTitleFormItem().title("Non-SwiftyFORM")
+		builder += ViewControllerFormItem().title("UITableViewController").viewController(MyTableViewController.self)
+
 		builder += SectionHeaderTitleFormItem().title("TextField")
 		builder += ViewControllerFormItem().title("Valid & Invalid").viewController(TextFieldValidInvalidViewController.self)
 		builder += ViewControllerFormItem().title("Keyboard Types").viewController(TextFieldKeyboardTypesViewController.self)
