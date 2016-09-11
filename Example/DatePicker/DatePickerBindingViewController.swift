@@ -4,14 +4,34 @@ import SwiftyFORM
 
 class DatePickerBindingViewController: FormViewController {
 	
+	var showHeader = false
+	
+	func reload() {
+		// TODO: move to FormViewController
+		formBuilder.removeAll()
+		populate(formBuilder)
+		title = formBuilder.navigationTitle
+		dataSource = formBuilder.result(self)
+		tableView.dataSource = dataSource
+		tableView.delegate = dataSource
+		tableView.reloadData()
+		
+		debugPrint(dataSource!)
+	}
+	
 	override func populate(builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
 		builder.toolbarMode = .Simple
 		
 		let section0 = SectionFormItem()
-		section0.sectionType = .None
+		if showHeader {
+			section0.sectionType = .Default
+		} else {
+			section0.sectionType = .None
+		}
 		
 		builder += section0
+		builder += toggleHeaderButton
 //		builder += SectionHeaderTitleFormItem(title: "Always expanded")
 		builder += datePicker
 		builder += incrementButton
@@ -28,6 +48,20 @@ class DatePickerBindingViewController: FormViewController {
 		builder += toggleDatePicker2
 		
 		updateSummary()
+	}
+	
+	lazy var toggleHeaderButton: ButtonFormItem = {
+		let instance = ButtonFormItem()
+		instance.title("Toggle")
+		instance.action = { [weak self] in
+			self?.toggleAction()
+		}
+		return instance
+	}()
+	
+	func toggleAction() {
+		showHeader = !showHeader
+		reload()
 	}
 	
 	lazy var datePicker: DatePickerFormItem = {

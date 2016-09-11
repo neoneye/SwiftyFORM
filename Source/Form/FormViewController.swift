@@ -27,6 +27,8 @@ public class FormViewController: UIViewController {
 		dataSource = formBuilder.result(self)
 		self.tableView.dataSource = dataSource
 		self.tableView.delegate = dataSource
+		
+		debugPrint(dataSource!)
 	}
 
 	public func populate(builder: FormBuilder) {

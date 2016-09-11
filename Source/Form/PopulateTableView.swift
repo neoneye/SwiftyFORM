@@ -330,8 +330,8 @@ class PopulateTableView: FormItemVisitor {
 	
 	func visit(object: SectionFormItem) {
 		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.None
-//			return TableViewSectionPart.Default
+//			return TableViewSectionPart.None
+			return TableViewSectionPart.Default
 		}
 		
 		let useDefaultHeader: Bool
