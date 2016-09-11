@@ -127,4 +127,22 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		scrollView.form_firstResponder()?.resignFirstResponder()
 		return true
 	}
+	
+	
+	// MARK: CustomDebugStringConvertible
+	
+	public override var debugDescription: String {
+		var result = [String]()
+		result.append("============ number of sections: \(sections.count)")
+		for (sectionIndex, section) in sections.enumerate() {
+			result.append("  --- section: \(sectionIndex), number of cells: \(section.cells.visibleItems.count)")
+			for (rowIndex, item) in section.cells.visibleItems.enumerate() {
+				let s = "    \(sectionIndex).\(rowIndex) \(item.cell.dynamicType)"
+				result.append(s)
+			}
+			result.append("  ---")
+		}
+		result.append("============")
+		return result.joinWithSeparator("\n")
+	}
 }
