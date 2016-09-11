@@ -45,28 +45,32 @@ class PopulateTableView: FormItemVisitor {
 	var cells: TableViewCellArray = TableViewCellArray.createEmpty()
 	var sections = [TableViewSection]()
 	var headerBlock: TableViewSectionPart.CreateBlock?
+	var pendingHeader = TableViewSectionPart.Default
 	
 	init(model: PopulateTableViewModel) {
 		self.model = model
 	}
 	
 	func closeSection(useDefaultHeader useDefaultHeader: Bool, footerBlock: TableViewSectionPart.CreateBlock) {
+		print("close section")
+		
+		let headerToCreate = self.pendingHeader
+		self.pendingHeader = .Default
+		
 		var headerBlock: Void -> TableViewSectionPart = {
-			if useDefaultHeader {
-				return TableViewSectionPart.Default
-			}
-			return TableViewSectionPart.None
+			return headerToCreate
 		}
-		if let block = self.headerBlock {
-			headerBlock = block
-		}
+		// TODO: overwrite with header block when available
+//		if let block = self.headerBlock {
+//			headerBlock = block
+//		}
 		
 		cells.reloadVisibleItems()
 		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
 		sections.append(section)
 
 		cells = TableViewCellArray.createEmpty()
-		self.headerBlock = nil
+//		self.headerBlock = nil
 	}
 	
 	
@@ -329,39 +333,48 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: SectionFormItem
 	
 	func visit(object: SectionFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-//			return TableViewSectionPart.None
-			return TableViewSectionPart.Default
+		print("cells.count: \(cells.allItems.count)")
+		if cells.allItems.count > 0 {
+			
+			let footerBlock: TableViewSectionPart.CreateBlock = {
+				//			return TableViewSectionPart.None
+				return TableViewSectionPart.Default
+			}
+			
+			let useDefaultHeader: Bool
+			switch object.sectionType {
+			case .None:
+				useDefaultHeader = false
+			case .Default:
+				useDefaultHeader = true
+			}
+			
+			closeSection(useDefaultHeader: useDefaultHeader, footerBlock: footerBlock)
 		}
-		
-		let useDefaultHeader: Bool
+
 		switch object.sectionType {
 		case .None:
-			useDefaultHeader = false
+			pendingHeader = .None
 		case .Default:
-			useDefaultHeader = true
+			pendingHeader = .Default
 		}
-		
-		closeSection(useDefaultHeader: useDefaultHeader, footerBlock: footerBlock)
 	}
 	
 	
 	// MARK: SectionHeaderTitleFormItem
 	
 	func visit(object: SectionHeaderTitleFormItem) {
-		if cells.count > 0 || self.headerBlock != nil {
+		print("cells.count: \(cells.allItems.count)")
+		if cells.allItems.count > 0 {
 			let footerBlock: TableViewSectionPart.CreateBlock = {
 				return TableViewSectionPart.Default
 			}
 			closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 		}
 
-		self.headerBlock = {
-			var item = TableViewSectionPart.Default
-			if let title = object.title {
-				item = TableViewSectionPart.TitleString(string: title)
-			}
-			return item
+		pendingHeader = TableViewSectionPart.Default
+		if let title = object.title {
+			pendingHeader = TableViewSectionPart.TitleString(string: title)
 		}
 	}
 	
