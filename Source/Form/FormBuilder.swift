@@ -61,8 +61,10 @@ public class FormBuilder: NSObject {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)
-		for item in innerItems {
+		for (itemIndex, item) in innerItems.enumerate() {
+			print("will visit item \(itemIndex): \(item.dynamicType)")
 			item.accept(v)
+			print("did visit item \(itemIndex): \(item.dynamicType)")
 		}
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			return TableViewSectionPart.Default
