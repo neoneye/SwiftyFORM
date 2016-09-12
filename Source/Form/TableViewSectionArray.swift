@@ -86,6 +86,13 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return sections[section].tableView(tableView, heightForHeaderInSection: section) ?? UITableViewAutomaticDimension
 	}
 	
+	
+	public func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return sections[section].tableView(tableView, estimatedHeightForHeaderInSection: section) ?? UITableViewAutomaticDimension
+	}
+	// TODO: estimatedHeightForFooterInSection
+
+	
 	public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return sections[section].tableView(tableView, heightForFooterInSection: section) ?? UITableViewAutomaticDimension
 	}

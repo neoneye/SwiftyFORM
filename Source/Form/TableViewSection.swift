@@ -62,6 +62,23 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 		return footer.height
 	}
 	
+	public func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		switch header {
+		case .None:
+			return 2
+		case .Default:
+			return 44
+		case let .TitleView(view):
+			let view2: UIView = view
+			return view2.frame.size.height
+		case .TitleString(_):
+			return 44
+		}
+	}
+	
+	// TODO: estimatedHeightForFooterInSection
+
+	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		if let cell = cells[indexPath.row] as? SelectRowDelegate {
 			cell.form_didSelectRow(indexPath, tableView: tableView)
