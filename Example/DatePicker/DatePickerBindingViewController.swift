@@ -4,8 +4,6 @@ import SwiftyFORM
 
 class DatePickerBindingViewController: FormViewController {
 	
-	// transition from hidden to visible works
-	// TODO: however transition from visible to hidden, is broken, why doesn't the header dissappear?
 	var showHeader = false
 	
 	func reload() {
