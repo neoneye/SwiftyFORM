@@ -6,7 +6,10 @@ public class FormTableView: UITableView {
 		super.init(frame: CGRectZero, style: .Grouped)
 		contentInset = UIEdgeInsetsZero
 		scrollIndicatorInsets = UIEdgeInsetsZero
+		
+		// Enable "Self Sizing Cells"
 		estimatedRowHeight = 44.0
+		rowHeight = UITableViewAutomaticDimension
 	}
 
 	public required init(coder aDecoder: NSCoder) {
