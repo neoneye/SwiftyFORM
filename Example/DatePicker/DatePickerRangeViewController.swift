@@ -8,7 +8,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Time")
 		instance.datePickerMode = .time
 		// -(5 * 60 * 60 + 5 * 60 + 5) == -18305
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -18305) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -18305)
 		return instance
 		}()
 	
@@ -17,7 +17,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Date")
 		instance.datePickerMode = .date
 		// -5 * 24 * 60 * 60 == -432000
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -432000) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
 		return instance
 		}()
 	
@@ -26,7 +26,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("DateAndTime")
 		instance.datePickerMode = .dateAndTime
 		// -5 * 24 * 60 * 60 == -432000
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -432000) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
 		return instance
 		}()
 	
@@ -35,7 +35,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Time")
 		instance.datePickerMode = .time
 		// 5 * 60 * 60 + 5 * 60 + 5 == 18305
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 18305) as Date
+		instance.maximumDate = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
 	
@@ -44,7 +44,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Date")
 		instance.datePickerMode = .date
 		// 5 * 24 * 60 * 60 == 432000
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 432000) as Date
+		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
 	
@@ -53,7 +53,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("DateAndTime")
 		instance.datePickerMode = .dateAndTime
 		// 5 * 24 * 60 * 60 == 432000
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 432000) as Date
+		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
 	
@@ -62,8 +62,8 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Time")
 		instance.datePickerMode = .time
 		// 5 * 60 * 60 + 5 * 60 + 5 == 18305
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -18305) as Date
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 18305) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -18305)
+		instance.maximumDate = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
 	
@@ -72,8 +72,8 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("Date")
 		instance.datePickerMode = .date
 		// 5 * 24 * 60 * 60 == 432000
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -432000) as Date
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 432000) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
+		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
 	
@@ -82,8 +82,8 @@ class DatePickerRangeViewController: FormViewController {
 		instance.title("DateAndTime")
 		instance.datePickerMode = .dateAndTime
 		// 5 * 24 * 60 * 60 == 432000
-		instance.minimumDate = NSDate(timeIntervalSinceNow: -432000) as Date
-		instance.maximumDate = NSDate(timeIntervalSinceNow: 432000) as Date
+		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
+		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
 	

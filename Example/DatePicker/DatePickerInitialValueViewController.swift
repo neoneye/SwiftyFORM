@@ -29,7 +29,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.title("Time")
 		instance.datePickerMode = .time
 		// 5 * 60 * 60 + 5 * 60 + 5 == 18305
-		instance.value = NSDate(timeIntervalSinceNow: 18305) as Date
+		instance.value = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
 	
@@ -38,7 +38,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.title("Date")
 		instance.datePickerMode = .date
 		// 51 * 24 * 60 * 60 == 4406400
-		instance.value = NSDate(timeIntervalSinceNow: 4406400) as Date
+		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
 		}()
 	
@@ -47,7 +47,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.title("DateAndTime")
 		instance.datePickerMode = .dateAndTime
 		// 51 * 24 * 60 * 60 == 4406400
-		instance.value = NSDate(timeIntervalSinceNow: 4406400) as Date
+		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
 		}()
 	
