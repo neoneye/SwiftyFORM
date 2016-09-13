@@ -1,19 +1,19 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class CustomFormItem: FormItem {
+open class CustomFormItem: FormItem {
 	public struct Context {
 		public let viewController: UIViewController
 	}
 	
-	public enum CustomFormItemError: ErrorType {
-		case CouldNotCreate
+	public enum CustomFormItemError: Error {
+		case couldNotCreate
 	}
 
-	public typealias CreateCell = Context throws -> UITableViewCell
-	public var createCell: CreateCell = { _ in throw CustomFormItemError.CouldNotCreate }
+	public typealias CreateCell = (Context) throws -> UITableViewCell
+	open var createCell: CreateCell = { _ in throw CustomFormItemError.couldNotCreate }
 	
-	override func accept(visitor: FormItemVisitor) {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 }

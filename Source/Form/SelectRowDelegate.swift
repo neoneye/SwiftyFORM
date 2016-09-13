@@ -2,5 +2,5 @@
 import UIKit
 
 public protocol SelectRowDelegate {
-	func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView)
+	func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView)
 }

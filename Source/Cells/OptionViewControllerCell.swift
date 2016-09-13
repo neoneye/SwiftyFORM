@@ -7,22 +7,22 @@ public struct OptionViewControllerCellModel {
 	var optionField: OptionPickerFormItem? = nil
 	var selectedOptionRow: OptionRowModel? = nil
 
-	var valueDidChange: OptionRowModel? -> Void = { (value: OptionRowModel?) in
+	var valueDidChange: (OptionRowModel?) -> Void = { (value: OptionRowModel?) in
 		SwiftyFormLog("value \(value)")
 	}
 }
 
-public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
-	private let model: OptionViewControllerCellModel
-	private var selectedOptionRow: OptionRowModel? = nil
-	private weak var parentViewController: UIViewController?
+open class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
+	fileprivate let model: OptionViewControllerCellModel
+	fileprivate var selectedOptionRow: OptionRowModel? = nil
+	fileprivate weak var parentViewController: UIViewController?
 	
 	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel) {
 		self.parentViewController = parentViewController
 		self.model = model
 		self.selectedOptionRow = model.selectedOptionRow
-		super.init(style: .Value1, reuseIdentifier: nil)
-		accessoryType = .DisclosureIndicator
+		super.init(style: .value1, reuseIdentifier: nil)
+		accessoryType = .disclosureIndicator
 		textLabel?.text = model.title
 		updateValue()
 	}
@@ -31,7 +31,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func humanReadableValue() -> String? {
+	fileprivate func humanReadableValue() -> String? {
 		if let option = selectedOptionRow {
 			return option.title
 		} else {
@@ -39,20 +39,20 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 	
-	private func updateValue() {
+	fileprivate func updateValue() {
 		let s = humanReadableValue()
 		SwiftyFormLog("update value \(s)")
 		detailTextLabel?.text = s
 	}
 	
-	public func setSelectedOptionRowWithoutPropagation(option: OptionRowModel?) {
+	open func setSelectedOptionRowWithoutPropagation(_ option: OptionRowModel?) {
 		SwiftyFormLog("set selected option: \(option?.title) \(option?.identifier)")
 		
 		selectedOptionRow = option
 		updateValue()
 	}
 	
-	private func viaOptionList_userPickedOption(option: OptionRowModel) {
+	fileprivate func viaOptionList_userPickedOption(_ option: OptionRowModel) {
 		SwiftyFormLog("user picked option: \(option.title) \(option.identifier)")
 		
 		if selectedOptionRow === option {
@@ -65,7 +65,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		model.valueDidChange(option)
 	}
 
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		
 		guard let vc: UIViewController = parentViewController else {
@@ -86,7 +86,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 
 		let childViewController = OptionListViewController(optionField: optionField) { [weak self] (selected: OptionRowModel) in
 			self?.viaOptionList_userPickedOption(selected)
-			nc.popViewControllerAnimated(true)
+			nc.popViewController(animated: true)
 		}
 		nc.pushViewController(childViewController, animated: true)
 		

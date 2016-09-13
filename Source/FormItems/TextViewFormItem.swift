@@ -1,30 +1,30 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class TextViewFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class TextViewFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var placeholder: String = ""
-	public func placeholder(placeholder: String) -> Self {
+	open var placeholder: String = ""
+	open func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	typealias SyncBlock = (value: String) -> Void
+	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: String = ""
-	public var value: String {
+	open var value: String {
 		get {
 			return self.innerValue
 		}
@@ -33,8 +33,8 @@ public class TextViewFormItem: FormItem {
 		}
 	}
 	
-	func assignValueAndSync(value: String) {
+	func assignValueAndSync(_ value: String) {
 		innerValue = value
-		syncCellWithValue(value: value)
+		syncCellWithValue(value)
 	}
 }

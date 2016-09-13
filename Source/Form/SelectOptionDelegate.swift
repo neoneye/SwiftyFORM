@@ -2,5 +2,5 @@
 import Foundation
 
 public protocol SelectOptionDelegate {
-	func form_willSelectOption(option: OptionRowFormItem)
+	func form_willSelectOption(_ option: OptionRowFormItem)
 }

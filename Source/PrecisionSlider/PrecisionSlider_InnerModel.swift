@@ -12,7 +12,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
-	func clampValue(value: Double) -> Double {
+	func clampValue(_ value: Double) -> Double {
 		if value > maximumValue {
 			return maximumValue
 		}
@@ -23,7 +23,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 
 	
-	var zoomMode = PrecisionSlider_InnerZoomMode.None
+	var zoomMode = PrecisionSlider_InnerZoomMode.none
 	
 	func updateRange() {
 		zoomMode = PrecisionSlider_InnerZoomMode.create(zoom)
@@ -140,7 +140,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var minimumZoom: Float = -5
 	var maximumZoom: Float = 5
 
-	func clampZoom(zoom: Float) -> Float {
+	func clampZoom(_ zoom: Float) -> Float {
 		if zoom > maximumZoom {
 			return maximumZoom
 		}
@@ -196,26 +196,26 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	
 	static let height: CGFloat = 130
 	
-	func labelTextForIndexPath(indexPath: NSIndexPath) -> String? {
-		var index = Int(floor(minimumValue)) + indexPath.row
+	func labelTextForIndexPath(_ indexPath: IndexPath) -> String? {
+		var index = Int(floor(minimumValue)) + (indexPath as NSIndexPath).row
 		if hasPartialItemBefore {
 			index += 1
 		}
 		return zoomMode.markerText(index)
 	}
 	
-	let markMajorColor = UIColor.blackColor()
+	let markMajorColor = UIColor.black
 	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
 	
-	func markColorForIndexPath(indexPath: NSIndexPath) -> UIColor? {
-		var index = Int(floor(minimumValue)) + indexPath.row
+	func markColorForIndexPath(_ indexPath: IndexPath) -> UIColor? {
+		var index = Int(floor(minimumValue)) + (indexPath as NSIndexPath).row
 		if hasPartialItemBefore {
 			index += 1
 		}
 		switch zoomMode.markerType(index: index) {
-		case .Major: return markMajorColor
-		case .Minor: return markMinorColor
-		case .Other: return UIColor.redColor()
+		case .major: return markMajorColor
+		case .minor: return markMinorColor
+		case .other: return UIColor.red
 		}
 	}
 	
@@ -235,6 +235,6 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		if hasPartialItemAfter {
 			strings.append(String(format: "partial-after: %.5f", sizeOfPartialItemAfter))
 		}
-		return strings.joinWithSeparator(" , ")
+		return strings.joined(separator: " , ")
 	}
 }

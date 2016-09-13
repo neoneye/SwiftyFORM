@@ -2,62 +2,62 @@
 import UIKit
 
 class AlignLeft {
-	private let items: [FormItem]
+	fileprivate let items: [FormItem]
 	init(items: [FormItem]) {
 		self.items = items
 	}
 }
 
 public enum ToolbarMode {
-	case None
-	case Simple
+	case none
+	case simple
 }
 
 
-public class FormBuilder: NSObject {
-	private var innerItems = [FormItem]()
-	private var alignLeftItems = [AlignLeft]()
+open class FormBuilder: NSObject {
+	fileprivate var innerItems = [FormItem]()
+	fileprivate var alignLeftItems = [AlignLeft]()
 	
 	override public init() {
 		super.init()
 	}
 	
-	public var navigationTitle: String? = nil
+	open var navigationTitle: String? = nil
 	
-	public var toolbarMode: ToolbarMode = .None
+	open var toolbarMode: ToolbarMode = .none
 	
-	public func removeAll() {
+	open func removeAll() {
 		innerItems.removeAll()
 	}
 	
-	public func append(item: FormItem) -> FormItem {
+	open func append(_ item: FormItem) -> FormItem {
 		innerItems.append(item)
 		return item
 	}
 	
-	public func appendMulti(items: [FormItem]) {
+	open func appendMulti(_ items: [FormItem]) {
 		innerItems += items
 	}
 	
-	public func alignLeft(items: [FormItem]) {
+	open func alignLeft(_ items: [FormItem]) {
 		let alignLeftItem = AlignLeft(items: items)
 		alignLeftItems.append(alignLeftItem)
 	}
 	
-	public func alignLeftElementsWithClass(styleClass: String) {
+	open func alignLeftElementsWithClass(_ styleClass: String) {
 		let items: [FormItem] = innerItems.filter { $0.styleClass == styleClass }
 		alignLeft(items)
 	}
 	
-	public var items: [FormItem] {
+	open var items: [FormItem] {
 		return innerItems
 	}
 	
-	public func dump(prettyPrinted: Bool = true) -> NSData {
+	open func dump(_ prettyPrinted: Bool = true) -> Data {
 		return DumpVisitor.dump(prettyPrinted, items: innerItems)
 	}
 	
-	public func result(viewController: UIViewController) -> TableViewSectionArray {
+	open func result(_ viewController: UIViewController) -> TableViewSectionArray {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)
@@ -65,7 +65,7 @@ public class FormBuilder: NSObject {
 			item.accept(v)
 		}
 		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.None
+			return TableViewSectionPart.none
 		}
 		v.closeSection(footerBlock)
 		
@@ -76,7 +76,7 @@ public class FormBuilder: NSObject {
 				return v.width
 			}
 			//SwiftyFormLog("widthArray: \(widthArray)")
-			let width = widthArray.maxElement()!
+			let width = widthArray.max()!
 			//SwiftyFormLog("max width: \(width)")
 			
 			for item in alignLeftItem.items {
@@ -88,32 +88,32 @@ public class FormBuilder: NSObject {
 		return TableViewSectionArray(sections: v.sections)
 	}
 	
-	public func validateAndUpdateUI() {
+	open func validateAndUpdateUI() {
 		ReloadPersistentValidationStateVisitor.validateAndUpdateUI(innerItems)
 	}
 	
 	public enum FormValidateResult {
-		case Valid
-		case Invalid(item: FormItem, message: String)
+		case valid
+		case invalid(item: FormItem, message: String)
 	}
 	
-	public func validate() -> FormValidateResult {
+	open func validate() -> FormValidateResult {
 		for item in innerItems {
 			let v = ValidateVisitor()
 			item.accept(v)
 			switch v.result {
-			case .Valid:
+			case .valid:
 				// SwiftyFormLog("valid")
 				continue
-			case .HardInvalid(let message):
+			case .hardInvalid(let message):
 				//SwiftyFormLog("invalid message \(message)")
-				return .Invalid(item: item, message: message)
-			case .SoftInvalid(let message):
+				return .invalid(item: item, message: message)
+			case .softInvalid(let message):
 				//SwiftyFormLog("invalid message \(message)")
-				return .Invalid(item: item, message: message)
+				return .invalid(item: item, message: message)
 			}
 		}
-		return .Valid
+		return .valid
 	}
 	
 }

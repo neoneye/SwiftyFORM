@@ -1,9 +1,9 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class FormViewController: UIViewController {
-	public var dataSource: TableViewSectionArray?
-	public var keyboardHandler: KeyboardHandler?
+open class FormViewController: UIViewController {
+	open var dataSource: TableViewSectionArray?
+	open var keyboardHandler: KeyboardHandler?
 	
 	public init() {
 		SwiftyFormLog("super init")
@@ -15,7 +15,7 @@ public class FormViewController: UIViewController {
 		super.init(nibName: nil, bundle: nil)
 	}
 
-	override public func loadView() {
+	override open func loadView() {
 		SwiftyFormLog("super loadview")
 		view = tableView
 		
@@ -29,31 +29,31 @@ public class FormViewController: UIViewController {
 		self.tableView.delegate = dataSource
 	}
 
-	public func populate(builder: FormBuilder) {
+	open func populate(_ builder: FormBuilder) {
 		SwiftyFormLog("subclass must implement populate()")
 	}
 
-	override public func viewWillAppear(animated: Bool) {
+	override open func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		keyboardHandler?.addObservers()
 
 		// Fade out, so that the user can see what row has been updated
 		if let indexPath = tableView.indexPathForSelectedRow {
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			tableView.deselectRow(at: indexPath, animated: true)
 		}
 	}
 	
-	override public func viewDidDisappear(animated: Bool) {
+	override open func viewDidDisappear(_ animated: Bool) {
 		self.keyboardHandler?.removeObservers()
 		super.viewDidDisappear(animated)
 	}
 
-	public lazy var formBuilder: FormBuilder = {
+	open lazy var formBuilder: FormBuilder = {
 		return FormBuilder()
 		}()
 	
-	public lazy var tableView: FormTableView = {
+	open lazy var tableView: FormTableView = {
 		return FormTableView()
 		}()
 }

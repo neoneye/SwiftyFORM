@@ -4,18 +4,18 @@ import UIKit
 public struct ButtonCellModel {
 	var title: String = ""
 	
-	var action: Void -> Void = {
+	var action: (Void) -> Void = {
 		SwiftyFormLog("action")
 	}
 
 }
 
-public class ButtonCell: UITableViewCell, SelectRowDelegate {
-	public let model: ButtonCellModel
+open class ButtonCell: UITableViewCell, SelectRowDelegate {
+	open let model: ButtonCellModel
 	
 	public init(model: ButtonCellModel) {
 		self.model = model
-		super.init(style: .Default, reuseIdentifier: nil)
+		super.init(style: .default, reuseIdentifier: nil)
 		loadWithModel(model)
 	}
 	
@@ -23,18 +23,18 @@ public class ButtonCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func loadWithModel(model: ButtonCellModel) {
+	open func loadWithModel(_ model: ButtonCellModel) {
 		textLabel?.text = model.title
-		textLabel?.textAlignment = NSTextAlignment.Center
+		textLabel?.textAlignment = NSTextAlignment.center
 	}
 
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 		
 		model.action()
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
 }

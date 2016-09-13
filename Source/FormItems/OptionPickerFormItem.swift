@@ -1,44 +1,44 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class OptionRowModel: CustomStringConvertible {
-	public let title: String
-	public let identifier: String
+open class OptionRowModel: CustomStringConvertible {
+	open let title: String
+	open let identifier: String
 	
 	public init(_ title: String, _ identifier: String) {
 		self.title = title
 		self.identifier = identifier
 	}
 	
-	public var description: String {
+	open var description: String {
 		return "\(title)-\(identifier)"
 	}
 }
 
-public class OptionPickerFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class OptionPickerFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var placeholder: String = ""
-	public func placeholder(placeholder: String) -> Self {
+	open var placeholder: String = ""
+	open func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	public var options = [OptionRowModel]()
-	public func append(name: String, identifier: String? = nil) -> Self {
+	open var options = [OptionRowModel]()
+	open func append(_ name: String, identifier: String? = nil) -> Self {
 		options.append(OptionRowModel(name, identifier ?? name))
 		return self
 	}
 	
-	public func selectOptionWithTitle(title: String) {
+	open func selectOptionWithTitle(_ title: String) {
 		for option in options {
 			if option.title == title {
 				self.setSelectedOptionRow(option)
@@ -47,7 +47,7 @@ public class OptionPickerFormItem: FormItem {
 		}
 	}
 	
-	public func selectOptionWithIdentifier(identifier: String) {
+	open func selectOptionWithIdentifier(_ identifier: String) {
 		for option in options {
 			if option.identifier == identifier {
 				self.setSelectedOptionRow(option)
@@ -56,13 +56,13 @@ public class OptionPickerFormItem: FormItem {
 		}
 	}
 
-	public typealias SyncBlock = (selected: OptionRowModel?) -> Void
-	public var syncCellWithValue: SyncBlock = { (selected: OptionRowModel?) in
+	public typealias SyncBlock = (_ selected: OptionRowModel?) -> Void
+	open var syncCellWithValue: SyncBlock = { (selected: OptionRowModel?) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerSelected: OptionRowModel? = nil
-	public var selected: OptionRowModel? {
+	open var selected: OptionRowModel? {
 		get {
 			return self.innerSelected
 		}
@@ -71,30 +71,30 @@ public class OptionPickerFormItem: FormItem {
 		}
 	}
 	
-	public func setSelectedOptionRow(selected: OptionRowModel?) {
+	open func setSelectedOptionRow(_ selected: OptionRowModel?) {
 		SwiftyFormLog("option: \(selected?.title)")
 		innerSelected = selected
-		syncCellWithValue(selected: selected)
+		syncCellWithValue(selected)
 	}
 	
-	public typealias ValueDidChange = (selected: OptionRowModel?) -> Void
-	public var valueDidChange: ValueDidChange = { (selected: OptionRowModel?) in
+	public typealias ValueDidChange = (_ selected: OptionRowModel?) -> Void
+	open var valueDidChange: ValueDidChange = { (selected: OptionRowModel?) in
 		SwiftyFormLog("value did change not overridden")
 	}
 }
 
-public class OptionRowFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class OptionRowFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	public var selected: Bool = false
+	open var selected: Bool = false
 	
-	public var context: AnyObject?
+	open var context: AnyObject?
 }

@@ -1,34 +1,34 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class StaticTextFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class StaticTextFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 
-	typealias SyncBlock = (value: String) -> Void
+	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: String = ""
-	public var value: String {
+	open var value: String {
 		get {
 			return self.innerValue
 		}
 		set {
 			innerValue = newValue
-			syncCellWithValue(value: innerValue)
+			syncCellWithValue(innerValue)
 		}
 	}
-	public func value(value: String) -> Self {
+	open func value(_ value: String) -> Self {
 		self.value = value
 		return self
 	}

@@ -2,15 +2,15 @@
 import Foundation
 
 public enum DatePickerFormItemMode {
-	case Time
-	case Date
-	case DateAndTime
+	case time
+	case date
+	case dateAndTime
 	
 	var description: String {
 		switch self {
-		case .Time: return "Time"
-		case .Date: return "Date"
-		case .DateAndTime: return "DateAndTime"
+		case .time: return "Time"
+		case .date: return "Date"
+		case .dateAndTime: return "DateAndTime"
 		}
 	}
 }
@@ -22,13 +22,13 @@ public enum DatePickerFormItemMode {
 
 Behind the scenes this creates a `UIDatePicker`.
 */
-public class DatePickerFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class DatePickerFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -60,23 +60,23 @@ public class DatePickerFormItem: FormItem {
 	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
 	*/
 	public enum Behavior {
-		case Collapsed
-		case Expanded
-		case ExpandedAlways
+		case collapsed
+		case expanded
+		case expandedAlways
 	}
-	public var behavior = Behavior.Collapsed
-	public func behavior(behavior: Behavior) -> Self {
+	open var behavior = Behavior.collapsed
+	open func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
-	typealias SyncBlock = (date: NSDate, animated: Bool) -> Void
-	var syncCellWithValue: SyncBlock = { (date: NSDate, animated: Bool) in
+	typealias SyncBlock = (_ date: Date, _ animated: Bool) -> Void
+	var syncCellWithValue: SyncBlock = { (date: Date, animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(date)")
 	}
 	
-	internal var innerValue = NSDate()
-	public var value: NSDate {
+	internal var innerValue = Date()
+	open var value: Date {
 		get {
 			return self.innerValue
 		}
@@ -85,24 +85,24 @@ public class DatePickerFormItem: FormItem {
 		}
 	}
 	
-	public func setValue(date: NSDate, animated: Bool) {
+	open func setValue(_ date: Date, animated: Bool) {
 		innerValue = date
-		syncCellWithValue(date: date, animated: animated)
+		syncCellWithValue(date, animated)
 	}
 	
-	public var datePickerMode: DatePickerFormItemMode = .DateAndTime
-	public var locale: NSLocale? // default is [NSLocale currentLocale]. setting nil returns to default
-	public var minimumDate: NSDate? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
-	public var maximumDate: NSDate? // default is nil
+	open var datePickerMode: DatePickerFormItemMode = .dateAndTime
+	open var locale: Locale? // default is [NSLocale currentLocale]. setting nil returns to default
+	open var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+	open var maximumDate: Date? // default is nil
 	
 	
-	public typealias ValueDidChangeBlock = (value: NSDate) -> Void
-	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: NSDate) in
+	public typealias ValueDidChangeBlock = (_ value: Date) -> Void
+	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: Date) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func valueDidChange(value: NSDate) {
+	open func valueDidChange(_ value: Date) {
 		innerValue = value
-		valueDidChangeBlock(value: value)
+		valueDidChangeBlock(value)
 	}
 }

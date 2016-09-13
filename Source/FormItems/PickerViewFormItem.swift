@@ -8,13 +8,13 @@ import Foundation
 
 Behind the scenes this creates a `UIPickerView`.
 */
-public class PickerViewFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class PickerViewFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -46,28 +46,28 @@ public class PickerViewFormItem: FormItem {
 	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
 	*/
 	public enum Behavior {
-		case Collapsed
-		case Expanded
-		case ExpandedAlways
+		case collapsed
+		case expanded
+		case expandedAlways
 	}
-	public var behavior = Behavior.Collapsed
-	public func behavior(behavior: Behavior) -> Self {
+	open var behavior = Behavior.collapsed
+	open func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
 	
-	public var pickerTitles = [[String]]()
+	open var pickerTitles = [[String]]()
 	
-	public var humanReadableValueSeparator: String?
+	open var humanReadableValueSeparator: String?
 	
 
-	typealias SyncBlock = (value: [Int], animated: Bool) -> Void
+	typealias SyncBlock = (_ value: [Int], _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: [Int], animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(value)")
 	}
 	
-	private func maybeAssignFallbackValue() {
+	fileprivate func maybeAssignFallbackValue() {
 		if innerValue.count == pickerTitles.count {
 			return
 		}
@@ -85,7 +85,7 @@ public class PickerViewFormItem: FormItem {
 	
 	
 	internal var innerValue = [Int]()
-	public var value: [Int] {
+	open var value: [Int] {
 		get {
 			maybeAssignFallbackValue()
 			return self.innerValue
@@ -95,18 +95,18 @@ public class PickerViewFormItem: FormItem {
 		}
 	}
 	
-	public func setValue(value: [Int], animated: Bool) {
+	open func setValue(_ value: [Int], animated: Bool) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value, animated)
 	}
 
-	public typealias ValueDidChangeBlock = (value: [Int]) -> Void
-	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
+	public typealias ValueDidChangeBlock = (_ value: [Int]) -> Void
+	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
 		SwiftyFormLog("not overridden")
 	}
 
-	public func valueDidChange(value: [Int]) {
+	open func valueDidChange(_ value: [Int]) {
 		innerValue = value
-		valueDidChangeBlock(value: value)
+		valueDidChangeBlock(value)
 	}
 }

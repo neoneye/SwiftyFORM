@@ -1,9 +1,9 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class TableViewCellArrayItem {
-	public let cell: UITableViewCell
-	public var hidden: Bool
+open class TableViewCellArrayItem {
+	open let cell: UITableViewCell
+	open var hidden: Bool
 	
 	public init(cell: UITableViewCell, hidden: Bool) {
 		self.cell = cell
@@ -12,16 +12,16 @@ public class TableViewCellArrayItem {
 }
 
 
-public class TableViewCellArray {
-	private(set) var allItems: [TableViewCellArrayItem]
-	private(set) var visibleItems = [TableViewCellArrayItem]()
+open class TableViewCellArray {
+	fileprivate(set) var allItems: [TableViewCellArrayItem]
+	fileprivate(set) var visibleItems = [TableViewCellArrayItem]()
 	
-	public static func create(cells cells: [UITableViewCell]) -> TableViewCellArray {
+	open static func create(cells: [UITableViewCell]) -> TableViewCellArray {
 		let items = cells.map { TableViewCellArrayItem(cell: $0, hidden: false) }
 		return TableViewCellArray(allItems: items)
 	}
 	
-	public static func createEmpty() -> TableViewCellArray {
+	open static func createEmpty() -> TableViewCellArray {
 		return TableViewCellArray(allItems: [])
 	}
 	
@@ -30,24 +30,24 @@ public class TableViewCellArray {
 		reloadVisibleItems()
 	}
 	
-	public func reloadVisibleItems() {
+	open func reloadVisibleItems() {
 		visibleItems = allItems.filter { $0.hidden == false }
 	}
 	
-	public subscript(index: Int) -> UITableViewCell {
+	open subscript(index: Int) -> UITableViewCell {
 		return visibleItems[index].cell
 	}
 	
-	public var count: Int {
+	open var count: Int {
 		return visibleItems.count
 	}
 	
-	public func append(cell: UITableViewCell) {
+	open func append(_ cell: UITableViewCell) {
 		let item = TableViewCellArrayItem(cell: cell, hidden: false)
 		allItems.append(item)
 	}
 
-	public func appendHidden(cell: UITableViewCell) {
+	open func appendHidden(_ cell: UITableViewCell) {
 		let item = TableViewCellArrayItem(cell: cell, hidden: true)
 		allItems.append(item)
 	}

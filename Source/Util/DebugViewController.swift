@@ -2,9 +2,9 @@
 import UIKit
 
 public enum WhatToShow {
-	case Json(json: NSData)
-	case Text(text: String)
-	case Url(url: NSURL)
+	case json(json: Data)
+	case text(text: String)
+	case url(url: URL)
 }
 
 /*
@@ -12,12 +12,12 @@ Usage:
 DebugViewController.showURL(self, url: NSURL(string: "http://www.google.com")!)
 DebugViewController.showText(self, text: "hello world")
 */
-public class DebugViewController: UIViewController {
+open class DebugViewController: UIViewController {
 	
-	public let dismissBlock: Void -> Void
-	public let whatToShow: WhatToShow
+	open let dismissBlock: (Void) -> Void
+	open let whatToShow: WhatToShow
 	
-	public init(dismissBlock: Void -> Void, whatToShow: WhatToShow) {
+	public init(dismissBlock: @escaping (Void) -> Void, whatToShow: WhatToShow) {
 		self.dismissBlock = dismissBlock
 		self.whatToShow = whatToShow
 		super.init(nibName: nil, bundle: nil)
@@ -27,57 +27,57 @@ public class DebugViewController: UIViewController {
 	    fatalError("init(coder:) has not been implemented")
 	}
 
-	public class func showJSON(parentViewController: UIViewController, jsonData: NSData) {
-		showModally(parentViewController, whatToShow: WhatToShow.Json(json: jsonData))
+	open class func showJSON(_ parentViewController: UIViewController, jsonData: Data) {
+		showModally(parentViewController, whatToShow: WhatToShow.json(json: jsonData))
 	}
 
-	public class func showText(parentViewController: UIViewController, text: String) {
-		showModally(parentViewController, whatToShow: WhatToShow.Text(text: text))
+	open class func showText(_ parentViewController: UIViewController, text: String) {
+		showModally(parentViewController, whatToShow: WhatToShow.text(text: text))
 	}
 
-	public class func showURL(parentViewController: UIViewController, url: NSURL) {
-		showModally(parentViewController, whatToShow: WhatToShow.Url(url: url))
+	open class func showURL(_ parentViewController: UIViewController, url: URL) {
+		showModally(parentViewController, whatToShow: WhatToShow.url(url: url))
 	}
 	
 	
-	public class func showModally(parentViewController: UIViewController, whatToShow: WhatToShow) {
+	open class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
 		weak var weakSelf = parentViewController
-		let dismissBlock: Void -> Void = {
+		let dismissBlock: (Void) -> Void = {
 			if let vc = weakSelf {
-				vc.dismissViewControllerAnimated(true, completion: nil)
+				vc.dismiss(animated: true, completion: nil)
 			}
 		}
 		
 		let vc = DebugViewController(dismissBlock: dismissBlock, whatToShow: whatToShow)
 		let nc = UINavigationController(rootViewController: vc)
-		parentViewController.presentViewController(nc, animated: true, completion: nil)
+		parentViewController.present(nc, animated: true, completion: nil)
 	}
 
-	public override func loadView() {
+	open override func loadView() {
 		let webview = UIWebView()
 		self.view = webview
 		
-		let item = UIBarButtonItem(title: "Dismiss", style: .Plain, target: self, action: #selector(DebugViewController.dismissAction(_:)))
+		let item = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(DebugViewController.dismissAction(_:)))
 		self.navigationItem.leftBarButtonItem = item
 
 		switch whatToShow {
-		case let .Json(json):
-			let url = NSURL(string: "http://localhost")!
-			webview.loadData(json, MIMEType: "application/json", textEncodingName: "utf-8", baseURL: url)
+		case let .json(json):
+			let url = URL(string: "http://localhost")!
+			webview.load(json, mimeType: "application/json", textEncodingName: "utf-8", baseURL: url)
 			self.title = "JSON"
-		case let .Text(text):
-			let url = NSURL(string: "http://localhost")!
-			let data = (text as NSString).dataUsingEncoding(NSUTF8StringEncoding)!
-			webview.loadData(data, MIMEType: "text/plain", textEncodingName: "utf-8", baseURL: url)
+		case let .text(text):
+			let url = URL(string: "http://localhost")!
+			let data = (text as NSString).data(using: String.Encoding.utf8.rawValue)!
+			webview.load(data, mimeType: "text/plain", textEncodingName: "utf-8", baseURL: url)
 			self.title = "Text"
-		case let .Url(url):
-			let request = NSURLRequest(URL: url)
+		case let .url(url):
+			let request = URLRequest(url: url)
 			webview.loadRequest(request)
 			self.title = "URL"
 		}
 	}
 	
-	func dismissAction(sender: AnyObject?) {
+	func dismissAction(_ sender: AnyObject?) {
 		dismissBlock()
 	}
 

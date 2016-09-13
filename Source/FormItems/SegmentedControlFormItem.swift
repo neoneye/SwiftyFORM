@@ -1,28 +1,28 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class SegmentedControlFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class SegmentedControlFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	public var items: [String] = ["a", "b", "c"]
-	public func items(items: String...) -> Self {
+	open var items: [String] = ["a", "b", "c"]
+	open func items(_ items: String...) -> Self {
 		self.items = items
 		return self
 	}
-	public func itemsArray(items: [String]) -> Self {
+	open func itemsArray(_ items: [String]) -> Self {
 		self.items = items
 		return self
 	}
 	
-	public var selectedItem: String? {
+	open var selectedItem: String? {
 		let index = selected
 		if index >= 0 || index < items.count {
 			return items[index]
@@ -30,40 +30,40 @@ public class SegmentedControlFormItem: FormItem {
 		return nil
 	}
 
-	public var selected: Int {
+	open var selected: Int {
 		get { return value }
 		set { self.value = newValue }
 	}
 
-	public func selected(selected: Int) -> Self {
+	open func selected(_ selected: Int) -> Self {
 		self.value = selected
 		return self
 	}
 	
 	
-	typealias SyncBlock = (value: Int) -> Void
+	typealias SyncBlock = (_ value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: Int = 0
-	public var value: Int {
+	open var value: Int {
 		get {
 			return innerValue
 		}
 		set {
 			innerValue = newValue
-			syncCellWithValue(value: newValue)
+			syncCellWithValue(newValue)
 		}
 	}
 	
-	public typealias ValueDidChangeBlock = (value: Int) -> Void
-	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Int) in
+	public typealias ValueDidChangeBlock = (_ value: Int) -> Void
+	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: Int) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func valueDidChange(value: Int) {
+	open func valueDidChange(_ value: Int) {
 		innerValue = value
-		valueDidChangeBlock(value: value)
+		valueDidChangeBlock(value)
 	}
 }

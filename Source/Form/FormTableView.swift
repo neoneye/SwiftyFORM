@@ -1,11 +1,11 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class FormTableView: UITableView {
+open class FormTableView: UITableView {
 	public init() {
-		super.init(frame: CGRectZero, style: .Grouped)
-		contentInset = UIEdgeInsetsZero
-		scrollIndicatorInsets = UIEdgeInsetsZero
+		super.init(frame: CGRect.zero, style: .grouped)
+		contentInset = UIEdgeInsets.zero
+		scrollIndicatorInsets = UIEdgeInsets.zero
 		estimatedRowHeight = 44.0
 	}
 

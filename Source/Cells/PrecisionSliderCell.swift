@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class PrecisionSliderCellModel {
+open class PrecisionSliderCellModel {
 	var title: String?
 	var decimalPlaces: UInt = 3
 	var value: Int = 0
@@ -11,7 +11,7 @@ public class PrecisionSliderCellModel {
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
 	var collapseWhenResigning = false
-	var selectionStyle = UITableViewCellSelectionStyle.Default
+	var selectionStyle = UITableViewCellSelectionStyle.default
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -20,7 +20,7 @@ public class PrecisionSliderCellModel {
 		let zoomUpdated: Bool
 	}
 	
-	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	public typealias SliderDidChangeBlock = (_ changeModel: SliderDidChangeModel) -> Void
 	var valueDidChange: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("value \(changeModel.value)  zoom \(changeModel.zoom)")
 	}
@@ -32,7 +32,7 @@ public class PrecisionSliderCellModel {
 }
 
 public struct PrecisionSliderCellFormatter {
-	public static func format(value value: Int, decimalPlaces: UInt) -> String {
+	public static func format(value: Int, decimalPlaces: UInt) -> String {
 		let decimalScale: Int = Int(pow(Double(10), Double(decimalPlaces)))
 		let integerValue = abs(value / decimalScale)
 		let sign: String = value < 0 ? "-" : ""
@@ -58,13 +58,13 @@ public struct PrecisionSliderCellFormatter {
 
 This causes the inline precision slider to expand/collapse
 */
-public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: PrecisionSliderExpandedCell?
-	public let model: PrecisionSliderCellModel
+	open let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {
 		self.model = model
-		super.init(style: .Value1, reuseIdentifier: nil)
+		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
 		clipsToBounds = true
 		textLabel?.text = model.title
@@ -80,7 +80,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
 	}
 	
-	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+	func sliderDidChange(_ changeModel: PrecisionSlider.SliderDidChangeModel) {
 		var valueUpdated = false
 		if changeModel.valueUpdated {
 			let decimalScale: Double = pow(Double(10), Double(model.decimalPlaces))
@@ -103,15 +103,15 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 			zoomUpdated: changeModel.zoomUpdated
 		)
 		
-		model.valueDidChange(changeModel: changeModel)
+		model.valueDidChange(changeModel)
 		reloadValueLabel()
 	}
 	
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return
@@ -129,14 +129,14 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	
 	// MARK: UIResponder
 	
-	public override func canBecomeFirstResponder() -> Bool {
+	open override var canBecomeFirstResponder : Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
 	
-	public override func becomeFirstResponder() -> Bool {
+	open override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
 		}
@@ -144,7 +144,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		return true
 	}
 	
-	public override func resignFirstResponder() -> Bool {
+	open override func resignFirstResponder() -> Bool {
 		if model.collapseWhenResigning {
 			collapse()
 		}
@@ -202,12 +202,12 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	
 	// MARK: AssignAppearance
 
-	public func assignDefaultColors() {
-		textLabel?.textColor = UIColor.blackColor()
-		detailTextLabel?.textColor = UIColor.grayColor()
+	open func assignDefaultColors() {
+		textLabel?.textColor = UIColor.black
+		detailTextLabel?.textColor = UIColor.gray
 	}
 	
-	public func assignTintColors() {
+	open func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
@@ -221,7 +221,7 @@ extension PrecisionSliderCellModel {
 		static let maxZoomedIn_DistanceBetweenMarks: Double = 60
 	}
 	
-	func sliderViewModel(sliderWidth sliderWidth: CGFloat) -> PrecisionSlider_InnerModel {
+	func sliderViewModel(sliderWidth: CGFloat) -> PrecisionSlider_InnerModel {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		let minimumValue = Double(self.minimumValue) / decimalScale
 		let maximumValue = Double(self.maximumValue) / decimalScale
@@ -284,14 +284,14 @@ extension PrecisionSliderCellModel {
 Row containing only a `PrecisionSlider`. This is not a standard Apple control.
 Please contact Simon Strandgaard if you have questions regarding it.
 */
-public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
+open class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
 	weak var collapsedCell: PrecisionSliderToggleCell?
 
-	public var toggleCell: UITableViewCell? {
+	open var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
 	
-	public var isCollapsable: Bool {
+	open var isCollapsable: Bool {
 		if let cell = collapsedCell {
 			if cell.model.expandCollapseWhenSelectingRow {
 				return cell.model.collapseWhenResigning
@@ -300,11 +300,11 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 		return false
 	}
 	
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return PrecisionSlider_InnerModel.height
 	}
 	
-	func sliderDidChange(changeModel: PrecisionSlider.SliderDidChangeModel) {
+	func sliderDidChange(_ changeModel: PrecisionSlider.SliderDidChangeModel) {
 		collapsedCell?.sliderDidChange(changeModel)
 	}
 	
@@ -315,7 +315,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 	}()
 	
 	public init() {
-		super.init(style: .Default, reuseIdentifier: nil)
+		super.init(style: .default, reuseIdentifier: nil)
 		addSubview(slider)
 	}
 	
@@ -323,12 +323,12 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public override func layoutSubviews() {
+	open override func layoutSubviews() {
 		super.layoutSubviews()
 		slider.frame = bounds
 		
-		let tinyDelay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Float(NSEC_PER_SEC)))
-		dispatch_after(tinyDelay, dispatch_get_main_queue()) {
+		let tinyDelay = DispatchTime.now() + Double(Int64(0.001 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		DispatchQueue.main.asyncAfter(deadline: tinyDelay) {
 			self.assignInitialValue()
 		}
 	}
@@ -363,7 +363,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 		}
 	}
 	
-	func setValueWithoutSync(value: Int) {
+	func setValueWithoutSync(_ value: Int) {
 		guard let model = collapsedCell?.model else {
 			return
 		}

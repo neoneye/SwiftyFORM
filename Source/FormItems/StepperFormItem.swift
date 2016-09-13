@@ -1,24 +1,24 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class StepperFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class StepperFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 
-	public var title: String = ""
-	public func title(title: String) -> Self {
+	open var title: String = ""
+	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 
-	typealias SyncBlock = (value: Int, animated: Bool) -> Void
+	typealias SyncBlock = (_ value: Int, _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
 	}
 
 	internal var innerValue: Int = 0
-	public var value: Int {
+	open var value: Int {
 		get {
 			return self.innerValue
 		}
@@ -27,8 +27,8 @@ public class StepperFormItem: FormItem {
 		}
 	}
 
-	public func setValue(value: Int, animated: Bool) {
+	open func setValue(_ value: Int, animated: Bool) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value, animated)
 	}
 }

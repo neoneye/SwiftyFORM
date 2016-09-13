@@ -1,31 +1,31 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-public class SliderFormItem: FormItem {
-	override func accept(visitor: FormItemVisitor) {
+open class SliderFormItem: FormItem {
+	override func accept(_ visitor: FormItemVisitor) {
 		visitor.visit(self)
 	}
 	
-	public var minimumValue: Float = 0.0
-	public func minimumValue(minimumValue: Float) -> Self {
+	open var minimumValue: Float = 0.0
+	open func minimumValue(_ minimumValue: Float) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
-	public var maximumValue: Float = 1.0
-	public func maximumValue(maximumValue: Float) -> Self {
+	open var maximumValue: Float = 1.0
+	open func maximumValue(_ maximumValue: Float) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
 	
 	
-	typealias SyncBlock = (value: Float, animated: Bool) -> Void
+	typealias SyncBlock = (_ value: Float, _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Float, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
 	}
 	
 	internal var innerValue: Float = 0.0
-	public var value: Float {
+	open var value: Float {
 		get {
 			return self.innerValue
 		}
@@ -33,23 +33,23 @@ public class SliderFormItem: FormItem {
 			self.setValue(newValue, animated: false)
 		}
 	}
-	public func value(value: Float) -> Self {
+	open func value(_ value: Float) -> Self {
 		setValue(value, animated: false)
 		return self
 	}
 	
-	public func setValue(value: Float, animated: Bool) {
+	open func setValue(_ value: Float, animated: Bool) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value, animated)
 	}
 
-	public typealias SliderDidChangeBlock = (value: Float) -> Void
-	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
+	public typealias SliderDidChangeBlock = (_ value: Float) -> Void
+	open var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func sliderDidChange(value: Float) {
+	open func sliderDidChange(_ value: Float) {
 		innerValue = value
-		sliderDidChangeBlock(value: value)
+		sliderDidChangeBlock(value)
 	}
 }

@@ -6,12 +6,12 @@ public struct StaticTextCellModel {
 	var value: String = ""
 }
 
-public class StaticTextCell: UITableViewCell {
-	public var model: StaticTextCellModel
+open class StaticTextCell: UITableViewCell {
+	open var model: StaticTextCellModel
 
 	public init(model: StaticTextCellModel) {
 		self.model = model
-		super.init(style: .Value1, reuseIdentifier: nil)
+		super.init(style: .value1, reuseIdentifier: nil)
 		loadWithModel(model)
 	}
 	
@@ -19,8 +19,8 @@ public class StaticTextCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func loadWithModel(model: StaticTextCellModel) {
-		selectionStyle = .None
+	open func loadWithModel(_ model: StaticTextCellModel) {
+		selectionStyle = .none
 		textLabel?.text = model.title
 		detailTextLabel?.text = model.value
 	}
