@@ -8,9 +8,9 @@ class SignUpViewController: FormViewController {
 		form_installSubmitButton()
 	}
 
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Sign Up"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder.demo_showInfo("SocialNetwork 123\nSign up form")
 		builder += SectionHeaderTitleFormItem().title("Details")
 		builder += userName
@@ -31,8 +31,8 @@ class SignUpViewController: FormViewController {
 	lazy var userName: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("User Name").placeholder("required")
-		instance.keyboardType = .ASCIICapable
-		instance.autocorrectionType = .No
+		instance.keyboardType = .asciiCapable
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.lowercaseLetterCharacterSet(), message: "Must be lowercase letters")
 		instance.submitValidate(CountSpecification.min(6), message: "Length must be minimum 6 letters")
 		instance.validate(CountSpecification.max(8), message: "Length must be maximum 8 letters")
@@ -59,8 +59,8 @@ class SignUpViewController: FormViewController {
 	lazy var password: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("PIN Code").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -70,18 +70,18 @@ class SignUpViewController: FormViewController {
 	lazy var email: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Email").placeholder("johndoe@example.com")
-		instance.keyboardType = .EmailAddress
+		instance.keyboardType = .emailAddress
 		instance.submitValidate(CountSpecification.min(6), message: "Length must be minimum 6 letters")
 		instance.validate(CountSpecification.max(60), message: "Length must be maximum 60 letters")
 		instance.softValidate(EmailSpecification(), message: "Must be a valid email address")
 		return instance
 		}()
 	
-	func offsetDate(date: NSDate, years: Int) -> NSDate {
-		let dateComponents = NSDateComponents()
+	func offsetDate(_ date: Date, years: Int) -> Date {
+		var dateComponents = DateComponents()
 		dateComponents.year = years
-		let calendar = NSCalendar.currentCalendar()
-		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+		let calendar = Calendar.current
+		guard let resultDate = (calendar as NSCalendar).date(byAdding: dateComponents, to: date, options: NSCalendar.Options(rawValue: 0)) else {
 			return date
 		}
 		return resultDate
@@ -91,9 +91,9 @@ class SignUpViewController: FormViewController {
 		let today = NSDate()
 		let instance = DatePickerFormItem()
 		instance.title("Birthday")
-		instance.datePickerMode = .Date
-		instance.minimumDate = self.offsetDate(today, years: -150)
-		instance.maximumDate = today
+		instance.datePickerMode = .date
+		instance.minimumDate = self.offsetDate(today as Date, years: -150)
+		instance.maximumDate = today as Date
 		return instance
 		}()
 	
@@ -106,11 +106,11 @@ class SignUpViewController: FormViewController {
 	
 	lazy var metaData: MetaFormItem = {
 		let instance = MetaFormItem()
-		var dict = [String: AnyObject]()
-		dict["key0"] = "I'm hidden text"
-		dict["key1"] = "I'm included when exporting to JSON"
-		dict["key2"] = "Can be used to pass extra info along with the JSON"
-		instance.value(dict).elementIdentifier("metaData")
+		var dict = [String: AnyObject?]()
+		dict["key0"] = "I'm hidden text" as AnyObject?
+		dict["key1"] = "I'm included when exporting to JSON" as AnyObject?
+		dict["key2"] = "Can be used to pass extra info along with the JSON" as AnyObject?
+		instance.value(dict as AnyObject?).elementIdentifier("metaData")
 		return instance
 		}()
 	
@@ -123,7 +123,7 @@ class SignUpViewController: FormViewController {
 		return instance
 		}()
 
-	func pickRandom(strings: [String]) -> String {
+	func pickRandom(_ strings: [String]) -> String {
 		if strings.count == 0 {
 			return ""
 		}
@@ -131,9 +131,9 @@ class SignUpViewController: FormViewController {
 		return strings[i]
 	}
 	
-	func pickRandomDate() -> NSDate {
+	func pickRandomDate() -> Date {
 		let i = randomInt(20, 60)
-		let today = NSDate()
+		let today = Date()
 		return offsetDate(today, years: -i)
 	}
 	

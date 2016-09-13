@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class OptionsViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Options"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		builder += SectionHeaderTitleFormItem().title("Options")
 		builder += adoptBitcoin
 		builder += exploreSpace
@@ -72,7 +72,7 @@ class OptionsViewController: FormViewController {
 		return instance
 		}()
 	
-	func assignRandomOption(optionField: OptionPickerFormItem) {
+	func assignRandomOption(_ optionField: OptionPickerFormItem) {
 		var selected: OptionRowModel? = nil
 		let options = optionField.options
 		if options.count > 0 {

@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class ColorPickerViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Color picker"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 
 		builder.demo_showInfo("Tap row to expand/collapse.\nPinch to change precision.\nPan to change value.")
 		
@@ -75,7 +75,7 @@ class ColorPickerViewController: FormViewController {
 		view?.backgroundColor = color
 		
 		navigationController?.navigationBar.barTintColor = color
-		navigationController?.navigationBar.translucent = false
+		navigationController?.navigationBar.isTranslucent = false
 	}
 
 	lazy var randomizeButton: ButtonFormItem = {
@@ -87,7 +87,7 @@ class ColorPickerViewController: FormViewController {
 		return instance
 	}()
 	
-	func assignRandomValue(formItem: PrecisionSliderFormItem) {
+	func assignRandomValue(_ formItem: PrecisionSliderFormItem) {
 		formItem.value = randomInt(0, 1000)
 	}
 	
@@ -99,11 +99,11 @@ class ColorPickerViewController: FormViewController {
 		updateColor()
 	}
 
-	override func viewWillDisappear(animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
 		// restore the navigationbar theme when leaving this page
 		navigationController?.navigationBar.barTintColor = nil
-		navigationController?.navigationBar.translucent = true
+		navigationController?.navigationBar.isTranslucent = true
 	}
 }

@@ -5,20 +5,20 @@ import SwiftyFORM
 class ScientificSliderViewController: UIViewController {
 	override func loadView() {
 		super.loadView()
-		view.backgroundColor = UIColor.lightGrayColor()
+		view.backgroundColor = UIColor.lightGray
 		view.addSubview(focusView)
 		view.addSubview(label)
 		view.addSubview(titleLabel)
 		view.addSubview(usageLabel)
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		focusView.addGestureRecognizer(panGesture)
 		updateLabel()
 	}
 	
-	override func viewDidDisappear(animated: Bool) {
+	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		focusView.removeGestureRecognizer(panGesture)
 	}
@@ -30,7 +30,7 @@ class ScientificSliderViewController: UIViewController {
 	
 	lazy var focusView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.whiteColor()
+		instance.backgroundColor = UIColor.white
 		return instance
 	}()
 	
@@ -38,8 +38,8 @@ class ScientificSliderViewController: UIViewController {
 		let instance = UILabel()
 		instance.text = "Pan left/right to adjust magnitude.\n\nPan up/down to adjust value."
 		instance.numberOfLines = 0
-		instance.textAlignment = .Center
-		instance.font = UIFont.systemFontOfSize(17)
+		instance.textAlignment = .center
+		instance.font = UIFont.systemFont(ofSize: 17)
 		return instance
 	}()
 	
@@ -47,8 +47,8 @@ class ScientificSliderViewController: UIViewController {
 		let instance = UILabel()
 		instance.text = "Value"
 		instance.numberOfLines = 0
-		instance.textAlignment = .Left
-		instance.font = UIFont.boldSystemFontOfSize(18)
+		instance.textAlignment = .left
+		instance.font = UIFont.boldSystemFont(ofSize: 18)
 		return instance
 	}()
 	
@@ -56,8 +56,8 @@ class ScientificSliderViewController: UIViewController {
 		let instance = UILabel()
 		instance.text = "-"
 		instance.numberOfLines = 0
-		instance.textAlignment = .Right
-		instance.font = UIFont.systemFontOfSize(20)
+		instance.textAlignment = .right
+		instance.font = UIFont.systemFont(ofSize: 20)
 		return instance
 	}()
 	
@@ -90,7 +90,7 @@ class ScientificSliderViewController: UIViewController {
 		}
 		var fp = ""
 		var sp = ""
-		for (index, char) in xs.characters.reverse().enumerate() {
+		for (index, char) in xs.characters.reversed().enumerated() {
 			if index >= cutpoint {
 				fp = "\(char)\(fp)"
 			} else {
@@ -98,12 +98,12 @@ class ScientificSliderViewController: UIViewController {
 			}
 		}
 		
-		let firstPart = NSAttributedString(string: fp, attributes: [NSForegroundColorAttributeName: UIColor.blackColor()])
-		let secondPart = NSAttributedString(string: sp, attributes: [NSForegroundColorAttributeName: UIColor.lightGrayColor()])
+		let firstPart = NSAttributedString(string: fp, attributes: [NSForegroundColorAttributeName: UIColor.black])
+		let secondPart = NSAttributedString(string: sp, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
 		
 		let text = NSMutableAttributedString()
-		text.appendAttributedString(firstPart)
-		text.appendAttributedString(secondPart)
+		text.append(firstPart)
+		text.append(secondPart)
 		
 		label.attributedText = text
 		view.setNeedsLayout()
@@ -114,7 +114,7 @@ class ScientificSliderViewController: UIViewController {
 		
 		do {
 			let frame = view.bounds.insetBy(dx: 10, dy: 80)
-			let (f0, _) = frame.divide(200, fromEdge: .MinYEdge)
+			let (f0, _) = frame.divided(atDistance: 200, from: .minYEdge)
 			usageLabel.frame = f0
 		}
 		
@@ -143,16 +143,16 @@ class ScientificSliderViewController: UIViewController {
 	var xDelta: CGFloat = 0
 	var yDelta: CGFloat = 0
 	
-	func handlePan(gesture: UIPanGestureRecognizer) {
-		if gesture.state == .Began {
+	func handlePan(_ gesture: UIPanGestureRecognizer) {
+		if gesture.state == .began {
 			xOriginal = x
 			yOriginal = y
 			xDelta = 0
 			yDelta = 0
 		}
 		
-		if gesture.state == .Changed {
-			let translation = gesture.translationInView(gesture.view)
+		if gesture.state == .changed {
+			let translation = gesture.translation(in: gesture.view)
 			xDelta -= translation.y * 0.1
 			yDelta -= translation.x * 0.05
 			
@@ -176,7 +176,7 @@ class ScientificSliderViewController: UIViewController {
 			}
 			
 			updateLabel()
-			gesture.setTranslation(CGPointZero, inView: gesture.view)
+			gesture.setTranslation(CGPoint.zero, in: gesture.view)
 		}
 	}
 }

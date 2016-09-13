@@ -4,9 +4,9 @@ import SwiftyFORM
 
 class DatePickerBindingViewController: FormViewController {
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder += SectionHeaderTitleFormItem(title: "Always expanded")
 		builder += datePicker
 		builder += incrementButton
@@ -28,8 +28,8 @@ class DatePickerBindingViewController: FormViewController {
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title("Date")
-		instance.datePickerMode = .Date
-		instance.behavior = .ExpandedAlways
+		instance.datePickerMode = .date
+		instance.behavior = .expandedAlways
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
@@ -62,11 +62,11 @@ class DatePickerBindingViewController: FormViewController {
 		summary.value = "\(datePicker.value)"
 	}
 	
-	func offsetDate(date: NSDate, days: Int) -> NSDate {
-		let dateComponents = NSDateComponents()
+	func offsetDate(_ date: Date, days: Int) -> Date {
+		var dateComponents = DateComponents()
 		dateComponents.day = days
-		let calendar = NSCalendar.currentCalendar()
-		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+		let calendar = Calendar.current
+		guard let resultDate = (calendar as NSCalendar).date(byAdding: dateComponents, to: date, options: NSCalendar.Options(rawValue: 0)) else {
 			return date
 		}
 		return resultDate
@@ -87,32 +87,32 @@ class DatePickerBindingViewController: FormViewController {
 	lazy var userName: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("User Name").placeholder("required")
-		instance.keyboardType = .ASCIICapable
-		instance.autocorrectionType = .No
+		instance.keyboardType = .asciiCapable
+		instance.autocorrectionType = .no
 		return instance
 	}()
 	
 	lazy var toggleDatePicker0: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title("Toggle 0")
-		instance.datePickerMode = .Time
-		instance.behavior = .Expanded
+		instance.datePickerMode = .time
+		instance.behavior = .expanded
 		return instance
 	}()
 	
 	lazy var toggleDatePicker1: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title("Toggle 1")
-		instance.datePickerMode = .Time
-		instance.behavior = .Collapsed
+		instance.datePickerMode = .time
+		instance.behavior = .collapsed
 		return instance
 	}()
 	
 	lazy var toggleDatePicker2: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title("Toggle 2")
-		instance.datePickerMode = .Time
-		instance.behavior = .Collapsed
+		instance.datePickerMode = .time
+		instance.behavior = .collapsed
 		return instance
 	}()
 	

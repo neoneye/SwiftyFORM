@@ -2,7 +2,7 @@
 import Foundation
 
 open class DumpVisitor: FormItemVisitor {
-	fileprivate typealias StringToAnyObject = [String: AnyObject]
+	fileprivate typealias StringToAnyObject = [String: AnyObject?]
 	
 	public init() {
 	}
@@ -25,10 +25,10 @@ open class DumpVisitor: FormItemVisitor {
 				dict["validate-status"] = "ok" as AnyObject?
 			case .hardInvalid(let message):
 				dict["validate-status"] = "hard-invalid" as AnyObject?
-				dict["validate-message"] = message
+				dict["validate-message"] = message as AnyObject?
 			case .softInvalid(let message):
 				dict["validate-status"] = "soft-invalid" as AnyObject?
-				dict["validate-message"] = message
+				dict["validate-message"] = message as AnyObject?
 			}
 			
 			dict.update(dumpVisitor.dict)
@@ -134,7 +134,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 		dict["date"] = convertOptionalDateToJSON(object.value as Date)
 		dict["datePickerMode"] = object.datePickerMode.description as AnyObject?
-		dict["locale"] = object.locale ?? NSNull()
+		dict["locale"] = object.locale as AnyObject?
 		dict["minimumDate"] = convertOptionalDateToJSON(object.minimumDate as Date?)
 		dict["maximumDate"] = convertOptionalDateToJSON(object.minimumDate as Date?)
 	}

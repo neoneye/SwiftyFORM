@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class ButtonsViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Buttons"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		builder += SectionHeaderTitleFormItem().title("Table Row Buttons")
 		builder += button0
 		builder += button1
