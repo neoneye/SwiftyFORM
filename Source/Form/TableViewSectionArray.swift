@@ -59,7 +59,7 @@ open class TableViewSectionArray: NSObject, UITableViewDataSource, UITableViewDe
 	}
 	
 	open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return sections[(indexPath as NSIndexPath).section].tableView(tableView: tableView, cellForRowAtIndexPath: indexPath)
+		return sections[(indexPath as NSIndexPath).section].tableView(tableView, cellForRowAtIndexPath: indexPath)
 	}
 	
 	open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

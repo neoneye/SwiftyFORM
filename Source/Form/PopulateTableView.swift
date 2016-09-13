@@ -50,7 +50,7 @@ class PopulateTableView: FormItemVisitor {
 		self.model = model
 	}
 	
-	func closeSection(_ footerBlock: TableViewSectionPart.CreateBlock) {
+	func closeSection(_ footerBlock: @escaping TableViewSectionPart.CreateBlock) {
 		var headerBlock: (Void) -> TableViewSectionPart = {
 			return TableViewSectionPart.none
 		}
