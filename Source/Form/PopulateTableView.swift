@@ -57,16 +57,15 @@ class PopulateTableView: FormItemVisitor {
 		let headerToCreate = self.pendingHeader
 		self.pendingHeader = .Default
 		
-		var headerBlock: Void -> TableViewSectionPart = {
-			return headerToCreate
-		}
 		// TODO: overwrite with header block when available
 //		if let block = self.headerBlock {
 //			headerBlock = block
 //		}
 		
+		let footer: TableViewSectionPart = footerBlock()
+		
 		cells.reloadVisibleItems()
-		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
+		let section = TableViewSection(cells: cells, header: headerToCreate, footer: footer)
 		sections.append(section)
 
 		cells = TableViewCellArray.createEmpty()

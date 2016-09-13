@@ -3,24 +3,15 @@ import UIKit
 
 public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDelegate {
 	public let cells: TableViewCellArray
-	private let headerBlock: TableViewSectionPart.CreateBlock
-	private let footerBlock: TableViewSectionPart.CreateBlock
+	private let header: TableViewSectionPart
+	private let footer: TableViewSectionPart
 	
-	init(cells: TableViewCellArray, headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
+	init(cells: TableViewCellArray, header: TableViewSectionPart, footer: TableViewSectionPart) {
 		self.cells = cells
-		self.headerBlock = headerBlock
-		self.footerBlock = footerBlock
+		self.header = header
+		self.footer = footer
 		super.init()
 	}
-
-	private lazy var header: TableViewSectionPart = {
-		return self.headerBlock()
-		}()
-
-	private lazy var footer: TableViewSectionPart = {
-		return self.footerBlock()
-		}()
-
 	
 	public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
