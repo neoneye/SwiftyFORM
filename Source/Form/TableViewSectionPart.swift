@@ -2,8 +2,8 @@
 import UIKit
 
 public enum TableViewSectionPart {
-	case Default
 	case None
+	case Default
 	case TitleString(string: String)
 	case TitleView(view: UIView)
 	
@@ -31,10 +31,12 @@ public enum TableViewSectionPart {
 		switch self {
 		case .None:
 			return CGFloat.min
+		case .Default:
+			return 35
 		case let .TitleView(view):
 			let view2: UIView = view
 			return view2.frame.size.height
-		default:
+		case .TitleString(_):
 			return UITableViewAutomaticDimension
 		}
 	}
