@@ -2,15 +2,15 @@
 import UIKit
 
 public class SimpleToolbar: UIToolbar {
-	public var jumpToPrevious: Void -> Void = {}
-	public var jumpToNext: Void -> Void = {}
-	public var dismissKeyboard: Void -> Void = {}
+	public var jumpToPrevious: (Void) -> Void = {}
+	public var jumpToNext: (Void) -> Void = {}
+	public var dismissKeyboard: (Void) -> Void = {}
 	
 	public init() {
-		super.init(frame: CGRectZero)
-		self.backgroundColor = UIColor.whiteColor()
+		super.init(frame: CGRect.zero)
+		self.backgroundColor = UIColor.white
 		self.items = self.toolbarItems()
-		self.autoresizingMask = [.FlexibleWidth, .FlexibleHeight, .FlexibleBottomMargin, .FlexibleTopMargin]
+		self.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleTopMargin]
 	}
 	
 	public required init(coder aDecoder: NSCoder) {
@@ -18,33 +18,33 @@ public class SimpleToolbar: UIToolbar {
 	}
 	
 	public lazy var previousButton: UIBarButtonItem = {
-		let image = UIImage(named: "SwiftFORMArrowLeft", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
+		let image = UIImage(named: "SwiftFORMArrowLeft", in: Bundle(for: type(of: self)), compatibleWith: nil)
 		if let image = image {
-			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
+			let image2 = image.withRenderingMode(.alwaysTemplate)
+			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: "◀︎", style: .Plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
+		return UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}()
 	
 	public lazy var nextButton: UIBarButtonItem = {
-		let image = UIImage(named: "SwiftFORMArrowRight", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)
+		let image = UIImage(named: "SwiftFORMArrowRight", in: Bundle(for: type(of: self)), compatibleWith: nil)
 		if let image = image {
-			let image2 = image.imageWithRenderingMode(.AlwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
+			let image2 = image.withRenderingMode(.alwaysTemplate)
+			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}
-		return UIBarButtonItem(title: "▶", style: .Plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
+		return UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}()
 	
 	public lazy var closeButton: UIBarButtonItem = {
-		let item = UIBarButtonItem(title: "OK", style: .Plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
+		let item = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
 		return item
 		}()
 	
 	public func toolbarItems() -> [UIBarButtonItem] {
-		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
 		spacer0.width = 15.0
 		
-		let spacer1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+		let spacer1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
 		
 		var items = [UIBarButtonItem]()
 		items.append(previousButton)
@@ -55,20 +55,20 @@ public class SimpleToolbar: UIToolbar {
 		return items
 	}
 	
-	public func previousButtonAction(sender: UIBarButtonItem!) {
+	public func previousButtonAction(_ sender: UIBarButtonItem!) {
 		jumpToPrevious()
 	}
 
-	public func nextButtonAction(sender: UIBarButtonItem!) {
+	public func nextButtonAction(_ sender: UIBarButtonItem!) {
 		jumpToNext()
 	}
 	
-	public func closeButtonAction(sender: UIBarButtonItem!) {
+	public func closeButtonAction(_ sender: UIBarButtonItem!) {
 		dismissKeyboard()
 	}
 	
-	public func updateButtonConfiguration(cell: UITableViewCell) {
-		previousButton.enabled = cell.form_canMakePreviousCellFirstResponder()
-		nextButton.enabled = cell.form_canMakeNextCellFirstResponder()
+	public func updateButtonConfiguration(_ cell: UITableViewCell) {
+		previousButton.isEnabled = cell.form_canMakePreviousCellFirstResponder()
+		nextButton.isEnabled = cell.form_canMakeNextCellFirstResponder()
 	}
 }

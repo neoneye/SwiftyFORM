@@ -2,19 +2,19 @@
 import UIKit
 
 public struct TextViewFormItemCellSizes {
-	var titleLabelFrame: CGRect = CGRectZero
-	var placeholderLabelFrame: CGRect = CGRectZero
-	var textViewFrame: CGRect = CGRectZero
-	var errorLabelFrame: CGRect = CGRectZero
+	var titleLabelFrame: CGRect = CGRect.zero
+	var placeholderLabelFrame: CGRect = CGRect.zero
+	var textViewFrame: CGRect = CGRect.zero
+	var errorLabelFrame: CGRect = CGRect.zero
 	var cellHeight: CGFloat = 0
 }
 
 public struct TextViewCellModel {
 	var title: String = ""
 	var placeholder: String = ""
-	var toolbarMode: ToolbarMode = .Simple
+	var toolbarMode: ToolbarMode = .simple
 
-	var valueDidChange: String -> Void = { (value: String) in
+	var valueDidChange: (String) -> Void = { (value: String) in
 		SwiftyFormLog("value \(value)")
 	}
 }
@@ -27,26 +27,26 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	
 	public init(model: TextViewCellModel) {
 		self.model = model
-		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .None
+		super.init(style: .value1, reuseIdentifier: nil)
+		selectionStyle = .none
 
 		titleLabel.text = model.title
-		titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
 
 		placeholderLabel.text = model.placeholder
-		placeholderLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-		placeholderLabel.textColor = UIColor.lightGrayColor()
+		placeholderLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		placeholderLabel.textColor = UIColor.lightGray
 
-		textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-		textView.textColor = UIColor.blackColor()
-		textView.backgroundColor = UIColor.clearColor()
-		textView.scrollEnabled = false
+		textView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		textView.textColor = UIColor.black
+		textView.backgroundColor = UIColor.clear
+		textView.isScrollEnabled = false
 		textView.delegate = self
 
 		textView.textContainer.lineFragmentPadding = 0
 		textView.textContainerInset = UIEdgeInsetsMake(5, 16, 10, 16)
 
-		if model.toolbarMode == .Simple {
+		if model.toolbarMode == .simple {
 			textView.inputAccessoryView = toolbar
 		}
 
@@ -63,8 +63,8 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func handleTap(sender: UITapGestureRecognizer) {
-		self.becomeFirstResponder()
+	public func handleTap(_ sender: UITapGestureRecognizer) {
+		_ = self.becomeFirstResponder()
 	}
 	
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
@@ -94,7 +94,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		}()
 	
 	public func updateToolbarButtons() {
-		if model.toolbarMode == .Simple {
+		if model.toolbarMode == .simple {
 			toolbar.updateButtonConfiguration(self)
 		}
 	}
@@ -111,22 +111,22 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	
 	public func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
-		resignFirstResponder()
+		_ = resignFirstResponder()
 	}
 	
-	public func textViewDidBeginEditing(textView: UITextView) {
+	public func textViewDidBeginEditing(_ textView: UITextView) {
 		updateToolbarButtons()
 	}
 
-	public func textViewDidChange(textView: UITextView) {
+	public func textViewDidChange(_ textView: UITextView) {
 		updateValue()
 		model.valueDidChange(textView.text)
 	}
 
 	public func updateValue() {
 		let s = textView.text
-		let hasText = s.characters.count > 0
-		placeholderLabel.hidden = hasText
+		let hasText = (s?.characters.count)! > 0
+		placeholderLabel.isHidden = hasText
 		
 		let tableView: UITableView? = form_tableView()
 		if let tv = tableView {
@@ -136,49 +136,49 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		}
 	}
 	
-	public func setValueWithoutSync(value: String) {
+	public func setValueWithoutSync(_ value: String) {
 		SwiftyFormLog("set value \(value)")
 		textView.text = value
 		updateValue()
 	}
 	
-	public func compute(cellWidth: CGFloat) -> TextViewFormItemCellSizes {
+	public func compute(_ cellWidth: CGFloat) -> TextViewFormItemCellSizes {
 		
-		var titleLabelFrame = CGRectZero
-		var placeholderLabelFrame = CGRectZero
-		var textViewFrame = CGRectZero
-		let errorLabelFrame = CGRectZero
+		var titleLabelFrame = CGRect.zero
+		var placeholderLabelFrame = CGRect.zero
+		var textViewFrame = CGRect.zero
+		let errorLabelFrame = CGRect.zero
 		var maxY: CGFloat = 0
-		let veryTallCell = CGRectMake(0, 0, cellWidth, CGFloat.max)
-		var (slice, remainder) = veryTallCell.divide(10, fromEdge: .MinYEdge)
+		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
+		var (slice, remainder) = veryTallCell.divided(atDistance: 10, from: .minYEdge)
 		
 		if true {
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
 			availableSize.width -= dx * 2
 			let size = titleLabel.sizeThatFits(availableSize)
-			(slice, remainder) = remainder.divide(size.height, fromEdge: .MinYEdge)
+			(slice, remainder) = remainder.divided(atDistance: size.height, from: .minYEdge)
 			titleLabelFrame = slice.insetBy(dx: dx, dy: 0)
 		}
 		
 		let bottomRemainder = remainder
 		
 		if true {
-			(slice, remainder) = bottomRemainder.divide(5.5, fromEdge: .MinYEdge)
+			(slice, remainder) = bottomRemainder.divided(atDistance: 5.5, from: .minYEdge)
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
 			availableSize.width -= dx * 2
 			let size = placeholderLabel.sizeThatFits(availableSize)
-			(slice, remainder) = remainder.divide(size.height, fromEdge: .MinYEdge)
+			(slice, remainder) = remainder.divided(atDistance: size.height, from: .minYEdge)
 			placeholderLabelFrame = slice.insetBy(dx: dx, dy: 0)
 		}
-		(slice, remainder) = remainder.divide(10, fromEdge: .MinYEdge)
+		(slice, remainder) = remainder.divided(atDistance: 10, from: .minYEdge)
 		maxY = slice.maxY
 		
 		if true {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
-			(slice, remainder) = bottomRemainder.divide(size.height, fromEdge: .MinYEdge)
+			(slice, remainder) = bottomRemainder.divided(atDistance: size.height, from: .minYEdge)
 			textViewFrame = slice
 		}
 		maxY = max(textViewFrame.maxY, maxY)
@@ -202,7 +202,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		textView.frame = sizes.textViewFrame
 	}
 	
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
@@ -211,7 +211,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	
 	// MARK: UIResponder
 	
-	public override func canBecomeFirstResponder() -> Bool {
+	public override var canBecomeFirstResponder : Bool {
 		return true
 	}
 	

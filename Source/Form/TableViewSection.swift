@@ -3,87 +3,87 @@ import UIKit
 
 public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDelegate {
 	public let cells: TableViewCellArray
-	private let headerBlock: TableViewSectionPart.CreateBlock
-	private let footerBlock: TableViewSectionPart.CreateBlock
+	fileprivate let headerBlock: TableViewSectionPart.CreateBlock
+	fileprivate let footerBlock: TableViewSectionPart.CreateBlock
 	
-	init(cells: TableViewCellArray, headerBlock: TableViewSectionPart.CreateBlock, footerBlock: TableViewSectionPart.CreateBlock) {
+	init(cells: TableViewCellArray, headerBlock: @escaping TableViewSectionPart.CreateBlock, footerBlock: @escaping TableViewSectionPart.CreateBlock) {
 		self.cells = cells
 		self.headerBlock = headerBlock
 		self.footerBlock = footerBlock
 		super.init()
 	}
 
-	private lazy var header: TableViewSectionPart = {
+	fileprivate lazy var header: TableViewSectionPart = {
 		return self.headerBlock()
 		}()
 
-	private lazy var footer: TableViewSectionPart = {
+	fileprivate lazy var footer: TableViewSectionPart = {
 		return self.footerBlock()
 		}()
 
 	
-	public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	public func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return cells.count
 	}
 	
-	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = cells[indexPath.row]
 		if let theCell = cell as? CellForRowDelegate {
-			return theCell.form_cellForRow(indexPath, tableView: tableView)
+			return theCell.form_cellForRow(indexPath: indexPath, tableView: tableView)
 		}
 		return cell
 	}
 	
-	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return header.title
 	}
 	
-	public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+	public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		return footer.title
 	}
 
-	public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return header.view
 	}
 
-	public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return footer.view
 	}
 
-	public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return header.height
 	}
 	
-	public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return footer.height
 	}
 	
-	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cell = cells[indexPath.row] as? SelectRowDelegate {
-			cell.form_didSelectRow(indexPath, tableView: tableView)
+			cell.form_didSelectRow(indexPath: indexPath, tableView: tableView)
 		}
 	}
 	
-	public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if let cell = cells[indexPath.row] as? CellHeightProvider {
-			return cell.form_cellHeight(indexPath, tableView: tableView)
+			return cell.form_cellHeight(indexPath: indexPath, tableView: tableView)
 		}
 		return UITableViewAutomaticDimension
 	}
 	
-	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		if let cell = cells[indexPath.row] as? WillDisplayCellDelegate {
-			cell.form_willDisplay(tableView, forRowAtIndexPath: indexPath)
+			cell.form_willDisplay(tableView: tableView, forRowAtIndexPath: indexPath)
 		}
 	}
 	
-	public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+	public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 		if let cell = cells[indexPath.row] as? AccessoryButtonDelegate {
-			cell.form_accessoryButtonTapped(indexPath, tableView: tableView)
+			cell.form_accessoryButtonTapped(indexPath: indexPath, tableView: tableView)
 		}
 	}
 }

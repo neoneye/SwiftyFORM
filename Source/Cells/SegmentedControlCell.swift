@@ -7,7 +7,7 @@ public struct SegmentedControlCellModel {
 	var items: [String] = ["a", "b", "c"]
 	var value = 0
 	
-	var valueDidChange: Int -> Void = { (value: Int) in
+	var valueDidChange: (Int) -> Void = { (value: Int) in
 		SwiftyFormLog("value \(value)")
 	}
 }
@@ -19,11 +19,11 @@ public class SegmentedControlCell: UITableViewCell {
 	public init(model: SegmentedControlCellModel) {
 		self.model = model
 		self.segmentedControl = UISegmentedControl(items: model.items)
-		super.init(style: .Default, reuseIdentifier: nil)
-		selectionStyle = .None
+		super.init(style: .default, reuseIdentifier: nil)
+		selectionStyle = .none
 		textLabel?.text = model.title
 		segmentedControl.selectedSegmentIndex = model.value
-		segmentedControl.addTarget(self, action: #selector(SegmentedControlCell.valueChanged), forControlEvents: .ValueChanged)
+		segmentedControl.addTarget(self, action: #selector(SegmentedControlCell.valueChanged), for: .valueChanged)
 		accessoryView = segmentedControl
 	}
 	
@@ -36,7 +36,7 @@ public class SegmentedControlCell: UITableViewCell {
 		model.valueDidChange(segmentedControl.selectedSegmentIndex)
 	}
 	
-	public func setValueWithoutSync(value: Int) {
+	public func setValueWithoutSync(_ value: Int) {
 		SwiftyFormLog("set value \(value)")
 		segmentedControl.selectedSegmentIndex = value
 	}

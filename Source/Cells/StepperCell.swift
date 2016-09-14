@@ -5,7 +5,7 @@ public struct StepperCellModel {
 	var title: String = ""
 	var value: Int = 0
 
-	var valueDidChange: Int -> Void = { (value: Int) in
+	var valueDidChange: (Int) -> Void = { (value: Int) in
 		SwiftyFormLog("value \(value)")
 	}
 }
@@ -18,17 +18,17 @@ public class StepperCell: UITableViewCell {
 	
 	public init(model: StepperCellModel) {
 		self.model = model
-		super.init(style: .Value1, reuseIdentifier: nil)
-		selectionStyle = .None
+		super.init(style: .value1, reuseIdentifier: nil)
+		selectionStyle = .none
 		textLabel?.text = model.title
 
-		valueLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-		valueLabel.textColor = UIColor.grayColor()
+		valueLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		valueLabel.textColor = UIColor.gray
 		containerView.addSubview(stepperView)
 		containerView.addSubview(valueLabel)
 		accessoryView = containerView
 
-		stepperView.addTarget(self, action: #selector(StepperCell.valueChanged), forControlEvents: .ValueChanged)
+		stepperView.addTarget(self, action: #selector(StepperCell.valueChanged), for: .valueChanged)
 
 		valueLabel.text = "0"
 	}
@@ -46,13 +46,13 @@ public class StepperCell: UITableViewCell {
 		let stepperSize = stepperView.frame.size
 		
 		let containerWidth = ceil(valueSize.width + valueStepperPadding + stepperSize.width)
-		containerView.frame = CGRectMake(bounds.width - rightPadding - containerWidth, 0, containerWidth, stepperSize.height)
+		containerView.frame = CGRect(x: bounds.width - rightPadding - containerWidth, y: 0, width: containerWidth, height: stepperSize.height)
 		
 		let valueY: CGFloat = bounds.midY - valueSize.height / 2
-		valueLabel.frame = CGRectIntegral(CGRectMake(0, valueY, valueSize.width, valueSize.height))
+		valueLabel.frame = CGRect(x: 0, y: valueY, width: valueSize.width, height: valueSize.height).integral
 		
 		let stepperY: CGFloat = bounds.midY - stepperSize.height / 2
-		stepperView.frame = CGRectMake(containerWidth - stepperSize.width, stepperY, stepperSize.width, stepperSize.height)
+		stepperView.frame = CGRect(x: containerWidth - stepperSize.width, y: stepperY, width: stepperSize.width, height: stepperSize.height)
 	}
 	
 	
@@ -72,14 +72,14 @@ public class StepperCell: UITableViewCell {
 		setNeedsLayout()
 	}
 
-	public func updateValue(value: Int) {
+	public func updateValue(_ value: Int) {
 		let value: Double = stepperView.value
 		let intValue: Int = Int(round(value))
 
 		self.valueLabel.text = "\(intValue)"
 	}
 
-	public func setValueWithoutSync(value: Int, animated: Bool) {
+	public func setValueWithoutSync(_ value: Int, animated: Bool) {
 		SwiftyFormLog("set value \(value)")
 
 		stepperView.value = Double(value)

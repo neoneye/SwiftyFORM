@@ -1,28 +1,28 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-extension NSBundle {
-	public enum FormLoadViewError: ErrorType {
-		case ExpectedXibToExistButGotNil
-		case ExpectedXibToContainJustOneButGotDifferentNumberOfObjects
-		case XibReturnedWrongType
+extension Bundle {
+	public enum FormLoadViewError: Error {
+		case expectedXibToExistButGotNil
+		case expectedXibToContainJustOneButGotDifferentNumberOfObjects
+		case xibReturnedWrongType
 	}
 	
 	/* 
 	usage:
 	let cell: ContactPickerCell = try NSBundle.mainBundle().form_loadView("ContactPickerCell")
 	*/
-	public func form_loadView<T>(name: String) throws -> T {
-		let topLevelObjects: [AnyObject]! = loadNibNamed(name, owner: self, options: nil)
+	public func form_loadView<T>(_ name: String) throws -> T {
+		let topLevelObjects: [AnyObject]! = loadNibNamed(name, owner: self, options: nil) as [AnyObject]!
 		if topLevelObjects == nil {
-			throw FormLoadViewError.ExpectedXibToExistButGotNil
+			throw FormLoadViewError.expectedXibToExistButGotNil
 		}
 		if topLevelObjects.count != 1 {
-			throw FormLoadViewError.ExpectedXibToContainJustOneButGotDifferentNumberOfObjects
+			throw FormLoadViewError.expectedXibToContainJustOneButGotDifferentNumberOfObjects
 		}
 		let firstObject: AnyObject! = topLevelObjects.first
 		guard let result = firstObject as? T else {
-			throw FormLoadViewError.XibReturnedWrongType
+			throw FormLoadViewError.xibReturnedWrongType
 		}
 		return result
 	}

@@ -4,9 +4,9 @@ import SwiftyFORM
 
 class CustomViewController: FormViewController {
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Custom cells"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder.demo_showInfo("Demonstration of\ncustom cells using\nCustomFormItem")
 
 		builder += SectionHeaderTitleFormItem(title: "World news")

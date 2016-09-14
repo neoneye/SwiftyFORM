@@ -3,14 +3,16 @@ import Foundation
 
 public class ButtonFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	public var action: Void -> Void = {}
+	public var action: (Void) -> Void = {}
 }

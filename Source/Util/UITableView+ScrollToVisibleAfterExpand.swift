@@ -7,19 +7,19 @@ extension UITableView {
 	This function ensures that the main row and its expanded row are both fully visible.
 	If the rows are obscured it will scrolls to make them visible.
 	*/
-	internal func form_scrollToVisibleAfterExpand(indexPath: NSIndexPath) {
-		let rect = rectForRowAtIndexPath(indexPath)
+	internal func form_scrollToVisibleAfterExpand(_ indexPath: IndexPath) {
+		let rect = rectForRow(at: indexPath)
 		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
 		//SwiftyFormLog("focusArea_minY \(focusArea_minY)    \(rect.minY) \(contentOffset.y) \(contentInset.top)")
 		if focusArea_minY < 0 {
 			SwiftyFormLog("focus area is outside the top. Scrolling to make it visible")
-			scrollToRowAtIndexPath(indexPath, atScrollPosition: .Top, animated: true)
+			scrollToRow(at: indexPath, at: .top, animated: true)
 			return
 		}
 		
 		// Expanded row
-		let expanded_indexPath = NSIndexPath(forRow: indexPath.row + 1, inSection: indexPath.section)
-		let expanded_rect = rectForRowAtIndexPath(expanded_indexPath)
+		let expanded_indexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+		let expanded_rect = rectForRow(at: expanded_indexPath)
 		let focusArea_maxY = expanded_rect.maxY - (contentOffset.y + contentInset.top)
 		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(expanded_rect.maxY) \(contentOffset.y) \(contentInset.top)")
 		
@@ -28,7 +28,7 @@ extension UITableView {
 		
 		if focusArea_maxY > bottomMaxY {
 			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
-			scrollToRowAtIndexPath(expanded_indexPath, atScrollPosition: .Bottom, animated: true)
+			scrollToRow(at: expanded_indexPath, at: .bottom, animated: true)
 			return
 		}
 		

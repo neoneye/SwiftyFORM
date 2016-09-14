@@ -2,7 +2,7 @@
 import SwiftyFORM
 
 class PickerViewViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "PickerViews"
 		builder += SectionHeaderTitleFormItem().title("PickerView")
 		builder += picker0
@@ -16,7 +16,7 @@ class PickerViewViewController: FormViewController {
 	}
 	
 	lazy var picker0: PickerViewFormItem = {
-		let instance = PickerViewFormItem().title("1 component").behavior(.Expanded)
+		let instance = PickerViewFormItem().title("1 component").behavior(.expanded)
 		instance.pickerTitles = [["0", "1", "2", "3", "4", "5", "6"]]
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
@@ -57,14 +57,14 @@ class PickerViewViewController: FormViewController {
 
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Randomize")
+		instance.title = "Randomize"
 		instance.action = { [weak self] in
 			self?.randomize()
 		}
 		return instance
 	}()
 	
-	func assignRandomValues(pickerView: PickerViewFormItem) {
+	func assignRandomValues(_ pickerView: PickerViewFormItem) {
 		var selectedRows = [Int]()
 		for rows in pickerView.pickerTitles {
 			if rows.count > 0 {

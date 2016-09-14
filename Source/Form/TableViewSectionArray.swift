@@ -9,7 +9,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		super.init()
 	}
 	
-	func findItem(cell: UITableViewCell?) -> TableViewCellArrayItem? {
+	func findItem(_ cell: UITableViewCell?) -> TableViewCellArrayItem? {
 		for section in sections {
 			for item in section.cells.allItems {
 				if item.cell === cell {
@@ -20,7 +20,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return nil
 	}
 	
-	func findVisibleItem(indexPath indexPath: NSIndexPath) -> TableViewCellArrayItem? {
+	func findVisibleItem(indexPath: IndexPath) -> TableViewCellArrayItem? {
 		if indexPath.section < 0 { return nil }
 		if indexPath.row < 0 { return nil }
 		if indexPath.section >= sections.count { return nil }
@@ -30,11 +30,11 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return items[indexPath.row]
 	}
 	
-	func indexPathForItem(findItem: TableViewCellArrayItem) -> NSIndexPath? {
-		for (sectionIndex, section) in sections.enumerate() {
-			for (rowIndex, item) in section.cells.visibleItems.enumerate() {
+	func indexPathForItem(_ findItem: TableViewCellArrayItem) -> IndexPath? {
+		for (sectionIndex, section) in sections.enumerated() {
+			for (rowIndex, item) in section.cells.visibleItems.enumerated() {
 				if item === findItem {
-					return NSIndexPath(forRow: rowIndex, inSection: sectionIndex)
+					return IndexPath(row: rowIndex, section: sectionIndex)
 				}
 			}
 		}
@@ -50,62 +50,62 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 
 	// MARK: UITableViewDataSource, UITableViewDelegate
 	
-	public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	public func numberOfSections(in tableView: UITableView) -> Int {
 		return sections.count
 	}
 	
-	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return sections[section].tableView(tableView, numberOfRowsInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		return sections[indexPath.section].tableView(tableView, cellForRowAtIndexPath: indexPath)
+	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		return sections[indexPath.section].tableView(tableView, cellForRowAt: indexPath)
 	}
 	
-	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		sections[indexPath.section].tableView(tableView, didSelectRowAtIndexPath: indexPath)
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		sections[indexPath.section].tableView(tableView, didSelectRowAt: indexPath)
 	}
 	
-	public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return sections[section].tableView(tableView, titleForHeaderInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+	public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		return sections[section].tableView(tableView, titleForFooterInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return sections[section].tableView(tableView, viewForHeaderInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return sections[section].tableView(tableView, viewForFooterInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return sections[section].tableView(tableView, heightForHeaderInSection: section) ?? UITableViewAutomaticDimension
+	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return sections[section].tableView(tableView, heightForHeaderInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return sections[section].tableView(tableView, heightForFooterInSection: section) ?? UITableViewAutomaticDimension
+	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return sections[section].tableView(tableView, heightForFooterInSection: section)
 	}
 	
-	public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		return sections[indexPath.section].tableView(tableView, heightForRowAtIndexPath: indexPath) ?? 0
+	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return sections[indexPath.section].tableView(tableView, heightForRowAt: indexPath)
 	}
 	
-	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-		sections[indexPath.section].tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
+	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+		sections[indexPath.section].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
 	}
 	
-	public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-		sections[indexPath.section].tableView(tableView, accessoryButtonTappedForRowWithIndexPath: indexPath)
+	public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+		sections[indexPath.section].tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
 	}
 	
 	// MARK: UIScrollViewDelegate
 	
 	/// hide keyboard when the user starts scrolling
-	public func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+	public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		guard let responder = scrollView.form_firstResponder() else {
 			return
 		}
@@ -123,7 +123,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	/// hide keyboard when the user taps the status bar
-	public func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+	public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
 		scrollView.form_firstResponder()?.resignFirstResponder()
 		return true
 	}

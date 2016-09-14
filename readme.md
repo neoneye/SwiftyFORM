@@ -197,7 +197,7 @@ class ChangePasswordViewController: FormViewController {
 
 ## Setup
 
-- Xcode7.3.1 (7D1014)
+- Xcode8.0 (8A218a)
 - iOS 9
 
 ## CocoaPods
@@ -232,7 +232,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 0.11
+github "neoneye/SwiftyFORM" ~> 1.0
 ```
 
 Then, run the following command:

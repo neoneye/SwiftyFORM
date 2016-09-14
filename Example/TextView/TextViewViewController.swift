@@ -4,7 +4,7 @@ import SwiftyFORM
 
 class TextViewViewController: FormViewController {
 
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "TextViews"
 		builder += longSummary
 		builder += notes
@@ -42,7 +42,7 @@ class TextViewViewController: FormViewController {
 	
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Randomize")
+		instance.title = "Randomize"
 		instance.action = { [weak self] in
 			self?.randomize()
 		}
@@ -51,14 +51,14 @@ class TextViewViewController: FormViewController {
 	
 	lazy var clearButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Clear")
+		instance.title = "Clear"
 		instance.action = { [weak self] in
 			self?.clear()
 		}
 		return instance
 		}()
 	
-	func pickRandom(strings: [String]) -> String {
+	func pickRandom(_ strings: [String]) -> String {
 		if strings.count == 0 {
 			return ""
 		}
@@ -66,7 +66,7 @@ class TextViewViewController: FormViewController {
 		return strings[i]
 	}
 	
-	func appendRandom(textView: TextViewFormItem, strings: [String]) {
+	func appendRandom(_ textView: TextViewFormItem, strings: [String]) {
 		let notEmpty = textView.value.characters.count != 0
 		var s = ""
 		if notEmpty {

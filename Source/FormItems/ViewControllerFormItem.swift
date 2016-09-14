@@ -17,29 +17,35 @@ public class ViewControllerFormItemPopContext {
 
 public class ViewControllerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var placeholder: String = ""
-	public func placeholder(placeholder: String) -> Self {
+
+	@discardableResult
+	public func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	public func viewController(aClass: UIViewController.Type) -> Self {
+	@discardableResult
+	public func viewController(_ aClass: UIViewController.Type) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			return aClass.init()
 		}
 		return self
 	}
 	
-	public func storyboard(name: String, bundle storyboardBundleOrNil: NSBundle?) -> Self {
+	@discardableResult
+	public func storyboard(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			let storyboard: UIStoryboard = UIStoryboard(name: name, bundle: storyboardBundleOrNil)
 			return storyboard.instantiateInitialViewController()
@@ -48,10 +54,10 @@ public class ViewControllerFormItem: FormItem {
 	}
 	
 	// the view controller must invoke the dismiss block when it's being dismissed
-	public typealias CreateViewController = CommandProtocol -> UIViewController?
+	public typealias CreateViewController = (CommandProtocol) -> UIViewController?
 	public var createViewController: CreateViewController?
 	
 	// dismissing the view controller
-	public typealias PopViewController = ViewControllerFormItemPopContext -> Void
+	public typealias PopViewController = (ViewControllerFormItemPopContext) -> Void
 	public var willPopViewController: PopViewController?
 }

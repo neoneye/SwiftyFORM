@@ -2,7 +2,7 @@
 import SwiftyFORM
 
 class Tutorial2_ChildViewController_ViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder += ViewControllerFormItem().title("Go to view controller").viewController(FirstViewController.self)
 	}
 }

@@ -3,17 +3,19 @@ import Foundation
 
 public class StaticTextFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 
-	typealias SyncBlock = (value: String) -> Void
+	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in
 		SwiftyFormLog("sync is not overridden")
 	}
@@ -25,10 +27,12 @@ public class StaticTextFormItem: FormItem {
 		}
 		set {
 			innerValue = newValue
-			syncCellWithValue(value: innerValue)
+			syncCellWithValue(innerValue)
 		}
 	}
-	public func value(value: String) -> Self {
+
+	@discardableResult
+	public func value(_ value: String) -> Self {
 		self.value = value
 		return self
 	}

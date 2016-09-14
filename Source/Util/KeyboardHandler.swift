@@ -4,8 +4,8 @@ import UIKit
 /// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell
 /// Resets insets when the keyboard is hidden
 public class KeyboardHandler: NSObject {
-	private let tableView: UITableView
-	private var innerKeyboardVisible: Bool = false
+	fileprivate let tableView: UITableView
+	fileprivate var innerKeyboardVisible: Bool = false
 	
 	init(tableView: UITableView) {
 		self.tableView = tableView
@@ -37,18 +37,18 @@ public class KeyboardHandler: NSObject {
 		*/
 		
 		// Listen for changes to keyboard visibility so that we can adjust the text view accordingly.
-		let notificationCenter = NSNotificationCenter.defaultCenter()
-		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
 	func removeObservers() {
-		let notificationCenter = NSNotificationCenter.defaultCenter()
-		notificationCenter.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-		notificationCenter.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
-	func keyboardWillShow(notification: NSNotification) {
+	func keyboardWillShow(_ notification: Notification) {
 //		SwiftyFormLog("show\n\n\n\n\n\n\n\n")
 		innerKeyboardVisible = true
 		let cellOrNil = tableView.form_firstResponder()?.form_cell()
@@ -57,16 +57,16 @@ public class KeyboardHandler: NSObject {
 		}
 		let cell = cellOrNil!
 		
-		let indexPathOrNil = tableView.indexPathForCell(cell)
+		let indexPathOrNil = tableView.indexPath(for: cell)
 		if indexPathOrNil == nil {
 			return
 		}
 		let indexPath = indexPathOrNil!
 		
-		let rectForRow = tableView.rectForRowAtIndexPath(indexPath)
+		let rectForRow = tableView.rectForRow(at: indexPath)
 //		SwiftyFormLog("rectForRow \(NSStringFromCGRect(rectForRow))")
 		
-		let userInfoOrNil: [NSObject : AnyObject]? = notification.userInfo
+		let userInfoOrNil: [AnyHashable: Any]? = notification.userInfo
 		if userInfoOrNil == nil {
 			return
 		}
@@ -78,24 +78,24 @@ public class KeyboardHandler: NSObject {
 		}
 		let window = windowOrNil!
 
-		let keyboardFrameEnd = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+		let keyboardFrameEnd = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 //		SwiftyFormLog("keyboardFrameEnd \(NSStringFromCGRect(keyboardFrameEnd))")
 		
 		
-		let keyboardFrame = window.convertRect(keyboardFrameEnd, toView: tableView.superview)
+		let keyboardFrame = window.convert(keyboardFrameEnd, to: tableView.superview)
 //		SwiftyFormLog("keyboardFrame \(keyboardFrame)")
 		
-		let convertedRectForRow = window.convertRect(rectForRow, fromView: tableView)
+		let convertedRectForRow = window.convert(rectForRow, from: tableView)
 //		SwiftyFormLog("convertedRectForRow \(NSStringFromCGRect(convertedRectForRow))")
 		
 //		SwiftyFormLog("tableView.frame \(NSStringFromCGRect(tableView.frame))")
 		
 		var scrollToVisible = false
-		var scrollToRect = CGRectZero
+		var scrollToRect = CGRect.zero
 
 		let spaceBetweenCellAndKeyboard: CGFloat = 36
-		let y0 = CGRectGetMaxY(convertedRectForRow) + spaceBetweenCellAndKeyboard
-		let y1 = CGRectGetMinY(keyboardFrameEnd)
+		let y0 = convertedRectForRow.maxY + spaceBetweenCellAndKeyboard
+		let y1 = keyboardFrameEnd.minY
 		let obscured = y0 > y1
 //		SwiftyFormLog("values \(y0) \(y1) \(obscured)")
 		if obscured {
@@ -123,7 +123,7 @@ public class KeyboardHandler: NSObject {
 		}
 	}
 	
-	func keyboardWillHide(notification: NSNotification) {
+	func keyboardWillHide(_ notification: Notification) {
 //		SwiftyFormLog("\n\n\n\nhide")
 		innerKeyboardVisible = false
 		

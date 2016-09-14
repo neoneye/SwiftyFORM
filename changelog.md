@@ -1,5 +1,18 @@
 ## 📄 Change Log
 
+### 1.0.0
+
+ * Major breaking changes, thus I'm incrementing version number from 0.x.x to 1.x.x
+ * Breaking: Upgraded from Swift 2.3 to Swift 3
+ * Breaking: Upgraded from Xcode 7.3.1 to Xcode 8.0
+ * Breaking: `CellHeightProvider.form_cellHeight()` now requires the name of the first parameter
+ * Breaking: `CellForRowDelegate.form_cellForRow()` now requires the name of the first parameter
+ * Breaking: `SelectOptionDelegate.form_willSelectOption()` now requires the name of the first parameter
+ * Breaking: `SelectRowDelegate.form_didSelectRow()` now requires the name of the first parameter
+ * Breaking: `WillDisplayCellDelegate.form_willDisplay()` now requires the name of the first parameter
+ * Breaking: Leaf classes can no longer be subclassed, such as `AttributedTextFormItem`, `ButtonFormItem`, `CustomFormItem`, `DatePickerFormItem`, etc. These were subclassable. The `FormItem` can still be subclassed, since it's the base class for all form items.
+
+
 ### 0.11.0
 
  * Added `PickerViewFormItem` that makes it possible to use inline `UIPickerView`.

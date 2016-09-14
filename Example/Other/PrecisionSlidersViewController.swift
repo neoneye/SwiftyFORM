@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class PrecisionSlidersViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Precision Sliders"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		
 		builder += SectionHeaderTitleFormItem().title("Zoom UI enabled")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(0).maximumValue(255).value(127).title("A 0 255").enableZoomUI()
@@ -69,9 +69,9 @@ class PrecisionSlidersViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(3).minimumValue(-20_000).maximumValue(-15_100).value(-18_000).title("C -20 -15.1")
 		
 		builder += SectionHeaderTitleFormItem().title("Behavior")
-		builder += PrecisionSliderFormItem().title("A Initially collapsed").behavior(.Collapsed)
-		builder += PrecisionSliderFormItem().title("B Initially expanded").behavior(.Expanded)
-		builder += PrecisionSliderFormItem().title("C Always expanded").behavior(.ExpandedAlways)
+		builder += PrecisionSliderFormItem().title("A Initially collapsed").behavior(.collapsed)
+		builder += PrecisionSliderFormItem().title("B Initially expanded").behavior(.expanded)
+		builder += PrecisionSliderFormItem().title("C Always expanded").behavior(.expandedAlways)
 		
 		builder += SectionHeaderTitleFormItem().title("Decimal places")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-1000).maximumValue(1000).value(0).title("0 decimal places")
