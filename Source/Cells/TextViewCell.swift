@@ -64,7 +64,7 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 	}
 	
 	open func handleTap(_ sender: UITapGestureRecognizer) {
-		self.becomeFirstResponder()
+		_ = self.becomeFirstResponder()
 	}
 	
 	open lazy var tapGestureRecognizer: UITapGestureRecognizer = {
@@ -111,7 +111,7 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 	
 	open func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
-		resignFirstResponder()
+		_ = resignFirstResponder()
 	}
 	
 	open func textViewDidBeginEditing(_ textView: UITextView) {

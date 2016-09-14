@@ -118,10 +118,10 @@ open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Selec
 		}
 		
 		if isExpandedCellVisible {
-			resignFirstResponder()
+			_ = resignFirstResponder()
 			collapse()
 		} else {
-			becomeFirstResponder()
+			_ = becomeFirstResponder()
 		}
 		form_deselectRow()
 	}

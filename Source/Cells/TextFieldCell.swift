@@ -151,7 +151,7 @@ open class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHeig
 
 	open func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
-		resignFirstResponder()
+		_ = resignFirstResponder()
 	}
 	
 	open func handleTap(_ sender: UITapGestureRecognizer) {

@@ -85,9 +85,9 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		}
 
 		if isExpandedCellVisible {
-			resignFirstResponder()
+			_ = resignFirstResponder()
 		} else {
-			becomeFirstResponder()
+			_ = becomeFirstResponder()
 		}
 		form_deselectRow()
 	}
