@@ -121,7 +121,7 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	fileprivate var partialLength: Double = 0.0
 	fileprivate var fullLength: Double = 0.0
 	
-	func configure(_ partialLength: Double, fullLength: Double) {
+	func configure(partialLength: Double, fullLength: Double) {
 		self.partialLength = partialLength
 		self.fullLength = fullLength
 		setNeedsLayout()
@@ -201,7 +201,7 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	fileprivate var partialLength: Double = 0.0
 	fileprivate var fullLength: Double = 0.0
 	
-	func configure(_ partialLength: Double, fullLength: Double) {
+	func configure(partialLength: Double, fullLength: Double) {
 		self.partialLength = partialLength
 		self.fullLength = fullLength
 		setNeedsLayout()

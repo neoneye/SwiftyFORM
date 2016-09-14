@@ -539,14 +539,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
-			cell.configure(model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
+			cell.configure(partialLength: model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
 			return cell
 		}
 		if isLast && model.hasPartialItemAfter {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
-			cell.configure(model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
+			cell.configure(partialLength: model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
 			return cell
 		}
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewFullCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewFullCell
