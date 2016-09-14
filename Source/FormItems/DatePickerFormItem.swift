@@ -95,7 +95,7 @@ public class DatePickerFormItem: FormItem {
 	}
 	
 	public var datePickerMode: DatePickerFormItemMode = .dateAndTime
-	public var locale: Locale? // default is [NSLocale currentLocale]. setting nil returns to default
+	public var locale: Locale? // default is Locale.current, setting nil returns to default
 	public var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	public var maximumDate: Date? // default is nil
 	

@@ -11,7 +11,7 @@ struct DatePickerCellConstants {
 public class DatePickerCellModel {
 	var title: String = ""
 	var datePickerMode: UIDatePickerMode = .dateAndTime
-	var locale: Locale? = nil // default is [NSLocale currentLocale]. setting nil returns to default
+	var locale: Locale? = nil // default is Locale.current, setting nil returns to default
 	var minimumDate: Date? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	var maximumDate: Date? = nil // default is nil
 	var date: Date = Date()

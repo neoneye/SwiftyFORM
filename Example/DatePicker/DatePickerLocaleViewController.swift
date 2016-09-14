@@ -29,7 +29,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
 		instance.datePickerMode = .time
-		instance.locale = NSLocale(localeIdentifier: "da_DK") as Locale
+		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
 	
@@ -37,7 +37,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
 		instance.datePickerMode = .date
-		instance.locale = NSLocale(localeIdentifier: "da_DK") as Locale
+		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
 	
@@ -45,7 +45,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
-		instance.locale = NSLocale(localeIdentifier: "da_DK") as Locale
+		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
 	
@@ -53,7 +53,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
 		instance.datePickerMode = .time
-		instance.locale = NSLocale(localeIdentifier: "zh_CN") as Locale
+		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
 	
@@ -61,7 +61,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
 		instance.datePickerMode = .date
-		instance.locale = NSLocale(localeIdentifier: "zh_CN") as Locale
+		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
 	
@@ -69,7 +69,7 @@ class DatePickerLocaleViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
-		instance.locale = NSLocale(localeIdentifier: "zh_CN") as Locale
+		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
 	
