@@ -2,7 +2,7 @@
 import UIKit
 
 public protocol CommandProtocol {
-	func execute(_ viewController: UIViewController, returnObject: AnyObject?)
+	func execute(viewController: UIViewController, returnObject: AnyObject?)
 }
 
 public class CommandBlock: CommandProtocol {
@@ -11,7 +11,7 @@ public class CommandBlock: CommandProtocol {
 		self.block = block
 	}
 	
-	public func execute(_ viewController: UIViewController, returnObject: AnyObject?) {
+	public func execute(viewController: UIViewController, returnObject: AnyObject?) {
 		block(viewController, returnObject)
 	}
 }
