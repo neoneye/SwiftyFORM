@@ -616,7 +616,7 @@ class PopulateTableView: FormItemVisitor {
 			if let vc = weakViewController {
 				let context = ViewControllerFormItemPopContext(parentViewController: vc, childViewController: childViewController, cell: cell, returnedObject: returnObject)
 				willPopCommand.execute(context)
-				vc.navigationController?.popViewController(animated: true)
+				_ = vc.navigationController?.popViewController(animated: true)
 			}
 		}
 		return command

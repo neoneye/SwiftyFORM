@@ -244,7 +244,7 @@ open class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHeig
 	open func setValueWithoutSync(_ value: String) {
 		SwiftyFormLog("set value \(value)")
 		textField.text = value
-		validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
+		_ = validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
 	}
 	
 
@@ -372,7 +372,7 @@ open class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHeig
 		//SwiftyFormLog("timer update")
 
 		let s = textField.text ?? ""
-		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: false)
+		_ = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: false)
 	}
 
 	open func reloadPersistentValidationState() {
@@ -380,7 +380,7 @@ open class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHeig
 		//SwiftyFormLog("reload persistent message")
 
 		let s = textField.text ?? ""
-		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
+		_ = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
 	}
 
 	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
