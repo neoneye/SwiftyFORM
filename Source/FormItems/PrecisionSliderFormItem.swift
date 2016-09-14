@@ -21,6 +21,8 @@ open class PrecisionSliderFormItem: FormItem {
 	}
 	
 	open var title: String = ""
+
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
@@ -61,12 +63,16 @@ open class PrecisionSliderFormItem: FormItem {
 		case expandedAlways
 	}
 	open var behavior = Behavior.collapsed
+
+	@discardableResult
 	open func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
 	open var collapseWhenResigning = false
+
+	@discardableResult
 	open func shouldCollapseWhenResigning() -> Self {
 		self.collapseWhenResigning = true
 		return self
@@ -91,6 +97,8 @@ open class PrecisionSliderFormItem: FormItem {
 			}
 		}
 	}
+
+	@discardableResult
 	open func initialZoom(_ initialZoom: Float) -> Self {
 		self.initialZoom = initialZoom
 		return self
@@ -106,24 +114,32 @@ open class PrecisionSliderFormItem: FormItem {
 			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
 		}
 	}
+
+	@discardableResult
 	open func decimalPlaces(_ decimalPlaces: UInt) -> Self {
 		self.decimalPlaces = decimalPlaces
 		return self
 	}
 	
 	open var minimumValue: Int = 0
+
+	@discardableResult
 	open func minimumValue(_ minimumValue: Int) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
 	open var maximumValue: Int = 1000
+
+	@discardableResult
 	open func maximumValue(_ maximumValue: Int) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
 	
 	open var zoomUI = false
+
+	@discardableResult
 	open func enableZoomUI() -> Self {
 		self.zoomUI = true
 		return self
@@ -143,6 +159,8 @@ open class PrecisionSliderFormItem: FormItem {
 			self.updateValue(newValue)
 		}
 	}
+
+	@discardableResult
 	open func value(_ value: Int) -> Self {
 		updateValue(value)
 		return self

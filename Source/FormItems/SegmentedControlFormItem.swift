@@ -7,16 +7,22 @@ open class SegmentedControlFormItem: FormItem {
 	}
 	
 	open var title: String = ""
+
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 	open var items: [String] = ["a", "b", "c"]
+
+	@discardableResult
 	open func items(_ items: String...) -> Self {
 		self.items = items
 		return self
 	}
+
+	@discardableResult
 	open func itemsArray(_ items: [String]) -> Self {
 		self.items = items
 		return self
@@ -35,6 +41,7 @@ open class SegmentedControlFormItem: FormItem {
 		set { self.value = newValue }
 	}
 
+	@discardableResult
 	open func selected(_ selected: Int) -> Self {
 		self.value = selected
 		return self

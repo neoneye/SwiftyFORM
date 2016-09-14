@@ -36,6 +36,7 @@ open class ViewControllerFormItem: FormItem {
 		return self
 	}
 	
+	@discardableResult
 	open func viewController(_ aClass: UIViewController.Type) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			return aClass.init()
@@ -43,6 +44,7 @@ open class ViewControllerFormItem: FormItem {
 		return self
 	}
 	
+	@discardableResult
 	open func storyboard(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			let storyboard: UIStoryboard = UIStoryboard(name: name, bundle: storyboardBundleOrNil)

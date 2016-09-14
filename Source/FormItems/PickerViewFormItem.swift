@@ -14,6 +14,8 @@ open class PickerViewFormItem: FormItem {
 	}
 	
 	open var title: String = ""
+
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
@@ -51,6 +53,8 @@ open class PickerViewFormItem: FormItem {
 		case expandedAlways
 	}
 	open var behavior = Behavior.collapsed
+
+	@discardableResult
 	open func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self

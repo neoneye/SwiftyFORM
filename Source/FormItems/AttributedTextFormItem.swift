@@ -7,10 +7,14 @@ open class AttributedTextFormItem: FormItem {
     }
     
 	open var title: NSAttributedString?
+
+	@discardableResult
 	open func title(_ title: NSAttributedString) -> Self {
 		self.title = title
 		return self
 	}
+
+	@discardableResult
 	open func title(_ title: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		self.title = NSAttributedString(string: title, attributes: attributes)
 		return self
@@ -32,10 +36,14 @@ open class AttributedTextFormItem: FormItem {
 			syncCellWithValue(innerValue)
 		}
 	}
+
+	@discardableResult
 	open func value(_ value: NSAttributedString) -> Self {
 		self.value = value
 		return self
 	}
+
+	@discardableResult
 	open func value(_ value: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		self.value = NSAttributedString(string: value, attributes: attributes)
 		return self
