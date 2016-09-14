@@ -1,23 +1,23 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class SliderFormItem: FormItem {
+public class SliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var minimumValue: Float = 0.0
+	public var minimumValue: Float = 0.0
 
 	@discardableResult
-	open func minimumValue(_ minimumValue: Float) -> Self {
+	public func minimumValue(_ minimumValue: Float) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
-	open var maximumValue: Float = 1.0
+	public var maximumValue: Float = 1.0
 
 	@discardableResult
-	open func maximumValue(_ maximumValue: Float) -> Self {
+	public func maximumValue(_ maximumValue: Float) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
@@ -29,7 +29,7 @@ open class SliderFormItem: FormItem {
 	}
 	
 	internal var innerValue: Float = 0.0
-	open var value: Float {
+	public var value: Float {
 		get {
 			return self.innerValue
 		}
@@ -39,22 +39,22 @@ open class SliderFormItem: FormItem {
 	}
 
 	@discardableResult
-	open func value(_ value: Float) -> Self {
+	public func value(_ value: Float) -> Self {
 		setValue(value, animated: false)
 		return self
 	}
 	
-	open func setValue(_ value: Float, animated: Bool) {
+	public func setValue(_ value: Float, animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value, animated)
 	}
 
 	public typealias SliderDidChangeBlock = (_ value: Float) -> Void
-	open var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	open func sliderDidChange(_ value: Float) {
+	public func sliderDidChange(_ value: Float) {
 		innerValue = value
 		sliderDidChangeBlock(value)
 	}

@@ -11,7 +11,7 @@ long patterns giving incomplete results.
 
 http://en.wikipedia.org/wiki/Email_address
 */
-open class EmailSpecification: CompositeSpecification {
+public class EmailSpecification: CompositeSpecification {
 	fileprivate let specification: RegularExpressionSpecification
 	
 	public override init() {
@@ -19,7 +19,7 @@ open class EmailSpecification: CompositeSpecification {
 		super.init()
 	}
 
-	open override func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return specification.isSatisfiedBy(candidate)
 	}
 

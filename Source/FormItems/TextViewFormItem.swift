@@ -1,23 +1,23 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class TextViewFormItem: FormItem {
+public class TextViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var placeholder: String = ""
+	public var placeholder: String = ""
 
 	@discardableResult
-	open func placeholder(_ placeholder: String) -> Self {
+	public func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -28,7 +28,7 @@ open class TextViewFormItem: FormItem {
 	}
 	
 	internal var innerValue: String = ""
-	open var value: String {
+	public var value: String {
 		get {
 			return self.innerValue
 		}

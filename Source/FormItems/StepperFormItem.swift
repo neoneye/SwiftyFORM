@@ -1,15 +1,15 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class StepperFormItem: FormItem {
+public class StepperFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -20,7 +20,7 @@ open class StepperFormItem: FormItem {
 	}
 
 	internal var innerValue: Int = 0
-	open var value: Int {
+	public var value: Int {
 		get {
 			return self.innerValue
 		}
@@ -29,7 +29,7 @@ open class StepperFormItem: FormItem {
 		}
 	}
 
-	open func setValue(_ value: Int, animated: Bool) {
+	public func setValue(_ value: Int, animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value, animated)
 	}

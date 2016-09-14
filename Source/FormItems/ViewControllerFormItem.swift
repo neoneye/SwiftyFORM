@@ -1,11 +1,11 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class ViewControllerFormItemPopContext {
-	open let parentViewController: UIViewController
-	open let childViewController: UIViewController
-	open let cell: ViewControllerFormItemCell
-	open let returnedObject: AnyObject?
+public class ViewControllerFormItemPopContext {
+	public let parentViewController: UIViewController
+	public let childViewController: UIViewController
+	public let cell: ViewControllerFormItemCell
+	public let returnedObject: AnyObject?
 	
 	public init(parentViewController: UIViewController, childViewController: UIViewController, cell: ViewControllerFormItemCell, returnedObject: AnyObject?) {
 		self.parentViewController = parentViewController
@@ -15,29 +15,29 @@ open class ViewControllerFormItemPopContext {
 	}
 }
 
-open class ViewControllerFormItem: FormItem {
+public class ViewControllerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var placeholder: String = ""
+	public var placeholder: String = ""
 
 	@discardableResult
-	open func placeholder(_ placeholder: String) -> Self {
+	public func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 	@discardableResult
-	open func viewController(_ aClass: UIViewController.Type) -> Self {
+	public func viewController(_ aClass: UIViewController.Type) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			return aClass.init()
 		}
@@ -45,7 +45,7 @@ open class ViewControllerFormItem: FormItem {
 	}
 	
 	@discardableResult
-	open func storyboard(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
+	public func storyboard(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
 			let storyboard: UIStoryboard = UIStoryboard(name: name, bundle: storyboardBundleOrNil)
 			return storyboard.instantiateInitialViewController()
@@ -55,9 +55,9 @@ open class ViewControllerFormItem: FormItem {
 	
 	// the view controller must invoke the dismiss block when it's being dismissed
 	public typealias CreateViewController = (CommandProtocol) -> UIViewController?
-	open var createViewController: CreateViewController?
+	public var createViewController: CreateViewController?
 	
 	// dismissing the view controller
 	public typealias PopViewController = (ViewControllerFormItemPopContext) -> Void
-	open var willPopViewController: PopViewController?
+	public var willPopViewController: PopViewController?
 }

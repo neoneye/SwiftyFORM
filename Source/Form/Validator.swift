@@ -7,44 +7,44 @@ public enum ValidateRule {
 	case submitRule(specification: Specification, message: String)
 }
 
-open class ValidatorBuilder {
+public class ValidatorBuilder {
 	fileprivate var rules = [ValidateRule]()
 	
 	public init() {}
 	
-	open func hardValidate(_ specification: Specification, message: String) {
+	public func hardValidate(_ specification: Specification, message: String) {
 		rules.append(ValidateRule.hardRule(specification: specification, message: message))
 	}
 	
-	open func softValidate(_ specification: Specification, message: String) {
+	public func softValidate(_ specification: Specification, message: String) {
 		rules.append(ValidateRule.softRule(specification: specification, message: message))
 	}
 	
-	open func submitValidate(_ specification: Specification, message: String) {
+	public func submitValidate(_ specification: Specification, message: String) {
 		rules.append(ValidateRule.submitRule(specification: specification, message: message))
 	}
 	
-	open func build() -> Validator {
+	public func build() -> Validator {
 		return Validator(rules: self.rules)
 	}
 }
 
-open class Validator {
+public class Validator {
 	fileprivate let rules: [ValidateRule]
 	
 	public init(rules: [ValidateRule]) {
 		self.rules = rules
 	}
 	
-	open func liveValidate(_ candidate: Any?) -> ValidateResult {
+	public func liveValidate(_ candidate: Any?) -> ValidateResult {
 		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
 	}
 	
-	open func submitValidate(_ candidate: Any?) -> ValidateResult {
+	public func submitValidate(_ candidate: Any?) -> ValidateResult {
 		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
 	}
 	
-	open func validate(_ candidate: Any?, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {
+	public func validate(_ candidate: Any?, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {
 		var results = [ValidateResult]()
 		for rule in rules {
 			switch rule {

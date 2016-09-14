@@ -11,20 +11,20 @@ open class CompositeSpecification: Specification {
 		return false
 	}
 	
-	open func and(_ other: Specification) -> Specification {
+	public func and(_ other: Specification) -> Specification {
 		return AndSpecification(self, other)
 	}
 	
-	open func or(_ other: Specification) -> Specification {
+	public func or(_ other: Specification) -> Specification {
 		return OrSpecification(self, other)
 	}
 	
-	open func not() -> Specification {
+	public func not() -> Specification {
 		return NotSpecification(self)
 	}
 }
 
-open class AndSpecification: CompositeSpecification {
+public class AndSpecification: CompositeSpecification {
 	fileprivate let one: Specification
 	fileprivate let other: Specification
 	
@@ -34,12 +34,12 @@ open class AndSpecification: CompositeSpecification {
 		super.init()
 	}
 	
-	override open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return one.isSatisfiedBy(candidate) && other.isSatisfiedBy(candidate)
 	}
 }
 
-open class OrSpecification: CompositeSpecification {
+public class OrSpecification: CompositeSpecification {
 	fileprivate let one: Specification
 	fileprivate let other: Specification
 	
@@ -49,12 +49,12 @@ open class OrSpecification: CompositeSpecification {
 		super.init()
 	}
 	
-	override open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return one.isSatisfiedBy(candidate) || other.isSatisfiedBy(candidate)
 	}
 }
 
-open class NotSpecification: CompositeSpecification {
+public class NotSpecification: CompositeSpecification {
 	fileprivate let wrapped: Specification
 	
 	public init(_ x: Specification) {
@@ -62,27 +62,27 @@ open class NotSpecification: CompositeSpecification {
 		super.init()
 	}
 	
-	override open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return !wrapped.isSatisfiedBy(candidate)
 	}
 }
 
-open class FalseSpecification: CompositeSpecification {
+public class FalseSpecification: CompositeSpecification {
 	override public init() {
 		super.init()
 	}
 	
-	override open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return false
 	}
 }
 
-open class TrueSpecification: CompositeSpecification {
+public class TrueSpecification: CompositeSpecification {
 	override public init() {
 		super.init()
 	}
 	
-	override open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return true
 	}
 }

@@ -1,9 +1,9 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-open class ViewControllerFormItemCellModel {
-	open let title: String
-	open let placeholder: String
+public class ViewControllerFormItemCellModel {
+	public let title: String
+	public let placeholder: String
 	public init(title: String, placeholder: String) {
 		self.title = title
 		self.placeholder = placeholder
@@ -11,8 +11,8 @@ open class ViewControllerFormItemCellModel {
 }
 
 
-open class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
-	open let model: ViewControllerFormItemCellModel
+public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
+	public let model: ViewControllerFormItemCellModel
 	let innerDidSelectRow: (ViewControllerFormItemCell, ViewControllerFormItemCellModel) -> Void
 
 	public init(model: ViewControllerFormItemCellModel, didSelectRow: @escaping (ViewControllerFormItemCell, ViewControllerFormItemCellModel) -> Void) {
@@ -28,7 +28,7 @@ open class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()

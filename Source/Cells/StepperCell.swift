@@ -10,11 +10,11 @@ public struct StepperCellModel {
 	}
 }
 
-open class StepperCell: UITableViewCell {
-	open let model: StepperCellModel
-	open let valueLabel = UILabel()
-	open let stepperView = UIStepper()
-	open var containerView = UIView()
+public class StepperCell: UITableViewCell {
+	public let model: StepperCellModel
+	public let valueLabel = UILabel()
+	public let stepperView = UIStepper()
+	public var containerView = UIView()
 	
 	public init(model: StepperCellModel) {
 		self.model = model
@@ -33,7 +33,7 @@ open class StepperCell: UITableViewCell {
 		valueLabel.text = "0"
 	}
 	
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		stepperView.sizeToFit()
@@ -60,7 +60,7 @@ open class StepperCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		SwiftyFormLog("value did change")
 
 		let value: Double = stepperView.value
@@ -72,14 +72,14 @@ open class StepperCell: UITableViewCell {
 		setNeedsLayout()
 	}
 
-	open func updateValue(_ value: Int) {
+	public func updateValue(_ value: Int) {
 		let value: Double = stepperView.value
 		let intValue: Int = Int(round(value))
 
 		self.valueLabel.text = "\(intValue)"
 	}
 
-	open func setValueWithoutSync(_ value: Int, animated: Bool) {
+	public func setValueWithoutSync(_ value: Int, animated: Bool) {
 		SwiftyFormLog("set value \(value)")
 
 		stepperView.value = Double(value)

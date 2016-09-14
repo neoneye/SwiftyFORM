@@ -6,8 +6,8 @@ public struct StaticTextCellModel {
 	var value: String = ""
 }
 
-open class StaticTextCell: UITableViewCell {
-	open var model: StaticTextCellModel
+public class StaticTextCell: UITableViewCell {
+	public var model: StaticTextCellModel
 
 	public init(model: StaticTextCellModel) {
 		self.model = model
@@ -19,7 +19,7 @@ open class StaticTextCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func loadWithModel(_ model: StaticTextCellModel) {
+	public func loadWithModel(_ model: StaticTextCellModel) {
 		selectionStyle = .none
 		textLabel?.text = model.title
 		detailTextLabel?.text = model.value

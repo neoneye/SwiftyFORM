@@ -19,11 +19,11 @@ public struct TextViewCellModel {
 	}
 }
 
-open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider {
-	open let titleLabel = UILabel()
-	open let placeholderLabel = UILabel()
-	open let textView = UITextView()
-	open let model: TextViewCellModel
+public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider {
+	public let titleLabel = UILabel()
+	public let placeholderLabel = UILabel()
+	public let textView = UITextView()
+	public let model: TextViewCellModel
 	
 	public init(model: TextViewCellModel) {
 		self.model = model
@@ -63,16 +63,16 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func handleTap(_ sender: UITapGestureRecognizer) {
+	public func handleTap(_ sender: UITapGestureRecognizer) {
 		_ = self.becomeFirstResponder()
 	}
 	
-	open lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
 		let gr = UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
 		return gr
 		}()
 	
-	open lazy var toolbar: SimpleToolbar = {
+	public lazy var toolbar: SimpleToolbar = {
 		let instance = SimpleToolbar()
 		weak var weakSelf = self
 		instance.jumpToPrevious = {
@@ -93,37 +93,37 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 		return instance
 		}()
 	
-	open func updateToolbarButtons() {
+	public func updateToolbarButtons() {
 		if model.toolbarMode == .simple {
 			toolbar.updateButtonConfiguration(self)
 		}
 	}
 	
-	open func gotoPrevious() {
+	public func gotoPrevious() {
 		SwiftyFormLog("make previous cell first responder")
 		form_makePreviousCellFirstResponder()
 	}
 	
-	open func gotoNext() {
+	public func gotoNext() {
 		SwiftyFormLog("make next cell first responder")
 		form_makeNextCellFirstResponder()
 	}
 	
-	open func dismissKeyboard() {
+	public func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
 		_ = resignFirstResponder()
 	}
 	
-	open func textViewDidBeginEditing(_ textView: UITextView) {
+	public func textViewDidBeginEditing(_ textView: UITextView) {
 		updateToolbarButtons()
 	}
 
-	open func textViewDidChange(_ textView: UITextView) {
+	public func textViewDidChange(_ textView: UITextView) {
 		updateValue()
 		model.valueDidChange(textView.text)
 	}
 
-	open func updateValue() {
+	public func updateValue() {
 		let s = textView.text
 		let hasText = (s?.characters.count)! > 0
 		placeholderLabel.isHidden = hasText
@@ -136,13 +136,13 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 		}
 	}
 	
-	open func setValueWithoutSync(_ value: String) {
+	public func setValueWithoutSync(_ value: String) {
 		SwiftyFormLog("set value \(value)")
 		textView.text = value
 		updateValue()
 	}
 	
-	open func compute(_ cellWidth: CGFloat) -> TextViewFormItemCellSizes {
+	public func compute(_ cellWidth: CGFloat) -> TextViewFormItemCellSizes {
 		
 		var titleLabelFrame = CGRect.zero
 		var placeholderLabelFrame = CGRect.zero
@@ -193,7 +193,7 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 	}
 
 
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
@@ -202,7 +202,7 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 		textView.frame = sizes.textViewFrame
 	}
 	
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
@@ -211,15 +211,15 @@ open class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider
 	
 	// MARK: UIResponder
 	
-	open override var canBecomeFirstResponder : Bool {
+	public override var canBecomeFirstResponder : Bool {
 		return true
 	}
 	
-	open override func becomeFirstResponder() -> Bool {
+	public override func becomeFirstResponder() -> Bool {
 		return textView.becomeFirstResponder()
 	}
 	
-	open override func resignFirstResponder() -> Bool {
+	public override func resignFirstResponder() -> Bool {
 		return textView.resignFirstResponder()
 	}
 }

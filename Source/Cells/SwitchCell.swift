@@ -9,9 +9,9 @@ public struct SwitchCellModel {
 	}
 }
 
-open class SwitchCell: UITableViewCell {
-	open let model: SwitchCellModel
-	open let switchView: UISwitch
+public class SwitchCell: UITableViewCell {
+	public let model: SwitchCellModel
+	public let switchView: UISwitch
 	
 	public init(model: SwitchCellModel) {
 		self.model = model
@@ -28,12 +28,12 @@ open class SwitchCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(switchView.isOn)
 	}
 
-	open func setValueWithoutSync(_ value: Bool, animated: Bool) {
+	public func setValueWithoutSync(_ value: Bool, animated: Bool) {
 		SwiftyFormLog("set value \(value), animated \(animated)")
 		switchView.setOn(value, animated: animated)
 	}
