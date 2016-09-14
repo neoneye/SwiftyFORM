@@ -6,33 +6,33 @@ class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	class func validateAndUpdateUI(_ items: [FormItem]) {
 		let visitor = ReloadPersistentValidationStateVisitor()
 		for item in items {
-			item.accept(visitor)
+			item.accept(visitor: visitor)
 		}
 	}
 	
-	func visit(_ object: TextFieldFormItem) {
+	func visit(object: TextFieldFormItem) {
 		object.reloadPersistentValidationState()
 	}
 	
-	func visit(_ object: AttributedTextFormItem) {}
-	func visit(_ object: ButtonFormItem) {}
-	func visit(_ object: CustomFormItem) {}
-	func visit(_ object: DatePickerFormItem) {}
-	func visit(_ object: MetaFormItem) {}
-	func visit(_ object: OptionPickerFormItem) {}
-	func visit(_ object: OptionRowFormItem) {}
-	func visit(_ object: PickerViewFormItem) {}
-	func visit(_ object: PrecisionSliderFormItem) {}
-	func visit(_ object: SectionFooterTitleFormItem) {}
-	func visit(_ object: SectionFooterViewFormItem) {}
-	func visit(_ object: SectionFormItem) {}
-	func visit(_ object: SectionHeaderTitleFormItem) {}
-	func visit(_ object: SectionHeaderViewFormItem) {}
-	func visit(_ object: SegmentedControlFormItem) {}
-	func visit(_ object: SliderFormItem) {}
-	func visit(_ object: StaticTextFormItem) {}
-	func visit(_ object: StepperFormItem) {}
-	func visit(_ object: SwitchFormItem) {}
-	func visit(_ object: TextViewFormItem) {}
-	func visit(_ object: ViewControllerFormItem) {}
+	func visit(object: AttributedTextFormItem) {}
+	func visit(object: ButtonFormItem) {}
+	func visit(object: CustomFormItem) {}
+	func visit(object: DatePickerFormItem) {}
+	func visit(object: MetaFormItem) {}
+	func visit(object: OptionPickerFormItem) {}
+	func visit(object: OptionRowFormItem) {}
+	func visit(object: PickerViewFormItem) {}
+	func visit(object: PrecisionSliderFormItem) {}
+	func visit(object: SectionFooterTitleFormItem) {}
+	func visit(object: SectionFooterViewFormItem) {}
+	func visit(object: SectionFormItem) {}
+	func visit(object: SectionHeaderTitleFormItem) {}
+	func visit(object: SectionHeaderViewFormItem) {}
+	func visit(object: SegmentedControlFormItem) {}
+	func visit(object: SliderFormItem) {}
+	func visit(object: StaticTextFormItem) {}
+	func visit(object: StepperFormItem) {}
+	func visit(object: SwitchFormItem) {}
+	func visit(object: TextViewFormItem) {}
+	func visit(object: ViewControllerFormItem) {}
 }

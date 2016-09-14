@@ -16,8 +16,8 @@ open class ViewControllerFormItemPopContext {
 }
 
 open class ViewControllerFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var placeholder: String = ""

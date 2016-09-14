@@ -23,8 +23,8 @@ public enum DatePickerFormItemMode {
 Behind the scenes this creates a `UIDatePicker`.
 */
 open class DatePickerFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var title: String = ""

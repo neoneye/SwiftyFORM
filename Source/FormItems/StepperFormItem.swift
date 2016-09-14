@@ -2,8 +2,8 @@
 import Foundation
 
 open class StepperFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 
 	open var title: String = ""

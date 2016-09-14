@@ -2,8 +2,8 @@
 import Foundation
 
 open class TextFieldFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var keyboardType: UIKeyboardType = .default

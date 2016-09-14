@@ -13,7 +13,7 @@ open class CustomFormItem: FormItem {
 	public typealias CreateCell = (Context) throws -> UITableViewCell
 	open var createCell: CreateCell = { _ in throw CustomFormItemError.couldNotCreate }
 	
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 }

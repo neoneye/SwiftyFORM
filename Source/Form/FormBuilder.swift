@@ -62,7 +62,7 @@ open class FormBuilder: NSObject {
 		
 		let v = PopulateTableView(model: model)
 		for item in innerItems {
-			item.accept(v)
+			item.accept(visitor: v)
 		}
 		let footerBlock: TableViewSectionPart.CreateBlock = {
 			return TableViewSectionPart.none
@@ -72,7 +72,7 @@ open class FormBuilder: NSObject {
 		for alignLeftItem in alignLeftItems {
 			let widthArray: [CGFloat] = alignLeftItem.items.map {
 				let v = ObtainTitleWidth()
-				$0.accept(v)
+				$0.accept(visitor: v)
 				return v.width
 			}
 			//SwiftyFormLog("widthArray: \(widthArray)")
@@ -81,7 +81,7 @@ open class FormBuilder: NSObject {
 			
 			for item in alignLeftItem.items {
 				let v = AssignTitleWidth(width: width)
-				item.accept(v)
+				item.accept(visitor: v)
 			}
 		}
 		
@@ -100,7 +100,7 @@ open class FormBuilder: NSObject {
 	open func validate() -> FormValidateResult {
 		for item in innerItems {
 			let v = ValidateVisitor()
-			item.accept(v)
+			item.accept(visitor: v)
 			switch v.result {
 			case .valid:
 				// SwiftyFormLog("valid")

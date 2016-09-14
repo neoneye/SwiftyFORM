@@ -16,8 +16,8 @@ Behind the scenes this creates a `PrecisionSlider`. This is not a standard Apple
 Please contact Simon Strandgaard if you have questions regarding it.
 */
 open class PrecisionSliderFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var title: String = ""

@@ -3,8 +3,8 @@ import Foundation
 
 /// This is an invisible field, that is submitted along with the json
 open class MetaFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var value: AnyObject?

@@ -2,8 +2,8 @@
 import Foundation
 
 open class SliderFormItem: FormItem {
-	override func accept(_ visitor: FormItemVisitor) {
-		visitor.visit(self)
+	override func accept(visitor: FormItemVisitor) {
+		visitor.visit(object: self)
 	}
 	
 	open var minimumValue: Float = 0.0
