@@ -5,28 +5,28 @@ import SwiftyFORM
 class DatePickerInitialValueViewController: FormViewController {
 	lazy var datePicker_time_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Time")
+		instance.title = "Time"
 		instance.datePickerMode = .time
 		return instance
 		}()
 	
 	lazy var datePicker_date_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
+		instance.title = "Date"
 		instance.datePickerMode = .date
 		return instance
 		}()
 	
 	lazy var datePicker_dateAndTime_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("DateAndTime")
+		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
 		return instance
 		}()
 	
 	lazy var datePicker_time_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Time")
+		instance.title = "Time"
 		instance.datePickerMode = .time
 		// 5 * 60 * 60 + 5 * 60 + 5 == 18305
 		instance.value = Date(timeIntervalSinceNow: 18305)
@@ -35,7 +35,7 @@ class DatePickerInitialValueViewController: FormViewController {
 	
 	lazy var datePicker_date_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
+		instance.title = "Date"
 		instance.datePickerMode = .date
 		// 51 * 24 * 60 * 60 == 4406400
 		instance.value = Date(timeIntervalSinceNow: 4406400)
@@ -44,7 +44,7 @@ class DatePickerInitialValueViewController: FormViewController {
 	
 	lazy var datePicker_dateAndTime_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("DateAndTime")
+		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
 		// 51 * 24 * 60 * 60 == 4406400
 		instance.value = Date(timeIntervalSinceNow: 4406400)

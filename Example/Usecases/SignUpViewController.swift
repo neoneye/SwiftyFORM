@@ -90,7 +90,7 @@ class SignUpViewController: FormViewController {
 	lazy var birthday: DatePickerFormItem = {
 		let today = NSDate()
 		let instance = DatePickerFormItem()
-		instance.title("Birthday")
+		instance.title = "Birthday"
 		instance.datePickerMode = .date
 		instance.minimumDate = self.offsetDate(today as Date, years: -150)
 		instance.maximumDate = today as Date
@@ -99,7 +99,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var subscribeToNewsletter: SwitchFormItem = {
 		let instance = SwitchFormItem()
-		instance.title("Subscribe to newsletter")
+		instance.title = "Subscribe to newsletter"
 		instance.value = true
 		return instance
 		}()
@@ -116,7 +116,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Randomize")
+		instance.title = "Randomize"
 		instance.action = { [weak self] in
 			self?.randomize()
 		}
@@ -152,7 +152,7 @@ class SignUpViewController: FormViewController {
 	
 	lazy var jsonButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("View JSON")
+		instance.title = "View JSON"
 		instance.action = { [weak self] in
 			if let vc = self {
 				DebugViewController.showJSON(vc, jsonData: vc.formBuilder.dump())

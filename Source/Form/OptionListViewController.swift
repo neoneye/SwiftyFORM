@@ -21,7 +21,7 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 		builder.navigationTitle = optionField.title
 		for optionRow: OptionRowModel in optionField.options {
 			let option = OptionRowFormItem()
-			option.title(optionRow.title)
+			option.title = optionRow.title
 			option.context = optionRow
 			option.selected = (optionRow === optionField.selected)
 			builder.append(option)

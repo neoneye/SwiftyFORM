@@ -13,13 +13,13 @@ class AliensViewController: FormViewController {
 	
 	lazy var stepperForm0: StepperFormItem = {
 		let instance = StepperFormItem()
-		instance.title("Alien encounters")
+		instance.title = "Alien encounters"
 		return instance
 		}()
 	
 	lazy var button0: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Submit")
+		instance.title = "Submit"
 		instance.action = { [weak self] in
 			if let stepperValue = self?.stepperForm0.value {
 				self?.form_simpleAlert("Aliens encounters", "I have encountered \(stepperValue) aliens!")

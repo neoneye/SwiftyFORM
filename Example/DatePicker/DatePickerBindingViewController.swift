@@ -27,7 +27,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
+		instance.title = "Date"
 		instance.datePickerMode = .date
 		instance.behavior = .expandedAlways
 		instance.valueDidChangeBlock = { [weak self] _ in
@@ -38,7 +38,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var incrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Next Day")
+		instance.title = "Next Day"
 		instance.action = { [weak self] in
 			self?.increment()
 		}
@@ -47,7 +47,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var decrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Previous Day")
+		instance.title = "Previous Day"
 		instance.action = { [weak self] in
 			self?.decrement()
 		}
@@ -94,7 +94,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var toggleDatePicker0: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 0")
+		instance.title = "Toggle 0"
 		instance.datePickerMode = .time
 		instance.behavior = .expanded
 		return instance
@@ -102,7 +102,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var toggleDatePicker1: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 1")
+		instance.title = "Toggle 1"
 		instance.datePickerMode = .time
 		instance.behavior = .collapsed
 		return instance
@@ -110,7 +110,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var toggleDatePicker2: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 2")
+		instance.title = "Toggle 2"
 		instance.datePickerMode = .time
 		instance.behavior = .collapsed
 		return instance

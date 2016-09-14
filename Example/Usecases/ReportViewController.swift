@@ -23,7 +23,7 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 	}
 	
 	func configureButton() {
-		sendButton.title("Send Now!")
+		sendButton.title = "Send Now!"
 		sendButton.action = { [weak self] in
 			self?.sendMail()
 		}

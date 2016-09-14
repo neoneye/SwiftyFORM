@@ -27,7 +27,7 @@ class MyOptionForm {
 		
 		for optionRow: OptionRow in optionRows {
 			let option = OptionRowFormItem()
-			option.title(optionRow.title)
+			option.title = optionRow.title
 			builder.append(option)
 		}
 
@@ -36,7 +36,7 @@ class MyOptionForm {
 	}
 
 	func configureVC0() {
-		vc0.title("What is XYZ?")
+		vc0.title = "What is XYZ?"
 		vc0.createViewController = { (dismissCommand: CommandProtocol) in
 			let vc = EmptyViewController()
 			return vc
