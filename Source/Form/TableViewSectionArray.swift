@@ -83,15 +83,15 @@ open class TableViewSectionArray: NSObject, UITableViewDataSource, UITableViewDe
 	}
 	
 	open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return sections[section].tableView(tableView, heightForHeaderInSection: section) ?? UITableViewAutomaticDimension
+		return sections[section].tableView(tableView, heightForHeaderInSection: section)
 	}
 	
 	open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return sections[section].tableView(tableView, heightForFooterInSection: section) ?? UITableViewAutomaticDimension
+		return sections[section].tableView(tableView, heightForFooterInSection: section)
 	}
 	
 	open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return sections[(indexPath as NSIndexPath).section].tableView(tableView, heightForRowAt: indexPath) ?? 0
+		return sections[(indexPath as NSIndexPath).section].tableView(tableView, heightForRowAt: indexPath)
 	}
 	
 	open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
