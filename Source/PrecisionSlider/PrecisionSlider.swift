@@ -532,8 +532,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let markColor: UIColor? = model.markColorForIndexPath(indexPath)
 		
 		let count = self.collectionView(collectionView, numberOfItemsInSection: 0)
-		let isFirst = (indexPath as NSIndexPath).row == 0
-		let isLast = (indexPath as NSIndexPath).row == count - 1
+		let isFirst = indexPath.row == 0
+		let isLast = indexPath.row == count - 1
 		
 		if isFirst && model.hasPartialItemBefore {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
@@ -564,7 +564,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			//print("size for one-partial \(indexPath.row) \(size.width)")
 			return size
 		}
-		var row = (indexPath as NSIndexPath).row
+		var row = indexPath.row
 		if model.hasPartialItemBefore {
 			if row == 0 {
 				let size = CGSize(

@@ -18,7 +18,7 @@ extension UITableView {
 		}
 		
 		// Expanded row
-		let expanded_indexPath = IndexPath(row: (indexPath as NSIndexPath).row + 1, section: (indexPath as NSIndexPath).section)
+		let expanded_indexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
 		let expanded_rect = rectForRow(at: expanded_indexPath)
 		let focusArea_maxY = expanded_rect.maxY - (contentOffset.y + contentInset.top)
 		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(expanded_rect.maxY) \(contentOffset.y) \(contentInset.top)")

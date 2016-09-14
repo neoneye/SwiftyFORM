@@ -21,13 +21,13 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	func findVisibleItem(indexPath: IndexPath) -> TableViewCellArrayItem? {
-		if (indexPath as NSIndexPath).section < 0 { return nil }
-		if (indexPath as NSIndexPath).row < 0 { return nil }
-		if (indexPath as NSIndexPath).section >= sections.count { return nil }
-		let section = sections[(indexPath as NSIndexPath).section]
+		if indexPath.section < 0 { return nil }
+		if indexPath.row < 0 { return nil }
+		if indexPath.section >= sections.count { return nil }
+		let section = sections[indexPath.section]
 		let items = section.cells.visibleItems
-		if (indexPath as NSIndexPath).row >= items.count { return nil }
-		return items[(indexPath as NSIndexPath).row]
+		if indexPath.row >= items.count { return nil }
+		return items[indexPath.row]
 	}
 	
 	func indexPathForItem(_ findItem: TableViewCellArrayItem) -> IndexPath? {
@@ -59,11 +59,11 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		return sections[(indexPath as NSIndexPath).section].tableView(tableView, cellForRowAt: indexPath)
+		return sections[indexPath.section].tableView(tableView, cellForRowAt: indexPath)
 	}
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		sections[(indexPath as NSIndexPath).section].tableView(tableView, didSelectRowAt: indexPath)
+		sections[indexPath.section].tableView(tableView, didSelectRowAt: indexPath)
 	}
 	
 	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -91,15 +91,15 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return sections[(indexPath as NSIndexPath).section].tableView(tableView, heightForRowAt: indexPath)
+		return sections[indexPath.section].tableView(tableView, heightForRowAt: indexPath)
 	}
 	
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		sections[(indexPath as NSIndexPath).section].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
+		sections[indexPath.section].tableView(tableView, willDisplay: cell, forRowAt: indexPath)
 	}
 	
 	public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-		sections[(indexPath as NSIndexPath).section].tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
+		sections[indexPath.section].tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
 	}
 	
 	// MARK: UIScrollViewDelegate

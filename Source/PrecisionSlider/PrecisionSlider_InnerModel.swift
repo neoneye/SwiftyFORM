@@ -197,7 +197,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	static let height: CGFloat = 130
 	
 	func labelTextForIndexPath(_ indexPath: IndexPath) -> String? {
-		var index = Int(floor(minimumValue)) + (indexPath as NSIndexPath).row
+		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
 		}
@@ -208,7 +208,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
 	
 	func markColorForIndexPath(_ indexPath: IndexPath) -> UIColor? {
-		var index = Int(floor(minimumValue)) + (indexPath as NSIndexPath).row
+		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
 			index += 1
 		}
