@@ -1,34 +1,34 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class SegmentedControlFormItem: FormItem {
+public class SegmentedControlFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	open var items: [String] = ["a", "b", "c"]
+	public var items: [String] = ["a", "b", "c"]
 
 	@discardableResult
-	open func items(_ items: String...) -> Self {
+	public func items(_ items: String...) -> Self {
 		self.items = items
 		return self
 	}
 
 	@discardableResult
-	open func itemsArray(_ items: [String]) -> Self {
+	public func itemsArray(_ items: [String]) -> Self {
 		self.items = items
 		return self
 	}
 	
-	open var selectedItem: String? {
+	public var selectedItem: String? {
 		let index = selected
 		if index >= 0 || index < items.count {
 			return items[index]
@@ -36,13 +36,13 @@ open class SegmentedControlFormItem: FormItem {
 		return nil
 	}
 
-	open var selected: Int {
+	public var selected: Int {
 		get { return value }
 		set { self.value = newValue }
 	}
 
 	@discardableResult
-	open func selected(_ selected: Int) -> Self {
+	public func selected(_ selected: Int) -> Self {
 		self.value = selected
 		return self
 	}
@@ -54,7 +54,7 @@ open class SegmentedControlFormItem: FormItem {
 	}
 	
 	internal var innerValue: Int = 0
-	open var value: Int {
+	public var value: Int {
 		get {
 			return innerValue
 		}
@@ -65,11 +65,11 @@ open class SegmentedControlFormItem: FormItem {
 	}
 	
 	public typealias ValueDidChangeBlock = (_ value: Int) -> Void
-	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: Int) in
+	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Int) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	open func valueDidChange(_ value: Int) {
+	public func valueDidChange(_ value: Int) {
 		innerValue = value
 		valueDidChangeBlock(value)
 	}

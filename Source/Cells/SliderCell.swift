@@ -12,10 +12,10 @@ public struct SliderCellModel {
 	}
 }
 
-open class SliderCell: UITableViewCell, CellHeightProvider {
-	open let model: SliderCellModel
+public class SliderCell: UITableViewCell, CellHeightProvider {
+	public let model: SliderCellModel
 	
-	open let slider = UISlider()
+	public let slider = UISlider()
 
 	public init(model: SliderCellModel) {
 		self.model = model
@@ -36,23 +36,23 @@ open class SliderCell: UITableViewCell, CellHeightProvider {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
 		slider.sizeToFit()
 		slider.frame = bounds.insetBy(dx: 16, dy: 0)
 	}
 
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(slider.value)
 	}
 	
-	open func setValueWithoutSync(_ value: Float, animated: Bool) {
+	public func setValueWithoutSync(_ value: Float, animated: Bool) {
 		SwiftyFormLog("set value \(value), animated \(animated)")
 		slider.setValue(value, animated: animated)
 	}

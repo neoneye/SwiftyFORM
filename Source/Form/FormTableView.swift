@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-open class FormTableView: UITableView {
+public class FormTableView: UITableView {
 	public init() {
 		super.init(frame: CGRect.zero, style: .grouped)
 		contentInset = UIEdgeInsets.zero

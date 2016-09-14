@@ -8,15 +8,15 @@ import Foundation
 
 Behind the scenes this creates a `UIPickerView`.
 */
-open class PickerViewFormItem: FormItem {
+public class PickerViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -52,18 +52,18 @@ open class PickerViewFormItem: FormItem {
 		case expanded
 		case expandedAlways
 	}
-	open var behavior = Behavior.collapsed
+	public var behavior = Behavior.collapsed
 
 	@discardableResult
-	open func behavior(_ behavior: Behavior) -> Self {
+	public func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
 	
-	open var pickerTitles = [[String]]()
+	public var pickerTitles = [[String]]()
 	
-	open var humanReadableValueSeparator: String?
+	public var humanReadableValueSeparator: String?
 	
 
 	typealias SyncBlock = (_ value: [Int], _ animated: Bool) -> Void
@@ -89,7 +89,7 @@ open class PickerViewFormItem: FormItem {
 	
 	
 	internal var innerValue = [Int]()
-	open var value: [Int] {
+	public var value: [Int] {
 		get {
 			maybeAssignFallbackValue()
 			return self.innerValue
@@ -99,17 +99,17 @@ open class PickerViewFormItem: FormItem {
 		}
 	}
 	
-	open func setValue(_ value: [Int], animated: Bool) {
+	public func setValue(_ value: [Int], animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value, animated)
 	}
 
 	public typealias ValueDidChangeBlock = (_ value: [Int]) -> Void
-	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
+	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
 		SwiftyFormLog("not overridden")
 	}
 
-	open func valueDidChange(_ value: [Int]) {
+	public func valueDidChange(_ value: [Int]) {
 		innerValue = value
 		valueDidChangeBlock(value)
 	}

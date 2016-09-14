@@ -22,15 +22,15 @@ public enum DatePickerFormItemMode {
 
 Behind the scenes this creates a `UIDatePicker`.
 */
-open class DatePickerFormItem: FormItem {
+public class DatePickerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -66,10 +66,10 @@ open class DatePickerFormItem: FormItem {
 		case expanded
 		case expandedAlways
 	}
-	open var behavior = Behavior.collapsed
+	public var behavior = Behavior.collapsed
 
 	@discardableResult
-	open func behavior(_ behavior: Behavior) -> Self {
+	public func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
@@ -80,7 +80,7 @@ open class DatePickerFormItem: FormItem {
 	}
 	
 	internal var innerValue = Date()
-	open var value: Date {
+	public var value: Date {
 		get {
 			return self.innerValue
 		}
@@ -89,23 +89,23 @@ open class DatePickerFormItem: FormItem {
 		}
 	}
 	
-	open func setValue(_ date: Date, animated: Bool) {
+	public func setValue(_ date: Date, animated: Bool) {
 		innerValue = date
 		syncCellWithValue(date, animated)
 	}
 	
-	open var datePickerMode: DatePickerFormItemMode = .dateAndTime
-	open var locale: Locale? // default is [NSLocale currentLocale]. setting nil returns to default
-	open var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
-	open var maximumDate: Date? // default is nil
+	public var datePickerMode: DatePickerFormItemMode = .dateAndTime
+	public var locale: Locale? // default is [NSLocale currentLocale]. setting nil returns to default
+	public var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+	public var maximumDate: Date? // default is nil
 	
 	
 	public typealias ValueDidChangeBlock = (_ value: Date) -> Void
-	open var valueDidChangeBlock: ValueDidChangeBlock = { (value: Date) in
+	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Date) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	open func valueDidChange(_ value: Date) {
+	public func valueDidChange(_ value: Date) {
 		innerValue = value
 		valueDidChangeBlock(value)
 	}

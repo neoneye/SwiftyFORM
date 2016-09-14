@@ -12,10 +12,10 @@ Usage:
 DebugViewController.showURL(self, url: NSURL(string: "http://www.google.com")!)
 DebugViewController.showText(self, text: "hello world")
 */
-open class DebugViewController: UIViewController {
+public class DebugViewController: UIViewController {
 	
-	open let dismissBlock: (Void) -> Void
-	open let whatToShow: WhatToShow
+	public let dismissBlock: (Void) -> Void
+	public let whatToShow: WhatToShow
 	
 	public init(dismissBlock: @escaping (Void) -> Void, whatToShow: WhatToShow) {
 		self.dismissBlock = dismissBlock
@@ -27,20 +27,20 @@ open class DebugViewController: UIViewController {
 	    fatalError("init(coder:) has not been implemented")
 	}
 
-	open class func showJSON(_ parentViewController: UIViewController, jsonData: Data) {
+	public class func showJSON(_ parentViewController: UIViewController, jsonData: Data) {
 		showModally(parentViewController, whatToShow: WhatToShow.json(json: jsonData))
 	}
 
-	open class func showText(_ parentViewController: UIViewController, text: String) {
+	public class func showText(_ parentViewController: UIViewController, text: String) {
 		showModally(parentViewController, whatToShow: WhatToShow.text(text: text))
 	}
 
-	open class func showURL(_ parentViewController: UIViewController, url: URL) {
+	public class func showURL(_ parentViewController: UIViewController, url: URL) {
 		showModally(parentViewController, whatToShow: WhatToShow.url(url: url))
 	}
 	
 	
-	open class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
+	public class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
 		weak var weakSelf = parentViewController
 		let dismissBlock: (Void) -> Void = {
 			if let vc = weakSelf {
@@ -53,7 +53,7 @@ open class DebugViewController: UIViewController {
 		parentViewController.present(nc, animated: true, completion: nil)
 	}
 
-	open override func loadView() {
+	public override func loadView() {
 		let webview = UIWebView()
 		self.view = webview
 		

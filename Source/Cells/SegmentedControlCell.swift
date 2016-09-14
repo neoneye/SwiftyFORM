@@ -12,9 +12,9 @@ public struct SegmentedControlCellModel {
 	}
 }
 
-open class SegmentedControlCell: UITableViewCell {
-	open let model: SegmentedControlCellModel
-	open let segmentedControl: UISegmentedControl
+public class SegmentedControlCell: UITableViewCell {
+	public let model: SegmentedControlCellModel
+	public let segmentedControl: UISegmentedControl
 	
 	public init(model: SegmentedControlCellModel) {
 		self.model = model
@@ -31,12 +31,12 @@ open class SegmentedControlCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(segmentedControl.selectedSegmentIndex)
 	}
 	
-	open func setValueWithoutSync(_ value: Int) {
+	public func setValueWithoutSync(_ value: Int) {
 		SwiftyFormLog("set value \(value)")
 		segmentedControl.selectedSegmentIndex = value
 	}

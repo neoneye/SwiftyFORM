@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-open class OptionCell: UITableViewCell, SelectRowDelegate {
+public class OptionCell: UITableViewCell, SelectRowDelegate {
 	let innerDidSelectOption: (Void) -> Void
 	
 	public init(model: OptionRowFormItem, didSelectOption: @escaping (Void) -> Void) {
@@ -14,7 +14,7 @@ open class OptionCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func loadWithModel(_ model: OptionRowFormItem) {
+	public func loadWithModel(_ model: OptionRowFormItem) {
 		textLabel?.text = model.title
 		if model.selected {
 			accessoryType = .checkmark
@@ -23,7 +23,7 @@ open class OptionCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		accessoryType = .checkmark
 		

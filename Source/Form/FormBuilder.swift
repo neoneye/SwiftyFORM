@@ -14,7 +14,7 @@ public enum ToolbarMode {
 }
 
 
-open class FormBuilder: NSObject {
+public class FormBuilder: NSObject {
 	fileprivate var innerItems = [FormItem]()
 	fileprivate var alignLeftItems = [AlignLeft]()
 	
@@ -22,43 +22,43 @@ open class FormBuilder: NSObject {
 		super.init()
 	}
 	
-	open var navigationTitle: String? = nil
+	public var navigationTitle: String? = nil
 	
-	open var toolbarMode: ToolbarMode = .none
+	public var toolbarMode: ToolbarMode = .none
 	
-	open func removeAll() {
+	public func removeAll() {
 		innerItems.removeAll()
 	}
 	
 	@discardableResult
-	open func append(_ item: FormItem) -> FormItem {
+	public func append(_ item: FormItem) -> FormItem {
 		innerItems.append(item)
 		return item
 	}
 	
-	open func appendMulti(_ items: [FormItem]) {
+	public func appendMulti(_ items: [FormItem]) {
 		innerItems += items
 	}
 	
-	open func alignLeft(_ items: [FormItem]) {
+	public func alignLeft(_ items: [FormItem]) {
 		let alignLeftItem = AlignLeft(items: items)
 		alignLeftItems.append(alignLeftItem)
 	}
 	
-	open func alignLeftElementsWithClass(_ styleClass: String) {
+	public func alignLeftElementsWithClass(_ styleClass: String) {
 		let items: [FormItem] = innerItems.filter { $0.styleClass == styleClass }
 		alignLeft(items)
 	}
 	
-	open var items: [FormItem] {
+	public var items: [FormItem] {
 		return innerItems
 	}
 	
-	open func dump(_ prettyPrinted: Bool = true) -> Data {
+	public func dump(_ prettyPrinted: Bool = true) -> Data {
 		return DumpVisitor.dump(prettyPrinted, items: innerItems)
 	}
 	
-	open func result(_ viewController: UIViewController) -> TableViewSectionArray {
+	public func result(_ viewController: UIViewController) -> TableViewSectionArray {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)
@@ -89,7 +89,7 @@ open class FormBuilder: NSObject {
 		return TableViewSectionArray(sections: v.sections)
 	}
 	
-	open func validateAndUpdateUI() {
+	public func validateAndUpdateUI() {
 		ReloadPersistentValidationStateVisitor.validateAndUpdateUI(innerItems)
 	}
 	
@@ -98,7 +98,7 @@ open class FormBuilder: NSObject {
 		case invalid(item: FormItem, message: String)
 	}
 	
-	open func validate() -> FormValidateResult {
+	public func validate() -> FormValidateResult {
 		for item in innerItems {
 			let v = ValidateVisitor()
 			item.accept(visitor: v)

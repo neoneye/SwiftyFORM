@@ -15,15 +15,15 @@ import Foundation
 Behind the scenes this creates a `PrecisionSlider`. This is not a standard Apple control.
 Please contact Simon Strandgaard if you have questions regarding it.
 */
-open class PrecisionSliderFormItem: FormItem {
+public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String = ""
+	public var title: String = ""
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -62,18 +62,18 @@ open class PrecisionSliderFormItem: FormItem {
 		case expanded
 		case expandedAlways
 	}
-	open var behavior = Behavior.collapsed
+	public var behavior = Behavior.collapsed
 
 	@discardableResult
-	open func behavior(_ behavior: Behavior) -> Self {
+	public func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
-	open var collapseWhenResigning = false
+	public var collapseWhenResigning = false
 
 	@discardableResult
-	open func shouldCollapseWhenResigning() -> Self {
+	public func shouldCollapseWhenResigning() -> Self {
 		self.collapseWhenResigning = true
 		return self
 	}
@@ -89,7 +89,7 @@ open class PrecisionSliderFormItem: FormItem {
 	When zoom is -2 that means zoom-out x100
 	The zoom range is from -5 to +5.
 	*/
-	open var initialZoom: Float? {
+	public var initialZoom: Float? {
 		willSet {
 			if let zoom = newValue {
 				assert(zoom >= -10, "initialZoom is far outside the zoom-range")
@@ -99,7 +99,7 @@ open class PrecisionSliderFormItem: FormItem {
 	}
 
 	@discardableResult
-	open func initialZoom(_ initialZoom: Float) -> Self {
+	public func initialZoom(_ initialZoom: Float) -> Self {
 		self.initialZoom = initialZoom
 		return self
 	}
@@ -109,38 +109,38 @@ open class PrecisionSliderFormItem: FormItem {
 	
 	The number can go from 0 to +5.
 	*/
-	open var decimalPlaces: UInt = 3  {
+	public var decimalPlaces: UInt = 3  {
 		willSet {
 			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
 		}
 	}
 
 	@discardableResult
-	open func decimalPlaces(_ decimalPlaces: UInt) -> Self {
+	public func decimalPlaces(_ decimalPlaces: UInt) -> Self {
 		self.decimalPlaces = decimalPlaces
 		return self
 	}
 	
-	open var minimumValue: Int = 0
+	public var minimumValue: Int = 0
 
 	@discardableResult
-	open func minimumValue(_ minimumValue: Int) -> Self {
+	public func minimumValue(_ minimumValue: Int) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
-	open var maximumValue: Int = 1000
+	public var maximumValue: Int = 1000
 
 	@discardableResult
-	open func maximumValue(_ maximumValue: Int) -> Self {
+	public func maximumValue(_ maximumValue: Int) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
 	
-	open var zoomUI = false
+	public var zoomUI = false
 
 	@discardableResult
-	open func enableZoomUI() -> Self {
+	public func enableZoomUI() -> Self {
 		self.zoomUI = true
 		return self
 	}
@@ -151,7 +151,7 @@ open class PrecisionSliderFormItem: FormItem {
 	}
 	
 	internal var innerValue: Int = 0
-	open var value: Int {
+	public var value: Int {
 		get {
 			return self.innerValue
 		}
@@ -161,17 +161,17 @@ open class PrecisionSliderFormItem: FormItem {
 	}
 
 	@discardableResult
-	open func value(_ value: Int) -> Self {
+	public func value(_ value: Int) -> Self {
 		updateValue(value)
 		return self
 	}
 	
-	open func updateValue(_ value: Int) {
+	public func updateValue(_ value: Int) {
 		innerValue = value
 		syncCellWithValue(value)
 	}
 	
-	open var actualValue: Double {
+	public var actualValue: Double {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(innerValue) / decimalScale
 	}
@@ -184,11 +184,11 @@ open class PrecisionSliderFormItem: FormItem {
 	}
 
 	public typealias SliderDidChangeBlock = (_ changeModel: SliderDidChangeModel) -> Void
-	open var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
+	public var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	open func sliderDidChange(_ changeModel: SliderDidChangeModel) {
+	public func sliderDidChange(_ changeModel: SliderDidChangeModel) {
 		innerValue = changeModel.value
 		sliderDidChangeBlock(changeModel)
 	}

@@ -8,7 +8,7 @@ struct DatePickerCellConstants {
 }
 
 
-open class DatePickerCellModel {
+public class DatePickerCellModel {
 	var title: String = ""
 	var datePickerMode: UIDatePickerMode = .dateAndTime
 	var locale: Locale? = nil // default is [NSLocale currentLocale]. setting nil returns to default
@@ -35,9 +35,9 @@ open class DatePickerCellModel {
 
 This causes the inline date picker to expand/collapse
 */
-open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: DatePickerExpandedCell?
-	open let model: DatePickerCellModel
+	public let model: DatePickerCellModel
 
 	public init(model: DatePickerCellModel) {
 		/*
@@ -67,7 +67,7 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func obtainDateStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
+	public func obtainDateStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
 			return .none
@@ -80,7 +80,7 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		}
 	}
 	
-	open func obtainTimeStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
+	public func obtainTimeStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
 			return .short
@@ -93,7 +93,7 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		}
 	}
 	
-	open var humanReadableValue: String {
+	public var humanReadableValue: String {
 		if model.datePickerMode == .countDownTimer {
 			return "Unsupported"
 		}
@@ -106,7 +106,7 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		return dateFormatter.string(from: date)
 	}
 
-	open func updateValue() {
+	public func updateValue() {
 		detailTextLabel?.text = humanReadableValue
 	}
 	
@@ -118,11 +118,11 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		expandedCell?.datePicker.setDate(model.date, animated: animated)
 	}
 	
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return
@@ -139,14 +139,14 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 
 	// MARK: UIResponder
 	
-	open override var canBecomeFirstResponder : Bool {
+	public override var canBecomeFirstResponder : Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
 	
-	open override func becomeFirstResponder() -> Bool {
+	public override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
 		}
@@ -154,7 +154,7 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		return true
 	}
 	
-	open override func resignFirstResponder() -> Bool {
+	public override func resignFirstResponder() -> Bool {
 		collapse()
 		return super.resignFirstResponder()
 	}
@@ -210,12 +210,12 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 	
 	// MARK: AssignAppearance
 	
-	open func assignDefaultColors() {
+	public func assignDefaultColors() {
 		textLabel?.textColor = UIColor.black
 		detailTextLabel?.textColor = UIColor.gray
 	}
 	
-	open func assignTintColors() {
+	public func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
@@ -227,22 +227,22 @@ open class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 
 Row containing only a `UIDatePicker`
 */
-open class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
+public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell {
 	weak var collapsedCell: DatePickerToggleCell?
 
-	open var toggleCell: UITableViewCell? {
+	public var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
 	
-	open var isCollapsable: Bool {
+	public var isCollapsable: Bool {
 		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return DatePickerCellConstants.CellExpanded.height
 	}
 
-	open func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
+	public func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
 		if let model = collapsedCell?.model {
 			configure(model)
 		}
@@ -262,7 +262,7 @@ open class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisp
 		datePicker.date = model.date
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
 			return
 		}
@@ -284,7 +284,7 @@ open class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDisp
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		datePicker.frame = bounds
 	}

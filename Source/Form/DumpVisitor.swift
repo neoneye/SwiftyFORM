@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class DumpVisitor: FormItemVisitor {
+public class DumpVisitor: FormItemVisitor {
 	fileprivate typealias StringToAnyObject = [String: AnyObject?]
 	
 	public init() {
@@ -49,7 +49,7 @@ open class DumpVisitor: FormItemVisitor {
 	
 	fileprivate var dict = StringToAnyObject()
 	
-	open func visit(object: MetaFormItem) {
+	public func visit(object: MetaFormItem) {
 		dict["class"] = "MetaFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -57,14 +57,14 @@ open class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 	}
 
-	open func visit(object: CustomFormItem) {
+	public func visit(object: CustomFormItem) {
 		dict["class"] = "CustomFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
 	}
 	
-	open func visit(object: StaticTextFormItem) {
+	public func visit(object: StaticTextFormItem) {
 		dict["class"] = "StaticTextFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -73,7 +73,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value as AnyObject?
 	}
 
-	open func visit(object: AttributedTextFormItem) {
+	public func visit(object: AttributedTextFormItem) {
 		dict["class"] = "AttributedTextFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -82,7 +82,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value?.string as AnyObject?
 	}
 	
-	open func visit(object: TextFieldFormItem) {
+	public func visit(object: TextFieldFormItem) {
 		dict["class"] = "TextFieldFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -92,7 +92,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["placeholder"] = object.placeholder as AnyObject?
 	}
 	
-	open func visit(object: TextViewFormItem) {
+	public func visit(object: TextViewFormItem) {
 		dict["class"] = "TextViewFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -101,7 +101,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value as AnyObject?
 	}
 	
-	open func visit(object: ViewControllerFormItem) {
+	public func visit(object: ViewControllerFormItem) {
 		dict["class"] = "ViewControllerFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -109,7 +109,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 	}
 	
-	open func visit(object: OptionPickerFormItem) {
+	public func visit(object: OptionPickerFormItem) {
 		dict["class"] = "OptionPickerFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -126,7 +126,7 @@ open class DumpVisitor: FormItemVisitor {
 		return NSNull()
 	}
 	
-	open func visit(object: DatePickerFormItem) {
+	public func visit(object: DatePickerFormItem) {
 		dict["class"] = "DatePickerFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -139,7 +139,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["maximumDate"] = convertOptionalDateToJSON(object.minimumDate as Date?)
 	}
 	
-	open func visit(object: ButtonFormItem) {
+	public func visit(object: ButtonFormItem) {
 		dict["class"] = "ButtonFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -147,7 +147,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 	}
 	
-	open func visit(object: OptionRowFormItem) {
+	public func visit(object: OptionRowFormItem) {
 		dict["class"] = "OptionRowFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -156,7 +156,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["state"] = object.selected as AnyObject?
 	}
 
-	open func visit(object: SwitchFormItem) {
+	public func visit(object: SwitchFormItem) {
 		dict["class"] = "SwitchFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -165,7 +165,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value as AnyObject?
 	}
 
-	open func visit(object: StepperFormItem) {
+	public func visit(object: StepperFormItem) {
 		dict["class"] = "StepperFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -173,7 +173,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 	}
 	
-	open func visit(object: SliderFormItem) {
+	public func visit(object: SliderFormItem) {
 		dict["class"] = "SliderFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -183,7 +183,7 @@ open class DumpVisitor: FormItemVisitor {
 		dict["maximumValue"] = object.maximumValue as AnyObject?
 	}
 	
-	open func visit(object: PrecisionSliderFormItem) {
+	public func visit(object: PrecisionSliderFormItem) {
 		dict["class"] = "PrecisionSliderFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -194,14 +194,14 @@ open class DumpVisitor: FormItemVisitor {
 		dict["decimalPlaces"] = object.decimalPlaces as AnyObject?
 	}
 	
-	open func visit(object: SectionFormItem) {
+	public func visit(object: SectionFormItem) {
 		dict["class"] = "SectionFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
 	}
 	
-	open func visit(object: SectionHeaderTitleFormItem) {
+	public func visit(object: SectionHeaderTitleFormItem) {
 		dict["class"] = "SectionHeaderTitleFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -209,14 +209,14 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 	}
 	
-	open func visit(object: SectionHeaderViewFormItem) {
+	public func visit(object: SectionHeaderViewFormItem) {
 		dict["class"] = "SectionHeaderViewFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
 	}
 	
-	open func visit(object: SectionFooterTitleFormItem) {
+	public func visit(object: SectionFooterTitleFormItem) {
 		dict["class"] = "SectionFooterTitleFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
@@ -224,21 +224,21 @@ open class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title as AnyObject?
 	}
 
-	open func visit(object: SectionFooterViewFormItem) {
+	public func visit(object: SectionFooterViewFormItem) {
 		dict["class"] = "SectionFooterViewFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
 	}
 
-	open func visit(object: SegmentedControlFormItem) {
+	public func visit(object: SegmentedControlFormItem) {
 		dict["class"] = "SegmentedControlFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
 	}
 	
-	open func visit(object: PickerViewFormItem) {
+	public func visit(object: PickerViewFormItem) {
 		dict["class"] = "PickerViewFormItem" as AnyObject?
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?

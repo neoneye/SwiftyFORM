@@ -12,7 +12,7 @@ public struct OptionViewControllerCellModel {
 	}
 }
 
-open class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
+public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	fileprivate let model: OptionViewControllerCellModel
 	fileprivate var selectedOptionRow: OptionRowModel? = nil
 	fileprivate weak var parentViewController: UIViewController?
@@ -45,7 +45,7 @@ open class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		detailTextLabel?.text = s
 	}
 	
-	open func setSelectedOptionRowWithoutPropagation(_ option: OptionRowModel?) {
+	public func setSelectedOptionRowWithoutPropagation(_ option: OptionRowModel?) {
 		SwiftyFormLog("set selected option: \(option?.title) \(option?.identifier)")
 		
 		selectedOptionRow = option
@@ -65,7 +65,7 @@ open class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		model.valueDidChange(option)
 	}
 
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		
 		guard let vc: UIViewController = parentViewController else {

@@ -2,15 +2,15 @@
 import Foundation
 
 /// This is an invisible field, that is submitted along with the json
-open class MetaFormItem: FormItem {
+public class MetaFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
-	open var value: AnyObject?
+	public var value: AnyObject?
 
 	@discardableResult
-	open func value(_ value: AnyObject?) -> Self {
+	public func value(_ value: AnyObject?) -> Self {
 		self.value = value
 		return self
 	}

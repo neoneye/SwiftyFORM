@@ -6,8 +6,8 @@ public struct AttributedTextCellModel {
 	var valueAttributedText: NSAttributedString?
 }
 
-open class AttributedTextCell: UITableViewCell {
-    open var model: AttributedTextCellModel
+public class AttributedTextCell: UITableViewCell {
+    public var model: AttributedTextCellModel
     
     public init(model: AttributedTextCellModel) {
         self.model = model
@@ -19,7 +19,7 @@ open class AttributedTextCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open func loadWithModel(_ model: AttributedTextCellModel) {
+    public func loadWithModel(_ model: AttributedTextCellModel) {
         selectionStyle = .none
         textLabel?.attributedText = model.titleAttributedText
         detailTextLabel?.attributedText = model.valueAttributedText

@@ -35,28 +35,28 @@ open class FormItem: NSObject {
 	func accept(visitor: FormItemVisitor) {}
 	
 	// For serialization to json purposes, eg. "firstName"
-	open var elementIdentifier: String?
+	public var elementIdentifier: String?
 
 	@discardableResult
-	open func elementIdentifier(_ elementIdentifier: String?) -> Self {
+	public func elementIdentifier(_ elementIdentifier: String?) -> Self {
 		self.elementIdentifier = elementIdentifier
 		return self
 	}
 	
 	// For styling purposes, eg. "bottomRowInFirstSection"
-	open var styleIdentifier: String?
+	public var styleIdentifier: String?
 
 	@discardableResult
-	open func styleIdentifier(_ styleIdentifier: String?) -> Self {
+	public func styleIdentifier(_ styleIdentifier: String?) -> Self {
 		self.styleIdentifier = styleIdentifier
 		return self
 	}
 
 	// For styling purposes, eg. "leftAlignedGroup0"
-	open var styleClass: String?
+	public var styleClass: String?
 
 	@discardableResult
-	open func styleClass(_ styleClass: String?) -> Self {
+	public func styleClass(_ styleClass: String?) -> Self {
 		self.styleClass = styleClass
 		return self
 	}

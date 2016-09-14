@@ -11,8 +11,8 @@ extension FormBuilder {
 	}
 }
 
-open class InfoView: UIView {
-	open let label: UILabel
+public class InfoView: UIView {
+	public let label: UILabel
 	
 	public init(frame: CGRect, text: String) {
 		self.label = UILabel()
@@ -30,7 +30,7 @@ open class InfoView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		let size = label.sizeThatFits(bounds.size)
 		label.frame = CGRect(x: bounds.midX - size.width / 2, y: bounds.midY - size.height / 2, width: size.width, height: size.height)

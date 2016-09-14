@@ -2,8 +2,8 @@
 import UIKit
 
 open class FormViewController: UIViewController {
-	open var dataSource: TableViewSectionArray?
-	open var keyboardHandler: KeyboardHandler?
+	public var dataSource: TableViewSectionArray?
+	public var keyboardHandler: KeyboardHandler?
 	
 	public init() {
 		SwiftyFormLog("super init")
@@ -49,11 +49,11 @@ open class FormViewController: UIViewController {
 		super.viewDidDisappear(animated)
 	}
 
-	open lazy var formBuilder: FormBuilder = {
+	public lazy var formBuilder: FormBuilder = {
 		return FormBuilder()
 		}()
 	
-	open lazy var tableView: FormTableView = {
+	public lazy var tableView: FormTableView = {
 		return FormTableView()
 		}()
 }

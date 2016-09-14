@@ -5,13 +5,13 @@ public protocol CommandProtocol {
 	func execute(_ viewController: UIViewController, returnObject: AnyObject?)
 }
 
-open class CommandBlock: CommandProtocol {
-	open let block: (UIViewController, AnyObject?) -> Void
+public class CommandBlock: CommandProtocol {
+	public let block: (UIViewController, AnyObject?) -> Void
 	public init(block: @escaping (UIViewController, AnyObject?) -> Void) {
 		self.block = block
 	}
 	
-	open func execute(_ viewController: UIViewController, returnObject: AnyObject?) {
+	public func execute(_ viewController: UIViewController, returnObject: AnyObject?) {
 		block(viewController, returnObject)
 	}
 }

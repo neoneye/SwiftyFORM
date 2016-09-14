@@ -10,8 +10,8 @@ public struct ButtonCellModel {
 
 }
 
-open class ButtonCell: UITableViewCell, SelectRowDelegate {
-	open let model: ButtonCellModel
+public class ButtonCell: UITableViewCell, SelectRowDelegate {
+	public let model: ButtonCellModel
 	
 	public init(model: ButtonCellModel) {
 		self.model = model
@@ -23,12 +23,12 @@ open class ButtonCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func loadWithModel(_ model: ButtonCellModel) {
+	public func loadWithModel(_ model: ButtonCellModel) {
 		textLabel?.text = model.title
 		textLabel?.textAlignment = NSTextAlignment.center
 	}
 
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 		
@@ -36,5 +36,4 @@ open class ButtonCell: UITableViewCell, SelectRowDelegate {
 		
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
-	
 }

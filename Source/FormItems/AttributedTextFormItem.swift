@@ -1,21 +1,21 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class AttributedTextFormItem: FormItem {
+public class AttributedTextFormItem: FormItem {
     override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
     }
     
-	open var title: NSAttributedString?
+	public var title: NSAttributedString?
 
 	@discardableResult
-	open func title(_ title: NSAttributedString) -> Self {
+	public func title(_ title: NSAttributedString) -> Self {
 		self.title = title
 		return self
 	}
 
 	@discardableResult
-	open func title(_ title: String, _ attributes: [String: AnyObject]? = nil) -> Self {
+	public func title(_ title: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		self.title = NSAttributedString(string: title, attributes: attributes)
 		return self
 	}
@@ -27,7 +27,7 @@ open class AttributedTextFormItem: FormItem {
 	}
 	
 	internal var innerValue: NSAttributedString?
-	open var value: NSAttributedString? {
+	public var value: NSAttributedString? {
 		get {
 			return self.innerValue
 		}
@@ -38,13 +38,13 @@ open class AttributedTextFormItem: FormItem {
 	}
 
 	@discardableResult
-	open func value(_ value: NSAttributedString) -> Self {
+	public func value(_ value: NSAttributedString) -> Self {
 		self.value = value
 		return self
 	}
 
 	@discardableResult
-	open func value(_ value: String, _ attributes: [String: AnyObject]? = nil) -> Self {
+	public func value(_ value: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		self.value = NSAttributedString(string: value, attributes: attributes)
 		return self
 	}

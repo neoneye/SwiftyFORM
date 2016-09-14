@@ -1,13 +1,13 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-open class SectionFormItem: FormItem {
+public class SectionFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 }
 
-open class SectionHeaderTitleFormItem: FormItem {
+public class SectionHeaderTitleFormItem: FormItem {
 	public init(title: String? = nil) {
 		self.title = title
 		super.init()
@@ -17,25 +17,25 @@ open class SectionHeaderTitleFormItem: FormItem {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String?
+	public var title: String?
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 }
 
-open class SectionHeaderViewFormItem: FormItem {
+public class SectionHeaderViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
 	public typealias CreateUIView = (Void) -> UIView?
-	open var viewBlock: CreateUIView?
+	public var viewBlock: CreateUIView?
 }
 
-open class SectionFooterTitleFormItem: FormItem {
+public class SectionFooterTitleFormItem: FormItem {
 	public init(title: String? = nil) {
 		self.title = title
 		super.init()
@@ -45,20 +45,20 @@ open class SectionFooterTitleFormItem: FormItem {
 		visitor.visit(object: self)
 	}
 	
-	open var title: String?
+	public var title: String?
 
 	@discardableResult
-	open func title(_ title: String) -> Self {
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 }
 
-open class SectionFooterViewFormItem: FormItem {
+public class SectionFooterViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 	
 	public typealias CreateUIView = (Void) -> UIView?
-	open var viewBlock: CreateUIView?
+	public var viewBlock: CreateUIView?
 }

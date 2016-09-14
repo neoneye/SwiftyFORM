@@ -8,7 +8,7 @@ struct PickerViewCellConstants {
 }
 
 
-open class PickerViewCellModel {
+public class PickerViewCellModel {
 	var title: String = ""
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.default
@@ -39,9 +39,9 @@ open class PickerViewCellModel {
 
 This causes the inline picker view to expand/collapse
 */
-open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: PickerViewExpandedCell?
-	open let model: PickerViewCellModel
+	public let model: PickerViewCellModel
 
 	public init(model: PickerViewCellModel) {
 		self.model = model
@@ -58,7 +58,7 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	open func updateValue() {
+	public func updateValue() {
 		detailTextLabel?.text = model.humanReadableValue
 	}
 	
@@ -74,11 +74,11 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		expandedCell?.pickerView.form_selectRows(value, animated: animated)
 	}
 	
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return
@@ -95,14 +95,14 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 
 	// MARK: UIResponder
 	
-	open override var canBecomeFirstResponder : Bool {
+	public override var canBecomeFirstResponder : Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
 	
-	open override func becomeFirstResponder() -> Bool {
+	public override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
 		}
@@ -110,7 +110,7 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 		return true
 	}
 	
-	open override func resignFirstResponder() -> Bool {
+	public override func resignFirstResponder() -> Bool {
 		collapse()
 		return super.resignFirstResponder()
 	}
@@ -166,12 +166,12 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 	
 	// MARK: AssignAppearance
 	
-	open func assignDefaultColors() {
+	public func assignDefaultColors() {
 		textLabel?.textColor = UIColor.black
 		detailTextLabel?.textColor = UIColor.gray
 	}
 	
-	open func assignTintColors() {
+	public func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
@@ -183,22 +183,22 @@ open class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontCollaps
 
 Row containing only a `UIPickerView`
 */
-open class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell, UIPickerViewDataSource, UIPickerViewDelegate {
+public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell, UIPickerViewDataSource, UIPickerViewDelegate {
 	weak var collapsedCell: PickerViewToggleCell?
 
-	open var toggleCell: UITableViewCell? {
+	public var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
 	
-	open var isCollapsable: Bool {
+	public var isCollapsable: Bool {
 		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return PickerViewCellConstants.CellExpanded.height
 	}
 
-	open func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
+	public func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
 		if let model = collapsedCell?.model {
 			configure(model)
 		}
@@ -220,7 +220,7 @@ open class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisp
 		pickerView.form_selectRows(model.value, animated: false)
 	}
 	
-	open func valueChanged() {
+	public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
 			return
 		}
@@ -247,7 +247,7 @@ open class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisp
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		pickerView.frame = contentView.bounds
 		
@@ -268,23 +268,23 @@ open class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisp
 
 	// MARK: UIPickerViewDataSource / UIPickerViewDelegate
 	
-	open func numberOfComponents(in pickerView: UIPickerView) -> Int {
+	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return titles.count
 	}
 	
-	open func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+	public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		return titles[component].count
 	}
 	
-	open func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+	public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		return titles[component][row]
 	}
 	
-	open func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+	public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		valueChanged()
 	}
 	
-	open func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+	public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
 		return 44
 	}
 }

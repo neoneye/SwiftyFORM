@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-open class PrecisionSliderCellModel {
+public class PrecisionSliderCellModel {
 	var title: String?
 	var decimalPlaces: UInt = 3
 	var value: Int = 0
@@ -58,9 +58,9 @@ public struct PrecisionSliderCellFormatter {
 
 This causes the inline precision slider to expand/collapse
 */
-open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
 	weak var expandedCell: PrecisionSliderExpandedCell?
-	open let model: PrecisionSliderCellModel
+	public let model: PrecisionSliderCellModel
 
 	public init(model: PrecisionSliderCellModel) {
 		self.model = model
@@ -107,11 +107,11 @@ open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Selec
 		reloadValueLabel()
 	}
 	
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
-	open func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return
@@ -129,14 +129,14 @@ open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Selec
 	
 	// MARK: UIResponder
 	
-	open override var canBecomeFirstResponder : Bool {
+	public override var canBecomeFirstResponder : Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
 	
-	open override func becomeFirstResponder() -> Bool {
+	public override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
 		}
@@ -144,7 +144,7 @@ open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Selec
 		return true
 	}
 	
-	open override func resignFirstResponder() -> Bool {
+	public override func resignFirstResponder() -> Bool {
 		if model.collapseWhenResigning {
 			collapse()
 		}
@@ -202,12 +202,12 @@ open class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Selec
 	
 	// MARK: AssignAppearance
 
-	open func assignDefaultColors() {
+	public func assignDefaultColors() {
 		textLabel?.textColor = UIColor.black
 		detailTextLabel?.textColor = UIColor.gray
 	}
 	
-	open func assignTintColors() {
+	public func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
@@ -284,14 +284,14 @@ extension PrecisionSliderCellModel {
 Row containing only a `PrecisionSlider`. This is not a standard Apple control.
 Please contact Simon Strandgaard if you have questions regarding it.
 */
-open class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
+public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, ExpandedCell {
 	weak var collapsedCell: PrecisionSliderToggleCell?
 
-	open var toggleCell: UITableViewCell? {
+	public var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
 	
-	open var isCollapsable: Bool {
+	public var isCollapsable: Bool {
 		if let cell = collapsedCell {
 			if cell.model.expandCollapseWhenSelectingRow {
 				return cell.model.collapseWhenResigning
@@ -300,7 +300,7 @@ open class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, Exp
 		return false
 	}
 	
-	open func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return PrecisionSlider_InnerModel.height
 	}
 	
@@ -323,7 +323,7 @@ open class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, Exp
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	open override func layoutSubviews() {
+	public override func layoutSubviews() {
 		super.layoutSubviews()
 		slider.frame = bounds
 		
