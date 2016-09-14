@@ -28,7 +28,7 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 		}
 	}
 	
-	func form_willSelectOption(_ option: OptionRowFormItem) {
+	func form_willSelectOption(option: OptionRowFormItem) {
 		guard let selected = option.context as? OptionRowModel else {
 			fatalError("Expected OptionRowModel when selecting option \(option.title)")
 		}

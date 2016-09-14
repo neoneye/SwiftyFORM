@@ -28,7 +28,7 @@ public class ButtonCell: UITableViewCell, SelectRowDelegate {
 		textLabel?.textAlignment = NSTextAlignment.center
 	}
 
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 		

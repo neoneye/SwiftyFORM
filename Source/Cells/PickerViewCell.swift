@@ -78,7 +78,7 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		return 60
 	}
 	
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return
@@ -198,7 +198,7 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		return PickerViewCellConstants.CellExpanded.height
 	}
 
-	public func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
+	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
 		if let model = collapsedCell?.model {
 			configure(model)
 		}

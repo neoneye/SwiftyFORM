@@ -23,7 +23,7 @@ public class OptionCell: UITableViewCell, SelectRowDelegate {
 		}
 	}
 
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		accessoryType = .checkmark
 		

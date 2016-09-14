@@ -225,7 +225,7 @@ class PopulateTableView: FormItemVisitor {
 			SwiftyFormLog("did select option")
 			if let vc = weakViewController {
 				if let x = vc as? SelectOptionDelegate {
-					x.form_willSelectOption(object)
+					x.form_willSelectOption(option: object)
 				}
 			}
 		}

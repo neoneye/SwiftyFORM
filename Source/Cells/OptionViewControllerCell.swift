@@ -65,7 +65,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		model.valueDidChange(option)
 	}
 
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		
 		guard let vc: UIViewController = parentViewController else {

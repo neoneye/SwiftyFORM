@@ -33,7 +33,7 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = cells[(indexPath as NSIndexPath).row]
 		if let theCell = cell as? CellForRowDelegate {
-			return theCell.form_cellForRow(indexPath, tableView: tableView)
+			return theCell.form_cellForRow(indexPath: indexPath, tableView: tableView)
 		}
 		return cell
 	}
@@ -64,7 +64,7 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cell = cells[(indexPath as NSIndexPath).row] as? SelectRowDelegate {
-			cell.form_didSelectRow(indexPath, tableView: tableView)
+			cell.form_didSelectRow(indexPath: indexPath, tableView: tableView)
 		}
 	}
 	
@@ -77,13 +77,13 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		if let cell = cells[(indexPath as NSIndexPath).row] as? WillDisplayCellDelegate {
-			cell.form_willDisplay(tableView, forRowAtIndexPath: indexPath)
+			cell.form_willDisplay(tableView: tableView, forRowAtIndexPath: indexPath)
 		}
 	}
 	
 	public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 		if let cell = cells[(indexPath as NSIndexPath).row] as? AccessoryButtonDelegate {
-			cell.form_accessoryButtonTapped(indexPath, tableView: tableView)
+			cell.form_accessoryButtonTapped(indexPath: indexPath, tableView: tableView)
 		}
 	}
 }

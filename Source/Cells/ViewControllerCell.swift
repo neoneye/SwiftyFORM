@@ -28,7 +28,7 @@ public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()

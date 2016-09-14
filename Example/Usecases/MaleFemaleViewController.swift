@@ -72,7 +72,7 @@ class MaleFemaleViewController: FormViewController, SelectOptionDelegate {
 		xmyform = myform
 	}
 	
-	func form_willSelectOption(_ option: OptionRowFormItem) {
+	func form_willSelectOption(option: OptionRowFormItem) {
 		print("select option \(option)")
 		dismissCommand.execute(self, returnObject: option)
 	}

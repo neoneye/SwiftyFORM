@@ -111,7 +111,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		return 60
 	}
 	
-	public func form_didSelectRow(_ indexPath: IndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
 			return

@@ -2,5 +2,5 @@
 import UIKit
 
 public protocol WillDisplayCellDelegate {
-	func form_willDisplay(_ tableView: UITableView, forRowAtIndexPath indexPath: IndexPath)
+	func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath)
 }
