@@ -66,7 +66,7 @@ class DatePickerBindingViewController: FormViewController {
 		var dateComponents = DateComponents()
 		dateComponents.day = days
 		let calendar = Calendar.current
-		guard let resultDate = (calendar as NSCalendar).date(byAdding: dateComponents, to: date, options: NSCalendar.Options(rawValue: 0)) else {
+		guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
 			return date
 		}
 		return resultDate
