@@ -66,7 +66,7 @@ public class KeyboardHandler: NSObject {
 		let rectForRow = tableView.rectForRow(at: indexPath)
 //		SwiftyFormLog("rectForRow \(NSStringFromCGRect(rectForRow))")
 		
-		let userInfoOrNil: [AnyHashable: Any]? = (notification as NSNotification).userInfo
+		let userInfoOrNil: [AnyHashable: Any]? = notification.userInfo
 		if userInfoOrNil == nil {
 			return
 		}
