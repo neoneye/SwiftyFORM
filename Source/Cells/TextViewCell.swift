@@ -202,7 +202,7 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		textView.frame = sizes.textViewFrame
 	}
 	
-	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")

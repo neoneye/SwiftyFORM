@@ -238,7 +238,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 
-	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return DatePickerCellConstants.CellExpanded.height
 	}
 

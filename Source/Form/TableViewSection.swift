@@ -70,7 +70,7 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if let cell = cells[(indexPath as NSIndexPath).row] as? CellHeightProvider {
-			return cell.form_cellHeight(indexPath, tableView: tableView)
+			return cell.form_cellHeight(indexPath: indexPath, tableView: tableView)
 		}
 		return UITableViewAutomaticDimension
 	}

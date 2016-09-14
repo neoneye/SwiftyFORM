@@ -107,7 +107,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 		reloadValueLabel()
 	}
 	
-	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
@@ -300,7 +300,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 		return false
 	}
 	
-	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return PrecisionSlider_InnerModel.height
 	}
 	

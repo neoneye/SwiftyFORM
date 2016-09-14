@@ -43,7 +43,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		slider.frame = bounds.insetBy(dx: 16, dy: 0)
 	}
 
-	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
 	
