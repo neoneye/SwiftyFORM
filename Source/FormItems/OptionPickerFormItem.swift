@@ -21,18 +21,24 @@ open class OptionPickerFormItem: FormItem {
 	}
 	
 	open var placeholder: String = ""
+
+	@discardableResult
 	open func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
 	open var title: String = ""
+
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 	open var options = [OptionRowModel]()
+
+	@discardableResult
 	open func append(_ name: String, identifier: String? = nil) -> Self {
 		options.append(OptionRowModel(name, identifier ?? name))
 		return self
@@ -89,6 +95,8 @@ open class OptionRowFormItem: FormItem {
 	}
 	
 	open var title: String = ""
+
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self

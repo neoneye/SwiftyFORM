@@ -7,6 +7,8 @@ open class TextFieldFormItem: FormItem {
 	}
 	
 	open var keyboardType: UIKeyboardType = .default
+
+	@discardableResult
 	open func keyboardType(_ keyboardType: UIKeyboardType) -> Self {
 		self.keyboardType = keyboardType
 		return self
@@ -19,6 +21,8 @@ open class TextFieldFormItem: FormItem {
 	open var secureTextEntry = false
 	
 	open var returnKeyType: UIReturnKeyType = .default
+
+	@discardableResult
 	open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> Self {
 		self.returnKeyType = returnKeyType
 		return self
@@ -68,17 +72,22 @@ open class TextFieldFormItem: FormItem {
 	
 	
 	open var placeholder: String = ""
+
+	@discardableResult
 	open func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
 	open var title: String = ""
+	
+	@discardableResult
 	open func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
+	@discardableResult
 	open func password() -> Self {
 		self.secureTextEntry = true
 		return self
@@ -86,21 +95,25 @@ open class TextFieldFormItem: FormItem {
 	
 	open let validatorBuilder = ValidatorBuilder()
 	
+	@discardableResult
 	open func validate(_ specification: Specification, message: String) -> Self {
 		validatorBuilder.hardValidate(specification, message: message)
 		return self
 	}
 	
+	@discardableResult
 	open func softValidate(_ specification: Specification, message: String) -> Self {
 		validatorBuilder.softValidate(specification, message: message)
 		return self
 	}
 	
+	@discardableResult
 	open func submitValidate(_ specification: Specification, message: String) -> Self {
 		validatorBuilder.submitValidate(specification, message: message)
 		return self
 	}
 	
+	@discardableResult
 	open func required(_ message: String) -> Self {
 		submitValidate(CountSpecification.min(1), message: message)
 		return self
