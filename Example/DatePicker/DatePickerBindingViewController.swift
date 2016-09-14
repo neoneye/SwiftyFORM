@@ -55,7 +55,7 @@ class DatePickerBindingViewController: FormViewController {
 	}()
 	
 	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("NSDate").value("-")
+		return StaticTextFormItem().title("Date").value("-")
 	}()
 	
 	func updateSummary() {

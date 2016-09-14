@@ -88,12 +88,12 @@ class SignUpViewController: FormViewController {
 	}
 
 	lazy var birthday: DatePickerFormItem = {
-		let today = NSDate()
+		let today = Date()
 		let instance = DatePickerFormItem()
 		instance.title = "Birthday"
 		instance.datePickerMode = .date
-		instance.minimumDate = self.offsetDate(today as Date, years: -150)
-		instance.maximumDate = today as Date
+		instance.minimumDate = self.offsetDate(today, years: -150)
+		instance.maximumDate = today
 		return instance
 		}()
 	
