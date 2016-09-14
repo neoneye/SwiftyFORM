@@ -464,6 +464,7 @@
 					};
 					42D5DE6E1A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -767,6 +768,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = neoneye.swiftyFORMTests;
 				PRODUCT_NAME = SwiftyFORMTests;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -781,6 +783,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = neoneye.swiftyFORMTests;
 				PRODUCT_NAME = SwiftyFORMTests;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

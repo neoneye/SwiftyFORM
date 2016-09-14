@@ -10,7 +10,7 @@ class ValidatorTests: XCTestCase {
 		builder.hardValidate(FalseSpecification(), message: "rule0")
 		let validator = builder.build()
 		let actual: ValidateResult = validator.validate("hello", checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
-		let expected = ValidateResult.HardInvalid(message: "rule0")
+		let expected = ValidateResult.hardInvalid(message: "rule0")
 		XCTAssertEqual(expected, actual)
     }
 

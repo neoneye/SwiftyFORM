@@ -8,14 +8,14 @@ class PrevNextMockTableView: UITableView {
 	
 	init(numberOfRowsInSectionData: [Int]) {
 		self.numberOfRowsInSectionData = numberOfRowsInSectionData
-		super.init(frame: CGRectZero, style: .Plain)
+		super.init(frame: CGRect.zero, style: .plain)
 	}
 
 	required init(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func numberOfRowsInSection(section: Int) -> Int {
+	override func numberOfRows(inSection section: Int) -> Int {
 		return numberOfRowsInSectionData[section]
 	}
 	
@@ -26,20 +26,20 @@ class PrevNextMockTableView: UITableView {
 
 class PrevNextTests: XCTestCase {
 	
-	func prev(row: Int, _ section: Int, _ tableView: UITableView) -> NSIndexPath? {
-		return NSIndexPath(forRow: row, inSection: section).form_indexPathForPreviousCell(tableView)
+	func prev(_ row: Int, _ section: Int, _ tableView: UITableView) -> IndexPath? {
+		return IndexPath(row: row, section: section).form_indexPathForPreviousCell(tableView)
 	}
 	
-	func next(row: Int, _ section: Int, _ tableView: UITableView) -> NSIndexPath? {
-		return NSIndexPath(forRow: row, inSection: section).form_indexPathForNextCell(tableView)
+	func next(_ row: Int, _ section: Int, _ tableView: UITableView) -> IndexPath? {
+		return IndexPath(row: row, section: section).form_indexPathForNextCell(tableView)
 	}
 	
-	func makeTableView(numberOfRowsInSectionData: [Int]) -> UITableView {
+	func makeTableView(_ numberOfRowsInSectionData: [Int]) -> UITableView {
 		return PrevNextMockTableView(numberOfRowsInSectionData: numberOfRowsInSectionData)
 	}
 	
-	func makeIndexPath(row: Int, _ section: Int) -> NSIndexPath {
-		return NSIndexPath(forRow: row, inSection: section)
+	func makeIndexPath(_ row: Int, _ section: Int) -> IndexPath {
+		return IndexPath(row: row, section: section)
 	}
 
 	// MARK: Previous
