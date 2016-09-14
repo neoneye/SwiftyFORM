@@ -464,6 +464,7 @@
 					};
 					42D5DE6E1A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 22DR89XVRF;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -756,10 +757,7 @@
 		42D5DE7A1A38167400D5C368 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				DEVELOPMENT_TEAM = 22DR89XVRF;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -775,10 +773,7 @@
 		42D5DE7B1A38167400D5C368 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				DEVELOPMENT_TEAM = 22DR89XVRF;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = neoneye.swiftyFORMTests;
