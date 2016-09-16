@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class StaticTextAndAttributedTextViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Text"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		
 		builder += SectionHeaderTitleFormItem(title: "Static Text")
 		builder += StaticTextFormItem().title("Title 0").value("Value 0")
@@ -15,17 +15,17 @@ class StaticTextAndAttributedTextViewController: FormViewController {
 		builder += SectionHeaderTitleFormItem(title: "Attributed Text")
 		builder += AttributedTextFormItem().title("Title 0").value("Value 0")
 		builder += AttributedTextFormItem()
-			.title("Title 1", [NSForegroundColorAttributeName: UIColor.grayColor()])
+			.title("Title 1", [NSForegroundColorAttributeName: UIColor.gray as AnyObject])
 			.value("Value 1", [
-				NSBackgroundColorAttributeName: UIColor.blackColor(),
-				NSForegroundColorAttributeName: UIColor.whiteColor()
+				NSBackgroundColorAttributeName: UIColor.black as AnyObject,
+				NSForegroundColorAttributeName: UIColor.white as AnyObject
 				])
 		builder += AttributedTextFormItem()
 			.title("Orange 🍊", [
-				NSForegroundColorAttributeName: UIColor.orangeColor(),
-				NSFontAttributeName: UIFont.boldSystemFontOfSize(24),
-				NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+				NSForegroundColorAttributeName: UIColor.orange as AnyObject,
+				NSFontAttributeName: UIFont.boldSystemFont(ofSize: 24) as AnyObject,
+				NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject
 				])
-			.value("Heart ❤️", [NSForegroundColorAttributeName: UIColor.redColor()])
+			.value("Heart ❤️", [NSForegroundColorAttributeName: UIColor.red as AnyObject])
 	}
 }

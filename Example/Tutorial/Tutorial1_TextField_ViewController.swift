@@ -2,7 +2,7 @@
 import SwiftyFORM
 
 class Tutorial1_TextField_ViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
-		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.EmailAddress)
+	override func populate(_ builder: FormBuilder) {
+		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.emailAddress)
 	}
 }

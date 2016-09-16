@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class ButtonsViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Buttons"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		builder += SectionHeaderTitleFormItem().title("Table Row Buttons")
 		builder += button0
 		builder += button1
@@ -14,7 +14,7 @@ class ButtonsViewController: FormViewController {
 	
 	lazy var button0: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Button 0")
+		instance.title = "Button 0"
 		instance.action = { [weak self] in
 			self?.form_simpleAlert("Button 0", "Button clicked")
 		}
@@ -23,7 +23,7 @@ class ButtonsViewController: FormViewController {
 	
 	lazy var button1: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Button 1")
+		instance.title = "Button 1"
 		instance.action = { [weak self] in
 			self?.form_simpleAlert("Button 1", "Button clicked")
 		}
@@ -32,7 +32,7 @@ class ButtonsViewController: FormViewController {
 	
 	lazy var button2: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Button 2")
+		instance.title = "Button 2"
 		instance.action = { [weak self] in
 			self?.form_simpleAlert("Button 2", "Button clicked")
 		}

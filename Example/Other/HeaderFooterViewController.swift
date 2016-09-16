@@ -7,7 +7,7 @@ class HeaderFooterViewController: FormViewController {
 	let headerView0 = SectionHeaderViewFormItem()
 	let footerView0 = SectionFooterViewFormItem()
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		configureHeaderView0()
 		configureFooterView0()
 		
@@ -32,13 +32,13 @@ class HeaderFooterViewController: FormViewController {
 	
 	func configureHeaderView0() {
 		headerView0.viewBlock = {
-			return InfoView(frame: CGRectMake(0, 0, 0, 75), text: "Custom\nHeader\nView")
+			return InfoView(frame: CGRect(x: 0, y: 0, width: 0, height: 75), text: "Custom\nHeader\nView")
 		}
 	}
 
 	func configureFooterView0() {
 		footerView0.viewBlock = {
-			return InfoView(frame: CGRectMake(0, 0, 0, 75), text: "Custom\nFooter\nView")
+			return InfoView(frame: CGRect(x: 0, y: 0, width: 0, height: 75), text: "Custom\nFooter\nView")
 		}
 	}
 }

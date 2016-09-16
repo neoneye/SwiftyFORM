@@ -4,9 +4,9 @@ import SwiftyFORM
 
 class GhostsViewController: FormViewController {
 
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Ghosts"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		builder += SectionHeaderTitleFormItem().title("Scary")
 		builder += scarySlider
 		builder += SectionHeaderTitleFormItem().title("See through")
@@ -45,7 +45,7 @@ class GhostsViewController: FormViewController {
 	
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Submit")
+		instance.title = "Submit"
 		instance.action = { [weak self] in
 			self?.submit()
 		}

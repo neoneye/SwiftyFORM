@@ -2,11 +2,11 @@
 import UIKit
 
 class OptionListViewController: FormViewController, SelectOptionDelegate {
-	typealias SelectOptionHandler = OptionRowModel -> Void
+	typealias SelectOptionHandler = (OptionRowModel) -> Void
 	let optionField: OptionPickerFormItem
 	let selectOptionHandler: SelectOptionHandler
 	
-	init(optionField: OptionPickerFormItem, selectOptionHandler: SelectOptionHandler) {
+	init(optionField: OptionPickerFormItem, selectOptionHandler: @escaping SelectOptionHandler) {
 		self.optionField = optionField
 		self.selectOptionHandler = selectOptionHandler
 		super.init()
@@ -16,12 +16,12 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		SwiftyFormLog("preselect option \(optionField.selected?.title)")
 		builder.navigationTitle = optionField.title
 		for optionRow: OptionRowModel in optionField.options {
 			let option = OptionRowFormItem()
-			option.title(optionRow.title)
+			option.title = optionRow.title
 			option.context = optionRow
 			option.selected = (optionRow === optionField.selected)
 			builder.append(option)

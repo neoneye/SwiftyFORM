@@ -19,15 +19,15 @@ class DatePickerBindingViewController: FormViewController {
 		debugPrint(dataSource!)
 	}
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		
 		let section0 = SectionFormItem()
 		if showHeader {
-			section0.sectionType = .Default
+			section0.sectionType = .systemDefault
 		} else {
-			section0.sectionType = .None
+			section0.sectionType = .none
 		}
 		
 		builder += section0
@@ -66,9 +66,9 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
-		instance.datePickerMode = .Date
-		instance.behavior = .ExpandedAlways
+		instance.title = "Date"
+		instance.datePickerMode = .date
+		instance.behavior = .expandedAlways
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
@@ -77,7 +77,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var incrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Next Day")
+		instance.title = "Next Day"
 		instance.action = { [weak self] in
 			self?.increment()
 		}
@@ -86,7 +86,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var decrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Previous Day")
+		instance.title = "Previous Day"
 		instance.action = { [weak self] in
 			self?.decrement()
 		}
@@ -94,18 +94,18 @@ class DatePickerBindingViewController: FormViewController {
 	}()
 	
 	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("NSDate").value("-")
+		return StaticTextFormItem().title("Date").value("-")
 	}()
 	
 	func updateSummary() {
 		summary.value = "\(datePicker.value)"
 	}
 	
-	func offsetDate(date: NSDate, days: Int) -> NSDate {
-		let dateComponents = NSDateComponents()
+	func offsetDate(_ date: Date, days: Int) -> Date {
+		var dateComponents = DateComponents()
 		dateComponents.day = days
-		let calendar = NSCalendar.currentCalendar()
-		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+		let calendar = Calendar.current
+		guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
 			return date
 		}
 		return resultDate
@@ -126,32 +126,32 @@ class DatePickerBindingViewController: FormViewController {
 	lazy var userName: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("User Name").placeholder("required")
-		instance.keyboardType = .ASCIICapable
-		instance.autocorrectionType = .No
+		instance.keyboardType = .asciiCapable
+		instance.autocorrectionType = .no
 		return instance
 	}()
 	
 	lazy var toggleDatePicker0: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 0")
-		instance.datePickerMode = .Time
-		instance.behavior = .Expanded
+		instance.title = "Toggle 0"
+		instance.datePickerMode = .time
+		instance.behavior = .expanded
 		return instance
 	}()
 	
 	lazy var toggleDatePicker1: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 1")
-		instance.datePickerMode = .Time
-		instance.behavior = .Collapsed
+		instance.title = "Toggle 1"
+		instance.datePickerMode = .time
+		instance.behavior = .collapsed
 		return instance
 	}()
 	
 	lazy var toggleDatePicker2: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Toggle 2")
-		instance.datePickerMode = .Time
-		instance.behavior = .Collapsed
+		instance.title = "Toggle 2"
+		instance.datePickerMode = .time
+		instance.behavior = .collapsed
 		return instance
 	}()
 	

@@ -16,16 +16,16 @@ class MyCollectionViewController: UICollectionViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+		collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 	}
 	
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return 5
 	}
 	
-	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
-		cell.backgroundColor = UIColor.redColor()
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+		cell.backgroundColor = UIColor.red
 		return cell
 	}
 }

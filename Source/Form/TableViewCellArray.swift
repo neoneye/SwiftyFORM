@@ -13,10 +13,10 @@ public class TableViewCellArrayItem {
 
 
 public class TableViewCellArray {
-	private(set) var allItems: [TableViewCellArrayItem]
-	private(set) var visibleItems = [TableViewCellArrayItem]()
+	fileprivate(set) var allItems: [TableViewCellArrayItem]
+	fileprivate(set) var visibleItems = [TableViewCellArrayItem]()
 	
-	public static func create(cells cells: [UITableViewCell]) -> TableViewCellArray {
+	public static func create(cells: [UITableViewCell]) -> TableViewCellArray {
 		let items = cells.map { TableViewCellArrayItem(cell: $0, hidden: false) }
 		return TableViewCellArray(allItems: items)
 	}
@@ -42,12 +42,12 @@ public class TableViewCellArray {
 		return visibleItems.count
 	}
 	
-	public func append(cell: UITableViewCell) {
+	public func append(_ cell: UITableViewCell) {
 		let item = TableViewCellArrayItem(cell: cell, hidden: false)
 		allItems.append(item)
 	}
 
-	public func appendHidden(cell: UITableViewCell) {
+	public func appendHidden(_ cell: UITableViewCell) {
 		let item = TableViewCellArrayItem(cell: cell, hidden: true)
 		allItems.append(item)
 	}

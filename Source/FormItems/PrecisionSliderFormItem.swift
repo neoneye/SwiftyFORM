@@ -17,11 +17,13 @@ Please contact Simon Strandgaard if you have questions regarding it.
 */
 public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -56,17 +58,21 @@ public class PrecisionSliderFormItem: FormItem {
 	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
 	*/
 	public enum Behavior {
-		case Collapsed
-		case Expanded
-		case ExpandedAlways
+		case collapsed
+		case expanded
+		case expandedAlways
 	}
-	public var behavior = Behavior.Collapsed
-	public func behavior(behavior: Behavior) -> Self {
+	public var behavior = Behavior.collapsed
+
+	@discardableResult
+	public func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
 	
 	public var collapseWhenResigning = false
+
+	@discardableResult
 	public func shouldCollapseWhenResigning() -> Self {
 		self.collapseWhenResigning = true
 		return self
@@ -91,7 +97,9 @@ public class PrecisionSliderFormItem: FormItem {
 			}
 		}
 	}
-	public func initialZoom(initialZoom: Float) -> Self {
+
+	@discardableResult
+	public func initialZoom(_ initialZoom: Float) -> Self {
 		self.initialZoom = initialZoom
 		return self
 	}
@@ -106,30 +114,38 @@ public class PrecisionSliderFormItem: FormItem {
 			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
 		}
 	}
-	public func decimalPlaces(decimalPlaces: UInt) -> Self {
+
+	@discardableResult
+	public func decimalPlaces(_ decimalPlaces: UInt) -> Self {
 		self.decimalPlaces = decimalPlaces
 		return self
 	}
 	
 	public var minimumValue: Int = 0
-	public func minimumValue(minimumValue: Int) -> Self {
+
+	@discardableResult
+	public func minimumValue(_ minimumValue: Int) -> Self {
 		self.minimumValue = minimumValue
 		return self
 	}
 	
 	public var maximumValue: Int = 1000
-	public func maximumValue(maximumValue: Int) -> Self {
+
+	@discardableResult
+	public func maximumValue(_ maximumValue: Int) -> Self {
 		self.maximumValue = maximumValue
 		return self
 	}
 	
 	public var zoomUI = false
+
+	@discardableResult
 	public func enableZoomUI() -> Self {
 		self.zoomUI = true
 		return self
 	}
 	
-	typealias SyncBlock = (value: Int) -> Void
+	typealias SyncBlock = (_ value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in
 		SwiftyFormLog("sync is not overridden")
 	}
@@ -143,14 +159,16 @@ public class PrecisionSliderFormItem: FormItem {
 			self.updateValue(newValue)
 		}
 	}
-	public func value(value: Int) -> Self {
+
+	@discardableResult
+	public func value(_ value: Int) -> Self {
 		updateValue(value)
 		return self
 	}
 	
-	public func updateValue(value: Int) {
+	public func updateValue(_ value: Int) {
 		innerValue = value
-		syncCellWithValue(value: value)
+		syncCellWithValue(value)
 	}
 	
 	public var actualValue: Double {
@@ -165,13 +183,13 @@ public class PrecisionSliderFormItem: FormItem {
 		public let zoomUpdated: Bool
 	}
 
-	public typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	public typealias SliderDidChangeBlock = (_ changeModel: SliderDidChangeModel) -> Void
 	public var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func sliderDidChange(changeModel: SliderDidChangeModel) {
+	public func sliderDidChange(_ changeModel: SliderDidChangeModel) {
 		innerValue = changeModel.value
-		sliderDidChangeBlock(changeModel: changeModel)
+		sliderDidChangeBlock(changeModel)
 	}
 }

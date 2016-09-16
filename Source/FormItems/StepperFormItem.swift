@@ -3,16 +3,18 @@ import Foundation
 
 public class StepperFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 
-	typealias SyncBlock = (value: Int, animated: Bool) -> Void
+	typealias SyncBlock = (_ value: Int, _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
 	}
@@ -27,8 +29,8 @@ public class StepperFormItem: FormItem {
 		}
 	}
 
-	public func setValue(value: Int, animated: Bool) {
+	public func setValue(_ value: Int, animated: Bool) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value, animated)
 	}
 }

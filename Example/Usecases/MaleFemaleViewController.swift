@@ -20,14 +20,14 @@ class MyOptionForm {
 		self.optionRows = optionRows
 	}
 	
-	func populate(builder: FormBuilder) {
+	func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Picker"
 
 		configureVC0()
 		
 		for optionRow: OptionRow in optionRows {
 			let option = OptionRowFormItem()
-			option.title(optionRow.title)
+			option.title = optionRow.title
 			builder.append(option)
 		}
 
@@ -36,7 +36,7 @@ class MyOptionForm {
 	}
 
 	func configureVC0() {
-		vc0.title("What is XYZ?")
+		vc0.title = "What is XYZ?"
 		vc0.createViewController = { (dismissCommand: CommandProtocol) in
 			let vc = EmptyViewController()
 			return vc
@@ -59,7 +59,7 @@ class MaleFemaleViewController: FormViewController, SelectOptionDelegate {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		let optionRows: [OptionRow] = [
 			OptionRow("Male", "male"),
 			OptionRow("Female", "female"),
@@ -74,7 +74,7 @@ class MaleFemaleViewController: FormViewController, SelectOptionDelegate {
 	
 	func form_willSelectOption(option: OptionRowFormItem) {
 		print("select option \(option)")
-		dismissCommand.execute(self, returnObject: option)
+		dismissCommand.execute(viewController: self, returnObject: option)
 	}
 
 }
@@ -83,7 +83,7 @@ class EmptyViewController: UIViewController {
 	
 	override func loadView() {
 		self.view = UIView()
-		self.view.backgroundColor = UIColor.redColor()
+		self.view.backgroundColor = UIColor.red
 	}
 	
 }

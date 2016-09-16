@@ -3,7 +3,7 @@ import UIKit
 
 class MyTableViewController: UITableViewController {
 	override init(style: UITableViewStyle) {
-		super.init(style: .Grouped)
+		super.init(style: .grouped)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -12,15 +12,15 @@ class MyTableViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 	}
 	
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 5
 	}
 	
-	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
 		cell.textLabel?.text = "Cell \(indexPath.row)"
 		return cell
 	}

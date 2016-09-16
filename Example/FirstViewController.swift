@@ -2,8 +2,8 @@
 import UIKit
 import SwiftyFORM
 
-public class FirstViewController: FormViewController {
-	override public func populate(builder: FormBuilder) {
+class FirstViewController: FormViewController {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "SwiftyFORM"
 		builder.demo_showInfo("Welcome to the\nSwiftyFORM example app\nthat shows everything")
 

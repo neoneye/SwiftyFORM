@@ -13,8 +13,8 @@ public class RegularExpressionSpecification: CompositeSpecification {
 		self.init(regularExpression: regularExpression)
 	}
 	
-	public override func isSatisfiedBy(candidate: Any?) -> Bool {
+	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		guard let s = candidate as? String else { return false }
-		return regularExpression.numberOfMatchesInString(s, options: [], range: NSMakeRange(0, s.characters.count)) > 0
+		return regularExpression.numberOfMatches(in: s, options: [], range: NSMakeRange(0, s.characters.count)) > 0
 	}
 }

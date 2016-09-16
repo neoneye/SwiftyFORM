@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class SlidersViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Sliders"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		
 		builder += SectionHeaderTitleFormItem().title("Sliders")
 		builder += slider0

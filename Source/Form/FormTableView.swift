@@ -3,9 +3,9 @@ import UIKit
 
 public class FormTableView: UITableView {
 	public init() {
-		super.init(frame: CGRectZero, style: .Grouped)
-		contentInset = UIEdgeInsetsZero
-		scrollIndicatorInsets = UIEdgeInsetsZero
+		super.init(frame: CGRect.zero, style: .grouped)
+		contentInset = UIEdgeInsets.zero
+		scrollIndicatorInsets = UIEdgeInsets.zero
 		
 		// Enable "Self Sizing Cells"
 		estimatedRowHeight = 44.0

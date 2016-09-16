@@ -3,13 +3,13 @@ import Foundation
 
 public class SectionFormItem: FormItem {
 	public enum SectionType {
-		case Default
-		case None
+		case systemDefault
+		case none
 	}
-	public var sectionType = SectionType.Default
+	public var sectionType = SectionType.systemDefault
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 }
 
@@ -20,11 +20,13 @@ public class SectionHeaderTitleFormItem: FormItem {
 	}
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String?
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -32,10 +34,10 @@ public class SectionHeaderTitleFormItem: FormItem {
 
 public class SectionHeaderViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
-	public typealias CreateUIView = Void -> UIView?
+	public typealias CreateUIView = (Void) -> UIView?
 	public var viewBlock: CreateUIView?
 }
 
@@ -46,11 +48,13 @@ public class SectionFooterTitleFormItem: FormItem {
 	}
 	
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String?
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -58,9 +62,9 @@ public class SectionFooterTitleFormItem: FormItem {
 
 public class SectionFooterViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
-	public typealias CreateUIView = Void -> UIView?
+	public typealias CreateUIView = (Void) -> UIView?
 	public var viewBlock: CreateUIView?
 }

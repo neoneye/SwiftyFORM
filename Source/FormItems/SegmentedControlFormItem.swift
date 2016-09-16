@@ -3,21 +3,27 @@ import Foundation
 
 public class SegmentedControlFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
 	public var items: [String] = ["a", "b", "c"]
-	public func items(items: String...) -> Self {
+
+	@discardableResult
+	public func items(_ items: String...) -> Self {
 		self.items = items
 		return self
 	}
-	public func itemsArray(items: [String]) -> Self {
+
+	@discardableResult
+	public func itemsArray(_ items: [String]) -> Self {
 		self.items = items
 		return self
 	}
@@ -35,13 +41,14 @@ public class SegmentedControlFormItem: FormItem {
 		set { self.value = newValue }
 	}
 
-	public func selected(selected: Int) -> Self {
+	@discardableResult
+	public func selected(_ selected: Int) -> Self {
 		self.value = selected
 		return self
 	}
 	
 	
-	typealias SyncBlock = (value: Int) -> Void
+	typealias SyncBlock = (_ value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in
 		SwiftyFormLog("sync is not overridden")
 	}
@@ -53,17 +60,17 @@ public class SegmentedControlFormItem: FormItem {
 		}
 		set {
 			innerValue = newValue
-			syncCellWithValue(value: newValue)
+			syncCellWithValue(newValue)
 		}
 	}
 	
-	public typealias ValueDidChangeBlock = (value: Int) -> Void
+	public typealias ValueDidChangeBlock = (_ value: Int) -> Void
 	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Int) in
 		SwiftyFormLog("not overridden")
 	}
 	
-	public func valueDidChange(value: Int) {
+	public func valueDidChange(_ value: Int) {
 		innerValue = value
-		valueDidChangeBlock(value: value)
+		valueDidChangeBlock(value)
 	}
 }

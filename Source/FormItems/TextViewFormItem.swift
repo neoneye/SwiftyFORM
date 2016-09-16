@@ -3,22 +3,26 @@ import Foundation
 
 public class TextViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var placeholder: String = ""
-	public func placeholder(placeholder: String) -> Self {
+
+	@discardableResult
+	public func placeholder(_ placeholder: String) -> Self {
 		self.placeholder = placeholder
 		return self
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
 	
-	typealias SyncBlock = (value: String) -> Void
+	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in
 		SwiftyFormLog("sync is not overridden")
 	}
@@ -33,8 +37,8 @@ public class TextViewFormItem: FormItem {
 		}
 	}
 	
-	func assignValueAndSync(value: String) {
+	func assignValueAndSync(_ value: String) {
 		innerValue = value
-		syncCellWithValue(value: value)
+		syncCellWithValue(value)
 	}
 }

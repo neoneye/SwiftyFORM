@@ -2,21 +2,21 @@
 import UIKit
 
 class AlignLeft {
-	private let items: [FormItem]
+	fileprivate let items: [FormItem]
 	init(items: [FormItem]) {
 		self.items = items
 	}
 }
 
 public enum ToolbarMode {
-	case None
-	case Simple
+	case none
+	case simple
 }
 
 
 public class FormBuilder: NSObject {
-	private var innerItems = [FormItem]()
-	private var alignLeftItems = [AlignLeft]()
+	fileprivate var innerItems = [FormItem]()
+	fileprivate var alignLeftItems = [AlignLeft]()
 	
 	override public init() {
 		super.init()
@@ -24,27 +24,28 @@ public class FormBuilder: NSObject {
 	
 	public var navigationTitle: String? = nil
 	
-	public var toolbarMode: ToolbarMode = .None
+	public var toolbarMode: ToolbarMode = .none
 	
 	public func removeAll() {
 		innerItems.removeAll()
 	}
 	
-	public func append(item: FormItem) -> FormItem {
+	@discardableResult
+	public func append(_ item: FormItem) -> FormItem {
 		innerItems.append(item)
 		return item
 	}
 	
-	public func appendMulti(items: [FormItem]) {
+	public func appendMulti(_ items: [FormItem]) {
 		innerItems += items
 	}
 	
-	public func alignLeft(items: [FormItem]) {
+	public func alignLeft(_ items: [FormItem]) {
 		let alignLeftItem = AlignLeft(items: items)
 		alignLeftItems.append(alignLeftItem)
 	}
 	
-	public func alignLeftElementsWithClass(styleClass: String) {
+	public func alignLeftElementsWithClass(_ styleClass: String) {
 		let items: [FormItem] = innerItems.filter { $0.styleClass == styleClass }
 		alignLeft(items)
 	}
@@ -53,37 +54,38 @@ public class FormBuilder: NSObject {
 		return innerItems
 	}
 	
-	public func dump(prettyPrinted: Bool = true) -> NSData {
+	public func dump(_ prettyPrinted: Bool = true) -> Data {
 		return DumpVisitor.dump(prettyPrinted, items: innerItems)
 	}
 	
-	public func result(viewController: UIViewController) -> TableViewSectionArray {
+	public func result(_ viewController: UIViewController) -> TableViewSectionArray {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)
-		for (itemIndex, item) in innerItems.enumerate() {
-			print("will visit item \(itemIndex): \(item.dynamicType)")
-			item.accept(v)
-			print("did visit item \(itemIndex): \(item.dynamicType)")
+		for (itemIndex, item) in innerItems.enumerated() {
+			let itemType = type(of: item)
+			print("will visit item \(itemIndex): \(itemType)")
+			item.accept(visitor: v)
+			print("did visit item \(itemIndex): \(itemType)")
 		}
 		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.Default
+			return TableViewSectionPart.systemDefault
 		}
 		v.closeSection(useDefaultHeader: true, footerBlock: footerBlock)
 		
 		for alignLeftItem in alignLeftItems {
 			let widthArray: [CGFloat] = alignLeftItem.items.map {
 				let v = ObtainTitleWidth()
-				$0.accept(v)
+				$0.accept(visitor: v)
 				return v.width
 			}
 			//SwiftyFormLog("widthArray: \(widthArray)")
-			let width = widthArray.maxElement()!
+			let width = widthArray.max()!
 			//SwiftyFormLog("max width: \(width)")
 			
 			for item in alignLeftItem.items {
 				let v = AssignTitleWidth(width: width)
-				item.accept(v)
+				item.accept(visitor: v)
 			}
 		}
 		
@@ -95,27 +97,27 @@ public class FormBuilder: NSObject {
 	}
 	
 	public enum FormValidateResult {
-		case Valid
-		case Invalid(item: FormItem, message: String)
+		case valid
+		case invalid(item: FormItem, message: String)
 	}
 	
 	public func validate() -> FormValidateResult {
 		for item in innerItems {
 			let v = ValidateVisitor()
-			item.accept(v)
+			item.accept(visitor: v)
 			switch v.result {
-			case .Valid:
+			case .valid:
 				// SwiftyFormLog("valid")
 				continue
-			case .HardInvalid(let message):
+			case .hardInvalid(let message):
 				//SwiftyFormLog("invalid message \(message)")
-				return .Invalid(item: item, message: message)
-			case .SoftInvalid(let message):
+				return .invalid(item: item, message: message)
+			case .softInvalid(let message):
 				//SwiftyFormLog("invalid message \(message)")
-				return .Invalid(item: item, message: message)
+				return .invalid(item: item, message: message)
 			}
 		}
-		return .Valid
+		return .valid
 	}
 	
 }

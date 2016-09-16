@@ -2,5 +2,5 @@
 import UIKit
 
 public protocol CellHeightProvider {
-	func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat
+	func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat
 }

@@ -2,16 +2,16 @@
 import UIKit
 
 public enum TableViewSectionPart {
-	case None
-	case Default
-	case TitleString(string: String)
-	case TitleView(view: UIView)
+	case none
+	case systemDefault
+	case titleString(string: String)
+	case titleView(view: UIView)
 	
-	typealias CreateBlock = Void -> TableViewSectionPart
+	typealias CreateBlock = (Void) -> TableViewSectionPart
 	
 	var title: String? {
 		switch self {
-		case let .TitleString(string):
+		case let .titleString(string):
 			return string
 		default:
 			return nil
@@ -20,7 +20,7 @@ public enum TableViewSectionPart {
 	
 	var view: UIView? {
 		switch self {
-		case let .TitleView(view):
+		case let .titleView(view):
 			return view
 		default:
 			return nil
@@ -29,14 +29,14 @@ public enum TableViewSectionPart {
 	
 	var height: CGFloat {
 		switch self {
-		case .None:
-			return CGFloat.min
-		case .Default:
+		case .none:
+			return CGFloat.leastNormalMagnitude
+		case .systemDefault:
 			return 35
-		case let .TitleView(view):
+		case let .titleView(view):
 			let view2: UIView = view
 			return view2.frame.size.height
-		case .TitleString(_):
+		case .titleString(_):
 			return UITableViewAutomaticDimension
 		}
 	}

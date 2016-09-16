@@ -2,5 +2,5 @@
 import UIKit
 
 public protocol CellForRowDelegate {
-	func form_cellForRow(indexPath: NSIndexPath, tableView: UITableView) -> UITableViewCell
+	func form_cellForRow(indexPath: IndexPath, tableView: UITableView) -> UITableViewCell
 }

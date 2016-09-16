@@ -7,7 +7,7 @@ class LoadingCell: UITableViewCell, CellHeightProvider {
 	var xibHeight: CGFloat = 160
 
 	static func createCell() throws -> LoadingCell {
-		let cell: LoadingCell = try NSBundle.mainBundle().form_loadView("LoadingCell")
+		let cell: LoadingCell = try Bundle.main.form_loadView("LoadingCell")
 		return cell
 	}
 	
@@ -17,7 +17,7 @@ class LoadingCell: UITableViewCell, CellHeightProvider {
 		activityIndicator.startAnimating()
     }
 
-	func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+	func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return xibHeight
 	}
 }

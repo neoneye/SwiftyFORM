@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class TextFieldValidInvalidViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Valid & Invalid"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder.demo_showInfo("Shows layouts variants\nof the text field cell\nwhen valid and when invalid")
 		builder += SectionHeaderTitleFormItem().title("padding before")
 		builder += StaticTextFormItem().title("Padding 1")

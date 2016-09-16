@@ -4,7 +4,7 @@ import SwiftyFORM
 
 class SegmentedControlsViewController: FormViewController {
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Segmented Controls"
 		builder += SectionHeaderTitleFormItem(title: "Please select")
 		builder += animal
@@ -69,14 +69,14 @@ class SegmentedControlsViewController: FormViewController {
 
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Randomize")
+		instance.title = "Randomize"
 		instance.action = { [weak self] in
 			self?.randomize()
 		}
 		return instance
 	}()
 
-	func assignRandomValue(formItem: SegmentedControlFormItem) {
+	func assignRandomValue(_ formItem: SegmentedControlFormItem) {
 		let count = formItem.items.count
 		if count > 0 {
 			formItem.selected = randomInt(0, count - 1)

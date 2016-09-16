@@ -3,21 +3,21 @@ import UIKit
 import SwiftyFORM
 
 class TextFieldReturnKeyViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Return Key"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder.demo_showInfo("Shows all the UIReturnKeyType variants")
-		builder += TextFieldFormItem().styleClass("align").title("Default").returnKeyType(.Default).placeholder("Return (gray)")
-		builder += TextFieldFormItem().styleClass("align").title("Go").returnKeyType(.Go).placeholder("Go (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Google").returnKeyType(.Google).placeholder("Search (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Join").returnKeyType(.Join).placeholder("Join (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Next").returnKeyType(.Next).placeholder("Next (gray)")
-		builder += TextFieldFormItem().styleClass("align").title("Route").returnKeyType(.Route).placeholder("Route (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Search").returnKeyType(.Search).placeholder("Search (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Send").returnKeyType(.Send).placeholder("Send (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Yahoo").returnKeyType(.Yahoo).placeholder("Search (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("Done").returnKeyType(.Done).placeholder("Done (blue)")
-		builder += TextFieldFormItem().styleClass("align").title("EmergencyCall").returnKeyType(.EmergencyCall).placeholder("Emergency Call (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Default").returnKeyType(.default).placeholder("Return (gray)")
+		builder += TextFieldFormItem().styleClass("align").title("Go").returnKeyType(.go).placeholder("Go (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Google").returnKeyType(.google).placeholder("Search (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Join").returnKeyType(.join).placeholder("Join (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Next").returnKeyType(.next).placeholder("Next (gray)")
+		builder += TextFieldFormItem().styleClass("align").title("Route").returnKeyType(.route).placeholder("Route (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Search").returnKeyType(.search).placeholder("Search (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Send").returnKeyType(.send).placeholder("Send (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Yahoo").returnKeyType(.yahoo).placeholder("Search (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Done").returnKeyType(.done).placeholder("Done (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("EmergencyCall").returnKeyType(.emergencyCall).placeholder("Emergency Call (blue)")
 		builder.alignLeftElementsWithClass("align")
 	}
 }

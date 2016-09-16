@@ -10,11 +10,13 @@ Behind the scenes this creates a `UIPickerView`.
 */
 public class PickerViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
-		visitor.visit(self)
+		visitor.visit(object: self)
 	}
 	
 	public var title: String = ""
-	public func title(title: String) -> Self {
+
+	@discardableResult
+	public func title(_ title: String) -> Self {
 		self.title = title
 		return self
 	}
@@ -46,12 +48,14 @@ public class PickerViewFormItem: FormItem {
 	It is not affected by `becomeFirstResponder()` nor `resignFirstResponder()`.
 	*/
 	public enum Behavior {
-		case Collapsed
-		case Expanded
-		case ExpandedAlways
+		case collapsed
+		case expanded
+		case expandedAlways
 	}
-	public var behavior = Behavior.Collapsed
-	public func behavior(behavior: Behavior) -> Self {
+	public var behavior = Behavior.collapsed
+
+	@discardableResult
+	public func behavior(_ behavior: Behavior) -> Self {
 		self.behavior = behavior
 		return self
 	}
@@ -62,12 +66,12 @@ public class PickerViewFormItem: FormItem {
 	public var humanReadableValueSeparator: String?
 	
 
-	typealias SyncBlock = (value: [Int], animated: Bool) -> Void
+	typealias SyncBlock = (_ value: [Int], _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: [Int], animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(value)")
 	}
 	
-	private func maybeAssignFallbackValue() {
+	fileprivate func maybeAssignFallbackValue() {
 		if innerValue.count == pickerTitles.count {
 			return
 		}
@@ -95,18 +99,18 @@ public class PickerViewFormItem: FormItem {
 		}
 	}
 	
-	public func setValue(value: [Int], animated: Bool) {
+	public func setValue(_ value: [Int], animated: Bool) {
 		innerValue = value
-		syncCellWithValue(value: value, animated: animated)
+		syncCellWithValue(value, animated)
 	}
 
-	public typealias ValueDidChangeBlock = (value: [Int]) -> Void
+	public typealias ValueDidChangeBlock = (_ value: [Int]) -> Void
 	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: [Int]) in
 		SwiftyFormLog("not overridden")
 	}
 
-	public func valueDidChange(value: [Int]) {
+	public func valueDidChange(_ value: [Int]) {
 		innerValue = value
-		valueDidChangeBlock(value: value)
+		valueDidChangeBlock(value)
 	}
 }
