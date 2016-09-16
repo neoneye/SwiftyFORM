@@ -7,8 +7,6 @@ public enum TableViewSectionPart {
 	case titleString(string: String)
 	case titleView(view: UIView)
 	
-	typealias CreateBlock = (Void) -> TableViewSectionPart
-	
 	var title: String? {
 		switch self {
 		case let .titleString(string):

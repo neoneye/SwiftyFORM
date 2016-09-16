@@ -68,10 +68,7 @@ public class FormBuilder: NSObject {
 			item.accept(visitor: v)
 			print("did visit item \(itemIndex): \(itemType)")
 		}
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.systemDefault
-		}
-		v.closeSection(useDefaultHeader: true, footerBlock: footerBlock)
+		v.closeSection(useDefaultHeader: true, footer: TableViewSectionPart.systemDefault)
 		
 		for alignLeftItem in alignLeftItems {
 			let widthArray: [CGFloat] = alignLeftItem.items.map {
