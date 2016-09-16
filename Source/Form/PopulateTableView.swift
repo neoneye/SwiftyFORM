@@ -44,29 +44,21 @@ class PopulateTableView: FormItemVisitor {
 	
 	var cells: TableViewCellArray = TableViewCellArray.createEmpty()
 	var sections = [TableViewSection]()
-	var pendingHeader = TableViewSectionPart.systemDefault
+	var header = TableViewSectionPart.systemDefault
+	var footer = TableViewSectionPart.systemDefault
 	
 	init(model: PopulateTableViewModel) {
 		self.model = model
 	}
 	
-	func closeSection(useDefaultHeader: Bool, footer: TableViewSectionPart) {
+	func closeSection() {
 		print("close section")
 		
-		let headerToCreate = self.pendingHeader
-		self.pendingHeader = .systemDefault
-		
-		// TODO: overwrite with header block when available
-//		if let block = self.headerBlock {
-//			headerBlock = block
-//		}
-		
 		cells.reloadVisibleItems()
-		let section = TableViewSection(cells: cells, header: headerToCreate, footer: footer)
+		let section = TableViewSection(cells: cells, header: header, footer: footer)
 		sections.append(section)
 
 		cells = TableViewCellArray.createEmpty()
-//		self.headerBlock = nil
 	}
 	
 	
@@ -300,27 +292,31 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: SectionFooterTitleFormItem
 	
 	func visit(object: SectionFooterTitleFormItem) {
-		let footer: TableViewSectionPart
 		if let title = object.title {
 			footer = TableViewSectionPart.titleString(string: title)
 		} else {
 			footer = TableViewSectionPart.systemDefault
 		}
 
-		closeSection(useDefaultHeader: true, footer: footer)
+		closeSection()
+		
+		header = TableViewSectionPart.systemDefault
+		footer = TableViewSectionPart.systemDefault
 	}
 	
 	
 	// MARK: SectionFooterViewFormItem
 	
 	func visit(object: SectionFooterViewFormItem) {
-		let footer: TableViewSectionPart
 		if let view: UIView = object.viewBlock?() {
 			footer = TableViewSectionPart.titleView(view: view)
 		} else {
 			footer = TableViewSectionPart.systemDefault
 		}
-		closeSection(useDefaultHeader: true, footer: footer)
+		closeSection()
+
+		header = TableViewSectionPart.systemDefault
+		footer = TableViewSectionPart.systemDefault
 	}
 	
 	
@@ -329,26 +325,16 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionFormItem) {
 		print("cells.count: \(cells.allItems.count)")
 		if cells.allItems.count > 0 {
-			
-			let footer = TableViewSectionPart.systemDefault
-			
-			let useDefaultHeader: Bool
-			switch object.sectionType {
-			case .none:
-				useDefaultHeader = false
-			case .systemDefault:
-				useDefaultHeader = true
-			}
-			
-			closeSection(useDefaultHeader: useDefaultHeader, footer: footer)
+			closeSection()
 		}
 
 		switch object.sectionType {
 		case .none:
-			pendingHeader = .none
+			header = .none
 		case .systemDefault:
-			pendingHeader = .systemDefault
+			header = .systemDefault
 		}
+		footer = TableViewSectionPart.systemDefault
 	}
 	
 	
@@ -357,34 +343,32 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: SectionHeaderTitleFormItem) {
 		print("cells.count: \(cells.allItems.count)")
 		if cells.allItems.count > 0 {
-			let footer = TableViewSectionPart.systemDefault
-			closeSection(useDefaultHeader: true, footer: footer)
+			footer = TableViewSectionPart.systemDefault
+			closeSection()
 		}
 
-		pendingHeader = TableViewSectionPart.systemDefault
 		if let title = object.title {
-			pendingHeader = TableViewSectionPart.titleString(string: title)
+			header = TableViewSectionPart.titleString(string: title)
+		} else {
+			header = TableViewSectionPart.systemDefault
 		}
+		footer = TableViewSectionPart.systemDefault
 	}
 	
 	
 	// MARK: SectionHeaderViewFormItem
 	
 	func visit(object: SectionHeaderViewFormItem) {
-		// TODO: header block
-//		if cells.count > 0 || self.headerBlock != nil {
-//			let footer = TableViewSectionPart.systemDefault
-//			closeSection(useDefaultHeader: true, footer: footer)
-//		}
-//
-//		self.headerBlock = {
-//			let view: UIView? = object.viewBlock?()
-//			var item = TableViewSectionPart.systemDefault
-//			if let view = view {
-//				item = TableViewSectionPart.titleView(view: view)
-//			}
-//			return item
-//		}
+		if cells.allItems.count > 0 {
+			footer = TableViewSectionPart.systemDefault
+			closeSection()
+		}
+		
+		if let view: UIView = object.viewBlock?() {
+			header = TableViewSectionPart.titleView(view: view)
+		} else {
+			header = TableViewSectionPart.systemDefault
+		}
 	}
 	
 	
