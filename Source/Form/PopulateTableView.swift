@@ -367,7 +367,6 @@ class PopulateTableView: FormItemVisitor {
 		case .systemDefault:
 			header = .systemDefault
 		}
-//		lastItemType = .header
 		lastItemType = .sectionEnd
 	}
 	
