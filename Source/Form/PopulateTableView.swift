@@ -65,8 +65,6 @@ class PopulateTableView: FormItemVisitor {
 	}
 	
 	func closeSection() {
-		print("close section")
-		
 		cells.reloadVisibleItems()
 		let section = TableViewSection(cells: cells, header: header, footer: footer)
 		sections.append(section)
