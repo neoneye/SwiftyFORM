@@ -47,6 +47,14 @@ class PopulateTableView: FormItemVisitor {
 	var header = TableViewSectionPart.systemDefault
 	var footer = TableViewSectionPart.systemDefault
 	
+	enum LastItemType {
+		case beginning
+		case header
+		case sectionEnd
+		case item
+	}
+	var lastItemType = LastItemType.beginning
+	
 	init(model: PopulateTableViewModel) {
 		self.model = model
 	}
@@ -59,6 +67,22 @@ class PopulateTableView: FormItemVisitor {
 		sections.append(section)
 
 		cells = TableViewCellArray.createEmpty()
+		header = TableViewSectionPart.systemDefault
+		footer = TableViewSectionPart.systemDefault
+	}
+	
+	func closeLastSection() {
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
+			closeSection()
+		}
+		lastItemType = .sectionEnd
 	}
 	
 	
@@ -70,6 +94,7 @@ class PopulateTableView: FormItemVisitor {
 		model.valueAttributedText = object.value
 		let cell = AttributedTextCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: NSAttributedString?) in
@@ -93,6 +118,7 @@ class PopulateTableView: FormItemVisitor {
 		model.action = object.action
 		let cell = ButtonCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
 
@@ -105,6 +131,7 @@ class PopulateTableView: FormItemVisitor {
 		do {
 			let cell = try object.createCell(context)
 			cells.append(cell)
+			lastItemType = .item
 		} catch {
 			print("ERROR: Could not create cell for custom form item: \(error)")
 
@@ -113,6 +140,7 @@ class PopulateTableView: FormItemVisitor {
 			model.value = "Exception"
 			let cell = StaticTextCell(model: model)
 			cells.append(cell)
+			lastItemType = .item
 		}
 	}
 	
@@ -147,6 +175,7 @@ class PopulateTableView: FormItemVisitor {
 		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
@@ -203,6 +232,7 @@ class PopulateTableView: FormItemVisitor {
 			model: model
 		)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (selected: OptionRowModel?) in
@@ -225,6 +255,7 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
 	
@@ -260,6 +291,7 @@ class PopulateTableView: FormItemVisitor {
 		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
@@ -297,11 +329,8 @@ class PopulateTableView: FormItemVisitor {
 		} else {
 			footer = TableViewSectionPart.systemDefault
 		}
-
 		closeSection()
-		
-		header = TableViewSectionPart.systemDefault
-		footer = TableViewSectionPart.systemDefault
+		lastItemType = .sectionEnd
 	}
 	
 	
@@ -314,17 +343,21 @@ class PopulateTableView: FormItemVisitor {
 			footer = TableViewSectionPart.systemDefault
 		}
 		closeSection()
-
-		header = TableViewSectionPart.systemDefault
-		footer = TableViewSectionPart.systemDefault
+		lastItemType = .sectionEnd
 	}
 	
 	
 	// MARK: SectionFormItem
 	
 	func visit(object: SectionFormItem) {
-		print("cells.count: \(cells.allItems.count)")
-		if cells.allItems.count > 0 {
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
 			closeSection()
 		}
 
@@ -334,16 +367,22 @@ class PopulateTableView: FormItemVisitor {
 		case .systemDefault:
 			header = .systemDefault
 		}
-		footer = TableViewSectionPart.systemDefault
+//		lastItemType = .header
+		lastItemType = .sectionEnd
 	}
 	
 	
 	// MARK: SectionHeaderTitleFormItem
 	
 	func visit(object: SectionHeaderTitleFormItem) {
-		print("cells.count: \(cells.allItems.count)")
-		if cells.allItems.count > 0 {
-			footer = TableViewSectionPart.systemDefault
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
 			closeSection()
 		}
 
@@ -352,15 +391,21 @@ class PopulateTableView: FormItemVisitor {
 		} else {
 			header = TableViewSectionPart.systemDefault
 		}
-		footer = TableViewSectionPart.systemDefault
+		lastItemType = .header
 	}
 	
 	
 	// MARK: SectionHeaderViewFormItem
 	
 	func visit(object: SectionHeaderViewFormItem) {
-		if cells.allItems.count > 0 {
-			footer = TableViewSectionPart.systemDefault
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
 			closeSection()
 		}
 		
@@ -369,6 +414,7 @@ class PopulateTableView: FormItemVisitor {
 		} else {
 			header = TableViewSectionPart.systemDefault
 		}
+		lastItemType = .header
 	}
 	
 	
@@ -389,6 +435,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SegmentedControlCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Int) in
@@ -417,6 +464,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SliderCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
@@ -435,6 +483,7 @@ class PopulateTableView: FormItemVisitor {
 		model.value = object.value
 		let cell = StaticTextCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -466,6 +515,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = StepperCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: true)
@@ -495,6 +545,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SwitchCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: false)
@@ -532,6 +583,7 @@ class PopulateTableView: FormItemVisitor {
 		let cell = TextFieldFormItemCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -578,6 +630,7 @@ class PopulateTableView: FormItemVisitor {
 		let cell = TextViewCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -605,6 +658,7 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
 	class func prepareDismissCommand(_ willPopCommand: WillPopCommandProtocol, parentViewController: UIViewController, cell: ViewControllerFormItemCell) -> CommandProtocol {
@@ -649,6 +703,7 @@ class PopulateTableView: FormItemVisitor {
 		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
