@@ -67,11 +67,8 @@ public class FormBuilder: NSObject {
 		if suppressHeaderForFirstSection {
 			v.installZeroHeightHeader()
 		}
-		for (itemIndex, item) in innerItems.enumerated() {
-			let itemType = type(of: item)
-			//print("will visit item \(itemIndex): \(itemType)")
+		for item in innerItems {
 			item.accept(visitor: v)
-			//print("did visit item \(itemIndex): \(itemType)")
 		}
 		v.closeLastSection()
 		
