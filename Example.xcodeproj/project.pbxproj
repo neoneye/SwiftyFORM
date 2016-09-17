@@ -28,7 +28,6 @@
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
 		42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */; };
-		42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */; };
 		42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */; };
 		42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */; };
 		42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */; };
@@ -36,6 +35,8 @@
 		42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */; };
 		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
 		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4267985D1D8DA574002275CA /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */; };
+		4267985E1D8DA574002275CA /* NoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267985C1D8DA574002275CA /* NoHeaderViewController.swift */; };
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
@@ -121,12 +122,13 @@
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
 		42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerInitialValueViewController.swift; sourceTree = "<group>"; };
-		42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
 		42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldKeyboardTypesViewController.swift; sourceTree = "<group>"; };
 		42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReturnKeyViewController.swift; sourceTree = "<group>"; };
 		42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTabThroughFormViewController.swift; sourceTree = "<group>"; };
 		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
 		42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
+		4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		4267985C1D8DA574002275CA /* NoHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoHeaderViewController.swift; sourceTree = "<group>"; };
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
-				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
 				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
@@ -238,6 +239,15 @@
 				42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */,
 			);
 			path = TextView;
+			sourceTree = "<group>";
+		};
+		4267985A1D8DA574002275CA /* HeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */,
+				4267985C1D8DA574002275CA /* NoHeaderViewController.swift */,
+			);
+			path = HeaderFooter;
 			sourceTree = "<group>";
 		};
 		42685D3E1D2D6AB2008ABC3D /* WorkInProgress */ = {
@@ -292,6 +302,7 @@
 				42D005111B96319900986B3B /* Custom */,
 				42589DAE1B3447E1007CA8C1 /* DatePicker */,
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
+				4267985A1D8DA574002275CA /* HeaderFooter */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
 				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
 				422C84B31D81CFAB00C63FC6 /* Non-SwiftyFORM */,
@@ -437,10 +448,12 @@
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
+				4267985E1D8DA574002275CA /* NoHeaderViewController.swift in Sources */,
 				42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
 				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
 				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
+				4267985D1D8DA574002275CA /* HeaderFooterViewController.swift in Sources */,
 				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
 				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
 				420F6CCF1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift in Sources */,
@@ -466,7 +479,6 @@
 				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
 				422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */,
-				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
