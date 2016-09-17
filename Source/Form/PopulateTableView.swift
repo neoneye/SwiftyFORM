@@ -365,13 +365,6 @@ class PopulateTableView: FormItemVisitor {
 		case .item:
 			closeSection()
 		}
-
-		switch object.sectionType {
-		case .none:
-			header = .none
-		case .systemDefault:
-			header = .systemDefault
-		}
 		lastItemType = .sectionEnd
 	}
 	

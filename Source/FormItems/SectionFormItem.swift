@@ -2,12 +2,6 @@
 import Foundation
 
 public class SectionFormItem: FormItem {
-	public enum SectionType {
-		case systemDefault
-		case none
-	}
-	public var sectionType = SectionType.systemDefault
-	
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
