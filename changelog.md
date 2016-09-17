@@ -11,7 +11,8 @@
  * Breaking: `SelectRowDelegate.form_didSelectRow()` now requires the name of the first parameter
  * Breaking: `WillDisplayCellDelegate.form_willDisplay()` now requires the name of the first parameter
  * Breaking: Leaf classes can no longer be subclassed, such as `AttributedTextFormItem`, `ButtonFormItem`, `CustomFormItem`, `DatePickerFormItem`, etc. These were subclassable. The `FormItem` can still be subclassed, since it's the base class for all form items.
-
+ * Breaking: Enabled "Self Sizing Cells" in `FormTableView`
+ * Added `FormBuilder.suppressHeaderForFirstSection` that hides the first header in the tableview
 
 ### 0.11.0
 
