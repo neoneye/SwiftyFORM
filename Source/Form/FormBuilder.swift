@@ -69,9 +69,9 @@ public class FormBuilder: NSObject {
 		}
 		for (itemIndex, item) in innerItems.enumerated() {
 			let itemType = type(of: item)
-			print("will visit item \(itemIndex): \(itemType)")
+			//print("will visit item \(itemIndex): \(itemType)")
 			item.accept(visitor: v)
-			print("did visit item \(itemIndex): \(itemType)")
+			//print("did visit item \(itemIndex): \(itemType)")
 		}
 		v.closeLastSection()
 		

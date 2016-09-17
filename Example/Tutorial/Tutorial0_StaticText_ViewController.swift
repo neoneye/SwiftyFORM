@@ -3,7 +3,6 @@ import SwiftyFORM
 
 class Tutorial0_StaticText_ViewController: FormViewController {
 	override func populate(_ builder: FormBuilder) {
-//		builder += SectionFormItem()
 		builder += StaticTextFormItem().title("Hello").value("World")
 	}
 }
