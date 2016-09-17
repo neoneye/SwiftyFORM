@@ -20,6 +20,10 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
 
+		builder += SectionHeaderTitleFormItem().title("Non-SwiftyFORM")
+		builder += ViewControllerFormItem().title("UICollectionViewController").viewController(MyCollectionViewController.self)
+		builder += ViewControllerFormItem().title("UITableViewController").viewController(MyTableViewController.self)
+
 		builder += SectionHeaderTitleFormItem().title("TextField")
 		builder += ViewControllerFormItem().title("Valid & Invalid").viewController(TextFieldValidInvalidViewController.self)
 		builder += ViewControllerFormItem().title("Keyboard Types").viewController(TextFieldKeyboardTypesViewController.self)
@@ -35,13 +39,16 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("DatePicker With Initial Value").viewController(DatePickerInitialValueViewController.self)
 		builder += ViewControllerFormItem().title("DatePicker With Bindings").viewController(DatePickerBindingViewController.self)
 
+		builder += SectionHeaderTitleFormItem().title("Header & Footer")
+		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)
+		builder += ViewControllerFormItem().title("No Header").viewController(NoHeaderViewController.self)
+
 		builder += SectionHeaderTitleFormItem().title("Other")
 		builder += ViewControllerFormItem().title("Static & Attributed Text").viewController(StaticTextAndAttributedTextViewController.self)
 		builder += ViewControllerFormItem().title("Buttons").viewController(ButtonsViewController.self)
 		builder += ViewControllerFormItem().title("Sliders").viewController(SlidersViewController.self)
 		builder += ViewControllerFormItem().title("Segmented Controls").viewController(SegmentedControlsViewController.self)
 		builder += ViewControllerFormItem().title("Options").viewController(OptionsViewController.self)
-		builder += ViewControllerFormItem().title("Header & Footer").viewController(HeaderFooterViewController.self)
 		builder += ViewControllerFormItem().title("Steppers").viewController(SteppersViewController.self)
 		builder += ViewControllerFormItem().title("Custom Cells").viewController(CustomViewController.self)
 		builder += ViewControllerFormItem().title("PickerView").viewController(PickerViewViewController.self)

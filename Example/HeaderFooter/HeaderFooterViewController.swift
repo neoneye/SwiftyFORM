@@ -1,5 +1,4 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
-import UIKit
 import SwiftyFORM
 
 class HeaderFooterViewController: FormViewController {

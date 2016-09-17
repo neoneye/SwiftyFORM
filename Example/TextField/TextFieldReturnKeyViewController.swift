@@ -18,6 +18,7 @@ class TextFieldReturnKeyViewController: FormViewController {
 		builder += TextFieldFormItem().styleClass("align").title("Yahoo").returnKeyType(.yahoo).placeholder("Search (blue)")
 		builder += TextFieldFormItem().styleClass("align").title("Done").returnKeyType(.done).placeholder("Done (blue)")
 		builder += TextFieldFormItem().styleClass("align").title("EmergencyCall").returnKeyType(.emergencyCall).placeholder("Emergency Call (blue)")
+		builder += TextFieldFormItem().styleClass("align").title("Continue").returnKeyType(.continue).placeholder("Continue (gray)")
 		builder.alignLeftElementsWithClass("align")
 	}
 }

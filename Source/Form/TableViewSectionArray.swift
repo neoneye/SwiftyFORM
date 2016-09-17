@@ -86,6 +86,10 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return sections[section].tableView(tableView, heightForHeaderInSection: section)
 	}
 	
+	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return sections[section].tableView(tableView, estimatedHeightForHeaderInSection: section)
+	}
+	
 	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return sections[section].tableView(tableView, heightForFooterInSection: section)
 	}
@@ -126,5 +130,23 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
 		scrollView.form_firstResponder()?.resignFirstResponder()
 		return true
+	}
+	
+	
+	// MARK: CustomDebugStringConvertible
+	
+	public override var debugDescription: String {
+		var result = [String]()
+		result.append("============ number of sections: \(sections.count)")
+		for (sectionIndex, section) in sections.enumerated() {
+			result.append("  --- section: \(sectionIndex), number of cells: \(section.cells.visibleItems.count)")
+			for (rowIndex, item) in section.cells.visibleItems.enumerated() {
+				let cellType = type(of: item.cell)
+				let s = "    \(sectionIndex).\(rowIndex) \(cellType)"
+				result.append(s)
+			}
+		}
+		result.append("============")
+		return result.joined(separator: "\n")
 	}
 }

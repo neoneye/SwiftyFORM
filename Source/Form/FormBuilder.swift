@@ -15,8 +15,8 @@ public enum ToolbarMode {
 
 
 public class FormBuilder: NSObject {
-	fileprivate var innerItems = [FormItem]()
-	fileprivate var alignLeftItems = [AlignLeft]()
+	private var innerItems = [FormItem]()
+	private var alignLeftItems = [AlignLeft]()
 	
 	override public init() {
 		super.init()
@@ -25,6 +25,8 @@ public class FormBuilder: NSObject {
 	public var navigationTitle: String? = nil
 	
 	public var toolbarMode: ToolbarMode = .none
+
+	public var suppressHeaderForFirstSection = false
 	
 	public func removeAll() {
 		innerItems.removeAll()
@@ -62,13 +64,16 @@ public class FormBuilder: NSObject {
 		let model = PopulateTableViewModel(viewController: viewController, toolbarMode: toolbarMode)
 		
 		let v = PopulateTableView(model: model)
-		for item in innerItems {
+		if suppressHeaderForFirstSection {
+			v.installZeroHeightHeader()
+		}
+		for (itemIndex, item) in innerItems.enumerated() {
+			let itemType = type(of: item)
+			//print("will visit item \(itemIndex): \(itemType)")
 			item.accept(visitor: v)
+			//print("did visit item \(itemIndex): \(itemType)")
 		}
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.none
-		}
-		v.closeSection(footerBlock)
+		v.closeLastSection()
 		
 		for alignLeftItem in alignLeftItems {
 			let widthArray: [CGFloat] = alignLeftItem.items.map {

@@ -3,24 +3,15 @@ import UIKit
 
 public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDelegate {
 	public let cells: TableViewCellArray
-	fileprivate let headerBlock: TableViewSectionPart.CreateBlock
-	fileprivate let footerBlock: TableViewSectionPart.CreateBlock
+	public let header: TableViewSectionPart
+	public let footer: TableViewSectionPart
 	
-	init(cells: TableViewCellArray, headerBlock: @escaping TableViewSectionPart.CreateBlock, footerBlock: @escaping TableViewSectionPart.CreateBlock) {
+	init(cells: TableViewCellArray, header: TableViewSectionPart, footer: TableViewSectionPart) {
 		self.cells = cells
-		self.headerBlock = headerBlock
-		self.footerBlock = footerBlock
+		self.header = header
+		self.footer = footer
 		super.init()
 	}
-
-	fileprivate lazy var header: TableViewSectionPart = {
-		return self.headerBlock()
-		}()
-
-	fileprivate lazy var footer: TableViewSectionPart = {
-		return self.footerBlock()
-		}()
-
 	
 	public func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
@@ -60,6 +51,10 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	
 	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return footer.height
+	}
+	
+	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+		return header.estimatedHeight
 	}
 	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
