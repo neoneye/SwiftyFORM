@@ -3,6 +3,29 @@
 
 
 
+# Expand/collapse - Sporadic crashes
+
+Difficulty level: HARD
+
+After moving the code to Xcode8.0 the PrecisionSlider cells have started crashing sporadic.
+With Xcode7.3.1 it worked fine.
+Tapping random rows so they collapses/expands, sometimes causes a crash.
+
+It happens on the `PrecisionSlidersViewController` page where there are a lot of cells.
+Rows in the bottom half are in particular fragile, where the upper cells works ok.
+
+The crash happens in the `ToggleExpandCollapse.execute` function.
+
+Console output
+
+	2016-09-17 20:35:59.543220 Example[2131:582991] *** Assertion failure in -[SwiftyFORM.FormTableView _updateWithItems:updateSupport:], /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3599.6/UITableView.m:3149
+	2016-09-17 20:36:17.407424 Example[2131:582991] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'Missing cell for newly visible row 16'
+	*** First throw call stack:
+	(0x18e4341c0 0x18ce6c55c 0x18e434094 0x18eebe82c 0x1945aef78 0x1942b1d78 0x1942c8b84 0x19447b1c0 0x19445f6a4 0x1002d156c 0x10023f4c8 0x10023f67c 0x10023ec60 0x10023fec4 0x100293a18 0x100261a38 0x100261ac8 0x1943aa594 0x19445b050 0x19450e264 0x194500018 0x19426ed6c 0x18e3e17dc 0x18e3df40c 0x18e3df89c 0x18e30e048 0x18fd91198 0x1942e7818 0x1942e2550 0x10006e954 0x18d2f05b8)
+	libc++abi.dylib: terminating with uncaught exception of type NSException
+
+
+
 # Expand/collapse - Animation glitch at bottom of tableview
 
 Difficulty level: HARD
