@@ -18,8 +18,6 @@
 		42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D2B1B3576110067FEAA /* SignUpViewController.swift */; };
 		42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D331B357A440067FEAA /* ButtonsViewController.swift */; };
 		422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */; };
-		422C84B51D81CFAB00C63FC6 /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422C84B41D81CFAB00C63FC6 /* MyTableViewController.swift */; };
-		422C84B71D81D2F900C63FC6 /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422C84B61D81D2F900C63FC6 /* MyCollectionViewController.swift */; };
 		423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17031BAF3A9B00A9859F /* AliensViewController.swift */; };
 		423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 423D17041BAF3A9B00A9859F /* Area51.storyboard */; };
 		423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D17051BAF3A9B00A9859F /* GhostsViewController.swift */; };
@@ -35,8 +33,10 @@
 		42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */; };
 		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
 		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4267985D1D8DA574002275CA /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */; };
-		4267985E1D8DA574002275CA /* NoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267985C1D8DA574002275CA /* NoHeaderViewController.swift */; };
+		4267986C1D8DB160002275CA /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */; };
+		4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986B1D8DB160002275CA /* NoHeaderViewController.swift */; };
+		426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */; };
+		426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426798701D8DB17B002275CA /* MyTableViewController.swift */; };
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
@@ -112,8 +112,6 @@
 		42108D2B1B3576110067FEAA /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		42108D331B357A440067FEAA /* ButtonsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsViewController.swift; sourceTree = "<group>"; };
 		422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewViewController.swift; sourceTree = "<group>"; };
-		422C84B41D81CFAB00C63FC6 /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
-		422C84B61D81D2F900C63FC6 /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
 		423D17031BAF3A9B00A9859F /* AliensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AliensViewController.swift; sourceTree = "<group>"; };
 		423D17041BAF3A9B00A9859F /* Area51.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Area51.storyboard; sourceTree = "<group>"; };
 		423D17051BAF3A9B00A9859F /* GhostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GhostsViewController.swift; sourceTree = "<group>"; };
@@ -127,8 +125,10 @@
 		42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTabThroughFormViewController.swift; sourceTree = "<group>"; };
 		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
 		42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
-		4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
-		4267985C1D8DA574002275CA /* NoHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoHeaderViewController.swift; sourceTree = "<group>"; };
+		4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		4267986B1D8DB160002275CA /* NoHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoHeaderViewController.swift; sourceTree = "<group>"; };
+		4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
+		426798701D8DB17B002275CA /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
@@ -174,15 +174,6 @@
 				42108D2B1B3576110067FEAA /* SignUpViewController.swift */,
 			);
 			path = Usecases;
-			sourceTree = "<group>";
-		};
-		422C84B31D81CFAB00C63FC6 /* Non-SwiftyFORM */ = {
-			isa = PBXGroup;
-			children = (
-				422C84B61D81D2F900C63FC6 /* MyCollectionViewController.swift */,
-				422C84B41D81CFAB00C63FC6 /* MyTableViewController.swift */,
-			);
-			path = "Non-SwiftyFORM";
 			sourceTree = "<group>";
 		};
 		423D17021BAF3A9B00A9859F /* Area51 */ = {
@@ -241,13 +232,22 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
-		4267985A1D8DA574002275CA /* HeaderFooter */ = {
+		426798691D8DB160002275CA /* HeaderFooter */ = {
 			isa = PBXGroup;
 			children = (
-				4267985B1D8DA574002275CA /* HeaderFooterViewController.swift */,
-				4267985C1D8DA574002275CA /* NoHeaderViewController.swift */,
+				4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */,
+				4267986B1D8DB160002275CA /* NoHeaderViewController.swift */,
 			);
 			path = HeaderFooter;
+			sourceTree = "<group>";
+		};
+		4267986E1D8DB17B002275CA /* Non-SwiftyFORM */ = {
+			isa = PBXGroup;
+			children = (
+				4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */,
+				426798701D8DB17B002275CA /* MyTableViewController.swift */,
+			);
+			path = "Non-SwiftyFORM";
 			sourceTree = "<group>";
 		};
 		42685D3E1D2D6AB2008ABC3D /* WorkInProgress */ = {
@@ -302,10 +302,10 @@
 				42D005111B96319900986B3B /* Custom */,
 				42589DAE1B3447E1007CA8C1 /* DatePicker */,
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
-				4267985A1D8DA574002275CA /* HeaderFooter */,
+				426798691D8DB160002275CA /* HeaderFooter */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
 				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
-				422C84B31D81CFAB00C63FC6 /* Non-SwiftyFORM */,
+				4267986E1D8DB17B002275CA /* Non-SwiftyFORM */,
 				42589DC21B3447EA007CA8C1 /* Other */,
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
@@ -447,17 +447,15 @@
 				423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */,
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
+				426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
-				4267985E1D8DA574002275CA /* NoHeaderViewController.swift in Sources */,
 				42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
 				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
 				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
-				4267985D1D8DA574002275CA /* HeaderFooterViewController.swift in Sources */,
 				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
 				42CEBF9B1A3BA2B50048E072 /* AppDelegate.swift in Sources */,
 				420F6CCF1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift in Sources */,
-				422C84B51D81CFAB00C63FC6 /* MyTableViewController.swift in Sources */,
 				42589DDD1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift in Sources */,
 				42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */,
 				42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */,
@@ -469,12 +467,14 @@
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
-				422C84B71D81D2F900C63FC6 /* MyCollectionViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
+				426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
+				4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
+				4267986C1D8DB160002275CA /* HeaderFooterViewController.swift in Sources */,
 				42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
