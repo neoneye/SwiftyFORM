@@ -4,10 +4,7 @@ import SwiftyFORM
 class NoHeaderViewController: FormViewController {
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "No Header"
-		
-		let section0 = SectionFormItem()
-		section0.sectionType = .none
-		builder += section0
+		builder.suppressHeaderForFirstSection = true
 
 		builder += StaticTextFormItem().title("Empty Row")
 		builder += StaticTextFormItem().title("Empty Row")

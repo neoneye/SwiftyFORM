@@ -59,6 +59,11 @@ class PopulateTableView: FormItemVisitor {
 		self.model = model
 	}
 	
+	func installZeroHeightHeader() {
+		header = .none
+		lastItemType = .sectionEnd
+	}
+	
 	func closeSection() {
 		print("close section")
 		

@@ -90,9 +90,6 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		return sections[section].tableView(tableView, estimatedHeightForHeaderInSection: section)
 	}
 	
-	// TODO: estimatedHeightForFooterInSection
-
-	
 	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 		return sections[section].tableView(tableView, heightForFooterInSection: section)
 	}

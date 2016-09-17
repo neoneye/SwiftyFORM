@@ -57,9 +57,6 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 		return header.estimatedHeight
 	}
 	
-	// TODO: estimatedHeightForFooterInSection
-
-	
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let cell = cells[indexPath.row] as? SelectRowDelegate {
 			cell.form_didSelectRow(indexPath: indexPath, tableView: tableView)

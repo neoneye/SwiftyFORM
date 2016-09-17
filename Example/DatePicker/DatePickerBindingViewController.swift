@@ -23,14 +23,20 @@ class DatePickerBindingViewController: FormViewController {
 		builder.navigationTitle = "DatePicker & Bindings"
 		builder.toolbarMode = .simple
 		
-		let section0 = SectionFormItem()
-		if showHeader {
-			section0.sectionType = .systemDefault
+		if !showHeader {
+			builder.suppressHeaderForFirstSection = true
 		} else {
-			section0.sectionType = .none
+			builder.suppressHeaderForFirstSection = false
 		}
 		
-		builder += section0
+//		let section0 = SectionFormItem()
+//		if showHeader {
+//			section0.sectionType = .systemDefault
+//		} else {
+//			section0.sectionType = .none
+//		}
+		
+//		builder += section0
 		builder += toggleHeaderButton
 //		builder += SectionHeaderTitleFormItem(title: "Always expanded")
 		builder += datePicker
