@@ -3,8 +3,8 @@ import UIKit
 
 public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDelegate {
 	public let cells: TableViewCellArray
-	private let header: TableViewSectionPart
-	private let footer: TableViewSectionPart
+	public let header: TableViewSectionPart
+	public let footer: TableViewSectionPart
 	
 	init(cells: TableViewCellArray, header: TableViewSectionPart, footer: TableViewSectionPart) {
 		self.cells = cells
@@ -54,17 +54,7 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	}
 	
 	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		switch header {
-		case .none:
-			return 2
-		case .systemDefault:
-			return 44
-		case let .titleView(view):
-			let view2: UIView = view
-			return view2.frame.size.height
-		case .titleString(_):
-			return 44
-		}
+		return header.estimatedHeight
 	}
 	
 	// TODO: estimatedHeightForFooterInSection
