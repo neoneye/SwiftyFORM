@@ -148,7 +148,6 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 				let s = "    \(sectionIndex).\(rowIndex) \(cellType)"
 				result.append(s)
 			}
-			result.append("  ---")
 		}
 		result.append("============")
 		return result.joined(separator: "\n")
