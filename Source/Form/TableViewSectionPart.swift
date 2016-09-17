@@ -30,10 +30,12 @@ public enum TableViewSectionPart {
 		case .none:
 			return CGFloat.leastNormalMagnitude
 		case .systemDefault:
-			return 35
+			return UITableViewAutomaticDimension
+//			return 35
 		case let .titleView(view):
-			let view2: UIView = view
-			return view2.frame.size.height
+			return UITableViewAutomaticDimension
+//			let view2: UIView = view
+//			return view2.frame.size.height
 		case .titleString(_):
 			return UITableViewAutomaticDimension
 		}
