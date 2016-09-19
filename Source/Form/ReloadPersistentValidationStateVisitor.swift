@@ -3,10 +3,10 @@ import Foundation
 
 class ReloadPersistentValidationStateVisitor: FormItemVisitor {
 	
-	class func validateAndUpdateUI(items: [FormItem]) {
+	class func validateAndUpdateUI(_ items: [FormItem]) {
 		let visitor = ReloadPersistentValidationStateVisitor()
 		for item in items {
-			item.accept(visitor)
+			item.accept(visitor: visitor)
 		}
 	}
 	

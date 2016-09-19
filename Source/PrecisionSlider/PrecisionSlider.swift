@@ -25,7 +25,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let zoomUpdated: Bool
 	}
 	
-	typealias SliderDidChangeBlock = (changeModel: SliderDidChangeModel) -> Void
+	typealias SliderDidChangeBlock = (_ changeModel: SliderDidChangeModel) -> Void
 	var valueDidChange: SliderDidChangeBlock?
 	
 	override init(frame: CGRect) {
@@ -86,15 +86,15 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		updateContentInset()
 
 		do {
-			let (left, right) = bounds.divide(round(bounds.width/2), fromEdge: .MinXEdge)
-			leftCoverView.frame = left.divide(1, fromEdge: .MaxXEdge).remainder
+			let (left, right) = bounds.divided(atDistance: round(bounds.width/2), from: .minXEdge)
+			leftCoverView.frame = left.divided(atDistance: 1, from: .maxXEdge).remainder
 			rightCoverView.frame = right
 		}
 		
 		if !zoomUIHidden {
 			let halfHeight = floor(bounds.height / 2)
-			let right = bounds.divide(halfHeight, fromEdge: .MaxXEdge).slice
-			let (a, b) = right.divide(halfHeight, fromEdge: .MaxYEdge)
+			let right = bounds.divided(atDistance: halfHeight, from: .maxXEdge).slice
+			let (a, b) = right.divided(atDistance: halfHeight, from: .maxYEdge)
 			zoomOutButton.frame = a
 			zoomInButton.frame = b
 			zoomLabel.frame = right
@@ -104,14 +104,14 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	lazy var leftCoverView: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-		instance.userInteractionEnabled = false
+		instance.isUserInteractionEnabled = false
 		return instance
 	}()
 	
 	lazy var rightCoverView: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-		instance.userInteractionEnabled = false
+		instance.isUserInteractionEnabled = false
 		return instance
 	}()
 
@@ -150,7 +150,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	/**
 	Scroll the collectionview so that the center indicator is aligned with the value.
 	*/
-	func setContentOffset(value: Double) {
+	func setContentOffset(_ value: Double) {
 		let length = model.lengthOfFullItem
 		if length < 0.001 {
 			return
@@ -176,16 +176,16 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 	
-	func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
 		return false
 	}
 	
-	func handlePinch(gesture: UIPinchGestureRecognizer) {
-		if gesture.state == .Began {
+	func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+		if gesture.state == .began {
 			originalZoom = model.zoom
 			originalValue = self.value
 		}
-		if gesture.state == .Changed {
+		if gesture.state == .changed {
 			let zoomBefore = model.zoom
 			let zoom = Float(log10(pow(10, Double(originalZoom)) * Double(gesture.scale)))
 			changeZoom(zoom: zoom, value: originalValue)
@@ -199,7 +199,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 					zoom: model.zoom,
 					zoomUpdated: true
 				)
-				valueDidChange?(changeModel: changeModel)
+				valueDidChange?(changeModel)
 			}
 		}
 	}
@@ -214,7 +214,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
-	func handleOneTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+	func handleOneTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
 		let originalZoom = model.zoom
 		let originalValue = self.value
@@ -233,17 +233,17 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		disablePropagation()
 		changeZoom(zoom: zoom0, value: originalValue)
 
-		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
-		dispatch_after(delay, dispatch_get_main_queue()) {
+		let delay = DispatchTime.now() + Double(Int64(0.08 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		DispatchQueue.main.asyncAfter(deadline: delay) {
 			self.changeZoom(zoom: zoom1, value: originalValue)
 
-			dispatch_after(delay, dispatch_get_main_queue()) {
+			DispatchQueue.main.asyncAfter(deadline: delay) {
 				self.changeZoom(zoom: zoom2, value: originalValue)
 
-				dispatch_after(delay, dispatch_get_main_queue()) {
+				DispatchQueue.main.asyncAfter(deadline: delay) {
 					self.changeZoom(zoom: zoom3, value: originalValue)
 					
-					dispatch_after(delay, dispatch_get_main_queue()) {
+					DispatchQueue.main.asyncAfter(deadline: delay) {
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
@@ -254,7 +254,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 							zoom: self.model.zoom,
 							zoomUpdated: true
 						)
-						self.valueDidChange?(changeModel: changeModel)
+						self.valueDidChange?(changeModel)
 					}
 				}
 			}
@@ -271,7 +271,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 	
-	func handleTwoTouchDoubleTap(gesture: UIPinchGestureRecognizer) {
+	func handleTwoTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
 		let originalZoom = model.zoom
 		let originalValue = self.value
@@ -290,17 +290,17 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		disablePropagation()
 		changeZoom(zoom: zoom0, value: originalValue)
 		
-		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.08 * Float(NSEC_PER_SEC)))
-		dispatch_after(delay, dispatch_get_main_queue()) {
+		let delay = DispatchTime.now() + Double(Int64(0.08 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		DispatchQueue.main.asyncAfter(deadline: delay) {
 			self.changeZoom(zoom: zoom1, value: originalValue)
 			
-			dispatch_after(delay, dispatch_get_main_queue()) {
+			DispatchQueue.main.asyncAfter(deadline: delay) {
 				self.changeZoom(zoom: zoom2, value: originalValue)
 				
-				dispatch_after(delay, dispatch_get_main_queue()) {
+				DispatchQueue.main.asyncAfter(deadline: delay) {
 					self.changeZoom(zoom: zoom3, value: originalValue)
 					
-					dispatch_after(delay, dispatch_get_main_queue()) {
+					DispatchQueue.main.asyncAfter(deadline: delay) {
 						self.changeZoom(zoom: zoom4, value: originalValue)
 						self.enablePropagation()
 
@@ -311,7 +311,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 							zoom: self.model.zoom,
 							zoomUpdated: true
 						)
-						self.valueDidChange?(changeModel: changeModel)
+						self.valueDidChange?(changeModel)
 					}
 				}
 			}
@@ -323,12 +323,12 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	var zoomUIHidden: Bool {
 		get {
-			return zoomLabel.hidden && zoomInButton.hidden && zoomOutButton.hidden
+			return zoomLabel.isHidden && zoomInButton.isHidden && zoomOutButton.isHidden
 		}
 		set {
-			zoomLabel.hidden = newValue
-			zoomInButton.hidden = newValue
-			zoomOutButton.hidden = newValue
+			zoomLabel.isHidden = newValue
+			zoomInButton.isHidden = newValue
+			zoomOutButton.isHidden = newValue
 			setNeedsLayout()
 		}
 	}
@@ -340,8 +340,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let instance = UILabel()
 		instance.textColor = UIColor(white: 0.2, alpha: 1.0)
 		instance.text = "0.0"
-		instance.font = UIFont.systemFontOfSize(12)
-		instance.textAlignment = .Center
+		instance.font = UIFont.systemFont(ofSize: 12)
+		instance.textAlignment = .center
 		return instance
 	}()
 	
@@ -353,13 +353,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	// MARK: Zoom UI - Button for zoom in
 	
 	lazy var zoomInButton: UIButton = {
-		let instance = UIButton(type: .Custom)
+		let instance = UIButton(type: .custom)
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
-		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControlState())
+		instance.titleLabel?.font = UIFont.systemFont(ofSize: 32)
 		instance.showsTouchWhenHighlighted = true
-		instance.setTitle("+", forState: .Normal)
-		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), forControlEvents: .TouchUpInside)
+		instance.setTitle("+", for: UIControlState())
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), for: .touchUpInside)
 		return instance
 	}()
 	
@@ -383,20 +383,20 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			zoom: model.zoom,
 			zoomUpdated: true
 		)
-		valueDidChange?(changeModel: changeModel)
+		valueDidChange?(changeModel)
 	}
 	
 	
 	// MARK: Zoom UI - Button for zoom out
 	
 	lazy var zoomOutButton: UIButton = {
-		let instance = UIButton(type: .Custom)
+		let instance = UIButton(type: .custom)
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), forState: .Normal)
-		instance.titleLabel?.font = UIFont.systemFontOfSize(32)
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControlState())
+		instance.titleLabel?.font = UIFont.systemFont(ofSize: 32)
 		instance.showsTouchWhenHighlighted = true
-		instance.setTitle("-", forState: .Normal)
-		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), forControlEvents: .TouchUpInside)
+		instance.setTitle("-", for: UIControlState())
+		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), for: .touchUpInside)
 		return instance
 	}()
 	
@@ -420,12 +420,12 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			zoom: model.zoom,
 			zoomUpdated: true
 		)
-		valueDidChange?(changeModel: changeModel)
+		valueDidChange?(changeModel)
 	}
 	
 
 	
-	func changeZoom(zoom zoom: Float, value: Double) {
+	func changeZoom(zoom: Float, value: Double) {
 		let clampedZoom = model.clampZoom(zoom)
 		if model.zoom == clampedZoom {
 			return // no need to update UI
@@ -451,12 +451,12 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	lazy var layout: PrecisionSlider_InnerCollectionViewFlowLayout = {
 		let instance = PrecisionSlider_InnerCollectionViewFlowLayout()
-		instance.scrollDirection = .Horizontal
+		instance.scrollDirection = .horizontal
 		instance.minimumInteritemSpacing = 0
 		instance.minimumLineSpacing = 0
-		instance.sectionInset = UIEdgeInsetsZero
-		instance.headerReferenceSize = CGSizeZero
-		instance.footerReferenceSize = CGSizeZero
+		instance.sectionInset = UIEdgeInsets.zero
+		instance.headerReferenceSize = CGSize.zero
+		instance.footerReferenceSize = CGSize.zero
 		instance.itemSize = self.computeItemSize()
 		instance.model = self.model
 		return instance
@@ -471,18 +471,18 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 	
 	lazy var collectionView: UICollectionView = {
-		let instance = UICollectionView(frame: CGRectZero, collectionViewLayout: self.layout)
+		let instance = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
 		instance.showsHorizontalScrollIndicator = false
 		instance.showsVerticalScrollIndicator = false
-		instance.backgroundColor = UIColor.whiteColor()
+		instance.backgroundColor = UIColor.white
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false
-		instance.registerClass(PrecisionSlider_InnerCollectionViewSingleCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewSingleCell.identifier)
-		instance.registerClass(PrecisionSlider_InnerCollectionViewFirstCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier)
-		instance.registerClass(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
-		instance.registerClass(PrecisionSlider_InnerCollectionViewFullCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFullCell.identifier)
-		instance.contentInset = UIEdgeInsetsZero
+		instance.register(PrecisionSlider_InnerCollectionViewSingleCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewSingleCell.identifier)
+		instance.register(PrecisionSlider_InnerCollectionViewFirstCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier)
+		instance.register(PrecisionSlider_InnerCollectionViewLastCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier)
+		instance.register(PrecisionSlider_InnerCollectionViewFullCell.self, forCellWithReuseIdentifier: PrecisionSlider_InnerCollectionViewFullCell.identifier)
+		instance.contentInset = UIEdgeInsets.zero
 		instance.delegate = self
 		instance.dataSource = self
 		return instance
@@ -491,7 +491,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	
 	// MARK: UICollectionView delegate/datasource
 	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		if enablePropagationCounter < 0 {
 			return
 		}
@@ -504,10 +504,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			zoom: self.model.zoom,
 			zoomUpdated: false
 		)
-		valueDidChange(changeModel: changeModel)
+		valueDidChange(changeModel)
 	}
 	
-	func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		var count = model.numberOfFullItems
 		if model.hasOnePartialItem {
 			count += 1
@@ -522,9 +522,9 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return count
 	}
 	
-	func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if model.hasOnePartialItem {
-			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewSingleCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewSingleCell
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewSingleCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewSingleCell
 			return cell
 		}
 		
@@ -536,26 +536,26 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let isLast = indexPath.row == count - 1
 		
 		if isFirst && model.hasPartialItemBefore {
-			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFirstCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewFirstCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewFirstCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
-			cell.configure(model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
+			cell.configure(partialLength: model.lengthOfPartialItemBefore, fullLength: model.lengthOfFullItem)
 			return cell
 		}
 		if isLast && model.hasPartialItemAfter {
-			let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewLastCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewLastCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewLastCell
 			cell.label.text = labelText
 			cell.mark.backgroundColor = markColor
-			cell.configure(model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
+			cell.configure(partialLength: model.lengthOfPartialItemAfter, fullLength: model.lengthOfFullItem)
 			return cell
 		}
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PrecisionSlider_InnerCollectionViewFullCell.identifier, forIndexPath: indexPath) as! PrecisionSlider_InnerCollectionViewFullCell
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PrecisionSlider_InnerCollectionViewFullCell.identifier, for: indexPath) as! PrecisionSlider_InnerCollectionViewFullCell
 		cell.label.text = labelText
 		cell.mark.backgroundColor = markColor
 		return cell
 	}
 	
-	func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 		if model.hasOnePartialItem {
 			let size = CGSize(
 				width: CGFloat(model.lengthOfOnePartialItem),
@@ -599,10 +599,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout {
 	weak var model: PrecisionSlider_InnerModel?
 	
-	override func collectionViewContentSize() -> CGSize {
+	override var collectionViewContentSize : CGSize {
 		guard let model = self.model else {
 			print("no model")
-			return CGSizeZero
+			return CGSize.zero
 		}
 		return CGSize(width: CGFloat(model.lengthOfContent), height: PrecisionSlider_InnerModel.height)
 	}

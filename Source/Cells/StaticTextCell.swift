@@ -11,7 +11,7 @@ public class StaticTextCell: UITableViewCell {
 
 	public init(model: StaticTextCellModel) {
 		self.model = model
-		super.init(style: .Value1, reuseIdentifier: nil)
+		super.init(style: .value1, reuseIdentifier: nil)
 		loadWithModel(model)
 	}
 	
@@ -19,8 +19,8 @@ public class StaticTextCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func loadWithModel(model: StaticTextCellModel) {
-		selectionStyle = .None
+	public func loadWithModel(_ model: StaticTextCellModel) {
+		selectionStyle = .none
 		textLabel?.text = model.title
 		detailTextLabel?.text = model.value
 	}

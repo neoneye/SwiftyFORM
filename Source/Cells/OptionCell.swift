@@ -2,11 +2,11 @@
 import UIKit
 
 public class OptionCell: UITableViewCell, SelectRowDelegate {
-	let innerDidSelectOption: Void -> Void
+	let innerDidSelectOption: (Void) -> Void
 	
-	public init(model: OptionRowFormItem, didSelectOption: Void -> Void) {
+	public init(model: OptionRowFormItem, didSelectOption: @escaping (Void) -> Void) {
 		self.innerDidSelectOption = didSelectOption
-		super.init(style: .Default, reuseIdentifier: nil)
+		super.init(style: .default, reuseIdentifier: nil)
 		loadWithModel(model)
 	}
 	
@@ -14,20 +14,20 @@ public class OptionCell: UITableViewCell, SelectRowDelegate {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	public func loadWithModel(model: OptionRowFormItem) {
+	public func loadWithModel(_ model: OptionRowFormItem) {
 		textLabel?.text = model.title
 		if model.selected {
-			accessoryType = .Checkmark
+			accessoryType = .checkmark
 		} else {
-			accessoryType = .None
+			accessoryType = .none
 		}
 	}
 
-	public func form_didSelectRow(indexPath: NSIndexPath, tableView: UITableView) {
+	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
-		accessoryType = .Checkmark
+		accessoryType = .checkmark
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 
 		innerDidSelectOption()
 		SwiftyFormLog("did invoke")

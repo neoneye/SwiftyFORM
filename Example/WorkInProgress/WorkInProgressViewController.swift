@@ -3,7 +3,7 @@ import UIKit
 import SwiftyFORM
 
 class WorkInProgressViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Work In Progress"
 		builder += ViewControllerFormItem().title("Scientific slider experimental").viewController(ScientificSliderViewController.self)
 	}

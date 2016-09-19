@@ -2,36 +2,36 @@ import Foundation
 
 public class CountSpecification: CompositeSpecification {
 	
-	public class func min(count: Int) -> CountSpecification {
+	public class func min(_ count: Int) -> CountSpecification {
 		return CountSpecification().min(count)
 	}
 	
-	public class func max(count: Int) -> CountSpecification {
+	public class func max(_ count: Int) -> CountSpecification {
 		return CountSpecification().max(count)
 	}
 	
-	public class func between(minCount: Int, _ maxCount: Int) -> CountSpecification {
+	public class func between(_ minCount: Int, _ maxCount: Int) -> CountSpecification {
 		return CountSpecification().min(minCount).max(maxCount)
 	}
 	
-	public class func exactly(count: Int) -> CountSpecification {
+	public class func exactly(_ count: Int) -> CountSpecification {
 		return CountSpecification().min(count).max(count)
 	}
 	
 	public var minCount: Int?
 	public var maxCount: Int?
 	
-	public func min(count: Int) -> CountSpecification {
+	public func min(_ count: Int) -> CountSpecification {
 		minCount = count
 		return self
 	}
 	
-	public func max(count: Int) -> CountSpecification {
+	public func max(_ count: Int) -> CountSpecification {
 		maxCount = count
 		return self
 	}
 	
-	public override func isSatisfiedBy(candidate: Any?) -> Bool {
+	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		if candidate == nil {
 			return false
 		}
@@ -55,11 +55,11 @@ public class CountSpecification: CompositeSpecification {
 		
 		
 		switch (minCount, maxCount) {
-		case (.Some(let min), .Some(let max)):
+		case (.some(let min), .some(let max)):
 			return (n >= min) && (n <= max)
-		case (.Some(let min), _):
+		case (.some(let min), _):
 			return (n >= min)
-		case (_, .Some(let max)):
+		case (_, .some(let max)):
 			return (n <= max)
 		default:
 			break

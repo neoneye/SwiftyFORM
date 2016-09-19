@@ -24,14 +24,14 @@ extension UITableViewCell {
 	func form_deselectRow() {
 		form_deselectIfNeeded()
 		
-		let delay = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Float(NSEC_PER_SEC)))
-		dispatch_after(delay, dispatch_get_main_queue()) {
+		let delay = DispatchTime.now() + Double(Int64(0.5 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+		DispatchQueue.main.asyncAfter(deadline: delay) {
 			self.form_deselectIfNeeded()
 		}
 	}
 	
-	private func form_deselectIfNeeded() {
-		if selected == false {
+	fileprivate func form_deselectIfNeeded() {
+		if isSelected == false {
 			//print("already deselected, no need to deselect")
 			return
 		}
@@ -49,7 +49,7 @@ extension UITableViewCell {
 		}
 		//print("deselecting: \(indexPath)   selectedRows \(tableView.indexPathsForSelectedRows)")
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 		setSelected(false, animated: true)
 	}
 }

@@ -3,9 +3,9 @@ import UIKit
 import SwiftyFORM
 
 class RateAppViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Rate"
-		builder.toolbarMode = .None
+		builder.toolbarMode = .none
 		builder.demo_showInfo("Rate this app")
 		builder += SectionHeaderTitleFormItem().title("Is it good?")
 		builder += goodSlider
@@ -29,7 +29,7 @@ class RateAppViewController: FormViewController {
 	
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Submit My Rating")
+		instance.title = "Submit My Rating"
 		instance.action = { [weak self] in
 			self?.submitMyRating()
 		}

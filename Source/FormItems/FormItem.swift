@@ -27,7 +27,7 @@ public protocol FormItemVisitor {
 	func visit(object: ViewControllerFormItem)
 }
 
-public class FormItem: NSObject {
+open class FormItem: NSObject {
 	
 	public override init() {
 	}
@@ -36,21 +36,27 @@ public class FormItem: NSObject {
 	
 	// For serialization to json purposes, eg. "firstName"
 	public var elementIdentifier: String?
-	public func elementIdentifier(elementIdentifier: String?) -> Self {
+
+	@discardableResult
+	public func elementIdentifier(_ elementIdentifier: String?) -> Self {
 		self.elementIdentifier = elementIdentifier
 		return self
 	}
 	
 	// For styling purposes, eg. "bottomRowInFirstSection"
 	public var styleIdentifier: String?
-	public func styleIdentifier(styleIdentifier: String?) -> Self {
+
+	@discardableResult
+	public func styleIdentifier(_ styleIdentifier: String?) -> Self {
 		self.styleIdentifier = styleIdentifier
 		return self
 	}
 
 	// For styling purposes, eg. "leftAlignedGroup0"
 	public var styleClass: String?
-	public func styleClass(styleClass: String?) -> Self {
+
+	@discardableResult
+	public func styleClass(_ styleClass: String?) -> Self {
 		self.styleClass = styleClass
 		return self
 	}

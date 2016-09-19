@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class FormViewController: UIViewController {
+open class FormViewController: UIViewController {
 	public var dataSource: TableViewSectionArray?
 	public var keyboardHandler: KeyboardHandler?
 	
@@ -15,7 +15,7 @@ public class FormViewController: UIViewController {
 		super.init(nibName: nil, bundle: nil)
 	}
 
-	override public func loadView() {
+	override open func loadView() {
 		SwiftyFormLog("super loadview")
 		view = tableView
 		
@@ -27,24 +27,26 @@ public class FormViewController: UIViewController {
 		dataSource = formBuilder.result(self)
 		self.tableView.dataSource = dataSource
 		self.tableView.delegate = dataSource
+		
+		//debugPrint(dataSource!)
 	}
 
-	public func populate(builder: FormBuilder) {
+	open func populate(_ builder: FormBuilder) {
 		SwiftyFormLog("subclass must implement populate()")
 	}
 
-	override public func viewWillAppear(animated: Bool) {
+	override open func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		keyboardHandler?.addObservers()
 
 		// Fade out, so that the user can see what row has been updated
 		if let indexPath = tableView.indexPathForSelectedRow {
-			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			tableView.deselectRow(at: indexPath, animated: true)
 		}
 	}
 	
-	override public func viewDidDisappear(animated: Bool) {
+	override open func viewDidDisappear(_ animated: Bool) {
 		self.keyboardHandler?.removeObservers()
 		super.viewDidDisappear(animated)
 	}

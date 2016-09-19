@@ -2,7 +2,7 @@
 import UIKit
 
 protocol WillPopCommandProtocol {
-	func execute(context: ViewControllerFormItemPopContext)
+	func execute(_ context: ViewControllerFormItemPopContext)
 }
 
 
@@ -12,7 +12,7 @@ class WillPopCustomViewController: WillPopCommandProtocol {
 		self.object = object
 	}
 	
-	func execute(context: ViewControllerFormItemPopContext) {
+	func execute(_ context: ViewControllerFormItemPopContext) {
 		if let vc = object as? ViewControllerFormItem {
 			vc.willPopViewController?(context)
 			return
@@ -26,7 +26,7 @@ class WillPopOptionViewController: WillPopCommandProtocol {
 		self.object = object
 	}
 	
-	func execute(context: ViewControllerFormItemPopContext) {
+	func execute(_ context: ViewControllerFormItemPopContext) {
 		object.willPopViewController?(context)
 	}
 }
@@ -44,26 +44,48 @@ class PopulateTableView: FormItemVisitor {
 	
 	var cells: TableViewCellArray = TableViewCellArray.createEmpty()
 	var sections = [TableViewSection]()
-	var headerBlock: TableViewSectionPart.CreateBlock?
+	var header = TableViewSectionPart.systemDefault
+	var footer = TableViewSectionPart.systemDefault
+	
+	enum LastItemType {
+		case beginning
+		case header
+		case sectionEnd
+		case item
+	}
+	var lastItemType = LastItemType.beginning
 	
 	init(model: PopulateTableViewModel) {
 		self.model = model
 	}
 	
-	func closeSection(footerBlock: TableViewSectionPart.CreateBlock) {
-		var headerBlock: Void -> TableViewSectionPart = {
-			return TableViewSectionPart.None
-		}
-		if let block = self.headerBlock {
-			headerBlock = block
-		}
-		
+	func installZeroHeightHeader() {
+		header = .none
+		lastItemType = .sectionEnd
+	}
+	
+	func closeSection() {
 		cells.reloadVisibleItems()
-		let section = TableViewSection(cells: cells, headerBlock: headerBlock, footerBlock: footerBlock)
+		let section = TableViewSection(cells: cells, header: header, footer: footer)
 		sections.append(section)
 
 		cells = TableViewCellArray.createEmpty()
-		self.headerBlock = nil
+		header = TableViewSectionPart.systemDefault
+		footer = TableViewSectionPart.systemDefault
+	}
+	
+	func closeLastSection() {
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
+			closeSection()
+		}
+		lastItemType = .sectionEnd
 	}
 	
 	
@@ -75,6 +97,7 @@ class PopulateTableView: FormItemVisitor {
 		model.valueAttributedText = object.value
 		let cell = AttributedTextCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: NSAttributedString?) in
@@ -98,6 +121,7 @@ class PopulateTableView: FormItemVisitor {
 		model.action = object.action
 		let cell = ButtonCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
 
@@ -110,6 +134,7 @@ class PopulateTableView: FormItemVisitor {
 		do {
 			let cell = try object.createCell(context)
 			cells.append(cell)
+			lastItemType = .item
 		} catch {
 			print("ERROR: Could not create cell for custom form item: \(error)")
 
@@ -118,6 +143,7 @@ class PopulateTableView: FormItemVisitor {
 			model.value = "Exception"
 			let cell = StaticTextCell(model: model)
 			cells.append(cell)
+			lastItemType = .item
 		}
 	}
 	
@@ -134,12 +160,12 @@ class PopulateTableView: FormItemVisitor {
 		model.date = object.value
 		
 		switch object.behavior {
-		case .Collapsed, .Expanded:
+		case .collapsed, .expanded:
 			model.expandCollapseWhenSelectingRow = true
-			model.selectionStyle = .Default
-		case .ExpandedAlways:
+			model.selectionStyle = .default
+		case .expandedAlways:
 			model.expandCollapseWhenSelectingRow = false
-			model.selectionStyle = .None
+			model.selectionStyle = .none
 		}
 		
 		let cell = DatePickerToggleCell(model: model)
@@ -147,11 +173,12 @@ class PopulateTableView: FormItemVisitor {
 		
 		cells.append(cell)
 		switch object.behavior {
-		case .Collapsed:
+		case .collapsed:
 			cells.appendHidden(cellExpanded)
-		case .Expanded, .ExpandedAlways:
+		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
@@ -159,23 +186,23 @@ class PopulateTableView: FormItemVisitor {
 		cellExpanded.configure(model)
 		
 		weak var weakCell = cell
-		object.syncCellWithValue = { (date: NSDate, animated: Bool) in
+		object.syncCellWithValue = { (date: Date, animated: Bool) in
 			SwiftyFormLog("sync date \(date)")
 			weakCell?.setDateWithoutSync(date, animated: animated)
 		}
 
 		weak var weakObject = object
-		model.valueDidChange = { (date: NSDate) in
+		model.valueDidChange = { (date: Date) in
 			SwiftyFormLog("value did change \(date)")
 			weakObject?.valueDidChange(date)
 		}
 	}
 	
-	func mapDatePickerMode(mode: DatePickerFormItemMode) -> UIDatePickerMode {
+	func mapDatePickerMode(_ mode: DatePickerFormItemMode) -> UIDatePickerMode {
 		switch mode {
-		case .Date: return UIDatePickerMode.Date
-		case .Time: return UIDatePickerMode.Time
-		case .DateAndTime: return UIDatePickerMode.DateAndTime
+		case .date: return UIDatePickerMode.date
+		case .time: return UIDatePickerMode.time
+		case .dateAndTime: return UIDatePickerMode.dateAndTime
 		}
 	}
 	
@@ -200,7 +227,7 @@ class PopulateTableView: FormItemVisitor {
 		model.valueDidChange = { (value: OptionRowModel?) in
 			SwiftyFormLog("propagate from cell to model. value \(value)")
 			weakObject?.innerSelected = value
-			weakObject?.valueDidChange(selected: value)
+			weakObject?.valueDidChange(value)
 		}
 		
 		let cell = OptionViewControllerCell(
@@ -208,6 +235,7 @@ class PopulateTableView: FormItemVisitor {
 			model: model
 		)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (selected: OptionRowModel?) in
@@ -225,11 +253,12 @@ class PopulateTableView: FormItemVisitor {
 			SwiftyFormLog("did select option")
 			if let vc = weakViewController {
 				if let x = vc as? SelectOptionDelegate {
-					x.form_willSelectOption(object)
+					x.form_willSelectOption(option: object)
 				}
 			}
 		}
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
 	
@@ -247,12 +276,12 @@ class PopulateTableView: FormItemVisitor {
 		model.collapseWhenResigning = object.collapseWhenResigning
 		
 		switch object.behavior {
-		case .Collapsed, .Expanded:
+		case .collapsed, .expanded:
 			model.expandCollapseWhenSelectingRow = true
-			model.selectionStyle = .Default
-		case .ExpandedAlways:
+			model.selectionStyle = .default
+		case .expandedAlways:
 			model.expandCollapseWhenSelectingRow = false
-			model.selectionStyle = .None
+			model.selectionStyle = .none
 		}
 		
 		let cell = PrecisionSliderToggleCell(model: model)
@@ -260,11 +289,12 @@ class PopulateTableView: FormItemVisitor {
 
 		cells.append(cell)
 		switch object.behavior {
-		case .Collapsed:
+		case .collapsed:
 			cells.appendHidden(cellExpanded)
-		case .Expanded, .ExpandedAlways:
+		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded
@@ -297,80 +327,89 @@ class PopulateTableView: FormItemVisitor {
 	// MARK: SectionFooterTitleFormItem
 	
 	func visit(object: SectionFooterTitleFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			var footer = TableViewSectionPart.None
-			if let title = object.title {
-				footer = TableViewSectionPart.TitleString(string: title)
-			}
-			return footer
+		if let title = object.title {
+			footer = TableViewSectionPart.titleString(string: title)
+		} else {
+			footer = TableViewSectionPart.systemDefault
 		}
-		closeSection(footerBlock)
+		closeSection()
+		lastItemType = .sectionEnd
 	}
 	
 	
 	// MARK: SectionFooterViewFormItem
 	
 	func visit(object: SectionFooterViewFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
-			if let view = view {
-				item = TableViewSectionPart.TitleView(view: view)
-			}
-			return item
+		if let view: UIView = object.viewBlock?() {
+			footer = TableViewSectionPart.titleView(view: view)
+		} else {
+			footer = TableViewSectionPart.systemDefault
 		}
-		closeSection(footerBlock)
+		closeSection()
+		lastItemType = .sectionEnd
 	}
 	
 	
 	// MARK: SectionFormItem
 	
 	func visit(object: SectionFormItem) {
-		let footerBlock: TableViewSectionPart.CreateBlock = {
-			return TableViewSectionPart.None
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
+			closeSection()
 		}
-		closeSection(footerBlock)
+		lastItemType = .sectionEnd
 	}
 	
 	
 	// MARK: SectionHeaderTitleFormItem
 	
 	func visit(object: SectionHeaderTitleFormItem) {
-		if cells.count > 0 || self.headerBlock != nil {
-			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
-			}
-			closeSection(footerBlock)
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
+			closeSection()
 		}
 
-		self.headerBlock = {
-			var item = TableViewSectionPart.None
-			if let title = object.title {
-				item = TableViewSectionPart.TitleString(string: title)
-			}
-			return item
+		if let title = object.title {
+			header = TableViewSectionPart.titleString(string: title)
+		} else {
+			header = TableViewSectionPart.systemDefault
 		}
+		lastItemType = .header
 	}
 	
 	
 	// MARK: SectionHeaderViewFormItem
 	
 	func visit(object: SectionHeaderViewFormItem) {
-		if cells.count > 0 || self.headerBlock != nil {
-			let footerBlock: TableViewSectionPart.CreateBlock = {
-				return TableViewSectionPart.None
-			}
-			closeSection(footerBlock)
+		switch lastItemType {
+		case .beginning:
+			break
+		case .sectionEnd:
+			break
+		case .header:
+			closeSection()
+		case .item:
+			closeSection()
 		}
-
-		self.headerBlock = {
-			let view: UIView? = object.viewBlock?()
-			var item = TableViewSectionPart.None
-			if let view = view {
-				item = TableViewSectionPart.TitleView(view: view)
-			}
-			return item
+		
+		if let view: UIView = object.viewBlock?() {
+			header = TableViewSectionPart.titleView(view: view)
+		} else {
+			header = TableViewSectionPart.systemDefault
 		}
+		lastItemType = .header
 	}
 	
 	
@@ -391,6 +430,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SegmentedControlCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Int) in
@@ -419,6 +459,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SliderCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: Float, animated: Bool) in
@@ -437,6 +478,7 @@ class PopulateTableView: FormItemVisitor {
 		model.value = object.value
 		let cell = StaticTextCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -468,6 +510,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = StepperCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: true)
@@ -497,6 +540,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		let cell = SwitchCell(model: model)
 		cells.append(cell)
+		lastItemType = .item
 		
 		SwiftyFormLog("will assign value \(object.value)")
 		cell.setValueWithoutSync(object.value, animated: false)
@@ -534,6 +578,7 @@ class PopulateTableView: FormItemVisitor {
 		let cell = TextFieldFormItemCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -549,7 +594,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		object.obtainTitleWidth = {
 			if let cell = weakCell {
-				let size = cell.titleLabel.intrinsicContentSize()
+				let size = cell.titleLabel.intrinsicContentSize
 				return size.width
 			}
 			return 0
@@ -557,7 +602,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		object.assignTitleWidth = { (width: CGFloat) in
 			if let cell = weakCell {
-				cell.titleWidthMode = TextFieldFormItemCell.TitleWidthMode.Assign(width: width)
+				cell.titleWidthMode = TextFieldFormItemCell.TitleWidthMode.assign(width: width)
 				cell.setNeedsUpdateConstraints()
 			}
 		}
@@ -580,6 +625,7 @@ class PopulateTableView: FormItemVisitor {
 		let cell = TextViewCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)
+		lastItemType = .item
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: String) in
@@ -607,16 +653,17 @@ class PopulateTableView: FormItemVisitor {
 			}
 		}
 		cells.append(cell)
+		lastItemType = .item
 	}
 	
-	class func prepareDismissCommand(willPopCommand: WillPopCommandProtocol, parentViewController: UIViewController, cell: ViewControllerFormItemCell) -> CommandProtocol {
+	class func prepareDismissCommand(_ willPopCommand: WillPopCommandProtocol, parentViewController: UIViewController, cell: ViewControllerFormItemCell) -> CommandProtocol {
 		weak var weakViewController = parentViewController
 		let command = CommandBlock { (childViewController: UIViewController, returnObject: AnyObject?) in
 			SwiftyFormLog("pop: \(returnObject)")
 			if let vc = weakViewController {
 				let context = ViewControllerFormItemPopContext(parentViewController: vc, childViewController: childViewController, cell: cell, returnedObject: returnObject)
 				willPopCommand.execute(context)
-				vc.navigationController?.popViewControllerAnimated(true)
+				_ = vc.navigationController?.popViewController(animated: true)
 			}
 		}
 		return command
@@ -633,12 +680,12 @@ class PopulateTableView: FormItemVisitor {
 		model.humanReadableValueSeparator = object.humanReadableValueSeparator
 		
 		switch object.behavior {
-		case .Collapsed, .Expanded:
+		case .collapsed, .expanded:
 			model.expandCollapseWhenSelectingRow = true
-			model.selectionStyle = .Default
-		case .ExpandedAlways:
+			model.selectionStyle = .default
+		case .expandedAlways:
 			model.expandCollapseWhenSelectingRow = false
-			model.selectionStyle = .None
+			model.selectionStyle = .none
 		}
 		
 		let cell = PickerViewToggleCell(model: model)
@@ -646,11 +693,12 @@ class PopulateTableView: FormItemVisitor {
 		
 		cells.append(cell)
 		switch object.behavior {
-		case .Collapsed:
+		case .collapsed:
 			cells.appendHidden(cellExpanded)
-		case .Expanded, .ExpandedAlways:
+		case .expanded, .expandedAlways:
 			cells.append(cellExpanded)
 		}
+		lastItemType = .item
 		
 		cellExpanded.collapsedCell = cell
 		cell.expandedCell = cellExpanded

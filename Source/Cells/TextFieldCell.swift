@@ -5,21 +5,21 @@ import UIKit
 public class CustomTextField: UITextField {
 	
 	public func configure() {
-		backgroundColor = UIColor.whiteColor()
-		autocapitalizationType = .Sentences
-		autocorrectionType = .Default
-		spellCheckingType = .No
-		returnKeyType = .Done
-		clearButtonMode = .WhileEditing
+		backgroundColor = UIColor.white
+		autocapitalizationType = .sentences
+		autocorrectionType = .default
+		spellCheckingType = .no
+		returnKeyType = .done
+		clearButtonMode = .whileEditing
 	}
 	
 }
 
 
 public enum TextCellState {
-	case NoMessage
-	case TemporaryMessage(message: String)
-	case PersistentMessage(message: String)
+	case noMessage
+	case temporaryMessage(message: String)
+	case persistentMessage(message: String)
 }
 
 
@@ -39,17 +39,17 @@ public class TextFieldFormItemCellSizes {
 
 public struct TextFieldFormItemCellModel {
 	var title: String = ""
-	var toolbarMode: ToolbarMode = .Simple
+	var toolbarMode: ToolbarMode = .simple
 	var placeholder: String = ""
-	var keyboardType: UIKeyboardType = .Default
-	var returnKeyType: UIReturnKeyType = .Default
-	var autocorrectionType: UITextAutocorrectionType = .No
-	var autocapitalizationType: UITextAutocapitalizationType = .None
-	var spellCheckingType: UITextSpellCheckingType = .No
+	var keyboardType: UIKeyboardType = .default
+	var returnKeyType: UIReturnKeyType = .default
+	var autocorrectionType: UITextAutocorrectionType = .no
+	var autocapitalizationType: UITextAutocapitalizationType = .none
+	var spellCheckingType: UITextSpellCheckingType = .no
 	var secureTextEntry = false
 	var model: TextFieldFormItem! = nil
 
-	var valueDidChange: String -> Void = { (value: String) in
+	var valueDidChange: (String) -> Void = { (value: String) in
 		SwiftyFormLog("value \(value)")
 	}
 }
@@ -60,27 +60,27 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	public let textField = CustomTextField()
 	public let errorLabel = UILabel()
 	
-	public var state: TextCellState = .NoMessage
+	public var state: TextCellState = .noMessage
 	
 	public init(model: TextFieldFormItemCellModel) {
 		self.model = model
-		super.init(style: .Default, reuseIdentifier: nil)
+		super.init(style: .default, reuseIdentifier: nil)
 
 		self.addGestureRecognizer(tapGestureRecognizer)
 		
-		selectionStyle = .None
+		selectionStyle = .none
 		
-		titleLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-		textField.font  = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-		errorLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)
+		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		textField.font  = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		errorLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)
 		
-		errorLabel.textColor = UIColor.redColor()
+		errorLabel.textColor = UIColor.red
 		errorLabel.numberOfLines = 0
 		
 		textField.configure()
 		textField.delegate = self
 		
-		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange(_:)), for: UIControlEvents.editingChanged)
 		
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(textField)
@@ -93,9 +93,9 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		textField.keyboardType = model.keyboardType
 		textField.returnKeyType = model.returnKeyType
 		textField.spellCheckingType = model.spellCheckingType
-		textField.secureTextEntry = model.secureTextEntry
+		textField.isSecureTextEntry = model.secureTextEntry
 		
-		if self.model.toolbarMode == .Simple {
+		if self.model.toolbarMode == .simple {
 			textField.inputAccessoryView = toolbar
 		}
 		
@@ -134,7 +134,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	}()
 	
 	public func updateToolbarButtons() {
-		if model.toolbarMode == .Simple {
+		if model.toolbarMode == .simple {
 			toolbar.updateButtonConfiguration(self)
 		}
 	}
@@ -151,10 +151,10 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 
 	public func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
-		resignFirstResponder()
+		_ = resignFirstResponder()
 	}
 	
-	public func handleTap(sender: UITapGestureRecognizer) {
+	public func handleTap(_ sender: UITapGestureRecognizer) {
 		textField.becomeFirstResponder()
 	}
 	
@@ -164,39 +164,39 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		}()
 	
 	public enum TitleWidthMode {
-		case Auto
-		case Assign(width: CGFloat)
+		case auto
+		case assign(width: CGFloat)
 	}
 	
-	public var titleWidthMode: TitleWidthMode = .Auto
+	public var titleWidthMode: TitleWidthMode = .auto
 	
-	public func compute(cellWidth: CGFloat) -> TextFieldFormItemCellSizes {
+	public func compute(_ cellWidth: CGFloat) -> TextFieldFormItemCellSizes {
 
-		var titleLabelFrame = CGRectZero
-		var textFieldFrame = CGRectZero
-		var errorLabelFrame = CGRectZero
+		var titleLabelFrame = CGRect.zero
+		var textFieldFrame = CGRect.zero
+		var errorLabelFrame = CGRect.zero
 		var cellHeight: CGFloat = 0
-		let veryTallCell = CGRectMake(0, 0, cellWidth, CGFloat.max)
+		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
 		let area = veryTallCell.insetBy(dx: 16, dy: 0)
 		
-		let (topRect, _) = area.divide(44, fromEdge: .MinYEdge)
+		let (topRect, _) = area.divided(atDistance: 44, from: .minYEdge)
 		if true {
 			let size = titleLabel.sizeThatFits(area.size)
 			var titleLabelWidth = size.width
 			
 			switch titleWidthMode {
-			case .Auto:
+			case .auto:
 				break
-			case let .Assign(width):
+			case let .assign(width):
 				let w = CGFloat(width)
 				if w > titleLabelWidth {
 					titleLabelWidth = w
 				}
 			}
 
-			var (slice, remainder) = topRect.divide(titleLabelWidth, fromEdge: .MinXEdge)
+			var (slice, remainder) = topRect.divided(atDistance: titleLabelWidth, from: .minXEdge)
 			titleLabelFrame = slice
-			(_, remainder) = remainder.divide(10, fromEdge: .MinXEdge)
+			(_, remainder) = remainder.divided(atDistance: 10, from: .minXEdge)
 			remainder.size.width += 4
 			textFieldFrame = remainder
 
@@ -208,7 +208,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			if size.height > 0.1 {
 				var r = topRect
 				r.origin.y = topRect.maxY - 6
-				let (slice, _) = r.divide(size.height, fromEdge: .MinYEdge)
+				let (slice, _) = r.divided(atDistance: size.height, from: .minYEdge)
 				errorLabelFrame = slice
 				cellHeight = ceil(errorLabelFrame.maxY + 10)
 			}
@@ -226,30 +226,30 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		errorLabel.frame = sizes.errorLabelFrame
 	}
 	
-	public func valueDidChange(sender: AnyObject?) {
+	public func valueDidChange(_ sender: AnyObject?) {
 		//SwiftyFormLog("did change")
 		model.valueDidChange(textField.text ?? "")
 		
 		let result: ValidateResult = model.model.liveValidateValueText()
 		switch result {
-		case .Valid:
+		case .valid:
 			SwiftyFormLog("valid")
-		case .HardInvalid:
+		case .hardInvalid:
 			SwiftyFormLog("hard invalid")
-		case .SoftInvalid:
+		case .softInvalid:
 			SwiftyFormLog("soft invalid")
 		}
 	}
 
-	public func setValueWithoutSync(value: String) {
+	public func setValueWithoutSync(_ value: String) {
 		SwiftyFormLog("set value \(value)")
 		textField.text = value
-		validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
+		_ = validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
 	}
 	
 
 	// Hide the keyboard when the user taps the return key in this UITextField
-	public func textFieldShouldReturn(textField: UITextField) -> Bool {
+	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		let s = textField.text ?? ""
 		let isTextValid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: true)
 		if isTextValid {
@@ -258,20 +258,20 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		return false
 	}
 	
-	public func updateErrorLabel(result: ValidateResult) {
+	public func updateErrorLabel(_ result: ValidateResult) {
 		switch result {
-		case .Valid:
+		case .valid:
 			errorLabel.text = nil
-		case .HardInvalid(let message):
+		case .hardInvalid(let message):
 			errorLabel.text = message
-		case .SoftInvalid(let message):
+		case .softInvalid(let message):
 			errorLabel.text = message
 		}
 	}
 	
 	public var lastResult: ValidateResult?
 	
-	public var hideErrorMessageAfterFewSecondsTimer: NSTimer?
+	public var hideErrorMessageAfterFewSecondsTimer: Timer?
 	public func invalidateTimer() {
 		if let timer = hideErrorMessageAfterFewSecondsTimer {
 			timer.invalidate()
@@ -281,13 +281,13 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 	
 	public func installTimer() {
 		invalidateTimer()
-		let timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(TextFieldFormItemCell.timerUpdate), userInfo: nil, repeats: false)
+		let timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(TextFieldFormItemCell.timerUpdate), userInfo: nil, repeats: false)
 		hideErrorMessageAfterFewSecondsTimer = timer
 	}
 	
 	// Returns true  when valid
 	// Returns false when invalid
-	public func validateAndUpdateErrorIfNeeded(text: String, shouldInstallTimer: Bool, checkSubmitRule: Bool) -> Bool {
+	public func validateAndUpdateErrorIfNeeded(_ text: String, shouldInstallTimer: Bool, checkSubmitRule: Bool) -> Bool {
 		
 		let tableView: UITableView? = form_tableView()
 
@@ -295,17 +295,17 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		if let lastResult = lastResult {
 			if lastResult == result {
 				switch result {
-				case .Valid:
+				case .valid:
 					//SwiftyFormLog("same valid")
 					return true
-				case .HardInvalid:
+				case .hardInvalid:
 					//SwiftyFormLog("same hard invalid")
 					invalidateTimer()
 					if shouldInstallTimer {
 						installTimer()
 					}
 					return false
-				case .SoftInvalid:
+				case .softInvalid:
 					//SwiftyFormLog("same soft invalid")
 					invalidateTimer()
 					if shouldInstallTimer {
@@ -318,7 +318,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		lastResult = result
 		
 		switch result {
-		case .Valid:
+		case .valid:
 			//SwiftyFormLog("different valid")
 			if let tv = tableView {
 				tv.beginUpdates()
@@ -329,7 +329,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 				invalidateTimer()
 			}
 			return true
-		case let .HardInvalid(message):
+		case let .hardInvalid(message):
 			//SwiftyFormLog("different hard invalid")
 			if let tv = tableView {
 				tv.beginUpdates()
@@ -343,7 +343,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 				}
 			}
 			return false
-		case let .SoftInvalid(message):
+		case let .softInvalid(message):
 			//SwiftyFormLog("different soft invalid")
 			if let tv = tableView {
 				tv.beginUpdates()
@@ -360,9 +360,9 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		}
 	}
 
-	public func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-		let textFieldString: NSString = textField.text ?? ""
-		let s = textFieldString.stringByReplacingCharactersInRange(range, withString:string)
+	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		let textFieldString: NSString = textField.text as NSString? ?? ""
+		let s = textFieldString.replacingCharacters(in: range, with:string)
 		let valid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: false)
 		return valid
 	}
@@ -372,7 +372,7 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		//SwiftyFormLog("timer update")
 
 		let s = textField.text ?? ""
-		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: false)
+		_ = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: false)
 	}
 
 	public func reloadPersistentValidationState() {
@@ -380,23 +380,23 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		//SwiftyFormLog("reload persistent message")
 
 		let s = textField.text ?? ""
-		validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
+		_ = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
 	}
 
-	public func form_cellHeight(indexPath: NSIndexPath, tableView: UITableView) -> CGFloat {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
 	
-	public func textFieldDidBeginEditing(textField: UITextField) {
+	public func textFieldDidBeginEditing(_ textField: UITextField) {
 		updateToolbarButtons()
 	}
 	
 	// MARK: UIResponder
 	
-	public override func canBecomeFirstResponder() -> Bool {
+	public override var canBecomeFirstResponder : Bool {
 		return true
 	}
 	

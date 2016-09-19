@@ -2,8 +2,9 @@
   <img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
 </p>
 
-[![License](https://img.shields.io/badge/license-MIT-gray.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
-[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
+[![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
+[![License](https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
@@ -16,6 +17,13 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 [SwiftyFORM demo on YouTube](https://youtu.be/PKbVJ91uQdA)
 
 Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tree/develop) branch.
+
+
+## Requirements
+
+- iOS 9.0+
+- Xcode 8.0+
+- Swift 3.0+
 
 
 ## Features
@@ -83,9 +91,9 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
-		instance.datePickerMode = .Date
-		instance.behavior = .ExpandedAlways
+		instance.title = "Date"
+		instance.datePickerMode = .date
+		instance.behavior = .expandedAlways
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
@@ -94,7 +102,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var incrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Next Day")
+		instance.title = "Next Day"
 		instance.action = { [weak self] in
 			self?.increment()
 		}
@@ -103,7 +111,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var decrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Previous Day")
+		instance.title = "Previous Day"
 		instance.action = { [weak self] in
 			self?.decrement()
 		}
@@ -111,18 +119,18 @@ class DatePickerBindingViewController: FormViewController {
 	}()
 	
 	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("NSDate").value("-")
+		return StaticTextFormItem().title("Date").value("-")
 	}()
 	
 	func updateSummary() {
 		summary.value = "\(datePicker.value)"
 	}
 	
-	func offsetDate(date: NSDate, days: Int) -> NSDate {
-		let dateComponents = NSDateComponents()
+	func offsetDate(_ date: Date, days: Int) -> Date {
+		var dateComponents = DateComponents()
 		dateComponents.day = days
-		let calendar = NSCalendar.currentCalendar()
-		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+		let calendar = Calendar.current
+		guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
 			return date
 		}
 		return resultDate
@@ -160,8 +168,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordOld: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Old password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -171,8 +179,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNew: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("New password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -182,8 +190,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNewRepeated: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Repeat password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -194,11 +202,6 @@ class ChangePasswordViewController: FormViewController {
 
 
 # INSTALLATION
-
-## Setup
-
-- Xcode7.3.1 (7D1014)
-- iOS 9
 
 ## CocoaPods
 
@@ -232,7 +235,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 0.11
+github "neoneye/SwiftyFORM" ~> 1.0
 ```
 
 Then, run the following command:

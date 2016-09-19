@@ -4,15 +4,15 @@ import XCTest
 @testable import SwiftyFORM
 
 class PrecisionSliderTests: XCTestCase {
-	func format0(value: Int) -> String {
+	func format0(_ value: Int) -> String {
 		return PrecisionSliderCellFormatter.format(value: value, decimalPlaces: 0)
 	}
 	
-	func format1(value: Int) -> String {
+	func format1(_ value: Int) -> String {
 		return PrecisionSliderCellFormatter.format(value: value, decimalPlaces: 1)
 	}
 
-	func format3(value: Int) -> String {
+	func format3(_ value: Int) -> String {
 		return PrecisionSliderCellFormatter.format(value: value, decimalPlaces: 3)
 	}
 	

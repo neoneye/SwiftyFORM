@@ -7,7 +7,7 @@ public protocol CommandProtocol {
 
 public class CommandBlock: CommandProtocol {
 	public let block: (UIViewController, AnyObject?) -> Void
-	public init(block: (UIViewController, AnyObject?) -> Void) {
+	public init(block: @escaping (UIViewController, AnyObject?) -> Void) {
 		self.block = block
 	}
 	

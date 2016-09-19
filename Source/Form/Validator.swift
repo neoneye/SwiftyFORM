@@ -2,26 +2,26 @@
 import Foundation
 
 public enum ValidateRule {
-	case HardRule(specification: Specification, message: String)
-	case SoftRule(specification: Specification, message: String)
-	case SubmitRule(specification: Specification, message: String)
+	case hardRule(specification: Specification, message: String)
+	case softRule(specification: Specification, message: String)
+	case submitRule(specification: Specification, message: String)
 }
 
 public class ValidatorBuilder {
-	private var rules = [ValidateRule]()
+	fileprivate var rules = [ValidateRule]()
 	
 	public init() {}
 	
-	public func hardValidate(specification: Specification, message: String) {
-		rules.append(ValidateRule.HardRule(specification: specification, message: message))
+	public func hardValidate(_ specification: Specification, message: String) {
+		rules.append(ValidateRule.hardRule(specification: specification, message: message))
 	}
 	
-	public func softValidate(specification: Specification, message: String) {
-		rules.append(ValidateRule.SoftRule(specification: specification, message: message))
+	public func softValidate(_ specification: Specification, message: String) {
+		rules.append(ValidateRule.softRule(specification: specification, message: message))
 	}
 	
-	public func submitValidate(specification: Specification, message: String) {
-		rules.append(ValidateRule.SubmitRule(specification: specification, message: message))
+	public func submitValidate(_ specification: Specification, message: String) {
+		rules.append(ValidateRule.submitRule(specification: specification, message: message))
 	}
 	
 	public func build() -> Validator {
@@ -30,40 +30,40 @@ public class ValidatorBuilder {
 }
 
 public class Validator {
-	private let rules: [ValidateRule]
+	fileprivate let rules: [ValidateRule]
 	
 	public init(rules: [ValidateRule]) {
 		self.rules = rules
 	}
 	
-	public func liveValidate(candidate: Any?) -> ValidateResult {
+	public func liveValidate(_ candidate: Any?) -> ValidateResult {
 		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
 	}
 	
-	public func submitValidate(candidate: Any?) -> ValidateResult {
+	public func submitValidate(_ candidate: Any?) -> ValidateResult {
 		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
 	}
 	
-	public func validate(candidate: Any?, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {
+	public func validate(_ candidate: Any?, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {
 		var results = [ValidateResult]()
 		for rule in rules {
 			switch rule {
-			case let .HardRule(specification, message):
+			case let .hardRule(specification, message):
 				if checkHardRule && !specification.isSatisfiedBy(candidate) {
-					return .HardInvalid(message: message)
+					return .hardInvalid(message: message)
 				}
-			case let .SoftRule(specification, message):
+			case let .softRule(specification, message):
 				if checkSoftRule && !specification.isSatisfiedBy(candidate) {
-					results.append(.SoftInvalid(message: message))
+					results.append(.softInvalid(message: message))
 				}
-			case let .SubmitRule(specification, message):
+			case let .submitRule(specification, message):
 				if checkSubmitRule && !specification.isSatisfiedBy(candidate) {
-					return .HardInvalid(message: message)
+					return .hardInvalid(message: message)
 				}
 			}
 		}
 		if results.isEmpty {
-			return .Valid
+			return .valid
 		}
 		return results[0]
 	}

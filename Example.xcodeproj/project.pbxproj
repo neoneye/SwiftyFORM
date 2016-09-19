@@ -26,7 +26,6 @@
 		42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */; };
 		42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */; };
 		42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */; };
-		42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */; };
 		42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */; };
 		42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */; };
 		42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */; };
@@ -34,6 +33,10 @@
 		42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */; };
 		425A32671B71571A006A433E /* SwiftyFORM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; };
 		425A32681B71571A006A433E /* SwiftyFORM.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 429910DB1B347FD8001F9195 /* SwiftyFORM.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4267986C1D8DB160002275CA /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */; };
+		4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986B1D8DB160002275CA /* NoHeaderViewController.swift */; };
+		426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */; };
+		426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426798701D8DB17B002275CA /* MyTableViewController.swift */; };
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
@@ -117,12 +120,15 @@
 		42589DAF1B3447E1007CA8C1 /* DatePickerLocaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerLocaleViewController.swift; sourceTree = "<group>"; };
 		42589DB01B3447E1007CA8C1 /* DatePickerRangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerRangeViewController.swift; sourceTree = "<group>"; };
 		42589DB11B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerInitialValueViewController.swift; sourceTree = "<group>"; };
-		42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
 		42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldKeyboardTypesViewController.swift; sourceTree = "<group>"; };
 		42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldReturnKeyViewController.swift; sourceTree = "<group>"; };
 		42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTabThroughFormViewController.swift; sourceTree = "<group>"; };
 		42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldValidInvalidViewController.swift; sourceTree = "<group>"; };
 		42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
+		4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		4267986B1D8DB160002275CA /* NoHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoHeaderViewController.swift; sourceTree = "<group>"; };
+		4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
+		426798701D8DB17B002275CA /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				42108D331B357A440067FEAA /* ButtonsViewController.swift */,
-				42589DC31B3447EA007CA8C1 /* HeaderFooterViewController.swift */,
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
 				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
@@ -225,6 +230,24 @@
 				42589DCD1B3447EA007CA8C1 /* TextViewViewController.swift */,
 			);
 			path = TextView;
+			sourceTree = "<group>";
+		};
+		426798691D8DB160002275CA /* HeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				4267986A1D8DB160002275CA /* HeaderFooterViewController.swift */,
+				4267986B1D8DB160002275CA /* NoHeaderViewController.swift */,
+			);
+			path = HeaderFooter;
+			sourceTree = "<group>";
+		};
+		4267986E1D8DB17B002275CA /* Non-SwiftyFORM */ = {
+			isa = PBXGroup;
+			children = (
+				4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */,
+				426798701D8DB17B002275CA /* MyTableViewController.swift */,
+			);
+			path = "Non-SwiftyFORM";
 			sourceTree = "<group>";
 		};
 		42685D3E1D2D6AB2008ABC3D /* WorkInProgress */ = {
@@ -279,8 +302,10 @@
 				42D005111B96319900986B3B /* Custom */,
 				42589DAE1B3447E1007CA8C1 /* DatePicker */,
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
+				426798691D8DB160002275CA /* HeaderFooter */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
 				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
+				4267986E1D8DB17B002275CA /* Non-SwiftyFORM */,
 				42589DC21B3447EA007CA8C1 /* Other */,
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
@@ -349,11 +374,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Simon Strandgaard";
 				TargetAttributes = {
 					42CEBF941A3BA2B50048E072 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = 22DR89XVRF;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -420,6 +447,7 @@
 				423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */,
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
+				426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
 				42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
@@ -440,15 +468,17 @@
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
+				426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
+				4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
+				4267986C1D8DB160002275CA /* HeaderFooterViewController.swift in Sources */,
 				42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */,
 				42589DDF1B3447EA007CA8C1 /* TextViewViewController.swift in Sources */,
 				42108D341B357A440067FEAA /* ButtonsViewController.swift in Sources */,
 				422437E41D719A4E00EC41E8 /* PickerViewViewController.swift in Sources */,
-				42589DD71B3447EA007CA8C1 /* HeaderFooterViewController.swift in Sources */,
 				423D17081BAF3A9B00A9859F /* GhostsViewController.swift in Sources */,
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
@@ -497,8 +527,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -507,6 +539,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -541,8 +574,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -550,6 +585,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -559,6 +595,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -567,24 +604,28 @@
 		42CEBFB51A3BA2B50048E072 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = 22DR89XVRF;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		42CEBFB61A3BA2B50048E072 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = 22DR89XVRF;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

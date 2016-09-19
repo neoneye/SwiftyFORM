@@ -39,14 +39,14 @@ class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
 	
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
-		instance.textAlignment = .Center
-		instance.lineBreakMode = .ByClipping
+		instance.textAlignment = .center
+		instance.lineBreakMode = .byClipping
 		instance.text = "0"
 		return instance
 	}()
@@ -56,8 +56,8 @@ class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
 		let markX = floor(bounds.midX)
 		mark.frame = CGRect(x: markX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 30)
 		
-		let (_, remain) = bounds.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
-		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		let (_, remain) = bounds.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, from: .minYEdge)
+		let (slice, _) = remain.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.height, from: .minYEdge)
 		label.frame = slice
 	}
 }
@@ -91,7 +91,7 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	
 	func commonInit() {
 		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
-			backgroundColor = UIColor.greenColor()
+			backgroundColor = UIColor.green
 		}
 		addSubview(mark)
 		addSubview(partialMark)
@@ -100,26 +100,26 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 	
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var partialMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
-		instance.textAlignment = .Center
-		instance.lineBreakMode = .ByClipping
+		instance.textAlignment = .center
+		instance.lineBreakMode = .byClipping
 		instance.text = "0"
 		return instance
 	}()
 	
-	private var partialLength: Double = 0.0
-	private var fullLength: Double = 0.0
+	fileprivate var partialLength: Double = 0.0
+	fileprivate var fullLength: Double = 0.0
 	
 	func configure(partialLength: Double, fullLength: Double) {
 		self.partialLength = partialLength
@@ -135,9 +135,9 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 		let partialMarkX = bounds.maxX - CGFloat(floor(fullLength / 2 + partialLength))
 		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
 		
-		let (_, rightHalf) = bounds.divide(CGFloat(fullLength), fromEdge: .MinXEdge)
-		let (_, remain) = rightHalf.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
-		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		let (_, rightHalf) = bounds.divided(atDistance: CGFloat(fullLength), from: .minXEdge)
+		let (_, remain) = rightHalf.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, from: .minYEdge)
+		let (slice, _) = remain.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.height, from: .minYEdge)
 		label.frame = slice
 	}
 }
@@ -171,7 +171,7 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	
 	func commonInit() {
 		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
-			backgroundColor = UIColor.redColor()
+			backgroundColor = UIColor.red
 		}
 		addSubview(mark)
 		addSubview(partialMark)
@@ -180,26 +180,26 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 	
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var partialMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var label: UILabel = {
 		let instance = UILabel()
-		instance.textAlignment = .Center
-		instance.lineBreakMode = .ByClipping
+		instance.textAlignment = .center
+		instance.lineBreakMode = .byClipping
 		instance.text = "0"
 		return instance
 	}()
 	
-	private var partialLength: Double = 0.0
-	private var fullLength: Double = 0.0
+	fileprivate var partialLength: Double = 0.0
+	fileprivate var fullLength: Double = 0.0
 	
 	func configure(partialLength: Double, fullLength: Double) {
 		self.partialLength = partialLength
@@ -215,9 +215,9 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 		let partialMarkX = CGFloat(floor(fullLength / 2 + partialLength))
 		partialMark.frame = CGRect(x: partialMarkX, y: 0, width: 1, height: bounds.height).insetBy(dx: 0, dy: 45)
 		
-		let (leftHalf, _) = bounds.divide(CGFloat(fullLength), fromEdge: .MinXEdge)
-		let (_, remain) = leftHalf.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, fromEdge: .MinYEdge)
-		let (slice, _) = remain.divide(PrecisionSlider_InnerCollectionViewCellConstants.Label.height, fromEdge: .MinYEdge)
+		let (leftHalf, _) = bounds.divided(atDistance: CGFloat(fullLength), from: .minXEdge)
+		let (_, remain) = leftHalf.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.topInset, from: .minYEdge)
+		let (slice, _) = remain.divided(atDistance: PrecisionSlider_InnerCollectionViewCellConstants.Label.height, from: .minYEdge)
 		label.frame = slice
 	}
 }
@@ -247,7 +247,7 @@ class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	
 	func commonInit() {
 		if PrecisionSlider_InnerCollectionViewCellConstants.colorizeCells {
-			backgroundColor = UIColor.blueColor()
+			backgroundColor = UIColor.blue
 		}
 		addSubview(leftMark)
 		addSubview(rightMark)
@@ -255,20 +255,20 @@ class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 	
 	lazy var leftMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	lazy var rightMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.blackColor()
+		instance.backgroundColor = UIColor.black
 		return instance
 	}()
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
 		let insetBounds = bounds.insetBy(dx: 0, dy: 30)
-		leftMark.frame  = insetBounds.divide(1, fromEdge: .MinXEdge).slice
-		rightMark.frame = insetBounds.divide(1, fromEdge: .MaxXEdge).slice
+		leftMark.frame  = insetBounds.divided(atDistance: 1, from: .minXEdge).slice
+		rightMark.frame = insetBounds.divided(atDistance: 1, from: .maxXEdge).slice
 	}
 }

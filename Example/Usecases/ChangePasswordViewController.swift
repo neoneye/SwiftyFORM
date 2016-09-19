@@ -8,9 +8,9 @@ class ChangePasswordViewController: FormViewController {
 		form_installSubmitButton()
 	}
 	
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Password"
-		builder.toolbarMode = .Simple
+		builder.toolbarMode = .simple
 		builder += SectionHeaderTitleFormItem().title("Your Old Password")
 		builder += passwordOld
 		builder += SectionHeaderTitleFormItem().title("Your New Password")
@@ -22,8 +22,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordOld: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Old password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -33,8 +33,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNew: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("New password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -44,8 +44,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNewRepeated: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Repeat password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")

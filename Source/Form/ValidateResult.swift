@@ -2,30 +2,30 @@
 import Foundation
 
 public enum ValidateResult: Equatable {
-	case Valid
-	case HardInvalid(message: String)
-	case SoftInvalid(message: String)
+	case valid
+	case hardInvalid(message: String)
+	case softInvalid(message: String)
 }
 
 public func ==(lhs: ValidateResult, rhs: ValidateResult) -> Bool {
 	switch lhs  {
-	case .Valid:
+	case .valid:
 		switch rhs {
-		case .Valid:
+		case .valid:
 			return true
 		default:
 			return false
 		}
-	case let .HardInvalid(messageA):
+	case let .hardInvalid(messageA):
 		switch rhs {
-		case let .HardInvalid(messageB):
+		case let .hardInvalid(messageB):
 			return messageA == messageB
 		default:
 			return false
 		}
-	case let .SoftInvalid(messageA):
+	case let .softInvalid(messageA):
 		switch rhs {
-		case let .SoftInvalid(messageB):
+		case let .softInvalid(messageB):
 			return messageA == messageB
 		default:
 			return false
