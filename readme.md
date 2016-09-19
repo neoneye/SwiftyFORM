@@ -91,9 +91,9 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
-		instance.title("Date")
-		instance.datePickerMode = .Date
-		instance.behavior = .ExpandedAlways
+		instance.title = "Date"
+		instance.datePickerMode = .date
+		instance.behavior = .expandedAlways
 		instance.valueDidChangeBlock = { [weak self] _ in
 			self?.updateSummary()
 		}
@@ -102,7 +102,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var incrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Next Day")
+		instance.title = "Next Day"
 		instance.action = { [weak self] in
 			self?.increment()
 		}
@@ -111,7 +111,7 @@ class DatePickerBindingViewController: FormViewController {
 	
 	lazy var decrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
-		instance.title("Previous Day")
+		instance.title = "Previous Day"
 		instance.action = { [weak self] in
 			self?.decrement()
 		}
@@ -119,18 +119,18 @@ class DatePickerBindingViewController: FormViewController {
 	}()
 	
 	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("NSDate").value("-")
+		return StaticTextFormItem().title("Date").value("-")
 	}()
 	
 	func updateSummary() {
 		summary.value = "\(datePicker.value)"
 	}
 	
-	func offsetDate(date: NSDate, days: Int) -> NSDate {
-		let dateComponents = NSDateComponents()
+	func offsetDate(_ date: Date, days: Int) -> Date {
+		var dateComponents = DateComponents()
 		dateComponents.day = days
-		let calendar = NSCalendar.currentCalendar()
-		guard let resultDate = calendar.dateByAddingComponents(dateComponents, toDate: date, options: NSCalendarOptions(rawValue: 0)) else {
+		let calendar = Calendar.current
+		guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
 			return date
 		}
 		return resultDate
@@ -168,8 +168,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordOld: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Old password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -179,8 +179,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNew: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("New password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
@@ -190,8 +190,8 @@ class ChangePasswordViewController: FormViewController {
 	lazy var passwordNewRepeated: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Repeat password").password().placeholder("required")
-		instance.keyboardType = .NumberPad
-		instance.autocorrectionType = .No
+		instance.keyboardType = .numberPad
+		instance.autocorrectionType = .no
 		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
