@@ -2,8 +2,9 @@
   <img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
 </p>
 
-[![License](https://img.shields.io/badge/license-MIT-gray.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
-[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey.svg)](http://cocoadocs.org/docsets/SwiftyFORM)
+[![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
+[![License](https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
+[![Platform](https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
@@ -16,6 +17,13 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 [SwiftyFORM demo on YouTube](https://youtu.be/PKbVJ91uQdA)
 
 Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tree/develop) branch.
+
+
+## Requirements
+
+- iOS 9.0+
+- Xcode 8.0+
+- Swift 3.0+
 
 
 ## Features
@@ -194,11 +202,6 @@ class ChangePasswordViewController: FormViewController {
 
 
 # INSTALLATION
-
-## Setup
-
-- Xcode8.0 (8A218a)
-- iOS 9
 
 ## CocoaPods
 
