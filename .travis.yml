@@ -1,0 +1,10 @@
+language: objective-c
+osx_image: xcode8
+xcode_sdk: iphonesimulator10.0
+xcode_project: SwiftyFORM.xcodeproj
+xcode_scheme: SwiftyFORM
+
+branches:
+  only:
+  - master
+  - develop
