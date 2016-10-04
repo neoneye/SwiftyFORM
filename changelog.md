@@ -1,8 +1,9 @@
 ## 📄 Change Log
 
-### 1.1.x
+### 1.1.0
 
  * Imported specification pattern unittests
+ * Enabled Travis CI.
 
 ### 1.0.1
 

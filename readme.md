@@ -2,6 +2,8 @@
   <img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
 </p>
 
+
+[![Build Status](https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master)](https://travis-ci.org/neoneye/SwiftyFORM)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![License](https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
@@ -235,7 +237,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 1.0
+github "neoneye/SwiftyFORM" ~> 1.1
 ```
 
 Then, run the following command:
