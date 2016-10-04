@@ -74,9 +74,9 @@ class AdvancedTests: XCTestCase {
 	
 	func movieRecords() -> [MovieRecord] {
 		// Read a CSV file
-		let path = Bundle(for: type(of: self)).path(forResource: "AdvancedTests", ofType: "csv")
+		let path: String! = Bundle(for: type(of: self)).path(forResource: "AdvancedTests", ofType: "csv")
 		assert(path != nil)
-		let dataString = try! NSString(contentsOfFile: path!, encoding: String.Encoding.utf8.rawValue)
+		let dataString = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
 
 		// Split CSV data into rows and fields
 		let rows = dataString.components(separatedBy: "\n")
@@ -87,12 +87,12 @@ class AdvancedTests: XCTestCase {
 			
 			// Create record populated with CSV data
 			let record: MovieRecord = MovieRecord()
-			record.recordId = Int((cells[0] as String)) ?? 0
-			record.name = cells[1] as String
-			record.released = Int((cells[2] as String)) ?? 0
-			record.directorsWriters = cells[3] as String
-			record.budget = NSString(string: (cells[4] as String)).doubleValue
-			record.runningTime = Int((cells[5] as String)) ?? 0
+			record.recordId = Int(cells[0]) ?? 0
+			record.name = cells[1]
+			record.released = Int(cells[2]) ?? 0
+			record.directorsWriters = cells[3]
+			record.budget = Double(cells[4]) ?? 0.0
+			record.runningTime = Int(cells[5]) ?? 0
 			records.append(record)
 		}
 		
