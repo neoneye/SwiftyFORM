@@ -1,5 +1,13 @@
 ## 📄 Change Log
 
+### 1.1.x
+
+ * Imported specification pattern unittests
+
+### 1.0.1
+
+ * Fixed podfile
+
 ### 1.0.0
 
  * Major breaking changes, thus I'm incrementing version number from 0.x.x to 1.x.x
