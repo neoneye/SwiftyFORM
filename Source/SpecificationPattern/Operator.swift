@@ -61,7 +61,7 @@ This is a shorthand for the `Specification.isSatisfiedBy()` function
 
 ## Example:
 
-`let spec = CharacterSetSpecification.decimalDigitCharacterSet()`
+`let spec = CharacterSetSpecification.decimalDigits`
 `spec == "123"`
 */
 public func == (left: Specification, right: Any?) -> Bool {
@@ -76,7 +76,7 @@ This is a shorthand for the `Specification.isSatisfiedBy()` function
 
 ## Example:
 
-`let spec = CharacterSetSpecification.decimalDigitCharacterSet()`
+`let spec = CharacterSetSpecification.decimalDigits`
 `spec != "123"`
 */
 public func != (left: Specification, right: Any?) -> Bool {

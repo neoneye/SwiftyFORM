@@ -3,6 +3,7 @@
 ### 1.2.0
 
  * Simplified specification pattern. In the future the `CompositeSpecification` class will be removed. Instead of subclassing `CompositeSpecification` one must instead subclass `Specification`.
+ * Simplified the `CharacterSetSpecification` factory functions. In the future the `CharacterSetSpecification` the oldschool factory functions will be removed.
 
 ### 1.1.0
 

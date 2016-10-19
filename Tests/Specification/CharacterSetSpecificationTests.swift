@@ -12,16 +12,16 @@ class CharacterSetSpecificationTests: XCTestCase {
 		XCTAssertFalse(spec.isSatisfiedBy("hello"))
 	}
 
-	func testDigit() {
-		let spec = CharacterSetSpecification.decimalDigitCharacterSet()
+	func testDecimalDigits() {
+		let spec = CharacterSetSpecification.decimalDigits
 		XCTAssertTrue(spec.isSatisfiedBy(""))
 		XCTAssertTrue(spec.isSatisfiedBy("0123456789"))
 		XCTAssertFalse(spec.isSatisfiedBy("0123hello"))
 		XCTAssertFalse(spec.isSatisfiedBy("hello"))
 	}
 	
-	func testWhitespaceAndNewline() {
-		let spec = CharacterSetSpecification.whitespaceAndNewlineCharacterSet()
+	func testWhitespacesAndNewlines() {
+		let spec = CharacterSetSpecification.whitespacesAndNewlines
 		XCTAssertTrue(spec.isSatisfiedBy(""))
 		XCTAssertTrue(spec.isSatisfiedBy(" \t \n "))
 		XCTAssertFalse(spec.isSatisfiedBy("---"))
