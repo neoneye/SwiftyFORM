@@ -44,15 +44,15 @@ public class CountSpecification: Specification {
 		return CountSpecification().min(count).max(count)
 	}
 	
-	public var minCount: Int?
-	public var maxCount: Int?
+	private var minCount: Int?
+	private var maxCount: Int?
 	
-	public func min(_ count: Int) -> CountSpecification {
+	private func min(_ count: Int) -> CountSpecification {
 		minCount = count
 		return self
 	}
 	
-	public func max(_ count: Int) -> CountSpecification {
+	private func max(_ count: Int) -> CountSpecification {
 		maxCount = count
 		return self
 	}
