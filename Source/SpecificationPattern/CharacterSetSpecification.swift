@@ -1,6 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
+/// Check if a string has no illegal characters.
 public class CharacterSetSpecification: Specification {
 	private let characterSet: CharacterSet
 	
@@ -13,6 +14,11 @@ public class CharacterSetSpecification: Specification {
 		return CharacterSetSpecification(characterSet: cs)
 	}
 
+	/// Check if all characters are contained in the characterset.
+	///
+	/// - parameter candidate: The object to be checked.
+	///
+	/// - returns: `true` if the candidate object is a string and all its characters are legal, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		guard let fullString = candidate as? String else { return false }
 		for character: Character in fullString.characters {
