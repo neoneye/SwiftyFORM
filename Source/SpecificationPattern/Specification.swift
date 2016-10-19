@@ -5,6 +5,8 @@
 ///
 /// Specifications are cheap to write, easy to test and can be combined to
 /// represent very complex business rules.
+///
+/// More about specification pattern on [Wikipedia](https://en.wikipedia.org/wiki/Specification_pattern).
 public protocol Specification {
 	
 	/// The central part of a specification is the `isSatisfiedBy()` function, 
