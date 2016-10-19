@@ -13,7 +13,7 @@ long patterns giving incomplete results.
 http://en.wikipedia.org/wiki/Email_address
 */
 public class EmailSpecification: Specification {
-	fileprivate let specification: RegularExpressionSpecification
+	private let specification: RegularExpressionSpecification
 	
 	public init() {
 		self.specification = RegularExpressionSpecification(pattern: emailRegularExpression)
@@ -26,7 +26,7 @@ public class EmailSpecification: Specification {
 	// RFC5322 address specification
 	// http://tools.ietf.org/html/rfc5322#section-3.4
 	// Taken from http://stackoverflow.com/a/1149894/78336
-	fileprivate let emailRegularExpression =
+	private let emailRegularExpression =
 		"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}" +
 		"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" +
 		"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-" +
