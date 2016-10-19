@@ -11,6 +11,12 @@
 /// ## Example
 ///
 /// `let spec = onlyDigits & between2And4Letters & modulus13Checksum`
+///
+///
+/// - parameter left: The specification to be checked first.
+/// - parameter right: The specification to be checked last.
+///
+/// - returns: A combined specification
 public func & (left: Specification, right: Specification) -> Specification {
 	return left.and(right)
 }
@@ -27,6 +33,12 @@ public func & (left: Specification, right: Specification) -> Specification {
 /// ## Example
 ///
 /// `let spec = connectionTypeWifi | connectionType4G | hasOfflineData`
+///
+///
+/// - parameter left: The specification to be checked first.
+/// - parameter right: The specification to be checked last.
+///
+/// - returns: A combined specification
 public func | (left: Specification, right: Specification) -> Specification {
 	return left.or(right)
 }
@@ -43,6 +55,11 @@ public func | (left: Specification, right: Specification) -> Specification {
 /// ## Example
 ///
 /// `let spec = ! filesystemIsFull`
+///
+///
+/// - parameter specification: The specification to be inverted.
+///
+/// - returns: A specification
 public prefix func ! (specification: Specification) -> Specification {
 	return specification.not()
 }
@@ -56,6 +73,12 @@ public prefix func ! (specification: Specification) -> Specification {
 ///
 /// `let spec = CharacterSetSpecification.decimalDigits`
 /// `spec == "123"`
+///
+///
+/// - parameter left: The specification that is to perform the checking
+/// - parameter right: The candidate object that is to be checked.
+///
+/// - returns: `true` if the candidate object is satisfied by the specification, `false` otherwise.
 public func == (left: Specification, right: Any?) -> Bool {
 	return left.isSatisfiedBy(right)
 }
@@ -69,6 +92,12 @@ public func == (left: Specification, right: Any?) -> Bool {
 ///
 /// `let spec = CharacterSetSpecification.decimalDigits`
 /// `spec != "123"`
+///
+///
+/// - parameter left: The specification that is to perform the checking
+/// - parameter right: The candidate object that is to be checked.
+///
+/// - returns: `true` if the candidate object is not satisfied by the specification, `false` otherwise.
 public func != (left: Specification, right: Any?) -> Bool {
 	return !left.isSatisfiedBy(right)
 }
