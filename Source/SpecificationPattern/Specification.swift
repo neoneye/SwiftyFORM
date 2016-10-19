@@ -20,8 +20,8 @@ extension Specification {
 }
 
 public class AndSpecification: Specification {
-	fileprivate let one: Specification
-	fileprivate let other: Specification
+	private let one: Specification
+	private let other: Specification
 	
 	public init(_ x: Specification, _ y: Specification)  {
 		self.one = x
@@ -34,8 +34,8 @@ public class AndSpecification: Specification {
 }
 
 public class OrSpecification: Specification {
-	fileprivate let one: Specification
-	fileprivate let other: Specification
+	private let one: Specification
+	private let other: Specification
 	
 	public init(_ x: Specification, _ y: Specification)  {
 		self.one = x
@@ -48,7 +48,7 @@ public class OrSpecification: Specification {
 }
 
 public class NotSpecification: Specification {
-	fileprivate let wrapped: Specification
+	private let wrapped: Specification
 	
 	public init(_ x: Specification) {
 		self.wrapped = x
