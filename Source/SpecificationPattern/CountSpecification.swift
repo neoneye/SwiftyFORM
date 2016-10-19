@@ -1,6 +1,6 @@
 import Foundation
 
-public class CountSpecification: CompositeSpecification {
+public class CountSpecification: Specification {
 	
 	public class func min(_ count: Int) -> CountSpecification {
 		return CountSpecification().min(count)
@@ -31,7 +31,7 @@ public class CountSpecification: CompositeSpecification {
 		return self
 	}
 	
-	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		if candidate == nil {
 			return false
 		}

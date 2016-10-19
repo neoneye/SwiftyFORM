@@ -1,5 +1,9 @@
 ## 📄 Change Log
 
+### 1.2.0
+
+ * Simplified specification pattern. In the future the `CompositeSpecification` class will be removed. Instead of subclassing `CompositeSpecification` one must instead subclass `Specification`.
+
 ### 1.1.0
 
  * Imported specification pattern unittests

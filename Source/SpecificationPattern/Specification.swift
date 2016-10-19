@@ -3,17 +3,9 @@
 /// A type that can check whether or not a candidate object satisfy the rules.
 public protocol Specification {
 	func isSatisfiedBy(_ candidate: Any?) -> Bool
-	func and(_ other: Specification) -> Specification
-	func or(_ other: Specification) -> Specification
-	func not() -> Specification
 }
 
-open class CompositeSpecification: Specification {
-	open func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		// subclass must implement this method
-		return false
-	}
-	
+extension Specification {
 	public func and(_ other: Specification) -> Specification {
 		return AndSpecification(self, other)
 	}
@@ -27,65 +19,69 @@ open class CompositeSpecification: Specification {
 	}
 }
 
-public class AndSpecification: CompositeSpecification {
+public class AndSpecification: Specification {
 	fileprivate let one: Specification
 	fileprivate let other: Specification
 	
 	public init(_ x: Specification, _ y: Specification)  {
 		self.one = x
 		self.other = y
-		super.init()
 	}
 	
-	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return one.isSatisfiedBy(candidate) && other.isSatisfiedBy(candidate)
 	}
 }
 
-public class OrSpecification: CompositeSpecification {
+public class OrSpecification: Specification {
 	fileprivate let one: Specification
 	fileprivate let other: Specification
 	
 	public init(_ x: Specification, _ y: Specification)  {
 		self.one = x
 		self.other = y
-		super.init()
 	}
 	
-	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return one.isSatisfiedBy(candidate) || other.isSatisfiedBy(candidate)
 	}
 }
 
-public class NotSpecification: CompositeSpecification {
+public class NotSpecification: Specification {
 	fileprivate let wrapped: Specification
 	
 	public init(_ x: Specification) {
 		self.wrapped = x
-		super.init()
 	}
 	
-	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return !wrapped.isSatisfiedBy(candidate)
 	}
 }
 
-public class FalseSpecification: CompositeSpecification {
-	override public init() {
-		super.init()
+public class FalseSpecification: Specification {
+	public init() {
 	}
 	
-	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return false
 	}
 }
 
-public class TrueSpecification: CompositeSpecification {
-	override public init() {
-		super.init()
+public class TrueSpecification: Specification {
+	public init() {
 	}
 	
-	override public func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return true
+	}
+}
+
+/// - warning:
+/// This class will be removed in the future, starting with SwiftyFORM 2.0.0
+open class CompositeSpecification: Specification {
+	open func isSatisfiedBy(_ candidate: Any?) -> Bool {
+		// subclass must implement this function
+		return false
 	}
 }

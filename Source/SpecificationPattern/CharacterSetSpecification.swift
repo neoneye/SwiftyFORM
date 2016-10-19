@@ -1,11 +1,10 @@
 import Foundation
 
-public class CharacterSetSpecification: CompositeSpecification {
+public class CharacterSetSpecification: Specification {
 	public let characterSet: CharacterSet
 	
 	init(characterSet: CharacterSet) {
 		self.characterSet = characterSet
-		super.init()
 	}
 	
 	public class func charactersInString(_ charactersInString: String) -> CharacterSetSpecification {
@@ -84,7 +83,7 @@ public class CharacterSetSpecification: CompositeSpecification {
 	}
 
 	
-	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		guard let fullString = candidate as? String else { return false }
 		for character: Character in fullString.characters {
 			let range: Range<String.Index>? =

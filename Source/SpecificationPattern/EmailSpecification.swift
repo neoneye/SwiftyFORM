@@ -11,15 +11,14 @@ long patterns giving incomplete results.
 
 http://en.wikipedia.org/wiki/Email_address
 */
-public class EmailSpecification: CompositeSpecification {
+public class EmailSpecification: Specification {
 	fileprivate let specification: RegularExpressionSpecification
 	
-	public override init() {
+	public init() {
 		self.specification = RegularExpressionSpecification(pattern: emailRegularExpression)
-		super.init()
 	}
 
-	public override func isSatisfiedBy(_ candidate: Any?) -> Bool {
+	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		return specification.isSatisfiedBy(candidate)
 	}
 
