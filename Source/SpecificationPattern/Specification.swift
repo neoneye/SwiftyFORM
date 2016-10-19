@@ -1,3 +1,6 @@
+// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+
+/// A type that can check whether or not a candidate object satisfy the rules.
 public protocol Specification {
 	func isSatisfiedBy(_ candidate: Any?) -> Bool
 	func and(_ other: Specification) -> Specification
