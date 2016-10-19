@@ -1,21 +1,46 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
+/// Check if a collection (String/Array) has the right number of elements.
 public class CountSpecification: Specification {
 	
-	public class func min(_ count: Int) -> CountSpecification {
+	/// Create a specification that checks for a minimum count
+	///
+	/// - parameter count: The minimum number of elements required
+	///
+	/// - returns: A CountSpecification that checks for a minimum count
+	public static func min(_ count: Int) -> CountSpecification {
 		return CountSpecification().min(count)
 	}
 	
-	public class func max(_ count: Int) -> CountSpecification {
+
+	/// Create a specification that checks for a maximum count
+	///
+	/// - parameter count: The maximum number of elements required
+	///
+	/// - returns: A CountSpecification that checks for a maximum count
+	public static func max(_ count: Int) -> CountSpecification {
 		return CountSpecification().max(count)
 	}
 	
-	public class func between(_ minCount: Int, _ maxCount: Int) -> CountSpecification {
+	
+	/// Create a specification that checks if count is inside a range
+	///
+	/// - parameter minCount: The minimum number of elements required
+	/// - parameter maxCount: The maximum number of elements required
+	///
+	/// - returns: A CountSpecification that checks if count is inside range
+	public static func between(_ minCount: Int, _ maxCount: Int) -> CountSpecification {
 		return CountSpecification().min(minCount).max(maxCount)
 	}
 	
-	public class func exactly(_ count: Int) -> CountSpecification {
+	
+	/// Create a specification that checks if count is exactly X elements
+	///
+	/// - parameter count: The exact number of elements required
+	///
+	/// - returns: A CountSpecification that checks if count is exactly the required count
+	public static func exactly(_ count: Int) -> CountSpecification {
 		return CountSpecification().min(count).max(count)
 	}
 	
@@ -32,6 +57,11 @@ public class CountSpecification: Specification {
 		return self
 	}
 	
+	/// Check if the number of elements is between min and max.
+	///
+	/// - parameter candidate: The object to be checked.
+	///
+	/// - returns: `true` if the candidate object has a count between min and max, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		if candidate == nil {
 			return false
