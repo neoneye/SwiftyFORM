@@ -78,7 +78,7 @@ public prefix func ! (specification: Specification) -> Specification {
 /// - parameter left: The specification that is to perform the checking
 /// - parameter right: The candidate object that is to be checked.
 ///
-/// - returns: `true` if the candidate object is satisfied by the specification, `false` otherwise.
+/// - returns: `true` if the candidate object satisfies the specification, `false` otherwise.
 public func == (left: Specification, right: Any?) -> Bool {
 	return left.isSatisfiedBy(right)
 }
@@ -97,7 +97,7 @@ public func == (left: Specification, right: Any?) -> Bool {
 /// - parameter left: The specification that is to perform the checking
 /// - parameter right: The candidate object that is to be checked.
 ///
-/// - returns: `true` if the candidate object is not satisfied by the specification, `false` otherwise.
+/// - returns: `true` if the candidate object doesn't satisfy the specification, `false` otherwise.
 public func != (left: Specification, right: Any?) -> Bool {
 	return !left.isSatisfiedBy(right)
 }
