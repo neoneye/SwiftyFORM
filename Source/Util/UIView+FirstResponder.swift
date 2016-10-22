@@ -2,6 +2,11 @@
 import UIKit
 
 extension UIView {
+	/// Find the first responder.
+	///
+	/// This function is recursive.
+	///
+	/// - returns: the first responder otherwise nil.
 	public func form_firstResponder() -> UIView? {
 		if self.isFirstResponder {
 			return self
