@@ -37,14 +37,7 @@ public class DumpVisitor: FormItemVisitor {
 			rowNumber += 1
 		}
 		
-		do {
-			let options: JSONSerialization.WritingOptions = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : []
-			let data = try JSONSerialization.data(withJSONObject: result, options: options)
-			return data
-		} catch _ {
-		}
-		
-		return Data()
+		return JSONHelper.convert(object: result as AnyObject?, prettyPrinted: prettyPrinted)
 	}
 	
 	fileprivate var dict = StringToAnyObject()
@@ -243,5 +236,89 @@ public class DumpVisitor: FormItemVisitor {
 		dict["elementIdentifier"] = object.elementIdentifier as AnyObject?
 		dict["styleIdentifier"] = object.styleIdentifier as AnyObject?
 		dict["styleClass"] = object.styleClass as AnyObject?
+	}
+}
+
+
+fileprivate struct JSONHelper {
+
+	static func process(objectOrNil: AnyObject?) -> AnyObject {
+		guard let object: AnyObject = objectOrNil else {
+			return NSNull()
+		}
+		if object is NSNull {
+			return NSNull()
+		}
+		
+		/*
+		TODO: How do I catch this Optional(_SwiftValue)?
+		
+		class for coder: Optional(_SwiftValue)
+		unknown item: nil  nil
+		*/
+		print("class for coder: \(object.classForCoder)")
+		if object.classForCoder === NSNull.classForCoder() {
+			return NSNull()
+		}
+		if let dict = object as? NSDictionary {
+			var result = [String: AnyObject]()
+			for (keyObject, valueObject) in dict {
+				guard let key = keyObject as? String else {
+					print("Expected string for key, skipping key: \(keyObject)")
+					continue
+				}
+				result[key] = process(objectOrNil: valueObject as AnyObject?)
+			}
+			return result as AnyObject
+		}
+		if let array = object as? NSArray {
+			var result = [AnyObject]()
+			for valueObject in array {
+				let item = process(objectOrNil: valueObject as AnyObject?)
+				result.append(item)
+			}
+			return result as AnyObject
+		}
+		if let item = object as? String {
+			return item as AnyObject
+		}
+		if let item = object as? Bool {
+			return item as AnyObject
+		}
+		if let item = object as? Int {
+			return item as AnyObject
+		}
+		if let item = object as? Float {
+			return item as AnyObject
+		}
+		if let item = object as? Double {
+			return item as AnyObject
+		}
+		if let item = object as? NSNumber {
+			return item as AnyObject
+		}
+		
+		print("unknown item: \(object)  \(object.self)")
+		
+		return NSNull()
+	}
+
+	
+	static func convert(object: AnyObject?, prettyPrinted: Bool) -> Data {
+		let result = process(objectOrNil: object)
+		
+		if !JSONSerialization.isValidJSONObject(result) {
+			print("the dictionary cannot be serialized to json")
+			return Data()
+		}
+		
+		do {
+			let options: JSONSerialization.WritingOptions = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : []
+			let data = try JSONSerialization.data(withJSONObject: result, options: options)
+			return data
+		} catch _ {
+		}
+
+		return Data()
 	}
 }
