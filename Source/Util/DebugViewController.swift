@@ -7,11 +7,18 @@ public enum WhatToShow {
 	case url(url: URL)
 }
 
-/*
-Usage:
-DebugViewController.showURL(self, url: NSURL(string: "http://www.google.com")!)
-DebugViewController.showText(self, text: "hello world")
-*/
+/// Present various types of data: json, plain text, webpage
+///
+/// The data is shown in a webview.
+///
+/// This is only supposed to be used during development,
+/// as a quick way to inspect data.
+///
+/// Usage:
+///
+/// 	DebugViewController.showURL(self, url: URL(string: "http://www.google.com")!)
+/// 	DebugViewController.showText(self, text: "hello world")
+///
 public class DebugViewController: UIViewController {
 	
 	public let dismissBlock: (Void) -> Void
