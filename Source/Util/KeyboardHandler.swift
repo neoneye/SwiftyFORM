@@ -1,8 +1,9 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-/// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell
-/// Resets insets when the keyboard is hidden
+/// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell.
+///
+/// Resets insets when the keyboard is hidden.
 public class KeyboardHandler: NSObject {
 	private let tableView: UITableView
 	private var innerKeyboardVisible: Bool = false
@@ -12,9 +13,10 @@ public class KeyboardHandler: NSObject {
 	}
 	
 	var keyboardVisible: Bool {
-		get { return innerKeyboardVisible }
+		return innerKeyboardVisible
 	}
 
+	/// Start listening for changes to keyboard visibility so that we can adjust the scroll view accordingly.
 	func addObservers() {
 		/*
 		I listen to UIKeyboardWillShowNotification.
@@ -36,18 +38,19 @@ public class KeyboardHandler: NSObject {
 		It's not something I will support for now.
 		*/
 		
-		// Listen for changes to keyboard visibility so that we can adjust the text view accordingly.
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
+	/// Stop listening to keyboard visibility changes
 	func removeObservers() {
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 	}
 	
+	/// The keyboard will appear, scroll content so it's not covered by the keyboard.
 	func keyboardWillShow(_ notification: Notification) {
 //		SwiftyFormLog("show\n\n\n\n\n\n\n\n")
 		innerKeyboardVisible = true
@@ -123,6 +126,7 @@ public class KeyboardHandler: NSObject {
 		}
 	}
 	
+	/// The keyboard will disappear, restore content insets.
 	func keyboardWillHide(_ notification: Notification) {
 //		SwiftyFormLog("\n\n\n\nhide")
 		innerKeyboardVisible = false
