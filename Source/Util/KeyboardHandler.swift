@@ -4,8 +4,8 @@ import UIKit
 /// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell
 /// Resets insets when the keyboard is hidden
 public class KeyboardHandler: NSObject {
-	fileprivate let tableView: UITableView
-	fileprivate var innerKeyboardVisible: Bool = false
+	private let tableView: UITableView
+	private var innerKeyboardVisible: Bool = false
 	
 	init(tableView: UITableView) {
 		self.tableView = tableView
