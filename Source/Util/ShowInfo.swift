@@ -2,6 +2,12 @@
 import UIKit
 
 extension FormBuilder {
+	/// Install a text header.
+	///
+ 	/// The text can span multiple lines.
+	/// The text is centered.
+	///
+	/// - parameter text: The text to be shown.
 	public func demo_showInfo(_ text: String) {
 		let headerView = SectionHeaderViewFormItem()
 		headerView.viewBlock = {
@@ -11,6 +17,7 @@ extension FormBuilder {
 	}
 }
 
+/// Centered multiline text useful for headers
 public class InfoView: UIView {
 	public let label: UILabel
 	
