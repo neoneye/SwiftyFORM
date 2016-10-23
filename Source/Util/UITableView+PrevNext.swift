@@ -3,11 +3,9 @@ import UIKit
 
 public extension IndexPath {
 	
-	/**
-	Indexpath of the previous cell.
-	
-	This function is complex because it deals with empty sections and invalid indexpaths.
-	*/
+	/// Indexpath of the previous cell.
+	///
+	/// This function is complex because it deals with empty sections and invalid indexpaths.
 	public func form_indexPathForPreviousCell(_ tableView: UITableView) -> IndexPath? {
 		if section < 0 || row < 0 {
 			return nil
@@ -33,11 +31,9 @@ public extension IndexPath {
 		}
 	}
 	
-	/**
-	Indexpath of the next cell.
-	
-	This function is complex because it deals with empty sections and invalid indexpaths.
-	*/
+	/// Indexpath of the next cell.
+	///
+	/// This function is complex because it deals with empty sections and invalid indexpaths.
 	public func form_indexPathForNextCell(_ tableView: UITableView) -> IndexPath? {
 		if section < 0 {
 			return nil
@@ -66,13 +62,11 @@ public extension IndexPath {
 
 extension UITableView {
 	
-	/**
-	Determine where a cell is located in this tableview. Considers cells inside and cells outside the visible area.
-	
-	Unlike UITableView.indexPathForCell() which only looksup inside the visible area.
-	UITableView doesn't let you lookup cells outside the visible area.
-	UITableView.indexPathForCell() returns nil when the cell is outside the visible area.
-	*/
+	/// Determine where a cell is located in this tableview. Considers cells inside and cells outside the visible area.
+	///
+	/// Unlike UITableView.indexPathForCell() which only looksup inside the visible area.
+	/// UITableView doesn't let you lookup cells outside the visible area.
+	/// UITableView.indexPathForCell() returns nil when the cell is outside the visible area.
 	func form_indexPathForCell(_ cell: UITableViewCell) -> IndexPath? {
 		guard let dataSource = self.dataSource else { return nil }
 		let sectionCount: Int = dataSource.numberOfSections?(in: self) ?? 0
@@ -89,11 +83,9 @@ extension UITableView {
 		return nil
 	}
 
-	/**
-	Find a cell above that can be jumped to. Skip cells that cannot be jumped to.
-	
-	Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
-	*/
+	/// Find a cell above that can be jumped to. Skip cells that cannot be jumped to.
+	///
+	/// Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
 	func form_indexPathForPreviousResponder(_ initialIndexPath: IndexPath) -> IndexPath? {
 		guard let dataSource = self.dataSource else { return nil }
 		var indexPath: IndexPath! = initialIndexPath
@@ -110,11 +102,9 @@ extension UITableView {
 		}
 	}
 			
-	/**
-	Find a cell below that can be jumped to. Skip cells that cannot be jumped to.
-	
-	Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
-	*/
+	/// Find a cell below that can be jumped to. Skip cells that cannot be jumped to.
+	///
+	/// Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
 	func form_indexPathForNextResponder(_ initialIndexPath: IndexPath) -> IndexPath? {
 		guard let dataSource = self.dataSource else { return nil }
 		var indexPath: IndexPath! = initialIndexPath
@@ -131,11 +121,9 @@ extension UITableView {
 		}
 	}
 	
-	/**
-	Jump to a cell above.
-	
-	Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
-	*/
+	/// Jump to a cell above.
+	///
+	/// Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
 	func form_makePreviousCellFirstResponder(_ cell: UITableViewCell) {
 		guard let indexPath0 = form_indexPathForCell(cell) else { return }
 		guard let indexPath1 = form_indexPathForPreviousResponder(indexPath0) else { return }
@@ -145,11 +133,9 @@ extension UITableView {
 		cell.becomeFirstResponder()
 	}
 	
-	/**
-	Jump to a cell below.
-	
-	Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
-	*/
+	/// Jump to a cell below.
+	///
+	/// Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
 	func form_makeNextCellFirstResponder(_ cell: UITableViewCell) {
 		guard let indexPath0 = form_indexPathForCell(cell) else { return }
 		guard let indexPath1 = form_indexPathForNextResponder(indexPath0) else { return }
@@ -159,9 +145,7 @@ extension UITableView {
 		cell.becomeFirstResponder()
 	}
 
-	/**
-	Determines if it's possible to jump to a cell above.
-	*/
+	/// Determines if it's possible to jump to a cell above.
 	func form_canMakePreviousCellFirstResponder(_ cell: UITableViewCell) -> Bool {
 		guard let indexPath0 = form_indexPathForCell(cell) else { return false }
 		if form_indexPathForPreviousResponder(indexPath0) == nil { return false }
@@ -169,9 +153,7 @@ extension UITableView {
 		return true
 	}
 
-	/**
-	Determines if it's possible to jump to a cell below.
-	*/
+	/// Determines if it's possible to jump to a cell below.
 	func form_canMakeNextCellFirstResponder(_ cell: UITableViewCell) -> Bool {
 		guard let indexPath0 = form_indexPathForCell(cell) else { return false }
 		if form_indexPathForNextResponder(indexPath0) == nil { return false }
@@ -183,37 +165,27 @@ extension UITableView {
 
 extension UITableViewCell {
 	
-	/**
-	Jump to the previous cell, located above the current cell.
-	
-	Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
-	*/
+	/// Jump to the previous cell, located above the current cell.
+	///
+	/// Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
 	func form_makePreviousCellFirstResponder() {
 		form_tableView()?.form_makePreviousCellFirstResponder(self)
 	}
 
-	/**
-	Jump to the next cell, located below the current cell.
-	
-	Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
-	*/
+	/// Jump to the next cell, located below the current cell.
+	///
+	/// Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
 	func form_makeNextCellFirstResponder() {
 		form_tableView()?.form_makeNextCellFirstResponder(self)
 	}
 	
-	/**
-	Determines if it's possible to jump to the cell above.
-	*/
+	/// Determines if it's possible to jump to the cell above.
 	func form_canMakePreviousCellFirstResponder() -> Bool {
 		return form_tableView()?.form_canMakePreviousCellFirstResponder(self) ?? false
 	}
 	
-	/**
-	Determines if it's possible to jump to the cell below.
-	*/
+	/// Determines if it's possible to jump to the cell below.
 	func form_canMakeNextCellFirstResponder() -> Bool {
 		return form_tableView()?.form_canMakeNextCellFirstResponder(self) ?? false
 	}
-
-	
 }
