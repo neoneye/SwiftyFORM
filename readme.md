@@ -1,7 +1,8 @@
 <p align="center">
-  <img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
+<img src="Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
 </p>
 
+## SwiftyFORM
 
 [![Build Status](https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master)](https://travis-ci.org/neoneye/SwiftyFORM)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
@@ -10,9 +11,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
-## Introduction
-
-**SwiftyFORM** is an iOS framework for creating forms.
+**SwiftyFORM is an iOS framework for creating forms.**
 
 Because form code is hard to write, hard to read, hard to reason about. Has a slow turn around time. Is painful to maintain.
 
