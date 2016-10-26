@@ -300,7 +300,7 @@ internal struct JSONHelper {
 	
 	/// Convert from a complex object to json data.
 	///
-	/// - parameter objectOrNil: The complex object to be converted.
+	/// - parameter unprocessedObject: The complex object to be converted.
 	/// - parameter prettyPrinted: If true then the json is formatted so it's human readable.
 	///
 	/// - returns: Data object containing json.
