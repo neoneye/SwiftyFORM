@@ -112,24 +112,17 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.selected?.title
 	}
 	
-	func convertOptionalDateToJSON(_ date: Date?) -> Any {
-		if let date = date {
-			return date.description as Any
-		}
-		return NSNull()
-	}
-	
 	public func visit(object: DatePickerFormItem) {
 		dict["class"] = "DatePickerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
-		dict["date"] = convertOptionalDateToJSON(object.value as Date)
+		dict["date"] = object.value
 		dict["datePickerMode"] = object.datePickerMode.description
 		dict["locale"] = object.locale
-		dict["minimumDate"] = convertOptionalDateToJSON(object.minimumDate as Date?)
-		dict["maximumDate"] = convertOptionalDateToJSON(object.minimumDate as Date?)
+		dict["minimumDate"] = object.minimumDate
+		dict["maximumDate"] = object.maximumDate
 	}
 	
 	public func visit(object: ButtonFormItem) {
@@ -288,6 +281,9 @@ internal struct JSONHelper {
 		}
 		if let item = object as? NSNumber {
 			return item
+		}
+		if let item = object as? Date {
+			return item.description
 		}
 		
 		print("skipping unknown item: \(object)  \(object.self)")
