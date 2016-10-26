@@ -13,6 +13,21 @@ class JSONHelperTests: XCTestCase {
 		XCTAssertTrue(value is NSNull)
 	}
 	
+	func testNone() {
+		let s: String? = nil
+		var dict = [String: AnyObject?]()
+		dict["id"] = s as AnyObject?
+		let obj: AnyObject? = dict as AnyObject?
+		
+		guard let dict2 = obj as? Dictionary<String, AnyObject?> else {
+			XCTFail()
+			return
+		}
+		let value = dict2["id"] as AnyObject?
+		let processedValue = JSONHelper.process(value)
+		XCTAssertTrue(processedValue is NSNull)
+	}
+	
 	func testInteger() {
 		let i: Int = 123
 		let value = JSONHelper.process(i as AnyObject)

@@ -250,17 +250,6 @@ internal struct JSONHelper {
 			return NSNull()
 		}
 		
-		/*
-		TODO: How do I catch this Optional(_SwiftValue)?
-		
-		class for coder: Optional(_SwiftValue)
-		unknown item: nil  nil
-		*/
-		print("class for coder: \(object.classForCoder)")
-		if object.classForCoder === NSNull.classForCoder() {
-			return NSNull()
-		}
-		
 		if let dict = object as? NSDictionary {
 			var result = [String: AnyObject]()
 			for (keyObject, valueObject) in dict {
@@ -301,7 +290,11 @@ internal struct JSONHelper {
 		if let item = object as? NSNumber {
 			return item as AnyObject
 		}
-		
+
+		guard object as! _OptionalNilComparisonType != AnyObject?.none else {
+			return NSNull()
+		}
+
 		print("unknown item: \(object)  \(object.self)")
 		
 		return NSNull()
