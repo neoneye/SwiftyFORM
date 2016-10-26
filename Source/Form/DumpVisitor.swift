@@ -2,7 +2,7 @@
 import Foundation
 
 public class DumpVisitor: FormItemVisitor {
-	fileprivate typealias StringToAny = [String: Any?]
+	private typealias StringToAny = [String: Any?]
 	
 	public init() {
 	}
@@ -40,7 +40,7 @@ public class DumpVisitor: FormItemVisitor {
 		return JSONHelper.convert(result, prettyPrinted: prettyPrinted)
 	}
 	
-	fileprivate var dict = StringToAny()
+	private var dict = StringToAny()
 	
 	public func visit(object: MetaFormItem) {
 		dict["class"] = "MetaFormItem"
