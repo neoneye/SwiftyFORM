@@ -1,8 +1,12 @@
-<p align="center">
+<h3 align="center">
+<a href="https://github.com/neoneye/SwiftyFORM">
 <img src="Documentation/swiftyform_logo.png" alt="SwiftyFORM by Simon Strandgaard"/>
-</p>
+<br />
+SwiftyFORM
+</a>
+</h3>
 
-## SwiftyFORM
+---
 
 [![Build Status](https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master)](https://travis-ci.org/neoneye/SwiftyFORM)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
