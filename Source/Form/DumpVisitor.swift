@@ -235,7 +235,7 @@ public class DumpVisitor: FormItemVisitor {
 
 internal struct JSONHelper {
 
-	/// Convert from a complex object to simpler json object.
+	/// Convert from a complex object to a simpler json object.
 	///
 	/// This function is recursive.
 	///
