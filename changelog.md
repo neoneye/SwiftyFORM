@@ -5,6 +5,7 @@
  * Simplified specification pattern. In the future the `CompositeSpecification` class will be removed. Instead of subclassing `CompositeSpecification` one must instead subclass `Specification`.
  * Simplified the `CharacterSetSpecification` factory functions. In the future the `CharacterSetSpecification` the oldschool factory functions will be removed.
  * Fixed crash in the `Sign Up` example code. Tapping the "Export to JSON" button always crashed. The problem was introduced in the `DumpVisitor` class when the project got migrated from Xcode7 to Xcode8.
+ * Wrote documentation for the files in `Source/Util` and `Source/Specification`. 
 
 ### 1.1.0
 
