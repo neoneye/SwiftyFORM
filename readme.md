@@ -240,7 +240,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 1.1
+github "neoneye/SwiftyFORM" ~> 1.2
 ```
 
 Then, run the following command:
