@@ -235,6 +235,13 @@ public class DumpVisitor: FormItemVisitor {
 
 internal struct JSONHelper {
 
+	/// Convert from a complex object to simpler json object.
+	///
+	/// This function is recursive.
+	///
+	/// - parameter objectOrNil: The complex object to be converted.
+	///
+	/// - returns: a converted object otherwise NSNull.
 	static func process(_ objectOrNil: Any?) -> Any {
 		guard let object = objectOrNil else {
 			return NSNull()
@@ -291,6 +298,12 @@ internal struct JSONHelper {
 	}
 
 	
+	/// Convert from a complex object to json data.
+	///
+	/// - parameter objectOrNil: The complex object to be converted.
+	/// - parameter prettyPrinted: If true then the json is formatted so it's human readable.
+	///
+	/// - returns: Data object containing json.
 	static func convert(_ unprocessedObject: Any?, prettyPrinted: Bool) -> Data {
 		let object = process(unprocessedObject)
 		
