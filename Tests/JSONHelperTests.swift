@@ -15,28 +15,28 @@ class JSONHelperTests: XCTestCase {
 	
 	func testNone() {
 		let s: String? = nil
-		var dict = [String: AnyObject?]()
-		dict["id"] = s as AnyObject?
-		let obj: AnyObject? = dict as AnyObject?
+		var dict = [String: Any?]()
+		dict["id"] = s as Any?
+		let obj: Any? = dict as Any?
 		
-		guard let dict2 = obj as? Dictionary<String, AnyObject?> else {
+		guard let dict2 = obj as? [String: Any?] else {
 			XCTFail()
 			return
 		}
-		let value = dict2["id"] as AnyObject?
+		let value = dict2["id"] as Any?
 		let processedValue = JSONHelper.process(value)
 		XCTAssertTrue(processedValue is NSNull)
 	}
 	
 	func testInteger() {
 		let i: Int = 123
-		let value = JSONHelper.process(i as AnyObject)
+		let value = JSONHelper.process(i)
 		XCTAssertTrue(value is Int)
 	}
 	
 	func testString() {
 		let s: String = "hello"
-		let value = JSONHelper.process(s as AnyObject)
+		let value = JSONHelper.process(s)
 		XCTAssertTrue(value is String)
 	}
 }
