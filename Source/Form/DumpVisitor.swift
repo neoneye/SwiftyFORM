@@ -240,9 +240,9 @@ public class DumpVisitor: FormItemVisitor {
 }
 
 
-fileprivate struct JSONHelper {
+internal struct JSONHelper {
 
-	static func process(objectOrNil: AnyObject?) -> AnyObject {
+	static func process(_ objectOrNil: AnyObject?) -> AnyObject {
 		guard let object: AnyObject = objectOrNil else {
 			return NSNull()
 		}
@@ -260,6 +260,7 @@ fileprivate struct JSONHelper {
 		if object.classForCoder === NSNull.classForCoder() {
 			return NSNull()
 		}
+		
 		if let dict = object as? NSDictionary {
 			var result = [String: AnyObject]()
 			for (keyObject, valueObject) in dict {
@@ -267,14 +268,14 @@ fileprivate struct JSONHelper {
 					print("Expected string for key, skipping key: \(keyObject)")
 					continue
 				}
-				result[key] = process(objectOrNil: valueObject as AnyObject?)
+				result[key] = process(valueObject as AnyObject?)
 			}
 			return result as AnyObject
 		}
 		if let array = object as? NSArray {
 			var result = [AnyObject]()
 			for valueObject in array {
-				let item = process(objectOrNil: valueObject as AnyObject?)
+				let item = process(valueObject as AnyObject?)
 				result.append(item)
 			}
 			return result as AnyObject
@@ -286,6 +287,9 @@ fileprivate struct JSONHelper {
 			return item as AnyObject
 		}
 		if let item = object as? Int {
+			return item as AnyObject
+		}
+		if let item = object as? UInt {
 			return item as AnyObject
 		}
 		if let item = object as? Float {
@@ -305,7 +309,7 @@ fileprivate struct JSONHelper {
 
 	
 	static func convert(object: AnyObject?, prettyPrinted: Bool) -> Data {
-		let result = process(objectOrNil: object)
+		let result = process(object)
 		
 		if !JSONSerialization.isValidJSONObject(result) {
 			print("the dictionary cannot be serialized to json")
