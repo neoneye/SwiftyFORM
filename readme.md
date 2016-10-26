@@ -60,7 +60,7 @@ class MyViewController: FormViewController {
 import SwiftyFORM
 class MyViewController: FormViewController {
 	override func populate(builder: FormBuilder) {
-		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.EmailAddress)
+		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.emailAddress)
 	}
 }
 ```
