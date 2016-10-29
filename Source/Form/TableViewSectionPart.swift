@@ -51,7 +51,12 @@ public enum TableViewSectionPart {
 		case .systemDefault:
 			return UITableViewAutomaticDimension
 		case let .titleView(view):
-			return view.frame.height
+			/**
+			Returning too low values can causes expand/collapse to crash.
+			The crash happens in UITableView.deleteRows() when tapping collapse.
+			Solution is to ensure that the value never drops below 10 pixels.
+			*/
+			return max(view.frame.height, 10)
 		case .titleString(_):
 			return 44
 		}
