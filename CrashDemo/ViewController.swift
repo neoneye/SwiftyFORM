@@ -19,10 +19,9 @@ class ViewController: FormViewController {
         builder += StaticTextFormItem().title("c")
 		builder += StaticTextFormItem().title("d")
         builder += StaticTextFormItem().title("e")
-        builder += createSpaceView()
         builder += StaticTextFormItem().title("f")
-        builder += createSpaceView()
-        builder += StaticTextFormItem().title("g")
+		builder += StaticTextFormItem().title("g")
+        builder += StaticTextFormItem().title("h")
         builder += createSpaceView()
 		//-----
         builder += datePicker
