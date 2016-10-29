@@ -17,21 +17,20 @@ class ViewController: FormViewController {
         builder += StaticTextFormItem().title("b")
         builder += createSpaceView()
         builder += StaticTextFormItem().title("c")
+		builder += createSpaceView()
 		builder += StaticTextFormItem().title("d")
         builder += StaticTextFormItem().title("e")
         builder += StaticTextFormItem().title("f")
 		builder += StaticTextFormItem().title("g")
         builder += StaticTextFormItem().title("h")
-        builder += createSpaceView()
 		//-----
         builder += datePicker
 		//-----
-        builder += createSpaceView()
         builder += StaticTextFormItem().title("x")
-        builder += createSpaceView()
-        builder += StaticTextFormItem().title("y")
-        builder += createSpaceView()
+		builder += StaticTextFormItem().title("y")
         builder += StaticTextFormItem().title("z")
+        builder += createSpaceView()
+        builder += StaticTextFormItem().title("w")
     }
     
 	func createSpaceView() -> FormItem {
@@ -44,7 +43,7 @@ class ViewController: FormViewController {
 	
     lazy var datePicker: DatePickerFormItem = {
         let instance = DatePickerFormItem()
-        instance.title = "Date of Signing"
+        instance.title = "Tap to crash"
         instance.datePickerMode = .date
         instance.behavior = .collapsed
         instance.valueDidChangeBlock = { [weak self] _ in
