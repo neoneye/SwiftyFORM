@@ -57,7 +57,7 @@ class ViewController: FormViewController {
 	func createSpaceView() -> FormItem {
 		let headerView = SectionHeaderViewFormItem()
 		headerView.viewBlock = {
-			return InfoView(frame: CGRect(x: 0, y: 0, width: 100, height: 2), text: " ")
+			return InfoView(frame: CGRect(x: 0, y: 0, width: 100, height: 3), text: " ")
 		}
 		return headerView
 	}
