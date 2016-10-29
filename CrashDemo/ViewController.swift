@@ -11,7 +11,7 @@ import SwiftyFORM
 class ViewController: FormViewController {
 	
     override func populate(_ builder: FormBuilder) {
-        builder += topTitle
+        builder += SectionHeaderTitleFormItem(title: "hello")
         builder += StaticTextFormItem().title("a")
         builder += createSpaceView()
         builder += StaticTextFormItem().title("b")
@@ -35,8 +35,6 @@ class ViewController: FormViewController {
         builder += StaticTextFormItem().title("z")
     }
     
-    //MARK: - BUILDER -
-	
 	func createSpaceView() -> FormItem {
 		let headerView = SectionHeaderViewFormItem()
 		headerView.viewBlock = {
@@ -44,13 +42,6 @@ class ViewController: FormViewController {
 		}
 		return headerView
 	}
-	
-    lazy var topTitle: SectionHeaderTitleFormItem = {
-        let instance = SectionHeaderTitleFormItem()
-        instance.title = "I HEREBY CERTIFY THAT THE AGREED UPON SCOPE OF WORK HAS BEEN SATISFIED, AND I AM ACCEPTING THE TURNOVER OF THIS UNIT."
-        return instance
-    }()
-    
 	
     lazy var datePicker: DatePickerFormItem = {
         let instance = DatePickerFormItem()
