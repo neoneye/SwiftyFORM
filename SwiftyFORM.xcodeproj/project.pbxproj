@@ -501,7 +501,7 @@
 				TargetAttributes = {
 					42D5DE641A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 					42D5DE6E1A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;

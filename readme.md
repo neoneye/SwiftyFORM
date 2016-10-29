@@ -27,7 +27,7 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 ## Requirements
 
 - iOS 9.0+
-- Xcode 8.0+
+- Xcode 8.1+
 - Swift 3.0+
 
 
