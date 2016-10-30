@@ -82,13 +82,18 @@ struct WhatToCollapse {
 	
 	/// If the expanded cell already is visible then collapse it
 	static func process(toggleCell: UITableViewCell, expandedCell: UITableViewCell, sectionArray: TableViewSectionArray) -> WhatToCollapse {
+		//debugPrint(sectionArray)
+
 		var indexPaths = [IndexPath]()
 		var toggleCells = [UITableViewCell]()
 		var isCollapse = false
 		
 		for (sectionIndex, section) in sectionArray.sections.enumerated() {
 			for (row, item) in section.cells.visibleItems.enumerated() {
+				//let cellType = type(of: item.cell)
+				//print("\(sectionIndex) \(row) \(cellType)")
 				if item.cell === expandedCell {
+					//print("\(sectionIndex) \(row)  this is the expanded cell to be collapsed")
 					item.hidden = true
 					indexPaths.append(IndexPath(row: row, section: sectionIndex))
 					toggleCells.append(toggleCell)
@@ -97,6 +102,7 @@ struct WhatToCollapse {
 				}
 				if let expandedCell2 = item.cell as? ExpandedCell , expandedCell2.isCollapsable {
 					if let toggleCell2 = expandedCell2.toggleCell {
+						//print("\(sectionIndex) \(row)  this is a toggle cell to be collapsed")
 						item.hidden = true
 						indexPaths.append(IndexPath(row: row, section: sectionIndex))
 						toggleCells.append(toggleCell2)
@@ -106,7 +112,11 @@ struct WhatToCollapse {
 		}
 		
 		if !indexPaths.isEmpty {
+			//let count0 = sectionArray.numberOfVisibleItems
 			sectionArray.reloadVisibleItems()
+			//let count1 = sectionArray.numberOfVisibleItems
+			//print("reloaded visible items  \(count0) -> \(count1)")
+			//debugPrint(sectionArray)
 		}
 		return WhatToCollapse(indexPaths: indexPaths, toggleCells: toggleCells, isCollapse: isCollapse)
 	}
