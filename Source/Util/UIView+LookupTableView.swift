@@ -2,6 +2,9 @@
 import UIKit
 
 extension UIView {
+	/// Find the first UITableView among all the superviews.
+	///
+	/// - returns: the found tableview otherwise nil.
 	func form_tableView() -> UITableView? {
 		var viewOrNil: UIView? = self
 		while let view = viewOrNil {

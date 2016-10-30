@@ -8,27 +8,14 @@ public enum ValidateResult: Equatable {
 }
 
 public func ==(lhs: ValidateResult, rhs: ValidateResult) -> Bool {
-	switch lhs  {
-	case .valid:
-		switch rhs {
-		case .valid:
-			return true
-		default:
-			return false
-		}
-	case let .hardInvalid(messageA):
-		switch rhs {
-		case let .hardInvalid(messageB):
-			return messageA == messageB
-		default:
-			return false
-		}
-	case let .softInvalid(messageA):
-		switch rhs {
-		case let .softInvalid(messageB):
-			return messageA == messageB
-		default:
-			return false
-		}
+	switch (lhs, rhs)  {
+	case (.valid, .valid):
+		return true
+	case let (.hardInvalid(messageA), .hardInvalid(messageB)):
+		return messageA == messageB
+	case let (.softInvalid(messageA), .softInvalid(messageB)):
+		return messageA == messageB
+	default:
+		return false
 	}
 }

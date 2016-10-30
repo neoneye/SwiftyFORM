@@ -1,5 +1,15 @@
 ## 📄 Change Log
 
+### 1.2.0
+
+ * Simplified specification pattern. In the future the `CompositeSpecification` class will be removed. Instead of subclassing `CompositeSpecification` one must instead subclass `Specification`.
+ * Simplified the `CharacterSetSpecification` factory functions. In the future the `CharacterSetSpecification` the oldschool factory functions will be removed.
+ * Fixed crash in the `Sign Up` example code. Tapping the "Export to JSON" button always crashed. The problem was introduced in the `DumpVisitor` class when the project got migrated from Xcode7 to Xcode8.
+ * Wrote documentation for the files in `Source/Util` and `Source/Specification`. 
+ * Upgraded from Xcode 8.0 to Xcode 8.1
+ * Fixed crash: When using a custom view for the section header and providing a height less than 10 pixels could cause expand/collapse to crash.  
+ * Longer section header titles affects expand/collapse animations. Here it's better to use a custom view as section header.
+
 ### 1.1.0
 
  * Imported specification pattern unittests

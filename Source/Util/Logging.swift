@@ -1,7 +1,9 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import Foundation
 
-// http://stackoverflow.com/questions/24114288/macros-in-swift
+/// `Print` with additional info such as linenumber, filename
+///
+/// http://stackoverflow.com/questions/24114288/macros-in-swift
 #if DEBUG
 	func SwiftyFormLog(_ message: String, function: String = #function, file: String = #file, line: Int = #line) {
 		print("[\(file):\(line)] \(function) - \(message)")

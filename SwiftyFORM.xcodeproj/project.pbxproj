@@ -27,6 +27,14 @@
 		42108D221B34E9F60067FEAA /* TextViewFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D151B34E9F60067FEAA /* TextViewFormItem.swift */; };
 		42108D231B34E9F60067FEAA /* ViewControllerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */; };
 		4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */; };
+		4219E1C51DB827CF00B3204A /* CharacterSetSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1BE1DB827CF00B3204A /* CharacterSetSpecification.swift */; };
+		4219E1C61DB827CF00B3204A /* CountSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1BF1DB827CF00B3204A /* CountSpecification.swift */; };
+		4219E1C71DB827CF00B3204A /* EmailSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C01DB827CF00B3204A /* EmailSpecification.swift */; };
+		4219E1C81DB827CF00B3204A /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C11DB827CF00B3204A /* Operator.swift */; };
+		4219E1C91DB827CF00B3204A /* PredicateSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C21DB827CF00B3204A /* PredicateSpecification.swift */; };
+		4219E1CA1DB827CF00B3204A /* RegularExpressionSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C31DB827CF00B3204A /* RegularExpressionSpecification.swift */; };
+		4219E1CB1DB827CF00B3204A /* Specification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C41DB827CF00B3204A /* Specification.swift */; };
+		4219E1D51DBE9EFB00B3204A /* JSONHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1D41DBE9EFB00B3204A /* JSONHelperTests.swift */; };
 		422437E01D71890500EC41E8 /* PickerViewFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422437DF1D71890500EC41E8 /* PickerViewFormItem.swift */; };
 		422437E21D71924400EC41E8 /* PickerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 422437E11D71924400EC41E8 /* PickerViewCell.swift */; };
 		4229CE0A1D43C450002C28A7 /* PrecisionSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4229CE081D43C386002C28A7 /* PrecisionSliderTests.swift */; };
@@ -78,13 +86,6 @@
 		428683481B346CFE0028DB2F /* TitleWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683151B346CFE0028DB2F /* TitleWidth.swift */; };
 		428683491B346CFE0028DB2F /* ValidateResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683161B346CFE0028DB2F /* ValidateResult.swift */; };
 		4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683171B346CFE0028DB2F /* ValidateVisitor.swift */; };
-		4286834C1B346CFE0028DB2F /* CharacterSetSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831A1B346CFE0028DB2F /* CharacterSetSpecification.swift */; };
-		4286834D1B346CFE0028DB2F /* CountSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831B1B346CFE0028DB2F /* CountSpecification.swift */; };
-		4286834E1B346CFE0028DB2F /* EmailSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831C1B346CFE0028DB2F /* EmailSpecification.swift */; };
-		4286834F1B346CFE0028DB2F /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831D1B346CFE0028DB2F /* Operator.swift */; };
-		428683501B346CFE0028DB2F /* PredicateSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831E1B346CFE0028DB2F /* PredicateSpecification.swift */; };
-		428683511B346CFE0028DB2F /* RegularExpressionSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4286831F1B346CFE0028DB2F /* RegularExpressionSpecification.swift */; };
-		428683521B346CFE0028DB2F /* Specification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683201B346CFE0028DB2F /* Specification.swift */; };
 		428683531B346CFE0028DB2F /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683221B346CFE0028DB2F /* DebugViewController.swift */; };
 		428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683231B346CFE0028DB2F /* Dictionary+Update.swift */; };
 		428683551B346CFE0028DB2F /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428683241B346CFE0028DB2F /* KeyboardHandler.swift */; };
@@ -141,6 +142,14 @@
 		42108D151B34E9F60067FEAA /* TextViewFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewFormItem.swift; sourceTree = "<group>"; };
 		42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFormItem.swift; sourceTree = "<group>"; };
 		4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellForRowDelegate.swift; sourceTree = "<group>"; };
+		4219E1BE1DB827CF00B3204A /* CharacterSetSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterSetSpecification.swift; sourceTree = "<group>"; };
+		4219E1BF1DB827CF00B3204A /* CountSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountSpecification.swift; sourceTree = "<group>"; };
+		4219E1C01DB827CF00B3204A /* EmailSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSpecification.swift; sourceTree = "<group>"; };
+		4219E1C11DB827CF00B3204A /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		4219E1C21DB827CF00B3204A /* PredicateSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateSpecification.swift; sourceTree = "<group>"; };
+		4219E1C31DB827CF00B3204A /* RegularExpressionSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionSpecification.swift; sourceTree = "<group>"; };
+		4219E1C41DB827CF00B3204A /* Specification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specification.swift; sourceTree = "<group>"; };
+		4219E1D41DBE9EFB00B3204A /* JSONHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONHelperTests.swift; sourceTree = "<group>"; };
 		422437DF1D71890500EC41E8 /* PickerViewFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewFormItem.swift; sourceTree = "<group>"; };
 		422437E11D71924400EC41E8 /* PickerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerViewCell.swift; sourceTree = "<group>"; };
 		4229CE081D43C386002C28A7 /* PrecisionSliderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSliderTests.swift; sourceTree = "<group>"; };
@@ -193,13 +202,6 @@
 		428683161B346CFE0028DB2F /* ValidateResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateResult.swift; sourceTree = "<group>"; };
 		428683171B346CFE0028DB2F /* ValidateVisitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateVisitor.swift; sourceTree = "<group>"; };
 		428683181B346CFE0028DB2F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4286831A1B346CFE0028DB2F /* CharacterSetSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterSetSpecification.swift; sourceTree = "<group>"; };
-		4286831B1B346CFE0028DB2F /* CountSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountSpecification.swift; sourceTree = "<group>"; };
-		4286831C1B346CFE0028DB2F /* EmailSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSpecification.swift; sourceTree = "<group>"; };
-		4286831D1B346CFE0028DB2F /* Operator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
-		4286831E1B346CFE0028DB2F /* PredicateSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredicateSpecification.swift; sourceTree = "<group>"; };
-		4286831F1B346CFE0028DB2F /* RegularExpressionSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegularExpressionSpecification.swift; sourceTree = "<group>"; };
-		428683201B346CFE0028DB2F /* Specification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specification.swift; sourceTree = "<group>"; };
 		428683221B346CFE0028DB2F /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		428683231B346CFE0028DB2F /* Dictionary+Update.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Update.swift"; sourceTree = "<group>"; };
 		428683241B346CFE0028DB2F /* KeyboardHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
@@ -289,6 +291,20 @@
 			path = FormItems;
 			sourceTree = "<group>";
 		};
+		4219E1BD1DB827CF00B3204A /* Specification */ = {
+			isa = PBXGroup;
+			children = (
+				4219E1BE1DB827CF00B3204A /* CharacterSetSpecification.swift */,
+				4219E1BF1DB827CF00B3204A /* CountSpecification.swift */,
+				4219E1C01DB827CF00B3204A /* EmailSpecification.swift */,
+				4219E1C11DB827CF00B3204A /* Operator.swift */,
+				4219E1C21DB827CF00B3204A /* PredicateSpecification.swift */,
+				4219E1C31DB827CF00B3204A /* RegularExpressionSpecification.swift */,
+				4219E1C41DB827CF00B3204A /* Specification.swift */,
+			);
+			path = Specification;
+			sourceTree = "<group>";
+		};
 		4245B3EA1DA429B500BCB4C7 /* Specification */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +330,7 @@
 				42108D091B34E9F60067FEAA /* FormItems */,
 				428683181B346CFE0028DB2F /* Info.plist */,
 				42FABBC21D4143510066E45A /* PrecisionSlider */,
-				428683191B346CFE0028DB2F /* SpecificationPattern */,
+				4219E1BD1DB827CF00B3204A /* Specification */,
 				4262DF961B34824E00DC2083 /* SwiftFORMImages.xcassets */,
 				428682F71B346CFE0028DB2F /* SwiftyFORM.h */,
 				428683211B346CFE0028DB2F /* Util */,
@@ -379,20 +395,6 @@
 			path = Form;
 			sourceTree = "<group>";
 		};
-		428683191B346CFE0028DB2F /* SpecificationPattern */ = {
-			isa = PBXGroup;
-			children = (
-				4286831A1B346CFE0028DB2F /* CharacterSetSpecification.swift */,
-				4286831B1B346CFE0028DB2F /* CountSpecification.swift */,
-				4286831C1B346CFE0028DB2F /* EmailSpecification.swift */,
-				4286831D1B346CFE0028DB2F /* Operator.swift */,
-				4286831E1B346CFE0028DB2F /* PredicateSpecification.swift */,
-				4286831F1B346CFE0028DB2F /* RegularExpressionSpecification.swift */,
-				428683201B346CFE0028DB2F /* Specification.swift */,
-			);
-			path = SpecificationPattern;
-			sourceTree = "<group>";
-		};
 		428683211B346CFE0028DB2F /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				4286835F1B346D0C0028DB2F /* Info.plist */,
+				4219E1D41DBE9EFB00B3204A /* JSONHelperTests.swift */,
 				4229CE081D43C386002C28A7 /* PrecisionSliderTests.swift */,
 				428683601B346D0C0028DB2F /* PrevNextTests.swift */,
 				4245B3EA1DA429B500BCB4C7 /* Specification */,
@@ -498,7 +501,7 @@
 				TargetAttributes = {
 					42D5DE641A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 					};
 					42D5DE6E1A38167400D5C368 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -550,10 +553,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4286834C1B346CFE0028DB2F /* CharacterSetSpecification.swift in Sources */,
 				42D0050E1B96241100986B3B /* CustomFormItem.swift in Sources */,
 				428683491B346CFE0028DB2F /* ValidateResult.swift in Sources */,
 				42108D221B34E9F60067FEAA /* TextViewFormItem.swift in Sources */,
+				4219E1CA1DB827CF00B3204A /* RegularExpressionSpecification.swift in Sources */,
 				42D297571D49611300561780 /* PrecisionSlider_InnerModel.swift in Sources */,
 				42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */,
 				42108D181B34E9F60067FEAA /* DatePickerFormItem.swift in Sources */,
@@ -563,6 +566,7 @@
 				42108D201B34E9F60067FEAA /* SwitchFormItem.swift in Sources */,
 				428683471B346CFE0028DB2F /* ReloadPersistentValidationStateVisitor.swift in Sources */,
 				428683381B346CFE0028DB2F /* TextViewCell.swift in Sources */,
+				4219E1C71DB827CF00B3204A /* EmailSpecification.swift in Sources */,
 				4286833E1B346CFE0028DB2F /* OptionListViewController.swift in Sources */,
 				42108D191B34E9F60067FEAA /* FormItem.swift in Sources */,
 				42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */,
@@ -572,10 +576,10 @@
 				428683531B346CFE0028DB2F /* DebugViewController.swift in Sources */,
 				428683461B346CFE0028DB2F /* PopulateTableView.swift in Sources */,
 				428683321B346CFE0028DB2F /* OptionViewControllerCell.swift in Sources */,
-				428683511B346CFE0028DB2F /* RegularExpressionSpecification.swift in Sources */,
 				42108D171B34E9F60067FEAA /* ButtonFormItem.swift in Sources */,
 				739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */,
 				4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */,
+				4219E1C61DB827CF00B3204A /* CountSpecification.swift in Sources */,
 				428683581B346CFE0028DB2F /* UITableView+PrevNext.swift in Sources */,
 				739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */,
 				42108D1E1B34E9F60067FEAA /* StaticTextFormItem.swift in Sources */,
@@ -588,22 +592,23 @@
 				425DED631D2823A600EDF891 /* SegmentedControlCell.swift in Sources */,
 				4286834A1B346CFE0028DB2F /* ValidateVisitor.swift in Sources */,
 				42D297551D49579E00561780 /* PrecisionSlider_InnerCollectionViewCells.swift in Sources */,
+				4219E1CB1DB827CF00B3204A /* Specification.swift in Sources */,
+				4219E1C51DB827CF00B3204A /* CharacterSetSpecification.swift in Sources */,
 				42D005181B96348200986B3B /* NSBundle+LoadView.swift in Sources */,
 				420F6CC91D69C17F009D5F57 /* AssignAppearance.swift in Sources */,
 				42108D1F1B34E9F60067FEAA /* StepperFormItem.swift in Sources */,
 				428683401B346CFE0028DB2F /* FormViewController.swift in Sources */,
 				42108D1B1B34E9F60067FEAA /* OptionPickerFormItem.swift in Sources */,
 				428683431B346CFE0028DB2F /* TableViewSection.swift in Sources */,
+				4219E1C91DB827CF00B3204A /* PredicateSpecification.swift in Sources */,
 				428683591B346CFE0028DB2F /* UIView+FirstResponder.swift in Sources */,
 				42108D1A1B34E9F60067FEAA /* MetaFormItem.swift in Sources */,
 				4286832E1B346CFE0028DB2F /* ButtonCell.swift in Sources */,
-				4286834F1B346CFE0028DB2F /* Operator.swift in Sources */,
 				428683411B346CFE0028DB2F /* SelectOptionDelegate.swift in Sources */,
 				428683421B346CFE0028DB2F /* FormTableView.swift in Sources */,
 				4286835B1B346CFE0028DB2F /* UIView+LookupTableView.swift in Sources */,
 				428683391B346CFE0028DB2F /* ViewControllerCell.swift in Sources */,
 				4286832F1B346CFE0028DB2F /* DatePickerCell.swift in Sources */,
-				4286834D1B346CFE0028DB2F /* CountSpecification.swift in Sources */,
 				428683481B346CFE0028DB2F /* TitleWidth.swift in Sources */,
 				428683441B346CFE0028DB2F /* Validator.swift in Sources */,
 				42685D4F1D340D99008ABC3D /* TableViewCellArray.swift in Sources */,
@@ -611,8 +616,8 @@
 				428683551B346CFE0028DB2F /* KeyboardHandler.swift in Sources */,
 				4286833D1B346CFE0028DB2F /* SelectRowDelegate.swift in Sources */,
 				428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */,
-				428683521B346CFE0028DB2F /* Specification.swift in Sources */,
 				4286835C1B346CFE0028DB2F /* UIViewController+Alert.swift in Sources */,
+				4219E1C81DB827CF00B3204A /* Operator.swift in Sources */,
 				428683561B346CFE0028DB2F /* Logging.swift in Sources */,
 				42096E741B358A7E0068B084 /* SubmitButton.swift in Sources */,
 				42F7521E1D6917CD0014C6ED /* CellDeselector.swift in Sources */,
@@ -623,11 +628,9 @@
 				42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */,
 				42685D4B1D34039B008ABC3D /* PrecisionSliderFormItem.swift in Sources */,
 				4286833C1B346CFE0028DB2F /* CellHeightProvider.swift in Sources */,
-				4286834E1B346CFE0028DB2F /* EmailSpecification.swift in Sources */,
 				42108D1D1B34E9F60067FEAA /* SliderFormItem.swift in Sources */,
 				4259A2C41C23759B00DB4CEB /* AccessoryButtonDelegate.swift in Sources */,
 				428683351B346CFE0028DB2F /* StepperCell.swift in Sources */,
-				428683501B346CFE0028DB2F /* PredicateSpecification.swift in Sources */,
 				4286833F1B346CFE0028DB2F /* FormBuilder.swift in Sources */,
 				428683371B346CFE0028DB2F /* TextFieldCell.swift in Sources */,
 				420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */,
@@ -654,6 +657,7 @@
 				4245B3FA1DA429B500BCB4C7 /* OperatorTests.swift in Sources */,
 				4245B3F81DA429B500BCB4C7 /* CountSpecificationTests.swift in Sources */,
 				4245B3FB1DA429B500BCB4C7 /* PredicateSpecificationTests.swift in Sources */,
+				4219E1D51DBE9EFB00B3204A /* JSONHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

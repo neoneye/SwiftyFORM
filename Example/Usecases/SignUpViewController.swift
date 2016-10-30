@@ -33,7 +33,7 @@ class SignUpViewController: FormViewController {
 		instance.title("User Name").placeholder("required")
 		instance.keyboardType = .asciiCapable
 		instance.autocorrectionType = .no
-		instance.validate(CharacterSetSpecification.lowercaseLetterCharacterSet(), message: "Must be lowercase letters")
+		instance.validate(CharacterSetSpecification.lowercaseLetters, message: "Must be lowercase letters")
 		instance.submitValidate(CountSpecification.min(6), message: "Length must be minimum 6 letters")
 		instance.validate(CountSpecification.max(8), message: "Length must be maximum 8 letters")
 		return instance
@@ -61,7 +61,7 @@ class SignUpViewController: FormViewController {
 		instance.title("PIN Code").password().placeholder("required")
 		instance.keyboardType = .numberPad
 		instance.autocorrectionType = .no
-		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
+		instance.validate(CharacterSetSpecification.decimalDigits, message: "Must be digits")
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance

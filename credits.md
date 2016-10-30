@@ -2,6 +2,8 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Alexey Bondarchuk](https://github.com/lMorninGl)
+* [Monica Silotto](https://github.com/h-umus)
 * [JuseongJee](https://github.com/JuseongJee)
 * [Walter Carli](https://github.com/Walkersneps)
 * [Jungho Bang](https://github.com/bangtoven)

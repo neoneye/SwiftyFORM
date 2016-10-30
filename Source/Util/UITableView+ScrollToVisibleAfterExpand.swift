@@ -2,11 +2,9 @@
 import UIKit
 
 extension UITableView {
-	/**
-	This is supposed to be run after the expand row animation has completed.
-	This function ensures that the main row and its expanded row are both fully visible.
-	If the rows are obscured it will scrolls to make them visible.
-	*/
+	/// This is supposed to be run after the expand row animation has completed.
+	/// This function ensures that the main row and its expanded row are both fully visible.
+	/// If the rows are obscured it will scrolls to make them visible.
 	internal func form_scrollToVisibleAfterExpand(_ indexPath: IndexPath) {
 		let rect = rectForRow(at: indexPath)
 		let focusArea_minY = rect.minY - (contentOffset.y + contentInset.top)
