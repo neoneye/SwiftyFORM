@@ -17,6 +17,12 @@ public class SectionHeaderTitleFormItem: FormItem {
 		visitor.visit(object: self)
 	}
 	
+	/// The section title is shown in uppercase.
+	///
+	/// Works best with texts shorter than 50 characters
+	///
+	/// Longer texts that spans multiple lines can cause crashes with expand/collapse animations.
+	/// In this case consider using the `SectionHeaderViewFormItem` class.
 	public var title: String?
 
 	@discardableResult
