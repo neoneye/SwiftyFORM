@@ -50,7 +50,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 
 	// MARK: UITableViewDataSource, UITableViewDelegate
 	
-	func trace(_ items: Any..., function: String = #function) {
+	func trace(_ items: Any?..., function: String = #function) {
 		print("\(function) - \(items)")
 	}
 	
@@ -182,7 +182,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	var numberOfVisibleItems: Int {
 		var count = 0
 		for section in sections {
-			for item in section.cells.visibleItems { count += 1 }
+			count += section.cells.visibleItems.count
 		}
 		return count
 	}
