@@ -20,21 +20,19 @@ public struct ToggleExpandCollapse {
 			expandedCell: expandedCell,
 			sectionArray: sectionArray
 		)
-		print("whatToCollapse: \(whatToCollapse)")
+		//print("whatToCollapse: \(whatToCollapse)")
 		
 		if !whatToCollapse.indexPaths.isEmpty {
 			
-//			for cell in whatToCollapse.toggleCells {
-//				if let cell2 = cell as? AssignAppearance {
-//					cell2.assignDefaultColors()
-//				}
-//			}
+			for cell in whatToCollapse.toggleCells {
+				if let cell2 = cell as? AssignAppearance {
+					cell2.assignDefaultColors()
+				}
+			}
 			
-//			tableView.beginUpdates()
-//			tableView.deleteRows(at: whatToCollapse.indexPaths, with: .fade)
-			print("\n\n\n\n\n\n!!!!!!!!!!!!!!!!!! before crash\n\n\n")
-			tableView.deleteRows(at: whatToCollapse.indexPaths, with: .none)
-//			tableView.endUpdates()
+			tableView.beginUpdates()
+			tableView.deleteRows(at: whatToCollapse.indexPaths, with: .fade)
+			tableView.endUpdates()
 		}
 		
 		// If the expanded cell is hidden then expand it
