@@ -54,32 +54,22 @@ public class KeyboardHandler: NSObject {
 	func keyboardWillShow(_ notification: Notification) {
 //		SwiftyFormLog("show\n\n\n\n\n\n\n\n")
 		innerKeyboardVisible = true
-		let cellOrNil = tableView.form_firstResponder()?.form_cell()
-		if cellOrNil == nil {
+		guard let cell = tableView.form_firstResponder()?.form_cell() else {
 			return
 		}
-		let cell = cellOrNil!
-		
-		let indexPathOrNil = tableView.indexPath(for: cell)
-		if indexPathOrNil == nil {
+		guard let indexPath = tableView.indexPath(for: cell) else {
 			return
 		}
-		let indexPath = indexPathOrNil!
 		
 		let rectForRow = tableView.rectForRow(at: indexPath)
 //		SwiftyFormLog("rectForRow \(NSStringFromCGRect(rectForRow))")
 		
-		let userInfoOrNil: [AnyHashable: Any]? = notification.userInfo
-		if userInfoOrNil == nil {
+		guard let userInfo: [AnyHashable: Any] = notification.userInfo else {
 			return
 		}
-		let userInfo = userInfoOrNil!
-
-		let windowOrNil: UIWindow? = tableView.window
-		if windowOrNil == nil {
+		guard let window: UIWindow = tableView.window else {
 			return
 		}
-		let window = windowOrNil!
 
 		let keyboardFrameEnd = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 //		SwiftyFormLog("keyboardFrameEnd \(NSStringFromCGRect(keyboardFrameEnd))")
