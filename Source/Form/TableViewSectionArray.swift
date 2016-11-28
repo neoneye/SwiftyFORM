@@ -21,12 +21,12 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	}
 	
 	func findVisibleItem(indexPath: IndexPath) -> TableViewCellArrayItem? {
-		if indexPath.section < 0 { return nil }
-		if indexPath.row < 0 { return nil }
-		if indexPath.section >= sections.count { return nil }
+		guard indexPath.section >= 0 else { return nil }
+		guard indexPath.row >= 0 else { return nil }
+		guard indexPath.section < sections.count else { return nil }
 		let section = sections[indexPath.section]
 		let items = section.cells.visibleItems
-		if indexPath.row >= items.count { return nil }
+		guard indexPath.row < items.count else { return nil }
 		return items[indexPath.row]
 	}
 	
