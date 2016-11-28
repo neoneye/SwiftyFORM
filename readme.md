@@ -51,7 +51,7 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder += StaticTextFormItem().title("Hello").value("World")
 	}
 }
@@ -62,7 +62,7 @@ class MyViewController: FormViewController {
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.emailAddress)
 	}
 }
@@ -73,7 +73,7 @@ class MyViewController: FormViewController {
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder += ViewControllerFormItem().title("Go to view controller").viewController(FirstViewController.self)
 	}
 }
@@ -85,7 +85,7 @@ class MyViewController: FormViewController {
 
 ```swift
 class DatePickerBindingViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder += datePicker
 		builder += incrementButton
 		builder += decrementButton
@@ -160,7 +160,7 @@ class DatePickerBindingViewController: FormViewController {
 
 ```swift
 class ChangePasswordViewController: FormViewController {
-	override func populate(builder: FormBuilder) {
+	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Password"
 		builder += SectionHeaderTitleFormItem().title("Your Old Password")
 		builder += passwordOld
