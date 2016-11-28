@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableViewDelegate {
+public class TableViewSectionArray: NSObject {
 	public let sections: [TableViewSection]
 	
 	public init(sections: [TableViewSection]) {
@@ -47,13 +47,35 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		}
 	}
 	
+	var numberOfVisibleItems: Int {
+		var count = 0
+		for section in sections {
+			count += section.cells.visibleItems.count
+		}
+		return count
+	}
 
-	// MARK: UITableViewDataSource, UITableViewDelegate
-	
+	public override var debugDescription: String {
+		var result = [String]()
+		result.append("============ number of sections: \(sections.count)")
+		for (sectionIndex, section) in sections.enumerated() {
+			result.append("  --- section: \(sectionIndex), number of cells: \(section.cells.visibleItems.count)")
+			for (rowIndex, item) in section.cells.visibleItems.enumerated() {
+				let cellType = type(of: item.cell)
+				let s = "    \(sectionIndex).\(rowIndex) \(cellType)"
+				result.append(s)
+			}
+		}
+		result.append("============")
+		return result.joined(separator: "\n")
+	}
+
 	func trace(_ items: Any?..., function: String = #function) {
 		//print("\(function) - \(items)")
 	}
-	
+}
+
+extension TableViewSectionArray: UITableViewDataSource {
 	public func numberOfSections(in tableView: UITableView) -> Int {
 		let returnValue = sections.count
 		trace(returnValue)
@@ -71,12 +93,7 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		trace(indexPath, returnValue)
 		return returnValue
 	}
-	
-	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		sections[indexPath.section].tableView(tableView, didSelectRowAt: indexPath)
-		trace(indexPath)
-	}
-	
+
 	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		let returnValue = sections[section].tableView(tableView, titleForHeaderInSection: section)
 		trace(section, returnValue)
@@ -87,6 +104,13 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		let returnValue = sections[section].tableView(tableView, titleForFooterInSection: section)
 		trace(section, returnValue)
 		return returnValue
+	}
+}
+
+extension TableViewSectionArray: UITableViewDelegate {
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		sections[indexPath.section].tableView(tableView, didSelectRowAt: indexPath)
+		trace(indexPath)
 	}
 	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -134,9 +158,9 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 		sections[indexPath.section].tableView(tableView, accessoryButtonTappedForRowWith: indexPath)
 		trace(indexPath)
 	}
-	
-	// MARK: UIScrollViewDelegate
-	
+}
+
+extension TableViewSectionArray: UIScrollViewDelegate {
 	/// hide keyboard when the user starts scrolling
 	public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 		guard let responder = scrollView.form_firstResponder() else {
@@ -159,31 +183,5 @@ public class TableViewSectionArray: NSObject, UITableViewDataSource, UITableView
 	public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
 		scrollView.form_firstResponder()?.resignFirstResponder()
 		return true
-	}
-	
-	
-	// MARK: CustomDebugStringConvertible
-	
-	public override var debugDescription: String {
-		var result = [String]()
-		result.append("============ number of sections: \(sections.count)")
-		for (sectionIndex, section) in sections.enumerated() {
-			result.append("  --- section: \(sectionIndex), number of cells: \(section.cells.visibleItems.count)")
-			for (rowIndex, item) in section.cells.visibleItems.enumerated() {
-				let cellType = type(of: item.cell)
-				let s = "    \(sectionIndex).\(rowIndex) \(cellType)"
-				result.append(s)
-			}
-		}
-		result.append("============")
-		return result.joined(separator: "\n")
-	}
-
-	var numberOfVisibleItems: Int {
-		var count = 0
-		for section in sections {
-			count += section.cells.visibleItems.count
-		}
-		return count
 	}
 }
