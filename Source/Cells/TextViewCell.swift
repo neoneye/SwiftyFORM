@@ -19,7 +19,7 @@ public struct TextViewCellModel {
 	}
 }
 
-public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvider {
+public class TextViewCell: UITableViewCell {
 	public let titleLabel = UILabel()
 	public let placeholderLabel = UILabel()
 	public let textView = UITextView()
@@ -114,15 +114,6 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		_ = resignFirstResponder()
 	}
 	
-	public func textViewDidBeginEditing(_ textView: UITextView) {
-		updateToolbarButtons()
-	}
-
-	public func textViewDidChange(_ textView: UITextView) {
-		updateValue()
-		model.valueDidChange(textView.text)
-	}
-
 	public func updateValue() {
 		let s = textView.text
 		let hasText = (s?.characters.count)! > 0
@@ -192,7 +183,6 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		return result
 	}
 
-
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
@@ -202,15 +192,8 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 		textView.frame = sizes.textViewFrame
 	}
 	
-	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
-		let value = sizes.cellHeight
-		//SwiftyFormLog("compute height of row: \(value)")
-		return value
-	}
-	
 	// MARK: UIResponder
-	
+
 	public override var canBecomeFirstResponder : Bool {
 		return true
 	}
@@ -221,5 +204,25 @@ public class TextViewCell: UITableViewCell, UITextViewDelegate, CellHeightProvid
 	
 	public override func resignFirstResponder() -> Bool {
 		return textView.resignFirstResponder()
+	}
+}
+
+extension TextViewCell: UITextViewDelegate {
+	public func textViewDidBeginEditing(_ textView: UITextView) {
+		updateToolbarButtons()
+	}
+	
+	public func textViewDidChange(_ textView: UITextView) {
+		updateValue()
+		model.valueDidChange(textView.text)
+	}
+}
+
+extension TextViewCell: CellHeightProvider {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
+		let value = sizes.cellHeight
+		//SwiftyFormLog("compute height of row: \(value)")
+		return value
 	}
 }
