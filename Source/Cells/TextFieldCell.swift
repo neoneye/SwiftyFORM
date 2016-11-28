@@ -3,7 +3,6 @@ import UIKit
 
 
 public class CustomTextField: UITextField {
-	
 	public func configure() {
 		backgroundColor = UIColor.white
 		autocapitalizationType = .sentences
@@ -12,7 +11,6 @@ public class CustomTextField: UITextField {
 		returnKeyType = .done
 		clearButtonMode = .whileEditing
 	}
-	
 }
 
 
@@ -54,7 +52,7 @@ public struct TextFieldFormItemCellModel {
 	}
 }
 
-public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHeightProvider {
+public class TextFieldFormItemCell: UITableViewCell {
 	public let model: TextFieldFormItemCellModel
 	public let titleLabel = UILabel()
 	public let textField = CustomTextField()
@@ -247,17 +245,6 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		_ = validateAndUpdateErrorIfNeeded(value, shouldInstallTimer: false, checkSubmitRule: false)
 	}
 	
-
-	// Hide the keyboard when the user taps the return key in this UITextField
-	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let s = textField.text ?? ""
-		let isTextValid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: true)
-		if isTextValid {
-			textField.resignFirstResponder()
-		}
-		return false
-	}
-	
 	public func updateErrorLabel(_ result: ValidateResult) {
 		switch result {
 		case .valid:
@@ -359,13 +346,6 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 			return true
 		}
 	}
-
-	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		let textFieldString: NSString = textField.text as NSString? ?? ""
-		let s = textFieldString.replacingCharacters(in: range, with:string)
-		let valid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: false)
-		return valid
-	}
 	
 	public func timerUpdate() {
 		invalidateTimer()
@@ -383,16 +363,6 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		_ = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: false, checkSubmitRule: true)
 	}
 
-	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
-		let value = sizes.cellHeight
-		//SwiftyFormLog("compute height of row: \(value)")
-		return value
-	}
-	
-	public func textFieldDidBeginEditing(_ textField: UITextField) {
-		updateToolbarButtons()
-	}
 	
 	// MARK: UIResponder
 	
@@ -408,4 +378,36 @@ public class TextFieldFormItemCell: UITableViewCell, UITextFieldDelegate, CellHe
 		return textField.resignFirstResponder()
 	}
 	
+}
+
+extension TextFieldFormItemCell: UITextFieldDelegate {
+	public func textFieldDidBeginEditing(_ textField: UITextField) {
+		updateToolbarButtons()
+	}
+
+	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		let textFieldString: NSString = textField.text as NSString? ?? ""
+		let s = textFieldString.replacingCharacters(in: range, with:string)
+		let valid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: false)
+		return valid
+	}
+
+	// Hide the keyboard when the user taps the return key in this UITextField
+	public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+		let s = textField.text ?? ""
+		let isTextValid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: true)
+		if isTextValid {
+			textField.resignFirstResponder()
+		}
+		return false
+	}
+}
+
+extension TextFieldFormItemCell: CellHeightProvider {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
+		let value = sizes.cellHeight
+		//SwiftyFormLog("compute height of row: \(value)")
+		return value
+	}
 }
