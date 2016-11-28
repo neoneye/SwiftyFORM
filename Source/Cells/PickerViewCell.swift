@@ -183,26 +183,8 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 
 Row containing only a `UIPickerView`
 */
-public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDisplayCellDelegate, ExpandedCell, UIPickerViewDataSource, UIPickerViewDelegate {
+public class PickerViewExpandedCell: UITableViewCell {
 	weak var collapsedCell: PickerViewToggleCell?
-
-	public var toggleCell: UITableViewCell? {
-		return collapsedCell
-	}
-	
-	public var isCollapsable: Bool {
-		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
-	}
-
-	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return PickerViewCellConstants.CellExpanded.height
-	}
-
-	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
-		if let model = collapsedCell?.model {
-			configure(model)
-		}
-	}
 
 	lazy var pickerView: UIPickerView = {
 		let instance = UIPickerView()
@@ -264,10 +246,10 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		*/
 		pickerView.setNeedsLayout()
 	}
-	
+}
 
-	// MARK: UIPickerViewDataSource / UIPickerViewDelegate
-	
+
+extension PickerViewExpandedCell: UIPickerViewDataSource {
 	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return titles.count
 	}
@@ -275,7 +257,10 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		return titles[component].count
 	}
-	
+}
+
+
+extension PickerViewExpandedCell: UIPickerViewDelegate {
 	public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		return titles[component][row]
 	}
@@ -288,6 +273,34 @@ public class PickerViewExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		return 44
 	}
 }
+
+
+extension PickerViewExpandedCell: CellHeightProvider {
+	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
+		return PickerViewCellConstants.CellExpanded.height
+	}
+}
+
+
+extension PickerViewExpandedCell: WillDisplayCellDelegate {
+	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
+		if let model = collapsedCell?.model {
+			configure(model)
+		}
+	}
+}
+
+
+extension PickerViewExpandedCell: ExpandedCell {
+	public var toggleCell: UITableViewCell? {
+		return collapsedCell
+	}
+	
+	public var isCollapsable: Bool {
+		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
+	}
+}
+
 
 extension UIPickerView {
 	func form_selectRows(_ rows: [Int], animated: Bool) {
