@@ -7,6 +7,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
 		instance.datePickerMode = .time
+		instance.minuteInterval = 15
 		return instance
 		}()
 	
