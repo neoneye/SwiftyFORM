@@ -14,6 +14,7 @@ public class DatePickerCellModel {
 	var locale: Locale? = nil // default is Locale.current, setting nil returns to default
 	var minimumDate: Date? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	var maximumDate: Date? = nil // default is nil
+	var minuteInterval: Int = 1
 	var date: Date = Date()
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.default
@@ -258,6 +259,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		datePicker.datePickerMode = model.datePickerMode
 		datePicker.minimumDate = model.minimumDate
 		datePicker.maximumDate = model.maximumDate
+		datePicker.minuteInterval = model.minuteInterval
 		datePicker.locale = model.resolvedLocale
 		datePicker.date = model.date
 	}

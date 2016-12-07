@@ -157,6 +157,7 @@ class PopulateTableView: FormItemVisitor {
 		model.locale = object.locale
 		model.minimumDate = object.minimumDate
 		model.maximumDate = object.maximumDate
+		model.minuteInterval = object.minuteInterval
 		model.date = object.value
 		
 		switch object.behavior {
