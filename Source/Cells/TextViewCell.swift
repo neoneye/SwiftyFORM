@@ -143,7 +143,7 @@ public class TextViewCell: UITableViewCell {
 		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
 		var (slice, remainder) = veryTallCell.divided(atDistance: 10, from: .minYEdge)
 		
-		if true {
+		do {
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
 			availableSize.width -= dx * 2
@@ -154,7 +154,7 @@ public class TextViewCell: UITableViewCell {
 		
 		let bottomRemainder = remainder
 		
-		if true {
+		do {
 			(slice, remainder) = bottomRemainder.divided(atDistance: 5.5, from: .minYEdge)
 			let dx: CGFloat = 16
 			var availableSize = veryTallCell.size
@@ -166,7 +166,7 @@ public class TextViewCell: UITableViewCell {
 		(slice, remainder) = remainder.divided(atDistance: 10, from: .minYEdge)
 		maxY = slice.maxY
 		
-		if true {
+		do {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
 			(slice, remainder) = bottomRemainder.divided(atDistance: size.height, from: .minYEdge)
