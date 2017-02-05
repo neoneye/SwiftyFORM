@@ -168,14 +168,19 @@ public class TextFieldFormItemCell: UITableViewCell {
 	
 	public var titleWidthMode: TitleWidthMode = .auto
 	
-	public func compute(_ cellWidth: CGFloat) -> TextFieldFormItemCellSizes {
+	public func compute() -> TextFieldFormItemCellSizes {
+		let cellWidth: CGFloat = bounds.width
 
 		var titleLabelFrame = CGRect.zero
 		var textFieldFrame = CGRect.zero
 		var errorLabelFrame = CGRect.zero
 		var cellHeight: CGFloat = 0
 		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
-		let area = veryTallCell.insetBy(dx: 16, dy: 0)
+
+		var layoutMargins = self.layoutMargins
+		layoutMargins.top = 0
+		layoutMargins.bottom = 0
+		let area = UIEdgeInsetsInsetRect(veryTallCell, layoutMargins)
 		
 		let (topRect, _) = area.divided(atDistance: 44, from: .minYEdge)
 		do {
@@ -218,7 +223,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		//SwiftyFormLog("layoutSubviews")
-		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
+		let sizes: TextFieldFormItemCellSizes = compute()
 		titleLabel.frame = sizes.titleLabelFrame
 		textField.frame = sizes.textFieldFrame
 		errorLabel.frame = sizes.errorLabelFrame
@@ -405,7 +410,7 @@ extension TextFieldFormItemCell: UITextFieldDelegate {
 
 extension TextFieldFormItemCell: CellHeightProvider {
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		let sizes: TextFieldFormItemCellSizes = compute(bounds.width)
+		let sizes: TextFieldFormItemCellSizes = compute()
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
