@@ -229,9 +229,20 @@ public class PickerViewExpandedCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	fileprivate var componentWidth: CGFloat = 0
+	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		pickerView.frame = contentView.bounds
+		
+		// Ensures that all UIPickerView components stay within the left/right layoutMargins
+		let rect = UIEdgeInsetsInsetRect(pickerView.frame, layoutMargins)
+		let numberOfComponents = titles.count
+		if numberOfComponents >= 1 {
+			componentWidth = rect.width / CGFloat(numberOfComponents)
+		} else {
+			componentWidth = rect.width
+		}
 		
 		/*
 		Workaround:
@@ -271,6 +282,10 @@ extension PickerViewExpandedCell: UIPickerViewDelegate {
 	
 	public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
 		return 44
+	}
+	
+	public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+		return componentWidth
 	}
 }
 
