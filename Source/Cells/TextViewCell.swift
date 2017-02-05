@@ -42,9 +42,7 @@ public class TextViewCell: UITableViewCell {
 		textView.backgroundColor = UIColor.clear
 		textView.isScrollEnabled = false
 		textView.delegate = self
-
 		textView.textContainer.lineFragmentPadding = 0
-		textView.textContainerInset = UIEdgeInsetsMake(5, 16, 10, 16)
 
 		if model.toolbarMode == .simple {
 			textView.inputAccessoryView = toolbar
@@ -133,35 +131,36 @@ public class TextViewCell: UITableViewCell {
 		updateValue()
 	}
 	
-	public func compute(_ cellWidth: CGFloat) -> TextViewFormItemCellSizes {
+	public func compute() -> TextViewFormItemCellSizes {
+		let cellWidth: CGFloat = bounds.width
 		
 		var titleLabelFrame = CGRect.zero
 		var placeholderLabelFrame = CGRect.zero
 		var textViewFrame = CGRect.zero
 		let errorLabelFrame = CGRect.zero
 		var maxY: CGFloat = 0
-		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
+		var veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
+
+		var layoutMargins = self.layoutMargins
+		layoutMargins.top = 0
+		layoutMargins.bottom = 0
+		veryTallCell = UIEdgeInsetsInsetRect(veryTallCell, layoutMargins)
+		
 		var (slice, remainder) = veryTallCell.divided(atDistance: 10, from: .minYEdge)
 		
 		do {
-			let dx: CGFloat = 16
-			var availableSize = veryTallCell.size
-			availableSize.width -= dx * 2
-			let size = titleLabel.sizeThatFits(availableSize)
+			let size = titleLabel.sizeThatFits(veryTallCell.size)
 			(slice, remainder) = remainder.divided(atDistance: size.height, from: .minYEdge)
-			titleLabelFrame = slice.insetBy(dx: dx, dy: 0)
+			titleLabelFrame = slice
 		}
 		
 		let bottomRemainder = remainder
 		
 		do {
 			(slice, remainder) = bottomRemainder.divided(atDistance: 5.5, from: .minYEdge)
-			let dx: CGFloat = 16
-			var availableSize = veryTallCell.size
-			availableSize.width -= dx * 2
-			let size = placeholderLabel.sizeThatFits(availableSize)
+			let size = placeholderLabel.sizeThatFits(veryTallCell.size)
 			(slice, remainder) = remainder.divided(atDistance: size.height, from: .minYEdge)
-			placeholderLabelFrame = slice.insetBy(dx: dx, dy: 0)
+			placeholderLabelFrame = slice
 		}
 		(slice, remainder) = remainder.divided(atDistance: 10, from: .minYEdge)
 		maxY = slice.maxY
@@ -170,7 +169,7 @@ public class TextViewCell: UITableViewCell {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
 			(slice, remainder) = bottomRemainder.divided(atDistance: size.height, from: .minYEdge)
-			textViewFrame = slice
+			textViewFrame = CGRect(x: bounds.minX, y: slice.minY, width: bounds.width, height: slice.height)
 		}
 		maxY = max(textViewFrame.maxY, maxY)
 
@@ -186,10 +185,15 @@ public class TextViewCell: UITableViewCell {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		
-		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
+		let sizes: TextViewFormItemCellSizes = compute()
 		titleLabel.frame = sizes.titleLabelFrame
 		placeholderLabel.frame = sizes.placeholderLabelFrame
 		textView.frame = sizes.textViewFrame
+		
+		var textViewInset = self.layoutMargins
+		textViewInset.top = 5
+		textViewInset.bottom = 10
+		textView.textContainerInset = textViewInset
 	}
 	
 	// MARK: UIResponder
@@ -220,7 +224,7 @@ extension TextViewCell: UITextViewDelegate {
 
 extension TextViewCell: CellHeightProvider {
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		let sizes: TextViewFormItemCellSizes = compute(bounds.width)
+		let sizes: TextViewFormItemCellSizes = compute()
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
