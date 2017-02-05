@@ -178,7 +178,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		let area = veryTallCell.insetBy(dx: 16, dy: 0)
 		
 		let (topRect, _) = area.divided(atDistance: 44, from: .minYEdge)
-		if true {
+		do {
 			let size = titleLabel.sizeThatFits(area.size)
 			var titleLabelWidth = size.width
 			
@@ -200,7 +200,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 
 			cellHeight = ceil(textFieldFrame.height)
 		}
-		if true {
+		do {
 			let size = errorLabel.sizeThatFits(area.size)
 //			SwiftyFormLog("error label size \(size)")
 			if size.height > 0.1 {
