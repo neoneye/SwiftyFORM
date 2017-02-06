@@ -123,6 +123,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["locale"] = object.locale
 		dict["minimumDate"] = object.minimumDate
 		dict["maximumDate"] = object.maximumDate
+		dict["minuteInterval"] = object.minuteInterval
 	}
 	
 	public func visit(object: ButtonFormItem) {

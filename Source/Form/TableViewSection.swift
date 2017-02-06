@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDelegate {
+public class TableViewSection: NSObject {
 	public let cells: TableViewCellArray
 	public let header: TableViewSectionPart
 	public let footer: TableViewSectionPart
@@ -12,7 +12,9 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 		self.footer = footer
 		super.init()
 	}
-	
+}
+
+extension TableViewSection: UITableViewDataSource {
 	public func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
@@ -36,7 +38,9 @@ public class TableViewSection: NSObject, UITableViewDataSource, UITableViewDeleg
 	public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
 		return footer.title
 	}
+}
 
+extension TableViewSection: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		return header.view
 	}

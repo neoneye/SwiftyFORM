@@ -39,7 +39,7 @@ public class StepperCell: UITableViewCell {
 		stepperView.sizeToFit()
 		valueLabel.sizeToFit()
 		
-		let rightPadding: CGFloat = 17
+		let rightPadding: CGFloat = layoutMargins.right
 		let valueStepperPadding: CGFloat = 10
 		
 		let valueSize = valueLabel.frame.size
