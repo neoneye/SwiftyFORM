@@ -27,7 +27,7 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 ## Requirements
 
 - iOS 9.0+
-- Xcode 8.1+
+- Xcode 8.2.1+
 - Swift 3.0+
 
 
@@ -240,7 +240,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 1.2
+github "neoneye/SwiftyFORM" ~> 1.3
 ```
 
 Then, run the following command:
