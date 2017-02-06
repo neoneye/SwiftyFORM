@@ -1,5 +1,10 @@
 ## 📄 Change Log
 
+### 1.3.0
+
+ * iPad: cells now adheres to `cellLayoutMarginsFollowReadableWidth = true` and uses the layoutMargin left/right for computing the frames.
+ * DatePickerFormItem.minuteInterval added.
+
 ### 1.2.0
 
  * Simplified specification pattern. In the future the `CompositeSpecification` class will be removed. Instead of subclassing `CompositeSpecification` one must instead subclass `Specification`.
