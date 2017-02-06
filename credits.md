@@ -2,6 +2,7 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Philipp Böhm](https://github.com/pboehm)
 * [Matt Baer](https://github.com/thebaer)
 * [Tobias Due Munk](https://github.com/duemunk)
 * [Chester Liu](https://github.com/skyline75489)
