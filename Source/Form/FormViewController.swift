@@ -10,9 +10,9 @@ open class FormViewController: UIViewController {
 		super.init(nibName: nil, bundle: nil)
 	}
 	
-	required public init(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		SwiftyFormLog("super init")
-		super.init(nibName: nil, bundle: nil)
+		super.init(coder: aDecoder)
 	}
 
 	override open func loadView() {
