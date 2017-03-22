@@ -14,11 +14,12 @@ class FirstViewController: FormViewController {
 		
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
+		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
+		builder += ViewControllerFormItem().title("Settings").storyboard("Settings", bundle: nil)
 		builder += ViewControllerFormItem().title("Change Password").viewController(ChangePasswordViewController.self)
 		builder += ViewControllerFormItem().title("Report").viewController(ReportViewController.self)
 		builder += ViewControllerFormItem().title("Rate").viewController(RateAppViewController.self)
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
-		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("Non-SwiftyFORM")
 		builder += ViewControllerFormItem().title("UICollectionViewController").viewController(MyCollectionViewController.self)
