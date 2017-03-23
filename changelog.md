@@ -5,6 +5,7 @@
  * Classes derived from FormViewController can now be used inside storyboards. Added 'SettingsViewController' that demonstrates this.
    FormViewController.init(coder aDecoder: NSCoder) have until now invoked super.init(nibName: nil, bundle: nil) so it has never worked inside a storyboard.
    FormViewController now instead implements init?(coder aDecoder: NSCoder) so it can invoke super.init(coder: aDecoder).
+ * FormViewController.reloadForm() added.
 
 ### 1.3.0
 
