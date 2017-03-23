@@ -42,6 +42,7 @@
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
 		42B1BB471E82C1C10090156A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42B1BB461E82C1C10090156A /* Settings.storyboard */; };
 		42B1BB491E82C1EF0090156A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BB481E82C1EF0090156A /* SettingsViewController.swift */; };
+		42B1BB581E8462D50090156A /* ReloadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BB571E8462D50090156A /* ReloadingViewController.swift */; };
 		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
 		42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */; };
 		42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */; };
@@ -137,6 +138,7 @@
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
 		42B1BB461E82C1C10090156A /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		42B1BB481E82C1EF0090156A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		42B1BB571E8462D50090156A /* ReloadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadingViewController.swift; sourceTree = "<group>"; };
 		42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
 		42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial0_StaticText_ViewController.swift; sourceTree = "<group>"; };
 		42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial1_TextField_ViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
 				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
+				42B1BB571E8462D50090156A /* ReloadingViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
 				420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */,
 				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
@@ -499,6 +502,7 @@
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
 				42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */,
+				42B1BB581E8462D50090156A /* ReloadingViewController.swift in Sources */,
 				42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
