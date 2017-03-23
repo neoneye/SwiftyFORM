@@ -18,17 +18,22 @@ open class FormViewController: UIViewController {
 	override open func loadView() {
 		SwiftyFormLog("super loadview")
 		view = tableView
-		
 		keyboardHandler = KeyboardHandler(tableView: tableView)
-		
+		populateAndSetup()
+	}
+	
+	open func populateAndSetup() {
 		populate(formBuilder)
 		title = formBuilder.navigationTitle
-		
 		dataSource = formBuilder.result(self)
-		self.tableView.dataSource = dataSource
-		self.tableView.delegate = dataSource
-		
-		//debugPrint(dataSource!)
+		tableView.dataSource = dataSource
+		tableView.delegate = dataSource
+	}
+
+	open func reloadForm() {
+		formBuilder.removeAll()
+		populateAndSetup()
+		tableView.reloadData()
 	}
 
 	open func populate(_ builder: FormBuilder) {
