@@ -101,7 +101,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (value: NSAttributedString?) in
-			SwiftyFormLog("sync value \(value)")
+			SwiftyFormLog("sync value \(String(describing: value))")
 			if let c = weakCell {
 				var m = AttributedTextCellModel()
 				m.titleAttributedText = c.model.titleAttributedText
@@ -226,7 +226,7 @@ class PopulateTableView: FormItemVisitor {
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: OptionRowModel?) in
-			SwiftyFormLog("propagate from cell to model. value \(value)")
+			SwiftyFormLog("propagate from cell to model. value \(String(describing: value))")
 			weakObject?.innerSelected = value
 			weakObject?.valueDidChange(value)
 		}
@@ -240,7 +240,7 @@ class PopulateTableView: FormItemVisitor {
 		
 		weak var weakCell = cell
 		object.syncCellWithValue = { (selected: OptionRowModel?) in
-			SwiftyFormLog("propagate from model to cell. option: \(selected?.title)")
+			SwiftyFormLog("propagate from model to cell. option: \(String(describing: selected?.title))")
 			weakCell?.setSelectedOptionRowWithoutPropagation(selected)
 		}
 	}
@@ -660,7 +660,7 @@ class PopulateTableView: FormItemVisitor {
 	class func prepareDismissCommand(_ willPopCommand: WillPopCommandProtocol, parentViewController: UIViewController, cell: ViewControllerFormItemCell) -> CommandProtocol {
 		weak var weakViewController = parentViewController
 		let command = CommandBlock { (childViewController: UIViewController, returnObject: AnyObject?) in
-			SwiftyFormLog("pop: \(returnObject)")
+			SwiftyFormLog("pop: \(String(describing: returnObject))")
 			if let vc = weakViewController {
 				let context = ViewControllerFormItemPopContext(parentViewController: vc, childViewController: childViewController, cell: cell, returnedObject: returnObject)
 				willPopCommand.execute(context)
