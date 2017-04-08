@@ -21,7 +21,7 @@ class OptionsViewController: FormViewController {
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
-			print("adopt bitcoin: \(selected)")
+			print("adopt bitcoin: \(String(describing: selected))")
 		}
 		return instance
 		}()
@@ -32,7 +32,7 @@ class OptionsViewController: FormViewController {
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
-			print("explore space: \(selected)")
+			print("explore space: \(String(describing: selected))")
 		}
 		return instance
 		}()
@@ -43,7 +43,7 @@ class OptionsViewController: FormViewController {
 		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
 		instance.selectOptionWithTitle("Neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
-			print("world peace: \(selected)")
+			print("world peace: \(String(describing: selected))")
 		}
 		return instance
 		}()
@@ -58,7 +58,7 @@ class OptionsViewController: FormViewController {
 		instance.append("Strongly agree", identifier: "strongly_agree")
 		instance.selectOptionWithIdentifier("neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
-			print("stop global warming: \(selected)")
+			print("stop global warming: \(String(describing: selected))")
 		}
 		return instance
 		}()

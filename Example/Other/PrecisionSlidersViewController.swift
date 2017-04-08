@@ -6,6 +6,7 @@ class PrecisionSlidersViewController: FormViewController {
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Precision Sliders"
 		builder.toolbarMode = .none
+		builder.demo_showInfo("Zoom can be adjusted\nusing a pinch gesture")
 		
 		builder += SectionHeaderTitleFormItem().title("Zoom UI enabled")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(0).maximumValue(255).value(127).title("A 0 255").enableZoomUI()

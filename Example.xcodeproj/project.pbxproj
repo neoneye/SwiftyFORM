@@ -40,6 +40,9 @@
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
 		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
+		42B1BB471E82C1C10090156A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42B1BB461E82C1C10090156A /* Settings.storyboard */; };
+		42B1BB491E82C1EF0090156A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BB481E82C1EF0090156A /* SettingsViewController.swift */; };
+		42B1BB581E8462D50090156A /* ReloadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BB571E8462D50090156A /* ReloadingViewController.swift */; };
 		42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */; };
 		42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */; };
 		42C6DD961D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */; };
@@ -133,6 +136,9 @@
 		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
+		42B1BB461E82C1C10090156A /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		42B1BB481E82C1EF0090156A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		42B1BB571E8462D50090156A /* ReloadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReloadingViewController.swift; sourceTree = "<group>"; };
 		42B5BC0E1B8CC2A000A70A54 /* SteppersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SteppersViewController.swift; sourceTree = "<group>"; };
 		42C6DD931D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial0_StaticText_ViewController.swift; sourceTree = "<group>"; };
 		42C6DD941D76253200D82DC9 /* Tutorial1_TextField_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tutorial1_TextField_ViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 				42096E6D1B357ECA0068B084 /* OptionsViewController.swift */,
 				422437E31D719A4E00EC41E8 /* PickerViewViewController.swift */,
 				42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */,
+				42B1BB571E8462D50090156A /* ReloadingViewController.swift */,
 				42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */,
 				420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */,
 				42096E6B1B357CEE0068B084 /* SlidersViewController.swift */,
@@ -268,6 +275,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		42B1BB451E82C1B40090156A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				42B1BB461E82C1C10090156A /* Settings.storyboard */,
+				42B1BB481E82C1EF0090156A /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		42C6DD921D76253200D82DC9 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +323,7 @@
 				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
 				4267986E1D8DB17B002275CA /* Non-SwiftyFORM */,
 				42589DC21B3447EA007CA8C1 /* Other */,
+				42B1BB451E82C1B40090156A /* Settings */,
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
 				42589DCC1B3447EA007CA8C1 /* TextView */,
@@ -434,6 +451,7 @@
 				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
 				4244C6941D6B864600FE1ECB /* LaunchScreen.storyboard in Resources */,
 				423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */,
+				42B1BB471E82C1C10090156A /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +469,7 @@
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
 				42C6DD951D76253200D82DC9 /* Tutorial0_StaticText_ViewController.swift in Sources */,
 				42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */,
+				42B1BB491E82C1EF0090156A /* SettingsViewController.swift in Sources */,
 				42589DDB1B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift in Sources */,
 				42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */,
 				42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */,
@@ -483,6 +502,7 @@
 				42108D2F1B3576110067FEAA /* SignUpViewController.swift in Sources */,
 				42589DDC1B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift in Sources */,
 				42B5BC0F1B8CC2A000A70A54 /* SteppersViewController.swift in Sources */,
+				42B1BB581E8462D50090156A /* ReloadingViewController.swift in Sources */,
 				42589DB71B3447E1007CA8C1 /* DatePickerRangeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

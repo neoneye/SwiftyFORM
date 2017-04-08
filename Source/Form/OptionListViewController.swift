@@ -17,7 +17,7 @@ class OptionListViewController: FormViewController, SelectOptionDelegate {
 	}
 	
 	override func populate(_ builder: FormBuilder) {
-		SwiftyFormLog("preselect option \(optionField.selected?.title)")
+		SwiftyFormLog("preselect option \(String(describing: optionField.selected?.title))")
 		builder.navigationTitle = optionField.title
 		for optionRow: OptionRowModel in optionField.options {
 			let option = OptionRowFormItem()
