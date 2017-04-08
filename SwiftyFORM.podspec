@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftyFORM'
-  s.version = '1.3.1'
+  s.version = '1.4.0'
   s.license = 'MIT'
   s.summary = 'SwiftyFORM is an iOS framework for creating forms'
   s.homepage = 'https://github.com/neoneye/SwiftyFORM'
@@ -8,5 +8,5 @@ Pod::Spec.new do |s|
   s.source = { :git => 'https://github.com/neoneye/SwiftyFORM.git', :tag => s.version }
   s.source_files = 'Source/*/*.swift'
   s.ios.deployment_target = '9.0'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0.1' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.1.0' }
 end
