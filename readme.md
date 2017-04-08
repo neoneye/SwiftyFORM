@@ -257,3 +257,10 @@ Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/B
 # 📄 CHANGE LOG
 
 ### See [changelog.md](https://github.com/neoneye/SwiftyFORM/blob/master/changelog.md) 👀
+
+
+# Help, feedback or suggestions?
+
+- [Open an issue](https://github.com/neoneye/SwiftyFORM/issues/new) if you need help, if you found a bug, or if you want to discuss a feature request.
+- [Open a PR](https://github.com/neoneye/SwiftyFORM/pull/new/master) if you want to make some change to SwiftyFORM.
+- Contact [@neoneye on Twitter](https://twitter.com/neoneye) for discussions, news & announcements about SwiftyFORM.
