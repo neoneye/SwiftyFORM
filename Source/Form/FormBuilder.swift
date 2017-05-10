@@ -14,12 +14,11 @@ public enum ToolbarMode {
 }
 
 
-public class FormBuilder: NSObject {
+public class FormBuilder {
 	private var innerItems = [FormItem]()
 	private var alignLeftItems = [AlignLeft]()
 	
-	override public init() {
-		super.init()
+	public init() {
 	}
 	
 	public var navigationTitle: String? = nil
