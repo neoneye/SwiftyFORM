@@ -99,7 +99,7 @@ public class KeyboardHandler {
 		} else {
 			SwiftyFormLog("cell is fully visible, no need to scroll")
 		}
-		let inset: CGFloat = tableView.frame.origin.y + tableView.frame.size.height - keyboardFrame.origin.y
+		let inset: CGFloat = tableView.frame.maxY - keyboardFrame.origin.y
 		//SwiftyFormLog("inset \(inset)")
 		
 		var contentInset: UIEdgeInsets = tableView.contentInset
