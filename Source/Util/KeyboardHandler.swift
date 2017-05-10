@@ -4,7 +4,7 @@ import UIKit
 /// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell.
 ///
 /// Resets insets when the keyboard is hidden.
-public class KeyboardHandler: NSObject {
+public class KeyboardHandler {
 	private let tableView: UITableView
 	private var innerKeyboardVisible: Bool = false
 	
@@ -51,7 +51,7 @@ public class KeyboardHandler: NSObject {
 	}
 	
 	/// The keyboard will appear, scroll content so it's not covered by the keyboard.
-	func keyboardWillShow(_ notification: Notification) {
+	@objc func keyboardWillShow(_ notification: Notification) {
 //		SwiftyFormLog("show\n\n\n\n\n\n\n\n")
 		innerKeyboardVisible = true
 		guard let cell = tableView.form_firstResponder()?.form_cell() else {
@@ -117,7 +117,7 @@ public class KeyboardHandler: NSObject {
 	}
 	
 	/// The keyboard will disappear, restore content insets.
-	func keyboardWillHide(_ notification: Notification) {
+	@objc func keyboardWillHide(_ notification: Notification) {
 //		SwiftyFormLog("\n\n\n\nhide")
 		innerKeyboardVisible = false
 		
