@@ -78,7 +78,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		textField.configure()
 		textField.delegate = self
 		
-		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange(_:)), for: UIControlEvents.editingChanged)
+		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange), for: UIControlEvents.editingChanged)
 		
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(textField)
@@ -229,8 +229,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		errorLabel.frame = sizes.errorLabelFrame
 	}
 	
-	public func valueDidChange(_ sender: AnyObject?) {
-		//SwiftyFormLog("did change")
+	public func valueDidChange() {
 		model.valueDidChange(textField.text ?? "")
 		
 		let result: ValidateResult = model.model.liveValidateValueText()
