@@ -10,18 +10,16 @@ extension Bundle {
 	
 	/* 
 	usage:
-	let cell: ContactPickerCell = try NSBundle.mainBundle().form_loadView("ContactPickerCell")
+	let cell: ContactPickerCell = try Bundle.main.form_loadView("ContactPickerCell")
 	*/
 	public func form_loadView<T>(_ name: String) throws -> T {
-		let topLevelObjects: [AnyObject]! = loadNibNamed(name, owner: self, options: nil) as [AnyObject]!
-		if topLevelObjects == nil {
+		guard let topLevelObjects = loadNibNamed(name, owner: self, options: nil) else {
 			throw FormLoadViewError.expectedXibToExistButGotNil
 		}
-		if topLevelObjects.count != 1 {
+		guard topLevelObjects.count == 1 else {
 			throw FormLoadViewError.expectedXibToContainJustOneButGotDifferentNumberOfObjects
 		}
-		let firstObject: AnyObject! = topLevelObjects.first
-		guard let result = firstObject as? T else {
+		guard let result = topLevelObjects.first as? T else {
 			throw FormLoadViewError.xibReturnedWrongType
 		}
 		return result
