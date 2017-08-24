@@ -23,8 +23,8 @@ class JSONHelperTests: XCTestCase {
 			XCTFail()
 			return
 		}
-		let value = dict2["id"] as Any?
-		let processedValue = JSONHelper.process(value)
+		let value: Any?? = dict2["id"]
+		let processedValue = JSONHelper.process(value!)
 		XCTAssertTrue(processedValue is NSNull)
 	}
 	
