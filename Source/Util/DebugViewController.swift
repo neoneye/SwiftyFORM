@@ -21,10 +21,10 @@ public enum WhatToShow {
 ///
 public class DebugViewController: UIViewController {
 	
-	public let dismissBlock: (Void) -> Void
+	public let dismissBlock: () -> Void
 	public let whatToShow: WhatToShow
 	
-	public init(dismissBlock: @escaping (Void) -> Void, whatToShow: WhatToShow) {
+	public init(dismissBlock: @escaping () -> Void, whatToShow: WhatToShow) {
 		self.dismissBlock = dismissBlock
 		self.whatToShow = whatToShow
 		super.init(nibName: nil, bundle: nil)
@@ -49,7 +49,7 @@ public class DebugViewController: UIViewController {
 	
 	public class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
 		weak var weakSelf = parentViewController
-		let dismissBlock: (Void) -> Void = {
+		let dismissBlock: () -> Void = {
 			if let vc = weakSelf {
 				vc.dismiss(animated: true, completion: nil)
 			}

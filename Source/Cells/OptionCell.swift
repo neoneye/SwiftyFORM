@@ -2,9 +2,9 @@
 import UIKit
 
 public class OptionCell: UITableViewCell, SelectRowDelegate {
-	let innerDidSelectOption: (Void) -> Void
+	let innerDidSelectOption: () -> Void
 	
-	public init(model: OptionRowFormItem, didSelectOption: @escaping (Void) -> Void) {
+	public init(model: OptionRowFormItem, didSelectOption: @escaping () -> Void) {
 		self.innerDidSelectOption = didSelectOption
 		super.init(style: .default, reuseIdentifier: nil)
 		loadWithModel(model)

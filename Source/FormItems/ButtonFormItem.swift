@@ -14,5 +14,5 @@ public class ButtonFormItem: FormItem {
 		return self
 	}
 	
-	public var action: (Void) -> Void = {}
+	public var action: () -> Void = {}
 }

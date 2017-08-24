@@ -37,7 +37,7 @@ public class SectionHeaderViewFormItem: FormItem {
 		visitor.visit(object: self)
 	}
 	
-	public typealias CreateUIView = (Void) -> UIView?
+	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }
 
@@ -65,6 +65,6 @@ public class SectionFooterViewFormItem: FormItem {
 		visitor.visit(object: self)
 	}
 	
-	public typealias CreateUIView = (Void) -> UIView?
+	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }

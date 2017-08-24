@@ -4,7 +4,7 @@ import UIKit
 public struct ButtonCellModel {
 	var title: String = ""
 	
-	var action: (Void) -> Void = {
+	var action: () -> Void = {
 		SwiftyFormLog("action")
 	}
 

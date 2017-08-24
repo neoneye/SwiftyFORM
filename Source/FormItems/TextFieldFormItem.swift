@@ -59,10 +59,10 @@ public class TextFieldFormItem: FormItem {
 		syncCellWithValue(value)
 	}
 	
-	public var reloadPersistentValidationState: (Void) -> Void = {}
+	public var reloadPersistentValidationState: () -> Void = {}
 	
 	
-	public var obtainTitleWidth: (Void) -> CGFloat = {
+	public var obtainTitleWidth: () -> CGFloat = {
 		return 0
 	}
 	

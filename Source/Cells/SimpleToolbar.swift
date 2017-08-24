@@ -2,9 +2,9 @@
 import UIKit
 
 public class SimpleToolbar: UIToolbar {
-	public var jumpToPrevious: (Void) -> Void = {}
-	public var jumpToNext: (Void) -> Void = {}
-	public var dismissKeyboard: (Void) -> Void = {}
+	public var jumpToPrevious: () -> Void = {}
+	public var jumpToNext: () -> Void = {}
+	public var dismissKeyboard: () -> Void = {}
 	
 	public init() {
 		super.init(frame: CGRect.zero)
