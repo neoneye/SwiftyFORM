@@ -364,8 +364,8 @@ public class TextFieldFormItemCell: UITableViewCell {
 	}
 
 	// MARK: UIResponder
-	
-	public override var canBecomeFirstResponder : Bool {
+
+	public override var canBecomeFirstResponder: Bool {
 		return true
 	}
 

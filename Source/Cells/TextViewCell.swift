@@ -198,7 +198,7 @@ public class TextViewCell: UITableViewCell {
 
 	// MARK: UIResponder
 
-	public override var canBecomeFirstResponder : Bool {
+	public override var canBecomeFirstResponder: Bool {
 		return true
 	}
 

@@ -109,7 +109,7 @@ public class PrecisionSliderFormItem: FormItem {
 	
 	The number can go from 0 to +5.
 	*/
-	public var decimalPlaces: UInt = 3  {
+	public var decimalPlaces: UInt = 3 {
 		willSet {
 			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
 		}

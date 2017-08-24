@@ -585,8 +585,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 class PrecisionSlider_InnerCollectionViewFlowLayout: UICollectionViewFlowLayout {
 	weak var model: PrecisionSlider_InnerModel?
-	
-	override var collectionViewContentSize : CGSize {
+
+	override var collectionViewContentSize: CGSize {
 		guard let model = self.model else {
 			print("no model")
 			return CGSize.zero

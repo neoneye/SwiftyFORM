@@ -97,7 +97,7 @@ struct WhatToCollapse {
 					isCollapse = true
 					continue
 				}
-				if let expandedCell2 = item.cell as? ExpandedCell , expandedCell2.isCollapsable {
+				if let expandedCell2 = item.cell as? ExpandedCell, expandedCell2.isCollapsable {
 					if let toggleCell2 = expandedCell2.toggleCell {
 						//print("\(sectionIndex) \(row)  this is a toggle cell to be collapsed")
 						item.hidden = true

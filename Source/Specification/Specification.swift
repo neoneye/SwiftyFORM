@@ -62,8 +62,8 @@ extension Specification {
 public class AndSpecification: Specification {
 	private let one: Specification
 	private let other: Specification
-	
-	public init(_ x: Specification, _ y: Specification)  {
+
+	public init(_ x: Specification, _ y: Specification) {
 		self.one = x
 		self.other = y
 	}
@@ -85,8 +85,8 @@ public class AndSpecification: Specification {
 public class OrSpecification: Specification {
 	private let one: Specification
 	private let other: Specification
-	
-	public init(_ x: Specification, _ y: Specification)  {
+
+	public init(_ x: Specification, _ y: Specification) {
 		self.one = x
 		self.other = y
 	}

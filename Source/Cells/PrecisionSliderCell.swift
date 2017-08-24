@@ -126,8 +126,8 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	}
 
 	// MARK: UIResponder
-	
-	public override var canBecomeFirstResponder : Bool {
+
+	public override var canBecomeFirstResponder: Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
