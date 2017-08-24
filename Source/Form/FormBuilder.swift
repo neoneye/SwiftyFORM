@@ -19,9 +19,9 @@ public class FormBuilder {
 
 	public init() {
 	}
-	
-	public var navigationTitle: String? = nil
-	
+
+	public var navigationTitle: String?
+
 	public var toolbarMode: ToolbarMode = .none
 
 	public var suppressHeaderForFirstSection = false

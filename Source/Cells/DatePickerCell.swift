@@ -10,9 +10,9 @@ struct DatePickerCellConstants {
 public class DatePickerCellModel {
 	var title: String = ""
 	var datePickerMode: UIDatePickerMode = .dateAndTime
-	var locale: Locale? = nil // default is Locale.current, setting nil returns to default
-	var minimumDate: Date? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
-	var maximumDate: Date? = nil // default is nil
+	var locale: Locale? // default is Locale.current, setting nil returns to default
+	var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+	var maximumDate: Date? // default is nil
 	var minuteInterval: Int = 1
 	var date: Date = Date()
 	var expandCollapseWhenSelectingRow = true

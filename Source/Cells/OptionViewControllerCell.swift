@@ -4,8 +4,8 @@ import UIKit
 public struct OptionViewControllerCellModel {
 	var title: String = ""
 	var placeholder: String = ""
-	var optionField: OptionPickerFormItem? = nil
-	var selectedOptionRow: OptionRowModel? = nil
+	var optionField: OptionPickerFormItem?
+	var selectedOptionRow: OptionRowModel?
 
 	var valueDidChange: (OptionRowModel?) -> Void = { (value: OptionRowModel?) in
 		SwiftyFormLog("value \(String(describing: value))")
@@ -14,7 +14,7 @@ public struct OptionViewControllerCellModel {
 
 public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	fileprivate let model: OptionViewControllerCellModel
-	fileprivate var selectedOptionRow: OptionRowModel? = nil
+	fileprivate var selectedOptionRow: OptionRowModel?
 	fileprivate weak var parentViewController: UIViewController?
 
 	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel) {
