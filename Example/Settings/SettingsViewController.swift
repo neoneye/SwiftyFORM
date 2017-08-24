@@ -14,7 +14,7 @@ class SettingsViewController: FormViewController {
 		builder += resetUserDefaultsButton
 		builder += deleteCacheButton
 	}
-	
+
 	lazy var server: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Server").placeholder("required")
@@ -22,7 +22,7 @@ class SettingsViewController: FormViewController {
 		instance.selectOptionWithTitle("Production")
 		return instance
 	}()
-	
+
 	lazy var theme: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Theme").placeholder("required")
@@ -38,7 +38,7 @@ class SettingsViewController: FormViewController {
 		instance.selectOptionWithTitle("Verbose")
 		return instance
 	}()
-	
+
 	lazy var resetUserDefaultsButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Reset UserDefaults"

@@ -3,7 +3,7 @@ import UIKit
 import SwiftyFORM
 
 class SteppersViewController: FormViewController {
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Steppers"
 		builder += SectionHeaderTitleFormItem().title("Animals seen")
@@ -11,19 +11,19 @@ class SteppersViewController: FormViewController {
 		builder += dogStepper
 		builder += submitButton
 	}
-	
+
 	lazy var catStepper: StepperFormItem = {
 		let instance = StepperFormItem()
 		instance.title = "Number of Cats"
 		return instance
 		}()
-	
+
 	lazy var dogStepper: StepperFormItem = {
 		let instance = StepperFormItem()
 		instance.title = "Number of Dogs"
 		return instance
 		}()
-	
+
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Submit"

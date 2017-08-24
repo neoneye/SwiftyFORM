@@ -10,7 +10,7 @@ class LoadingCell: UITableViewCell, CellHeightProvider {
 		let cell: LoadingCell = try Bundle.main.form_loadView("LoadingCell")
 		return cell
 	}
-	
+
     override func awakeFromNib() {
         super.awakeFromNib()
 		xibHeight = bounds.height

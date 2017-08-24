@@ -4,7 +4,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
-	
+
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		let vc = FirstViewController()
 		let window = UIWindow(frame: UIScreen.main.bounds)
@@ -14,5 +14,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window.makeKeyAndVisible()
 		return true
 	}
-	
+
 }
