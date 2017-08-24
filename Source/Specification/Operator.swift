@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 
 /// AND operator
 ///
@@ -21,7 +21,6 @@ public func & (left: Specification, right: Specification) -> Specification {
 	return left.and(right)
 }
 
-
 /// OR operator
 ///
 /// Combine two specifications into a single specification.
@@ -43,7 +42,6 @@ public func | (left: Specification, right: Specification) -> Specification {
 	return left.or(right)
 }
 
-
 /// Negate operator
 ///
 /// This is a shorthand for the `Specification.not()` function.
@@ -64,7 +62,6 @@ public prefix func ! (specification: Specification) -> Specification {
 	return specification.not()
 }
 
-
 /// Equivalence operator 
 ///
 /// This is a shorthand for the `Specification.isSatisfiedBy()` function
@@ -82,7 +79,6 @@ public prefix func ! (specification: Specification) -> Specification {
 public func == (left: Specification, right: Any?) -> Bool {
 	return left.isSatisfiedBy(right)
 }
-
 
 /// Not equivalent operator
 ///

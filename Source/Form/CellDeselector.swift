@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 extension UITableViewCell {
@@ -23,13 +23,13 @@ extension UITableViewCell {
 	*/
 	func form_deselectRow() {
 		form_deselectIfNeeded()
-		
+
 		let delay = DispatchTime.now() + Double(Int64(0.5 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
 		DispatchQueue.main.asyncAfter(deadline: delay) {
 			self.form_deselectIfNeeded()
 		}
 	}
-	
+
 	fileprivate func form_deselectIfNeeded() {
 		if isSelected == false {
 			//print("already deselected, no need to deselect")
@@ -48,7 +48,7 @@ extension UITableViewCell {
 			return
 		}
 		//print("deselecting: \(indexPath)   selectedRows \(tableView.indexPathsForSelectedRows)")
-		
+
 		tableView.deselectRow(at: indexPath, animated: true)
 		setSelected(false, animated: true)
 	}

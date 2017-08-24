@@ -1,15 +1,15 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import SwiftyFORM
 
 class HeaderFooterViewController: FormViewController {
 
 	let headerView0 = SectionHeaderViewFormItem()
 	let footerView0 = SectionFooterViewFormItem()
-	
+
 	override func populate(_ builder: FormBuilder) {
 		configureHeaderView0()
 		configureFooterView0()
-		
+
 		builder.navigationTitle = "Header & Footer"
 		builder.demo_showInfo("Demonstration of\nsection headers\nand section footers")
 		builder += SectionHeaderTitleFormItem().title("Standard Header Title")
@@ -28,7 +28,7 @@ class HeaderFooterViewController: FormViewController {
 		builder += StaticTextFormItem().title("Empty Row")
 		builder += SectionFooterTitleFormItem(title: "Line 1: Standard Footer Title\nLine 2: Standard Footer Title\nLine 3: Standard Footer Title")
 	}
-	
+
 	func configureHeaderView0() {
 		headerView0.viewBlock = {
 			return InfoView(frame: CGRect(x: 0, y: 0, width: 0, height: 75), text: "Custom\nHeader\nView")

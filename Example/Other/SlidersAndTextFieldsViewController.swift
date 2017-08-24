@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -12,7 +12,7 @@ class SlidersAndTextFieldsViewController: FormViewController {
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(-100).maximumValue(100).value(0).title("Slider 1").shouldCollapseWhenResigning()
 		builder += textField2
 	}
-	
+
 	lazy var textField0: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("TextField 0").placeholder("required")
@@ -28,7 +28,7 @@ class SlidersAndTextFieldsViewController: FormViewController {
 		instance.autocorrectionType = .no
 		return instance
 	}()
-	
+
 	lazy var textField2: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("TextField 2").placeholder("required")

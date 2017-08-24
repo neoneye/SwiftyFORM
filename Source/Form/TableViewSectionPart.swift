@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 public enum TableViewSectionPart {
@@ -6,7 +6,7 @@ public enum TableViewSectionPart {
 	case systemDefault
 	case titleString(string: String)
 	case titleView(view: UIView)
-	
+
 	var title: String? {
 		switch self {
 		case let .titleString(string):
@@ -15,7 +15,7 @@ public enum TableViewSectionPart {
 			return nil
 		}
 	}
-	
+
 	var view: UIView? {
 		switch self {
 		case let .titleView(view):
@@ -24,7 +24,7 @@ public enum TableViewSectionPart {
 			return nil
 		}
 	}
-	
+
 	var height: CGFloat {
 		switch self {
 		case .none:
@@ -37,7 +37,7 @@ public enum TableViewSectionPart {
 			return UITableViewAutomaticDimension
 		}
 	}
-	
+
 	var estimatedHeight: CGFloat {
 		switch self {
 		case .none:

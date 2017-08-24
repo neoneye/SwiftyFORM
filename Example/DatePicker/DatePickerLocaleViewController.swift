@@ -1,16 +1,16 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
 class DatePickerLocaleViewController: FormViewController {
-	
+
 	lazy var datePicker_time_currentLocale: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
 		instance.datePickerMode = .time
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_currentLocale: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -24,7 +24,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.datePickerMode = .dateAndTime
 		return instance
 		}()
-	
+
 	lazy var datePicker_time_da_DK: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
@@ -32,7 +32,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_da_DK: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -40,7 +40,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_da_DK: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -48,7 +48,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "da_DK")
 		return instance
 		}()
-	
+
 	lazy var datePicker_time_zh_CN: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
@@ -56,7 +56,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_zh_CN: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -64,7 +64,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_zh_CN: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -72,7 +72,7 @@ class DatePickerLocaleViewController: FormViewController {
 		instance.locale = Locale(identifier: "zh_CN")
 		return instance
 		}()
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Locale"
 		builder.toolbarMode = .simple

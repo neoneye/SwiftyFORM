@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -27,7 +27,7 @@ class SignUpViewController: FormViewController {
 		builder += randomizeButton
 		builder += jsonButton
 	}
-	
+
 	lazy var userName: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("User Name").placeholder("required")
@@ -38,7 +38,7 @@ class SignUpViewController: FormViewController {
 		instance.validate(CountSpecification.max(8), message: "Length must be maximum 8 letters")
 		return instance
 		}()
-	
+
 	lazy var maleOrFemale: ViewControllerFormItem = {
 		let instance = ViewControllerFormItem()
 		instance.title("Male or Female").placeholder("required")
@@ -76,7 +76,7 @@ class SignUpViewController: FormViewController {
 		instance.softValidate(EmailSpecification(), message: "Must be a valid email address")
 		return instance
 		}()
-	
+
 	func offsetDate(_ date: Date, years: Int) -> Date {
 		var dateComponents = DateComponents()
 		dateComponents.year = years
@@ -96,14 +96,14 @@ class SignUpViewController: FormViewController {
 		instance.maximumDate = today
 		return instance
 		}()
-	
+
 	lazy var subscribeToNewsletter: SwitchFormItem = {
 		let instance = SwitchFormItem()
 		instance.title = "Subscribe to newsletter"
 		instance.value = true
 		return instance
 		}()
-	
+
 	lazy var metaData: MetaFormItem = {
 		let instance = MetaFormItem()
 		var dict = [String: AnyObject?]()
@@ -113,7 +113,7 @@ class SignUpViewController: FormViewController {
 		instance.value(dict as AnyObject?).elementIdentifier("metaData")
 		return instance
 		}()
-	
+
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Randomize"
@@ -130,18 +130,18 @@ class SignUpViewController: FormViewController {
 		let i = randomInt(0, strings.count - 1)
 		return strings[i]
 	}
-	
+
 	func pickRandomDate() -> Date {
 		let i = randomInt(20, 60)
 		let today = Date()
 		return offsetDate(today, years: -i)
 	}
-	
+
 	func pickRandomBoolean() -> Bool {
 		let i = randomInt(0, 1)
 		return i == 0
 	}
-	
+
 	func randomize() {
 		userName.value = pickRandom(["john", "jane", "steve", "bill", "einstein", "newton"])
 		password.value = pickRandom(["1234", "0000", "111111", "abc", "111122223333"])
@@ -149,7 +149,7 @@ class SignUpViewController: FormViewController {
 		birthday.value = pickRandomDate()
 		subscribeToNewsletter.value = pickRandomBoolean()
 	}
-	
+
 	lazy var jsonButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "View JSON"

@@ -1,14 +1,14 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var originalMaximumValue: Double = 0.0
 	var originalMinimumValue: Double = 100.0
-	
+
 	var fallbackValue: Double {
 		return (originalMaximumValue - originalMinimumValue) / 2
 	}
-	
+
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
@@ -22,18 +22,17 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		return value
 	}
 
-	
 	var zoomMode = PrecisionSlider_InnerZoomMode.none
-	
+
 	func updateRange() {
 		zoomMode = PrecisionSlider_InnerZoomMode.create(zoom)
 		//print("zoomMode: \(zoomMode)  zoom: \(zoom)")
-		
+
 		maximumValue = originalMaximumValue * zoomMode.scalar
 		minimumValue = originalMinimumValue * zoomMode.scalar
-		
+
 		var count = Int(floor(maximumValue) - ceil(minimumValue)) + 1
-		
+
 		let sizeBefore = ceil(minimumValue) - minimumValue
 		//print("size before: \(sizeBefore)    \(minimumValue)")
 		if sizeBefore > 0.0000001 {
@@ -45,7 +44,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			hasPartialItemBefore = false
 			sizeOfPartialItemBefore = 0
 		}
-		
+
 		let sizeAfter = maximumValue - floor(maximumValue)
 		//print("size after: \(sizeAfter)    \(maximumValue)")
 		if sizeAfter > 0.0000001 {
@@ -57,7 +56,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			hasPartialItemAfter = false
 			sizeOfPartialItemAfter = 0
 		}
-		
+
 		// prevent negative number of items
 		if count < 0 {
 			// In this case use the "single_cell"
@@ -73,10 +72,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 			numberOfFullItems = count
 			hasOnePartialItem = false
 		}
-		
+
 		//		print("model: \(self)")
 	}
-	
+
 	/**
 	This is used as a last resort when the range is too tiny that no other cells can be shown.
 	
@@ -86,7 +85,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	*/
 	var hasOnePartialItem = false
 	var sizeOfOnePartialItem: Double = 0.0
-	
+
 	/**
 	This is used when the minimumValue doesn't align with any marker.
 	
@@ -97,7 +96,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	*/
 	var hasPartialItemBefore = false
 	var sizeOfPartialItemBefore: Double = 0.0
-	
+
 	/**
 	This is used when the maximumValue doesn't align with any marker.
 	
@@ -108,7 +107,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	*/
 	var hasPartialItemAfter = false
 	var sizeOfPartialItemAfter: Double = 0.0
-	
+
 	/**
 	The full_cell is used for showing markers inbetween minimumValue and maximumValue.
 	
@@ -120,7 +119,6 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	 * Cell 2: spans from min=5.5 to max=6.5 with a marker shown at 6.0
 	*/
 	var numberOfFullItems = 100
-	
 
 	var markerSpacing: Double = 30
 
@@ -150,7 +148,6 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		return zoom
 	}
 
-	
 	/// length is in pixels
 	var lengthOfFullItem: Double {
 		let result = ceil(pow(10, Double(zoom)) * markerSpacing / zoomMode.scalar)
@@ -159,7 +156,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		}
 		return result
 	}
-	
+
 	var lengthOfAllFullItems: Double {
 		return Double(numberOfFullItems) * lengthOfFullItem
 	}
@@ -178,7 +175,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var remainingLengthOfPartialItemAfter: Double {
 		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemAfter))
 	}
-	
+
 	var lengthOfContent: Double {
 		if hasOnePartialItem {
 			return lengthOfOnePartialItem
@@ -193,9 +190,9 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		}
 		return length
 	}
-	
+
 	static let height: CGFloat = 130
-	
+
 	func labelTextForIndexPath(_ indexPath: IndexPath) -> String? {
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
@@ -203,10 +200,10 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		}
 		return zoomMode.markerText(index)
 	}
-	
+
 	let markMajorColor = UIColor.black
 	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
-	
+
 	func markColorForIndexPath(_ indexPath: IndexPath) -> UIColor? {
 		var index = Int(floor(minimumValue)) + indexPath.row
 		if hasPartialItemBefore {
@@ -218,7 +215,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		case .other: return UIColor.red
 		}
 	}
-	
+
 	var debugDescription: String {
 		var strings = [String]()
 		strings.append("zoomMode: \(zoomMode)")

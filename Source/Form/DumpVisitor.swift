@@ -1,23 +1,22 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class DumpVisitor: FormItemVisitor {
 	private typealias StringToAny = [String: Any?]
-	
+
 	public init() {
 	}
-	
+
 	class func dump(_ prettyPrinted: Bool = true, items: [FormItem]) -> Data {
 		var result = [StringToAny]()
 		var rowNumber: Int = 0
 		for item in items {
 			let dumpVisitor = DumpVisitor()
 			item.accept(visitor: dumpVisitor)
-			
-			
+
 			var dict = StringToAny()
 			dict["row"] = rowNumber
-			
+
 			let validateVisitor = ValidateVisitor()
 			item.accept(visitor: validateVisitor)
 			switch validateVisitor.result {
@@ -30,18 +29,18 @@ public class DumpVisitor: FormItemVisitor {
 				dict["validate-status"] = "soft-invalid"
 				dict["validate-message"] = message
 			}
-			
+
 			dict.update(dumpVisitor.dict)
-			
+
 			result.append(dict)
 			rowNumber += 1
 		}
-		
+
 		return JSONHelper.convert(result, prettyPrinted: prettyPrinted)
 	}
-	
+
 	private var dict = StringToAny()
-	
+
 	public func visit(object: MetaFormItem) {
 		dict["class"] = "MetaFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -56,7 +55,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
-	
+
 	public func visit(object: StaticTextFormItem) {
 		dict["class"] = "StaticTextFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -74,7 +73,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title?.string
 		dict["value"] = object.value?.string
 	}
-	
+
 	public func visit(object: TextFieldFormItem) {
 		dict["class"] = "TextFieldFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -84,7 +83,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["value"] = object.value
 		dict["placeholder"] = object.placeholder
 	}
-	
+
 	public func visit(object: TextViewFormItem) {
 		dict["class"] = "TextViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -93,7 +92,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["title"] = object.title
 		dict["value"] = object.value
 	}
-	
+
 	public func visit(object: ViewControllerFormItem) {
 		dict["class"] = "ViewControllerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -101,7 +100,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
 	}
-	
+
 	public func visit(object: OptionPickerFormItem) {
 		dict["class"] = "OptionPickerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -111,7 +110,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["placeholder"] = object.placeholder
 		dict["value"] = object.selected?.title
 	}
-	
+
 	public func visit(object: DatePickerFormItem) {
 		dict["class"] = "DatePickerFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -125,7 +124,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["maximumDate"] = object.maximumDate
 		dict["minuteInterval"] = object.minuteInterval
 	}
-	
+
 	public func visit(object: ButtonFormItem) {
 		dict["class"] = "ButtonFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -133,7 +132,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
 	}
-	
+
 	public func visit(object: OptionRowFormItem) {
 		dict["class"] = "OptionRowFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -159,7 +158,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
 	}
-	
+
 	public func visit(object: SliderFormItem) {
 		dict["class"] = "SliderFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -169,7 +168,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["minimumValue"] = object.minimumValue
 		dict["maximumValue"] = object.maximumValue
 	}
-	
+
 	public func visit(object: PrecisionSliderFormItem) {
 		dict["class"] = "PrecisionSliderFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -180,14 +179,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["maximumValue"] = object.maximumValue
 		dict["decimalPlaces"] = object.decimalPlaces
 	}
-	
+
 	public func visit(object: SectionFormItem) {
 		dict["class"] = "SectionFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
-	
+
 	public func visit(object: SectionHeaderTitleFormItem) {
 		dict["class"] = "SectionHeaderTitleFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -195,14 +194,14 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 		dict["title"] = object.title
 	}
-	
+
 	public func visit(object: SectionHeaderViewFormItem) {
 		dict["class"] = "SectionHeaderViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
-	
+
 	public func visit(object: SectionFooterTitleFormItem) {
 		dict["class"] = "SectionFooterTitleFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -224,7 +223,7 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleIdentifier"] = object.styleIdentifier
 		dict["styleClass"] = object.styleClass
 	}
-	
+
 	public func visit(object: PickerViewFormItem) {
 		dict["class"] = "PickerViewFormItem"
 		dict["elementIdentifier"] = object.elementIdentifier
@@ -232,7 +231,6 @@ public class DumpVisitor: FormItemVisitor {
 		dict["styleClass"] = object.styleClass
 	}
 }
-
 
 internal struct JSONHelper {
 
@@ -293,12 +291,11 @@ internal struct JSONHelper {
 		if let item = object as? Date {
 			return item.description
 		}
-		
+
 		print("skipping unknown item: \(object)  \(object.self)")
 		return NSNull()
 	}
 
-	
 	/// Convert from a complex object to json data.
 	///
 	/// - parameter unprocessedObject: The complex object to be converted.
@@ -307,12 +304,12 @@ internal struct JSONHelper {
 	/// - returns: Data object containing json.
 	static func convert(_ unprocessedObject: Any?, prettyPrinted: Bool) -> Data {
 		let object = process(unprocessedObject)
-		
+
 		if !JSONSerialization.isValidJSONObject(object) {
 			print("the dictionary cannot be serialized to json")
 			return Data()
 		}
-		
+
 		do {
 			let options: JSONSerialization.WritingOptions = prettyPrinted ? JSONSerialization.WritingOptions.prettyPrinted : []
 			let data = try JSONSerialization.data(withJSONObject: object, options: options)

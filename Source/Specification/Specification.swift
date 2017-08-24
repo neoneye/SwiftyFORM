@@ -1,5 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
-
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 
 /// A type that can check whether or not a candidate object satisfy the rules.
 ///
@@ -8,7 +7,7 @@
 ///
 /// More about specification pattern on [Wikipedia](https://en.wikipedia.org/wiki/Specification_pattern).
 public protocol Specification {
-	
+
 	/// The central part of a specification is the `isSatisfiedBy()` function, 
 	/// which is used to check if an object satisfies the specification.
 	///
@@ -16,7 +15,7 @@ public protocol Specification {
 	///
 	/// - returns: `true` if the candidate satisfies the specification, `false` otherwise.
 	func isSatisfiedBy(_ candidate: Any?) -> Bool
-	
+
 }
 
 extension Specification {
@@ -32,7 +31,6 @@ extension Specification {
 	public func and(_ other: Specification) -> Specification {
 		return AndSpecification(self, other)
 	}
-	
 
 	/// Combine two specifications into one.
 	///
@@ -45,7 +43,6 @@ extension Specification {
 	public func or(_ other: Specification) -> Specification {
 		return OrSpecification(self, other)
 	}
-	
 
 	/// Invert a specification.
 	///
@@ -58,7 +55,6 @@ extension Specification {
 	}
 }
 
-
 /// Check if two specifications are both satisfied.
 ///
 /// This is a composite specification that combines two specifications 
@@ -66,12 +62,12 @@ extension Specification {
 public class AndSpecification: Specification {
 	private let one: Specification
 	private let other: Specification
-	
-	public init(_ x: Specification, _ y: Specification)  {
+
+	public init(_ x: Specification, _ y: Specification) {
 		self.one = x
 		self.other = y
 	}
-	
+
 	/// Check if both specifications are satisfied.
 	///
 	/// - parameter candidate: The object to be checked.
@@ -82,7 +78,6 @@ public class AndSpecification: Specification {
 	}
 }
 
-
 /// Check if either of the specifications are satisfied.
 ///
 /// This is a composite specification that combines two specifications
@@ -90,12 +85,12 @@ public class AndSpecification: Specification {
 public class OrSpecification: Specification {
 	private let one: Specification
 	private let other: Specification
-	
-	public init(_ x: Specification, _ y: Specification)  {
+
+	public init(_ x: Specification, _ y: Specification) {
 		self.one = x
 		self.other = y
 	}
-	
+
 	/// Check if either of the specifications are satisfied.
 	///
 	/// - parameter candidate: The object to be checked.
@@ -106,17 +101,16 @@ public class OrSpecification: Specification {
 	}
 }
 
-
 /// Check if a specification is not satisfied.
 ///
 /// This is a composite specification that wraps another specification.
 public class NotSpecification: Specification {
 	private let wrapped: Specification
-	
+
 	public init(_ x: Specification) {
 		self.wrapped = x
 	}
-	
+
 	/// Check if specification is not satisfied.
 	///
 	/// - parameter candidate: The object to be checked.
@@ -127,12 +121,11 @@ public class NotSpecification: Specification {
 	}
 }
 
-
 /// This specification is never satisfied.
 public class FalseSpecification: Specification {
 	public init() {
 	}
-	
+
 	/// Doesn't do anything. This specification is never satisfied.
 	///
 	/// - parameter candidate: The parameter is ignored.
@@ -147,7 +140,7 @@ public class FalseSpecification: Specification {
 public class TrueSpecification: Specification {
 	public init() {
 	}
-	
+
 	/// Doesn't do anything. This specification is always satisfied.
 	///
 	/// - parameter candidate: The parameter is ignored.
@@ -157,7 +150,6 @@ public class TrueSpecification: Specification {
 		return true
 	}
 }
-
 
 /// - warning:
 /// This class will be removed in the future, starting with SwiftyFORM 2.0.0

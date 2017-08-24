@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -10,7 +10,7 @@ class LoadingCell: UITableViewCell, CellHeightProvider {
 		let cell: LoadingCell = try Bundle.main.form_loadView("LoadingCell")
 		return cell
 	}
-	
+
     override func awakeFromNib() {
         super.awakeFromNib()
 		xibHeight = bounds.height

@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public enum DatePickerFormItemMode {
 	case time
 	case date
 	case dateAndTime
-	
+
 	var description: String {
 		switch self {
 		case .time: return "Time"
@@ -26,7 +26,7 @@ public class DatePickerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -34,7 +34,7 @@ public class DatePickerFormItem: FormItem {
 		self.title = title
 		return self
 	}
-	
+
 	/**
 	### Collapsed
 	
@@ -73,12 +73,12 @@ public class DatePickerFormItem: FormItem {
 		self.behavior = behavior
 		return self
 	}
-	
+
 	typealias SyncBlock = (_ date: Date, _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (date: Date, animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(date)")
 	}
-	
+
 	internal var innerValue = Date()
 	public var value: Date {
 		get {
@@ -88,24 +88,23 @@ public class DatePickerFormItem: FormItem {
 			self.setValue(newValue, animated: false)
 		}
 	}
-	
+
 	public func setValue(_ date: Date, animated: Bool) {
 		innerValue = date
 		syncCellWithValue(date, animated)
 	}
-	
+
 	public var datePickerMode: DatePickerFormItemMode = .dateAndTime
 	public var locale: Locale? // default is Locale.current, setting nil returns to default
 	public var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	public var maximumDate: Date? // default is nil
 	public var minuteInterval: Int = 1
-	
-	
+
 	public typealias ValueDidChangeBlock = (_ value: Date) -> Void
 	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Date) in
 		SwiftyFormLog("not overridden")
 	}
-	
+
 	public func valueDidChange(_ value: Date) {
 		innerValue = value
 		valueDidChangeBlock(value)

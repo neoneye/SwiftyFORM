@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class ViewControllerFormItemCellModel {
@@ -9,7 +9,6 @@ public class ViewControllerFormItemCellModel {
 		self.placeholder = placeholder
 	}
 }
-
 
 public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 	public let model: ViewControllerFormItemCellModel
@@ -23,11 +22,11 @@ public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 		textLabel?.text = model.title
 		detailTextLabel?.text = model.placeholder
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row

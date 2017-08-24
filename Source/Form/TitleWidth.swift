@@ -1,13 +1,13 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 class ObtainTitleWidth: FormItemVisitor {
 	var width: CGFloat = 0
-	
+
 	func visit(object: TextFieldFormItem) {
 		width = object.obtainTitleWidth()
 	}
-	
+
 	func visit(object: AttributedTextFormItem) {}
 	func visit(object: ButtonFormItem) {}
 	func visit(object: CustomFormItem) {}
@@ -33,15 +33,15 @@ class ObtainTitleWidth: FormItemVisitor {
 
 class AssignTitleWidth: FormItemVisitor {
 	fileprivate var width: CGFloat = 0
-	
+
 	init(width: CGFloat) {
 		self.width = width
 	}
-	
+
 	func visit(object: TextFieldFormItem) {
 		object.assignTitleWidth(width)
 	}
-	
+
 	func visit(object: AttributedTextFormItem) {}
 	func visit(object: ButtonFormItem) {}
 	func visit(object: CustomFormItem) {}

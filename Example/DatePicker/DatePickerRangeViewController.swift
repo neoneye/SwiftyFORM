@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -11,7 +11,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.minimumDate = Date(timeIntervalSinceNow: -18305)
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_min: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -20,7 +20,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_min: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -29,7 +29,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.minimumDate = Date(timeIntervalSinceNow: -432000)
 		return instance
 		}()
-	
+
 	lazy var datePicker_time_max: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
@@ -38,7 +38,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_max: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -47,7 +47,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_max: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -56,7 +56,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
-	
+
 	lazy var datePicker_time_minmax: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
@@ -66,7 +66,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_minmax: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -76,7 +76,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_minmax: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -86,7 +86,7 @@ class DatePickerRangeViewController: FormViewController {
 		instance.maximumDate = Date(timeIntervalSinceNow: 432000)
 		return instance
 		}()
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Range"
 		builder.toolbarMode = .simple

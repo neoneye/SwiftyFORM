@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -10,21 +10,21 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.minuteInterval = 15
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
 		instance.datePickerMode = .date
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
 		return instance
 		}()
-	
+
 	lazy var datePicker_time_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Time"
@@ -33,7 +33,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.value = Date(timeIntervalSinceNow: 18305)
 		return instance
 		}()
-	
+
 	lazy var datePicker_date_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -42,7 +42,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
 		}()
-	
+
 	lazy var datePicker_dateAndTime_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
@@ -51,7 +51,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
 		}()
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Value"
 		builder.toolbarMode = .simple
@@ -65,5 +65,5 @@ class DatePickerInitialValueViewController: FormViewController {
 		builder += datePicker_date_value
 		builder += datePicker_dateAndTime_value
 	}
-	
+
 }

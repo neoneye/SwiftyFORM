@@ -1,5 +1,10 @@
 ## 📄 Change Log
 
+### 1.5.0
+
+ * Xcode9 preparations. Now compiles with Xcode9beta6.
+ * Swiftlint
+
 ### 1.4.0
 
  * Upgraded from Xcode8.2.1 to Xcode8.3.1

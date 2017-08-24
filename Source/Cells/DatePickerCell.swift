@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 struct DatePickerCellConstants {
@@ -7,27 +7,25 @@ struct DatePickerCellConstants {
 	}
 }
 
-
 public class DatePickerCellModel {
 	var title: String = ""
 	var datePickerMode: UIDatePickerMode = .dateAndTime
-	var locale: Locale? = nil // default is Locale.current, setting nil returns to default
-	var minimumDate: Date? = nil // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
-	var maximumDate: Date? = nil // default is nil
+	var locale: Locale? // default is Locale.current, setting nil returns to default
+	var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
+	var maximumDate: Date? // default is nil
 	var minuteInterval: Int = 1
 	var date: Date = Date()
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.default
-	
+
 	var valueDidChange: (Date) -> Void = { (date: Date) in
 		SwiftyFormLog("date \(date)")
 	}
-	
+
 	var resolvedLocale: Locale {
 		return locale ?? Locale.current
 	}
 }
-
 
 /**
 # Date picker toggle-cell
@@ -58,16 +56,16 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
-		
+
 		updateValue()
-		
+
 		assignDefaultColors()
 	}
 
 	public required init(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func obtainDateStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
@@ -80,7 +78,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			return .none
 		}
 	}
-	
+
 	public func obtainTimeStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
@@ -93,7 +91,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			return .short
 		}
 	}
-	
+
 	public var humanReadableValue: String {
 		if model.datePickerMode == .countDownTimer {
 			return "Unsupported"
@@ -110,19 +108,19 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	public func updateValue() {
 		detailTextLabel?.text = humanReadableValue
 	}
-	
+
 	func setDateWithoutSync(_ date: Date, animated: Bool) {
 		SwiftyFormLog("set date \(date), animated \(animated)")
 		model.date = date
 		updateValue()
-		
+
 		expandedCell?.datePicker.setDate(model.date, animated: animated)
 	}
-	
+
 	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
-	
+
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
@@ -137,16 +135,15 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		form_deselectRow()
 	}
 
-
 	// MARK: UIResponder
-	
-	public override var canBecomeFirstResponder : Bool {
+
+	public override var canBecomeFirstResponder: Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
-	
+
 	public override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
@@ -154,13 +151,12 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		expand()
 		return true
 	}
-	
+
 	public override func resignFirstResponder() -> Bool {
 		collapse()
 		return super.resignFirstResponder()
 	}
 
-	
 	// MARK: Expand collapse
 
 	var isExpandedCellVisible: Bool {
@@ -175,7 +171,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		}
 		return true
 	}
-	
+
 	func toggleExpandCollapse() {
 		guard let tableView = form_tableView() else {
 			return
@@ -193,7 +189,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			sectionArray: sectionArray
 		)
 	}
-	
+
 	func expand() {
 		if isExpandedCellVisible {
 			assignTintColors()
@@ -201,27 +197,25 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			toggleExpandCollapse()
 		}
 	}
-	
+
 	func collapse() {
 		if isExpandedCellVisible {
 			toggleExpandCollapse()
 		}
 	}
-	
-	
+
 	// MARK: AssignAppearance
-	
+
 	public func assignDefaultColors() {
 		textLabel?.textColor = UIColor.black
 		detailTextLabel?.textColor = UIColor.gray
 	}
-	
+
 	public func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
 }
-
 
 /**
 # Date picker expanded-cell
@@ -234,7 +228,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	public var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
-	
+
 	public var isCollapsable: Bool {
 		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
@@ -254,7 +248,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		instance.addTarget(self, action: #selector(DatePickerExpandedCell.valueChanged), for: .valueChanged)
 		return instance
 	}()
-	
+
 	func configure(_ model: DatePickerCellModel) {
 		datePicker.datePickerMode = model.datePickerMode
 		datePicker.minimumDate = model.minimumDate
@@ -263,29 +257,29 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		datePicker.locale = model.resolvedLocale
 		datePicker.date = model.date
 	}
-	
-	public func valueChanged() {
+
+	@objc public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
 			return
 		}
 		let model = collapsedCell.model
 		let date = datePicker.date
 		model.date = date
-		
+
 		collapsedCell.updateValue()
-		
+
 		model.valueDidChange(date)
 	}
-	
+
 	public init() {
 		super.init(style: .default, reuseIdentifier: nil)
 		addSubview(datePicker)
 	}
-	
+
 	required public init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		datePicker.frame = bounds

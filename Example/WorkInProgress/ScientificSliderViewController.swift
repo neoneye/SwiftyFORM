@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -11,29 +11,29 @@ class ScientificSliderViewController: UIViewController {
 		view.addSubview(titleLabel)
 		view.addSubview(usageLabel)
 	}
-	
+
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		focusView.addGestureRecognizer(panGesture)
 		updateLabel()
 	}
-	
+
 	override func viewDidDisappear(_ animated: Bool) {
 		super.viewDidDisappear(animated)
 		focusView.removeGestureRecognizer(panGesture)
 	}
-	
+
 	lazy var panGesture: UIPanGestureRecognizer = {
 		let instance = UIPanGestureRecognizer(target: self, action: #selector(ScientificSliderViewController.handlePan))
 		return instance
 	}()
-	
+
 	lazy var focusView: UIView = {
 		let instance = UIView()
 		instance.backgroundColor = UIColor.white
 		return instance
 	}()
-	
+
 	lazy var usageLabel: UILabel = {
 		let instance = UILabel()
 		instance.text = "Pan left/right to adjust magnitude.\n\nPan up/down to adjust value."
@@ -42,7 +42,7 @@ class ScientificSliderViewController: UIViewController {
 		instance.font = UIFont.systemFont(ofSize: 17)
 		return instance
 	}()
-	
+
 	lazy var titleLabel: UILabel = {
 		let instance = UILabel()
 		instance.text = "Value"
@@ -51,7 +51,7 @@ class ScientificSliderViewController: UIViewController {
 		instance.font = UIFont.boldSystemFont(ofSize: 18)
 		return instance
 	}()
-	
+
 	lazy var label: UILabel = {
 		let instance = UILabel()
 		instance.text = "-"
@@ -60,15 +60,15 @@ class ScientificSliderViewController: UIViewController {
 		instance.font = UIFont.systemFont(ofSize: 20)
 		return instance
 	}()
-	
+
 	var x: Int = 0
 	var y: Int = 0
-	
+
 	let scale: Int = 3
-	
+
 	func updateLabel() {
 		let xx = CGFloat(x) * 0.001
-		
+
 		let xs: String
 		if y >= 6 {
 			xs = String(format: "%08.3f", xx)
@@ -83,7 +83,7 @@ class ScientificSliderViewController: UIViewController {
 				}
 			}
 		}
-		
+
 		var cutpoint = y
 		if y >= scale {
 			cutpoint += 1
@@ -97,32 +97,32 @@ class ScientificSliderViewController: UIViewController {
 				sp = "\(char)\(sp)"
 			}
 		}
-		
+
 		let firstPart = NSAttributedString(string: fp, attributes: [NSForegroundColorAttributeName: UIColor.black])
 		let secondPart = NSAttributedString(string: sp, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
-		
+
 		let text = NSMutableAttributedString()
 		text.append(firstPart)
 		text.append(secondPart)
-		
+
 		label.attributedText = text
 		view.setNeedsLayout()
 	}
-	
+
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
-		
+
 		do {
 			let frame = view.bounds.insetBy(dx: 10, dy: 80)
 			let (f0, _) = frame.divided(atDistance: 200, from: .minYEdge)
 			usageLabel.frame = f0
 		}
-		
+
 		var f = view.bounds.insetBy(dx: 0, dy: 10)
 		f.size.height = 64
 		f.origin.y = view.bounds.midY - 50
 		focusView.frame = f
-		
+
 		do {
 			let size = titleLabel.sizeThatFits(f.size)
 			let labelx = f.minX + 20
@@ -136,30 +136,30 @@ class ScientificSliderViewController: UIViewController {
 			label.frame = CGRect(origin: CGPoint(x: labelx, y: labely), size: size)
 		}
 	}
-	
+
 	var xOriginal: Int = 0
 	var yOriginal: Int = 0
-	
+
 	var xDelta: CGFloat = 0
 	var yDelta: CGFloat = 0
-	
-	func handlePan(_ gesture: UIPanGestureRecognizer) {
+
+	@objc func handlePan(_ gesture: UIPanGestureRecognizer) {
 		if gesture.state == .began {
 			xOriginal = x
 			yOriginal = y
 			xDelta = 0
 			yDelta = 0
 		}
-		
+
 		if gesture.state == .changed {
 			let translation = gesture.translation(in: gesture.view)
 			xDelta -= translation.y * 0.1
 			yDelta -= translation.x * 0.05
-			
+
 			let xd = Int(floor(xDelta + 0.5))
 			let scale = Int(pow(Float(10), Float(y)))
 			x = xOriginal + xd * scale
-			
+
 			y = yOriginal + Int(yDelta)
 			if y < 0 {
 				y = 0
@@ -167,14 +167,14 @@ class ScientificSliderViewController: UIViewController {
 			if y > 6 {
 				y = 6
 			}
-			
+
 			if y != yOriginal {
 				yOriginal = y
 				yDelta = 0
 				xOriginal = x
 				xDelta = 0
 			}
-			
+
 			updateLabel()
 			gesture.setTranslation(CGPoint.zero, in: gesture.view)
 		}

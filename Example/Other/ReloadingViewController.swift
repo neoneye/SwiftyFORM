@@ -4,16 +4,16 @@ import SwiftyFORM
 
 class ReloadingViewController: FormViewController {
 	var populateCount = 0
-	
+
 	override func populate(_ builder: FormBuilder) {
 		populateCount += 1
-		
+
 		builder.navigationTitle = "Reload Form"
 		builder.toolbarMode = .none
-		
+
 		builder += SectionHeaderTitleFormItem().title("Action")
 		builder += reloadButton
-		
+
 		builder += SectionHeaderTitleFormItem().title("Populate")
 		builder += StaticTextFormItem().title("Number of reloads").value(String(populateCount))
 
@@ -29,7 +29,7 @@ class ReloadingViewController: FormViewController {
 			builder += StaticTextFormItem().title("Polution")
 		}
 	}
-	
+
 	lazy var reloadButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Reload Form"

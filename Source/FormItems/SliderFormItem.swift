@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class SliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var minimumValue: Float = 0.0
 
 	@discardableResult
@@ -13,7 +13,7 @@ public class SliderFormItem: FormItem {
 		self.minimumValue = minimumValue
 		return self
 	}
-	
+
 	public var maximumValue: Float = 1.0
 
 	@discardableResult
@@ -21,13 +21,12 @@ public class SliderFormItem: FormItem {
 		self.maximumValue = maximumValue
 		return self
 	}
-	
-	
+
 	typealias SyncBlock = (_ value: Float, _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Float, animated: Bool) in
 		SwiftyFormLog("sync is not overridden")
 	}
-	
+
 	internal var innerValue: Float = 0.0
 	public var value: Float {
 		get {
@@ -43,7 +42,7 @@ public class SliderFormItem: FormItem {
 		setValue(value, animated: false)
 		return self
 	}
-	
+
 	public func setValue(_ value: Float, animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value, animated)
@@ -53,7 +52,7 @@ public class SliderFormItem: FormItem {
 	public var sliderDidChangeBlock: SliderDidChangeBlock = { (value: Float) in
 		SwiftyFormLog("not overridden")
 	}
-	
+
 	public func sliderDidChange(_ value: Float) {
 		innerValue = value
 		sliderDidChangeBlock(value)

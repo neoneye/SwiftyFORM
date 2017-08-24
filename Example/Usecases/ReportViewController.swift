@@ -1,14 +1,14 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import MessageUI
 import SwiftyFORM
 
 class ReportViewController: FormViewController, MFMailComposeViewControllerDelegate {
 	let sendButton = ButtonFormItem()
-	
+
 	override func populate(_ builder: FormBuilder) {
 		configureButton()
-		
+
 		builder.navigationTitle = "Report"
 		builder.demo_showInfo("Report a problem\nTroubleshooting\nNeed help")
 		builder += SectionHeaderTitleFormItem().title("Send report to the developer")
@@ -21,14 +21,14 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 		builder += appVersion()
 		builder += appBuild()
 	}
-	
+
 	func configureButton() {
 		sendButton.title = "Send Now!"
 		sendButton.action = { [weak self] in
 			self?.sendMail()
 		}
 	}
-	
+
 	static func platformModelString() -> String? {
 		if let key = "hw.machine".cString(using: String.Encoding.utf8) {
 			var size: Int = 0
@@ -39,17 +39,17 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 		}
 		return nil
 	}
-	
+
 	func deviceName() -> StaticTextFormItem {
 		let string = ReportViewController.platformModelString() ?? "N/A"
 		return StaticTextFormItem().title("Device").value(string)
 	}
-	
+
 	func systemVersion() -> StaticTextFormItem {
 		let string: String = UIDevice.current.systemVersion
 		return StaticTextFormItem().title("iOS").value(string)
 	}
-	
+
 	func appName() -> StaticTextFormItem {
 		let mainBundle = Bundle.main
 		let string0 = mainBundle.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
@@ -57,21 +57,21 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 		let string = string0 ?? string1 ?? "Unknown"
 		return StaticTextFormItem().title("Name").value(string)
 	}
-	
+
 	func appVersion() -> StaticTextFormItem {
 		let mainBundle = Bundle.main
 		let string0 = mainBundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
 		let string = string0 ?? "Unknown"
 		return StaticTextFormItem().title("Version").value(string)
 	}
-	
+
 	func appBuild() -> StaticTextFormItem {
 		let mainBundle = Bundle.main
 		let string0 = mainBundle.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
 		let string = string0 ?? "Unknown"
 		return StaticTextFormItem().title("Build").value(string)
 	}
-	
+
 	func sendMail() {
 		if MFMailComposeViewController.canSendMail() {
 			let mc = configuredMailComposeViewController()
@@ -80,7 +80,7 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 			form_simpleAlert("Could Not Send Mail", "Your device could not send mail. Please check mail configuration and try again.")
 		}
 	}
-	
+
 	func configuredMailComposeViewController() -> MFMailComposeViewController {
 		let emailTitle = "Report"
 		let messageBody = "This is a test email body"
@@ -99,7 +99,7 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 			self?.showMailResultAlert(result, error: error)
 		}
 	}
-	
+
 	func showMailResultAlert(_ result: MFMailComposeResult, error: Error?) {
 		switch result {
 		case .cancelled:
@@ -113,4 +113,3 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 		}
 	}
 }
-

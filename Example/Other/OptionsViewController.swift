@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -25,7 +25,7 @@ class OptionsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var exploreSpace: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Explore Space?").placeholder("required")
@@ -36,7 +36,7 @@ class OptionsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var worldPeace: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("World Peace?").placeholder("required")
@@ -47,7 +47,7 @@ class OptionsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var stopGlobalWarming: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Stop Global Warming?").placeholder("required")
@@ -71,7 +71,7 @@ class OptionsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	func assignRandomOption(_ optionField: OptionPickerFormItem) {
 		var selected: OptionRowModel? = nil
 		let options = optionField.options
@@ -83,7 +83,7 @@ class OptionsViewController: FormViewController {
 		}
 		optionField.selected = selected
 	}
-	
+
 	func randomize() {
 		assignRandomOption(adoptBitcoin)
 		assignRandomOption(exploreSpace)

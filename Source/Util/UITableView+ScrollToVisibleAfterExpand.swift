@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 extension UITableView {
@@ -14,22 +14,22 @@ extension UITableView {
 			scrollToRow(at: indexPath, at: .top, animated: true)
 			return
 		}
-		
+
 		// Expanded row
 		let expanded_indexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
 		let expanded_rect = rectForRow(at: expanded_indexPath)
 		let focusArea_maxY = expanded_rect.maxY - (contentOffset.y + contentInset.top)
 		//SwiftyFormLog("focusArea_maxY \(focusArea_maxY)    \(expanded_rect.maxY) \(contentOffset.y) \(contentInset.top)")
-		
+
 		let bottomMaxY = bounds.height - (contentInset.bottom + contentInset.top)
 		//SwiftyFormLog("bottomMaxY: \(bottomMaxY) \(bounds.height) \(contentInset.bottom) \(contentInset.top)")
-		
+
 		if focusArea_maxY > bottomMaxY {
 			SwiftyFormLog("content is outside the bottom. Scrolling to make it visible")
 			scrollToRow(at: expanded_indexPath, at: .bottom, animated: true)
 			return
 		}
-		
+
 		SwiftyFormLog("focus area is inside. No need to scroll")
 	}
 }

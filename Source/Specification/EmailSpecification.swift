@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 /// Partial validation of email using regex
@@ -13,7 +13,7 @@ import Foundation
 /// More info about these problems on [Wikipedia](http://en.wikipedia.org/wiki/Email_address).
 public class EmailSpecification: Specification {
 	private let specification: RegularExpressionSpecification
-	
+
 	public init() {
 		self.specification = RegularExpressionSpecification(pattern: emailRegularExpression)
 	}

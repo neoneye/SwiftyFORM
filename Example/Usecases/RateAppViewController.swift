@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -20,13 +20,13 @@ class RateAppViewController: FormViewController {
 		instance.minimumValue(-100.0).maximumValue(100.0).value(0)
 		return instance
 		}()
-	
+
 	lazy var lookSlider: SliderFormItem = {
 		let instance = SliderFormItem()
 		instance.minimumValue(-100.0).maximumValue(100.0).value(0)
 		return instance
 		}()
-	
+
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Submit My Rating"
@@ -35,7 +35,7 @@ class RateAppViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	func submitMyRating() {
 		self.form_simpleAlert("Submit Rating", "Button clicked")
 	}

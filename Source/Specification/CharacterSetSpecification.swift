@@ -1,14 +1,14 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 /// Check if a string has no illegal characters.
 public class CharacterSetSpecification: Specification {
 	private let characterSet: CharacterSet
-	
+
 	public init(characterSet: CharacterSet) {
 		self.characterSet = characterSet
 	}
-	
+
 	public static func charactersInString(_ charactersInString: String) -> CharacterSetSpecification {
 		let cs = CharacterSet(charactersIn: charactersInString)
 		return CharacterSetSpecification(characterSet: cs)
@@ -34,7 +34,6 @@ public class CharacterSetSpecification: Specification {
 		return true // the whole string satisfies the characterSet
 	}
 }
-
 
 extension CharacterSetSpecification {
 	public static var alphanumerics: CharacterSetSpecification {
@@ -102,7 +101,6 @@ extension CharacterSetSpecification {
 	}
 }
 
-
 /// - warning:
 /// These functions will be removed in the future, starting with SwiftyFORM 2.0.0
 extension CharacterSetSpecification {
@@ -113,43 +111,43 @@ extension CharacterSetSpecification {
 	public static func capitalizedLetterCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.capitalizedLetters
 	}
-	
+
 	public static func controlCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.controlCharacters
 	}
-	
+
 	public static func decimalDigitCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.decimalDigits
 	}
-	
+
 	public static func decomposableCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.decomposables
 	}
-	
+
 	public static func illegalCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.illegalCharacters
 	}
-	
+
 	public static func lowercaseLetterCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.lowercaseLetters
 	}
-	
+
 	public static func newlineCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.newlines
 	}
-	
+
 	public static func nonBaseCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.nonBaseCharacters
 	}
-	
+
 	public static func punctuationCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.punctuationCharacters
 	}
-	
+
 	public static func symbolCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.symbols
 	}
-	
+
 	public static func uppercaseLetterCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.uppercaseLetters
 	}
@@ -157,7 +155,7 @@ extension CharacterSetSpecification {
 	public static func whitespaceCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.whitespaces
 	}
-	
+
 	public static func whitespaceAndNewlineCharacterSet() -> CharacterSetSpecification {
 		return CharacterSetSpecification.whitespacesAndNewlines
 	}

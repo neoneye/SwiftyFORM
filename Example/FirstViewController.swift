@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -11,7 +11,7 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("StaticText").viewController(Tutorial0_StaticText_ViewController.self)
 		builder += ViewControllerFormItem().title("TextField").viewController(Tutorial1_TextField_ViewController.self)
 		builder += ViewControllerFormItem().title("Child ViewController").viewController(Tutorial2_ChildViewController_ViewController.self)
-		
+
 		builder += SectionHeaderTitleFormItem().title("Usecases")
 		builder += ViewControllerFormItem().title("Sign Up").viewController(SignUpViewController.self)
 		builder += ViewControllerFormItem().title("Color Picker").viewController(ColorPickerViewController.self)

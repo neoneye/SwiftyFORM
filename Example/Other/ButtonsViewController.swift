@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -11,7 +11,7 @@ class ButtonsViewController: FormViewController {
 		builder += button1
 		builder += button2
 	}
-	
+
 	lazy var button0: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Button 0"
@@ -20,7 +20,7 @@ class ButtonsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var button1: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Button 1"
@@ -29,7 +29,7 @@ class ButtonsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var button2: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Button 2"

@@ -1,9 +1,9 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
 class DatePickerBindingViewController: FormViewController {
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Bindings"
 		builder.toolbarMode = .simple
@@ -21,10 +21,10 @@ class DatePickerBindingViewController: FormViewController {
 		builder += toggleDatePicker0
 		builder += toggleDatePicker1
 		builder += toggleDatePicker2
-		
+
 		updateSummary()
 	}
-	
+
 	lazy var datePicker: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
@@ -35,7 +35,7 @@ class DatePickerBindingViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var incrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Next Day"
@@ -44,7 +44,7 @@ class DatePickerBindingViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var decrementButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Previous Day"
@@ -53,15 +53,15 @@ class DatePickerBindingViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var summary: StaticTextFormItem = {
 		return StaticTextFormItem().title("Date").value("-")
 	}()
-	
+
 	func updateSummary() {
 		summary.value = "\(datePicker.value)"
 	}
-	
+
 	func offsetDate(_ date: Date, days: Int) -> Date {
 		var dateComponents = DateComponents()
 		dateComponents.day = days
@@ -71,7 +71,7 @@ class DatePickerBindingViewController: FormViewController {
 		}
 		return resultDate
 	}
-	
+
 	func increment() {
 		datePicker.setValue(offsetDate(datePicker.value, days: 1), animated: true)
 		updateSummary()
@@ -83,7 +83,7 @@ class DatePickerBindingViewController: FormViewController {
 	}
 
 	// MARK: Collapse / expand
-	
+
 	lazy var userName: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("User Name").placeholder("required")
@@ -91,7 +91,7 @@ class DatePickerBindingViewController: FormViewController {
 		instance.autocorrectionType = .no
 		return instance
 	}()
-	
+
 	lazy var toggleDatePicker0: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Toggle 0"
@@ -99,7 +99,7 @@ class DatePickerBindingViewController: FormViewController {
 		instance.behavior = .expanded
 		return instance
 	}()
-	
+
 	lazy var toggleDatePicker1: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Toggle 1"
@@ -107,7 +107,7 @@ class DatePickerBindingViewController: FormViewController {
 		instance.behavior = .collapsed
 		return instance
 	}()
-	
+
 	lazy var toggleDatePicker2: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Toggle 2"
@@ -115,5 +115,5 @@ class DatePickerBindingViewController: FormViewController {
 		instance.behavior = .collapsed
 		return instance
 	}()
-	
+
 }

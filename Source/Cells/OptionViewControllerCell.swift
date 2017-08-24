@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 public struct OptionViewControllerCellModel {
 	var title: String = ""
 	var placeholder: String = ""
-	var optionField: OptionPickerFormItem? = nil
-	var selectedOptionRow: OptionRowModel? = nil
+	var optionField: OptionPickerFormItem?
+	var selectedOptionRow: OptionRowModel?
 
 	var valueDidChange: (OptionRowModel?) -> Void = { (value: OptionRowModel?) in
 		SwiftyFormLog("value \(String(describing: value))")
@@ -14,9 +14,9 @@ public struct OptionViewControllerCellModel {
 
 public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 	fileprivate let model: OptionViewControllerCellModel
-	fileprivate var selectedOptionRow: OptionRowModel? = nil
+	fileprivate var selectedOptionRow: OptionRowModel?
 	fileprivate weak var parentViewController: UIViewController?
-	
+
 	public init(parentViewController: UIViewController, model: OptionViewControllerCellModel) {
 		self.parentViewController = parentViewController
 		self.model = model
@@ -26,11 +26,11 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		textLabel?.text = model.title
 		updateValue()
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	fileprivate func humanReadableValue() -> String? {
 		if let option = selectedOptionRow {
 			return option.title
@@ -38,28 +38,28 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 			return model.placeholder
 		}
 	}
-	
+
 	fileprivate func updateValue() {
 		let s = humanReadableValue()
 		SwiftyFormLog("update value \(String(describing: s))")
 		detailTextLabel?.text = s
 	}
-	
+
 	public func setSelectedOptionRowWithoutPropagation(_ option: OptionRowModel?) {
 		SwiftyFormLog("set selected option: \(String(describing: option?.title)) \(String(describing: option?.identifier))")
-		
+
 		selectedOptionRow = option
 		updateValue()
 	}
-	
+
 	fileprivate func viaOptionList_userPickedOption(_ option: OptionRowModel) {
 		SwiftyFormLog("user picked option: \(option.title) \(option.identifier)")
-		
+
 		if selectedOptionRow === option {
 			SwiftyFormLog("no change")
 			return
 		}
-		
+
 		selectedOptionRow = option
 		updateValue()
 		model.valueDidChange(option)
@@ -67,7 +67,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
-		
+
 		guard let vc: UIViewController = parentViewController else {
 			SwiftyFormLog("Expected a parent view controller")
 			return
@@ -80,7 +80,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 			SwiftyFormLog("Expected model to have an optionField")
 			return
 		}
-		
+
 		// hide keyboard when the user taps this kind of row
 		tableView.form_firstResponder()?.resignFirstResponder()
 
@@ -89,7 +89,7 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 			nc.popViewController(animated: true)
 		}
 		nc.pushViewController(childViewController, animated: true)
-		
+
 		SwiftyFormLog("did invoke")
 	}
 }

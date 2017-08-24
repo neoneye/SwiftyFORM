@@ -1,8 +1,8 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 public extension IndexPath {
-	
+
 	/// Indexpath of the previous cell.
 	///
 	/// This function is complex because it deals with empty sections and invalid indexpaths.
@@ -30,7 +30,7 @@ public extension IndexPath {
 			}
 		}
 	}
-	
+
 	/// Indexpath of the next cell.
 	///
 	/// This function is complex because it deals with empty sections and invalid indexpaths.
@@ -56,12 +56,11 @@ public extension IndexPath {
 			currentRow = 0
 		}
 	}
-	
+
 }
 
-
 extension UITableView {
-	
+
 	/// Determine where a cell is located in this tableview. Considers cells inside and cells outside the visible area.
 	///
 	/// Unlike UITableView.indexPathForCell() which only looksup inside the visible area.
@@ -101,7 +100,7 @@ extension UITableView {
 			}
 		}
 	}
-			
+
 	/// Find a cell below that can be jumped to. Skip cells that cannot be jumped to.
 	///
 	/// Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
@@ -113,14 +112,14 @@ extension UITableView {
 			if indexPath == nil {
 				return nil
 			}
-			
+
 			let cell = dataSource.tableView(self, cellForRowAt: indexPath)
 			if cell.canBecomeFirstResponder {
 				return indexPath
 			}
 		}
 	}
-	
+
 	/// Jump to a cell above.
 	///
 	/// Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
@@ -132,7 +131,7 @@ extension UITableView {
 		let cell = dataSource.tableView(self, cellForRowAt: indexPath1)
 		cell.becomeFirstResponder()
 	}
-	
+
 	/// Jump to a cell below.
 	///
 	/// Usage: when the user hits TAB on the keyboard, then we want to jump to a cell below.
@@ -162,9 +161,8 @@ extension UITableView {
 	}
 }
 
-
 extension UITableViewCell {
-	
+
 	/// Jump to the previous cell, located above the current cell.
 	///
 	/// Usage: when the user types SHIFT TAB on the keyboard, then we want to jump to a cell above.
@@ -178,12 +176,12 @@ extension UITableViewCell {
 	func form_makeNextCellFirstResponder() {
 		form_tableView()?.form_makeNextCellFirstResponder(self)
 	}
-	
+
 	/// Determines if it's possible to jump to the cell above.
 	func form_canMakePreviousCellFirstResponder() -> Bool {
 		return form_tableView()?.form_canMakePreviousCellFirstResponder(self) ?? false
 	}
-	
+
 	/// Determines if it's possible to jump to the cell below.
 	func form_canMakeNextCellFirstResponder() -> Bool {
 		return form_tableView()?.form_canMakeNextCellFirstResponder(self) ?? false

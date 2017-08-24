@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import SwiftyFORM
 
 class PickerViewViewController: FormViewController {
@@ -11,10 +11,10 @@ class PickerViewViewController: FormViewController {
 		builder += SectionHeaderTitleFormItem().title("Misc")
 		builder += summary
 		builder += randomizeButton
-		
+
 		updateSummary()
 	}
-	
+
 	lazy var picker0: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("1 component").behavior(.expanded)
 		instance.pickerTitles = [["0", "1", "2", "3", "4", "5", "6"]]
@@ -23,7 +23,7 @@ class PickerViewViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var picker1: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("2 components")
 		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12", "13", "14"]]
@@ -33,7 +33,7 @@ class PickerViewViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var picker2: PickerViewFormItem = {
 		let instance = PickerViewFormItem().title("3 components")
 		instance.pickerTitles = [["00", "01", "02", "03"], ["10", "11", "12"], ["20", "21", "22", "23", "24"]]
@@ -47,7 +47,7 @@ class PickerViewViewController: FormViewController {
 	lazy var summary: StaticTextFormItem = {
 		return StaticTextFormItem().title("Values").value("-")
 	}()
-	
+
 	func updateSummary() {
 		let v0 = picker0.value
 		let v1 = picker1.value
@@ -63,7 +63,7 @@ class PickerViewViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	func assignRandomValues(_ pickerView: PickerViewFormItem) {
 		var selectedRows = [Int]()
 		for rows in pickerView.pickerTitles {
@@ -75,7 +75,7 @@ class PickerViewViewController: FormViewController {
 		}
 		pickerView.setValue(selectedRows, animated: true)
 	}
-	
+
 	func randomize() {
 		assignRandomValues(picker0)
 		assignRandomValues(picker1)

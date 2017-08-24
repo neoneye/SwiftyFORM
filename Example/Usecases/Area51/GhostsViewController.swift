@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -24,25 +24,25 @@ class GhostsViewController: FormViewController {
 		instance.minimumValue(0.0).maximumValue(100.0).value(50.0)
 		return instance
 		}()
-	
+
 	lazy var transparantSlider: SliderFormItem = {
 		let instance = SliderFormItem()
 		instance.minimumValue(0.0).maximumValue(100.0).value(50.0)
 		return instance
 		}()
-	
+
 	lazy var humanLookingSlider: SliderFormItem = {
 		let instance = SliderFormItem()
 		instance.minimumValue(0.0).maximumValue(100.0).value(50.0)
 		return instance
 		}()
-	
+
 	lazy var makingNoisesSlider: SliderFormItem = {
 		let instance = SliderFormItem()
 		instance.minimumValue(0.0).maximumValue(100.0).value(50.0)
 		return instance
 		}()
-	
+
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Submit"
@@ -51,7 +51,7 @@ class GhostsViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	func submit() {
 		var s = "scary: \(scarySlider.value)\n"
 		s += "transparant: \(transparantSlider.value)\n"

@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 struct PickerViewCellConstants {
@@ -7,20 +7,19 @@ struct PickerViewCellConstants {
 	}
 }
 
-
 public class PickerViewCellModel {
 	var title: String = ""
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCellSelectionStyle.default
-	
+
 	var titles = [[String]]()
 	var value = [Int]()
 	var humanReadableValueSeparator: String?
-	
+
 	var valueDidChange: ([Int]) -> Void = { (selectedRows: [Int]) in
 		SwiftyFormLog("selectedRows \(selectedRows)")
 	}
-	
+
 	var humanReadableValue: String {
 		var result = [String]()
 		for (component, row) in value.enumerated() {
@@ -30,7 +29,6 @@ public class PickerViewCellModel {
 		return result.joined(separator: humanReadableValueSeparator ?? ",")
 	}
 }
-
 
 /**
 # Picker view toggle-cell
@@ -48,20 +46,20 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
-		
+
 		updateValue()
-		
+
 		assignDefaultColors()
 	}
 
 	public required init(coder aDecoder: NSCoder) {
 	    fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func updateValue() {
 		detailTextLabel?.text = model.humanReadableValue
 	}
-	
+
 	func setValueWithoutSync(_ value: [Int], animated: Bool) {
 		if value.count != model.titles.count {
 			print("Expected the number of components to be the same")
@@ -70,14 +68,14 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		SwiftyFormLog("set value \(value), animated \(animated)")
 		model.value = value
 		updateValue()
-		
+
 		expandedCell?.pickerView.form_selectRows(value, animated: animated)
 	}
-	
+
 	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return 60
 	}
-	
+
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		if model.expandCollapseWhenSelectingRow == false {
 			//print("cell is always expanded")
@@ -92,16 +90,15 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		form_deselectRow()
 	}
 
-
 	// MARK: UIResponder
-	
-	public override var canBecomeFirstResponder : Bool {
+
+	public override var canBecomeFirstResponder: Bool {
 		if model.expandCollapseWhenSelectingRow == false {
 			return false
 		}
 		return true
 	}
-	
+
 	public override func becomeFirstResponder() -> Bool {
 		if !super.becomeFirstResponder() {
 			return false
@@ -109,13 +106,12 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		expand()
 		return true
 	}
-	
+
 	public override func resignFirstResponder() -> Bool {
 		collapse()
 		return super.resignFirstResponder()
 	}
 
-	
 	// MARK: Expand collapse
 
 	var isExpandedCellVisible: Bool {
@@ -130,7 +126,7 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		}
 		return true
 	}
-	
+
 	func toggleExpandCollapse() {
 		guard let tableView = form_tableView() else {
 			return
@@ -148,7 +144,7 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			sectionArray: sectionArray
 		)
 	}
-	
+
 	func expand() {
 		if isExpandedCellVisible {
 			assignTintColors()
@@ -156,27 +152,25 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			toggleExpandCollapse()
 		}
 	}
-	
+
 	func collapse() {
 		if isExpandedCellVisible {
 			toggleExpandCollapse()
 		}
 	}
-	
-	
+
 	// MARK: AssignAppearance
-	
+
 	public func assignDefaultColors() {
 		textLabel?.textColor = UIColor.black
 		detailTextLabel?.textColor = UIColor.gray
 	}
-	
+
 	public func assignTintColors() {
 		textLabel?.textColor = tintColor
 		detailTextLabel?.textColor = tintColor
 	}
 }
-
 
 /**
 # Picker view expanded-cell
@@ -192,49 +186,49 @@ public class PickerViewExpandedCell: UITableViewCell {
 		instance.delegate = self
 		return instance
 	}()
-	
+
 	var titles = [[String]]()
-	
+
 	func configure(_ model: PickerViewCellModel) {
 		titles = model.titles
 		pickerView.reloadAllComponents()
 		pickerView.setNeedsLayout()
 		pickerView.form_selectRows(model.value, animated: false)
 	}
-	
+
 	public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
 			return
 		}
 		let model = collapsedCell.model
-		
+
 		var selectedRows = [Int]()
 		for (component, _) in titles.enumerated() {
 			let row: Int = pickerView.selectedRow(inComponent: component)
 			selectedRows.append(row)
 		}
 		//print("selected rows: \(selectedRows)")
-		
+
 		model.value = selectedRows
 		collapsedCell.updateValue()
 		model.valueDidChange(selectedRows)
 	}
-	
+
 	public init() {
 		super.init(style: .default, reuseIdentifier: nil)
 		contentView.addSubview(pickerView)
 	}
-	
+
 	required public init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	fileprivate var componentWidth: CGFloat = 0
-	
+
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		pickerView.frame = contentView.bounds
-		
+
 		// Ensures that all UIPickerView components stay within the left/right layoutMargins
 		let rect = UIEdgeInsetsInsetRect(pickerView.frame, layoutMargins)
 		let numberOfComponents = titles.count
@@ -243,7 +237,7 @@ public class PickerViewExpandedCell: UITableViewCell {
 		} else {
 			componentWidth = rect.width
 		}
-		
+
 		/*
 		Workaround:
 		UIPickerView gets messed up on orientation change
@@ -259,43 +253,39 @@ public class PickerViewExpandedCell: UITableViewCell {
 	}
 }
 
-
 extension PickerViewExpandedCell: UIPickerViewDataSource {
 	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return titles.count
 	}
-	
+
 	public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		return titles[component].count
 	}
 }
 
-
 extension PickerViewExpandedCell: UIPickerViewDelegate {
 	public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
 		return titles[component][row]
 	}
-	
+
 	public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		valueChanged()
 	}
-	
+
 	public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
 		return 44
 	}
-	
+
 	public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
 		return componentWidth
 	}
 }
-
 
 extension PickerViewExpandedCell: CellHeightProvider {
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		return PickerViewCellConstants.CellExpanded.height
 	}
 }
-
 
 extension PickerViewExpandedCell: WillDisplayCellDelegate {
 	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
@@ -305,17 +295,15 @@ extension PickerViewExpandedCell: WillDisplayCellDelegate {
 	}
 }
 
-
 extension PickerViewExpandedCell: ExpandedCell {
 	public var toggleCell: UITableViewCell? {
 		return collapsedCell
 	}
-	
+
 	public var isCollapsable: Bool {
 		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 }
-
 
 extension UIPickerView {
 	func form_selectRows(_ rows: [Int], animated: Bool) {

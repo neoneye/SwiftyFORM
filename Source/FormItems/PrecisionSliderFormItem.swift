@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 /**
@@ -19,7 +19,7 @@ public class PrecisionSliderFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -69,7 +69,7 @@ public class PrecisionSliderFormItem: FormItem {
 		self.behavior = behavior
 		return self
 	}
-	
+
 	public var collapseWhenResigning = false
 
 	@discardableResult
@@ -77,7 +77,7 @@ public class PrecisionSliderFormItem: FormItem {
 		self.collapseWhenResigning = true
 		return self
 	}
-	
+
 	/**
 	# Initial zoom factor
 	
@@ -109,7 +109,7 @@ public class PrecisionSliderFormItem: FormItem {
 	
 	The number can go from 0 to +5.
 	*/
-	public var decimalPlaces: UInt = 3  {
+	public var decimalPlaces: UInt = 3 {
 		willSet {
 			assert(newValue <= 10, "PrecisionSlider cannot handle so many decimalPlaces. Too big a number.")
 		}
@@ -120,7 +120,7 @@ public class PrecisionSliderFormItem: FormItem {
 		self.decimalPlaces = decimalPlaces
 		return self
 	}
-	
+
 	public var minimumValue: Int = 0
 
 	@discardableResult
@@ -128,7 +128,7 @@ public class PrecisionSliderFormItem: FormItem {
 		self.minimumValue = minimumValue
 		return self
 	}
-	
+
 	public var maximumValue: Int = 1000
 
 	@discardableResult
@@ -136,7 +136,7 @@ public class PrecisionSliderFormItem: FormItem {
 		self.maximumValue = maximumValue
 		return self
 	}
-	
+
 	public var zoomUI = false
 
 	@discardableResult
@@ -144,12 +144,12 @@ public class PrecisionSliderFormItem: FormItem {
 		self.zoomUI = true
 		return self
 	}
-	
+
 	typealias SyncBlock = (_ value: Int) -> Void
 	var syncCellWithValue: SyncBlock = { (value: Int) in
 		SwiftyFormLog("sync is not overridden")
 	}
-	
+
 	internal var innerValue: Int = 0
 	public var value: Int {
 		get {
@@ -165,17 +165,17 @@ public class PrecisionSliderFormItem: FormItem {
 		updateValue(value)
 		return self
 	}
-	
+
 	public func updateValue(_ value: Int) {
 		innerValue = value
 		syncCellWithValue(value)
 	}
-	
+
 	public var actualValue: Double {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(innerValue) / decimalScale
 	}
-	
+
 	public struct SliderDidChangeModel {
 		public let value: Int
 		public let valueUpdated: Bool
@@ -187,7 +187,7 @@ public class PrecisionSliderFormItem: FormItem {
 	public var sliderDidChangeBlock: SliderDidChangeBlock = { (changeModel: SliderDidChangeModel) in
 		SwiftyFormLog("not overridden")
 	}
-	
+
 	public func sliderDidChange(_ changeModel: SliderDidChangeModel) {
 		innerValue = changeModel.value
 		sliderDidChangeBlock(changeModel)

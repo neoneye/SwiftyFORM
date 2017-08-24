@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -21,25 +21,25 @@ class TextViewViewController: FormViewController {
 		instance.value = "Lorem ipsum"
 		return instance
 		}()
-	
+
 	lazy var notes: TextViewFormItem = {
 		let instance = TextViewFormItem()
 		instance.title("Notes").placeholder("I'm a placeholder")
 		return instance
 		}()
-	
+
 	lazy var commentArea: TextViewFormItem = {
 		let instance = TextViewFormItem()
 		instance.title("Comments").placeholder("I'm also a placeholder")
 		return instance
 		}()
-	
+
 	lazy var userDescription: TextViewFormItem = {
 		let instance = TextViewFormItem()
 		instance.title("Description").placeholder("Yet another placeholder")
 		return instance
 		}()
-	
+
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Randomize"
@@ -48,7 +48,7 @@ class TextViewViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	lazy var clearButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
 		instance.title = "Clear"
@@ -57,7 +57,7 @@ class TextViewViewController: FormViewController {
 		}
 		return instance
 		}()
-	
+
 	func pickRandom(_ strings: [String]) -> String {
 		if strings.count == 0 {
 			return ""
@@ -65,7 +65,7 @@ class TextViewViewController: FormViewController {
 		let i = randomInt(0, strings.count - 1)
 		return strings[i]
 	}
-	
+
 	func appendRandom(_ textView: TextViewFormItem, strings: [String]) {
 		let notEmpty = textView.value.characters.count != 0
 		var s = ""
@@ -74,7 +74,7 @@ class TextViewViewController: FormViewController {
 		}
 		textView.value += s + pickRandom(strings)
 	}
-	
+
 	func randomize() {
 		appendRandom(longSummary, strings: ["Hello", "World", "Cat", "Water", "Fish", "Hund"])
 		appendRandom(notes, strings: ["Hat", "Ham", "Has"])

@@ -1,13 +1,13 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 class ValidateVisitor: FormItemVisitor {
 	var result = ValidateResult.valid
-	
+
 	func visit(object: TextFieldFormItem) {
 		result = object.submitValidateValueText()
 	}
-	
+
 	func visit(object: AttributedTextFormItem) {}
 	func visit(object: ButtonFormItem) {}
 	func visit(object: CustomFormItem) {}

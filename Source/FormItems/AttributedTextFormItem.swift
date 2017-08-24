@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class AttributedTextFormItem: FormItem {
     override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
     }
-    
+
 	public var title: NSAttributedString?
 
 	@discardableResult
@@ -19,13 +19,12 @@ public class AttributedTextFormItem: FormItem {
 		self.title = NSAttributedString(string: title, attributes: attributes)
 		return self
 	}
-	
-	
+
 	typealias SyncBlock = (_ value: NSAttributedString?) -> Void
 	var syncCellWithValue: SyncBlock = { (value: NSAttributedString?) in
 		SwiftyFormLog("sync is not overridden")
 	}
-	
+
 	internal var innerValue: NSAttributedString?
 	public var value: NSAttributedString? {
 		get {

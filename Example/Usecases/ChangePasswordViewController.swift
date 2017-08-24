@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -7,7 +7,7 @@ class ChangePasswordViewController: FormViewController {
 		super.loadView()
 		form_installSubmitButton()
 	}
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Password"
 		builder.toolbarMode = .simple
@@ -18,7 +18,7 @@ class ChangePasswordViewController: FormViewController {
 		builder += passwordNewRepeated
 		builder.alignLeft([passwordOld, passwordNew, passwordNewRepeated])
 	}
-	
+
 	lazy var passwordOld: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Old password").password().placeholder("required")
@@ -29,7 +29,7 @@ class ChangePasswordViewController: FormViewController {
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
 		}()
-	
+
 	lazy var passwordNew: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("New password").password().placeholder("required")
@@ -40,7 +40,7 @@ class ChangePasswordViewController: FormViewController {
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
 		}()
-	
+
 	lazy var passwordNewRepeated: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
 		instance.title("Repeat password").password().placeholder("required")

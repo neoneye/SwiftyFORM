@@ -1,11 +1,11 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class ButtonFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -13,6 +13,6 @@ public class ButtonFormItem: FormItem {
 		self.title = title
 		return self
 	}
-	
-	public var action: (Void) -> Void = {}
+
+	public var action: () -> Void = {}
 }

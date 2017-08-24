@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import XCTest
 @testable import SwiftyFORM
 
@@ -23,8 +23,8 @@ class JSONHelperTests: XCTestCase {
 			XCTFail()
 			return
 		}
-		let value = dict2["id"] as Any?
-		let processedValue = JSONHelper.process(value)
+		let value: Any?? = dict2["id"]
+		let processedValue = JSONHelper.process(value!)
 		XCTAssertTrue(processedValue is NSNull)
 	}
 	

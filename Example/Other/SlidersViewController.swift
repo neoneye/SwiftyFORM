@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -6,7 +6,7 @@ class SlidersViewController: FormViewController {
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Sliders"
 		builder.toolbarMode = .none
-		
+
 		builder += SectionHeaderTitleFormItem().title("Sliders")
 		builder += slider0
 		builder += slider1
@@ -14,10 +14,10 @@ class SlidersViewController: FormViewController {
 
 		builder += SectionHeaderTitleFormItem().title("Summary")
 		builder += summary
-		
+
 		updateSummary()
 	}
-	
+
 	lazy var slider0: SliderFormItem = {
 		let instance = SliderFormItem().minimumValue(-1.0).maximumValue(1.0).value(-0.5)
 		instance.sliderDidChangeBlock = { [weak self] (value: Float) in
@@ -33,7 +33,7 @@ class SlidersViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var slider2: SliderFormItem = {
 		let instance = SliderFormItem().minimumValue(0.0).maximumValue(100.0).value(80)
 		instance.sliderDidChangeBlock = { [weak self] (value: Float) in
@@ -41,11 +41,11 @@ class SlidersViewController: FormViewController {
 		}
 		return instance
 	}()
-	
+
 	lazy var summary: StaticTextFormItem = {
 		return StaticTextFormItem().title("Values").value("-")
 	}()
-	
+
 	func updateSummary() {
 		let s0 = String(format: "%.1f", slider0.value)
 		let s1 = String(format: "%.1f", slider1.value)

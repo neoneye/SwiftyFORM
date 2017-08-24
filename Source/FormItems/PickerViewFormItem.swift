@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 /**
@@ -12,7 +12,7 @@ public class PickerViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -20,7 +20,7 @@ public class PickerViewFormItem: FormItem {
 		self.title = title
 		return self
 	}
-	
+
 	/**
 	### Collapsed
 	
@@ -59,18 +59,16 @@ public class PickerViewFormItem: FormItem {
 		self.behavior = behavior
 		return self
 	}
-	
-	
+
 	public var pickerTitles = [[String]]()
-	
+
 	public var humanReadableValueSeparator: String?
-	
 
 	typealias SyncBlock = (_ value: [Int], _ animated: Bool) -> Void
 	var syncCellWithValue: SyncBlock = { (value: [Int], animated: Bool) in
 		SwiftyFormLog("sync is not overridden: \(value)")
 	}
-	
+
 	fileprivate func maybeAssignFallbackValue() {
 		if innerValue.count == pickerTitles.count {
 			return
@@ -86,8 +84,7 @@ public class PickerViewFormItem: FormItem {
 		}
 		innerValue = selectedRows
 	}
-	
-	
+
 	internal var innerValue = [Int]()
 	public var value: [Int] {
 		get {
@@ -98,7 +95,7 @@ public class PickerViewFormItem: FormItem {
 			self.setValue(newValue, animated: false)
 		}
 	}
-	
+
 	public func setValue(_ value: [Int], animated: Bool) {
 		innerValue = value
 		syncCellWithValue(value, animated)

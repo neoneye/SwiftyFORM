@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class SectionFormItem: FormItem {
@@ -12,11 +12,11 @@ public class SectionHeaderTitleFormItem: FormItem {
 		self.title = title
 		super.init()
 	}
-	
+
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	/// The section title is shown in uppercase.
 	///
 	/// Works best with texts shorter than 50 characters
@@ -36,8 +36,8 @@ public class SectionHeaderViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
-	public typealias CreateUIView = (Void) -> UIView?
+
+	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }
 
@@ -46,11 +46,11 @@ public class SectionFooterTitleFormItem: FormItem {
 		self.title = title
 		super.init()
 	}
-	
+
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String?
 
 	@discardableResult
@@ -64,7 +64,7 @@ public class SectionFooterViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
-	public typealias CreateUIView = (Void) -> UIView?
+
+	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }

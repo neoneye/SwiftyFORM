@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public class ViewControllerFormItemPopContext {
@@ -6,7 +6,7 @@ public class ViewControllerFormItemPopContext {
 	public let childViewController: UIViewController
 	public let cell: ViewControllerFormItemCell
 	public let returnedObject: AnyObject?
-	
+
 	public init(parentViewController: UIViewController, childViewController: UIViewController, cell: ViewControllerFormItemCell, returnedObject: AnyObject?) {
 		self.parentViewController = parentViewController
 		self.childViewController = childViewController
@@ -19,7 +19,7 @@ public class ViewControllerFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var placeholder: String = ""
 
 	@discardableResult
@@ -27,7 +27,7 @@ public class ViewControllerFormItem: FormItem {
 		self.placeholder = placeholder
 		return self
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -35,7 +35,7 @@ public class ViewControllerFormItem: FormItem {
 		self.title = title
 		return self
 	}
-	
+
 	@discardableResult
 	public func viewController(_ aClass: UIViewController.Type) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
@@ -43,7 +43,7 @@ public class ViewControllerFormItem: FormItem {
 		}
 		return self
 	}
-	
+
 	@discardableResult
 	public func storyboard(_ name: String, bundle storyboardBundleOrNil: Bundle?) -> Self {
 		createViewController = { (dismissCommand: CommandProtocol) in
@@ -52,11 +52,11 @@ public class ViewControllerFormItem: FormItem {
 		}
 		return self
 	}
-	
+
 	// the view controller must invoke the dismiss block when it's being dismissed
 	public typealias CreateViewController = (CommandProtocol) -> UIViewController?
 	public var createViewController: CreateViewController?
-	
+
 	// dismissing the view controller
 	public typealias PopViewController = (ViewControllerFormItemPopContext) -> Void
 	public var willPopViewController: PopViewController?

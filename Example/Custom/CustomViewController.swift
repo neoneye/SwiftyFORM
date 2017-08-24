@@ -1,9 +1,9 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
 class CustomViewController: FormViewController {
-	
+
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Custom cells"
 		builder.toolbarMode = .simple
@@ -22,21 +22,21 @@ class CustomViewController: FormViewController {
 			return try LoadingCell.createCell()
 		}
 		builder += loaderItem1
-		
+
 		builder += SectionHeaderTitleFormItem().title("Game news")
 		let loaderItem2 = CustomFormItem()
 		loaderItem2.createCell = { _ in
 			return try LoadingCell.createCell()
 		}
 		builder += loaderItem2
-		
+
 		builder += SectionHeaderTitleFormItem().title("Fashion news")
 		let loaderItem3 = CustomFormItem()
 		loaderItem3.createCell = { _ in
 			return try LoadingCell.createCell()
 		}
 		builder += loaderItem3
-		
+
 		builder += SectionHeaderTitleFormItem().title("Biz news")
 		let loaderItem4 = CustomFormItem()
 		loaderItem4.createCell = { _ in
@@ -44,5 +44,5 @@ class CustomViewController: FormViewController {
 		}
 		builder += loaderItem4
 	}
-	
+
 }

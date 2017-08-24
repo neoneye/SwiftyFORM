@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 extension FormViewController {
@@ -11,13 +11,13 @@ extension FormViewController {
 	}
 
 	/// Used internally by the `form_installSubmitButton()` function
-	public func form_submitAction(_ sender: AnyObject?) {
+	@objc public func form_submitAction(_ sender: AnyObject?) {
 		formBuilder.validateAndUpdateUI()
 		let result = formBuilder.validate()
 		SwiftyFormLog("result \(result)")
 		form_showSubmitResult(result)
 	}
-	
+
 	/// Used internally by the `form_installSubmitButton()` function
 	public func form_showSubmitResult(_ result: FormBuilder.FormValidateResult) {
 		switch result {

@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import Foundation
 
 public enum ValidateResult: Equatable {
@@ -8,7 +8,7 @@ public enum ValidateResult: Equatable {
 }
 
 public func ==(lhs: ValidateResult, rhs: ValidateResult) -> Bool {
-	switch (lhs, rhs)  {
+	switch (lhs, rhs) {
 	case (.valid, .valid):
 		return true
 	case let (.hardInvalid(messageA), .hardInvalid(messageB)):

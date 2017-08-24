@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 extension FormBuilder {
@@ -20,7 +20,7 @@ extension FormBuilder {
 /// Centered multiline text useful for headers
 public class InfoView: UIView {
 	public let label: UILabel
-	
+
 	public init(frame: CGRect, text: String) {
 		self.label = UILabel()
 		super.init(frame: frame)
@@ -32,11 +32,11 @@ public class InfoView: UIView {
 		label.textAlignment = .center
 		label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		let size = label.sizeThatFits(bounds.size)

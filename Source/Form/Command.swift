@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
 import UIKit
 
 public protocol CommandProtocol {
@@ -10,7 +10,7 @@ public class CommandBlock: CommandProtocol {
 	public init(block: @escaping (UIViewController, AnyObject?) -> Void) {
 		self.block = block
 	}
-	
+
 	public func execute(viewController: UIViewController, returnObject: AnyObject?) {
 		block(viewController, returnObject)
 	}
