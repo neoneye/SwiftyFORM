@@ -618,7 +618,7 @@ class PopulateTableView: FormItemVisitor {
 		let willPopViewController = WillPopCustomViewController(object: object)
 
 		weak var weakViewController = self.model.viewController
-		let cell = ViewControllerFormItemCell(model: model) { (cell: ViewControllerFormItemCell, modelObject: ViewControllerFormItemCellModel) in
+		let cell = ViewControllerFormItemCell(model: model) { (cell: ViewControllerFormItemCell, _: ViewControllerFormItemCellModel) in
 			SwiftyFormLog("push")
 			if let vc = weakViewController {
 				let dismissCommand = PopulateTableView.prepareDismissCommand(willPopViewController, parentViewController: vc, cell: cell)
