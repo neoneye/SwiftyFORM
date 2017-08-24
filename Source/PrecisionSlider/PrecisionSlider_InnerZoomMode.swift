@@ -28,11 +28,11 @@ enum PrecisionSlider_InnerZoomMode {
 		if zoom >  1.41 { return .zoomIn(count: 20) }
 		if zoom >  0.90 { return .zoomIn(count: 10) }
 		if zoom >  0.47 { return .zoomIn(count: 2) }
-		if zoom >  0.0  { return .none }
+		if zoom >  0.00 { return .none }
 		if zoom > -0.47 { return .zoomOut(count: 5) }
-		if zoom > -1.0  { return .zoomOut(count: 10) }
+		if zoom > -1.00 { return .zoomOut(count: 10) }
 		if zoom > -1.69 { return .zoomOut(count: 50) }
-		if zoom > -2.0  { return .zoomOut(count: 100) }
+		if zoom > -2.00 { return .zoomOut(count: 100) }
 		if zoom > -2.30 { return .zoomOut(count: 500) }
 		if zoom > -2.97 { return .zoomOut(count: 1000) }
 		if zoom > -3.87 { return .zoomOut(count: 5000) }
