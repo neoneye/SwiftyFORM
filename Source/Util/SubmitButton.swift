@@ -11,7 +11,7 @@ extension FormViewController {
 	}
 
 	/// Used internally by the `form_installSubmitButton()` function
-	public func form_submitAction(_ sender: AnyObject?) {
+	@objc public func form_submitAction(_ sender: AnyObject?) {
 		formBuilder.validateAndUpdateUI()
 		let result = formBuilder.validate()
 		SwiftyFormLog("result \(result)")

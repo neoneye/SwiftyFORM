@@ -177,7 +177,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return false
 	}
 
-	func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+	@objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
 		if gesture.state == .began {
 			originalZoom = model.zoom
 			originalValue = self.value
@@ -210,7 +210,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
-	func handleOneTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
+	@objc func handleOneTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
 		let originalZoom = model.zoom
 		let originalValue = self.value
@@ -266,7 +266,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
-	func handleTwoTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
+	@objc func handleTwoTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
 		let originalZoom = model.zoom
 		let originalValue = self.value
@@ -355,7 +355,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
-	func zoomInButtonAction() {
+	@objc func zoomInButtonAction() {
 		let originalZoom = model.zoom
 		let originalValue = self.value
 
@@ -391,7 +391,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		return instance
 	}()
 
-	func zoomOutButtonAction() {
+	@objc func zoomOutButtonAction() {
 		let originalZoom = model.zoom
 		let originalValue = self.value
 

@@ -59,7 +59,7 @@ public class StepperCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func valueChanged() {
+	@objc public func valueChanged() {
 		SwiftyFormLog("value did change")
 
 		let value: Double = stepperView.value

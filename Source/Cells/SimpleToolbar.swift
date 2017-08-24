@@ -55,15 +55,15 @@ public class SimpleToolbar: UIToolbar {
 		return items
 	}
 
-	public func previousButtonAction(_ sender: UIBarButtonItem!) {
+	@objc public func previousButtonAction(_ sender: UIBarButtonItem!) {
 		jumpToPrevious()
 	}
 
-	public func nextButtonAction(_ sender: UIBarButtonItem!) {
+	@objc public func nextButtonAction(_ sender: UIBarButtonItem!) {
 		jumpToNext()
 	}
 
-	public func closeButtonAction(_ sender: UIBarButtonItem!) {
+	@objc public func closeButtonAction(_ sender: UIBarButtonItem!) {
 		dismissKeyboard()
 	}
 

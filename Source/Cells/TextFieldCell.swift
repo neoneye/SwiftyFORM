@@ -148,7 +148,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		_ = resignFirstResponder()
 	}
 
-	public func handleTap(_ sender: UITapGestureRecognizer) {
+	@objc public func handleTap(_ sender: UITapGestureRecognizer) {
 		textField.becomeFirstResponder()
 	}
 
@@ -225,7 +225,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		errorLabel.frame = sizes.errorLabelFrame
 	}
 
-	public func valueDidChange() {
+	@objc public func valueDidChange() {
 		model.valueDidChange(textField.text ?? "")
 
 		let result: ValidateResult = model.model.liveValidateValueText()
@@ -347,7 +347,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		}
 	}
 
-	public func timerUpdate() {
+	@objc public func timerUpdate() {
 		invalidateTimer()
 		//SwiftyFormLog("timer update")
 

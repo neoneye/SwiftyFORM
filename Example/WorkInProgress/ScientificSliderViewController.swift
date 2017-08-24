@@ -143,7 +143,7 @@ class ScientificSliderViewController: UIViewController {
 	var xDelta: CGFloat = 0
 	var yDelta: CGFloat = 0
 
-	func handlePan(_ gesture: UIPanGestureRecognizer) {
+	@objc func handlePan(_ gesture: UIPanGestureRecognizer) {
 		if gesture.state == .began {
 			xOriginal = x
 			yOriginal = y

@@ -51,7 +51,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		return 60
 	}
 
-	public func valueChanged() {
+	@objc public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(slider.value)
 	}

@@ -31,7 +31,7 @@ public class SegmentedControlCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func valueChanged() {
+	@objc public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(segmentedControl.selectedSegmentIndex)
 	}

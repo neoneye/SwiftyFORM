@@ -61,7 +61,7 @@ public class TextViewCell: UITableViewCell {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public func handleTap(_ sender: UITapGestureRecognizer) {
+	@objc public func handleTap(_ sender: UITapGestureRecognizer) {
 		_ = self.becomeFirstResponder()
 	}
 

@@ -83,7 +83,7 @@ public class DebugViewController: UIViewController {
 		}
 	}
 
-	func dismissAction(_ sender: AnyObject?) {
+	@objc func dismissAction(_ sender: AnyObject?) {
 		dismissBlock()
 	}
 

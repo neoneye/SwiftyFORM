@@ -258,7 +258,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		datePicker.date = model.date
 	}
 
-	public func valueChanged() {
+	@objc public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
 			return
 		}
