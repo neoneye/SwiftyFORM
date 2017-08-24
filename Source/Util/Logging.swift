@@ -13,5 +13,3 @@ import Foundation
 		// do nothing
 	}
 #endif
-
-

@@ -6,7 +6,7 @@ public class MetaFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var value: AnyObject?
 
 	@discardableResult

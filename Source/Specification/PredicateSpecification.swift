@@ -6,11 +6,11 @@ import Foundation
 /// Closure is sometimes preferred instead of subclassing the `Specification` protocol.
 public class PredicateSpecification<T>: Specification {
 	private let predicate: (T) -> Bool
-	
+
 	public init(predicate: @escaping (T) -> Bool) {
 		self.predicate = predicate
 	}
-	
+
 	/// Check if the closure is satisfied.
 	///
 	/// - parameter candidate: The object to be checked.

@@ -13,7 +13,7 @@ import Foundation
 /// More info about these problems on [Wikipedia](http://en.wikipedia.org/wiki/Email_address).
 public class EmailSpecification: Specification {
 	private let specification: RegularExpressionSpecification
-	
+
 	public init() {
 		self.specification = RegularExpressionSpecification(pattern: emailRegularExpression)
 	}

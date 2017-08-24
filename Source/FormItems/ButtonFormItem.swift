@@ -5,7 +5,7 @@ public class ButtonFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String = ""
 
 	@discardableResult
@@ -13,6 +13,6 @@ public class ButtonFormItem: FormItem {
 		self.title = title
 		return self
 	}
-	
+
 	public var action: () -> Void = {}
 }

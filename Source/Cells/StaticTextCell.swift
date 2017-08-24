@@ -14,11 +14,11 @@ public class StaticTextCell: UITableViewCell {
 		super.init(style: .value1, reuseIdentifier: nil)
 		loadWithModel(model)
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func loadWithModel(_ model: StaticTextCellModel) {
 		selectionStyle = .none
 		textLabel?.text = model.title

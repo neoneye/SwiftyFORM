@@ -5,7 +5,7 @@ enum PrecisionSlider_InnerZoomMode {
 	case none
 	case zoomIn(count: UInt)
 	case zoomOut(count: UInt)
-	
+
 	var scalar: Double {
 		switch self {
 		case .none:
@@ -16,7 +16,7 @@ enum PrecisionSlider_InnerZoomMode {
 			return 1 / Double(count)
 		}
 	}
-	
+
 	static func create(_ zoom: Float) -> PrecisionSlider_InnerZoomMode {
 		if zoom >  4.92 { return .zoomIn(count: 100000) }
 		if zoom >  4.42 { return .zoomIn(count: 20000) }
@@ -40,13 +40,13 @@ enum PrecisionSlider_InnerZoomMode {
 		if zoom > -4.87 { return .zoomOut(count: 50000) }
 		return .zoomOut(count: 100000)
 	}
-	
+
 	enum MarkerType {
 	case major
 	case minor
 	case other
 	}
-	
+
 	func markerType(index: Int) -> MarkerType {
 		switch self {
 		case .none:
@@ -87,12 +87,11 @@ enum PrecisionSlider_InnerZoomMode {
 		}
 	}
 
-	
 	func modulo10String(_ index: Int) -> String {
 		let displayValue = index % 10
 		return String(displayValue)
 	}
-	
+
 	func markerText(_ index: Int) -> String? {
 		switch self {
 		case .none:

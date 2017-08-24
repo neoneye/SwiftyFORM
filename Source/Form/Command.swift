@@ -10,7 +10,7 @@ public class CommandBlock: CommandProtocol {
 	public init(block: @escaping (UIViewController, AnyObject?) -> Void) {
 		self.block = block
 	}
-	
+
 	public func execute(viewController: UIViewController, returnObject: AnyObject?) {
 		block(viewController, returnObject)
 	}

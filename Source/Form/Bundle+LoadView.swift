@@ -7,7 +7,7 @@ extension Bundle {
 		case expectedXibToContainJustOneButGotDifferentNumberOfObjects
 		case xibReturnedWrongType
 	}
-	
+
 	/* 
 	usage:
 	let cell: ContactPickerCell = try Bundle.main.form_loadView("ContactPickerCell")

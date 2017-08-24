@@ -10,7 +10,6 @@ public class ViewControllerFormItemCellModel {
 	}
 }
 
-
 public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 	public let model: ViewControllerFormItemCellModel
 	let innerDidSelectRow: (ViewControllerFormItemCell, ViewControllerFormItemCellModel) -> Void
@@ -23,11 +22,11 @@ public class ViewControllerFormItemCell: UITableViewCell, SelectRowDelegate {
 		textLabel?.text = model.title
 		detailTextLabel?.text = model.placeholder
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
 		SwiftyFormLog("will invoke")
 		// hide keyboard when the user taps this kind of row

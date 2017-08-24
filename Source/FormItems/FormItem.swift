@@ -1,7 +1,6 @@
 // MIT license. Copyright (c) 2016 SwiftyFORM. All rights reserved.
 import UIKit
 
-
 public protocol FormItemVisitor {
 	func visit(object: AttributedTextFormItem)
 	func visit(object: ButtonFormItem)
@@ -28,12 +27,12 @@ public protocol FormItemVisitor {
 }
 
 open class FormItem {
-	
+
 	public init() {
 	}
-	
+
 	func accept(visitor: FormItemVisitor) {}
-	
+
 	// For serialization to json purposes, eg. "firstName"
 	public var elementIdentifier: String?
 
@@ -42,7 +41,7 @@ open class FormItem {
 		self.elementIdentifier = elementIdentifier
 		return self
 	}
-	
+
 	// For styling purposes, eg. "bottomRowInFirstSection"
 	public var styleIdentifier: String?
 

@@ -12,22 +12,22 @@ public struct SwitchCellModel {
 public class SwitchCell: UITableViewCell {
 	public let model: SwitchCellModel
 	public let switchView: UISwitch
-	
+
 	public init(model: SwitchCellModel) {
 		self.model = model
 		self.switchView = UISwitch()
 		super.init(style: .default, reuseIdentifier: nil)
 		selectionStyle = .none
 		textLabel?.text = model.title
-		
+
 		switchView.addTarget(self, action: #selector(SwitchCell.valueChanged), for: .valueChanged)
 		accessoryView = switchView
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func valueChanged() {
 		SwiftyFormLog("value did change")
 		model.valueDidChange(switchView.isOn)
@@ -37,6 +37,5 @@ public class SwitchCell: UITableViewCell {
 		SwiftyFormLog("set value \(value), animated \(animated)")
 		switchView.setOn(value, animated: animated)
 	}
-	
-}
 
+}

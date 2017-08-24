@@ -20,10 +20,10 @@ public enum WhatToShow {
 /// 	DebugViewController.showText(self, text: "hello world")
 ///
 public class DebugViewController: UIViewController {
-	
+
 	public let dismissBlock: () -> Void
 	public let whatToShow: WhatToShow
-	
+
 	public init(dismissBlock: @escaping () -> Void, whatToShow: WhatToShow) {
 		self.dismissBlock = dismissBlock
 		self.whatToShow = whatToShow
@@ -45,8 +45,7 @@ public class DebugViewController: UIViewController {
 	public class func showURL(_ parentViewController: UIViewController, url: URL) {
 		showModally(parentViewController, whatToShow: WhatToShow.url(url: url))
 	}
-	
-	
+
 	public class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
 		weak var weakSelf = parentViewController
 		let dismissBlock: () -> Void = {
@@ -54,7 +53,7 @@ public class DebugViewController: UIViewController {
 				vc.dismiss(animated: true, completion: nil)
 			}
 		}
-		
+
 		let vc = DebugViewController(dismissBlock: dismissBlock, whatToShow: whatToShow)
 		let nc = UINavigationController(rootViewController: vc)
 		parentViewController.present(nc, animated: true, completion: nil)
@@ -63,7 +62,7 @@ public class DebugViewController: UIViewController {
 	public override func loadView() {
 		let webview = UIWebView()
 		self.view = webview
-		
+
 		let item = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(DebugViewController.dismissAction(_:)))
 		self.navigationItem.leftBarButtonItem = item
 
@@ -83,7 +82,7 @@ public class DebugViewController: UIViewController {
 			self.title = "URL"
 		}
 	}
-	
+
 	func dismissAction(_ sender: AnyObject?) {
 		dismissBlock()
 	}

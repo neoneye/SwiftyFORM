@@ -2,18 +2,18 @@
 import Foundation
 
 class ReloadPersistentValidationStateVisitor: FormItemVisitor {
-	
+
 	class func validateAndUpdateUI(_ items: [FormItem]) {
 		let visitor = ReloadPersistentValidationStateVisitor()
 		for item in items {
 			item.accept(visitor: visitor)
 		}
 	}
-	
+
 	func visit(object: TextFieldFormItem) {
 		object.reloadPersistentValidationState()
 	}
-	
+
 	func visit(object: AttributedTextFormItem) {}
 	func visit(object: ButtonFormItem) {}
 	func visit(object: CustomFormItem) {}

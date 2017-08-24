@@ -12,11 +12,11 @@ public class SectionHeaderTitleFormItem: FormItem {
 		self.title = title
 		super.init()
 	}
-	
+
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	/// The section title is shown in uppercase.
 	///
 	/// Works best with texts shorter than 50 characters
@@ -36,7 +36,7 @@ public class SectionHeaderViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }
@@ -46,11 +46,11 @@ public class SectionFooterTitleFormItem: FormItem {
 		self.title = title
 		super.init()
 	}
-	
+
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public var title: String?
 
 	@discardableResult
@@ -64,7 +64,7 @@ public class SectionFooterViewFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
-	
+
 	public typealias CreateUIView = () -> UIView?
 	public var viewBlock: CreateUIView?
 }

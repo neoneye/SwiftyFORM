@@ -24,7 +24,7 @@ public class TextViewCell: UITableViewCell {
 	public let placeholderLabel = UILabel()
 	public let textView = UITextView()
 	public let model: TextViewCellModel
-	
+
 	public init(model: TextViewCellModel) {
 		self.model = model
 		super.init(style: .value1, reuseIdentifier: nil)
@@ -53,23 +53,23 @@ public class TextViewCell: UITableViewCell {
 		contentView.addSubview(placeholderLabel)
 
 		clipsToBounds = true
-		
+
 		self.addGestureRecognizer(tapGestureRecognizer)
 	}
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func handleTap(_ sender: UITapGestureRecognizer) {
 		_ = self.becomeFirstResponder()
 	}
-	
+
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
 		let gr = UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
 		return gr
 		}()
-	
+
 	public lazy var toolbar: SimpleToolbar = {
 		let instance = SimpleToolbar()
 		weak var weakSelf = self
@@ -90,33 +90,33 @@ public class TextViewCell: UITableViewCell {
 		}
 		return instance
 		}()
-	
+
 	public func updateToolbarButtons() {
 		if model.toolbarMode == .simple {
 			toolbar.updateButtonConfiguration(self)
 		}
 	}
-	
+
 	public func gotoPrevious() {
 		SwiftyFormLog("make previous cell first responder")
 		form_makePreviousCellFirstResponder()
 	}
-	
+
 	public func gotoNext() {
 		SwiftyFormLog("make next cell first responder")
 		form_makeNextCellFirstResponder()
 	}
-	
+
 	public func dismissKeyboard() {
 		SwiftyFormLog("dismiss keyboard")
 		_ = resignFirstResponder()
 	}
-	
+
 	public func updateValue() {
 		let s = textView.text
 		let hasText = (s?.characters.count)! > 0
 		placeholderLabel.isHidden = hasText
-		
+
 		let tableView: UITableView? = form_tableView()
 		if let tv = tableView {
 			setNeedsLayout()
@@ -124,16 +124,16 @@ public class TextViewCell: UITableViewCell {
 			tv.endUpdates()
 		}
 	}
-	
+
 	public func setValueWithoutSync(_ value: String) {
 		SwiftyFormLog("set value \(value)")
 		textView.text = value
 		updateValue()
 	}
-	
+
 	public func compute() -> TextViewFormItemCellSizes {
 		let cellWidth: CGFloat = bounds.width
-		
+
 		var titleLabelFrame = CGRect.zero
 		var placeholderLabelFrame = CGRect.zero
 		var textViewFrame = CGRect.zero
@@ -145,17 +145,17 @@ public class TextViewCell: UITableViewCell {
 		layoutMargins.top = 0
 		layoutMargins.bottom = 0
 		veryTallCell = UIEdgeInsetsInsetRect(veryTallCell, layoutMargins)
-		
+
 		var (slice, remainder) = veryTallCell.divided(atDistance: 10, from: .minYEdge)
-		
+
 		do {
 			let size = titleLabel.sizeThatFits(veryTallCell.size)
 			(slice, remainder) = remainder.divided(atDistance: size.height, from: .minYEdge)
 			titleLabelFrame = slice
 		}
-		
+
 		let bottomRemainder = remainder
-		
+
 		do {
 			(slice, remainder) = bottomRemainder.divided(atDistance: 5.5, from: .minYEdge)
 			let size = placeholderLabel.sizeThatFits(veryTallCell.size)
@@ -164,7 +164,7 @@ public class TextViewCell: UITableViewCell {
 		}
 		(slice, remainder) = remainder.divided(atDistance: 10, from: .minYEdge)
 		maxY = slice.maxY
-		
+
 		do {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
@@ -184,28 +184,28 @@ public class TextViewCell: UITableViewCell {
 
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		
+
 		let sizes: TextViewFormItemCellSizes = compute()
 		titleLabel.frame = sizes.titleLabelFrame
 		placeholderLabel.frame = sizes.placeholderLabelFrame
 		textView.frame = sizes.textViewFrame
-		
+
 		var textViewInset = self.layoutMargins
 		textViewInset.top = 5
 		textViewInset.bottom = 10
 		textView.textContainerInset = textViewInset
 	}
-	
+
 	// MARK: UIResponder
 
 	public override var canBecomeFirstResponder : Bool {
 		return true
 	}
-	
+
 	public override func becomeFirstResponder() -> Bool {
 		return textView.becomeFirstResponder()
 	}
-	
+
 	public override func resignFirstResponder() -> Bool {
 		return textView.resignFirstResponder()
 	}
@@ -215,7 +215,7 @@ extension TextViewCell: UITextViewDelegate {
 	public func textViewDidBeginEditing(_ textView: UITextView) {
 		updateToolbarButtons()
 	}
-	
+
 	public func textViewDidChange(_ textView: UITextView) {
 		updateValue()
 		model.valueDidChange(textView.text)

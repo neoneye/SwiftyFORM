@@ -15,7 +15,7 @@ public class StepperCell: UITableViewCell {
 	public let valueLabel = UILabel()
 	public let stepperView = UIStepper()
 	public var containerView = UIView()
-	
+
 	public init(model: StepperCellModel) {
 		self.model = model
 		super.init(style: .value1, reuseIdentifier: nil)
@@ -32,34 +32,33 @@ public class StepperCell: UITableViewCell {
 
 		valueLabel.text = "0"
 	}
-	
+
 	public override func layoutSubviews() {
 		super.layoutSubviews()
-		
+
 		stepperView.sizeToFit()
 		valueLabel.sizeToFit()
-		
+
 		let rightPadding: CGFloat = layoutMargins.right
 		let valueStepperPadding: CGFloat = 10
-		
+
 		let valueSize = valueLabel.frame.size
 		let stepperSize = stepperView.frame.size
-		
+
 		let containerWidth = ceil(valueSize.width + valueStepperPadding + stepperSize.width)
 		containerView.frame = CGRect(x: bounds.width - rightPadding - containerWidth, y: 0, width: containerWidth, height: stepperSize.height)
-		
+
 		let valueY: CGFloat = bounds.midY - valueSize.height / 2
 		valueLabel.frame = CGRect(x: 0, y: valueY, width: valueSize.width, height: valueSize.height).integral
-		
+
 		let stepperY: CGFloat = bounds.midY - stepperSize.height / 2
 		stepperView.frame = CGRect(x: containerWidth - stepperSize.width, y: stepperY, width: stepperSize.width, height: stepperSize.height)
 	}
-	
-	
+
 	public required init(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
+
 	public func valueChanged() {
 		SwiftyFormLog("value did change")
 
@@ -86,4 +85,3 @@ public class StepperCell: UITableViewCell {
 		updateValue(value)
 	}
 }
-

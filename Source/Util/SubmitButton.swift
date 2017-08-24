@@ -17,7 +17,7 @@ extension FormViewController {
 		SwiftyFormLog("result \(result)")
 		form_showSubmitResult(result)
 	}
-	
+
 	/// Used internally by the `form_installSubmitButton()` function
 	public func form_showSubmitResult(_ result: FormBuilder.FormValidateResult) {
 		switch result {
