@@ -19,6 +19,7 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Change Password").viewController(ChangePasswordViewController.self)
 		builder += ViewControllerFormItem().title("Report").viewController(ReportViewController.self)
 		builder += ViewControllerFormItem().title("Rate").viewController(RateAppViewController.self)
+		builder += ViewControllerFormItem().title("Storyboard Demo").viewController(StoryboardDemoViewController.self)
 		builder += ViewControllerFormItem().title("Area 51").storyboard("Area51", bundle: nil)
 
 		builder += SectionHeaderTitleFormItem().title("Non-SwiftyFORM")
