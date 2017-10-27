@@ -30,7 +30,8 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Valid & Invalid").viewController(TextFieldValidInvalidViewController.self)
 		builder += ViewControllerFormItem().title("Keyboard Types").viewController(TextFieldKeyboardTypesViewController.self)
 		builder += ViewControllerFormItem().title("Tab Through Form").viewController(TextFieldTabThroughFormViewController.self)
-		builder += ViewControllerFormItem().title("Return Key").viewController(TextFieldReturnKeyViewController.self)
+        builder += ViewControllerFormItem().title("Return Key").viewController(TextFieldReturnKeyViewController.self)
+        builder += ViewControllerFormItem().title("Editing  End").viewController(TextFieldEndEditingViewController.self)
 
 		builder += SectionHeaderTitleFormItem().title("TextView")
 		builder += ViewControllerFormItem().title("TextViews").viewController(TextViewViewController.self)
