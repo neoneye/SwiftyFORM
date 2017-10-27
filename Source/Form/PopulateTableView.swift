@@ -552,8 +552,7 @@ class PopulateTableView: FormItemVisitor {
 			weakObject?.textDidChange(value)
 			return
 		}
-        model.didEndEditing = {
-            (value: String) in
+        model.didEndEditing = { (value: String) in
             SwiftyFormLog("value \(value)")
             weakObject?.editingEnd(value)
             return

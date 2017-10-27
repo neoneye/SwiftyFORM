@@ -48,7 +48,7 @@ public struct TextFieldFormItemCellModel {
 		SwiftyFormLog("value \(value)")
 	}
     
-    var didEndEditing:(String) -> Void = { (value: String) in
+    var didEndEditing: (String) -> Void = { (value: String) in
         SwiftyFormLog("value \(value)")
     }
 }
