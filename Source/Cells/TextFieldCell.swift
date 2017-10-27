@@ -400,8 +400,8 @@ extension TextFieldFormItemCell: UITextFieldDelegate {
 		let s = textField.text ?? ""
 		let isTextValid = validateAndUpdateErrorIfNeeded(s, shouldInstallTimer: true, checkSubmitRule: true)
 		if isTextValid {
-            model.didEndEditing(s)
 			textField.resignFirstResponder()
+			model.didEndEditing(s)
 		}
 		return false
 	}
