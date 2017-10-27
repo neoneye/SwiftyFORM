@@ -59,7 +59,7 @@
 		42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */; };
 		42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC81D4152490066E45A /* ColorPickerViewController.swift */; };
 		42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */; };
-		CD5878FB1FA324CD00BB3B8E /* TextFieldEndEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5878FA1FA324CD00BB3B8E /* TextFieldEndEditingViewController.swift */; };
+		CD5878FB1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,7 +161,7 @@
 		42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsViewController.swift; sourceTree = "<group>"; };
 		42FABBC81D4152490066E45A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlidersViewController.swift; sourceTree = "<group>"; };
-		CD5878FA1FA324CD00BB3B8E /* TextFieldEndEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldEndEditingViewController.swift; sourceTree = "<group>"; };
+		CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldEditingEndViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,11 +241,11 @@
 		42589DC61B3447EA007CA8C1 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */,
 				42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */,
 				42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */,
 				42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */,
 				42589DCA1B3447EA007CA8C1 /* TextFieldValidInvalidViewController.swift */,
-				CD5878FA1FA324CD00BB3B8E /* TextFieldEndEditingViewController.swift */,
 			);
 			path = TextField;
 			sourceTree = "<group>";
@@ -508,7 +508,7 @@
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
-				CD5878FB1FA324CD00BB3B8E /* TextFieldEndEditingViewController.swift in Sources */,
+				CD5878FB1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
 				426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
