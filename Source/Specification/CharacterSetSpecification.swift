@@ -21,7 +21,7 @@ public class CharacterSetSpecification: Specification {
 	/// - returns: `true` if the candidate object is a string and all its characters are legal, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		guard let fullString = candidate as? String else { return false }
-		for character: Character in fullString.characters {
+		for character: Character in fullString {
 			let range: Range<String.Index>? =
 			String(character).rangeOfCharacter(from: characterSet)
 			if range == nil {

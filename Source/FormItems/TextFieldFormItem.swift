@@ -46,12 +46,21 @@ public class TextFieldFormItem: FormItem {
 	public var textDidChangeBlock: TextDidChangeBlock = { (value: String) in
 		SwiftyFormLog("not overridden")
 	}
-
-	public func textDidChange(_ value: String) {
-		innerValue = value
-		textDidChangeBlock(value)
+    
+    public func textDidChange(_ value: String) {
+        innerValue = value
+        textDidChangeBlock(value)
+    }
+    
+	public typealias TextEditingEndBlock = (_ value: String) -> Void
+	public var textEditingEndBlock: TextEditingEndBlock = { (value: String) in
+		SwiftyFormLog("not overridden")
 	}
-
+	
+	public func editingEnd(_ value: String) {
+		textEditingEndBlock(value)
+	}
+	
 	public func assignValueAndSync(_ value: String) {
 		innerValue = value
 		syncCellWithValue(value)

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iZm-zR-g4N">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Vote Result-->
+        <scene sceneID="QdK-5q-EPX">
+            <objects>
+                <viewController title="Vote Result" id="iZm-zR-g4N" customClass="VoteViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SPe-H4-lFh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rant about politics" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSZ-HO-VYy">
+                                <rect key="frame" x="116" y="401.5" width="142.5" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OlN-xW-XMP">
+                                <rect key="frame" x="99.5" y="299.5" width="176" height="72"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RSZ-HO-VYy" firstAttribute="top" secondItem="OlN-xW-XMP" secondAttribute="bottom" constant="30" id="TFl-Lq-F2N"/>
+                            <constraint firstItem="OlN-xW-XMP" firstAttribute="centerY" secondItem="Ctp-U1-FAS" secondAttribute="centerY" constant="-30" id="VIx-Rv-2Z6"/>
+                            <constraint firstItem="OlN-xW-XMP" firstAttribute="centerX" secondItem="Ctp-U1-FAS" secondAttribute="centerX" id="fhk-xo-NeX"/>
+                            <constraint firstItem="RSZ-HO-VYy" firstAttribute="centerX" secondItem="Ctp-U1-FAS" secondAttribute="centerX" id="pCw-VX-FAJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ctp-U1-FAS"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="voteCount" destination="OlN-xW-XMP" id="DmC-4F-nzN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mWl-CP-mIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-135" y="170"/>
+        </scene>
+    </scenes>
+</document>

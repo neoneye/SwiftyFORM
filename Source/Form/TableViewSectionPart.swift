@@ -79,7 +79,7 @@ public enum TableViewSectionPart {
 			The right solution would be to consider font size, screen size for determining the label height.
 			This may be overfitting the problem.
 			*/
-			if string.characters.count > 50 {
+			if string.utf8.count > 50 {
 				print("WARNING: Multiline section texts may cause crashes, consider instead using SectionHeaderViewFormItem")
 				return Constant.estimatedHeightForTitleSection * 2
 			}

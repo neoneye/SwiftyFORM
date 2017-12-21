@@ -552,6 +552,11 @@ class PopulateTableView: FormItemVisitor {
 			weakObject?.textDidChange(value)
 			return
 		}
+        model.didEndEditing = { (value: String) in
+            SwiftyFormLog("value \(value)")
+            weakObject?.editingEnd(value)
+            return
+        }
 		let cell = TextFieldFormItemCell(model: model)
 		cell.setValueWithoutSync(object.value)
 		cells.append(cell)

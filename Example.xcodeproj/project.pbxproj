@@ -10,6 +10,9 @@
 		42096E6C1B357CEE0068B084 /* SlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6B1B357CEE0068B084 /* SlidersViewController.swift */; };
 		42096E6E1B357ECA0068B084 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6D1B357ECA0068B084 /* OptionsViewController.swift */; };
 		42096E701B35853E0068B084 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */; };
+		420AC61A1F88D17500898C85 /* VoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420AC6191F88D17500898C85 /* VoteViewController.swift */; };
+		420AC61C1F88D21000898C85 /* VoteViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 420AC61B1F88D21000898C85 /* VoteViewController.storyboard */; };
+		420AC61E1F88D40500898C85 /* StoryboardDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420AC61D1F88D40500898C85 /* StoryboardDemoViewController.swift */; };
 		420F6CCF1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */; };
 		42108D261B356C5B0067FEAA /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D251B356C5B0067FEAA /* FirstViewController.swift */; };
 		42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D281B3576110067FEAA /* MaleFemaleViewController.swift */; };
@@ -56,6 +59,7 @@
 		42ED169A1D294D0C001B4D61 /* SegmentedControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */; };
 		42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC81D4152490066E45A /* ColorPickerViewController.swift */; };
 		42FABBCB1D4173FF0066E45A /* PrecisionSlidersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */; };
+		CD5878FB1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +111,9 @@
 		42096E6B1B357CEE0068B084 /* SlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersViewController.swift; sourceTree = "<group>"; };
 		42096E6D1B357ECA0068B084 /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		42096E6F1B35853E0068B084 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		420AC6191F88D17500898C85 /* VoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteViewController.swift; sourceTree = "<group>"; };
+		420AC61B1F88D21000898C85 /* VoteViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VoteViewController.storyboard; sourceTree = "<group>"; };
+		420AC61D1F88D40500898C85 /* StoryboardDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardDemoViewController.swift; sourceTree = "<group>"; };
 		420F6CCE1D6A27B8009D5F57 /* SlidersAndTextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidersAndTextFieldsViewController.swift; sourceTree = "<group>"; };
 		42108D251B356C5B0067FEAA /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		42108D281B3576110067FEAA /* MaleFemaleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaleFemaleViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +161,7 @@
 		42ED16991D294D0C001B4D61 /* SegmentedControlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControlsViewController.swift; sourceTree = "<group>"; };
 		42FABBC81D4152490066E45A /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		42FABBCA1D4173FF0066E45A /* PrecisionSlidersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlidersViewController.swift; sourceTree = "<group>"; };
+		CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldEditingEndViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +176,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420AC6171F88D0B400898C85 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				420AC61D1F88D40500898C85 /* StoryboardDemoViewController.swift */,
+				420AC61B1F88D21000898C85 /* VoteViewController.storyboard */,
+				420AC6191F88D17500898C85 /* VoteViewController.swift */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		42108D271B3576110067FEAA /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +241,7 @@
 		42589DC61B3447EA007CA8C1 /* TextField */ = {
 			isa = PBXGroup;
 			children = (
+				CD5878FA1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift */,
 				42589DC71B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift */,
 				42589DC81B3447EA007CA8C1 /* TextFieldReturnKeyViewController.swift */,
 				42589DC91B3447EA007CA8C1 /* TextFieldTabThroughFormViewController.swift */,
@@ -324,6 +343,7 @@
 				4267986E1D8DB17B002275CA /* Non-SwiftyFORM */,
 				42589DC21B3447EA007CA8C1 /* Other */,
 				42B1BB451E82C1B40090156A /* Settings */,
+				420AC6171F88D0B400898C85 /* Storyboard */,
 				42CEBF981A3BA2B50048E072 /* Supporting Files */,
 				42589DC61B3447EA007CA8C1 /* TextField */,
 				42589DCC1B3447EA007CA8C1 /* TextView */,
@@ -391,13 +411,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Simon Strandgaard";
 				TargetAttributes = {
 					42CEBF941A3BA2B50048E072 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 22DR89XVRF;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
@@ -450,6 +470,7 @@
 				42D005161B9631F400986B3B /* LoadingCell.xib in Resources */,
 				42CEBFA21A3BA2B50048E072 /* Images.xcassets in Resources */,
 				4244C6941D6B864600FE1ECB /* LaunchScreen.storyboard in Resources */,
+				420AC61C1F88D21000898C85 /* VoteViewController.storyboard in Resources */,
 				423D17071BAF3A9B00A9859F /* Area51.storyboard in Resources */,
 				42B1BB471E82C1C10090156A /* Settings.storyboard in Resources */,
 			);
@@ -464,6 +485,7 @@
 			files = (
 				423D17061BAF3A9B00A9859F /* AliensViewController.swift in Sources */,
 				42589DB61B3447E1007CA8C1 /* DatePickerLocaleViewController.swift in Sources */,
+				420AC61A1F88D17500898C85 /* VoteViewController.swift in Sources */,
 				42108D2D1B3576110067FEAA /* RateAppViewController.swift in Sources */,
 				426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */,
 				42D0051A1B96395D00986B3B /* CustomViewController.swift in Sources */,
@@ -486,11 +508,13 @@
 				42108D2E1B3576110067FEAA /* ReportViewController.swift in Sources */,
 				42D2975D1D4CD6C100561780 /* Random.swift in Sources */,
 				42589DDA1B3447EA007CA8C1 /* TextFieldKeyboardTypesViewController.swift in Sources */,
+				CD5878FB1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
 				426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */,
 				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
 				4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
+				420AC61E1F88D40500898C85 /* StoryboardDemoViewController.swift in Sources */,
 				423E313E1D5BA98A0048D8C3 /* DatePickerBindingViewController.swift in Sources */,
 				42FABBC91D4152490066E45A /* ColorPickerViewController.swift in Sources */,
 				4267986C1D8DB160002275CA /* HeaderFooterViewController.swift in Sources */,
@@ -542,14 +566,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -589,14 +619,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -631,7 +667,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -645,7 +681,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
