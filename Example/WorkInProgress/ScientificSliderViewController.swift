@@ -90,7 +90,7 @@ class ScientificSliderViewController: UIViewController {
 		}
 		var fp = ""
 		var sp = ""
-		for (index, char) in xs.characters.reversed().enumerated() {
+		for (index, char) in xs.reversed().enumerated() {
 			if index >= cutpoint {
 				fp = "\(char)\(fp)"
 			} else {
@@ -98,8 +98,8 @@ class ScientificSliderViewController: UIViewController {
 			}
 		}
 
-		let firstPart = NSAttributedString(string: fp, attributes: [NSForegroundColorAttributeName: UIColor.black])
-		let secondPart = NSAttributedString(string: sp, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+		let firstPart = NSAttributedString(string: fp, attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
+		let secondPart = NSAttributedString(string: sp, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
 
 		let text = NSMutableAttributedString()
 		text.append(firstPart)

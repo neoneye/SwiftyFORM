@@ -67,7 +67,7 @@ public class CountSpecification: Specification {
 		var n: Int = 0
 		repeat {
 			if let x = candidate as? String {
-				n = x.characters.count
+				n = x.utf8.count
 				break
 			}
 

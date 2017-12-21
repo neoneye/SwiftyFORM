@@ -113,8 +113,8 @@ public class TextViewCell: UITableViewCell {
 	}
 
 	public func updateValue() {
-		let s = textView.text
-		let hasText = (s?.characters.count)! > 0
+		let s = textView.text ?? ""
+		let hasText = !s.isEmpty
 		placeholderLabel.isHidden = hasText
 
 		let tableView: UITableView? = form_tableView()

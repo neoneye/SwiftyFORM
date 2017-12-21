@@ -67,7 +67,7 @@ class TextViewViewController: FormViewController {
 	}
 
 	func appendRandom(_ textView: TextViewFormItem, strings: [String]) {
-		let notEmpty = textView.value.characters.count != 0
+		let notEmpty = textView.value.utf8.count != 0
 		var s = ""
 		if notEmpty {
 			s = " "
