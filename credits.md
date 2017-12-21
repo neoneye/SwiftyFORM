@@ -2,6 +2,7 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Mücahit KAÇMAZ](https://github.com/mchts)
 * [Sercan Özen](https://github.com/sercan5534)
 * [Sreejith Ajithkumar](https://github.com/cresouls)
 * [Hiroaki Towata](https://github.com/saxograph)
