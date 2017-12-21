@@ -8,5 +8,4 @@ Pod::Spec.new do |s|
   s.source = { :git => 'https://github.com/neoneye/SwiftyFORM.git', :tag => s.version }
   s.source_files = 'Source/*/*.swift'
   s.ios.deployment_target = '9.0'
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 end
