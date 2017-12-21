@@ -17,7 +17,10 @@ public class AttributedTextFormItem: FormItem {
 	@discardableResult
 	public func title(_ title: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		if let attributes = attributes {
-			let newAttributes = Dictionary(uniqueKeysWithValues: attributes.map { key, value in (NSAttributedStringKey(key), value) })
+			var newAttributes = [NSAttributedStringKey: Any]()
+			for (key, value) in attributes {
+				newAttributes[NSAttributedStringKey(key)] = value
+			}
 			self.title = NSAttributedString(string: title, attributes: newAttributes)
 		} else {
 			self.title = NSAttributedString(string: title, attributes: nil)
@@ -50,7 +53,10 @@ public class AttributedTextFormItem: FormItem {
 	@discardableResult
 	public func value(_ value: String, _ attributes: [String: AnyObject]? = nil) -> Self {
 		if let attributes = attributes {
-			let newAttributes = Dictionary(uniqueKeysWithValues: attributes.map { key, value in (NSAttributedStringKey(key), value) })
+			var newAttributes = [NSAttributedStringKey: Any]()
+			for (key, value) in attributes {
+				newAttributes[NSAttributedStringKey(key)] = value
+			}
 			self.value = NSAttributedString(string: value, attributes: newAttributes)
 		} else {
 			self.value = NSAttributedString(string: value, attributes: nil)
