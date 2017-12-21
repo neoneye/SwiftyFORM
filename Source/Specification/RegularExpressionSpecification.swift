@@ -28,6 +28,6 @@ public class RegularExpressionSpecification: Specification {
 	/// - returns: `true` if the candidate object is a `String` and it satisfies the regex, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		guard let s = candidate as? String else { return false }
-		return regularExpression.numberOfMatches(in: s, options: [], range: NSMakeRange(0, s.characters.count)) > 0
+		return regularExpression.numberOfMatches(in: s, options: [], range: NSMakeRange(0, s.utf8.count)) > 0
 	}
 }
