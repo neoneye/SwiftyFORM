@@ -18,6 +18,7 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 		builder += StaticTextFormItem().title("Name").value(AppInfo.appName)
 		builder += StaticTextFormItem().title("Version").value(AppInfo.appVersionAndBuild)
 		builder += StaticTextFormItem().title("UTC").value(AppInfo.packageDate)
+		builder += StaticTextFormItem().title("Defines").value(AppInfo.defines)
 
 		builder += SectionHeaderTitleFormItem().title("Device info")
 		builder += StaticTextFormItem().title("Device").value(AppInfo.deviceName)
@@ -137,5 +138,19 @@ struct AppInfo {
 	
 	static var systemVersion: String {
 		return UIDevice.current.systemVersion
+	}
+	
+	static var defines: String {
+		var strings = [String]()
+		#if DEBUG
+			strings.append("DEBUG")
+		#endif
+		#if RELEASE
+			defines.append("RELEASE")
+		#endif
+		if strings.isEmpty {
+			return "N/A"
+		}
+		return strings.joined(separator: ", ")
 	}
 }

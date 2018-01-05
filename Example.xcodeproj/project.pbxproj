@@ -665,6 +665,7 @@
 				DEVELOPMENT_TEAM = 22DR89XVRF;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
 				SWIFT_VERSION = 4.0;
@@ -679,6 +680,7 @@
 				DEVELOPMENT_TEAM = 22DR89XVRF;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
 				SWIFT_VERSION = 4.0;
