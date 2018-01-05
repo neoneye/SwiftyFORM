@@ -42,9 +42,9 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 	}
 
 	func configuredMailComposeViewController() -> MFMailComposeViewController {
-		let emailTitle = "Report"
-		let messageBody = "This is a test email body"
-		let toRecipents = ["feedback@example.com"]
+		let emailTitle = "SwiftyFORM feedback"
+		let messageBody = "Insert a message to the user of your app, or write to the SwiftyFORM developer.\n---------\n\n\nHi Simon (the SwiftyFORM developer),\n\nI use your framework in my app.\n\nBest regards from Antarctica"
+		let toRecipents = ["neoneye@gmail.com"]
 
 		let mc = MFMailComposeViewController()
 		mc.mailComposeDelegate = self
