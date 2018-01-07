@@ -146,7 +146,7 @@ struct AppInfo {
 			strings.append("DEBUG")
 		#endif
 		#if RELEASE
-			defines.append("RELEASE")
+			strings.append("RELEASE")
 		#endif
 		if strings.isEmpty {
 			return "N/A"
