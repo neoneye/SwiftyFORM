@@ -116,7 +116,39 @@ public class FormBuilder {
 		}
 		return .valid
 	}
-
+    
+    public func update(pickerTitles:[[String]], setTo pickerValues: [String?], in pickerFormItem: PickerViewFormItem, in formViewController: FormViewController) {
+        pickerFormItem.pickerTitles = pickerTitles
+        
+        let index = innerItems.index { (formItem) -> Bool in
+            formItem === pickerFormItem
+        }
+        
+        if let index = index {
+            let cell = formViewController.tableView.cellForRow(at: IndexPath(item: index, section: 0))
+            if let cell = cell as? PickerViewExpandedCell {
+                cell.collapsedCell?.model.titles = pickerTitles
+                cell.titles = pickerTitles
+                cell.pickerView.reloadAllComponents()
+            } else if let cell = cell as? PickerViewToggleCell {
+                cell.model.titles = pickerTitles
+                cell.expandedCell?.titles = pickerTitles
+                cell.expandedCell?.pickerView.reloadAllComponents()
+            }
+        }
+        
+        var i = 0
+        for column in pickerTitles {
+            if let pickerValue = pickerValues[i] {
+                if let value = column.index(of: pickerValue) {
+                    pickerFormItem.setValue([value], animated: false)
+                } else {
+                    pickerFormItem.setValue([0], animated: false)
+                }
+            }
+            i += 1
+        }
+    }
 }
 
 public func += (left: FormBuilder, right: FormItem) {
