@@ -2,6 +2,8 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Paul Crompton](https://github.com/PCrompton)
+* [Jerwin Pastoral](https://github.com/JerwinPRO)
 * [Mücahit KAÇMAZ](https://github.com/mchts)
 * [Sercan Özen](https://github.com/sercan5534)
 * [Sreejith Ajithkumar](https://github.com/cresouls)
