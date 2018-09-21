@@ -9,14 +9,14 @@ struct DatePickerCellConstants {
 
 public class DatePickerCellModel {
 	var title: String = ""
-	var datePickerMode: UIDatePickerMode = .dateAndTime
+	var datePickerMode: UIDatePicker.Mode = .dateAndTime
 	var locale: Locale? // default is Locale.current, setting nil returns to default
 	var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	var maximumDate: Date? // default is nil
 	var minuteInterval: Int = 1
 	var date: Date = Date()
 	var expandCollapseWhenSelectingRow = true
-	var selectionStyle = UITableViewCellSelectionStyle.default
+	var selectionStyle = UITableViewCell.SelectionStyle.default
 
 	var valueDidChange: (Date) -> Void = { (date: Date) in
 		SwiftyFormLog("date \(date)")
@@ -66,7 +66,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	    fatalError("init(coder:) has not been implemented")
 	}
 
-	public func obtainDateStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
+	public func obtainDateStyle(_ datePickerMode: UIDatePicker.Mode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
 			return .none
@@ -79,7 +79,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		}
 	}
 
-	public func obtainTimeStyle(_ datePickerMode: UIDatePickerMode) -> DateFormatter.Style {
+	public func obtainTimeStyle(_ datePickerMode: UIDatePicker.Mode) -> DateFormatter.Style {
 		switch datePickerMode {
 		case .time:
 			return .short

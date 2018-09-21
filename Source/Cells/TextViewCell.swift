@@ -31,13 +31,13 @@ public class TextViewCell: UITableViewCell {
 		selectionStyle = .none
 
 		titleLabel.text = model.title
-		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 
 		placeholderLabel.text = model.placeholder
-		placeholderLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		placeholderLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 		placeholderLabel.textColor = UIColor.lightGray
 
-		textView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 		textView.textColor = UIColor.black
 		textView.backgroundColor = UIColor.clear
 		textView.isScrollEnabled = false
@@ -144,7 +144,7 @@ public class TextViewCell: UITableViewCell {
 		var layoutMargins = self.layoutMargins
 		layoutMargins.top = 0
 		layoutMargins.bottom = 0
-		veryTallCell = UIEdgeInsetsInsetRect(veryTallCell, layoutMargins)
+		veryTallCell = veryTallCell.inset(by: layoutMargins)
 
 		var (slice, remainder) = veryTallCell.divided(atDistance: 10, from: .minYEdge)
 

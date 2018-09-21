@@ -11,7 +11,7 @@ public class PrecisionSliderCellModel {
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
 	var collapseWhenResigning = false
-	var selectionStyle = UITableViewCellSelectionStyle.default
+	var selectionStyle = UITableViewCell.SelectionStyle.default
 
 	public struct SliderDidChangeModel {
 		let value: Int

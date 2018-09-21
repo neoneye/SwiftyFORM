@@ -191,11 +191,11 @@ class PopulateTableView: FormItemVisitor {
 		}
 	}
 
-	func mapDatePickerMode(_ mode: DatePickerFormItemMode) -> UIDatePickerMode {
+	func mapDatePickerMode(_ mode: DatePickerFormItemMode) -> UIDatePicker.Mode {
 		switch mode {
-		case .date: return UIDatePickerMode.date
-		case .time: return UIDatePickerMode.time
-		case .dateAndTime: return UIDatePickerMode.dateAndTime
+		case .date: return UIDatePicker.Mode.date
+		case .time: return UIDatePicker.Mode.time
+		case .dateAndTime: return UIDatePicker.Mode.dateAndTime
 		}
 	}
 
