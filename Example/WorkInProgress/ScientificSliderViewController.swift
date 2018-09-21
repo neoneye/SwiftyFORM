@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 import SwiftyFORM
 
@@ -98,8 +98,8 @@ class ScientificSliderViewController: UIViewController {
 			}
 		}
 
-		let firstPart = NSAttributedString(string: fp, attributes: [NSAttributedStringKey.foregroundColor: UIColor.black])
-		let secondPart = NSAttributedString(string: sp, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+		let firstPart = NSAttributedString(string: fp, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black])
+		let secondPart = NSAttributedString(string: sp, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
 
 		let text = NSMutableAttributedString()
 		text.append(firstPart)

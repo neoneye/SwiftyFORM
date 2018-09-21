@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public enum TableViewSectionPart {
@@ -30,11 +30,11 @@ public enum TableViewSectionPart {
 		case .none:
 			return 0
 		case .systemDefault:
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		case let .titleView(view):
 			return view.frame.height
 		case .titleString(_):
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		}
 	}
 
@@ -49,7 +49,7 @@ public enum TableViewSectionPart {
 			*/
 			return 2
 		case .systemDefault:
-			return UITableViewAutomaticDimension
+			return UITableView.automaticDimension
 		case let .titleView(view):
 			/**
 			Returning too low values can causes expand/collapse to crash.

@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 extension FormBuilder {
@@ -30,7 +30,7 @@ public class InfoView: UIView {
 		label.text = text
 		label.numberOfLines = 0
 		label.textAlignment = .center
-		label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 	}
 
 	public required init(coder aDecoder: NSCoder) {

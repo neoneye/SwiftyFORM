@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class SimpleToolbar: UIToolbar {
@@ -41,10 +41,10 @@ public class SimpleToolbar: UIToolbar {
 		}()
 
 	public func toolbarItems() -> [UIBarButtonItem] {
-		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
+		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
 		spacer0.width = 15.0
 
-		let spacer1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+		let spacer1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
 
 		var items = [UIBarButtonItem]()
 		items.append(previousButton)

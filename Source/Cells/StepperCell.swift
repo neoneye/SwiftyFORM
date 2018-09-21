@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public struct StepperCellModel {
@@ -22,7 +22,7 @@ public class StepperCell: UITableViewCell {
 		selectionStyle = .none
 		textLabel?.text = model.title
 
-		valueLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+		valueLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 		valueLabel.textColor = UIColor.gray
 		containerView.addSubview(stepperView)
 		containerView.addSubview(valueLabel)

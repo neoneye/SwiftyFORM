@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class FormTableView: UITableView {
@@ -9,7 +9,7 @@ public class FormTableView: UITableView {
 
 		// Enable "Self Sizing Cells"
 		estimatedRowHeight = 44.0
-		rowHeight = UITableViewAutomaticDimension
+		rowHeight = UITableView.automaticDimension
 	}
 
 	public required init(coder aDecoder: NSCoder) {
