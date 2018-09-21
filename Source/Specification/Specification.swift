@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 
 /// A type that can check whether or not a candidate object satisfy the rules.
 ///
