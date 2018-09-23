@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 /**
@@ -347,10 +347,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	lazy var zoomInButton: UIButton = {
 		let instance = UIButton(type: .custom)
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControlState())
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControl.State())
 		instance.titleLabel?.font = UIFont.systemFont(ofSize: 32)
 		instance.showsTouchWhenHighlighted = true
-		instance.setTitle("+", for: UIControlState())
+		instance.setTitle("+", for: UIControl.State())
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomInButtonAction), for: .touchUpInside)
 		return instance
 	}()
@@ -383,10 +383,10 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	lazy var zoomOutButton: UIButton = {
 		let instance = UIButton(type: .custom)
 		instance.backgroundColor = UIColor(white: 0.8, alpha: 0.85)
-		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControlState())
+		instance.setTitleColor(UIColor(white: 0.2, alpha: 1.0), for: UIControl.State())
 		instance.titleLabel?.font = UIFont.systemFont(ofSize: 32)
 		instance.showsTouchWhenHighlighted = true
-		instance.setTitle("-", for: UIControlState())
+		instance.setTitle("-", for: UIControl.State())
 		instance.addTarget(self, action: #selector(PrecisionSlider.zoomOutButtonAction), for: .touchUpInside)
 		return instance
 	}()

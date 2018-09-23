@@ -26,9 +26,9 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 
 ## Requirements
 
-- iOS 9.0+
-- Xcode 9.2+
-- Swift 4.0+
+- iOS 10.0+
+- Xcode 10.0+
+- Swift 4.2+
 
 
 ## Features
@@ -254,13 +254,10 @@ Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/B
 - add `$(SRCROOT)/Carthage/Build/iOS/SwiftyFORM.framework` to the input files 
 
 
-# 📄 CHANGE LOG
+# Communication
 
-### See [changelog.md](https://github.com/neoneye/SwiftyFORM/blob/master/changelog.md) 👀
+- If you want to contribute, submit a pull request.
+- If you found a bug, have suggestions or need help, please, open an issue.
+- If you need help, write me: neoneye@gmail.com
+- If you want to [give me](https://www.paypal.me/SimonStrandgaard) some motivation ;-)
 
-
-# Help, feedback or suggestions?
-
-- [Open an issue](https://github.com/neoneye/SwiftyFORM/issues/new) if you need help, if you found a bug, or if you want to discuss a feature request.
-- [Open a PR](https://github.com/neoneye/SwiftyFORM/pull/new/master) if you want to make some change to SwiftyFORM.
-- Contact [@neoneye on Twitter](https://twitter.com/neoneye) for discussions, news & announcements about SwiftyFORM.

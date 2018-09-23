@@ -1,8 +1,8 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 class MyTableViewController: UITableViewController {
-	override init(style: UITableViewStyle) {
+	override init(style: UITableView.Style) {
 		super.init(style: .grouped)
 	}
 

@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class PrecisionSliderCellModel {
@@ -11,7 +11,7 @@ public class PrecisionSliderCellModel {
 	var zoomUI = false
 	var expandCollapseWhenSelectingRow = true
 	var collapseWhenResigning = false
-	var selectionStyle = UITableViewCellSelectionStyle.default
+	var selectionStyle = UITableViewCell.SelectionStyle.default
 
 	public struct SliderDidChangeModel {
 		let value: Int

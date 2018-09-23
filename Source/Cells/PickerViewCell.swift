@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 struct PickerViewCellConstants {
@@ -10,7 +10,7 @@ struct PickerViewCellConstants {
 public class PickerViewCellModel {
 	var title: String = ""
 	var expandCollapseWhenSelectingRow = true
-	var selectionStyle = UITableViewCellSelectionStyle.default
+	var selectionStyle = UITableViewCell.SelectionStyle.default
 
 	var titles = [[String]]()
 	var value = [Int]()
@@ -230,7 +230,7 @@ public class PickerViewExpandedCell: UITableViewCell {
 		pickerView.frame = contentView.bounds
 
 		// Ensures that all UIPickerView components stay within the left/right layoutMargins
-		let rect = UIEdgeInsetsInsetRect(pickerView.frame, layoutMargins)
+		let rect = pickerView.frame.inset(by: layoutMargins)
 		let numberOfComponents = titles.count
 		if numberOfComponents >= 1 {
 			componentWidth = rect.width / CGFloat(numberOfComponents)

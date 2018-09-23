@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 /// Adjusts bottom insets when keyboard is shown and makes sure the keyboard doesn't obscure the cell.
@@ -39,15 +39,15 @@ public class KeyboardHandler {
 		*/
 
 		let notificationCenter = NotificationCenter.default
-		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillShow(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
+		notificationCenter.addObserver(self, selector: #selector(KeyboardHandler.keyboardWillHide(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
 	}
 
 	/// Stop listening to keyboard visibility changes
 	func removeObservers() {
 		let notificationCenter = NotificationCenter.default
-		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-		notificationCenter.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		notificationCenter.removeObserver(self, name: UIWindow.keyboardWillShowNotification, object: nil)
+		notificationCenter.removeObserver(self, name: UIWindow.keyboardWillHideNotification, object: nil)
 	}
 
 	/// The keyboard will appear, scroll content so it's not covered by the keyboard.
@@ -71,7 +71,7 @@ public class KeyboardHandler {
 			return
 		}
 
-		let keyboardFrameEnd = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+		let keyboardFrameEnd = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 //		SwiftyFormLog("keyboardFrameEnd \(NSStringFromCGRect(keyboardFrameEnd))")
 
 		let keyboardFrame = window.convert(keyboardFrameEnd, to: tableView.superview)

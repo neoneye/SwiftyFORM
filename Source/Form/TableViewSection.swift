@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class TableViewSection: NSObject {
@@ -71,7 +71,7 @@ extension TableViewSection: UITableViewDelegate {
 		if let cell = cells[indexPath.row] as? CellHeightProvider {
 			return cell.form_cellHeight(indexPath: indexPath, tableView: tableView)
 		}
-		return UITableViewAutomaticDimension
+		return UITableView.automaticDimension
 	}
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2017 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
 public struct SliderCellModel {
@@ -44,7 +44,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 		var inset = self.layoutMargins
 		inset.top = 0
 		inset.bottom = 0
-		slider.frame = UIEdgeInsetsInsetRect(bounds, layoutMargins)
+		slider.frame = bounds.inset(by: layoutMargins)
 	}
 
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
