@@ -1,6 +1,6 @@
 ## 📄 Change Log
 
-### 2.0.0
+### 1.7.0
 
  * Upgraded from Xcode9.x to Xcode10.0
  * Upgraded from Swift4 to Swift4.2
