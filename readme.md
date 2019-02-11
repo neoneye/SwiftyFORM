@@ -24,6 +24,10 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tree/develop) branch.
 
 
+<a href="mailto:neoneye@gmail.com?subject=Hire Simon Strandgaard">
+<img src="Documentation/hire_simon_strandgaard@2x.png" width="211" height="34"></a>
+
+
 ## Requirements
 
 - iOS 10.0+
