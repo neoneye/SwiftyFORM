@@ -14,7 +14,7 @@ let package = Package(
             targets: [
                 "SwiftyFORM"
             ]
-        ),
+        )
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -32,7 +32,7 @@ let package = Package(
             name: "SwiftyFORMTests",
             dependencies: ["SwiftyFORM"],
             path: "Tests"
-        ),
+        )
     ],
     swiftLanguageVersions: [.v5]
 )
