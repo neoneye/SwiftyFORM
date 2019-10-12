@@ -13,7 +13,7 @@ public class KeyboardHandler {
 	}
 
 	var keyboardVisible: Bool {
-		return innerKeyboardVisible
+		innerKeyboardVisible
 	}
 
 	/// Start listening for changes to keyboard visibility so that we can adjust the scroll view accordingly.

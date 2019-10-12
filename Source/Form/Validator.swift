@@ -25,7 +25,7 @@ public class ValidatorBuilder {
 	}
 
 	public func build() -> Validator {
-		return Validator(rules: self.rules)
+		Validator(rules: self.rules)
 	}
 }
 
@@ -37,11 +37,11 @@ public class Validator {
 	}
 
 	public func liveValidate(_ candidate: Any?) -> ValidateResult {
-		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
+		validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
 	}
 
 	public func submitValidate(_ candidate: Any?) -> ValidateResult {
-		return validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
+		validate(candidate, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
 	}
 
 	public func validate(_ candidate: Any?, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {

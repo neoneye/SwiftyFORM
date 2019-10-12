@@ -73,7 +73,7 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	}
 
 	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return 60
+        60
 	}
 
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
@@ -255,17 +255,17 @@ public class PickerViewExpandedCell: UITableViewCell {
 
 extension PickerViewExpandedCell: UIPickerViewDataSource {
 	public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-		return titles.count
+        titles.count
 	}
 
 	public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return titles[component].count
+		titles[component].count
 	}
 }
 
 extension PickerViewExpandedCell: UIPickerViewDelegate {
 	public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return titles[component][row]
+		titles[component][row]
 	}
 
 	public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -273,17 +273,17 @@ extension PickerViewExpandedCell: UIPickerViewDelegate {
 	}
 
 	public func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-		return 44
+		44
 	}
 
 	public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-		return componentWidth
+		componentWidth
 	}
 }
 
 extension PickerViewExpandedCell: CellHeightProvider {
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return PickerViewCellConstants.CellExpanded.height
+		PickerViewCellConstants.CellExpanded.height
 	}
 }
 
@@ -297,11 +297,11 @@ extension PickerViewExpandedCell: WillDisplayCellDelegate {
 
 extension PickerViewExpandedCell: ExpandedCell {
 	public var toggleCell: UITableViewCell? {
-		return collapsedCell
+		collapsedCell
 	}
 
 	public var isCollapsable: Bool {
-		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
+		collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 }
 

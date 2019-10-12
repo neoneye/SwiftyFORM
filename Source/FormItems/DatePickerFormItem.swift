@@ -82,7 +82,7 @@ public class DatePickerFormItem: FormItem {
 	internal var innerValue = Date()
 	public var value: Date {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			self.setValue(newValue, animated: false)

@@ -66,9 +66,8 @@ public class TextViewCell: UITableViewCell {
 	}
 
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-		let gr = UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
-		return gr
-		}()
+		UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
+    }()
 
 	public lazy var toolbar: SimpleToolbar = {
 		let instance = SimpleToolbar()
@@ -199,15 +198,15 @@ public class TextViewCell: UITableViewCell {
 	// MARK: UIResponder
 
 	public override var canBecomeFirstResponder: Bool {
-		return true
+		true
 	}
 
 	public override func becomeFirstResponder() -> Bool {
-		return textView.becomeFirstResponder()
+		textView.becomeFirstResponder()
 	}
 
 	public override func resignFirstResponder() -> Bool {
-		return textView.resignFirstResponder()
+		textView.resignFirstResponder()
 	}
 }
 

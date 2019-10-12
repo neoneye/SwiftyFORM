@@ -11,7 +11,7 @@ public class OptionRowModel: CustomStringConvertible {
 	}
 
 	public var description: String {
-		return "\(title)-\(identifier)"
+		"\(title)-\(identifier)"
 	}
 }
 

@@ -19,7 +19,7 @@ class MyCollectionViewController: UICollectionViewController {
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return 5
+		5
 	}
 
 	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

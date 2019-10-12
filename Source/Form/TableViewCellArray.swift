@@ -21,7 +21,7 @@ public class TableViewCellArray {
 	}
 
 	public static func createEmpty() -> TableViewCellArray {
-		return TableViewCellArray(allItems: [])
+		TableViewCellArray(allItems: [])
 	}
 
 	public init(allItems: [TableViewCellArrayItem]) {
@@ -34,11 +34,11 @@ public class TableViewCellArray {
 	}
 
 	public subscript(index: Int) -> UITableViewCell {
-		return visibleItems[index].cell
+		visibleItems[index].cell
 	}
 
 	public var count: Int {
-		return visibleItems.count
+		visibleItems.count
 	}
 
 	public func append(_ cell: UITableViewCell) {

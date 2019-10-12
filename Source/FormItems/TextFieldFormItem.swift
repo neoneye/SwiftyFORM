@@ -125,22 +125,22 @@ public class TextFieldFormItem: FormItem {
 	}
 
 	public func liveValidateValueText() -> ValidateResult {
-		return  validatorBuilder.build().liveValidate(self.value)
+		validatorBuilder.build().liveValidate(self.value)
 	}
 
 	public func liveValidateText(_ text: String) -> ValidateResult {
-		return validatorBuilder.build().validate(text, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
+		validatorBuilder.build().validate(text, checkHardRule: true, checkSoftRule: true, checkSubmitRule: false)
 	}
 
 	public func submitValidateValueText() -> ValidateResult {
-		return validatorBuilder.build().submitValidate(self.value)
+		validatorBuilder.build().submitValidate(self.value)
 	}
 
 	public func submitValidateText(_ text: String) -> ValidateResult {
-		return validatorBuilder.build().validate(text, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
+		validatorBuilder.build().validate(text, checkHardRule: true, checkSoftRule: true, checkSubmitRule: true)
 	}
 
 	public func validateText(_ text: String, checkHardRule: Bool, checkSoftRule: Bool, checkSubmitRule: Bool) -> ValidateResult {
-		return validatorBuilder.build().validate(text, checkHardRule: checkHardRule, checkSoftRule: checkSoftRule, checkSubmitRule: checkSubmitRule)
+		validatorBuilder.build().validate(text, checkHardRule: checkHardRule, checkSoftRule: checkSoftRule, checkSubmitRule: checkSubmitRule)
 	}
 }

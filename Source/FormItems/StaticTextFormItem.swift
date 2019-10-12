@@ -22,7 +22,7 @@ public class StaticTextFormItem: FormItem {
 	internal var innerValue: String = ""
 	public var value: String {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			innerValue = newValue

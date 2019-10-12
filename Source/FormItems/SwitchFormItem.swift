@@ -22,7 +22,7 @@ public class SwitchFormItem: FormItem {
 	internal var innerValue: Bool = false
 	public var value: Bool {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			self.setValue(newValue, animated: false)

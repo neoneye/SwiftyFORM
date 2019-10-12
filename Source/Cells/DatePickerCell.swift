@@ -76,6 +76,9 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			return .short
 		case .countDownTimer:
 			return .none
+        @unknown default:
+            SwiftyFormLog("WARNING - unknown UIDatePicker.Mode '\(datePickerMode)', not displaying date")
+            return .none
 		}
 	}
 
@@ -89,6 +92,9 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 			return .short
 		case .countDownTimer:
 			return .short
+        @unknown default:
+            SwiftyFormLog("WARNING - unknown UIDatePicker.Mode '\(datePickerMode)', not displaying time")
+            return .none
 		}
 	}
 
@@ -118,7 +124,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	}
 
 	public func form_cellHeight(_ indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return 60
+        60
 	}
 
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
@@ -226,15 +232,15 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 	weak var collapsedCell: DatePickerToggleCell?
 
 	public var toggleCell: UITableViewCell? {
-		return collapsedCell
+        collapsedCell
 	}
 
 	public var isCollapsable: Bool {
-		return collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
+        collapsedCell?.model.expandCollapseWhenSelectingRow ?? false
 	}
 
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return DatePickerCellConstants.CellExpanded.height
+        DatePickerCellConstants.CellExpanded.height
 	}
 
 	public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {

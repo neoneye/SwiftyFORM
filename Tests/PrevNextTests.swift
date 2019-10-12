@@ -16,30 +16,30 @@ class PrevNextMockTableView: UITableView {
 	}
 	
 	override func numberOfRows(inSection section: Int) -> Int {
-		return numberOfRowsInSectionData[section]
+		numberOfRowsInSectionData[section]
 	}
 	
 	override var numberOfSections: Int {
-		return numberOfRowsInSectionData.count
+		numberOfRowsInSectionData.count
 	}
 }
 
 class PrevNextTests: XCTestCase {
 	
 	func prev(_ row: Int, _ section: Int, _ tableView: UITableView) -> IndexPath? {
-		return IndexPath(row: row, section: section).form_indexPathForPreviousCell(tableView)
+		IndexPath(row: row, section: section).form_indexPathForPreviousCell(tableView)
 	}
 	
 	func next(_ row: Int, _ section: Int, _ tableView: UITableView) -> IndexPath? {
-		return IndexPath(row: row, section: section).form_indexPathForNextCell(tableView)
+		IndexPath(row: row, section: section).form_indexPathForNextCell(tableView)
 	}
 	
 	func makeTableView(_ numberOfRowsInSectionData: [Int]) -> UITableView {
-		return PrevNextMockTableView(numberOfRowsInSectionData: numberOfRowsInSectionData)
+		PrevNextMockTableView(numberOfRowsInSectionData: numberOfRowsInSectionData)
 	}
 	
 	func makeIndexPath(_ row: Int, _ section: Int) -> IndexPath {
-		return IndexPath(row: row, section: section)
+		IndexPath(row: row, section: section)
 	}
 
 	// MARK: Previous

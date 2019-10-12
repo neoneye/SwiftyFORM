@@ -37,7 +37,7 @@ public class AttributedTextFormItem: FormItem {
 	internal var innerValue: NSAttributedString?
 	public var value: NSAttributedString? {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			innerValue = newValue

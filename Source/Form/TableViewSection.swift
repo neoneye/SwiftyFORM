@@ -16,11 +16,11 @@ public class TableViewSection: NSObject {
 
 extension TableViewSection: UITableViewDataSource {
 	public func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		1
 	}
 
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return cells.count
+		cells.count
 	}
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -32,33 +32,33 @@ extension TableViewSection: UITableViewDataSource {
 	}
 
 	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return header.title
+		header.title
 	}
 
 	public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-		return footer.title
+		footer.title
 	}
 }
 
 extension TableViewSection: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		return header.view
+		header.view
 	}
 
 	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return footer.view
+		footer.view
 	}
 
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return header.height
+		header.height
 	}
 
 	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return footer.height
+		footer.height
 	}
 
 	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		return header.estimatedHeight
+		header.estimatedHeight
 	}
 
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

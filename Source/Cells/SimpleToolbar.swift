@@ -24,7 +24,7 @@ public class SimpleToolbar: UIToolbar {
 			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 		}
 		return UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
-		}()
+    }()
 
 	public lazy var nextButton: UIBarButtonItem = {
 		let image = UIImage(named: "SwiftFORMArrowRight", in: Bundle(for: type(of: self)), compatibleWith: nil)
@@ -33,12 +33,11 @@ public class SimpleToolbar: UIToolbar {
 			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
 		}
 		return UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
-		}()
+    }()
 
 	public lazy var closeButton: UIBarButtonItem = {
-		let item = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
-		return item
-		}()
+		UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
+    }()
 
 	public func toolbarItems() -> [UIBarButtonItem] {
 		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)

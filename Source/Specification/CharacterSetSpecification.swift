@@ -37,67 +37,67 @@ public class CharacterSetSpecification: Specification {
 
 extension CharacterSetSpecification {
 	public static var alphanumerics: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.alphanumerics)
+		CharacterSetSpecification(characterSet: CharacterSet.alphanumerics)
 	}
 	public static var capitalizedLetters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.capitalizedLetters)
+		CharacterSetSpecification(characterSet: CharacterSet.capitalizedLetters)
 	}
 	public static var controlCharacters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.controlCharacters)
+		CharacterSetSpecification(characterSet: CharacterSet.controlCharacters)
 	}
 	public static var decimalDigits: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.decimalDigits)
+		CharacterSetSpecification(characterSet: CharacterSet.decimalDigits)
 	}
 	public static var decomposables: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.decomposables)
+		CharacterSetSpecification(characterSet: CharacterSet.decomposables)
 	}
 	public static var illegalCharacters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.illegalCharacters)
+		CharacterSetSpecification(characterSet: CharacterSet.illegalCharacters)
 	}
 	public static var letters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.letters)
+		CharacterSetSpecification(characterSet: CharacterSet.letters)
 	}
 	public static var lowercaseLetters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.lowercaseLetters)
+		CharacterSetSpecification(characterSet: CharacterSet.lowercaseLetters)
 	}
 	public static var newlines: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.newlines)
+		CharacterSetSpecification(characterSet: CharacterSet.newlines)
 	}
 	public static var nonBaseCharacters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.nonBaseCharacters)
+		CharacterSetSpecification(characterSet: CharacterSet.nonBaseCharacters)
 	}
 	public static var punctuationCharacters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.punctuationCharacters)
+		CharacterSetSpecification(characterSet: CharacterSet.punctuationCharacters)
 	}
 	public static var symbols: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.symbols)
+		CharacterSetSpecification(characterSet: CharacterSet.symbols)
 	}
 	public static var uppercaseLetters: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.uppercaseLetters)
+		CharacterSetSpecification(characterSet: CharacterSet.uppercaseLetters)
 	}
 	public static var urlFragmentAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlFragmentAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlFragmentAllowed)
 	}
 	public static var urlHostAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlHostAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlHostAllowed)
 	}
 	public static var urlPasswordAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlPasswordAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlPasswordAllowed)
 	}
 	public static var urlPathAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlPathAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlPathAllowed)
 	}
 	public static var urlQueryAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlQueryAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlQueryAllowed)
 	}
 	public static var urlUserAllowed: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.urlUserAllowed)
+		CharacterSetSpecification(characterSet: CharacterSet.urlUserAllowed)
 	}
 	public static var whitespaces: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.whitespaces)
+		CharacterSetSpecification(characterSet: CharacterSet.whitespaces)
 	}
 	public static var whitespacesAndNewlines: CharacterSetSpecification {
-		return CharacterSetSpecification(characterSet: CharacterSet.whitespacesAndNewlines)
+		CharacterSetSpecification(characterSet: CharacterSet.whitespacesAndNewlines)
 	}
 }
 
@@ -105,58 +105,58 @@ extension CharacterSetSpecification {
 /// These functions will be removed in the future, starting with SwiftyFORM 2.0.0
 extension CharacterSetSpecification {
 	public static func alphanumericCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.alphanumerics
+		CharacterSetSpecification.alphanumerics
 	}
 
 	public static func capitalizedLetterCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.capitalizedLetters
+		CharacterSetSpecification.capitalizedLetters
 	}
 
 	public static func controlCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.controlCharacters
+		CharacterSetSpecification.controlCharacters
 	}
 
 	public static func decimalDigitCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.decimalDigits
+		CharacterSetSpecification.decimalDigits
 	}
 
 	public static func decomposableCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.decomposables
+		CharacterSetSpecification.decomposables
 	}
 
 	public static func illegalCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.illegalCharacters
+		CharacterSetSpecification.illegalCharacters
 	}
 
 	public static func lowercaseLetterCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.lowercaseLetters
+		CharacterSetSpecification.lowercaseLetters
 	}
 
 	public static func newlineCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.newlines
+		CharacterSetSpecification.newlines
 	}
 
 	public static func nonBaseCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.nonBaseCharacters
+		CharacterSetSpecification.nonBaseCharacters
 	}
 
 	public static func punctuationCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.punctuationCharacters
+		CharacterSetSpecification.punctuationCharacters
 	}
 
 	public static func symbolCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.symbols
+		CharacterSetSpecification.symbols
 	}
 
 	public static func uppercaseLetterCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.uppercaseLetters
+		CharacterSetSpecification.uppercaseLetters
 	}
 
 	public static func whitespaceCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.whitespaces
+		CharacterSetSpecification.whitespaces
 	}
 
 	public static func whitespaceAndNewlineCharacterSet() -> CharacterSetSpecification {
-		return CharacterSetSpecification.whitespacesAndNewlines
+		CharacterSetSpecification.whitespacesAndNewlines
 	}
 }

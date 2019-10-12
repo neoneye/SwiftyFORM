@@ -153,7 +153,7 @@ public class PrecisionSliderFormItem: FormItem {
 	internal var innerValue: Int = 0
 	public var value: Int {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			self.updateValue(newValue)

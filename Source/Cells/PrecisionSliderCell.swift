@@ -107,7 +107,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	}
 
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return 60
+		60
 	}
 
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
@@ -283,7 +283,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 	weak var collapsedCell: PrecisionSliderToggleCell?
 
 	public var toggleCell: UITableViewCell? {
-		return collapsedCell
+		collapsedCell
 	}
 
 	public var isCollapsable: Bool {
@@ -296,7 +296,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 	}
 
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return PrecisionSlider_InnerModel.height
+		PrecisionSlider_InnerModel.height
 	}
 
 	func sliderDidChange(_ changeModel: PrecisionSlider.SliderDidChangeModel) {

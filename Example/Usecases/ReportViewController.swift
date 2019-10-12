@@ -133,11 +133,11 @@ struct AppInfo {
 	}
 	
 	static var appVersionAndBuild: String {
-		return "\(appVersion), build \(appBuild)"
+		"\(appVersion), build \(appBuild)"
 	}
 	
 	static var systemVersion: String {
-		return UIDevice.current.systemVersion
+		UIDevice.current.systemVersion
 	}
 	
 	static var defines: String {

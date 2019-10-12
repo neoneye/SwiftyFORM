@@ -18,6 +18,6 @@ class LoadingCell: UITableViewCell, CellHeightProvider {
     }
 
 	func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return xibHeight
+		xibHeight
 	}
 }

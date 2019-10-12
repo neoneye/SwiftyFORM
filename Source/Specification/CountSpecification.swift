@@ -10,7 +10,7 @@ public class CountSpecification: Specification {
 	///
 	/// - returns: A CountSpecification that checks for a minimum count
 	public static func min(_ count: Int) -> CountSpecification {
-		return CountSpecification().min(count)
+		CountSpecification().min(count)
 	}
 
 	/// Create a specification that checks for a maximum count
@@ -19,7 +19,7 @@ public class CountSpecification: Specification {
 	///
 	/// - returns: A CountSpecification that checks for a maximum count
 	public static func max(_ count: Int) -> CountSpecification {
-		return CountSpecification().max(count)
+		CountSpecification().max(count)
 	}
 
 	/// Create a specification that checks if count is inside a range
@@ -29,7 +29,7 @@ public class CountSpecification: Specification {
 	///
 	/// - returns: A CountSpecification that checks if count is inside range
 	public static func between(_ minCount: Int, _ maxCount: Int) -> CountSpecification {
-		return CountSpecification().min(minCount).max(maxCount)
+		CountSpecification().min(minCount).max(maxCount)
 	}
 
 	/// Create a specification that checks if count is exactly X elements
@@ -38,7 +38,7 @@ public class CountSpecification: Specification {
 	///
 	/// - returns: A CountSpecification that checks if count is exactly the required count
 	public static func exactly(_ count: Int) -> CountSpecification {
-		return CountSpecification().min(count).max(count)
+		CountSpecification().min(count).max(count)
 	}
 
 	private var minCount: Int?

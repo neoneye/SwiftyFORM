@@ -29,7 +29,7 @@ extension Specification {
 	///
 	/// - returns: A combined specification
 	public func and(_ other: Specification) -> Specification {
-		return AndSpecification(self, other)
+		AndSpecification(self, other)
 	}
 
 	/// Combine two specifications into one.
@@ -41,7 +41,7 @@ extension Specification {
 	///
 	/// - returns: A combined specification
 	public func or(_ other: Specification) -> Specification {
-		return OrSpecification(self, other)
+		OrSpecification(self, other)
 	}
 
 	/// Invert a specification.
@@ -51,7 +51,7 @@ extension Specification {
 	///
 	/// - returns: An inverted specification
 	public func not() -> Specification {
-		return NotSpecification(self)
+		NotSpecification(self)
 	}
 }
 
@@ -74,7 +74,7 @@ public class AndSpecification: Specification {
 	///
 	/// - returns: `true` if the candidate satisfies both specifications, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return one.isSatisfiedBy(candidate) && other.isSatisfiedBy(candidate)
+		one.isSatisfiedBy(candidate) && other.isSatisfiedBy(candidate)
 	}
 }
 
@@ -97,7 +97,7 @@ public class OrSpecification: Specification {
 	///
 	/// - returns: `true` if the candidate satisfies either of the specifications, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return one.isSatisfiedBy(candidate) || other.isSatisfiedBy(candidate)
+		one.isSatisfiedBy(candidate) || other.isSatisfiedBy(candidate)
 	}
 }
 
@@ -117,7 +117,7 @@ public class NotSpecification: Specification {
 	///
 	/// - returns: `true` if the candidate doesn't satisfy the specification, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return !wrapped.isSatisfiedBy(candidate)
+		!wrapped.isSatisfiedBy(candidate)
 	}
 }
 
@@ -132,7 +132,7 @@ public class FalseSpecification: Specification {
 	///
 	/// - returns: `false` always.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return false
+		false
 	}
 }
 
@@ -147,7 +147,7 @@ public class TrueSpecification: Specification {
 	///
 	/// - returns: `true` always.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return true
+		true
 	}
 }
 
@@ -156,6 +156,6 @@ public class TrueSpecification: Specification {
 open class CompositeSpecification: Specification {
 	open func isSatisfiedBy(_ candidate: Any?) -> Bool {
 		// subclass must implement this function
-		return false
+		false
 	}
 }

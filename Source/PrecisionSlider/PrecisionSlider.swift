@@ -174,7 +174,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 
 	func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-		return false
+		false
 	}
 
 	@objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -435,7 +435,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 
 	func computeItemSize() -> CGSize {
-		return CGSize(width: CGFloat(model.lengthOfFullItem), height: PrecisionSlider_InnerModel.height)
+		CGSize(width: CGFloat(model.lengthOfFullItem), height: PrecisionSlider_InnerModel.height)
 	}
 
 	lazy var layout: PrecisionSlider_InnerCollectionViewFlowLayout = {
@@ -456,7 +456,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	This lets us install custom gesture recognizers for pinch and double-tap.
 	*/
 	lazy var collectionViewWrapper: UIView = {
-		return UIView()
+		UIView()
 	}()
 
 	lazy var collectionView: UICollectionView = {

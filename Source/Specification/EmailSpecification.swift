@@ -24,7 +24,7 @@ public class EmailSpecification: Specification {
 	///
 	/// - returns: `true` if the candidate object is a string and could be an email, `false` otherwise.
 	public func isSatisfiedBy(_ candidate: Any?) -> Bool {
-		return specification.isSatisfiedBy(candidate)
+		specification.isSatisfiedBy(candidate)
 	}
 
 	/// [RFC5322](http://tools.ietf.org/html/rfc5322#section-3.4) address specification

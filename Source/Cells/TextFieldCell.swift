@@ -370,15 +370,15 @@ public class TextFieldFormItemCell: UITableViewCell {
 	// MARK: UIResponder
 
 	public override var canBecomeFirstResponder: Bool {
-		return true
+		true
 	}
 
 	public override func becomeFirstResponder() -> Bool {
-		return textField.becomeFirstResponder()
+		textField.becomeFirstResponder()
 	}
 
 	public override func resignFirstResponder() -> Bool {
-		return textField.resignFirstResponder()
+		textField.resignFirstResponder()
 	}
 
 }

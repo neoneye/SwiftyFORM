@@ -6,7 +6,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	var originalMinimumValue: Double = 100.0
 
 	var fallbackValue: Double {
-		return (originalMaximumValue - originalMinimumValue) / 2
+		(originalMaximumValue - originalMinimumValue) / 2
 	}
 
 	var minimumValue: Double = 0.0
@@ -158,22 +158,22 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 	}
 
 	var lengthOfAllFullItems: Double {
-		return Double(numberOfFullItems) * lengthOfFullItem
+		Double(numberOfFullItems) * lengthOfFullItem
 	}
 	var lengthOfOnePartialItem: Double {
-		return ceil(lengthOfFullItem * sizeOfOnePartialItem)
+		ceil(lengthOfFullItem * sizeOfOnePartialItem)
 	}
 	var lengthOfPartialItemBefore: Double {
-		return ceil(lengthOfFullItem * sizeOfPartialItemBefore)
+		ceil(lengthOfFullItem * sizeOfPartialItemBefore)
 	}
 	var remainingLengthOfPartialItemBefore: Double {
-		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemBefore))
+		ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemBefore))
 	}
 	var lengthOfPartialItemAfter: Double {
-		return ceil(lengthOfFullItem * sizeOfPartialItemAfter)
+		ceil(lengthOfFullItem * sizeOfPartialItemAfter)
 	}
 	var remainingLengthOfPartialItemAfter: Double {
-		return ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemAfter))
+		ceil(lengthOfFullItem * (1.0 - sizeOfPartialItemAfter))
 	}
 
 	var lengthOfContent: Double {

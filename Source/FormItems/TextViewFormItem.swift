@@ -30,7 +30,7 @@ public class TextViewFormItem: FormItem {
 	internal var innerValue: String = ""
 	public var value: String {
 		get {
-			return self.innerValue
+			self.innerValue
 		}
 		set {
 			self.assignValueAndSync(newValue)

@@ -48,7 +48,7 @@ public class SliderCell: UITableViewCell, CellHeightProvider {
 	}
 
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
-		return 60
+		60
 	}
 
 	@objc public func valueChanged() {
