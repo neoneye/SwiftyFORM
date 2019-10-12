@@ -8,7 +8,7 @@ public class SimpleToolbar: UIToolbar {
 
 	public init() {
 		super.init(frame: CGRect.zero)
-		self.backgroundColor = UIColor.white
+        self.backgroundColor = Colors.background
 		self.items = self.toolbarItems()
 		self.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleBottomMargin, .flexibleTopMargin]
 	}

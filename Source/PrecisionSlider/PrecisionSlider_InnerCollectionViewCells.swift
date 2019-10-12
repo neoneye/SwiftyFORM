@@ -37,7 +37,7 @@ class PrecisionSlider_InnerCollectionViewFullCell: UICollectionViewCell {
 
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
@@ -97,13 +97,13 @@ class PrecisionSlider_InnerCollectionViewFirstCell: UICollectionViewCell {
 
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
 	lazy var partialMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
@@ -176,13 +176,13 @@ class PrecisionSlider_InnerCollectionViewLastCell: UICollectionViewCell {
 
 	lazy var mark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
 	lazy var partialMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
@@ -250,13 +250,13 @@ class PrecisionSlider_InnerCollectionViewSingleCell: UICollectionViewCell {
 
 	lazy var leftMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 
 	lazy var rightMark: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.black
+        instance.backgroundColor = Colors.text
 		return instance
 	}()
 

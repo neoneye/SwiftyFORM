@@ -42,8 +42,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		addSubview(collectionViewWrapper)
 		collectionViewWrapper.addSubview(collectionView)
 
-		addSubview(leftCoverView)
-		addSubview(rightCoverView)
+        addSubview(precisionPointView)
 		addSubview(zoomInButton)
 		addSubview(zoomOutButton)
 		addSubview(zoomLabel)
@@ -86,9 +85,8 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		updateContentInset()
 
 		do {
-			let (left, right) = bounds.divided(atDistance: round(bounds.width/2), from: .minXEdge)
-			leftCoverView.frame = left.divided(atDistance: 1, from: .maxXEdge).remainder
-			rightCoverView.frame = right
+            precisionPointView.frame.size = CGSize(width: 3, height: bounds.height)
+            precisionPointView.center = CGPoint(x: bounds.midX, y: bounds.midY)
 		}
 
 		if !zoomUIHidden {
@@ -100,20 +98,13 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 			zoomLabel.frame = right
 		}
 	}
-
-	lazy var leftCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-		instance.isUserInteractionEnabled = false
-		return instance
-	}()
-
-	lazy var rightCoverView: UIView = {
-		let instance = UIView()
-		instance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-		instance.isUserInteractionEnabled = false
-		return instance
-	}()
+    
+    lazy var precisionPointView: UIView = {
+        let instance = UIView()
+        instance.backgroundColor = Colors.text
+        instance.isUserInteractionEnabled = false
+        return instance
+    }()
 
 	var enablePropagationCounter = 0
 
@@ -463,7 +454,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 		let instance = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
 		instance.showsHorizontalScrollIndicator = false
 		instance.showsVerticalScrollIndicator = false
-		instance.backgroundColor = UIColor.white
+        instance.backgroundColor = Colors.mutedBackground
 		instance.bounces = false
 		instance.alwaysBounceHorizontal = true
 		instance.alwaysBounceVertical = false

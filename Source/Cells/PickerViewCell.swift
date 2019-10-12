@@ -162,8 +162,8 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	// MARK: AssignAppearance
 
 	public func assignDefaultColors() {
-		textLabel?.textColor = UIColor.black
-		detailTextLabel?.textColor = UIColor.gray
+        textLabel?.textColor = Colors.text
+        detailTextLabel?.textColor = Colors.secondaryText
 	}
 
 	public func assignTintColors() {

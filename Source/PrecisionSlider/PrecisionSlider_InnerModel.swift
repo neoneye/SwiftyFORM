@@ -201,8 +201,8 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		return zoomMode.markerText(index)
 	}
 
-	let markMajorColor = UIColor.black
-	let markMinorColor = UIColor(white: 0.7, alpha: 1.0)
+    let markMajorColor = Colors.text
+    let markMinorColor = Colors.secondaryText
 
 	func markColorForIndexPath(_ indexPath: IndexPath) -> UIColor? {
 		var index = Int(floor(minimumValue)) + indexPath.row

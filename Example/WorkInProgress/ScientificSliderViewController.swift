@@ -30,7 +30,7 @@ class ScientificSliderViewController: UIViewController {
 
 	lazy var focusView: UIView = {
 		let instance = UIView()
-		instance.backgroundColor = UIColor.white
+        instance.backgroundColor = .white
 		return instance
 	}()
 

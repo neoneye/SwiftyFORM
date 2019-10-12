@@ -3,7 +3,7 @@ import UIKit
 
 public class CustomTextField: UITextField {
 	public func configure() {
-		backgroundColor = UIColor.white
+        backgroundColor = .clear
 		autocapitalizationType = .sentences
 		autocorrectionType = .default
 		spellCheckingType = .no
@@ -70,7 +70,9 @@ public class TextFieldFormItemCell: UITableViewCell {
 
 		selectionStyle = .none
 
+        titleLabel.textColor = Colors.text
 		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        textField.textColor = Colors.text
 		textField.font  = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 		errorLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
 
