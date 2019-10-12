@@ -109,7 +109,6 @@
 		42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC31D4143650066E45A /* PrecisionSlider.swift */; };
 		739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649121D2B6B7400E12A96 /* AttributedTextCell.swift */; };
 		739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */; };
-		971783F923521A7B00A0948D /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971783F823521A7B00A0948D /* Package.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,7 +227,6 @@
 		42FABBC31D4143650066E45A /* PrecisionSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider.swift; sourceTree = "<group>"; };
 		739649121D2B6B7400E12A96 /* AttributedTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextCell.swift; sourceTree = "<group>"; };
 		739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextFormItem.swift; sourceTree = "<group>"; };
-		971783F823521A7B00A0948D /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,7 +251,6 @@
 		4208F22C19F95C73003E834D = {
 			isa = PBXGroup;
 			children = (
-				971783F823521A7B00A0948D /* Package.swift */,
 				428682F61B346CFE0028DB2F /* Source */,
 				4286835D1B346D0C0028DB2F /* Tests */,
 				4208F23619F95C73003E834D /* Products */,
@@ -574,7 +571,6 @@
 				42108D191B34E9F60067FEAA /* FormItem.swift in Sources */,
 				42D005101B96243000986B3B /* WillDisplayCellDelegate.swift in Sources */,
 				42108D211B34E9F60067FEAA /* TextFieldFormItem.swift in Sources */,
-				971783F923521A7B00A0948D /* Package.swift in Sources */,
 				428683341B346CFE0028DB2F /* StaticTextCell.swift in Sources */,
 				423E31411D6383FE0048D8C3 /* TableViewSectionArray.swift in Sources */,
 				428683531B346CFE0028DB2F /* DebugViewController.swift in Sources */,

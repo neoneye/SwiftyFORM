@@ -28,6 +28,11 @@ let package = Package(
             dependencies: [],
             path: "Source"
         ),
+        .testTarget(
+            name: "SwiftyFORMTests",
+            dependencies: ["SwiftyFORM"],
+            path: "Tests"
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )
