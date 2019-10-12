@@ -15,3 +15,10 @@ profile
 DerivedData
 .idea/
 *.xccheckout
+
+# SPM
+/.build
+/Packages
+/*.xcodeproj
+.swiftpm
+Package.resolved
