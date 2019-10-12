@@ -18,21 +18,11 @@ public class SimpleToolbar: UIToolbar {
 	}
 
 	public lazy var previousButton: UIBarButtonItem = {
-		let image = UIImage(named: "SwiftFORMArrowLeft", in: Bundle(for: type(of: self)), compatibleWith: nil)
-		if let image = image {
-			let image2 = image.withRenderingMode(.alwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
-		}
-		return UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
+		UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
     }()
 
 	public lazy var nextButton: UIBarButtonItem = {
-		let image = UIImage(named: "SwiftFORMArrowRight", in: Bundle(for: type(of: self)), compatibleWith: nil)
-		if let image = image {
-			let image2 = image.withRenderingMode(.alwaysTemplate)
-			return UIBarButtonItem(image: image2, style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
-		}
-		return UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
+		UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
     }()
 
 	public lazy var closeButton: UIBarButtonItem = {
