@@ -1,5 +1,5 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
 extension UITableViewCell {
 	/**

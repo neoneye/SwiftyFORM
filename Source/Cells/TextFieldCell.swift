@@ -42,6 +42,7 @@ public struct TextFieldFormItemCellModel {
 	var autocapitalizationType: UITextAutocapitalizationType = .none
 	var spellCheckingType: UITextSpellCheckingType = .no
 	var secureTextEntry = false
+    var textAlignment: NSTextAlignment = .left
 	var model: TextFieldFormItem! = nil
 
 	var valueDidChange: (String) -> Void = { (value: String) in
@@ -93,6 +94,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		textField.returnKeyType = model.returnKeyType
 		textField.spellCheckingType = model.spellCheckingType
 		textField.isSecureTextEntry = model.secureTextEntry
+        textField.textAlignment = model.textAlignment
 
 		if self.model.toolbarMode == .simple {
 			textField.inputAccessoryView = toolbar

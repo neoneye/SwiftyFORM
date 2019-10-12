@@ -1,5 +1,5 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
 public class TextFieldFormItem: FormItem {
 	override func accept(visitor: FormItemVisitor) {
@@ -18,6 +18,7 @@ public class TextFieldFormItem: FormItem {
 	public var autocapitalizationType: UITextAutocapitalizationType = .none
 	public var spellCheckingType: UITextSpellCheckingType = .no
 	public var secureTextEntry = false
+    public var textAlignment: NSTextAlignment = .left
 
 	public var returnKeyType: UIReturnKeyType = .default
 

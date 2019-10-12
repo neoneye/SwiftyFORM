@@ -537,6 +537,7 @@ class PopulateTableView: FormItemVisitor {
 	func visit(object: TextFieldFormItem) {
 		var model = TextFieldFormItemCellModel()
 		model.toolbarMode = self.model.toolbarMode
+        model.textAlignment = object.textAlignment
 		model.title = object.title
 		model.placeholder = object.placeholder
 		model.keyboardType = object.keyboardType
