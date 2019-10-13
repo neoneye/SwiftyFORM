@@ -27,6 +27,34 @@ public class PrecisionSliderFormItem: FormItem {
 		self.title = title
 		return self
 	}
+    
+    /**
+     ## Prefix
+     
+     This is the prefix that appears before the precision number for associating semantics.
+     e.g. "People: " -> People: 23
+     */
+    public var prefix = ""
+    
+    @discardableResult
+    public func prefix(_ prefix: String) -> Self {
+        self.prefix = prefix
+        return self
+    }
+
+    /**
+     ## Suffix
+     
+     This is the suffix that appears after the precision number, useful for apportioning a quantity to a value.
+     e.g. " potatoes" -> 3.4 potatoes
+     */
+    public var suffix = ""
+    
+    @discardableResult
+    public func suffix(_ suffix: String) -> Self {
+        self.suffix = suffix
+        return self
+    }
 
 	/**
 	### Collapsed

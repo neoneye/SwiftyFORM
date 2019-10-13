@@ -263,6 +263,8 @@ class PopulateTableView: FormItemVisitor {
 		model.initialZoom = object.initialZoom
 		model.zoomUI = object.zoomUI
 		model.collapseWhenResigning = object.collapseWhenResigning
+        model.prefix = object.prefix
+        model.suffix = object.suffix
 
 		switch object.behavior {
 		case .collapsed, .expanded:

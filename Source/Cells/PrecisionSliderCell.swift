@@ -12,6 +12,8 @@ public class PrecisionSliderCellModel {
 	var expandCollapseWhenSelectingRow = true
 	var collapseWhenResigning = false
 	var selectionStyle = UITableViewCell.SelectionStyle.default
+    var prefix = ""
+    var suffix = ""
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -32,7 +34,7 @@ public class PrecisionSliderCellModel {
 }
 
 public struct PrecisionSliderCellFormatter {
-	public static func format(value: Int, decimalPlaces: UInt) -> String {
+    public static func format(value: Int, decimalPlaces: UInt, prefix: String, suffix: String) -> String {
 		let decimalScale: Int = Int(pow(Double(10), Double(decimalPlaces)))
 		let integerValue = abs(value / decimalScale)
 		let sign: String = value < 0 ? "-" : ""
@@ -46,7 +48,10 @@ public struct PrecisionSliderCellFormatter {
 			fractionString = ""
 		}
 
-		return "\(sign)\(integerValue)\(fractionString)"
+		let formattedNumber = "\(sign)\(integerValue)\(fractionString)"
+        let prePostFixed = "\(prefix)\(formattedNumber)\(suffix)"
+        
+        return prePostFixed
 	}
 }
 
@@ -76,7 +81,10 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	}
 
 	func reloadValueLabel() {
-		detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value, decimalPlaces: model.decimalPlaces)
+        detailTextLabel?.text = PrecisionSliderCellFormatter.format(value: model.value,
+                                                                    decimalPlaces: model.decimalPlaces,
+                                                                    prefix: model.prefix,
+                                                                    suffix: model.suffix)
 	}
 
 	func sliderDidChange(_ changeModel: PrecisionSlider.SliderDidChangeModel) {
