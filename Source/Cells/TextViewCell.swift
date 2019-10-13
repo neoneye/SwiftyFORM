@@ -35,10 +35,10 @@ public class TextViewCell: UITableViewCell {
 
 		placeholderLabel.text = model.placeholder
 		placeholderLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-		placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.textColor = Colors.secondaryText
 
 		textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-		textView.textColor = UIColor.black
+        textView.textColor = Colors.text
 		textView.backgroundColor = UIColor.clear
 		textView.isScrollEnabled = false
 		textView.delegate = self
