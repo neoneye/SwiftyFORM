@@ -8,7 +8,6 @@ public class CustomTextField: UITextField {
 		autocorrectionType = .default
 		spellCheckingType = .no
 		returnKeyType = .done
-		clearButtonMode = .whileEditing
 	}
 }
 
