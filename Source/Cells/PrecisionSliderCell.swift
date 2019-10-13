@@ -207,8 +207,8 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	// MARK: AssignAppearance
 
 	public func assignDefaultColors() {
-		textLabel?.textColor = UIColor.black
-		detailTextLabel?.textColor = UIColor.gray
+        textLabel?.textColor = Colors.text
+        detailTextLabel?.textColor = Colors.secondaryText
 	}
 
 	public func assignTintColors() {
