@@ -19,6 +19,7 @@ public class TextFieldFormItem: FormItem {
 	public var spellCheckingType: UITextSpellCheckingType = .no
 	public var secureTextEntry = false
     public var textAlignment: NSTextAlignment = .left
+    public var clearButtonMode: UITextField.ViewMode = .whileEditing
 
 	public var returnKeyType: UIReturnKeyType = .default
 

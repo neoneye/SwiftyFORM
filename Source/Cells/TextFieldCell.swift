@@ -43,6 +43,7 @@ public struct TextFieldFormItemCellModel {
 	var spellCheckingType: UITextSpellCheckingType = .no
 	var secureTextEntry = false
     var textAlignment: NSTextAlignment = .left
+    var clearButtonMode: UITextField.ViewMode = .whileEditing
 	var model: TextFieldFormItem! = nil
 
 	var valueDidChange: (String) -> Void = { (value: String) in
@@ -54,7 +55,7 @@ public struct TextFieldFormItemCellModel {
     }
 }
 
-public class TextFieldFormItemCell: UITableViewCell {
+public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 	public let model: TextFieldFormItemCellModel
 	public let titleLabel = UILabel()
 	public let textField = CustomTextField()
@@ -97,6 +98,7 @@ public class TextFieldFormItemCell: UITableViewCell {
 		textField.spellCheckingType = model.spellCheckingType
 		textField.isSecureTextEntry = model.secureTextEntry
         textField.textAlignment = model.textAlignment
+        textField.clearButtonMode = model.clearButtonMode
 
 		if self.model.toolbarMode == .simple {
 			textField.inputAccessoryView = toolbar
@@ -384,13 +386,27 @@ public class TextFieldFormItemCell: UITableViewCell {
 	public override func resignFirstResponder() -> Bool {
 		textField.resignFirstResponder()
 	}
+    
+    public func assignDefaultColors() {
+        titleLabel.textColor = Colors.text
+    }
+    
+    public func assignTintColors() {
+        titleLabel.textColor = tintColor
+    }
 
 }
 
 extension TextFieldFormItemCell: UITextFieldDelegate {
+    
 	public func textFieldDidBeginEditing(_ textField: UITextField) {
 		updateToolbarButtons()
+        assignTintColors()
 	}
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        assignDefaultColors()
+    }
 
 	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		let textFieldString: NSString = textField.text as NSString? ?? ""
