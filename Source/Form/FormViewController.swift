@@ -31,9 +31,13 @@ open class FormViewController: UIViewController {
 	}
 
 	open func reloadForm() {
-		formBuilder.removeAll()
-		populateAndSetup()
-		tableView.reloadData()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.formBuilder.removeAll()
+            DispatchQueue.main.async {
+                self.populateAndSetup()
+                self.tableView.reloadData()
+            }
+        }
 	}
 
 	open func populate(_ builder: FormBuilder) {
