@@ -27,6 +27,8 @@
 		42108D221B34E9F60067FEAA /* TextViewFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D151B34E9F60067FEAA /* TextViewFormItem.swift */; };
 		42108D231B34E9F60067FEAA /* ViewControllerFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */; };
 		4212E0131D3A3ABE002287D0 /* CellForRowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */; };
+		4215D750235493880039D3AB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4215D74F235493880039D3AB /* Colors.swift */; };
+		4215D752235493F20039D3AB /* DynamicUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4215D751235493F20039D3AB /* DynamicUIColor.swift */; };
 		4219E1C51DB827CF00B3204A /* CharacterSetSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1BE1DB827CF00B3204A /* CharacterSetSpecification.swift */; };
 		4219E1C61DB827CF00B3204A /* CountSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1BF1DB827CF00B3204A /* CountSpecification.swift */; };
 		4219E1C71DB827CF00B3204A /* EmailSpecification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4219E1C01DB827CF00B3204A /* EmailSpecification.swift */; };
@@ -142,6 +144,8 @@
 		42108D151B34E9F60067FEAA /* TextViewFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewFormItem.swift; sourceTree = "<group>"; };
 		42108D161B34E9F60067FEAA /* ViewControllerFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFormItem.swift; sourceTree = "<group>"; };
 		4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellForRowDelegate.swift; sourceTree = "<group>"; };
+		4215D74F235493880039D3AB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		4215D751235493F20039D3AB /* DynamicUIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicUIColor.swift; sourceTree = "<group>"; };
 		4219E1BE1DB827CF00B3204A /* CharacterSetSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterSetSpecification.swift; sourceTree = "<group>"; };
 		4219E1BF1DB827CF00B3204A /* CountSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountSpecification.swift; sourceTree = "<group>"; };
 		4219E1C01DB827CF00B3204A /* EmailSpecification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSpecification.swift; sourceTree = "<group>"; };
@@ -398,8 +402,10 @@
 		428683211B346CFE0028DB2F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				4215D74F235493880039D3AB /* Colors.swift */,
 				428683221B346CFE0028DB2F /* DebugViewController.swift */,
 				428683231B346CFE0028DB2F /* Dictionary+Update.swift */,
+				4215D751235493F20039D3AB /* DynamicUIColor.swift */,
 				428683241B346CFE0028DB2F /* KeyboardHandler.swift */,
 				428683251B346CFE0028DB2F /* Logging.swift */,
 				42096E711B358A7E0068B084 /* ShowInfo.swift */,
@@ -614,6 +620,7 @@
 				42685D4F1D340D99008ABC3D /* TableViewCellArray.swift in Sources */,
 				42108D1C1B34E9F60067FEAA /* SectionFormItem.swift in Sources */,
 				428683551B346CFE0028DB2F /* KeyboardHandler.swift in Sources */,
+				4215D752235493F20039D3AB /* DynamicUIColor.swift in Sources */,
 				4286833D1B346CFE0028DB2F /* SelectRowDelegate.swift in Sources */,
 				428683541B346CFE0028DB2F /* Dictionary+Update.swift in Sources */,
 				4286835C1B346CFE0028DB2F /* UIViewController+Alert.swift in Sources */,
@@ -624,6 +631,7 @@
 				428683331B346CFE0028DB2F /* SliderCell.swift in Sources */,
 				422437E01D71890500EC41E8 /* PickerViewFormItem.swift in Sources */,
 				422437E21D71924400EC41E8 /* PickerViewCell.swift in Sources */,
+				4215D750235493880039D3AB /* Colors.swift in Sources */,
 				428683301B346CFE0028DB2F /* SimpleToolbar.swift in Sources */,
 				42096E731B358A7E0068B084 /* ShowInfo.swift in Sources */,
 				42685D4B1D34039B008ABC3D /* PrecisionSliderFormItem.swift in Sources */,
@@ -721,7 +729,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -772,7 +780,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
