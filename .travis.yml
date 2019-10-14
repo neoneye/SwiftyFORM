@@ -1,10 +1,9 @@
-language: objective-c
-osx_image: xcode9.2
+language: swift
+osx_image: xcode11.1
 
 script: 
-- xcodebuild clean build test -project SwiftyFORM.xcodeproj -scheme SwiftyFORM -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6'
+- xcodebuild clean build test -project SwiftyFORM.xcodeproj -scheme SwiftyFORM -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8'
 
 branches:
   only:
   - master
-  - develop
