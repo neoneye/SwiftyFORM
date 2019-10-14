@@ -70,6 +70,8 @@ class ReportViewController: FormViewController, MFMailComposeViewControllerDeleg
 			form_simpleAlert("Status", "Mail sent")
 		case .failed:
 			form_simpleAlert("Mail failed", "error: \(String(describing: error))")
+		@unknown default:
+			form_simpleAlert("Unknown MFMailComposeResult", "result \(result) error: \(String(describing: error))")
 		}
 	}
 }
