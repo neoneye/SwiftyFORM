@@ -417,7 +417,7 @@
 					42CEBF941A3BA2B50048E072 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = 22DR89XVRF;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -676,6 +676,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -690,6 +691,7 @@
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "dk.neoneye.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Example;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
