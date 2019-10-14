@@ -21,8 +21,6 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 
 [SwiftyFORM demo on YouTube](https://youtu.be/PKbVJ91uQdA)
 
-Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tree/develop) branch.
-
 
 <a href="mailto:neoneye@gmail.com?subject=Hire Simon Strandgaard">
 <img src="Documentation/hire_simon_strandgaard@2x.png" width="211" height="34"></a>
@@ -30,9 +28,9 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 
 ## Requirements
 
-- iOS 10.0+
-- Xcode 10.0+
-- Swift 4.2+
+- iOS 13
+- Xcode 11
+- Swift 5
 
 
 ## Features
@@ -55,9 +53,9 @@ Development happens in the [`develop`](https://github.com/neoneye/SwiftyFORM/tre
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(_ builder: FormBuilder) {
-		builder += StaticTextFormItem().title("Hello").value("World")
-	}
+    override func populate(_ builder: FormBuilder) {
+        builder += StaticTextFormItem().title("Hello").value("World")
+    }
 }
 ```
 
@@ -66,9 +64,9 @@ class MyViewController: FormViewController {
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(_ builder: FormBuilder) {
-		builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.emailAddress)
-	}
+    override func populate(_ builder: FormBuilder) {
+        builder += TextFieldFormItem().title("Email").placeholder("Please specify").keyboardType(.emailAddress)
+    }
 }
 ```
 
@@ -77,9 +75,9 @@ class MyViewController: FormViewController {
 ```swift
 import SwiftyFORM
 class MyViewController: FormViewController {
-	override func populate(_ builder: FormBuilder) {
-		builder += ViewControllerFormItem().title("Go to view controller").viewController(FirstViewController.self)
-	}
+    override func populate(_ builder: FormBuilder) {
+        builder += ViewControllerFormItem().title("Go to view controller").viewController(FirstViewController.self)
+    }
 }
 ```
 
@@ -89,71 +87,71 @@ class MyViewController: FormViewController {
 
 ```swift
 class DatePickerBindingViewController: FormViewController {
-	override func populate(_ builder: FormBuilder) {
-		builder += datePicker
-		builder += incrementButton
-		builder += decrementButton
-		builder += SectionFormItem()
-		builder += summary
-		updateSummary()
-	}
-	
-	lazy var datePicker: DatePickerFormItem = {
-		let instance = DatePickerFormItem()
-		instance.title = "Date"
-		instance.datePickerMode = .date
-		instance.behavior = .expandedAlways
-		instance.valueDidChangeBlock = { [weak self] _ in
-			self?.updateSummary()
-		}
-		return instance
-	}()
-	
-	lazy var incrementButton: ButtonFormItem = {
-		let instance = ButtonFormItem()
-		instance.title = "Next Day"
-		instance.action = { [weak self] in
-			self?.increment()
-		}
-		return instance
-	}()
-	
-	lazy var decrementButton: ButtonFormItem = {
-		let instance = ButtonFormItem()
-		instance.title = "Previous Day"
-		instance.action = { [weak self] in
-			self?.decrement()
-		}
-		return instance
-	}()
-	
-	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("Date").value("-")
-	}()
-	
-	func updateSummary() {
-		summary.value = "\(datePicker.value)"
-	}
-	
-	func offsetDate(_ date: Date, days: Int) -> Date {
-		var dateComponents = DateComponents()
-		dateComponents.day = days
-		let calendar = Calendar.current
-		guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
-			return date
-		}
-		return resultDate
-	}
-	
-	func increment() {
-		datePicker.setValue(offsetDate(datePicker.value, days: 1), animated: true)
-		updateSummary()
-	}
-
-	func decrement() {
-		datePicker.setValue(offsetDate(datePicker.value, days: -1), animated: true)
-		updateSummary()
-	}
+    override func populate(_ builder: FormBuilder) {
+        builder += datePicker
+        builder += incrementButton
+        builder += decrementButton
+        builder += SectionFormItem()
+        builder += summary
+        updateSummary()
+    }
+    
+    lazy var datePicker: DatePickerFormItem = {
+        let instance = DatePickerFormItem()
+        instance.title = "Date"
+        instance.datePickerMode = .date
+        instance.behavior = .expandedAlways
+        instance.valueDidChangeBlock = { [weak self] _ in
+            self?.updateSummary()
+        }
+        return instance
+    }()
+    
+    lazy var incrementButton: ButtonFormItem = {
+        let instance = ButtonFormItem()
+        instance.title = "Next Day"
+        instance.action = { [weak self] in
+            self?.increment()
+        }
+        return instance
+    }()
+    
+    lazy var decrementButton: ButtonFormItem = {
+        let instance = ButtonFormItem()
+        instance.title = "Previous Day"
+        instance.action = { [weak self] in
+            self?.decrement()
+        }
+        return instance
+    }()
+    
+    lazy var summary: StaticTextFormItem = {
+        return StaticTextFormItem().title("Date").value("-")
+    }()
+    
+    func updateSummary() {
+        summary.value = "\(datePicker.value)"
+    }
+    
+    func offsetDate(_ date: Date, days: Int) -> Date {
+        var dateComponents = DateComponents()
+        dateComponents.day = days
+        let calendar = Calendar.current
+        guard let resultDate = calendar.date(byAdding: dateComponents, to: date) else {
+            return date
+        }
+        return resultDate
+    }
+    
+    func increment() {
+        datePicker.setValue(offsetDate(datePicker.value, days: 1), animated: true)
+        updateSummary()
+    }
+    
+    func decrement() {
+        datePicker.setValue(offsetDate(datePicker.value, days: -1), animated: true)
+        updateSummary()
+    }
 }
 ```
 
@@ -164,48 +162,48 @@ class DatePickerBindingViewController: FormViewController {
 
 ```swift
 class ChangePasswordViewController: FormViewController {
-	override func populate(_ builder: FormBuilder) {
-		builder.navigationTitle = "Password"
-		builder += SectionHeaderTitleFormItem().title("Your Old Password")
-		builder += passwordOld
-		builder += SectionHeaderTitleFormItem().title("Your New Password")
-		builder += passwordNew
-		builder += passwordNewRepeated
-		builder.alignLeft([passwordOld, passwordNew, passwordNewRepeated])
-	}
-	
-	lazy var passwordOld: TextFieldFormItem = {
-		let instance = TextFieldFormItem()
-		instance.title("Old password").password().placeholder("required")
-		instance.keyboardType = .numberPad
-		instance.autocorrectionType = .no
-		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
-		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
-		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
-		return instance
-		}()
-	
-	lazy var passwordNew: TextFieldFormItem = {
-		let instance = TextFieldFormItem()
-		instance.title("New password").password().placeholder("required")
-		instance.keyboardType = .numberPad
-		instance.autocorrectionType = .no
-		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
-		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
-		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
-		return instance
-		}()
-	
-	lazy var passwordNewRepeated: TextFieldFormItem = {
-		let instance = TextFieldFormItem()
-		instance.title("Repeat password").password().placeholder("required")
-		instance.keyboardType = .numberPad
-		instance.autocorrectionType = .no
-		instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
-		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
-		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
-		return instance
-		}()
+    override func populate(_ builder: FormBuilder) {
+        builder.navigationTitle = "Password"
+        builder += SectionHeaderTitleFormItem().title("Your Old Password")
+        builder += passwordOld
+        builder += SectionHeaderTitleFormItem().title("Your New Password")
+        builder += passwordNew
+        builder += passwordNewRepeated
+        builder.alignLeft([passwordOld, passwordNew, passwordNewRepeated])
+    }
+    
+    lazy var passwordOld: TextFieldFormItem = {
+        let instance = TextFieldFormItem()
+        instance.title("Old password").password().placeholder("required")
+        instance.keyboardType = .numberPad
+        instance.autocorrectionType = .no
+        instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
+        instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
+        instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
+        return instance
+        }()
+    
+    lazy var passwordNew: TextFieldFormItem = {
+        let instance = TextFieldFormItem()
+        instance.title("New password").password().placeholder("required")
+        instance.keyboardType = .numberPad
+        instance.autocorrectionType = .no
+        instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
+        instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
+        instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
+        return instance
+        }()
+    
+    lazy var passwordNewRepeated: TextFieldFormItem = {
+        let instance = TextFieldFormItem()
+        instance.title("Repeat password").password().placeholder("required")
+        instance.keyboardType = .numberPad
+        instance.autocorrectionType = .no
+        instance.validate(CharacterSetSpecification.decimalDigitCharacterSet(), message: "Must be digits")
+        instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
+        instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
+        return instance
+        }()
 }
 ```
 
@@ -226,7 +224,7 @@ To integrate SwiftyFORM into your Xcode project using CocoaPods, specify it in y
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '12.0'
 use_frameworks!
 
 pod 'SwiftyFORM'
@@ -244,7 +242,7 @@ $ pod install
 
 To integrate SwiftyFORM into your Xcode project using Carthage, specify it in your `Cartfile`:
 ```
-github "neoneye/SwiftyFORM" ~> 1.4
+github "neoneye/SwiftyFORM" ~> 1.8
 ```
 
 Then, run the following command:
@@ -263,5 +261,4 @@ Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/B
 - If you want to contribute, submit a pull request.
 - If you found a bug, have suggestions or need help, please, open an issue.
 - If you need help, write me: neoneye@gmail.com
-- If you want to [give me](https://www.paypal.me/SimonStrandgaard) some motivation ;-)
 
