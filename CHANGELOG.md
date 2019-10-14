@@ -1,5 +1,12 @@
 ## 📄 Change Log
 
+### 1.8.0
+
+ * Dark mode support and much more. Contributed by Bradley Mackey. Thank you.
+ * Upgraded from Xcode10.x to Xcode11.0
+ * Upgraded from Swift4.2 to Swift5
+ * Deleted "develop" branch.
+
 ### 1.7.0
 
  * Upgraded from Xcode9.x to Xcode10.0
