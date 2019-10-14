@@ -212,22 +212,20 @@ class ChangePasswordViewController: FormViewController {
 
 ## CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
+[Link to demo project that shows a minimal SwiftyFORM app using CocoaPods](https://github.com/neoneye/SwiftyFORM-Examples).
 
-You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
 
 To integrate SwiftyFORM into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
+swift_version = "5.0"
 platform :ios, '12.0'
 use_frameworks!
 
-pod 'SwiftyFORM'
+target 'MyApp' do
+    pod 'SwiftyFORM', :git => 'https://github.com/neoneye/SwiftyFORM.git', :commit => 'c2b9071acc952910629bd9a471c50f41ae5ad6a3'
+end
 ```
 
 Then, run the following command:
