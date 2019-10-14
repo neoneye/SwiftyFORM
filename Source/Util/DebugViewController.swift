@@ -1,5 +1,6 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
+import WebKit
 
 public enum WhatToShow {
 	case json(json: Data)
@@ -60,7 +61,7 @@ public class DebugViewController: UIViewController {
 	}
 
 	public override func loadView() {
-		let webview = UIWebView()
+		let webview = WKWebView()
 		self.view = webview
 
 		let item = UIBarButtonItem(title: "Dismiss", style: .plain, target: self, action: #selector(DebugViewController.dismissAction(_:)))
@@ -69,16 +70,16 @@ public class DebugViewController: UIViewController {
 		switch whatToShow {
 		case let .json(json):
 			let url = URL(string: "http://localhost")!
-			webview.load(json, mimeType: "application/json", textEncodingName: "utf-8", baseURL: url)
+			webview.load(json, mimeType: "application/json", characterEncodingName: "utf-8", baseURL: url)
 			self.title = "JSON"
 		case let .text(text):
 			let url = URL(string: "http://localhost")!
 			let data = (text as NSString).data(using: String.Encoding.utf8.rawValue)!
-			webview.load(data, mimeType: "text/plain", textEncodingName: "utf-8", baseURL: url)
+			webview.load(data, mimeType: "text/plain", characterEncodingName: "utf-8", baseURL: url)
 			self.title = "Text"
 		case let .url(url):
 			let request = URLRequest(url: url)
-			webview.loadRequest(request)
+			webview.load(request)
 			self.title = "URL"
 		}
 	}
