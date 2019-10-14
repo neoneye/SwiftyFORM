@@ -17,6 +17,8 @@ SwiftyFORM
 
 **SwiftyFORM is an iOS framework for creating forms.**
 
+![Screenshot of the demo app](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/light_and_dark1.png "Screenshot of the demo app")
+
 Because form code is hard to write, hard to read, hard to reason about. Has a slow turn around time. Is painful to maintain.
 
 [SwiftyFORM demo on YouTube](https://youtu.be/PKbVJ91uQdA)
