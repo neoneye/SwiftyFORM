@@ -43,6 +43,13 @@ public struct TextFieldFormItemCellModel {
 	var secureTextEntry = false
     var textAlignment: NSTextAlignment = .left
     var clearButtonMode: UITextField.ViewMode = .whileEditing
+    var titleTextColor: UIColor = Colors.text
+    var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    var detailTextColor: UIColor = Colors.secondaryText
+    var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+    var errorFont: UIFont = .preferredFont(forTextStyle: .caption2)
+    var errorTextColor: UIColor = UIColor.red
+    
 	var model: TextFieldFormItem! = nil
 
 	var valueDidChange: (String) -> Void = { (value: String) in
@@ -70,13 +77,13 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 
 		selectionStyle = .none
 
-        titleLabel.textColor = Colors.text
-		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        textField.textColor = Colors.text
-		textField.font  = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-		errorLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
+        titleLabel.textColor = model.titleTextColor
+        titleLabel.font = model.titleFont
+        textField.textColor = model.detailTextColor
+        textField.font  = model.detailFont
+        errorLabel.font = model.errorFont
 
-		errorLabel.textColor = UIColor.red
+        errorLabel.textColor = model.errorTextColor
 		errorLabel.numberOfLines = 0
 
 		textField.configure()
@@ -164,7 +171,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
 		let gr = UITapGestureRecognizer(target: self, action: #selector(TextFieldFormItemCell.handleTap(_:)))
 		return gr
-		}()
+    }()
 
 	public enum TitleWidthMode {
 		case auto
@@ -387,7 +394,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 	}
     
     public func assignDefaultColors() {
-        titleLabel.textColor = Colors.text
+        titleLabel.textColor = model.titleTextColor
     }
     
     public func assignTintColors() {

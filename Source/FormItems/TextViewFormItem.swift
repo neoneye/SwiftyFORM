@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
-public class TextViewFormItem: FormItem {
+public class TextViewFormItem: FormItem, CustomizableTitleLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
@@ -16,11 +16,11 @@ public class TextViewFormItem: FormItem {
 
 	public var title: String = ""
 
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    
+    public var titleTextColor: UIColor = Colors.text
+    
+    public var placeholderTextColor: UIColor = Colors.secondaryText
 
 	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in

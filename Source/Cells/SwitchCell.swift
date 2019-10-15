@@ -3,13 +3,16 @@ import UIKit
 
 public struct SwitchCellModel {
 	var title: String = ""
+    var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    var titleTextColor: UIColor = Colors.text
 
 	var valueDidChange: (Bool) -> Void = { (value: Bool) in
 		SwiftyFormLog("value \(value)")
 	}
 }
 
-public class SwitchCell: UITableViewCell {
+public class SwitchCell: UITableViewCell, AssignAppearance {
+    
 	public let model: SwitchCellModel
 	public let switchView: UISwitch
 
@@ -19,6 +22,9 @@ public class SwitchCell: UITableViewCell {
 		super.init(style: .default, reuseIdentifier: nil)
 		selectionStyle = .none
 		textLabel?.text = model.title
+        textLabel?.font = model.titleFont
+        
+        assignDefaultColors()
 
 		switchView.addTarget(self, action: #selector(SwitchCell.valueChanged), for: .valueChanged)
 		accessoryView = switchView
@@ -37,5 +43,13 @@ public class SwitchCell: UITableViewCell {
 		SwiftyFormLog("set value \(value), animated \(animated)")
 		switchView.setOn(value, animated: animated)
 	}
+    
+    public func assignDefaultColors() {
+        textLabel?.textColor = model.titleTextColor
+    }
+    
+    public func assignTintColors() {
+        textLabel?.textColor = tintColor
+    }
 
 }

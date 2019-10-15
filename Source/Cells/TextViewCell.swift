@@ -13,13 +13,17 @@ public struct TextViewCellModel {
 	var title: String = ""
 	var placeholder: String = ""
 	var toolbarMode: ToolbarMode = .simple
+    var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    var titleTextColor: UIColor = Colors.text
+    var placeholderTextColor: UIColor = Colors.secondaryText
 
 	var valueDidChange: (String) -> Void = { (value: String) in
 		SwiftyFormLog("value \(value)")
 	}
 }
 
-public class TextViewCell: UITableViewCell {
+public class TextViewCell: UITableViewCell, AssignAppearance {
+    
 	public let titleLabel = UILabel()
 	public let placeholderLabel = UILabel()
 	public let textView = UITextView()
@@ -34,11 +38,11 @@ public class TextViewCell: UITableViewCell {
 		titleLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 
 		placeholderLabel.text = model.placeholder
-		placeholderLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        placeholderLabel.textColor = Colors.secondaryText
+        placeholderLabel.font = model.titleFont
+        placeholderLabel.textColor = model.placeholderTextColor
 
-		textView.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        textView.textColor = Colors.text
+        textView.font = model.titleFont
+        textView.textColor = model.titleTextColor
 		textView.backgroundColor = UIColor.clear
 		textView.isScrollEnabled = false
 		textView.delegate = self
@@ -208,6 +212,15 @@ public class TextViewCell: UITableViewCell {
 	public override func resignFirstResponder() -> Bool {
 		textView.resignFirstResponder()
 	}
+    
+    public func assignDefaultColors() {
+        textView.textColor = model.titleTextColor
+    }
+    
+    public func assignTintColors() {
+        textView.textColor = tintColor
+    }
+    
 }
 
 extension TextViewCell: UITextViewDelegate {

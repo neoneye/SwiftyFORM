@@ -1,18 +1,21 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
-public class StaticTextFormItem: FormItem {
+public class StaticTextFormItem: FormItem, CustomizableLabels {
+    
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
 
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    
+    public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+    
+    public var titleTextColor: UIColor = Colors.text
+    
+    public var detailTextColor: UIColor = Colors.secondaryText
 
 	typealias SyncBlock = (_ value: String) -> Void
 	var syncCellWithValue: SyncBlock = { (string: String) in

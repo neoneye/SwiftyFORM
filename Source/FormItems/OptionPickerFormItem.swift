@@ -15,7 +15,7 @@ public class OptionRowModel: CustomStringConvertible {
 	}
 }
 
-public class OptionPickerFormItem: FormItem {
+public class OptionPickerFormItem: FormItem, CustomizableLabels {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
@@ -29,45 +29,15 @@ public class OptionPickerFormItem: FormItem {
 	}
 
 	public var title: String = ""
-
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
     
     public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
     
-    @discardableResult
-    public func titleFont(_ titleFont: UIFont) -> Self {
-        self.titleFont = titleFont
-        return self
-    }
-    
     public var titleTextColor: UIColor = Colors.text
-    
-    @discardableResult
-    public func titleTextColor(_ titleTextColor: UIColor) -> Self {
-        self.titleTextColor = titleTextColor
-        return self
-    }
     
     public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
     
-    @discardableResult
-    public func detailFont(_ detailFont: UIFont) -> Self {
-        self.detailFont = detailFont
-        return self
-    }
+    public var detailTextColor: UIColor = Colors.secondaryText
     
-    public var detailTextColor: UIColor = Colors.text
-    
-    @discardableResult
-    public func detailTextColor(_ detailTextColor: UIColor) -> Self {
-        self.detailTextColor = detailTextColor
-        return self
-    }
-
 	public var options = [OptionRowModel]()
 
 	@discardableResult
@@ -121,36 +91,19 @@ public class OptionPickerFormItem: FormItem {
 	}
 }
 
-public class OptionRowFormItem: FormItem {
+public class OptionRowFormItem: FormItem, CustomizableTitleLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
     
-    @discardableResult
-    public func title(_ title: String) -> Self {
-        self.title = title
-        return self
-    }
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
     
-    public var font: UIFont = .preferredFont(forTextStyle: .body)
-    
-    @discardableResult
-    public func font(_ font: UIFont) -> Self {
-        self.font = font
-        return self
-    }
-    
-    public var textColor: UIColor = Colors.text
-    
-    @discardableResult
-    public func textColor(_ textColor: UIColor) -> Self {
-        self.textColor = textColor
-        return self
-    }
+    public var titleTextColor: UIColor = Colors.text
 
 	public var selected: Bool = false
 
 	public var context: AnyObject?
+    
 }

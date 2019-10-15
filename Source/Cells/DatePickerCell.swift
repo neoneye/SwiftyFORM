@@ -18,9 +18,9 @@ public class DatePickerCellModel {
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCell.SelectionStyle.default
     var titleFont = UIFont.preferredFont(forTextStyle: .body)
-    var dateFont = UIFont.preferredFont(forTextStyle: .body)
+    var detailFont = UIFont.preferredFont(forTextStyle: .body)
     var titleTextColor = Colors.text
-    var dateTextColor = Colors.secondaryText
+    var detailTextColor = Colors.secondaryText
 
 	var valueDidChange: (Date) -> Void = { (date: Date) in
 		SwiftyFormLog("date \(date)")
@@ -39,11 +39,9 @@ public class DatePickerCellModel {
 This causes the inline date picker to expand/collapse
 */
 public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontCollapseWhenScrolling, AssignAppearance {
+    
 	weak var expandedCell: DatePickerExpandedCell?
 	public let model: DatePickerCellModel
-    
-    public let titleTextColor: UIColor
-    public let dateTextColor: UIColor
 
 	public init(model: DatePickerCellModel) {
 		/*
@@ -60,17 +58,12 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		assert(model.datePickerMode != .countDownTimer, "CountDownTimer is not supported")
 
 		self.model = model
-        self.titleTextColor = model.titleTextColor
-        self.dateTextColor = model.dateTextColor
 		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
         textLabel?.font = model.titleFont
-        textLabel?.textColor = model.titleTextColor
         detailTextLabel?.font = model.dateFont
-        detailTextLabel?.textColor = model.dateTextColor
         
-    
 		updateValue()
 
 		assignDefaultColors()
@@ -227,8 +220,8 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	// MARK: AssignAppearance
 
 	public func assignDefaultColors() {
-        textLabel?.textColor = titleTextColor
-        detailTextLabel?.textColor = dateTextColor
+        textLabel?.textColor = model.titleTextColor
+        detailTextLabel?.textColor = model.detailTextColor
 	}
 
 	public func assignTintColors() {

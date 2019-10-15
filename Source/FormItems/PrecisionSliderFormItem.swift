@@ -1,5 +1,5 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
 /**
 # Inline precision slider
@@ -15,19 +15,22 @@ import Foundation
 Behind the scenes this creates a `PrecisionSlider`. This is not a standard Apple control.
 Please contact Simon Strandgaard if you have questions regarding it.
 */
-public class PrecisionSliderFormItem: FormItem {
+public class PrecisionSliderFormItem: FormItem, CustomizableLabels {
+    
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
 
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
     
+    public var titleTextColor: UIColor = Colors.text
+
+    public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+
+    public var detailTextColor: UIColor = Colors.secondaryText
+
     /**
      ## Prefix
      

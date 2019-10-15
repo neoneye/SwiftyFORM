@@ -114,8 +114,8 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.action = object.action
         model.textAlignment = object.textAlignment
-        model.font = object.font
-        model.textColor = object.textColor
+        model.font = object.titleFont
+        model.textColor = object.titleTextColor
 		let cell = ButtonCell(model: model)
 		cells.append(cell)
 		lastItemType = .item
@@ -156,8 +156,8 @@ class PopulateTableView: FormItemVisitor {
 		model.date = object.value
         model.titleFont = object.titleFont
         model.titleTextColor = object.titleTextColor
-        model.dateFont = object.dateFont
-        model.dateTextColor = object.dateTextColor
+        model.dateFont = object.detailFont
+        model.dateTextColor = object.detailTextColor
 
 		switch object.behavior {
 		case .collapsed, .expanded:

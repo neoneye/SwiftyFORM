@@ -1,7 +1,8 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class TextFieldFormItem: FormItem {
+public class TextFieldFormItem: FormItem, CustomizableLabels {
+    
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
@@ -88,11 +89,17 @@ public class TextFieldFormItem: FormItem {
 
 	public var title: String = ""
 
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    
+    public var titleTextColor: UIColor = Colors.text
+    
+    public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+       
+    public var detailTextColor: UIColor = Colors.secondaryText
+    
+    public var errorFont: UIFont = .preferredFont(forTextStyle: .caption2)
+       
+    public var errorTextColor: UIColor = UIColor.red
 
 	@discardableResult
 	public func password() -> Self {

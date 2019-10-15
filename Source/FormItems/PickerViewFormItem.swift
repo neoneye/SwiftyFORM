@@ -8,34 +8,21 @@ import UIKit
 
 Behind the scenes this creates a `UIPickerView`.
 */
-public class PickerViewFormItem: FormItem {
+public class PickerViewFormItem: FormItem, CustomizableLabels {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
-
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
     
     public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
 
-    @discardableResult
-    public func titleFont(_ titleFont: UIFont) -> Self {
-        self.titleFont = titleFont
-        return self
-    }
-    
     public var titleTextColor: UIColor = Colors.text
+    
+    public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
 
-    @discardableResult
-    public func titleTextColor(_ titleTextColor: UIColor) -> Self {
-        self.titleTextColor = titleTextColor
-        return self
-    }
+    public var detailTextColor: UIColor = Colors.secondaryText
+
 
 	/**
 	### Collapsed

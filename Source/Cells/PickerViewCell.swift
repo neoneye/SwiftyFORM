@@ -13,6 +13,8 @@ public class PickerViewCellModel {
 	var selectionStyle = UITableViewCell.SelectionStyle.default
     var titleFont: UIFont = .preferredFont(forTextStyle: .body)
     var titleTextColor: UIColor = Colors.text
+    var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+    var detailTextColor: UIColor = Colors.secondaryText
 
 	var titles = [[String]]()
 	var value = [Int]()
@@ -49,7 +51,7 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
         textLabel?.font = model.titleFont
-        textLabel?.textColor = model.titleTextColor
+        detailTextLabel?.font = model.detailFont
 
 		updateValue()
 
@@ -166,8 +168,8 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 	// MARK: AssignAppearance
 
 	public func assignDefaultColors() {
-        textLabel?.textColor = Colors.text
-        detailTextLabel?.textColor = Colors.secondaryText
+        textLabel?.textColor = model.titleTextColor
+        detailTextLabel?.textColor = model.detailTextColor
 	}
 
 	public func assignTintColors() {

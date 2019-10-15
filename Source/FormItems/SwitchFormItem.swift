@@ -1,18 +1,17 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
-public class SwitchFormItem: FormItem {
+public class SwitchFormItem: FormItem, CustomizableTitleLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
 
 	public var title: String = ""
-
-	@discardableResult
-	public func title(_ title: String) -> Self {
-		self.title = title
-		return self
-	}
+    
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    
+    public var titleTextColor: UIColor = Colors.text
+	
 
 	public typealias SyncBlock = (_ value: Bool, _ animated: Bool) -> Void
 	public var syncCellWithValue: SyncBlock = { (value: Bool, animated: Bool) in
