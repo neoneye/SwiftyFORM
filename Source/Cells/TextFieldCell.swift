@@ -17,18 +17,11 @@ public enum TextCellState {
 	case persistentMessage(message: String)
 }
 
-public class TextFieldFormItemCellSizes {
+public struct TextFieldFormItemCellSizes {
 	public let titleLabelFrame: CGRect
 	public let textFieldFrame: CGRect
 	public let errorLabelFrame: CGRect
 	public let cellHeight: CGFloat
-
-	public init(titleLabelFrame: CGRect, textFieldFrame: CGRect, errorLabelFrame: CGRect, cellHeight: CGFloat) {
-		self.titleLabelFrame = titleLabelFrame
-		self.textFieldFrame = textFieldFrame
-		self.errorLabelFrame = errorLabelFrame
-		self.cellHeight = cellHeight
-	}
 }
 
 public struct TextFieldFormItemCellModel {
@@ -90,7 +83,11 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 		textField.delegate = self
 
 		textField.addTarget(self, action: #selector(TextFieldFormItemCell.valueDidChange), for: UIControl.Event.editingChanged)
-
+        
+        if #available(iOS 11, *) {
+            contentView.insetsLayoutMarginsFromSafeArea = true
+        }
+        
 		contentView.addSubview(titleLabel)
 		contentView.addSubview(textField)
 		contentView.addSubview(errorLabel)
@@ -181,7 +178,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 	public var titleWidthMode: TitleWidthMode = .auto
 
 	public func compute() -> TextFieldFormItemCellSizes {
-		let cellWidth: CGFloat = bounds.width
+        let cellWidth: CGFloat = contentView.bounds.width
 
 		var titleLabelFrame = CGRect.zero
 		var textFieldFrame = CGRect.zero
@@ -189,10 +186,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 		var cellHeight: CGFloat = 0
 		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
 
-        var layoutMargins = self.layoutMargins
-        if #available(iOS 11, *) {
-            layoutMargins = self.safeAreaInsets
-        }
+        var layoutMargins = contentView.layoutMargins
 		layoutMargins.top = 0
 		layoutMargins.bottom = 0
 		let area = veryTallCell.inset(by: layoutMargins)
@@ -239,7 +233,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 		super.layoutSubviews()
 		//SwiftyFormLog("layoutSubviews")
 		let sizes: TextFieldFormItemCellSizes = compute()
-		titleLabel.frame = sizes.titleLabelFrame
+        titleLabel.frame = sizes.titleLabelFrame
 		textField.frame = sizes.textFieldFrame
 		errorLabel.frame = sizes.errorLabelFrame
 	}

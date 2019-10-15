@@ -51,6 +51,10 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 		if model.toolbarMode == .simple {
 			textView.inputAccessoryView = toolbar
 		}
+        
+        if #available(iOS 11, *) {
+            contentView.insetsLayoutMarginsFromSafeArea = true
+        }
 
 		contentView.addSubview(textView)
 		contentView.addSubview(titleLabel)
@@ -135,7 +139,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 	}
 
 	public func compute() -> TextViewFormItemCellSizes {
-		let cellWidth: CGFloat = bounds.width
+        let cellWidth: CGFloat = contentView.bounds.width
 
 		var titleLabelFrame = CGRect.zero
 		var placeholderLabelFrame = CGRect.zero
@@ -144,7 +148,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 		var maxY: CGFloat = 0
 		var veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
 
-		var layoutMargins = self.layoutMargins
+		var layoutMargins = contentView.layoutMargins
 		layoutMargins.top = 0
 		layoutMargins.bottom = 0
 		veryTallCell = veryTallCell.inset(by: layoutMargins)
@@ -172,7 +176,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 			let availableSize = veryTallCell.size
 			let size = textView.sizeThatFits(availableSize)
 			(slice, remainder) = bottomRemainder.divided(atDistance: size.height, from: .minYEdge)
-			textViewFrame = CGRect(x: bounds.minX, y: slice.minY, width: bounds.width, height: slice.height)
+            textViewFrame = CGRect(x: contentView.bounds.minX, y: slice.minY, width: contentView.bounds.width, height: slice.height)
 		}
 		maxY = max(textViewFrame.maxY, maxY)
 
@@ -193,10 +197,11 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 		placeholderLabel.frame = sizes.placeholderLabelFrame
 		textView.frame = sizes.textViewFrame
 
-		var textViewInset = self.layoutMargins
+		var textViewInset = contentView.layoutMargins
 		textViewInset.top = 5
 		textViewInset.bottom = 10
 		textView.textContainerInset = textViewInset
+    
 	}
 
 	// MARK: UIResponder
@@ -235,10 +240,12 @@ extension TextViewCell: UITextViewDelegate {
 }
 
 extension TextViewCell: CellHeightProvider {
+    
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute()
 		let value = sizes.cellHeight
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
+    
 }
