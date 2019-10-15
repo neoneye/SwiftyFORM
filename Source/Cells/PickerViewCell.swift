@@ -11,6 +11,8 @@ public class PickerViewCellModel {
 	var title: String = ""
 	var expandCollapseWhenSelectingRow = true
 	var selectionStyle = UITableViewCell.SelectionStyle.default
+    var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    var titleTextColor: UIColor = Colors.text
 
 	var titles = [[String]]()
 	var value = [Int]()
@@ -46,6 +48,8 @@ public class PickerViewToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
+        textLabel?.font = model.titleFont
+        textLabel?.textColor = model.titleTextColor
 
 		updateValue()
 

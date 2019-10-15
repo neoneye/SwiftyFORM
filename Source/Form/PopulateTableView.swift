@@ -113,6 +113,9 @@ class PopulateTableView: FormItemVisitor {
 		var model = ButtonCellModel()
 		model.title = object.title
 		model.action = object.action
+        model.textAlignment = object.textAlignment
+        model.font = object.font
+        model.textColor = object.textColor
 		let cell = ButtonCell(model: model)
 		cells.append(cell)
 		lastItemType = .item
@@ -151,6 +154,10 @@ class PopulateTableView: FormItemVisitor {
 		model.maximumDate = object.maximumDate
 		model.minuteInterval = object.minuteInterval
 		model.date = object.value
+        model.titleFont = object.titleFont
+        model.titleTextColor = object.titleTextColor
+        model.dateFont = object.dateFont
+        model.dateTextColor = object.dateTextColor
 
 		switch object.behavior {
 		case .collapsed, .expanded:
@@ -213,6 +220,10 @@ class PopulateTableView: FormItemVisitor {
 		model.placeholder = object.placeholder
 		model.optionField = object
 		model.selectedOptionRow = object.selected
+        model.titleFont = object.titleFont
+        model.titleTextColor = object.titleTextColor
+        model.detailFont = object.detailFont
+        model.detailTextColor = object.detailTextColor
 
 		weak var weakObject = object
 		model.valueDidChange = { (value: OptionRowModel?) in
@@ -660,6 +671,8 @@ class PopulateTableView: FormItemVisitor {
 		model.title = object.title
 		model.value = object.value
 		model.titles = object.pickerTitles
+        model.titleFont = object.titleFont
+        model.titleTextColor = object.titleTextColor
 		model.humanReadableValueSeparator = object.humanReadableValueSeparator
 
 		switch object.behavior {

@@ -121,7 +121,7 @@ class SignUpViewController: FormViewController {
 			self?.randomize()
 		}
 		return instance
-		}()
+    }()
 
 	func pickRandom(_ strings: [String]) -> String {
 		if strings.count == 0 {

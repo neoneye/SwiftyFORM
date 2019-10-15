@@ -4,6 +4,10 @@ import UIKit
 public struct OptionViewControllerCellModel {
 	var title: String = ""
 	var placeholder: String = ""
+    var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+    var detailFont: UIFont = .preferredFont(forTextStyle: .body)
+    var titleTextColor: UIColor = Colors.text
+    var detailTextColor: UIColor = Colors.secondaryText
 	var optionField: OptionPickerFormItem?
 	var selectedOptionRow: OptionRowModel?
 
@@ -24,6 +28,10 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 		super.init(style: .value1, reuseIdentifier: nil)
 		accessoryType = .disclosureIndicator
 		textLabel?.text = model.title
+        textLabel?.font = model.titleFont
+        textLabel?.textColor = model.titleTextColor
+        detailTextLabel?.font = model.detailFont
+        detailTextLabel?.textColor = model.detailTextColor
 		updateValue()
 	}
 
@@ -92,4 +100,5 @@ public class OptionViewControllerCell: UITableViewCell, SelectRowDelegate {
 
 		SwiftyFormLog("did invoke")
 	}
+    
 }

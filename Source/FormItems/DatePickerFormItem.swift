@@ -1,5 +1,5 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
 public enum DatePickerFormItemMode {
 	case time
@@ -99,6 +99,12 @@ public class DatePickerFormItem: FormItem {
 	public var minimumDate: Date? // specify min/max date range. default is nil. When min > max, the values are ignored. Ignored in countdown timer mode
 	public var maximumDate: Date? // default is nil
 	public var minuteInterval: Int = 1
+    
+    public var titleFont = UIFont.preferredFont(forTextStyle: .body)
+    public var dateFont = UIFont.preferredFont(forTextStyle: .body)
+    
+    public var titleTextColor = Colors.text
+    public var dateTextColor = Colors.secondaryText
 
 	public typealias ValueDidChangeBlock = (_ value: Date) -> Void
 	public var valueDidChangeBlock: ValueDidChangeBlock = { (value: Date) in

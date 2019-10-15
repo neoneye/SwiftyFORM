@@ -16,6 +16,8 @@ public class OptionCell: UITableViewCell, SelectRowDelegate {
 
 	public func loadWithModel(_ model: OptionRowFormItem) {
 		textLabel?.text = model.title
+        textLabel?.font = model.font
+        textLabel?.textColor = model.textColor
 		if model.selected {
 			accessoryType = .checkmark
 		} else {

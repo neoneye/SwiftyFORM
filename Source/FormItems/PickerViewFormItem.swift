@@ -1,5 +1,5 @@
 // MIT license. Copyright (c) 2018 SwiftyFORM. All rights reserved.
-import Foundation
+import UIKit
 
 /**
 # Inline picker view
@@ -20,6 +20,22 @@ public class PickerViewFormItem: FormItem {
 		self.title = title
 		return self
 	}
+    
+    public var titleFont: UIFont = .preferredFont(forTextStyle: .body)
+
+    @discardableResult
+    public func titleFont(_ titleFont: UIFont) -> Self {
+        self.titleFont = titleFont
+        return self
+    }
+    
+    public var titleTextColor: UIColor = Colors.text
+
+    @discardableResult
+    public func titleTextColor(_ titleTextColor: UIColor) -> Self {
+        self.titleTextColor = titleTextColor
+        return self
+    }
 
 	/**
 	### Collapsed
