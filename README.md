@@ -218,7 +218,7 @@ With Swift Package Manager support in the latest Xcode, installation has never b
 
 Open your Xcode project -> `File` -> `Swift Packages` -> `Add Package Dependency...`
 
-Search for `SwiftyFORM` and specify the version you want. The lastest tagged release is usually a good idea.
+Search for `SwiftyFORM` and specify the version you want. The latest tagged release is usually a good idea.
 
 ## CocoaPods
 
