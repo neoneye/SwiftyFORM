@@ -28,6 +28,10 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 	public let placeholderLabel = UILabel()
 	public let textView = UITextView()
 	public let model: TextViewCellModel
+    
+    /// keeps track of the last frame change, so we can reload the tableview if needed to get an accurate height for this cell
+    private var reloadIndexPath: IndexPath?
+    private var lastTextViewFrame: CGRect?
 
 	public init(model: TextViewCellModel) {
 		self.model = model
@@ -196,6 +200,16 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 		titleLabel.frame = sizes.titleLabelFrame
 		placeholderLabel.frame = sizes.placeholderLabelFrame
 		textView.frame = sizes.textViewFrame
+        
+        // if there was a rotation, reload the row again to ensure we get the correct height
+        if let priorFrame = lastTextViewFrame,
+            priorFrame.width != textView.frame.width,
+            let indexPath = reloadIndexPath {
+            form_tableView()?.reloadRows(at: [indexPath], with: .none)
+            reloadIndexPath = nil
+        }
+        
+        lastTextViewFrame = textView.frame
 
 		var textViewInset = contentView.layoutMargins
 		textViewInset.top = 5
@@ -244,6 +258,7 @@ extension TextViewCell: CellHeightProvider {
 	public func form_cellHeight(indexPath: IndexPath, tableView: UITableView) -> CGFloat {
 		let sizes: TextViewFormItemCellSizes = compute()
 		let value = sizes.cellHeight
+        reloadIndexPath = indexPath
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
