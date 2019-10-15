@@ -119,7 +119,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	}
 
 	public func form_didSelectRow(indexPath: IndexPath, tableView: UITableView) {
-		if model.expandCollapseWhenSelectingRow == false {
+		guard model.expandCollapseWhenSelectingRow else {
 			//print("cell is always expanded")
 			return
 		}
@@ -136,10 +136,7 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
 	// MARK: UIResponder
 
 	public override var canBecomeFirstResponder: Bool {
-		if model.expandCollapseWhenSelectingRow == false {
-			return false
-		}
-		return true
+		model.expandCollapseWhenSelectingRow
 	}
 
 	public override func becomeFirstResponder() -> Bool {
