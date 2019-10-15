@@ -8,16 +8,23 @@ SwiftyFORM
 
 ---
 
+<p align="center">
+
 [![Build Status](https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master)](https://travis-ci.org/neoneye/SwiftyFORM)
 [![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![License](https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
+<a href="https://swift.org/package-manager">
+    <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
+</a>
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 **SwiftyFORM is an iOS framework for creating forms.**
 
 ![Screenshot of the demo app](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/light_and_dark1.png "Screenshot of the demo app")
+
+</p>
 
 Because form code is hard to write, hard to read, hard to reason about. Has a slow turn around time. Is painful to maintain.
 
