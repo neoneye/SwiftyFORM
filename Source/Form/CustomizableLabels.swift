@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CustomizableTitleLabel {
+public protocol CustomizableTitleLabel {
     var title: String { get set }
     var titleFont: UIFont { get set }
     var titleTextColor: UIColor { get set }
@@ -15,45 +15,50 @@ protocol CustomizableTitleLabel {
 
 typealias CustomizableLabels = CustomizableTitleLabel & CustomizableDetailLabel
 
-extension CustomizableTitleLabel {
+public extension CustomizableTitleLabel where Self: FormItem {
     
     @discardableResult
-    public mutating func title(_ title: String) -> Self {
-        self.title = title
-        return self
+    func title(_ title: String) -> Self {
+        var instance = self
+        instance.title = title
+        return instance
     }
     
     @discardableResult
-    public mutating func titleFont(_ titleFont: UIFont) -> Self {
-        self.titleFont = titleFont
-        return self
+    func titleFont(_ titleFont: UIFont) -> Self {
+        var instance = self
+        instance.titleFont = titleFont
+        return instance
     }
     
     @discardableResult
-    public mutating func titleTextColor(_ titleTextColor: UIColor) -> Self {
-        self.titleTextColor = titleTextColor
-        return self
+    func titleTextColor(_ titleTextColor: UIColor) -> Self {
+        var instance = self
+        instance.titleTextColor = titleTextColor
+        return instance
     }
     
 }
 
-protocol CustomizableDetailLabel {
+public protocol CustomizableDetailLabel {
     var detailFont: UIFont { get set }
     var detailTextColor: UIColor { get set }
 }
 
-extension CustomizableDetailLabel {
+public extension CustomizableDetailLabel where Self: FormItem {
     
     @discardableResult
-    public mutating func detailFont(_ detailFont: UIFont) -> Self {
-        self.detailFont = detailFont
-        return self
+    func detailFont(_ detailFont: UIFont) -> Self {
+        var instance = self
+        instance.detailFont = detailFont
+        return instance
     }
     
     @discardableResult
-    public mutating func detailTextColor(_ detailTextColor: UIColor) -> Self {
-        self.detailTextColor = detailTextColor
-        return self
+    func detailTextColor(_ detailTextColor: UIColor) -> Self {
+        var instance = self
+        instance.detailTextColor = detailTextColor
+        return instance
     }
     
 }
