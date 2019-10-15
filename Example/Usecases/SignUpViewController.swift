@@ -127,27 +127,22 @@ class SignUpViewController: FormViewController {
 		if strings.count == 0 {
 			return ""
 		}
-		let i = randomInt(0, strings.count - 1)
+        let i = Int.random(in: 0..<strings.count)
 		return strings[i]
 	}
 
 	func pickRandomDate() -> Date {
-		let i = randomInt(20, 60)
+        let i = Int.random(in: 20...60)
 		let today = Date()
 		return offsetDate(today, years: -i)
 	}
-
-	func pickRandomBoolean() -> Bool {
-		let i = randomInt(0, 1)
-		return i == 0
-	}
-
+    
 	func randomize() {
 		userName.value = pickRandom(["john", "jane", "steve", "bill", "einstein", "newton"])
 		password.value = pickRandom(["1234", "0000", "111111", "abc", "111122223333"])
 		email.value = pickRandom(["hello@example.com", "hi@example.com", "feedback@example.com", "unsubscribe@example.com", "not-a-valid-email"])
 		birthday.value = pickRandomDate()
-		subscribeToNewsletter.value = pickRandomBoolean()
+		subscribeToNewsletter.value = Bool.random()
 	}
 
 	lazy var jsonButton: ButtonFormItem = {
@@ -159,6 +154,6 @@ class SignUpViewController: FormViewController {
 			}
 		}
 		return instance
-		}()
+    }()
 
 }

@@ -79,7 +79,7 @@ class SegmentedControlsViewController: FormViewController {
 	func assignRandomValue(_ formItem: SegmentedControlFormItem) {
 		let count = formItem.items.count
 		if count > 0 {
-			formItem.selected = randomInt(0, count - 1)
+			formItem.selected = Int.random(in: 0..<count-1)
 		}
 	}
 

@@ -68,7 +68,7 @@ class PickerViewViewController: FormViewController {
 		var selectedRows = [Int]()
 		for rows in pickerView.pickerTitles {
 			if rows.count > 0 {
-				selectedRows.append(randomInt(0, rows.count-1))
+				selectedRows.append(Int.random(in: 0..<rows.count))
 			} else {
 				selectedRows.append(-1)
 			}

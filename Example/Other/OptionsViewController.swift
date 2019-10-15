@@ -76,7 +76,7 @@ class OptionsViewController: FormViewController {
 		var selected: OptionRowModel? = nil
 		let options = optionField.options
 		if options.count > 0 {
-			let i = randomInt(0, options.count)
+			let i = Int.random(in: 0..<options.count)
 			if i < options.count {
 				selected = options[i]
 			}

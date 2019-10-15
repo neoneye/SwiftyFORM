@@ -87,7 +87,7 @@ class ColorPickerViewController: FormViewController {
 	}()
 
 	func assignRandomValue(_ formItem: PrecisionSliderFormItem) {
-		formItem.value = randomInt(0, 1000)
+        formItem.value = Int.random(in: 0...1000)
 	}
 
 	func randomize() {

@@ -62,7 +62,7 @@ class TextViewViewController: FormViewController {
 		if strings.count == 0 {
 			return ""
 		}
-		let i = randomInt(0, strings.count - 1)
+        let i = Int.random(in: 0..<strings.count)
 		return strings[i]
 	}
 
