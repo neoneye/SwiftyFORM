@@ -9,26 +9,32 @@ SwiftyFORM
 ---
 
 <p align="center">
-
-[![Build Status](https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master)](https://travis-ci.org/neoneye/SwiftyFORM)
-[![Version](https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
-[![Platform](https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
-<a href="https://swift.org/package-manager">
-    <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
-</a>
-<a href="https://github.com/Carthage/Carthage">
-    <img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="Carthage" />
-</a>
-[![License](https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat)](http://cocoapods.org/pods/SwiftyFORM)
-
+    <a href="https://travis-ci.org/neoneye/SwiftyFORM">
+        <img src="https://travis-ci.org/neoneye/SwiftyFORM.svg?branch=master" alt="Build Status" />
+    </a>
+    <a href="http://cocoapods.org/pods/SwiftyFORM">
+        <img src="https://img.shields.io/cocoapods/v/SwiftyFORM.svg?style=flat" alt="Version" />
+    </a>
+    <a href="http://cocoapods.org/pods/SwiftyFORM">
+        <img src="https://img.shields.io/cocoapods/p/SwiftyFORM.svg?style=flat" alt="Platform" />
+    </a>
+    <a href="https://swift.org/package-manager">
+        <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager" />
+    </a>
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat" alt="Carthage" />
+    </a>
+    <a href="http://cocoapods.org/pods/SwiftyFORM">
+        <img src="https://img.shields.io/cocoapods/l/SwiftyFORM.svg?style=flat" alt="MIT License" />
+    </a>
 </p>
 
 <p align="center">
-**SwiftyFORM is a lightweight iOS framework for creating forms.**
+    <b>SwiftyFORM is a lightweight iOS framework for creating forms</b>
 </p>
 
 <p align="center">
-<img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/light_and_dark1.png" alt="Dark Mode supported" /> 
+    <img src="https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/light_and_dark1.png" alt="Dark Mode supported" /> 
 </p>
 
 
