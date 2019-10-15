@@ -30,9 +30,9 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 
 ## Requirements
 
-- iOS 13
-- Xcode 11
-- Swift 5
+- iOS 9+
+- Xcode 11+
+- Swift 5.1+
 
 
 ## Features
