@@ -62,7 +62,7 @@ public class DatePickerToggleCell: UITableViewCell, SelectRowDelegate, DontColla
 		selectionStyle = model.selectionStyle
 		textLabel?.text = model.title
         textLabel?.font = model.titleFont
-        detailTextLabel?.font = model.dateFont
+        detailTextLabel?.font = model.detailFont
         
 		updateValue()
 
