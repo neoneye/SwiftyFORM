@@ -212,6 +212,14 @@ class ChangePasswordViewController: FormViewController {
 
 # INSTALLATION
 
+## Swift Package Manager (Xcode 11+)
+
+With Swift Package Manager support in the latest Xcode, installation has never been easier.
+
+Open your Xcode project -> `File` -> `Swift Packages` -> `Add Package Dependency...`
+
+Search for `SwiftyFORM` and specify the version you want. The lastest tagged release is usually a good idea.
+
 ## CocoaPods
 
 [Link to demo project that shows a minimal SwiftyFORM app using CocoaPods](https://github.com/neoneye/SwiftyFORM-Examples).
