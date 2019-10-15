@@ -210,10 +210,10 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
         // if there is a mismatch between what the table thinks and what we display, reload to get accurate height
         if believedHeight != sizes.cellHeight,
             let indexPath = reloadIndexPath {
-            form_tableView()?.reloadRows(at: [indexPath], with: .none)
-            // only if it has changed make it nil
-            if textView.frame.height == believedHeight {
-                reloadIndexPath = nil
+            if believedHeight == 0 {
+                believedHeight = sizes.cellHeight
+            } else {
+                form_tableView()?.reloadRows(at: [indexPath], with: .none)
             }
         }
 
@@ -249,6 +249,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 }
 
 extension TextViewCell: UITextViewDelegate {
+    
 	public func textViewDidBeginEditing(_ textView: UITextView) {
 		updateToolbarButtons()
 	}
@@ -269,13 +270,5 @@ extension TextViewCell: CellHeightProvider {
 		//SwiftyFormLog("compute height of row: \(value)")
 		return value
 	}
-    
-}
-
-extension TextViewCell: WillDisplayCellDelegate {
-    
-    public func form_willDisplay(tableView: UITableView, forRowAtIndexPath indexPath: IndexPath) {
-        layoutSubviews()
-    }
     
 }
