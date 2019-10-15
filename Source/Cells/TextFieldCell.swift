@@ -189,7 +189,10 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 		var cellHeight: CGFloat = 0
 		let veryTallCell = CGRect(x: 0, y: 0, width: cellWidth, height: CGFloat.greatestFiniteMagnitude)
 
-        var layoutMargins = self.safeAreaInsets
+        var layoutMargins = self.layoutMargins
+        if #available(iOS 11, *) {
+            layoutMargins = self.safeAreaInsets
+        }
 		layoutMargins.top = 0
 		layoutMargins.bottom = 0
 		let area = veryTallCell.inset(by: layoutMargins)
