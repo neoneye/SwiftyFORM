@@ -1,9 +1,4 @@
-//
-//  Colors.swift
-//
-//  Created by Bradley Mackey on 12/10/2019.
-//
-
+// MIT license. Copyright (c) 2019 SwiftyFORM. All rights reserved.
 import UIKit
 
 /// dynamic (light/dark) colors for iOS 13+

@@ -1,10 +1,4 @@
-//
-//  File.swift
-//  
-//
-//  Created by Bradley Mackey on 15/10/2019.
-//
-
+// MIT license. Copyright (c) 2019 SwiftyFORM. All rights reserved.
 import UIKit
 
 public protocol CustomizableTitleLabel {
