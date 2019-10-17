@@ -59,11 +59,7 @@ class TextViewViewController: FormViewController {
 		}()
 
 	func pickRandom(_ strings: [String]) -> String {
-		if strings.count == 0 {
-			return ""
-		}
-        let i = Int.random(in: 0..<strings.count)
-		return strings[i]
+        return strings.randomElement() ?? ""
 	}
 
 	func appendRandom(_ textView: TextViewFormItem, strings: [String]) {
