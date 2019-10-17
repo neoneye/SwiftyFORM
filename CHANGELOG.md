@@ -1,5 +1,15 @@
 ## 📄 Change Log
 
+### 1.8.1
+
+ * Contributions by Bradley Mackey. Thank you.
+ * TextFieldCell/TextViewCell improvements.
+   Better layout inside the safe area (iPhone X+).
+   More robust handling of orientation change.
+ * Extracted `CustomizableDetailLabel` and `CustomizableTitleLabel`,
+   for getter/setter functions shared across similar classes.
+
+
 ### 1.8.0
 
  * Dark mode support and much more. Contributed by Bradley Mackey. Thank you.
