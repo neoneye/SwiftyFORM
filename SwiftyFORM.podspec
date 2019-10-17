@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SwiftyFORM'
-  s.version = '1.8.0'
+  s.version = '1.8.1'
   s.license = 'MIT'
   s.summary = 'SwiftyFORM is an iOS framework for creating forms'
   s.homepage = 'https://github.com/neoneye/SwiftyFORM'
