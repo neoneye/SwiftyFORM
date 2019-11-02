@@ -22,8 +22,9 @@ public class PrecisionSliderFormItem: FormItem, CustomizableLabels {
 	}
     
     public enum Style {
+		/// User can use a pinch gesture to zoom in/out.
         case standard
-        /// always fully zoomed in, shows true values on the markers
+        /// Always fully zoomed in, shows true values on the markers
         case simple
     }
 
