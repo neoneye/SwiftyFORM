@@ -1,5 +1,11 @@
 ## 📄 Change Log
 
+### 1.8.2
+
+ * Contributions by Bradley Mackey. Thank you.
+   The PrecisionSliders have so far always had a pinch to zoom gesture.
+   Bradley have added a `simple` style, where pinch is disabled.
+
 ### 1.8.1
 
  * Contributions by Bradley Mackey. Thank you.
