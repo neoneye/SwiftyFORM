@@ -8,6 +8,28 @@ class PrecisionSlidersViewController: FormViewController {
 		builder.toolbarMode = .none
 		builder.demo_showInfo("Zoom can be adjusted\nusing a pinch gesture")
 
+		builder += SectionHeaderTitleFormItem().title("Slider Style")
+		do {
+			let slider = PrecisionSliderFormItem()
+			slider.decimalPlaces = 0
+			slider.minimumValue = -100
+			slider.maximumValue = 100
+			slider.value = 0
+			slider.title = "Standard - Pinch to zoom"
+			slider.style = .standard
+			builder += slider
+		}
+		do {
+			let slider = PrecisionSliderFormItem()
+			slider.decimalPlaces = 0
+			slider.minimumValue = -100
+			slider.maximumValue = 100
+			slider.value = 0
+			slider.title = "Simple - No pinch gesture"
+			slider.style = .simple
+			builder += slider
+		}
+
 		builder += SectionHeaderTitleFormItem().title("Zoom UI enabled")
 		builder += PrecisionSliderFormItem().decimalPlaces(0).minimumValue(0).maximumValue(255).value(127).title("A 0 255").enableZoomUI()
 		builder += PrecisionSliderFormItem().decimalPlaces(2).minimumValue(-100).maximumValue(100).value(25).title("B -1 1").enableZoomUI()
