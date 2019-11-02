@@ -18,6 +18,7 @@ public class PrecisionSliderCellModel {
     var detailTextColor: UIColor = Colors.secondaryText
     var prefix = ""
     var suffix = ""
+    var style = PrecisionSliderFormItem.Style.standard
 
 	public struct SliderDidChangeModel {
 		let value: Int
@@ -35,6 +36,7 @@ public class PrecisionSliderCellModel {
 		let decimalScale: Double = pow(Double(10), Double(decimalPlaces))
 		return Double(value) / decimalScale
 	}
+    
 }
 
 public struct PrecisionSliderCellFormatter {
@@ -72,10 +74,12 @@ public class PrecisionSliderToggleCell: UITableViewCell, CellHeightProvider, Sel
     
     let titleTextColor: UIColor
     let detailTextColor: UIColor
+    let style: PrecisionSliderFormItem.Style
 
 	public init(model: PrecisionSliderCellModel) {
         self.titleTextColor = model.titleTextColor
         self.detailTextColor = model.detailTextColor
+        self.style = model.style
 		self.model = model
 		super.init(style: .value1, reuseIdentifier: nil)
 		selectionStyle = model.selectionStyle
@@ -243,6 +247,9 @@ extension PrecisionSliderCellModel {
 		let instance = PrecisionSlider_InnerModel()
 		instance.originalMinimumValue = minimumValue
 		instance.originalMaximumValue = maximumValue
+        
+        // set the style
+        instance.style = style
 
 		let rangeLength = maximumValue - minimumValue
 
@@ -261,7 +268,7 @@ extension PrecisionSliderCellModel {
 		if let zoom = initialZoom {
 			instance.zoom = zoom
 		}
-
+        
 		// Determine how far zoom-out is possible
 		let maxZoomOutSliderWidth = Double(sliderWidth - Constants.maxZoomedOut_Inset)
 		if maxZoomOutSliderWidth > 10 && rangeLength > 0.001 {
@@ -272,6 +279,11 @@ extension PrecisionSliderCellModel {
 
 		// Determine how far zoom-in is possible
 		instance.maximumZoom = Float(log10(Constants.maxZoomedIn_DistanceBetweenMarks * decimalScale / markerSpacing))
+        // if simple, should be fully zoomed in
+        if style == .simple {
+            instance.zoom = instance.maximumZoom
+            instance.zoomMode = .none
+        }
 
 		// Prevent negative zoom-range
 		if instance.minimumZoom > instance.maximumZoom {
@@ -358,6 +370,7 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 
 		let sliderViewModel = model.sliderViewModel(sliderWidth: slider.bounds.width)
 		slider.model = sliderViewModel
+        slider.style = model.style
 		slider.layout.model = sliderViewModel
 		slider.reloadSlider()
 		slider.reloadZoomLabel()

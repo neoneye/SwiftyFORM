@@ -13,8 +13,14 @@ These gestures are available:
 
 */
 class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UIScrollViewDelegate, UIGestureRecognizerDelegate {
+    
 	var originalZoom: Float = 0
 	var originalValue: Double = 0
+    var style: PrecisionSliderFormItem.Style = .standard {
+        didSet {
+            model.style = style
+        }
+    }
 
 	var model = PrecisionSlider_InnerModel()
 
@@ -101,7 +107,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
     
     lazy var precisionPointView: UIView = {
         let instance = UIView()
-        instance.backgroundColor = Colors.text
+        instance.backgroundColor = Colors.text.withAlphaComponent(0.5)
         instance.isUserInteractionEnabled = false
         return instance
     }()
@@ -169,6 +175,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}
 
 	@objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        guard style == .standard else { return }
 		if gesture.state == .began {
 			originalZoom = model.zoom
 			originalValue = self.value
@@ -203,6 +210,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	@objc func handleOneTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom in")
+        guard style == .standard else { return }
 		let originalZoom = model.zoom
 		let originalValue = self.value
 
@@ -259,6 +267,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 
 	@objc func handleTwoTouchDoubleTap(_ gesture: UIPinchGestureRecognizer) {
 		SwiftyFormLog("zoom out")
+        guard style == .standard else { return }
 		let originalZoom = model.zoom
 		let originalValue = self.value
 
@@ -347,6 +356,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 
 	@objc func zoomInButtonAction() {
+        guard style == .standard else { return }
 		let originalZoom = model.zoom
 		let originalValue = self.value
 
@@ -383,6 +393,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	}()
 
 	@objc func zoomOutButtonAction() {
+        guard style == .standard else { return }
 		let originalZoom = model.zoom
 		let originalValue = self.value
 

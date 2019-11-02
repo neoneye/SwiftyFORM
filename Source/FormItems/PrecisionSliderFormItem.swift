@@ -20,6 +20,12 @@ public class PrecisionSliderFormItem: FormItem, CustomizableLabels {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
+    
+    public enum Style {
+        case standard
+        /// always fully zoomed in, shows true values on the markers
+        case simple
+    }
 
 	public var title: String = ""
 
@@ -30,6 +36,8 @@ public class PrecisionSliderFormItem: FormItem, CustomizableLabels {
     public var detailFont: UIFont = .preferredFont(forTextStyle: .body)
 
     public var detailTextColor: UIColor = Colors.secondaryText
+    
+    public var style: Style = .standard
 
     /**
      ## Prefix

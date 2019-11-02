@@ -9,6 +9,7 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		(originalMaximumValue - originalMinimumValue) / 2
 	}
 
+    var style: PrecisionSliderFormItem.Style = .standard
 	var minimumValue: Double = 0.0
 	var maximumValue: Double = 100.0
 
@@ -198,7 +199,13 @@ class PrecisionSlider_InnerModel: CustomDebugStringConvertible {
 		if hasPartialItemBefore {
 			index += 1
 		}
-		return zoomMode.markerText(index)
+        switch style {
+        case .simple:
+            return String(index)
+        case .standard:
+            return zoomMode.markerText(index)
+        }
+		
 	}
 
     let markMajorColor = Colors.text

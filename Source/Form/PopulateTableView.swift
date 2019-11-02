@@ -269,6 +269,7 @@ class PopulateTableView: FormItemVisitor {
 		model.decimalPlaces = object.decimalPlaces
 		model.minimumValue = object.minimumValue
 		model.maximumValue = object.maximumValue
+        model.style = object.style
 		model.value = object.value
 		model.title = object.title
 		model.initialZoom = object.initialZoom
