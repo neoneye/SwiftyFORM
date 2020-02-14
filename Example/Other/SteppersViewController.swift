@@ -16,13 +16,13 @@ class SteppersViewController: FormViewController {
 		let instance = StepperFormItem()
 		instance.title = "Number of Cats"
 		return instance
-		}()
+	}()
 
 	lazy var dogStepper: StepperFormItem = {
 		let instance = StepperFormItem()
 		instance.title = "Number of Dogs"
 		return instance
-		}()
+	}()
 
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -33,5 +33,5 @@ class SteppersViewController: FormViewController {
 			self?.form_simpleAlert("Submit", "There are \(catCount) cats and \(dogCount) dogs!")
 		}
 		return instance
-		}()
+	}()
 }

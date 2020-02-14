@@ -42,9 +42,7 @@ class SlidersViewController: FormViewController {
 		return instance
 	}()
 
-	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("Values").value("-")
-	}()
+	lazy var summary: StaticTextFormItem = StaticTextFormItem().title("Values").value("-")
 
 	func updateSummary() {
 		let s0 = String(format: "%.1f", slider0.value)

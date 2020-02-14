@@ -9,21 +9,21 @@ class DatePickerInitialValueViewController: FormViewController {
 		instance.datePickerMode = .time
 		instance.minuteInterval = 15
 		return instance
-		}()
+	}()
 
 	lazy var datePicker_date_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "Date"
 		instance.datePickerMode = .date
 		return instance
-		}()
+	}()
 
 	lazy var datePicker_dateAndTime_noValue: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
 		instance.title = "DateAndTime"
 		instance.datePickerMode = .dateAndTime
 		return instance
-		}()
+	}()
 
 	lazy var datePicker_time_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
@@ -32,7 +32,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		// 5 * 60 * 60 + 5 * 60 + 5 == 18305
 		instance.value = Date(timeIntervalSinceNow: 18305)
 		return instance
-		}()
+	}()
 
 	lazy var datePicker_date_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
@@ -41,7 +41,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		// 51 * 24 * 60 * 60 == 4406400
 		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
-		}()
+	}()
 
 	lazy var datePicker_dateAndTime_value: DatePickerFormItem = {
 		let instance = DatePickerFormItem()
@@ -50,7 +50,7 @@ class DatePickerInitialValueViewController: FormViewController {
 		// 51 * 24 * 60 * 60 == 4406400
 		instance.value = Date(timeIntervalSinceNow: 4406400)
 		return instance
-		}()
+	}()
 
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "DatePicker & Value"

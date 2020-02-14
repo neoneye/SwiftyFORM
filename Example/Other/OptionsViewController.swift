@@ -30,7 +30,7 @@ class OptionsViewController: FormViewController {
 			print("adopt bitcoin: \(String(describing: selected))")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var exploreSpace: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
@@ -41,7 +41,7 @@ class OptionsViewController: FormViewController {
 			print("explore space: \(String(describing: selected))")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var worldPeace: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
@@ -52,7 +52,7 @@ class OptionsViewController: FormViewController {
 			print("world peace: \(String(describing: selected))")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var stopGlobalWarming: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
@@ -67,7 +67,7 @@ class OptionsViewController: FormViewController {
 			print("stop global warming: \(String(describing: selected))")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -76,7 +76,7 @@ class OptionsViewController: FormViewController {
 			self?.randomize()
 		}
 		return instance
-		}()
+	}()
 
 	func assignRandomOption(_ optionField: OptionPickerFormItem) {
 		var selected: OptionRowModel? = nil

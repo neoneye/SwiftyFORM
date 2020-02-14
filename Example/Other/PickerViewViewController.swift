@@ -44,9 +44,7 @@ class PickerViewViewController: FormViewController {
 		return instance
 	}()
 
-	lazy var summary: StaticTextFormItem = {
-		return StaticTextFormItem().title("Values").value("-")
-	}()
+	lazy var summary: StaticTextFormItem = StaticTextFormItem().title("Values").value("-")
 
 	func updateSummary() {
 		let v0 = picker0.value

@@ -60,11 +60,7 @@ open class FormViewController: UIViewController {
 		super.viewDidDisappear(animated)
 	}
 
-	public lazy var formBuilder: FormBuilder = {
-		return FormBuilder()
-		}()
+	public lazy var formBuilder: FormBuilder = FormBuilder()
 
-	public lazy var tableView: FormTableView = {
-		return FormTableView()
-		}()
+	public lazy var tableView: FormTableView = FormTableView()
 }

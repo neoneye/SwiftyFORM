@@ -28,7 +28,7 @@ class ChangePasswordViewController: FormViewController {
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
-		}()
+	}()
 
 	lazy var passwordNew: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
@@ -39,7 +39,7 @@ class ChangePasswordViewController: FormViewController {
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
-		}()
+	}()
 
 	lazy var passwordNewRepeated: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
@@ -50,5 +50,5 @@ class ChangePasswordViewController: FormViewController {
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
-		}()
+	}()
 }

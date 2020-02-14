@@ -23,10 +23,7 @@ class ScientificSliderViewController: UIViewController {
 		focusView.removeGestureRecognizer(panGesture)
 	}
 
-	lazy var panGesture: UIPanGestureRecognizer = {
-		let instance = UIPanGestureRecognizer(target: self, action: #selector(ScientificSliderViewController.handlePan))
-		return instance
-	}()
+	lazy var panGesture: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(ScientificSliderViewController.handlePan))
 
 	lazy var focusView: UIView = {
 		let instance = UIView()

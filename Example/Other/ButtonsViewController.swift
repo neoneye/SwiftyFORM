@@ -19,7 +19,7 @@ class ButtonsViewController: FormViewController {
 			self?.form_simpleAlert("Button 0", "Button clicked")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var button1: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -28,7 +28,7 @@ class ButtonsViewController: FormViewController {
 			self?.form_simpleAlert("Button 1", "Button clicked")
 		}
 		return instance
-		}()
+	}()
 
 	lazy var button2: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -37,5 +37,5 @@ class ButtonsViewController: FormViewController {
 			self?.form_simpleAlert("Button 2", "Button clicked")
 		}
 		return instance
-		}()
+	}()
 }

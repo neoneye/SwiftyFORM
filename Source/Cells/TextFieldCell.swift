@@ -165,10 +165,7 @@ public class TextFieldFormItemCell: UITableViewCell, AssignAppearance {
 		textField.becomeFirstResponder()
 	}
 
-	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-		let gr = UITapGestureRecognizer(target: self, action: #selector(TextFieldFormItemCell.handleTap(_:)))
-		return gr
-    }()
+	public lazy var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TextFieldFormItemCell.handleTap(_:)))
 
 	public enum TitleWidthMode {
 		case auto

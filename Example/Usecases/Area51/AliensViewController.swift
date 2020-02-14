@@ -15,7 +15,7 @@ class AliensViewController: FormViewController {
 		let instance = StepperFormItem()
 		instance.title = "Alien encounters"
 		return instance
-		}()
+	}()
 
 	lazy var button0: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -26,6 +26,6 @@ class AliensViewController: FormViewController {
 			}
 		}
 		return instance
-		}()
+	}()
 
 }

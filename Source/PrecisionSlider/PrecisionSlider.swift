@@ -457,9 +457,7 @@ class PrecisionSlider: UIView, UICollectionViewDelegateFlowLayout, UICollectionV
 	The collectionview is wrapped in a plain UIView, that doesn't do anything.
 	This lets us install custom gesture recognizers for pinch and double-tap.
 	*/
-	lazy var collectionViewWrapper: UIView = {
-		UIView()
-	}()
+	lazy var collectionViewWrapper: UIView = UIView()
 
 	lazy var collectionView: UICollectionView = {
 		let instance = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)

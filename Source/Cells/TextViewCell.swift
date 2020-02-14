@@ -77,9 +77,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 		_ = self.becomeFirstResponder()
 	}
 
-	public lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-		UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
-    }()
+	public lazy var tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TextViewCell.handleTap(_:)))
     
     public override func prepareForReuse() {
         super.prepareForReuse()
@@ -106,7 +104,7 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 			}
 		}
 		return instance
-		}()
+	}()
 
 	public func updateToolbarButtons() {
 		if model.toolbarMode == .simple {

@@ -19,13 +19,13 @@ class RateAppViewController: FormViewController {
 		let instance = SliderFormItem()
 		instance.minimumValue(-100.0).maximumValue(100.0).value(0)
 		return instance
-		}()
+	}()
 
 	lazy var lookSlider: SliderFormItem = {
 		let instance = SliderFormItem()
 		instance.minimumValue(-100.0).maximumValue(100.0).value(0)
 		return instance
-		}()
+	}()
 
 	lazy var submitButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
@@ -34,7 +34,7 @@ class RateAppViewController: FormViewController {
 			self?.submitMyRating()
 		}
 		return instance
-		}()
+	}()
 
 	func submitMyRating() {
 		self.form_simpleAlert("Submit Rating", "Button clicked")

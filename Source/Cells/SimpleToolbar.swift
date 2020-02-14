@@ -17,17 +17,13 @@ public class SimpleToolbar: UIToolbar {
 		fatalError("init(coder:) has not been implemented")
 	}
 
-	public lazy var previousButton: UIBarButtonItem = {
-		UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
-    }()
+	public lazy var previousButton: UIBarButtonItem = UIBarButtonItem(title: "◀︎", style: .plain, target: self, action: #selector(SimpleToolbar.previousButtonAction(_:)))
 
-	public lazy var nextButton: UIBarButtonItem = {
-		UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
-    }()
+	public lazy var nextButton: UIBarButtonItem = UIBarButtonItem(title: "▶", style: .plain, target: self, action: #selector(SimpleToolbar.nextButtonAction(_:)))
+    
 
-	public lazy var closeButton: UIBarButtonItem = {
-		UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
-    }()
+	public lazy var closeButton: UIBarButtonItem = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SimpleToolbar.closeButtonAction(_:)))
+    
 
 	public func toolbarItems() -> [UIBarButtonItem] {
 		let spacer0 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)

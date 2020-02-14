@@ -37,7 +37,7 @@ class SignUpViewController: FormViewController {
 		instance.submitValidate(CountSpecification.min(6), message: "Length must be minimum 6 letters")
 		instance.validate(CountSpecification.max(8), message: "Length must be maximum 8 letters")
 		return instance
-		}()
+	}()
 
 	lazy var maleOrFemale: ViewControllerFormItem = {
 		let instance = ViewControllerFormItem()
@@ -54,7 +54,7 @@ class SignUpViewController: FormViewController {
 			}
 		}
 		return instance
-		}()
+	}()
 
 	lazy var password: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
@@ -65,7 +65,7 @@ class SignUpViewController: FormViewController {
 		instance.submitValidate(CountSpecification.min(4), message: "Length must be minimum 4 digits")
 		instance.validate(CountSpecification.max(6), message: "Length must be maximum 6 digits")
 		return instance
-		}()
+	}()
 
 	lazy var email: TextFieldFormItem = {
 		let instance = TextFieldFormItem()
@@ -75,7 +75,7 @@ class SignUpViewController: FormViewController {
 		instance.validate(CountSpecification.max(60), message: "Length must be maximum 60 letters")
 		instance.softValidate(EmailSpecification(), message: "Must be a valid email address")
 		return instance
-		}()
+	}()
 
 	func offsetDate(_ date: Date, years: Int) -> Date {
 		var dateComponents = DateComponents()
@@ -95,14 +95,14 @@ class SignUpViewController: FormViewController {
 		instance.minimumDate = self.offsetDate(today, years: -150)
 		instance.maximumDate = today
 		return instance
-		}()
+	}()
 
 	lazy var subscribeToNewsletter: SwitchFormItem = {
 		let instance = SwitchFormItem()
 		instance.title = "Subscribe to newsletter"
 		instance.value = true
 		return instance
-		}()
+	}()
 
 	lazy var metaData: MetaFormItem = {
 		let instance = MetaFormItem()
@@ -112,7 +112,7 @@ class SignUpViewController: FormViewController {
 		dict["key2"] = "Can be used to pass extra info along with the JSON" as AnyObject?
 		instance.value(dict as AnyObject?).elementIdentifier("metaData")
 		return instance
-		}()
+	}()
 
 	lazy var randomizeButton: ButtonFormItem = {
 		let instance = ButtonFormItem()
