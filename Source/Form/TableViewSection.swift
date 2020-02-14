@@ -25,10 +25,8 @@ extension TableViewSection: UITableViewDataSource {
 
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = cells[indexPath.row]
-		if let theCell = cell as? CellForRowDelegate {
-			return theCell.form_cellForRow(indexPath: indexPath, tableView: tableView)
-		}
-		return cell
+		guard let theCell = cell as? CellForRowDelegate else { return cell }
+		return theCell.form_cellForRow(indexPath: indexPath, tableView: tableView)
 	}
 
 	public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
