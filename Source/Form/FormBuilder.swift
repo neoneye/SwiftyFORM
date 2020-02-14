@@ -36,7 +36,11 @@ public class FormBuilder {
 		return item
 	}
 
-	public func appendMulti(_ items: [FormItem]) {
+	public func append(_ items: [FormItem]) {
+		innerItems += items
+	}
+
+	public func append(_ items: FormItem...) {
 		innerItems += items
 	}
 
