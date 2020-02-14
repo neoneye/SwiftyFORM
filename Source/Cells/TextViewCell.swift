@@ -87,21 +87,14 @@ public class TextViewCell: UITableViewCell, AssignAppearance {
 
 	public lazy var toolbar: SimpleToolbar = {
 		let instance = SimpleToolbar()
-		weak var weakSelf = self
-		instance.jumpToPrevious = {
-			if let cell = weakSelf {
-				cell.gotoPrevious()
-			}
+		instance.jumpToPrevious = { [weak self] in
+			self?.gotoPrevious()
 		}
-		instance.jumpToNext = {
-			if let cell = weakSelf {
-				cell.gotoNext()
-			}
+		instance.jumpToNext = { [weak self] in
+			self?.gotoNext()
 		}
-		instance.dismissKeyboard = {
-			if let cell = weakSelf {
-				cell.dismissKeyboard()
-			}
+		instance.dismissKeyboard = { [weak self] in
+			self?.dismissKeyboard()
 		}
 		return instance
 	}()

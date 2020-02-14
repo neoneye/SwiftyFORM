@@ -48,11 +48,8 @@ public class DebugViewController: UIViewController {
 	}
 
 	public class func showModally(_ parentViewController: UIViewController, whatToShow: WhatToShow) {
-		weak var weakSelf = parentViewController
-		let dismissBlock: () -> Void = {
-			if let vc = weakSelf {
-				vc.dismiss(animated: true, completion: nil)
-			}
+		let dismissBlock: () -> Void = { [weak parentViewController] in
+			parentViewController?.dismiss(animated: true, completion: nil)
 		}
 
 		let vc = DebugViewController(dismissBlock: dismissBlock, whatToShow: whatToShow)
