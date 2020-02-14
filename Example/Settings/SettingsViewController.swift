@@ -18,15 +18,22 @@ class SettingsViewController: FormViewController {
 	lazy var server: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Server").placeholder("required")
-		instance.append("Production").append("Staging1").append("Staging2")
-		instance.selectOptionWithTitle("Production")
+		instance.append(
+			OptionRowModel("Production", "1"),
+			OptionRowModel("Staging1", "2"),
+			OptionRowModel("Staging2", "3")
+		)
+		instance.selectOptionWithIdentifier("1")
 		return instance
 	}()
 
 	lazy var theme: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Theme").placeholder("required")
-		instance.append("Bright").append("Hipster").append("Dark")
+		instance
+			.append("Bright")
+			.append("Hipster")
+			.append("Dark")
 		instance.selectOptionWithTitle("Bright")
 		return instance
 	}()
@@ -34,7 +41,11 @@ class SettingsViewController: FormViewController {
 	lazy var logging: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Logging").placeholder("required")
-		instance.append("Disabled").append("Compact").append("Verbose")
+		instance.append([
+			"Disabled",
+			"Compact",
+			"Verbose"
+		])
 		instance.selectOptionWithTitle("Verbose")
 		return instance
 	}()

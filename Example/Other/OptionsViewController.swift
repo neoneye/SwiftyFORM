@@ -18,7 +18,13 @@ class OptionsViewController: FormViewController {
 	lazy var adoptBitcoin: OptionPickerFormItem = {
 		let instance = OptionPickerFormItem()
 		instance.title("Adopt Bitcoin?").placeholder("required")
-		instance.append("Strongly disagree").append("Disagree").append("Neutral").append("Agree").append("Strongly agree")
+		instance.append([
+			"Strongly disagree",
+			"Disagree",
+			"Neutral",
+			"Agree",
+			"Strongly agree"
+		])
 		instance.selectOptionWithTitle("Neutral")
 		instance.valueDidChange = { (selected: OptionRowModel?) in
 			print("adopt bitcoin: \(String(describing: selected))")

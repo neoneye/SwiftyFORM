@@ -46,6 +46,18 @@ public class OptionPickerFormItem: FormItem, CustomizableLabels {
 		return self
 	}
 
+	@discardableResult
+	public func append(_ names: [String]) -> Self {
+		options += names.map { OptionRowModel($0, $0) }
+		return self
+	}
+
+	@discardableResult
+	public func append(_ rows: OptionRowModel...) -> Self {
+		options += rows
+		return self
+	}
+
 	public func selectOptionWithTitle(_ title: String) {
 		for option in options {
 			if option.title == title {
