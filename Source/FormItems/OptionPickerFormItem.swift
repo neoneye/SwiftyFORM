@@ -59,21 +59,15 @@ public class OptionPickerFormItem: FormItem, CustomizableLabels {
 	}
 
 	public func selectOptionWithTitle(_ title: String) {
-		for option in options {
-			if option.title == title {
-				self.setSelectedOptionRow(option)
-				SwiftyFormLog("initial selected option: \(option)")
-			}
-		}
+		guard let option = options.first(where: { $0.title == title }) else { return }
+		self.setSelectedOptionRow(option)
+		SwiftyFormLog("initial selected option: \(option)")
 	}
 
 	public func selectOptionWithIdentifier(_ identifier: String) {
-		for option in options {
-			if option.identifier == identifier {
-				self.setSelectedOptionRow(option)
-				SwiftyFormLog("initial selected option: \(option)")
-			}
-		}
+		guard let option = options.first(where: { $0.identifier == identifier }) else { return }
+		self.setSelectedOptionRow(option)
+		SwiftyFormLog("initial selected option: \(option)")
 	}
 
 	public typealias SyncBlock = (_ selected: OptionRowModel?) -> Void
