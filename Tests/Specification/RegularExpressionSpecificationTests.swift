@@ -9,6 +9,8 @@ class RegularExpressionSpecificationTests: XCTestCase {
 		XCTAssertTrue(spec.isSatisfiedBy("123"))
 		XCTAssertFalse(spec.isSatisfiedBy("abc"))
 		XCTAssertFalse(spec.isSatisfiedBy(nil))
+		XCTAssertFalse(spec.isSatisfiedBy("º"))
+		XCTAssertFalse(spec.isSatisfiedBy("»"))
 	}
 	
 }

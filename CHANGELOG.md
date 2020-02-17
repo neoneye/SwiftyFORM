@@ -4,6 +4,7 @@
 
  * Contributions by Asaf Baibekov. Thank you.
    Neat simplifications and cleanups several places.
+ * RegularExpressionSpecification: Fixed crash with utf8/utf16 length mismatch. Special characters could crash the app.
 
 ### 1.8.2
 
