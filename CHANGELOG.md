@@ -1,5 +1,10 @@
 ## 📄 Change Log
 
+### 1.8.3
+
+ * Contributions by Asaf Baibekov. Thank you.
+   Neat simplifications and cleanups several places.
+
 ### 1.8.2
 
  * Contributions by Bradley Mackey. Thank you.

@@ -2,6 +2,7 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Asaf Baibekov](https://github.com/asafbaibekov)
 * [Bradley Mackey](https://github.com/bradleymackey)
 * [Paul Crompton](https://github.com/PCrompton)
 * [Jerwin Pastoral](https://github.com/JerwinPRO)
