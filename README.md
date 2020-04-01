@@ -253,7 +253,7 @@ platform :ios, '12.0'
 use_frameworks!
 
 target 'MyApp' do
-    pod 'SwiftyFORM', :git => 'https://github.com/neoneye/SwiftyFORM.git', :commit => '26a03a08bec7b9297274eb8781599c384e46fd4c'
+    pod 'SwiftyFORM', :git => 'https://github.com/neoneye/SwiftyFORM.git', '~> 1.8'
 end
 ```
 
