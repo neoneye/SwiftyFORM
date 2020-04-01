@@ -1,5 +1,10 @@
 ## 📄 Change Log
 
+### 1.8.4
+
+ * Contributions by Bradley Mackey. Thank you.
+   Support for UITableViewStyle.insetGrouped, which Apple introduced in iOS13.
+
 ### 1.8.3
 
  * Contributions by Asaf Baibekov. Thank you.
