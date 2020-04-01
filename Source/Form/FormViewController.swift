@@ -4,14 +4,18 @@ import UIKit
 open class FormViewController: UIViewController {
 	public var dataSource: TableViewSectionArray?
 	public var keyboardHandler: KeyboardHandler?
+    private(set) public var tableViewStyle: UITableView.Style
 
-	public init() {
+    public init(style tableViewStyle: UITableView.Style = .grouped) {
 		SwiftyFormLog("super init")
+        self.tableViewStyle = tableViewStyle
 		super.init(nibName: nil, bundle: nil)
 	}
 
 	required public init?(coder aDecoder: NSCoder) {
 		SwiftyFormLog("super init")
+        /* style is just grouped if loaded from decoder, initalise directly to customise */
+        self.tableViewStyle = .grouped
 		super.init(coder: aDecoder)
 	}
 
@@ -62,5 +66,5 @@ open class FormViewController: UIViewController {
 
 	public lazy var formBuilder: FormBuilder = FormBuilder()
 
-	public lazy var tableView: FormTableView = FormTableView()
+	public lazy var tableView: FormTableView = FormTableView(style: tableViewStyle)
 }
