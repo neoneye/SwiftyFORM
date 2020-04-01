@@ -241,19 +241,16 @@ Search for `SwiftyFORM` and specify the version you want. The latest tagged rele
 
 ## CocoaPods
 
-[Link to demo project that shows a minimal SwiftyFORM app using CocoaPods](https://github.com/neoneye/SwiftyFORM-Podfile-Example).
-
-
-To integrate SwiftyFORM into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate SwiftyFORM into your Xcode project using CocoaPods, specify the following in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-swift_version = "5.0"
+swift_version = '5.0'
 platform :ios, '12.0'
 use_frameworks!
 
 target 'MyApp' do
-    pod 'SwiftyFORM', :git => 'https://github.com/neoneye/SwiftyFORM.git', '~> 1.8'
+    pod 'SwiftyFORM', '~> 1.8'
 end
 ```
 
