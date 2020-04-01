@@ -6,7 +6,14 @@ open class FormViewController: UIViewController {
 	public var keyboardHandler: KeyboardHandler?
     private(set) public var tableViewStyle: UITableView.Style
 
-    public init(style tableViewStyle: UITableView.Style = .grouped) {
+    public init() {
+        SwiftyFormLog("super init")
+        // UITableView.style default value is `plain`
+        self.tableViewStyle = .plain
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    public init(style tableViewStyle: UITableView.Style) {
 		SwiftyFormLog("super init")
         self.tableViewStyle = tableViewStyle
 		super.init(nibName: nil, bundle: nil)
@@ -14,8 +21,8 @@ open class FormViewController: UIViewController {
 
 	required public init?(coder aDecoder: NSCoder) {
 		SwiftyFormLog("super init")
-        /* style is just grouped if loaded from decoder, initalise directly to customise */
-        self.tableViewStyle = .grouped
+        // UITableView.style default value is `plain`. Initalise directly to customise.
+        self.tableViewStyle = .plain
 		super.init(coder: aDecoder)
 	}
 
