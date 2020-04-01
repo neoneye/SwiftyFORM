@@ -4,16 +4,15 @@ import UIKit
 open class FormViewController: UIViewController {
 	public var dataSource: TableViewSectionArray?
 	public var keyboardHandler: KeyboardHandler?
-    private(set) public var tableViewStyle: UITableView.Style
+    private(set) public var tableViewStyle: FormTableViewStyle
 
     public init() {
         SwiftyFormLog("super init")
-        // UITableView.style default value is `plain`
-        self.tableViewStyle = .plain
+        self.tableViewStyle = .grouped
         super.init(nibName: nil, bundle: nil)
     }
 
-    public init(style tableViewStyle: UITableView.Style) {
+    public init(style tableViewStyle: FormTableViewStyle) {
 		SwiftyFormLog("super init")
         self.tableViewStyle = tableViewStyle
 		super.init(nibName: nil, bundle: nil)
@@ -21,8 +20,7 @@ open class FormViewController: UIViewController {
 
 	required public init?(coder aDecoder: NSCoder) {
 		SwiftyFormLog("super init")
-        // UITableView.style default value is `plain`. Initalise directly to customise.
-        self.tableViewStyle = .plain
+        self.tableViewStyle = .grouped
 		super.init(coder: aDecoder)
 	}
 
