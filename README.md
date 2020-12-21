@@ -49,7 +49,7 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 
 ## Requirements
 
-- iOS 9+
+- iOS 12+
 - Xcode 12+
 - Swift 5.1+
 
