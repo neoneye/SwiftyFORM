@@ -1,5 +1,10 @@
 ## 📄 Change Log
 
+### 1.8.5
+
+ * Contributions by IOS-Sisa. Thank you.
+   Fixed broken date picker. Since iOS 13.4 the UIDatePicker has a .preferredDatePickerStyle that must be set to .wheels, in order for expanded date pickers to work.
+
 ### 1.8.4
 
  * Contributions by Bradley Mackey. Thank you.
