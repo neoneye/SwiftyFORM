@@ -269,7 +269,10 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 		datePicker.minuteInterval = model.minuteInterval
 		datePicker.locale = model.resolvedLocale
 		datePicker.date = model.date
-	}
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+    }
 
 	@objc public func valueChanged() {
 		guard let collapsedCell = collapsedCell else {
@@ -286,7 +289,7 @@ public class DatePickerExpandedCell: UITableViewCell, CellHeightProvider, WillDi
 
 	public init() {
 		super.init(style: .default, reuseIdentifier: nil)
-		addSubview(datePicker)
+        contentView.addSubview(datePicker)
 	}
 
 	required public init?(coder aDecoder: NSCoder) {
