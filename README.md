@@ -50,7 +50,7 @@ Because form code is hard to write, hard to read, hard to reason about. Has a sl
 ## Requirements
 
 - iOS 9+
-- Xcode 11+
+- Xcode 12+
 - Swift 5.1+
 
 
@@ -103,8 +103,6 @@ class MyViewController: FormViewController {
 ```
 
 ### Advanced - date picker
-
-![DatePicker with prev button and next button](https://github.com/neoneye/SwiftyFORM/raw/master/Documentation/datepicker_nextprev.jpg "DatePicker with prev button and next button")
 
 ```swift
 class DatePickerBindingViewController: FormViewController {
@@ -231,7 +229,7 @@ class ChangePasswordViewController: FormViewController {
 
 # INSTALLATION
 
-## Swift Package Manager (Xcode 11+)
+## Swift Package Manager
 
 With Swift Package Manager support in the latest Xcode, installation has never been easier.
 
