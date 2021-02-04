@@ -114,6 +114,7 @@ class PopulateTableView: FormItemVisitor {
         model.textAlignment = object.textAlignment
         model.titleFont = object.titleFont
         model.titleTextColor = object.titleTextColor
+        model.backgroundColor = object.backgroundColor
 		let cell = ButtonCell(model: model)
 		cells.append(cell)
 		lastItemType = .item

@@ -277,6 +277,25 @@ Finally, add `SwiftyFORM.framework` (will be built by Carthage under `Carthage/B
 - write `/usr/local/bin/carthage copy-frameworks` in the script body
 - add `$(SRCROOT)/Carthage/Build/iOS/SwiftyFORM.framework` to the input files 
 
+## Manual
+
+1. Open up Terminal application and cd into your iOS project directory
+
+2. ONLY IF your project is not already initialized as a git repository, run
+```
+$ git init
+```
+
+3. Add `SwiftyFORM` as a submodule by running
+```
+$ git submodule add https://github.com/neoneye/SwiftyFORM.git
+```
+
+4. In the Project Navigator, select your application project and go to "Targets" -> "General"
+
+5. Open the project folder and drag the `SwiftyFORM.xcodeproj` file into the "Frameworks, Libraries, and Embedded Content" tab of your application. 
+
+6. Click the `+` button under the "Frameworks, Libraries, and Embedded Content" section and `Add` the `SwiftyFORM.framework`
 
 # Communication
 

@@ -111,6 +111,7 @@
 		42FABBC41D4143650066E45A /* PrecisionSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42FABBC31D4143650066E45A /* PrecisionSlider.swift */; };
 		739649131D2B6B7400E12A96 /* AttributedTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649121D2B6B7400E12A96 /* AttributedTextCell.swift */; };
 		739649151D2B6CC100E12A96 /* AttributedTextFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */; };
+		EA831A9025CB162A00779BAD /* CustomizableButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA831A8F25CB162A00779BAD /* CustomizableButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +232,7 @@
 		42FABBC31D4143650066E45A /* PrecisionSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecisionSlider.swift; sourceTree = "<group>"; };
 		739649121D2B6B7400E12A96 /* AttributedTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextCell.swift; sourceTree = "<group>"; };
 		739649141D2B6CC000E12A96 /* AttributedTextFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextFormItem.swift; sourceTree = "<group>"; };
+		EA831A8F25CB162A00779BAD /* CustomizableButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomizableButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,6 +376,7 @@
 				4212E0121D3A3ABE002287D0 /* CellForRowDelegate.swift */,
 				428683091B346CFE0028DB2F /* CellHeightProvider.swift */,
 				428683071B346CFE0028DB2F /* Command.swift */,
+				EA831A8F25CB162A00779BAD /* CustomizableButtons.swift */,
 				4208767823586EDD006C8918 /* CustomizableLabels.swift */,
 				420F6CC61D69BBA5009D5F57 /* DontCollapseWhenScrolling.swift */,
 				428683081B346CFE0028DB2F /* DumpVisitor.swift */,
@@ -643,6 +646,7 @@
 				420F6CCD1D6A1044009D5F57 /* ToggleExpandCollapse.swift in Sources */,
 				423E31431D6384700048D8C3 /* TableViewSectionPart.swift in Sources */,
 				42D297591D4BAEFB00561780 /* PrecisionSlider_InnerZoomMode.swift in Sources */,
+				EA831A9025CB162A00779BAD /* CustomizableButtons.swift in Sources */,
 				425DED651D28257000EDF891 /* SegmentedControlFormItem.swift in Sources */,
 				4208767923586EDD006C8918 /* CustomizableLabels.swift in Sources */,
 			);
