@@ -41,7 +41,7 @@
 		426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */; };
 		426798721D8DB17B002275CA /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426798701D8DB17B002275CA /* MyTableViewController.swift */; };
 		42685D371D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */; };
-		42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */; };
+		42685D401D2D6AB2008ABC3D /* LabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D3F1D2D6AB2008ABC3D /* LabViewController.swift */; };
 		42685D421D2D6B01008ABC3D /* ScientificSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */; };
 		42B1BB471E82C1C10090156A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42B1BB461E82C1C10090156A /* Settings.storyboard */; };
 		42B1BB491E82C1EF0090156A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BB481E82C1EF0090156A /* SettingsViewController.swift */; };
@@ -139,7 +139,7 @@
 		4267986F1D8DB17B002275CA /* MyCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCollectionViewController.swift; sourceTree = "<group>"; };
 		426798701D8DB17B002275CA /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		42685D361D2C3885008ABC3D /* StaticTextAndAttributedTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticTextAndAttributedTextViewController.swift; sourceTree = "<group>"; };
-		42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkInProgressViewController.swift; sourceTree = "<group>"; };
+		42685D3F1D2D6AB2008ABC3D /* LabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabViewController.swift; sourceTree = "<group>"; };
 		42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScientificSliderViewController.swift; sourceTree = "<group>"; };
 		429910D51B347FD7001F9195 /* SwiftyFORM.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyFORM.xcodeproj; sourceTree = "<group>"; };
 		42B1BB461E82C1C10090156A /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -274,13 +274,13 @@
 			path = "Non-SwiftyFORM";
 			sourceTree = "<group>";
 		};
-		42685D3E1D2D6AB2008ABC3D /* WorkInProgress */ = {
+		42685D3E1D2D6AB2008ABC3D /* Lab */ = {
 			isa = PBXGroup;
 			children = (
-				42685D3F1D2D6AB2008ABC3D /* WorkInProgressViewController.swift */,
+				42685D3F1D2D6AB2008ABC3D /* LabViewController.swift */,
 				42685D411D2D6B01008ABC3D /* ScientificSliderViewController.swift */,
 			);
-			path = WorkInProgress;
+			path = Lab;
 			sourceTree = "<group>";
 		};
 		429910D61B347FD7001F9195 /* Products */ = {
@@ -337,6 +337,7 @@
 				42108D251B356C5B0067FEAA /* FirstViewController.swift */,
 				426798691D8DB160002275CA /* HeaderFooter */,
 				42CEBFA11A3BA2B50048E072 /* Images.xcassets */,
+				42685D3E1D2D6AB2008ABC3D /* Lab */,
 				4244C6921D6B864600FE1ECB /* LaunchScreen.storyboard */,
 				4267986E1D8DB17B002275CA /* Non-SwiftyFORM */,
 				42589DC21B3447EA007CA8C1 /* Other */,
@@ -347,7 +348,6 @@
 				42589DCC1B3447EA007CA8C1 /* TextView */,
 				42C6DD921D76253200D82DC9 /* Tutorial */,
 				42108D271B3576110067FEAA /* Usecases */,
-				42685D3E1D2D6AB2008ABC3D /* WorkInProgress */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -499,7 +499,7 @@
 				CD5878FB1FA324CD00BB3B8E /* TextFieldEditingEndViewController.swift in Sources */,
 				42589DB81B3447E1007CA8C1 /* DatePickerInitialValueViewController.swift in Sources */,
 				426798711D8DB17B002275CA /* MyCollectionViewController.swift in Sources */,
-				42685D401D2D6AB2008ABC3D /* WorkInProgressViewController.swift in Sources */,
+				42685D401D2D6AB2008ABC3D /* LabViewController.swift in Sources */,
 				4267986D1D8DB160002275CA /* NoHeaderViewController.swift in Sources */,
 				42108D2C1B3576110067FEAA /* MaleFemaleViewController.swift in Sources */,
 				420AC61E1F88D40500898C85 /* StoryboardDemoViewController.swift in Sources */,

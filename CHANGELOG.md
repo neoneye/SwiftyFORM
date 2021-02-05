@@ -7,6 +7,7 @@
    Extended the README with guidance for how to install SwiftyFORM manually.
  * Renamed from `CustomizableLabels` to `CustomizableLabel`, so it's consistent with the new `CustomizableButton` protocol.
  * Fixed broken PrecisionSliderFormItem. With iOS14 Apple have changed the view hierarchy inside UITableView.
+ * Example app: Renamed from `WorkInProgressViewController` to `LabViewController`.
 
 ### 1.8.5
 

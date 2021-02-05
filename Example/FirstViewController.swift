@@ -58,6 +58,6 @@ class FirstViewController: FormViewController {
 		builder += ViewControllerFormItem().title("Sliders & TextFields").viewController(SlidersAndTextFieldsViewController.self)
 		builder += ViewControllerFormItem().title("Precision Sliders").viewController(PrecisionSlidersViewController.self)
 		builder += ViewControllerFormItem().title("Reload Form").viewController(ReloadingViewController.self)
-		builder += ViewControllerFormItem().title("Work In Progress").viewController(WorkInProgressViewController.self)
+		builder += ViewControllerFormItem().title("Lab Experiments").viewController(LabViewController.self)
 	}
 }
