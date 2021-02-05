@@ -22,7 +22,7 @@ public enum DatePickerFormItemMode {
 
 Behind the scenes this creates a `UIDatePicker`.
 */
-public class DatePickerFormItem: FormItem, CustomizableLabels {
+public class DatePickerFormItem: FormItem, CustomizableLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}

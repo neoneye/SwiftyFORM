@@ -1,7 +1,7 @@
 // MIT license. Copyright (c) 2021 SwiftyFORM. All rights reserved.
 import UIKit
 
-public class StaticTextFormItem: FormItem, CustomizableLabels {
+public class StaticTextFormItem: FormItem, CustomizableLabel {
     
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)

@@ -15,7 +15,7 @@ public class OptionRowModel: CustomStringConvertible {
 	}
 }
 
-public class OptionPickerFormItem: FormItem, CustomizableLabels {
+public class OptionPickerFormItem: FormItem, CustomizableLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}

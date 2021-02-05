@@ -8,7 +8,7 @@ import UIKit
 
 Behind the scenes this creates a `UIPickerView`.
 */
-public class PickerViewFormItem: FormItem, CustomizableLabels {
+public class PickerViewFormItem: FormItem, CustomizableLabel {
 	override func accept(visitor: FormItemVisitor) {
 		visitor.visit(object: self)
 	}
