@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2020 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2021 SwiftyFORM. All rights reserved.
 import UIKit
 
 public class TableViewSection: NSObject {

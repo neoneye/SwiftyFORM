@@ -1,4 +1,4 @@
-// MIT license. Copyright (c) 2020 SwiftyFORM. All rights reserved.
+// MIT license. Copyright (c) 2021 SwiftyFORM. All rights reserved.
 import Foundation
 
 /// Check if a collection (String/Array) has the right number of elements.
