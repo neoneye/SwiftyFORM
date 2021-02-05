@@ -1,5 +1,11 @@
 ## 📄 Change Log
 
+### 1.8.6
+
+ * Contributions by Luca Pizzini. Thank you.
+   The background color is now customizable for buttons.
+   Extended the README with guidance for how to install SwiftyFORM manually.
+
 ### 1.8.5
 
  * Contributions by IOS-Sisa. Thank you.

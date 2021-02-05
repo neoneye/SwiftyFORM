@@ -2,6 +2,7 @@
 
 This is a partial list of people that have contributed to SwiftyFORM. Thank you!
 
+* [Luca Pizzini](https://github.com/Pizzo15)
 * [IOS-Sisa](https://github.com/IOS-Sisa)
 * [Asaf Baibekov](https://github.com/asafbaibekov)
 * [Bradley Mackey](https://github.com/bradleymackey)
