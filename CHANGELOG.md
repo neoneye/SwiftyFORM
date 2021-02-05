@@ -6,6 +6,7 @@
    The background color is now customizable for buttons.
    Extended the README with guidance for how to install SwiftyFORM manually.
  * Renamed from `CustomizableLabels` to `CustomizableLabel`, so it's consistent with the new `CustomizableButton` protocol.
+ * Fixed broken PrecisionSliderFormItem. With iOS14 Apple have changed the view hierarchy inside UITableView.
 
 ### 1.8.5
 

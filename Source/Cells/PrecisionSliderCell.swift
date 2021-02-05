@@ -341,7 +341,14 @@ public class PrecisionSliderExpandedCell: UITableViewCell, CellHeightProvider, E
 
 	public init() {
 		super.init(style: .default, reuseIdentifier: nil)
-		addSubview(slider)
+
+        // In iOS14 for some reason, UITableView view hierarchy is different.
+        // https://stackoverflow.com/questions/63987896/problem-with-gesture-in-xcode-12-and-ios-14
+        if #available(iOS 14.0, *) {
+            contentView.addSubview(slider)
+        } else {
+            addSubview(slider)
+        }
 	}
 
 	required public init?(coder aDecoder: NSCoder) {
