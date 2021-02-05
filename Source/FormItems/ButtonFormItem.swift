@@ -15,7 +15,7 @@ public class ButtonFormItem: FormItem, CustomizableTitleLabel, CustomizableButto
 
     public var textAlignment: NSTextAlignment = .center
     
-    public var backgroundColor: UIColor = .clear 
+    public var backgroundColor: UIColor? = nil
 
 	public var action: () -> Void = {}
     

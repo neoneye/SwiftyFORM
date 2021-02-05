@@ -6,10 +6,13 @@ class ButtonsViewController: FormViewController {
 	override func populate(_ builder: FormBuilder) {
 		builder.navigationTitle = "Buttons"
 		builder.toolbarMode = .none
-		builder += SectionHeaderTitleFormItem().title("Table Row Buttons")
+		builder += SectionHeaderTitleFormItem().title("Simple Buttons")
 		builder += button0
 		builder += button1
 		builder += button2
+        builder += SectionHeaderTitleFormItem().title("Themed Buttons")
+        builder += button3
+        builder += button4
 	}
 
 	lazy var button0: ButtonFormItem = {
@@ -38,4 +41,26 @@ class ButtonsViewController: FormViewController {
 		}
 		return instance
 	}()
+
+    lazy var button3: ButtonFormItem = {
+        let instance = ButtonFormItem()
+        instance.title = "Button 3"
+        instance.titleTextColor = UIColor.black
+        instance.backgroundColor = UIColor.yellow
+        instance.action = { [weak self] in
+            self?.form_simpleAlert("Button 3", "Button clicked")
+        }
+        return instance
+    }()
+
+    lazy var button4: ButtonFormItem = {
+        let instance = ButtonFormItem()
+        instance.title = "Button 4"
+        instance.titleTextColor = UIColor.black
+        instance.backgroundColor = UIColor.red
+        instance.action = { [weak self] in
+            self?.form_simpleAlert("Button 4", "Button clicked")
+        }
+        return instance
+    }()
 }
